@@ -50,7 +50,8 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
+# Python lib directories (but not Flutter/source code lib dirs)
+**/python*/lib/
 lib64/
 parts/
 sdist/
@@ -70,13 +71,15 @@ ENV/
 env.bak/
 venv.bak/
 
-# PyTorch/ML
+# PyTorch/ML - Generated files only
 *.pth
 *.pkl
 *.joblib
 *.h5
 *.hdf5
-models/
+# Trained model files and outputs (not source code)
+**/trained_models/
+**/saved_models/
 checkpoints/
 tensorboard_logs/
 mlruns/
