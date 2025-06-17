@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 import '../../../core/router/app_routes.dart';
+import '../../../data/repositories/auth_repository.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
@@ -31,33 +32,12 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   Future<void> _handleLogin() async {
     if (!_formKey.currentState!.validate()) return;
 
-    setState(() {
-      _isLoading = true;
-    });
-
-    try {
-      // TODO: Implement actual login logic
-      await Future.delayed(const Duration(seconds: 2)); // Simulate API call
-      
-      if (mounted) {
-        context.go(AppRoutes.home);
-      }
-    } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Login failed: ${e.toString()}'),
-            backgroundColor: Colors.red,
-          ),
-        );
-      }
-    } finally {
-      if (mounted) {
-        setState(() {
-          _isLoading = false;
-        });
-      }
-    }
+    final authNotifier = ref.read(authStateProvider.notifier);
+    
+    await authNotifier.login(
+      _emailController.text.trim(),
+      _passwordController.text,
+    );
   }
 
   Future<void> _handleGoogleLogin() async {
@@ -93,6 +73,23 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    
+    // Listen to auth state changes
+    ref.listen<AuthState>(authStateProvider, (previous, next) {
+      if (next.status == AuthStatus.authenticated) {
+        context.go(AppRoutes.home);
+      } else if (next.status == AuthStatus.error && next.error != null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(next.error!),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    });
+    
+    final authState = ref.watch(authStateProvider);
+    final isLoading = authState.status == AuthStatus.loading;
     
     return Scaffold(
       backgroundColor: theme.colorScheme.surface,
@@ -250,7 +247,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 
                 // Login button
                 ElevatedButton(
-                  onPressed: _isLoading ? null : _handleLogin,
+                  onPressed: isLoading ? null : _handleLogin,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: theme.colorScheme.primary,
                     foregroundColor: theme.colorScheme.onPrimary,
@@ -259,7 +256,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  child: _isLoading
+                  child: isLoading
                       ? SizedBox(
                           height: 20,
                           width: 20,
@@ -313,7 +310,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 
                 // Google login button
                 OutlinedButton.icon(
-                  onPressed: _isLoading ? null : _handleGoogleLogin,
+                  onPressed: isLoading ? null : _handleGoogleLogin,
                   icon: Image.asset(
                     'assets/icons/google.png',
                     width: 20,

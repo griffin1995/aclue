@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
-import '../swipe_page.dart';
+import '../../../../data/models/product_model.dart';
 
 class SwipeCard extends StatelessWidget {
-  final SwipeItem item;
+  final ProductModel product;
   final double horizontalThreshold;
   final double verticalThreshold;
 
   const SwipeCard({
     super.key,
-    required this.item,
+    required this.product,
     required this.horizontalThreshold,
     required this.verticalThreshold,
   });
@@ -51,7 +51,7 @@ class SwipeCard extends StatelessWidget {
               // Background image
               Positioned.fill(
                 child: CachedNetworkImage(
-                  imageUrl: item.imageUrl,
+                  imageUrl: product.mainImageUrl,
                   fit: BoxFit.cover,
                   placeholder: (context, url) => Container(
                     color: theme.colorScheme.surfaceVariant,
@@ -73,7 +73,7 @@ class SwipeCard extends StatelessWidget {
                         ),
                         const SizedBox(height: 16),
                         Text(
-                          item.title,
+                          product.title,
                           style: theme.textTheme.headlineMedium?.copyWith(
                             color: theme.colorScheme.onSurfaceVariant,
                             fontWeight: FontWeight.bold,
@@ -211,7 +211,7 @@ class SwipeCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Text(
-                    item.category,
+                    product.primaryCategory,
                     style: TextStyle(
                       color: theme.colorScheme.onPrimary,
                       fontSize: 12,
@@ -236,7 +236,7 @@ class SwipeCard extends StatelessWidget {
                       Wrap(
                         spacing: 8,
                         runSpacing: 4,
-                        children: item.tags.take(3).map((tag) {
+                        children: product.tags.take(3).map((tag) {
                           return Container(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 8,
@@ -264,20 +264,21 @@ class SwipeCard extends StatelessWidget {
                       const SizedBox(height: 12),
                       
                       // Brand
-                      Text(
-                        item.brand,
-                        style: const TextStyle(
-                          color: Colors.white70,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
+                      if (product.brand != null)
+                        Text(
+                          product.brand!,
+                          style: const TextStyle(
+                            color: Colors.white70,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
-                      ),
                       
-                      const SizedBox(height: 4),
+                      if (product.brand != null) const SizedBox(height: 4),
                       
                       // Title
                       Text(
-                        item.title,
+                        product.title,
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 24,
@@ -293,7 +294,7 @@ class SwipeCard extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            '\$${item.price.toStringAsFixed(2)}',
+                            product.displayPrice,
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 20,

@@ -6,6 +6,10 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 import '../../../core/theme/app_theme.dart';
+import '../../../data/repositories/swipe_repository.dart';
+import '../../../data/repositories/product_repository.dart';
+import '../../../data/models/swipe_model.dart';
+import '../../../data/models/product_model.dart';
 import 'widgets/swipe_card.dart';
 import 'widgets/swipe_buttons.dart';
 import 'widgets/swipe_progress.dart';
@@ -25,58 +29,8 @@ class _SwipePageState extends ConsumerState<SwipePage>
   late AnimationController _feedbackController;
   
   int _currentIndex = 0;
-  int _totalSwipes = 0;
-  int _likesCount = 0;
-  int _dislikesCount = 0;
-  
-  // Sample data - in real app this would come from providers
-  final List<SwipeItem> _items = [
-    SwipeItem(
-      id: '1',
-      title: 'Wireless Headphones',
-      brand: 'Sony',
-      price: 199.99,
-      imageUrl: 'https://via.placeholder.com/400x400/E3F2FD/1976D2?text=Headphones',
-      category: 'Electronics',
-      tags: ['Music', 'Premium', 'Wireless'],
-    ),
-    SwipeItem(
-      id: '2',
-      title: 'Coffee Maker',
-      brand: 'Breville',
-      price: 299.99,
-      imageUrl: 'https://via.placeholder.com/400x400/FFF3E0/F57C00?text=Coffee+Maker',
-      category: 'Kitchen',
-      tags: ['Coffee', 'Morning', 'Essential'],
-    ),
-    SwipeItem(
-      id: '3',
-      title: 'Yoga Mat',
-      brand: 'Lululemon',
-      price: 68.00,
-      imageUrl: 'https://via.placeholder.com/400x400/E8F5E8/4CAF50?text=Yoga+Mat',
-      category: 'Fitness',
-      tags: ['Wellness', 'Exercise', 'Mindfulness'],
-    ),
-    SwipeItem(
-      id: '4',
-      title: 'Smart Watch',
-      brand: 'Apple',
-      price: 399.99,
-      imageUrl: 'https://via.placeholder.com/400x400/F3E5F5/9C27B0?text=Smart+Watch',
-      category: 'Technology',
-      tags: ['Health', 'Smart', 'Fitness'],
-    ),
-    SwipeItem(
-      id: '5',
-      title: 'Cooking Set',
-      brand: 'All-Clad',
-      price: 499.99,
-      imageUrl: 'https://via.placeholder.com/400x400/FFF8E1/FFC107?text=Cooking+Set',
-      category: 'Kitchen',
-      tags: ['Cooking', 'Professional', 'Durable'],
-    ),
-  ];
+  List<ProductModel> _products = [];
+  bool _isLoadingProducts = true;
 
   @override
   void initState() {
@@ -89,6 +43,24 @@ class _SwipePageState extends ConsumerState<SwipePage>
       duration: const Duration(milliseconds: 500),
       vsync: this,
     );
+    _initializeSwipeSession();
+  }
+
+  Future<void> _initializeSwipeSession() async {
+    // Start a swipe session and load products
+    final swipeNotifier = ref.read(activeSwipeSessionProvider.notifier);
+    await swipeNotifier.startSession(
+      sessionType: 'onboarding',
+      platform: 'mobile',
+    );
+
+    // Load featured products for swiping
+    final productBrowser = ref.read(productBrowserProvider.notifier);
+    await productBrowser.searchProducts(ProductSearchParams(
+      limit: 20,
+      sortBy: 'popularity',
+      sortOrder: 'desc',
+    ));
   }
 
   @override
@@ -102,16 +74,23 @@ class _SwipePageState extends ConsumerState<SwipePage>
   void _onSwipe(int previousIndex, int? currentIndex, CardSwiperDirection direction) {
     HapticFeedback.lightImpact();
     
+    final products = ref.read(productBrowserProvider).products;
+    if (products.isEmpty || previousIndex >= products.length) return;
+    
+    final product = products[previousIndex];
+    
     setState(() {
-      _currentIndex = currentIndex ?? _items.length;
-      _totalSwipes++;
-      
-      if (direction == CardSwiperDirection.right || direction == CardSwiperDirection.top) {
-        _likesCount++;
-      } else {
-        _dislikesCount++;
-      }
+      _currentIndex = currentIndex ?? products.length;
     });
+
+    // Record the swipe interaction
+    final swipeNotifier = ref.read(activeSwipeSessionProvider.notifier);
+    swipeNotifier.recordSwipe(
+      productId: product.id,
+      contentType: 'product',
+      direction: _mapCardDirectionToSwipeDirection(direction),
+      categoryName: product.primaryCategory,
+    );
 
     _progressController.forward().then((_) {
       _progressController.reset();
@@ -121,8 +100,21 @@ class _SwipePageState extends ConsumerState<SwipePage>
     _showSwipeFeedback(direction);
 
     // Check if we've reached the end
-    if (_currentIndex >= _items.length) {
+    if (_currentIndex >= products.length) {
       _onSwipeSessionComplete();
+    }
+  }
+
+  SwipeDirection _mapCardDirectionToSwipeDirection(CardSwiperDirection direction) {
+    switch (direction) {
+      case CardSwiperDirection.left:
+        return SwipeDirection.left;
+      case CardSwiperDirection.right:
+        return SwipeDirection.right;
+      case CardSwiperDirection.top:
+        return SwipeDirection.up;
+      default:
+        return SwipeDirection.left;
     }
   }
 
@@ -132,14 +124,25 @@ class _SwipePageState extends ConsumerState<SwipePage>
   }
 
   void _onSwipeSessionComplete() {
+    final swipeSession = ref.read(activeSwipeSessionProvider);
+    final swipeNotifier = ref.read(activeSwipeSessionProvider.notifier);
+    
+    // Complete the session
+    swipeNotifier.completeSession(
+      completionRate: '100%',
+      totalSessionTime: DateTime.now().difference(
+        DateTime.parse(swipeSession.session?.sessionStart ?? DateTime.now().toIso8601String())
+      ).inSeconds,
+    );
+
     // Navigate to recommendations or show completion screen
     showDialog(
       context: context,
       barrierDismissible: false,
       builder: (context) => SwipeCompletionDialog(
-        totalSwipes: _totalSwipes,
-        likesCount: _likesCount,
-        dislikesCount: _dislikesCount,
+        totalSwipes: swipeNotifier.totalSwipes,
+        likesCount: swipeNotifier.likesCount,
+        dislikesCount: swipeNotifier.dislikesCount,
         onContinue: () {
           Navigator.of(context).pop();
           // Navigate to recommendations
@@ -163,6 +166,10 @@ class _SwipePageState extends ConsumerState<SwipePage>
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    
+    final productBrowserState = ref.watch(productBrowserProvider);
+    final swipeSessionState = ref.watch(activeSwipeSessionProvider);
+    final products = productBrowserState.products;
     
     return Scaffold(
       backgroundColor: theme.colorScheme.surface,
@@ -190,7 +197,7 @@ class _SwipePageState extends ConsumerState<SwipePage>
           // Progress indicator
           SwipeProgress(
             current: _currentIndex,
-            total: _items.length,
+            total: products.length,
             controller: _progressController,
           ).animate().fadeIn(),
 
@@ -208,41 +215,37 @@ class _SwipePageState extends ConsumerState<SwipePage>
 
           // Card stack
           Expanded(
-            child: _currentIndex < _items.length
-                ? Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24),
-                    child: CardSwiper(
-                      controller: _cardController,
-                      cardsCount: _items.length,
-                      onSwipe: _onSwipe,
-                      onUndo: (previousIndex, currentIndex, direction) {
-                        setState(() {
-                          _currentIndex = currentIndex;
-                          _totalSwipes = _totalSwipes > 0 ? _totalSwipes - 1 : 0;
-                          
-                          if (direction == CardSwiperDirection.right || 
-                              direction == CardSwiperDirection.top) {
-                            _likesCount = _likesCount > 0 ? _likesCount - 1 : 0;
-                          } else {
-                            _dislikesCount = _dislikesCount > 0 ? _dislikesCount - 1 : 0;
-                          }
-                        });
-                        return true;
-                      },
-                      numberOfCardsDisplayed: 3,
-                      backCardOffset: const Offset(0, -10),
-                      padding: const EdgeInsets.symmetric(vertical: 20),
-                      cardBuilder: (context, index, horizontalThresholdPercentage, verticalThresholdPercentage) {
-                        if (index >= _items.length) return const SizedBox();
-                        
-                        return SwipeCard(
-                          item: _items[index],
-                          horizontalThreshold: horizontalThresholdPercentage,
-                          verticalThreshold: verticalThresholdPercentage,
-                        );
-                      },
-                    ),
+            child: productBrowserState.isLoading
+                ? const Center(
+                    child: CircularProgressIndicator(),
                   )
+                : _currentIndex < products.length
+                    ? Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        child: CardSwiper(
+                          controller: _cardController,
+                          cardsCount: products.length,
+                          onSwipe: _onSwipe,
+                          onUndo: (previousIndex, currentIndex, direction) {
+                            setState(() {
+                              _currentIndex = currentIndex;
+                            });
+                            return true;
+                          },
+                          numberOfCardsDisplayed: 3,
+                          backCardOffset: const Offset(0, -10),
+                          padding: const EdgeInsets.symmetric(vertical: 20),
+                          cardBuilder: (context, index, horizontalThresholdPercentage, verticalThresholdPercentage) {
+                            if (index >= products.length) return const SizedBox();
+                            
+                            return SwipeCard(
+                              product: products[index],
+                              horizontalThreshold: horizontalThresholdPercentage,
+                              verticalThreshold: verticalThresholdPercentage,
+                            );
+                          },
+                        ),
+                      )
                 : Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -272,12 +275,12 @@ class _SwipePageState extends ConsumerState<SwipePage>
           ),
 
           // Action buttons
-          if (_currentIndex < _items.length)
+          if (_currentIndex < products.length && !productBrowserState.isLoading)
             SwipeButtons(
               onDislike: _swipeLeft,
               onLike: _swipeRight,
               onSuperLike: _swipeUp,
-              canUndo: _totalSwipes > 0,
+              canUndo: swipeSessionState.interactions.isNotEmpty,
               onUndo: () {
                 _cardController.undo();
               },
@@ -296,20 +299,24 @@ class _SwipePageState extends ConsumerState<SwipePage>
                 _StatItem(
                   icon: Icons.favorite,
                   label: 'Liked',
-                  value: _likesCount,
+                  value: swipeSessionState.interactions
+                      .where((i) => i.swipeDirection == SwipeDirection.right || i.swipeDirection == SwipeDirection.up)
+                      .length,
                   color: Colors.green,
                 ),
                 _StatItem(
                   icon: Icons.close,
                   label: 'Passed',
-                  value: _dislikesCount,
+                  value: swipeSessionState.interactions
+                      .where((i) => i.swipeDirection == SwipeDirection.left)
+                      .length,
                   color: Colors.red,
                 ),
                 _StatItem(
                   icon: Icons.progress_activity,
                   label: 'Progress',
                   value: _currentIndex,
-                  total: _items.length,
+                  total: products.length,
                   color: theme.colorScheme.primary,
                 ),
               ],
@@ -319,26 +326,6 @@ class _SwipePageState extends ConsumerState<SwipePage>
       ),
     );
   }
-}
-
-class SwipeItem {
-  final String id;
-  final String title;
-  final String brand;
-  final double price;
-  final String imageUrl;
-  final String category;
-  final List<String> tags;
-
-  SwipeItem({
-    required this.id,
-    required this.title,
-    required this.brand,
-    required this.price,
-    required this.imageUrl,
-    required this.category,
-    required this.tags,
-  });
 }
 
 class _StatItem extends StatelessWidget {
