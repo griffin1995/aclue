@@ -1,0 +1,87 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: giftsync-api
+  namespace: giftsync
+  labels:
+    app: giftsync-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: giftsync-api
+  template:
+    metadata:
+      labels:
+        app: giftsync-api
+    spec:
+      containers:
+      - name: giftsync-api
+        image: 123456789012.dkr.ecr.us-east-1.amazonaws.com/giftsync-api:latest
+        ports:
+        - containerPort: 8000
+        env:
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: giftsync-secrets
+              key: database-url
+        - name: SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: giftsync-secrets
+              key: secret-key
+        - name: JWT_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: giftsync-secrets
+              key: jwt-secret
+        - name: REDIS_URL
+          valueFrom:
+            secretKeyRef:
+              name: giftsync-secrets
+              key: redis-url
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: giftsync-secrets
+              key: aws-access-key
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: giftsync-secrets
+              key: aws-secret-key
+        - name: MIXPANEL_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: giftsync-secrets
+              key: mixpanel-token
+        - name: SENTRY_DSN
+          valueFrom:
+            secretKeyRef:
+              name: giftsync-secrets
+              key: sentry-dsn
+        envFrom:
+        - configMapRef:
+            name: giftsync-config
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+      imagePullSecrets:
+      - name: ecr-registry-secret

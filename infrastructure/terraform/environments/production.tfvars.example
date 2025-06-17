@@ -1,0 +1,57 @@
+# Production Environment Configuration
+# Copy this file to production.tfvars and update with your values
+
+# General
+environment = "production"
+project_name = "giftsync"
+region = "us-east-1"
+
+# Networking
+vpc_cidr = "10.0.0.0/16"
+availability_zones = ["us-east-1a", "us-east-1b", "us-east-1c"]
+
+# EKS Configuration
+cluster_version = "1.28"
+node_instance_types = ["t3.medium", "t3.large"]
+node_desired_capacity = 3
+node_max_capacity = 10
+node_min_capacity = 2
+
+# RDS Configuration
+db_instance_class = "db.t3.medium"
+db_allocated_storage = 100
+db_max_allocated_storage = 1000
+db_backup_retention_period = 7
+db_backup_window = "03:00-04:00"
+db_maintenance_window = "sun:04:00-sun:05:00"
+db_deletion_protection = true
+db_username = "giftsync_admin"
+
+# ElastiCache Configuration
+redis_node_type = "cache.t3.micro"
+redis_num_cache_nodes = 2
+redis_parameter_group_name = "default.redis7"
+
+# S3 Configuration
+s3_versioning_enabled = true
+s3_lifecycle_enabled = true
+
+# Domain Configuration
+domain_name = "giftsync.com"
+api_subdomain = "api"
+app_subdomain = "app"
+
+# SSL Certificate ARN (create manually first)
+certificate_arn = "arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012"
+
+# Monitoring
+enable_cloudwatch_logs = true
+log_retention_in_days = 30
+
+# Tags
+tags = {
+  Environment = "production"
+  Project     = "giftsync"
+  Owner       = "giftsync-team"
+  ManagedBy   = "terraform"
+}
