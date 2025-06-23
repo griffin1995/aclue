@@ -38,7 +38,7 @@ import { EnvironmentConfig } from '@/types';
  */
 export const config: EnvironmentConfig = {
   // Core service URLs
-  apiUrl: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000',        // Backend API base URL
+  apiUrl: process.env.NEXT_PUBLIC_API_URL || 'https://giftsync-backend-production.up.railway.app',        // Backend API base URL
   webUrl: process.env.NEXT_PUBLIC_WEB_URL || 'http://localhost:3000',        // Frontend application URL
   
   // Analytics and monitoring service keys

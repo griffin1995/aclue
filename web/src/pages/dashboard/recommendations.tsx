@@ -64,8 +64,8 @@ export default function RecommendationsPage() {
         exclude_seen: false,
       };
 
-      const response = await api.generateRecommendations(requestFilters);
-      setRecommendations(response.data.recommendations);
+      const response = await api.getRecommendations(requestFilters);
+      setRecommendations(Array.isArray(response.data) ? response.data : response.data.items || []);
       
     } catch (error) {
       console.error('Failed to load recommendations:', error);
