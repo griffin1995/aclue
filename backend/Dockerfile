@@ -52,10 +52,10 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 # Update package list and install required system libraries
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-        build-essential \       # Required for compiling Python packages
-        libpq-dev \            # PostgreSQL client library
-        curl \                 # For health checks and external API calls
-    && rm -rf /var/lib/apt/lists/*  # Remove package cache to reduce image size
+        build-essential \
+        libpq-dev \
+        curl \
+    && rm -rf /var/lib/apt/lists/*
 
 # =============================================================================
 # SECURITY: NON-ROOT USER SETUP
