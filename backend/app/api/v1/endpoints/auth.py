@@ -36,7 +36,7 @@ from pydantic import BaseModel, EmailStr, Field
 from typing import Optional
 
 from app.core.config import settings
-from app.database import supabase, supabase_anon, supabase_service, create_supabase_client
+from app.database import supabase, get_supabase_anon, get_supabase_service, create_supabase_client
 from app.core.database import get_db
 from app.models_sqlalchemy.user import User
 

@@ -7,7 +7,7 @@ from app.core.config import settings
 
 # Initialize Supabase clients
 def create_supabase_client(use_service_key: bool = False) -> Client:
-    """Create a Supabase client instance"""
+    """Create a Supabase client instance with current API"""
     if not settings.SUPABASE_URL:
         raise ValueError("SUPABASE_URL is required")
     
@@ -20,20 +20,37 @@ def create_supabase_client(use_service_key: bool = False) -> Client:
             raise ValueError("SUPABASE_ANON_KEY is required")
         return create_client(settings.SUPABASE_URL, settings.SUPABASE_ANON_KEY)
 
-# Global client instances
-supabase_anon = create_supabase_client(use_service_key=False)
-supabase_service = create_supabase_client(use_service_key=True)
+# Lazy initialization to avoid import-time errors
+_supabase_anon = None
+_supabase_service = None
+
+def get_supabase_anon() -> Client:
+    """Get or create anonymous Supabase client"""
+    global _supabase_anon
+    if _supabase_anon is None:
+        _supabase_anon = create_supabase_client(use_service_key=False)
+    return _supabase_anon
+
+def get_supabase_service() -> Client:
+    """Get or create service Supabase client"""
+    global _supabase_service
+    if _supabase_service is None:
+        _supabase_service = create_supabase_client(use_service_key=True)
+    return _supabase_service
+
+# Export lazy getters for backward compatibility
+supabase_anon = None  # Will be initialized lazily
+supabase_service = None  # Will be initialized lazily
 
 class SupabaseClient:
     """Wrapper class for Supabase operations with backward compatibility"""
     
     def __init__(self):
-        self.anon_client = supabase_anon
-        self.service_client = supabase_service
+        pass
     
     def _get_client(self, use_service_key: bool = False) -> Client:
         """Get the appropriate Supabase client"""
-        return self.service_client if use_service_key else self.anon_client
+        return get_supabase_service() if use_service_key else get_supabase_anon()
     
     async def select(self, table: str, select: str = "*", filters: Optional[dict] = None, limit: int = 100, use_service_key: bool = False):
         """Select data from a table using Supabase query builder"""
@@ -97,4 +114,4 @@ class SupabaseClient:
 supabase = SupabaseClient()
 
 # Export both old and new interfaces
-__all__ = ['supabase', 'supabase_anon', 'supabase_service', 'create_supabase_client']
+__all__ = ['supabase', 'get_supabase_anon', 'get_supabase_service', 'create_supabase_client']
