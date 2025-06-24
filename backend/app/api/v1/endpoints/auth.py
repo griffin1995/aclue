@@ -36,7 +36,7 @@ from pydantic import BaseModel, EmailStr
 from typing import Optional
 
 from app.core.config import settings
-from app.database import supabase
+from app.database import supabase, supabase_anon, supabase_service, create_supabase_client
 from app.core.database import get_db
 from app.models_sqlalchemy.user import User
 
@@ -129,17 +129,15 @@ class AuthResponse(BaseModel):
 @router.post("/register", response_model=AuthResponse, status_code=status.HTTP_201_CREATED)
 async def register(user_data: UserRegistration):
     """
-    Register a new user account.
+    Register a new user account using Supabase Auth.
     
-    Creates a new user account with secure password hashing and returns
-    JWT tokens for immediate authentication. Includes email uniqueness
-    validation and GDPR compliance handling.
+    Creates a new user account using Supabase's built-in authentication
+    system, then creates a corresponding profile record.
     
     Security Features:
-        - bcrypt password hashing with salt
-        - Email uniqueness validation
-        - UUID generation for user ID
-        - Immediate JWT token generation
+        - Supabase Auth built-in password validation
+        - Automatic email verification (if configured)
+        - Secure JWT token generation
         - Feature flag protection
     
     Parameters:
@@ -150,18 +148,8 @@ async def register(user_data: UserRegistration):
     
     Raises:
         HTTPException 403: Registration disabled via feature flag
-        HTTPException 400: Email already exists
+        HTTPException 400: Registration failed (email exists, weak password, etc.)
         HTTPException 500: Database error during user creation
-    
-    Example:
-        POST /auth/register
-        {
-            "first_name": "John",
-            "last_name": "Smith", 
-            "email": "john@example.com",
-            "password": "SecurePass123",
-            "marketing_consent": true
-        }
     """
     # Check if registration is enabled via feature flag
     if not settings.ENABLE_REGISTRATION:
@@ -172,98 +160,70 @@ async def register(user_data: UserRegistration):
     
     try:
         # ===========================================================================
-        # EMAIL UNIQUENESS VALIDATION
+        # SUPABASE AUTH REGISTRATION
         # ===========================================================================
-        # Check if user already exists with this email address
-        existing_users = await supabase.select(
-            "users",
-            select="email",
-            filters={"email": user_data.email},
-            use_service_key=True
-        )
+        # Use Supabase Auth to create user account with built-in validation
+        response = supabase_anon.auth.sign_up({
+            "email": user_data.email,
+            "password": user_data.password,
+            "options": {
+                "data": {
+                    "first_name": user_data.first_name,
+                    "last_name": user_data.last_name,
+                    "full_name": f"{user_data.first_name} {user_data.last_name}".strip(),
+                    "marketing_consent": user_data.marketing_consent
+                }
+            }
+        })
         
-        if existing_users:
+        if response.user is None:
             raise HTTPException(
                 status_code=400,
-                detail="User with this email already exists"
+                detail="Registration failed. Please check your email and password."
             )
         
         # ===========================================================================
-        # SECURE PASSWORD HASHING
+        # CREATE USER PROFILE
         # ===========================================================================
-        # Hash password using bcrypt with automatically generated salt
-        password_hash = bcrypt.hashpw(
-            user_data.password.encode('utf-8'),  # Convert to bytes
-            bcrypt.gensalt()                     # Generate random salt
-        ).decode('utf-8')                        # Convert back to string for storage
-        
-        # ===========================================================================
-        # USER DATA PREPARATION
-        # ===========================================================================
-        # Generate unique user ID and prepare user data for database insertion
-        user_id = str(uuid.uuid4())  # Generate UUID for user ID
-        full_name = f"{user_data.first_name} {user_data.last_name}".strip()
-        
-        user_create_data = {
-            "id": user_id,                              # Unique user identifier
-            "email": user_data.email,                   # User's email address
-            "first_name": user_data.first_name,         # User's first name
-            "last_name": user_data.last_name,           # User's last name
-            "full_name": full_name,                     # Combined full name
-            "password_hash": password_hash,             # Securely hashed password
-            "subscription_tier": "free",                # Default to free tier
-            "gdpr_consent": True,                       # GDPR consent (required for registration)
-            "is_active": True,                          # Account is active
-            "email_verified": False,                    # Email verification pending
-            # Note: created_at and updated_at will be set by database defaults
-            "last_login_at": datetime.now().isoformat() # Set initial login time
+        # Create profile record in profiles table using service key
+        profile_data = {
+            "id": response.user.id,
+            "email": response.user.email,
+            "first_name": user_data.first_name,
+            "last_name": user_data.last_name,
+            "full_name": f"{user_data.first_name} {user_data.last_name}".strip(),
+            "subscription_tier": "free",
+            "gdpr_consent": True,
+            "marketing_consent": user_data.marketing_consent,
+            "email_verified": response.user.email_confirmed_at is not None,
+            "updated_at": datetime.now().isoformat()
         }
         
-        # ===========================================================================
-        # DATABASE USER CREATION
-        # ===========================================================================
-        # Insert new user record into database with service key privileges
-        created_users = await supabase.insert(
-            "users",                    # Target table
-            user_create_data,           # User data to insert
-            use_service_key=True        # Bypass RLS policies
+        # Insert profile with service key to bypass RLS
+        created_profiles = await supabase.insert(
+            "profiles",
+            profile_data,
+            use_service_key=True
         )
         
-        created_user = created_users[0]  # Get created user record
+        created_profile = created_profiles[0] if created_profiles else profile_data
         
         # ===========================================================================
-        # JWT TOKEN GENERATION
+        # RESPONSE PREPARATION
         # ===========================================================================
-        # Generate access and refresh tokens for immediate authentication
-        access_token = jwt.encode(
-            {
-                "user_id": created_user["id"],     # User identifier for API requests
-                "email": created_user["email"],     # Email for additional verification
-                "exp": datetime.utcnow() + timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
-            },
-            settings.SECRET_KEY,                     # JWT signing secret
-            algorithm="HS256"                        # HMAC SHA-256 algorithm
-        )
+        # Extract tokens from Supabase Auth response
+        access_token = response.session.access_token if response.session else ""
+        refresh_token = response.session.refresh_token if response.session else ""
         
-        refresh_token = jwt.encode(
-            {
-                "user_id": created_user["id"],     # User identifier
-                "type": "refresh",                  # Token type for validation
-                "exp": datetime.utcnow() + timedelta(days=settings.REFRESH_TOKEN_EXPIRE_DAYS)
-            },
-            settings.SECRET_KEY,                     # JWT signing secret
-            algorithm="HS256"                        # HMAC SHA-256 algorithm
-        )
-        
-        # Return user data without password
+        # Prepare user response data
         user_response = {
-            "id": created_user["id"],
-            "email": created_user["email"],
-            "first_name": created_user["first_name"],
-            "last_name": created_user["last_name"],
-            "subscription_tier": created_user["subscription_tier"],
-            "created_at": created_user["created_at"],
-            "last_login": created_user["last_login_at"]
+            "id": response.user.id,
+            "email": response.user.email,
+            "first_name": user_data.first_name,
+            "last_name": user_data.last_name,
+            "subscription_tier": "free",
+            "created_at": response.user.created_at,
+            "last_login": response.user.last_sign_in_at
         }
         
         return AuthResponse(
@@ -280,57 +240,97 @@ async def register(user_data: UserRegistration):
 
 @router.post("/login", response_model=AuthResponse)
 async def login(credentials: UserLogin):
-    """Login user and return access tokens."""
+    """
+    Login user using Supabase Auth.
+    
+    Authenticates user credentials using Supabase's built-in authentication
+    system and returns JWT tokens for API access.
+    
+    Parameters:
+        credentials: UserLogin model with email and password
+    
+    Returns:
+        AuthResponse: JWT tokens and user profile data
+    
+    Raises:
+        HTTPException 401: Invalid credentials
+        HTTPException 500: Authentication system error
+    """
     try:
-        # Find user by email
-        users = await supabase.select(
-            "users",
+        # ===========================================================================
+        # SUPABASE AUTH LOGIN
+        # ===========================================================================
+        # Use Supabase Auth to authenticate user credentials
+        response = supabase_anon.auth.sign_in_with_password({
+            "email": credentials.email,
+            "password": credentials.password
+        })
+        
+        if response.user is None or response.session is None:
+            raise HTTPException(
+                status_code=401,
+                detail="Invalid email or password"
+            )
+        
+        # ===========================================================================
+        # FETCH USER PROFILE
+        # ===========================================================================
+        # Get user profile from profiles table
+        profiles = await supabase.select(
+            "profiles",
             select="*",
-            filters={"email": credentials.email},
+            filters={"id": response.user.id},
             use_service_key=True
         )
         
-        if not users:
-            raise HTTPException(status_code=401, detail="Invalid credentials")
+        # If no profile exists, create one from auth user data
+        if not profiles:
+            profile_data = {
+                "id": response.user.id,
+                "email": response.user.email,
+                "first_name": response.user.user_metadata.get("first_name", ""),
+                "last_name": response.user.user_metadata.get("last_name", ""),
+                "full_name": response.user.user_metadata.get("full_name", ""),
+                "subscription_tier": "free",
+                "email_verified": response.user.email_confirmed_at is not None,
+                "updated_at": datetime.now().isoformat()
+            }
+            
+            profiles = await supabase.insert(
+                "profiles",
+                profile_data,
+                use_service_key=True
+            )
         
-        user = users[0]
+        profile = profiles[0]
         
-        # Verify password
-        if "password_hash" not in user or not user["password_hash"]:
-            raise HTTPException(status_code=401, detail="Invalid credentials - no password hash")
-        
-        if not bcrypt.checkpw(credentials.password.encode('utf-8'), user["password_hash"].encode('utf-8')):
-            raise HTTPException(status_code=401, detail="Invalid credentials - password mismatch")
-        
-        # Update last login
+        # ===========================================================================
+        # UPDATE LAST LOGIN
+        # ===========================================================================
+        # Update profile with last login time
         await supabase.update(
-            "users",
-            {"last_login_at": datetime.now().isoformat()},
-            filters={"id": user["id"]},
+            "profiles",
+            {"updated_at": datetime.now().isoformat()},
+            filters={"id": response.user.id},
             use_service_key=True
         )
         
-        # Generate tokens
-        access_token = jwt.encode(
-            {"user_id": user["id"], "email": user["email"]},
-            settings.SECRET_KEY,
-            algorithm="HS256"
-        )
-        refresh_token = jwt.encode(
-            {"user_id": user["id"], "type": "refresh"},
-            settings.SECRET_KEY,
-            algorithm="HS256"
-        )
+        # ===========================================================================
+        # RESPONSE PREPARATION
+        # ===========================================================================
+        # Extract tokens from Supabase Auth response
+        access_token = response.session.access_token
+        refresh_token = response.session.refresh_token
         
-        # Return user data without password
+        # Prepare user response data from profile
         user_response = {
-            "id": user["id"],
-            "email": user["email"],
-            "first_name": user["first_name"],
-            "last_name": user["last_name"],
-            "subscription_tier": user["subscription_tier"],
-            "created_at": user["created_at"],
-            "last_login": user.get("last_login_at", datetime.now().isoformat())
+            "id": profile["id"],
+            "email": profile["email"],
+            "first_name": profile["first_name"],
+            "last_name": profile["last_name"],
+            "subscription_tier": profile.get("subscription_tier", "free"),
+            "created_at": response.user.created_at,
+            "last_login": response.user.last_sign_in_at
         }
         
         return AuthResponse(
@@ -347,7 +347,21 @@ async def login(credentials: UserLogin):
 
 @router.get("/me", response_model=UserResponse)
 async def get_current_user(authorization: Optional[str] = Header(None)):
-    """Get current user information from JWT token."""
+    """
+    Get current user information from Supabase Auth token.
+    
+    Validates the Supabase JWT token and returns user profile information.
+    
+    Parameters:
+        authorization: Bearer token from Authorization header
+    
+    Returns:
+        UserResponse: Current user profile data
+    
+    Raises:
+        HTTPException 401: Missing or invalid authorization
+        HTTPException 500: Authentication system error
+    """
     if not authorization:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -364,47 +378,67 @@ async def get_current_user(authorization: Optional[str] = Header(None)):
         
         token = authorization.split(" ")[1]
         
-        # Decode JWT token
-        payload = jwt.decode(token, settings.SECRET_KEY, algorithms=["HS256"])
-        user_id = payload.get("user_id")
+        # ===========================================================================
+        # SUPABASE AUTH TOKEN VALIDATION
+        # ===========================================================================
+        # Create a client with the user's token and validate
+        user_client = create_supabase_client(use_service_key=False)
+        user_client.auth.set_session(token, "")  # Set the token
         
-        if not user_id:
+        # Get user from Supabase Auth
+        user_response = user_client.auth.get_user(token)
+        
+        if user_response.user is None:
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
-                detail="Invalid token payload"
+                detail="Invalid or expired token"
             )
         
-        # Get user from database
-        users = await supabase.select(
-            "users",
-            select="id,email,first_name,last_name,subscription_tier,created_at,last_login_at",
+        user_id = user_response.user.id
+        
+        # ===========================================================================
+        # FETCH USER PROFILE
+        # ===========================================================================
+        # Get user profile from profiles table
+        profiles = await supabase.select(
+            "profiles",
+            select="*",
             filters={"id": user_id},
             use_service_key=True
         )
         
-        if not users:
-            raise HTTPException(
-                status_code=status.HTTP_401_UNAUTHORIZED,
-                detail="User not found"
+        if not profiles:
+            # If no profile exists, create one from auth user data
+            profile_data = {
+                "id": user_response.user.id,
+                "email": user_response.user.email,
+                "first_name": user_response.user.user_metadata.get("first_name", ""),
+                "last_name": user_response.user.user_metadata.get("last_name", ""),
+                "subscription_tier": "free",
+                "email_verified": user_response.user.email_confirmed_at is not None,
+                "updated_at": datetime.now().isoformat()
+            }
+            
+            profiles = await supabase.insert(
+                "profiles",
+                profile_data,
+                use_service_key=True
             )
         
-        user = users[0]
+        profile = profiles[0]
         
         return UserResponse(
-            id=user["id"],
-            email=user["email"],
-            first_name=user["first_name"],
-            last_name=user["last_name"],
-            subscription_tier=user["subscription_tier"],
-            created_at=user["created_at"],
-            last_login=user.get("last_login_at")
+            id=profile["id"],
+            email=profile["email"],
+            first_name=profile["first_name"],
+            last_name=profile["last_name"],
+            subscription_tier=profile.get("subscription_tier", "free"),
+            created_at=user_response.user.created_at,
+            last_login=user_response.user.last_sign_in_at
         )
         
-    except jwt.InvalidTokenError:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid token"
-        )
+    except HTTPException:
+        raise
     except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -413,23 +447,94 @@ async def get_current_user(authorization: Optional[str] = Header(None)):
 
 @router.post("/refresh")
 async def refresh_token(refresh_token_data: dict):
-    """Refresh access token using refresh token (placeholder)."""
-    # Placeholder implementation - in production would validate refresh token
-    return {
-        "access_token": "new-access-token",
-        "refresh_token": "new-refresh-token",
-        "message": "Token refreshed successfully"
-    }
+    """
+    Refresh access token using Supabase Auth refresh token.
+    
+    Uses Supabase's built-in token refresh mechanism to generate
+    new access and refresh tokens.
+    
+    Parameters:
+        refresh_token_data: Dict containing refresh_token
+    
+    Returns:
+        Dict with new access_token and refresh_token
+    
+    Raises:
+        HTTPException 401: Invalid or expired refresh token
+        HTTPException 400: Missing refresh token
+    """
+    refresh_token = refresh_token_data.get("refresh_token")
+    
+    if not refresh_token:
+        raise HTTPException(
+            status_code=400,
+            detail="Refresh token is required"
+        )
+    
+    try:
+        # Use Supabase Auth to refresh the session
+        response = supabase_anon.auth.refresh_session(refresh_token)
+        
+        if response.session is None:
+            raise HTTPException(
+                status_code=401,
+                detail="Invalid or expired refresh token"
+            )
+        
+        return {
+            "access_token": response.session.access_token,
+            "refresh_token": response.session.refresh_token,
+            "message": "Token refreshed successfully"
+        }
+        
+    except Exception as e:
+        raise HTTPException(
+            status_code=401,
+            detail=f"Token refresh failed: {str(e)}"
+        )
 
 
 @router.post("/logout")
-async def logout():
-    """Logout user (client should discard tokens)."""
+async def logout(authorization: Optional[str] = Header(None)):
+    """
+    Logout user using Supabase Auth.
+    
+    Signs out the user from Supabase Auth and invalidates the session.
+    
+    Parameters:
+        authorization: Bearer token from Authorization header
+    
+    Returns:
+        Dict with logout confirmation message
+    """
+    if authorization and authorization.startswith("Bearer "):
+        token = authorization.split(" ")[1]
+        
+        try:
+            # Use Supabase Auth to sign out the user
+            user_client = create_supabase_client(use_service_key=False)
+            user_client.auth.set_session(token, "")
+            user_client.auth.sign_out()
+        except Exception:
+            # If sign out fails, continue anyway - client should discard tokens
+            pass
+    
     return {"message": "Successfully logged out"}
 
 # Helper function to get current user (for other endpoints)
 async def get_current_user_from_token(authorization: str) -> dict:
-    """Extract user from JWT token - helper function for other endpoints."""
+    """
+    Extract user from Supabase Auth JWT token - helper function for other endpoints.
+    
+    Parameters:
+        authorization: Bearer token string
+    
+    Returns:
+        dict: User profile data from profiles table
+    
+    Raises:
+        HTTPException 401: Invalid authorization or user not found
+    """
     if not authorization or not authorization.startswith("Bearer "):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -439,34 +544,40 @@ async def get_current_user_from_token(authorization: str) -> dict:
     token = authorization.split(" ")[1]
     
     try:
-        payload = jwt.decode(token, settings.SECRET_KEY, algorithms=["HS256"])
-        user_id = payload.get("user_id")
+        # Validate token with Supabase Auth
+        user_client = create_supabase_client(use_service_key=False)
+        user_response = user_client.auth.get_user(token)
         
-        if not user_id:
+        if user_response.user is None:
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
-                detail="Invalid token"
+                detail="Invalid or expired token"
             )
         
-        users = await supabase.select(
-            "users",
+        user_id = user_response.user.id
+        
+        # Get user profile from profiles table
+        profiles = await supabase.select(
+            "profiles",
             select="*",
             filters={"id": user_id},
             use_service_key=True
         )
         
-        if not users:
+        if not profiles:
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
-                detail="User not found"
+                detail="User profile not found"
             )
         
-        return users[0]
+        return profiles[0]
         
-    except jwt.InvalidTokenError:
+    except HTTPException:
+        raise
+    except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid token"
+            detail=f"Token validation failed: {str(e)}"
         )
 
 
@@ -475,7 +586,20 @@ async def get_current_user(
     authorization: Optional[str] = Header(None),
     db: AsyncSession = Depends(get_db)
 ) -> User:
-    """Get current user as SQLAlchemy User model from JWT token."""
+    """
+    Get current user as SQLAlchemy User model from Supabase Auth JWT token.
+    
+    Parameters:
+        authorization: Bearer token from Authorization header
+        db: SQLAlchemy async session
+    
+    Returns:
+        User: SQLAlchemy User model instance
+    
+    Raises:
+        HTTPException 401: Invalid authorization or user not found
+        HTTPException 500: Database error
+    """
     if not authorization:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -492,15 +616,17 @@ async def get_current_user(
         
         token = authorization.split(" ")[1]
         
-        # Decode JWT token
-        payload = jwt.decode(token, settings.SECRET_KEY, algorithms=["HS256"])
-        user_id = payload.get("user_id")
+        # Validate token with Supabase Auth
+        user_client = create_supabase_client(use_service_key=False)
+        user_response = user_client.auth.get_user(token)
         
-        if not user_id:
+        if user_response.user is None:
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
-                detail="Invalid token payload"
+                detail="Invalid or expired token"
             )
+        
+        user_id = user_response.user.id
         
         # Get user from database using SQLAlchemy
         from sqlalchemy import select
@@ -511,16 +637,13 @@ async def get_current_user(
         if not user:
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
-                detail="User not found"
+                detail="User not found in database"
             )
         
         return user
         
-    except jwt.InvalidTokenError:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid token"
-        )
+    except HTTPException:
+        raise
     except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
