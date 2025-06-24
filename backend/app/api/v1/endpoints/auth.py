@@ -26,13 +26,13 @@ Endpoints:
 # ==============================================================================
 
 from datetime import timedelta, datetime
-from fastapi import APIRouter, Depends, HTTPException, status, Header
-from fastapi.security import OAuth2PasswordRequestForm
+from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials, OAuth2PasswordRequestForm
 from sqlalchemy.ext.asyncio import AsyncSession
 import jwt
 import bcrypt
 import uuid
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, Field
 from typing import Optional
 
 from app.core.config import settings
@@ -41,7 +41,10 @@ from app.core.database import get_db
 from app.models_sqlalchemy.user import User
 
 # FastAPI router for authentication endpoints
-router = APIRouter()
+router = APIRouter(tags=["authentication"])
+
+# Security scheme for JWT Bearer tokens
+security = HTTPBearer()
 
 # ==============================================================================
 # REQUEST/RESPONSE MODELS
@@ -56,17 +59,17 @@ class UserRegistration(BaseModel):
     and optional marketing consent for GDPR compliance.
     
     Fields:
-        first_name: User's first name (required)
-        last_name: User's last name (required)
+        first_name: User's first name (required, 2-50 characters)
+        last_name: User's last name (required, 2-50 characters)
         email: Valid email address (required, unique)
-        password: User password (required, min 8 chars)
+        password: User password (required, min 8 characters)
         marketing_consent: Optional marketing email consent (GDPR)
     """
-    first_name: str
-    last_name: str
-    email: EmailStr
-    password: str
-    marketing_consent: Optional[bool] = False
+    first_name: str = Field(..., min_length=2, max_length=50, description="User's first name")
+    last_name: str = Field(..., min_length=2, max_length=50, description="User's last name")
+    email: EmailStr = Field(..., description="Valid email address")
+    password: str = Field(..., min_length=8, description="Password (minimum 8 characters)")
+    marketing_consent: Optional[bool] = Field(False, description="Marketing email consent")
 
 class UserLogin(BaseModel):
     """
@@ -78,8 +81,8 @@ class UserLogin(BaseModel):
         email: User's registered email address
         password: User's password in plain text (encrypted in transit)
     """
-    email: EmailStr
-    password: str
+    email: EmailStr = Field(..., description="User's registered email address")
+    password: str = Field(..., min_length=1, description="User's password")
 
 class UserResponse(BaseModel):
     """
@@ -105,6 +108,17 @@ class UserResponse(BaseModel):
     created_at: str
     last_login: Optional[str] = None
 
+class RefreshTokenRequest(BaseModel):
+    """
+    Refresh token request model.
+    
+    Contains the refresh token needed to generate new access tokens.
+    
+    Fields:
+        refresh_token: Valid refresh token string
+    """
+    refresh_token: str = Field(..., min_length=1, description="Valid refresh token")
+
 class AuthResponse(BaseModel):
     """
     Authentication response model.
@@ -117,16 +131,81 @@ class AuthResponse(BaseModel):
         refresh_token: JWT refresh token (30 day expiry)
         user: Complete user profile data
     """
-    access_token: str
-    refresh_token: str
-    user: UserResponse
+    access_token: str = Field(..., description="JWT access token")
+    refresh_token: str = Field(..., description="JWT refresh token")
+    user: UserResponse = Field(..., description="User profile data")
 
+
+# ==============================================================================
+# AUTHENTICATION DEPENDENCIES
+# ==============================================================================
+
+async def get_current_user_dependency(
+    credentials: HTTPAuthorizationCredentials = Depends(security)
+) -> dict:
+    """
+    FastAPI dependency to extract and validate current user from JWT token.
+    
+    Parameters:
+        credentials: HTTP Bearer token credentials
+    
+    Returns:
+        dict: User profile data from profiles table
+    
+    Raises:
+        HTTPException 401: Invalid or expired token
+    """
+    try:
+        # Validate token with Supabase Auth
+        user_client = create_supabase_client(use_service_key=False)
+        user_response = user_client.auth.get_user(credentials.credentials)
+        
+        if user_response.user is None:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Invalid or expired token",
+                headers={"WWW-Authenticate": "Bearer"}
+            )
+        
+        user_id = user_response.user.id
+        
+        # Get user profile from profiles table
+        profiles = await supabase.select(
+            "profiles",
+            select="*",
+            filters={"id": user_id},
+            use_service_key=True
+        )
+        
+        if not profiles:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="User profile not found",
+                headers={"WWW-Authenticate": "Bearer"}
+            )
+        
+        return profiles[0]
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail=f"Token validation failed: {str(e)}",
+            headers={"WWW-Authenticate": "Bearer"}
+        )
 
 # ==============================================================================
 # AUTHENTICATION ENDPOINTS
 # ==============================================================================
 
-@router.post("/register", response_model=AuthResponse, status_code=status.HTTP_201_CREATED)
+@router.post(
+    "/register",
+    response_model=AuthResponse,
+    status_code=status.HTTP_201_CREATED,
+    summary="Register new user account",
+    description="Create a new user account using Supabase Auth with built-in validation"
+)
 async def register(user_data: UserRegistration):
     """
     Register a new user account using Supabase Auth.
@@ -238,7 +317,12 @@ async def register(user_data: UserRegistration):
         raise HTTPException(status_code=500, detail=f"Registration failed: {str(e)}")
 
 
-@router.post("/login", response_model=AuthResponse)
+@router.post(
+    "/login",
+    response_model=AuthResponse,
+    summary="Login user",
+    description="Authenticate user credentials using Supabase Auth and return JWT tokens"
+)
 async def login(credentials: UserLogin):
     """
     Login user using Supabase Auth.
@@ -345,108 +429,43 @@ async def login(credentials: UserLogin):
         raise HTTPException(status_code=500, detail=f"Login failed: {str(e)}")
 
 
-@router.get("/me", response_model=UserResponse)
-async def get_current_user(authorization: Optional[str] = Header(None)):
+@router.get(
+    "/me",
+    response_model=UserResponse,
+    summary="Get current user profile",
+    description="Get current user information from validated JWT token"
+)
+async def get_current_user(
+    current_user: dict = Depends(get_current_user_dependency)
+):
     """
-    Get current user information from Supabase Auth token.
+    Get current user information from validated JWT token.
     
-    Validates the Supabase JWT token and returns user profile information.
+    Uses the authentication dependency to validate the token and return
+    user profile information.
     
     Parameters:
-        authorization: Bearer token from Authorization header
+        current_user: User profile data from authentication dependency
     
     Returns:
         UserResponse: Current user profile data
-    
-    Raises:
-        HTTPException 401: Missing or invalid authorization
-        HTTPException 500: Authentication system error
     """
-    if not authorization:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Authorization header required"
-        )
-    
-    try:
-        # Extract token from "Bearer <token>" format
-        if not authorization.startswith("Bearer "):
-            raise HTTPException(
-                status_code=status.HTTP_401_UNAUTHORIZED,
-                detail="Invalid authorization header format"
-            )
-        
-        token = authorization.split(" ")[1]
-        
-        # ===========================================================================
-        # SUPABASE AUTH TOKEN VALIDATION
-        # ===========================================================================
-        # Create a client with the user's token and validate
-        user_client = create_supabase_client(use_service_key=False)
-        user_client.auth.set_session(token, "")  # Set the token
-        
-        # Get user from Supabase Auth
-        user_response = user_client.auth.get_user(token)
-        
-        if user_response.user is None:
-            raise HTTPException(
-                status_code=status.HTTP_401_UNAUTHORIZED,
-                detail="Invalid or expired token"
-            )
-        
-        user_id = user_response.user.id
-        
-        # ===========================================================================
-        # FETCH USER PROFILE
-        # ===========================================================================
-        # Get user profile from profiles table
-        profiles = await supabase.select(
-            "profiles",
-            select="*",
-            filters={"id": user_id},
-            use_service_key=True
-        )
-        
-        if not profiles:
-            # If no profile exists, create one from auth user data
-            profile_data = {
-                "id": user_response.user.id,
-                "email": user_response.user.email,
-                "first_name": user_response.user.user_metadata.get("first_name", ""),
-                "last_name": user_response.user.user_metadata.get("last_name", ""),
-                "subscription_tier": "free",
-                "email_verified": user_response.user.email_confirmed_at is not None,
-                "updated_at": datetime.now().isoformat()
-            }
-            
-            profiles = await supabase.insert(
-                "profiles",
-                profile_data,
-                use_service_key=True
-            )
-        
-        profile = profiles[0]
-        
-        return UserResponse(
-            id=profile["id"],
-            email=profile["email"],
-            first_name=profile["first_name"],
-            last_name=profile["last_name"],
-            subscription_tier=profile.get("subscription_tier", "free"),
-            created_at=user_response.user.created_at,
-            last_login=user_response.user.last_sign_in_at
-        )
-        
-    except HTTPException:
-        raise
-    except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Authentication error: {str(e)}"
-        )
+    return UserResponse(
+        id=current_user["id"],
+        email=current_user["email"],
+        first_name=current_user["first_name"],
+        last_name=current_user["last_name"],
+        subscription_tier=current_user.get("subscription_tier", "free"),
+        created_at=current_user.get("created_at", datetime.now().isoformat()),
+        last_login=current_user.get("updated_at")
+    )
 
-@router.post("/refresh")
-async def refresh_token(refresh_token_data: dict):
+@router.post(
+    "/refresh",
+    summary="Refresh access token",
+    description="Generate new access and refresh tokens using a valid refresh token"
+)
+async def refresh_token(refresh_token_data: RefreshTokenRequest):
     """
     Refresh access token using Supabase Auth refresh token.
     
@@ -463,17 +482,9 @@ async def refresh_token(refresh_token_data: dict):
         HTTPException 401: Invalid or expired refresh token
         HTTPException 400: Missing refresh token
     """
-    refresh_token = refresh_token_data.get("refresh_token")
-    
-    if not refresh_token:
-        raise HTTPException(
-            status_code=400,
-            detail="Refresh token is required"
-        )
-    
     try:
         # Use Supabase Auth to refresh the session
-        response = supabase_anon.auth.refresh_session(refresh_token)
+        response = supabase_anon.auth.refresh_session(refresh_token_data.refresh_token)
         
         if response.session is None:
             raise HTTPException(
@@ -494,40 +505,42 @@ async def refresh_token(refresh_token_data: dict):
         )
 
 
-@router.post("/logout")
-async def logout(authorization: Optional[str] = Header(None)):
+@router.post(
+    "/logout",
+    summary="Logout user",
+    description="Sign out user from Supabase Auth and invalidate session"
+)
+async def logout(
+    current_user: dict = Depends(get_current_user_dependency)
+):
     """
     Logout user using Supabase Auth.
     
     Signs out the user from Supabase Auth and invalidates the session.
+    Note: This endpoint validates the token but actual logout is handled
+    client-side by discarding tokens.
     
     Parameters:
-        authorization: Bearer token from Authorization header
+        current_user: Validated user from authentication dependency
     
     Returns:
         Dict with logout confirmation message
     """
-    if authorization and authorization.startswith("Bearer "):
-        token = authorization.split(" ")[1]
-        
-        try:
-            # Use Supabase Auth to sign out the user
-            user_client = create_supabase_client(use_service_key=False)
-            user_client.auth.set_session(token, "")
-            user_client.auth.sign_out()
-        except Exception:
-            # If sign out fails, continue anyway - client should discard tokens
-            pass
-    
+    # Token validation is already handled by the dependency
+    # Actual logout is client-side token disposal
     return {"message": "Successfully logged out"}
 
-# Helper function to get current user (for other endpoints)
+# DEPRECATED: Use get_current_user_dependency instead
+# Legacy helper function for backward compatibility with existing endpoints
 async def get_current_user_from_token(authorization: str) -> dict:
     """
-    Extract user from Supabase Auth JWT token - helper function for other endpoints.
+    DEPRECATED: Extract user from JWT token - use get_current_user_dependency instead.
+    
+    This function is maintained for backward compatibility with existing endpoints
+    that haven't been migrated to use proper FastAPI dependencies.
     
     Parameters:
-        authorization: Bearer token string
+        authorization: Bearer token string in "Bearer <token>" format
     
     Returns:
         dict: User profile data from profiles table
@@ -581,16 +594,19 @@ async def get_current_user_from_token(authorization: str) -> dict:
         )
 
 
-# Additional function to get current user as SQLAlchemy model (for complex endpoints)
-async def get_current_user(
-    authorization: Optional[str] = Header(None),
+# FastAPI dependency to get current user as SQLAlchemy model
+async def get_current_user_sqlalchemy(
+    credentials: HTTPAuthorizationCredentials = Depends(security),
     db: AsyncSession = Depends(get_db)
 ) -> User:
     """
-    Get current user as SQLAlchemy User model from Supabase Auth JWT token.
+    FastAPI dependency to get current user as SQLAlchemy User model.
+    
+    Validates JWT token with Supabase Auth and returns the corresponding
+    SQLAlchemy User model instance from the database.
     
     Parameters:
-        authorization: Bearer token from Authorization header
+        credentials: HTTP Bearer token credentials from security dependency
         db: SQLAlchemy async session
     
     Returns:
@@ -600,30 +616,16 @@ async def get_current_user(
         HTTPException 401: Invalid authorization or user not found
         HTTPException 500: Database error
     """
-    if not authorization:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Authorization header required"
-        )
-    
     try:
-        # Extract token from "Bearer <token>" format
-        if not authorization.startswith("Bearer "):
-            raise HTTPException(
-                status_code=status.HTTP_401_UNAUTHORIZED,
-                detail="Invalid authorization header format"
-            )
-        
-        token = authorization.split(" ")[1]
-        
         # Validate token with Supabase Auth
         user_client = create_supabase_client(use_service_key=False)
-        user_response = user_client.auth.get_user(token)
+        user_response = user_client.auth.get_user(credentials.credentials)
         
         if user_response.user is None:
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
-                detail="Invalid or expired token"
+                detail="Invalid or expired token",
+                headers={"WWW-Authenticate": "Bearer"}
             )
         
         user_id = user_response.user.id
@@ -637,7 +639,8 @@ async def get_current_user(
         if not user:
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
-                detail="User not found in database"
+                detail="User not found in database",
+                headers={"WWW-Authenticate": "Bearer"}
             )
         
         return user

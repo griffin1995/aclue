@@ -40,26 +40,67 @@ Usage Patterns:
   - Account deletion for privacy compliance
 """
 
-from fastapi import APIRouter, Depends, HTTPException, status, Header
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-from typing import List, Optional
-from datetime import datetime
+from pydantic import BaseModel, Field
+from typing import List, Optional, Dict, Any
+from datetime import datetime, date
 import uuid
 
 # Internal imports for database and authentication
 from app.core.database import get_db
 from app.models_sqlalchemy.user import User
-from app.api.v1.endpoints.auth import get_current_user, get_current_user_from_token
+from app.api.v1.endpoints.auth import get_current_user_sqlalchemy, get_current_user_from_token, get_current_user_dependency
 from app.database import supabase
 
 # Create router for user management endpoints
-router = APIRouter()
+router = APIRouter(tags=["users"])
+
+# ==============================================================================
+# REQUEST/RESPONSE MODELS
+# ==============================================================================
+
+class UserUpdateRequest(BaseModel):
+    """
+    User profile update request model.
+    
+    Validates user profile update data with appropriate field restrictions
+    and validation rules.
+    """
+    first_name: Optional[str] = Field(None, min_length=2, max_length=50, description="User's first name")
+    last_name: Optional[str] = Field(None, min_length=2, max_length=50, description="User's last name")
+    phone_number: Optional[str] = Field(None, max_length=20, description="Contact phone number")
+    date_of_birth: Optional[date] = Field(None, description="Date of birth for personalisation")
+    gender: Optional[str] = Field(None, max_length=20, description="Gender preference")
+    location: Optional[str] = Field(None, max_length=100, description="Geographic location")
+    preferences: Optional[Dict[str, Any]] = Field(None, description="User preference settings")
+    notification_settings: Optional[Dict[str, Any]] = Field(None, description="Communication preferences")
+
+class UserStatsResponse(BaseModel):
+    """
+    User statistics response model.
+    
+    Contains comprehensive user analytics and engagement metrics.
+    """
+    user_id: str = Field(..., description="User identifier")
+    swipe_stats: Dict[str, Any] = Field(..., description="Swipe interaction analytics")
+    recommendation_stats: Dict[str, Any] = Field(..., description="AI recommendation performance")
+    gift_link_stats: Dict[str, Any] = Field(..., description="Social sharing analytics")
+    engagement_stats: Dict[str, Any] = Field(..., description="Overall platform engagement")
+    preference_insights: Dict[str, Any] = Field(..., description="Personalisation intelligence")
+    achievements: List[Dict[str, Any]] = Field(..., description="Gamification milestones")
+    last_updated: str = Field(..., description="Statistics calculation timestamp")
+    cache_duration_minutes: int = Field(..., description="Recommended cache duration")
 
 
-@router.get("/me", summary="Get current user profile")
+@router.get(
+    "/me",
+    summary="Get current user profile",
+    description="Get complete profile information for the authenticated user"
+)
 async def get_current_user_profile(
-    current_user: User = Depends(get_current_user),
+    current_user: User = Depends(get_current_user_sqlalchemy),
     db: AsyncSession = Depends(get_db)
 ):
     """
@@ -113,10 +154,14 @@ async def get_current_user_profile(
     return current_user.to_dict()
 
 
-@router.put("/me", summary="Update current user profile")
+@router.put(
+    "/me",
+    summary="Update current user profile",
+    description="Update user profile information with comprehensive field validation"
+)
 async def update_current_user_profile(
-    profile_data: dict,
-    current_user: User = Depends(get_current_user),
+    profile_data: UserUpdateRequest,
+    current_user: User = Depends(get_current_user_sqlalchemy),
     db: AsyncSession = Depends(get_db)
 ):
     """
@@ -177,28 +222,20 @@ async def update_current_user_profile(
     # FIELD VALIDATION AND SECURITY
     # ===========================================================================
     
-    # Define fields that users are allowed to update
-    updatable_fields = [
-        'first_name',           # Personal information
-        'last_name', 
-        'phone_number', 
-        'date_of_birth', 
-        'gender',               # Demographics for personalization
-        'location',             # Geographic preferences
-        'preferences',          # User preferences (JSON)
-        'notification_settings' # Communication settings (JSON)
-    ]
+    # Extract only the fields that were actually provided in the request
+    update_data = profile_data.model_dump(exclude_unset=True)
     
-    # Validate and update only permitted fields
+    # Track which fields are being updated
     updated_fields = []
-    for field, value in profile_data.items():
-        if field in updatable_fields and hasattr(current_user, field):
-            # Additional validation could be added here for specific fields
+    
+    # Update only the provided fields
+    for field, value in update_data.items():
+        if hasattr(current_user, field):
             setattr(current_user, field, value)
             updated_fields.append(field)
-        elif field not in updatable_fields:
-            # Log attempt to update restricted field
-            print(f"⚠️  Attempted update to restricted field: {field} by user {current_user.id}")
+        else:
+            # Log attempt to update non-existent field
+            print(f"⚠️  Attempted update to non-existent field: {field} by user {current_user.id}")
     
     # ===========================================================================
     # DATABASE TRANSACTION
@@ -223,9 +260,13 @@ async def update_current_user_profile(
     return current_user.to_dict()
 
 
-@router.delete("/me", summary="Delete current user account")
+@router.delete(
+    "/me",
+    summary="Delete current user account",
+    description="Soft delete user account with GDPR compliance and data retention"
+)
 async def delete_current_user_account(
-    current_user: User = Depends(get_current_user),
+    current_user: User = Depends(get_current_user_sqlalchemy),
     db: AsyncSession = Depends(get_db)
 ):
     """
@@ -422,9 +463,14 @@ async def get_user_by_id(
     }
 
 
-@router.get("/me/statistics", summary="Get current user statistics")
+@router.get(
+    "/me/statistics",
+    response_model=UserStatsResponse,
+    summary="Get current user statistics",
+    description="Get comprehensive user engagement statistics and analytics"
+)
 async def get_user_statistics(
-    authorization: str = Header(None)
+    current_user: dict = Depends(get_current_user_dependency)
 ):
     """
     Get comprehensive user engagement statistics and analytics.
@@ -481,24 +527,12 @@ async def get_user_statistics(
             }
         }
     """
-    # ===========================================================================
-    # AUTHENTICATION VALIDATION
-    # ===========================================================================
-    
-    # Verify authorization header is present
-    if not authorization:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Authorization header required. Please provide valid JWT token."
-        )
-    
     try:
         # ===========================================================================
-        # USER AUTHENTICATION AND CONTEXT
+        # USER CONTEXT
         # ===========================================================================
         
-        # Extract and validate user from JWT token
-        current_user = await get_current_user_from_token(authorization)
+        # User validation is handled by the dependency
         user_id = current_user["id"]
         
         # ===========================================================================
