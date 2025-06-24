@@ -38,10 +38,9 @@ module.exports = {
   // Define where Tailwind should look for class names to include in build
   
   content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',      // Next.js pages directory
-    './components/**/*.{js,ts,jsx,tsx,mdx}', // Components directory
-    './app/**/*.{js,ts,jsx,tsx,mdx}',        // Next.js app directory
-    './src/**/*.{js,ts,jsx,tsx,mdx}',        // Source directory
+    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',      // Next.js pages directory
+    './src/components/**/*.{js,ts,jsx,tsx,mdx}', // Components directory
+    './src/**/*.{js,ts,jsx,tsx,mdx}',            // Source directory (covers all subdirectories)
   ],
   theme: {
     extend: {
