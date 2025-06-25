@@ -1,3 +1,31 @@
+# CRITICAL DEVELOPMENT RULES - READ FIRST
+
+## ABSOLUTELY CRITICAL RULES - NEVER VIOLATE THESE
+1. **NEVER add attribution to any AI tools** in code comments, commit messages, or documentation
+2. **NEVER mention AI assistance** in any form throughout the codebase
+3. **ALWAYS use British English** spelling and terminology throughout all code, documentation, and user-facing content
+4. **NEVER take shortcuts or create minimal versions** - Always implement the most optimal, production-ready, industry-standard solutions
+5. **ALWAYS use official documentation** from the docs/ directory or context7.com for proper implementation practices
+
+## Core Development Principles
+6. **REMEMBER the complete tech stack** even if parts aren't implemented yet - we follow a proper roadmap and architecture
+7. **ALWAYS commit logical changes** at important steps with industry-standard commit messages following conventional commit format
+8. **ALWAYS implement comprehensive, production-ready solutions** that meet enterprise standards for security, performance, and maintainability
+
+## File Management Rules
+9. **Do what has been asked; nothing more, nothing less**
+10. **NEVER create files unless they're absolutely necessary for achieving your goal**
+11. **ALWAYS prefer editing an existing file to creating a new one**
+12. **NEVER proactively create documentation files (*.md) or README files. Only create documentation files if explicitly requested by the User**
+
+## Documentation Strategy
+13. **When needing official documentation for any technology in this project, use the WebFetch tool to access https://context7.com/[technology-name] instead of maintaining local copies**
+14. **Available documentation through context7.com includes all major technologies used in this project: FastAPI, Next.js, React, PostgreSQL, Docker, Redis, Tailwind CSS, TypeScript, Supabase, and many others**
+15. **Always fetch the most current documentation rather than relying on potentially outdated local copies**
+16. **Use documentation from docs/ directory for local reference materials and library-specific implementation guides**
+
+---
+
 # GiftSync Development Notes
 
 ## Discover Page Debugging - RESOLVED
@@ -80,19 +108,3 @@ cd web && npm run dev
 - PostHog analytics working (404s are expected in development)
 - Backend Supabase integration working correctly
 - Authentication flow working properly
-
-# Custom Development Rules
-
-## Core Development Principles
-1. **NEVER take shortcuts or create minimal versions** - Always implement the most optimal, production-ready, industry-standard solutions
-2. **ALWAYS use British English** spelling and terminology throughout all code, documentation, and user-facing content
-3. **NEVER add attribution to Claude** or similar AI tools in code comments, commit messages, or documentation
-4. **REMEMBER the complete tech stack** even if parts aren't implemented yet - we follow a proper roadmap and architecture
-5. **ALWAYS commit logical changes** at important steps with industry-standard commit messages following conventional commit format
-6. **ALWAYS implement comprehensive, production-ready solutions** that meet enterprise standards for security, performance, and maintainability
-
-## File Management Rules
-7. **Do what has been asked; nothing more, nothing less**
-8. **NEVER create files unless they're absolutely necessary for achieving your goal**
-9. **ALWAYS prefer editing an existing file to creating a new one**
-10. **NEVER proactively create documentation files (*.md) or README files. Only create documentation files if explicitly requested by the User**
