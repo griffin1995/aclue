@@ -42,7 +42,7 @@ Integration Points:
 """
 
 from fastapi import APIRouter, HTTPException, status, Query, Header
-from typing import List, Optional
+from typing import List, Optional, Dict
 from datetime import datetime, timedelta
 import uuid
 from pydantic import BaseModel
