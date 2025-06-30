@@ -1,0 +1,1503 @@
+TITLE: Running Supabase Postgres Docker Image (Latest)
+DESCRIPTION: This command runs the latest Supabase Postgres Docker image from `ghcr.io` in an interactive, ephemeral container. It allows users to quickly start the PostgreSQL server for testing or development purposes without persisting any data.
+SOURCE: https://github.com/supabase/postgres/blob/develop/nix/docs/docker.md#_snippet_0
+
+LANGUAGE: bash
+CODE:
+```
+docker run --rm -it ghcr.io/supabase/nix-postgres-15:latest
+```
+
+----------------------------------------
+
+TITLE: pgvector Extension
+DESCRIPTION: An open-source extension for vector similarity search in Postgres, useful for AI and machine learning applications.
+SOURCE: https://github.com/supabase/postgres/blob/develop/README.md#_snippet_49
+
+LANGUAGE: APIDOC
+CODE:
+```
+Extension: pgvector
+Version: 0.8.0
+Description: Open-source vector similarity search for Postgres
+```
+
+----------------------------------------
+
+TITLE: PostgreSQL Extension: pgvector
+DESCRIPTION: Open-source vector similarity search for Postgres.
+SOURCE: https://github.com/supabase/postgres/blob/develop/README.md#_snippet_21
+
+LANGUAGE: APIDOC
+CODE:
+```
+Extension Name: pgvector
+Version: 0.8.0
+Description: Open-source vector similarity search for Postgres
+Source URL: https://github.com/pgvector/pgvector/archive/refs/tags/v0.8.0.tar.gz
+```
+
+----------------------------------------
+
+TITLE: Running PostgreSQL Server Locally with Nix
+DESCRIPTION: This command starts a PostgreSQL server using Nix from the root of the repository. It defaults to port 5435 to avoid conflicts. The first argument specifies the PostgreSQL version (e.g., 15 or 16), and an optional second argument can specify the port.
+SOURCE: https://github.com/supabase/postgres/blob/develop/nix/docs/start-client-server.md#_snippet_0
+
+LANGUAGE: Nix
+CODE:
+```
+nix run .#start-server 15
+```
+
+----------------------------------------
+
+TITLE: PostgreSQL Extension: pg_graphql
+DESCRIPTION: GraphQL support for PostgreSQL.
+SOURCE: https://github.com/supabase/postgres/blob/develop/README.md#_snippet_6
+
+LANGUAGE: APIDOC
+CODE:
+```
+Extension Name: pg_graphql
+Version: 1.5.11
+Description: GraphQL support for PostreSQL
+Source URL: https://github.com/supabase/pg_graphql/archive/v1.5.11.tar.gz
+```
+
+----------------------------------------
+
+TITLE: Creating New Migration with Dbmate (Docker Compose)
+DESCRIPTION: This command creates a new migration file using `dbmate` within a Docker container. The `--rm` flag ensures the container is removed after the command completes, maintaining a clean development environment.
+SOURCE: https://github.com/supabase/postgres/blob/develop/migrations/README.md#_snippet_7
+
+LANGUAGE: shell
+CODE:
+```
+docker-compose run --rm dbmate new '<some message>'
+```
+
+----------------------------------------
+
+TITLE: Applying Migrations with Dbmate (Docker Compose)
+DESCRIPTION: This command applies pending database migrations using `dbmate` within a Docker container. The `--rm` flag ensures the container is removed after the command completes, which is standard practice for one-off commands in a Dockerized workflow.
+SOURCE: https://github.com/supabase/postgres/blob/develop/migrations/README.md#_snippet_8
+
+LANGUAGE: shell
+CODE:
+```
+docker-compose run --rm dbmate up
+```
+
+----------------------------------------
+
+TITLE: pg_graphql Extension
+DESCRIPTION: Adds GraphQL support for PostgreSQL, allowing database interactions via GraphQL queries.
+SOURCE: https://github.com/supabase/postgres/blob/develop/README.md#_snippet_34
+
+LANGUAGE: APIDOC
+CODE:
+```
+Extension: pg_graphql
+Version: 1.5.11
+Description: GraphQL support for PostreSQL
+```
+
+----------------------------------------
+
+TITLE: Cloning Supabase Postgres Repository - Bash
+DESCRIPTION: This snippet provides the necessary bash commands to clone the Supabase Postgres GitHub repository to your home directory and then change the current working directory into the newly cloned repository. This is a prerequisite for any further operations within the project.
+SOURCE: https://github.com/supabase/postgres/blob/develop/nix/docs/build-postgres.md#_snippet_0
+
+LANGUAGE: bash
+CODE:
+```
+git clone https://github.com/supabase/postgres $HOME/supabase-postgres
+cd $HOME/supabase-postgres
+```
+
+----------------------------------------
+
+TITLE: pg-safeupdate Extension
+DESCRIPTION: A simple PostgreSQL extension that enforces criteria for UPDATE and DELETE statements, preventing accidental broad modifications.
+SOURCE: https://github.com/supabase/postgres/blob/develop/README.md#_snippet_32
+
+LANGUAGE: APIDOC
+CODE:
+```
+Extension: pg-safeupdate
+Version: 1.4
+Description: A simple extension to PostgreSQL that requires criteria for UPDATE and DELETE
+```
+
+----------------------------------------
+
+TITLE: PostgreSQL Extension: pg-safeupdate
+DESCRIPTION: A simple extension to PostgreSQL that requires criteria for UPDATE and DELETE.
+SOURCE: https://github.com/supabase/postgres/blob/develop/README.md#_snippet_3
+
+LANGUAGE: APIDOC
+CODE:
+```
+Extension Name: pg-safeupdate
+Version: 1.4
+Description: A simple extension to PostgreSQL that requires criteria for UPDATE and DELETE
+Source URL: https://github.com/eradman/pg-safeupdate/archive/1.4.tar.gz
+```
+
+----------------------------------------
+
+TITLE: PostgreSQL 15 Extension Reference
+DESCRIPTION: A comprehensive reference of PostgreSQL 15 extensions, providing their current versions and a brief description of their purpose and capabilities. This reference helps users understand the available tools to extend PostgreSQL functionality for various tasks.
+SOURCE: https://github.com/supabase/postgres/blob/develop/README.md#_snippet_0
+
+LANGUAGE: APIDOC
+CODE:
+```
+Extension: hypopg
+  Version: 1.4.1
+  Description: Hypothetical Indexes for PostgreSQL
+
+Extension: index_advisor
+  Version: 0.2.0
+  Description: Recommend indexes to improve query performance in PostgreSQL
+
+Extension: pg-safeupdate
+  Version: 1.4
+  Description: A simple extension to PostgreSQL that requires criteria for UPDATE and DELETE
+
+Extension: pg_cron
+  Version: 1.6.4
+  Description: Run Cron jobs through PostgreSQL
+
+Extension: pg_graphql
+  Version: 1.5.11
+  Description: GraphQL support for PostreSQL
+
+Extension: pg_hashids
+  Version: cd0e1b31d52b394a0df64079406a14a4f7387cd6
+  Description: Generate short unique IDs in PostgreSQL
+
+Extension: pg_jsonschema
+  Version: 0.3.3
+  Description: JSON Schema Validation for PostgreSQL
+
+Extension: pg_net
+  Version: 0.14.0
+  Description: Async networking for Postgres
+
+Extension: pg_plan_filter
+  Version: 5081a7b5cb890876e67d8e7486b6a64c38c9a492
+  Description: Filter PostgreSQL statements by execution plans
+
+Extension: pg_repack
+  Version: 1.5.2
+  Description: Reorganize tables in PostgreSQL databases with minimal locks
+
+Extension: pg_stat_monitor
+  Version: 2.1.0
+  Description: Query Performance Monitoring Tool for PostgreSQL
+
+Extension: pg_tle
+  Version: 1.4.0
+  Description: Framework for 'Trusted Language Extensions' in PostgreSQL
+
+Extension: pgaudit
+  Version: 1.7.0
+  Description: Open Source PostgreSQL Audit Logging
+
+Extension: pgjwt
+  Version: 9742dab1b2f297ad3811120db7b21451bca2d3c9
+  Description: PostgreSQL implementation of JSON Web Tokens
+
+Extension: pgmq
+  Version: 1.4.4
+  Description: A lightweight message queue. Like AWS SQS and RSMQ but on Postgres.
+
+Extension: pgroonga
+  Version: 3.2.5
+  Description: A PostgreSQL extension to use Groonga as the index
+
+Extension: pgrouting
+  Version: 3.4.1
+  Description: A PostgreSQL/PostGIS extension that provides geospatial routing functionality
+
+Extension: pgsodium
+  Version: 3.1.8
+  Description: Modern cryptography for PostgreSQL
+
+Extension: pgsql-http
+  Version: 1.6.1
+  Description: HTTP client for Postgres
+
+Extension: pgtap
+  Version: 1.2.0
+  Description: A unit testing framework for PostgreSQL
+
+Extension: pgvector
+  Version: 0.8.0
+  Description: Open-source vector similarity search for Postgres
+
+Extension: plpgsql-check
+  Version: 2.7.11
+  Description: Linter tool for language PL/pgSQL
+```
+
+----------------------------------------
+
+TITLE: orioledb Extension
+DESCRIPTION: orioledb is a modern storage engine for PostgreSQL, offering enhanced performance and features.
+SOURCE: https://github.com/supabase/postgres/blob/develop/README.md#_snippet_31
+
+LANGUAGE: APIDOC
+CODE:
+```
+Extension: orioledb
+Version: orioledb
+Description: orioledb
+```
+
+----------------------------------------
+
+TITLE: Configuring direnv to Source Recommended Environment
+DESCRIPTION: Explains how to set up the project's `.envrc` file to source the `.envrc.recommended` file, which contains shared environment configurations. This pattern allows users to customize their local `.envrc` (which is `.gitignore`'d) while leveraging version-controlled utility code for project setup.
+SOURCE: https://github.com/supabase/postgres/blob/develop/nix/docs/use-direnv.md#_snippet_4
+
+LANGUAGE: Shell
+CODE:
+```
+echo "source_env .envrc.recommended" >> .envrc
+```
+
+----------------------------------------
+
+TITLE: PostgreSQL Extension: pg_repack
+DESCRIPTION: Reorganize tables in PostgreSQL databases with minimal locks.
+SOURCE: https://github.com/supabase/postgres/blob/develop/README.md#_snippet_11
+
+LANGUAGE: APIDOC
+CODE:
+```
+Extension Name: pg_repack
+Version: 1.5.2
+Description: Reorganize tables in PostgreSQL databases with minimal locks
+Source URL: https://github.com/reorg/pg_repack/archive/ver_1.5.2.tar.gz
+```
+
+----------------------------------------
+
+TITLE: Starting Database Server with Docker Compose
+DESCRIPTION: This command starts the database server and other services defined in the `docker-compose.yml` file. It provides an alternative method to run the database locally for migration development and testing.
+SOURCE: https://github.com/supabase/postgres/blob/develop/migrations/README.md#_snippet_6
+
+LANGUAGE: shell
+CODE:
+```
+docker-compose up
+```
+
+----------------------------------------
+
+TITLE: WAL2JSON Extension for PostgreSQL
+DESCRIPTION: WAL2JSON is a PostgreSQL JSON output plugin for extracting logical decoding changesets from the Write-Ahead Log (WAL). It converts database changes into a structured JSON format, which is crucial for real-time data synchronization and auditing.
+SOURCE: https://github.com/supabase/postgres/blob/develop/README.md#_snippet_28
+
+LANGUAGE: APIDOC
+CODE:
+```
+wal2json:
+  Version: 2_6
+  Description: PostgreSQL JSON output plugin for changeset extraction
+```
+
+----------------------------------------
+
+TITLE: pg_jsonschema Extension
+DESCRIPTION: Provides JSON Schema Validation capabilities for PostgreSQL, ensuring data integrity for JSONB columns.
+SOURCE: https://github.com/supabase/postgres/blob/develop/README.md#_snippet_36
+
+LANGUAGE: APIDOC
+CODE:
+```
+Extension: pg_jsonschema
+Version: 0.3.3
+Description: JSON Schema Validation for PostgreSQL
+```
+
+----------------------------------------
+
+TITLE: Applying Migrations with Dbmate (Nix)
+DESCRIPTION: This command applies pending database migrations using `dbmate`, targeting the specified migrations directory. The `--no-dump-schema` flag prevents `dbmate` from dumping the schema after applying migrations, which is useful during development and testing.
+SOURCE: https://github.com/supabase/postgres/blob/develop/migrations/README.md#_snippet_5
+
+LANGUAGE: shell
+CODE:
+```
+dbmate --no-dump-schema --migrations-dir"migrations/db/migrations" up
+```
+
+----------------------------------------
+
+TITLE: PostgreSQL Extension: pgaudit
+DESCRIPTION: Open Source PostgreSQL Audit Logging.
+SOURCE: https://github.com/supabase/postgres/blob/develop/README.md#_snippet_14
+
+LANGUAGE: APIDOC
+CODE:
+```
+Extension Name: pgaudit
+Version: 17.0
+Description: Open Source PostgreSQL Audit Logging
+Source URL: https://github.com/pgaudit/pgaudit/archive/17.0.tar.gz
+```
+
+----------------------------------------
+
+TITLE: pgaudit Extension
+DESCRIPTION: Provides open-source audit logging for PostgreSQL, tracking database activities for security and compliance.
+SOURCE: https://github.com/supabase/postgres/blob/develop/README.md#_snippet_42
+
+LANGUAGE: APIDOC
+CODE:
+```
+Extension: pgaudit
+Version: 17.0
+Description: Open Source PostgreSQL Audit Logging
+```
+
+----------------------------------------
+
+TITLE: Creating New Migration with Dbmate (Nix)
+DESCRIPTION: This command uses `dbmate` to create a new migration file within the specified migrations directory. The provided message is incorporated into the migration file's name, aiding in organization and tracking of database changes.
+SOURCE: https://github.com/supabase/postgres/blob/develop/migrations/README.md#_snippet_4
+
+LANGUAGE: shell
+CODE:
+```
+dbmate --migrations-dir="migrations/db/migrations" new '<some message>'
+```
+
+----------------------------------------
+
+TITLE: PostgreSQL Extension: pgsodium
+DESCRIPTION: Modern cryptography for PostgreSQL.
+SOURCE: https://github.com/supabase/postgres/blob/develop/README.md#_snippet_18
+
+LANGUAGE: APIDOC
+CODE:
+```
+Extension Name: pgsodium
+Version: 3.1.8
+Description: Modern cryptography for PostgreSQL
+Source URL: https://github.com/michelp/pgsodium/archive/refs/tags/v3.1.8.tar.gz
+```
+
+----------------------------------------
+
+TITLE: PostgreSQL Extension: index_advisor
+DESCRIPTION: Recommend indexes to improve query performance in PostgreSQL.
+SOURCE: https://github.com/supabase/postgres/blob/develop/README.md#_snippet_2
+
+LANGUAGE: APIDOC
+CODE:
+```
+Extension Name: index_advisor
+Version: 0.2.0
+Description: Recommend indexes to improve query performance in PostgreSQL
+Source URL: https://github.com/olirice/index_advisor/archive/v0.2.0.tar.gz
+```
+
+----------------------------------------
+
+TITLE: pg_cron Extension
+DESCRIPTION: Enables running cron jobs directly through PostgreSQL, allowing for scheduled tasks within the database environment.
+SOURCE: https://github.com/supabase/postgres/blob/develop/README.md#_snippet_33
+
+LANGUAGE: APIDOC
+CODE:
+```
+Extension: pg_cron
+Version: 1.6.4
+Description: Run Cron jobs through PostgreSQL
+```
+
+----------------------------------------
+
+TITLE: pgsodium Extension
+DESCRIPTION: Integrates modern cryptography into PostgreSQL, offering secure data handling capabilities.
+SOURCE: https://github.com/supabase/postgres/blob/develop/README.md#_snippet_46
+
+LANGUAGE: APIDOC
+CODE:
+```
+Extension: pgsodium
+Version: 3.1.8
+Description: Modern cryptography for PostgreSQL
+```
+
+----------------------------------------
+
+TITLE: PostgreSQL Extension: pg_cron
+DESCRIPTION: Run Cron jobs through PostgreSQL.
+SOURCE: https://github.com/supabase/postgres/blob/develop/README.md#_snippet_5
+
+LANGUAGE: APIDOC
+CODE:
+```
+Extension Name: pg_cron
+Version: 1.6.4
+Description: Run Cron jobs through PostgreSQL
+Source URL: https://github.com/citusdata/pg_cron/archive/v1.6.4.tar.gz
+```
+
+----------------------------------------
+
+TITLE: Vault Extension for PostgreSQL
+DESCRIPTION: The Vault extension for PostgreSQL enables the secure storage of encrypted secrets directly within the database. It provides a mechanism to manage sensitive information, ensuring data confidentiality and integrity.
+SOURCE: https://github.com/supabase/postgres/blob/develop/README.md#_snippet_27
+
+LANGUAGE: APIDOC
+CODE:
+```
+vault:
+  Version: 0.2.9
+  Description: Store encrypted secrets in PostgreSQL
+```
+
+----------------------------------------
+
+TITLE: PostgreSQL Extension: pgsql-http
+DESCRIPTION: HTTP client for Postgres.
+SOURCE: https://github.com/supabase/postgres/blob/develop/README.md#_snippet_19
+
+LANGUAGE: APIDOC
+CODE:
+```
+Extension Name: pgsql-http
+Version: 1.6.1
+Description: HTTP client for Postgres
+Source URL: https://github.com/pramsey/pgsql-http/archive/refs/tags/v1.6.1.tar.gz
+```
+
+----------------------------------------
+
+TITLE: PostgreSQL Extension: pg_stat_monitor
+DESCRIPTION: Query Performance Monitoring Tool for PostgreSQL.
+SOURCE: https://github.com/supabase/postgres/blob/develop/README.md#_snippet_12
+
+LANGUAGE: APIDOC
+CODE:
+```
+Extension Name: pg_stat_monitor
+Version: 2.1.0
+Description: Query Performance Monitoring Tool for PostgreSQL
+Source URL: https://github.com/percona/pg_stat_monitor/archive/refs/tags/2.1.0.tar.gz
+```
+
+----------------------------------------
+
+TITLE: Entering a Nix Development Shell
+DESCRIPTION: This command drops the user into a subshell where all necessary development tools, as defined by the current Nix project, are immediately available in the `$PATH`. Upon exiting the shell, these tools are removed, ensuring a clean environment.
+SOURCE: https://github.com/supabase/postgres/blob/develop/nix/docs/build-postgres.md#_snippet_7
+
+LANGUAGE: bash
+CODE:
+```
+nix develop .
+```
+
+----------------------------------------
+
+TITLE: postgis Extension
+DESCRIPTION: Adds support for geographic objects to PostgreSQL, transforming it into a powerful spatial database.
+SOURCE: https://github.com/supabase/postgres/blob/develop/README.md#_snippet_51
+
+LANGUAGE: APIDOC
+CODE:
+```
+Extension: postgis
+Version: 3.3.7
+Description: Geographic Objects for PostgreSQL
+```
+
+----------------------------------------
+
+TITLE: Allowing direnv to Load Environment
+DESCRIPTION: Shows the `direnv allow` command, which explicitly approves the content of the `.envrc` file, enabling `direnv` to load and apply the specified environment variables and tools. Upon execution, `direnv` processes the `.envrc` and `.envrc.recommended` files, integrating with Nix flakes to provision the development environment.
+SOURCE: https://github.com/supabase/postgres/blob/develop/nix/docs/use-direnv.md#_snippet_6
+
+LANGUAGE: Shell
+CODE:
+```
+$ direnv allow
+direnv: loading ~/work/nix-postgres/.envrc
+direnv: loading ~/work/nix-postgres/.envrc.recommended
+direnv: loading https://raw.githubusercontent.com/nix-community/nix-direnv/2.3.0/direnvrc (sha256-Dmd+j63L84wuzgyjITIfSxSD57Tx7v51DMxVZOsiUD8=)
+direnv: using flake
+direnv: nix-direnv: renewed cache
+direnv: export +AR +AS +CC +CONFIG_SHELL +CXX +DETERMINISTIC_BUILD +HOST_PATH +IN_NIX_SHELL +LD +NIX_BINTOOLS +NIX_BINTOOLS_WRAPPER_TARGET_HOST_x86_64_unknown_linux_gnu +NIX_BUILD_CORES +NIX_CC +NIX_CC_WRAPPER_TARGET_HOST_x86_64_unknown_linux_gnu +NIX_CFLAGS_COMPILE +NIX_ENFORCE_NO_NATIVE +NIX_HARDENING_ENABLE +NIX_LDFLAGS +NIX_STORE +NM +OBJCOPY +OBJDUMP +PYTHONHASHSEED +PYTHONNOUSERSITE +PYTHONPATH +RANLIB +READELF +SIZE +SOURCE_DATE_EPOCH +STRINGS +STRIP +_PYTHON_HOST_PLATFORM +_PYTHON_SYSCONFIGDATA_NAME +__structuredAttrs +buildInputs +buildPhase +builder +cmakeFlags +configureFlags +depsBuildBuild +depsBuildBuildPropagated +depsBuildTarget +depsBuildTargetPropagated +depsHostHost +depsHostHostPropagated +depsTargetTarget +depsTargetTargetPropagated +doCheck +doInstallCheck +dontAddDisableDepTrack +mesonFlags +name +nativeBuildInputs +out +outputs +patches +phases +preferLocalBuild +propagatedBuildInputs +propagatedNativeBuildInputs +shell +shellHook +stdenv +strictDeps +system ~PATH ~XDG_DATA_DIRS
+```
+
+----------------------------------------
+
+TITLE: hypopg Extension
+DESCRIPTION: Provides support for hypothetical indexes in PostgreSQL, allowing users to test index performance without actually creating them.
+SOURCE: https://github.com/supabase/postgres/blob/develop/README.md#_snippet_29
+
+LANGUAGE: APIDOC
+CODE:
+```
+Extension: hypopg
+Version: 1.4.1
+Description: Hypothetical Indexes for PostgreSQL
+```
+
+----------------------------------------
+
+TITLE: Building pg_jsonschema PostgreSQL Extension with Nix
+DESCRIPTION: This Nix derivation defines how to build the `pg_jsonschema` PostgreSQL extension using the `buildPgrxExtension_0_11_3` builder. It specifies source fetching, build dependencies (cargo, postgresql), environment variables for macOS, and includes `preBuild` and `postInstall` scripts to manage versioning and SQL file generation for upgrade paths.
+SOURCE: https://github.com/supabase/postgres/blob/develop/nix/docs/adding-new-package.md#_snippet_1
+
+LANGUAGE: Nix
+CODE:
+```
+{ lib, stdenv, fetchFromGitHub, postgresql, buildPgrxExtension_0_11_3, cargo }:
+
+buildPgrxExtension_0_11_3 rec {
+  pname = "pg_jsonschema";
+  version = "0.3.1";
+  inherit postgresql;
+
+  src = fetchFromGitHub {
+    owner = "supabase";
+    repo = pname;
+    rev = "v${version}";
+    hash = "sha256-YdKpOEiDIz60xE7C+EzpYjBcH0HabnDbtZl23CYls6g=";
+  };
+
+  nativeBuildInputs = [ cargo ];
+  buildInputs = [ postgresql ];
+  # update the following array when the pg_jsonschema version is updated
+  # required to ensure that extensions update scripts from previous versions are generated
+
+  previousVersions = ["0.3.0" "0.2.0" "0.1.4" "0.1.4" "0.1.2" "0.1.1" "0.1.0"];
+  CARGO="${cargo}/bin/cargo";
+  env = lib.optionalAttrs stdenv.isDarwin {
+    POSTGRES_LIB = "${postgresql}/lib";
+    RUSTFLAGS = "-C link-arg=-undefined -C link-arg=dynamic_lookup";
+  };
+  cargoHash = "sha256-VcS+efMDppofuFW2zNrhbC28By3lYekDFquHPta2g=";
+
+  # FIXME (aseipp): testsuite tries to write files into /nix/store; we'll have
+  # to fix this a bit later.
+  doCheck = false;
+
+  preBuild = ''
+    echo "Processing git tags..."
+    echo '${builtins.concatStringsSep "," previousVersions}' | sed 's/,/\n/g' > git_tags.txt
+  '';
+
+  postInstall = ''
+    echo "Creating SQL files for previous versions..."
+    current_version="${version}"
+    sql_file="$out/share/postgresql/extension/pg_jsonschema--$current_version.sql"
+    
+    if [ -f "$sql_file" ]; then
+      while read -r previous_version; do
+        if [ "$(printf '%s\n' "$previous_version" "$current_version" | sort -V | head -n1)" = "$previous_version" ] && [ "$previous_version" != "$current_version" ]; then
+          new_file="$out/share/postgresql/extension/pg_jsonschema--$previous_version--$current_version.sql"
+          echo "Creating $new_file"
+          cp "$sql_file" "$new_file"
+        fi
+      done < git_tags.txt
+    else
+      echo "Warning: $sql_file not found"
+    fi
+    rm git_tags.txt
+  '';
+
+
+  meta = with lib; {
+    description = "JSON Schema Validation for PostgreSQL";
+    homepage = "https://github.com/supabase/${pname}";
+    platforms = postgresql.meta.platforms;
+    license = licenses.postgresql;
+  };
+}
+```
+
+----------------------------------------
+
+TITLE: pgmq Extension
+DESCRIPTION: A lightweight message queue built on PostgreSQL, similar to AWS SQS or RSMQ, for inter-application communication.
+SOURCE: https://github.com/supabase/postgres/blob/develop/README.md#_snippet_43
+
+LANGUAGE: APIDOC
+CODE:
+```
+Extension: pgmq
+Version: 1.4.4
+Description: A lightweight message queue. Like AWS SQS and RSMQ but on Postgres.
+```
+
+----------------------------------------
+
+TITLE: PostgreSQL Extension: pgmq
+DESCRIPTION: A lightweight message queue. Like AWS SQS and RSMQ but on Postgres.
+SOURCE: https://github.com/supabase/postgres/blob/develop/README.md#_snippet_15
+
+LANGUAGE: APIDOC
+CODE:
+```
+Extension Name: pgmq
+Version: 1.4.4
+Description: A lightweight message queue. Like AWS SQS and RSMQ but on Postgres.
+Source URL: https://github.com/tembo-io/pgmq/archive/v1.4.4.tar.gz
+```
+
+----------------------------------------
+
+TITLE: Building PostgreSQL 15 Binaries with Nix
+DESCRIPTION: This command uses Nix to build a PostgreSQL 15 installation, specifically targeting its binary directory. Upon completion, it creates a symlink named `result` pointing to the built path, which includes PostgreSQL and its extensions.
+SOURCE: https://github.com/supabase/postgres/blob/develop/nix/docs/build-postgres.md#_snippet_1
+
+LANGUAGE: Nix
+CODE:
+```
+nix build .#psql_15/bin
+```
+
+----------------------------------------
+
+TITLE: Querying Data from PostgreSQL Replica
+DESCRIPTION: This SQL snippet queries the `items` table on a replica server to verify that the data created on the master has been successfully replicated. It returns the count of rows in the `items` table.
+SOURCE: https://github.com/supabase/postgres/blob/develop/nix/docs/start-client-server.md#_snippet_8
+
+LANGUAGE: SQL
+CODE:
+```
+select count(*) from items;
+ count
+-------
+   100
+(1 row)
+```
+
+----------------------------------------
+
+TITLE: pg_tle Extension
+DESCRIPTION: A framework for 'Trusted Language Extensions' in PostgreSQL, enabling secure and isolated execution of custom code.
+SOURCE: https://github.com/supabase/postgres/blob/develop/README.md#_snippet_41
+
+LANGUAGE: APIDOC
+CODE:
+```
+Extension: pg_tle
+Version: 1.4.0
+Description: Framework for 'Trusted Language Extensions' in PostgreSQL
+```
+
+----------------------------------------
+
+TITLE: Starting PostgreSQL Master and Replicas
+DESCRIPTION: These commands initiate a PostgreSQL master server and two replica servers. The first argument specifies the PostgreSQL version, and subsequent arguments define the master port and replica server ports, respectively. This sets up a basic replication environment.
+SOURCE: https://github.com/supabase/postgres/blob/develop/nix/docs/start-client-server.md#_snippet_4
+
+LANGUAGE: Shell
+CODE:
+```
+$ start-postgres-server 15 5435
+
+$ start-postgres-replica 15 5439
+
+$ start-postgres-replica 15 5440
+```
+
+----------------------------------------
+
+TITLE: Connecting PostgreSQL Client to Master Server
+DESCRIPTION: This command connects a PostgreSQL client to the master server. The first argument specifies the PostgreSQL version (e.g., 15), and the second argument specifies the master server's port (e.g., 5435).
+SOURCE: https://github.com/supabase/postgres/blob/develop/nix/docs/start-client-server.md#_snippet_5
+
+LANGUAGE: Shell
+CODE:
+```
+$ start-postgres-client 15 5435
+```
+
+----------------------------------------
+
+TITLE: pg_repack Extension
+DESCRIPTION: Reorganizes tables and indexes in PostgreSQL databases with minimal locks, reducing downtime during maintenance.
+SOURCE: https://github.com/supabase/postgres/blob/develop/README.md#_snippet_39
+
+LANGUAGE: APIDOC
+CODE:
+```
+Extension: pg_repack
+Version: 1.5.2
+Description: Reorganize tables in PostgreSQL databases with minimal locks
+```
+
+----------------------------------------
+
+TITLE: Checking Replication Status and Creating Table
+DESCRIPTION: This SQL snippet queries `pg_stat_replication` to check the status of connected replicas, showing their addresses and states (e.g., 'streaming'). It then creates a table named `items` and populates it with 100 integer values, demonstrating data manipulation on the master.
+SOURCE: https://github.com/supabase/postgres/blob/develop/nix/docs/start-client-server.md#_snippet_6
+
+LANGUAGE: SQL
+CODE:
+```
+SELECT client_addr, state
+FROM pg_stat_replication;
+ client_addr |   state
+-------------+-----------
+ ::1         | streaming
+ ::1         | streaming
+(2 rows)
+
+create table items as select x::int from generate_series(1,100) x;
+```
+
+----------------------------------------
+
+TITLE: Adding pg_graphql Extension to Dockerfile
+DESCRIPTION: This Dockerfile snippet demonstrates how to add a new extension, `pg_graphql`, to the Supabase Postgres image. It defines a build argument for the release version, downloads the Debian package from GitHub, and copies it to the extensions stage, leveraging Docker layer caching for efficient builds.
+SOURCE: https://github.com/supabase/postgres/blob/develop/CONTRIBUTING.md#_snippet_0
+
+LANGUAGE: Dockerfile
+CODE:
+```
+ARG pg_graphql_release=1.1.0
+
+####################
+# 19-pg_graphql.yml
+####################
+FROM base as pg_graphql
+# Download package archive
+ARG pg_graphql_release
+ADD "https://github.com/supabase/pg_graphql/releases/download/v${pg_graphql_release}/pg_graphql-v${pg_graphql_release}-pg${postgresql_major}-${TARGETARCH}-linux-gnu.deb" \
+    /tmp/pg_graphql.deb
+
+####################
+# Collect extension packages
+####################
+FROM scratch as extensions
+COPY --from=pg_graphql /tmp/*.deb /tmp/
+```
+
+----------------------------------------
+
+TITLE: PostgreSQL Extension: plpgsql-check
+DESCRIPTION: Linter tool for language PL/pgSQL.
+SOURCE: https://github.com/supabase/postgres/blob/develop/README.md#_snippet_22
+
+LANGUAGE: APIDOC
+CODE:
+```
+Extension Name: plpgsql-check
+Version: 2.7.11
+Description: Linter tool for language PL/pgSQL
+Source URL: https://github.com/okbob/plpgsql_check/archive/v2.7.11.tar.gz
+```
+
+----------------------------------------
+
+TITLE: Running Dbmate Tool with Nix
+DESCRIPTION: This command executes the `dbmate-tool` using Nix, allowing users to run `dbmate up` against specified PostgreSQL versions. It supports options for version selection and port configuration, and is primarily used for applying database migrations.
+SOURCE: https://github.com/supabase/postgres/blob/develop/migrations/README.md#_snippet_0
+
+LANGUAGE: shell
+CODE:
+```
+Usage: nix run .#dbmate-tool -- [options]
+
+Options:
+  -v, --version [15|16|orioledb-17|all]  Specify the PostgreSQL version to use (required defaults to --version all)
+  -p, --port PORT                    Specify the port number to use (default: 5435)
+  -h, --help                         Show this help message
+
+Description:
+  Runs 'dbmate up' against a locally running the version of database you specify. Or 'all' to run against all versions.
+  NOTE: To create a migration, you must run 'nix develop' and then 'dbmate new <migration_name>' to create a new migration file.
+
+Examples:
+  nix run .#dbmate-tool
+  nix run .#dbmate-tool -- --version 15
+  nix run .#dbmate-tool -- --version 16 --port 5433
+```
+
+----------------------------------------
+
+TITLE: PostgreSQL Extension: pgrouting
+DESCRIPTION: A PostgreSQL/PostGIS extension that provides geospatial routing functionality.
+SOURCE: https://github.com/supabase/postgres/blob/develop/README.md#_snippet_17
+
+LANGUAGE: APIDOC
+CODE:
+```
+Extension Name: pgrouting
+Version: 3.4.1
+Description: A PostgreSQL/PostGIS extension that provides geospatial routing functionality
+Source URL: https://github.com/pgRouting/pgrouting/archive/v3.4.1.tar.gz
+```
+
+----------------------------------------
+
+TITLE: Installing Bat with Nix Profile (Shell)
+DESCRIPTION: This command uses `nix profile install` to add the `bat` utility from the `nixpkgs` channel to the user's Nix profile. Bat is a `cat` clone with syntax highlighting and Git integration.
+SOURCE: https://github.com/supabase/postgres/blob/develop/nix/docs/start-here.md#_snippet_6
+
+LANGUAGE: shell
+CODE:
+```
+nix profile install nixpkgs#bat
+```
+
+----------------------------------------
+
+TITLE: Installing HTTPie with Nix Profile (Shell)
+DESCRIPTION: This command uses `nix profile install` to add the HTTPie tool from the `nixpkgs` channel to the user's Nix profile. HTTPie is a user-friendly command-line HTTP client.
+SOURCE: https://github.com/supabase/postgres/blob/develop/nix/docs/start-here.md#_snippet_4
+
+LANGUAGE: shell
+CODE:
+```
+nix profile install nixpkgs#httpie
+```
+
+----------------------------------------
+
+TITLE: Installing Ripgrep with Nix Profile (Shell)
+DESCRIPTION: This command uses `nix profile install` to add the `ripgrep` utility from the `nixpkgs` channel to the user's Nix profile. Ripgrep is a line-oriented search tool that recursively searches the current directory for a regex pattern.
+SOURCE: https://github.com/supabase/postgres/blob/develop/nix/docs/start-here.md#_snippet_5
+
+LANGUAGE: shell
+CODE:
+```
+nix profile install nixpkgs#ripgrep
+```
+
+----------------------------------------
+
+TITLE: pg_plan_filter Extension
+DESCRIPTION: Allows filtering PostgreSQL statements based on their execution plans, useful for performance tuning and analysis.
+SOURCE: https://github.com/supabase/postgres/blob/develop/README.md#_snippet_38
+
+LANGUAGE: APIDOC
+CODE:
+```
+Extension: pg_plan_filter
+Version: 5081a7b5cb890876e67d8e7486b6a64c38c9a492
+Description: Filter PostgreSQL statements by execution plans
+```
+
+----------------------------------------
+
+TITLE: pg_hashids Extension
+DESCRIPTION: Generates short, unique, and non-sequential IDs in PostgreSQL using the hashids algorithm.
+SOURCE: https://github.com/supabase/postgres/blob/develop/README.md#_snippet_35
+
+LANGUAGE: APIDOC
+CODE:
+```
+Extension: pg_hashids
+Version: cd0e1b31d52b394a0df64079406a14a4f7387cd6
+Description: Generate short unique IDs in PostgreSQL
+```
+
+----------------------------------------
+
+TITLE: Starting Local PostgreSQL Server with Nix
+DESCRIPTION: This command starts a local PostgreSQL server using Nix, specifically for version 15. It is a prerequisite for creating and testing new database migrations locally, ensuring a running database instance for `dbmate` operations.
+SOURCE: https://github.com/supabase/postgres/blob/develop/migrations/README.md#_snippet_2
+
+LANGUAGE: shell
+CODE:
+```
+nix run .#start-server 15
+```
+
+----------------------------------------
+
+TITLE: Installing Python Dependencies for Testinfra
+DESCRIPTION: This command installs the necessary Python packages required to run the Testinfra integration tests, including `boto3` for AWS interactions, `docker` for Docker, and `pytest-testinfra` for the testing framework itself.
+SOURCE: https://github.com/supabase/postgres/blob/develop/testinfra/README.md#_snippet_0
+
+LANGUAGE: sh
+CODE:
+```
+pip3 install boto3 boto3-stubs[essential] docker ec2instanceconnectcli pytest pytest-testinfra[paramiko,docker] requests
+```
+
+----------------------------------------
+
+TITLE: pg_net Extension
+DESCRIPTION: Enables asynchronous networking capabilities directly within PostgreSQL, allowing the database to make HTTP requests.
+SOURCE: https://github.com/supabase/postgres/blob/develop/README.md#_snippet_37
+
+LANGUAGE: APIDOC
+CODE:
+```
+Extension: pg_net
+Version: 0.14.0
+Description: Async networking for Postgres
+```
+
+----------------------------------------
+
+TITLE: Supabase Wrappers for PostgreSQL
+DESCRIPTION: Supabase Wrappers offers a collection of Foreign Data Wrappers (FDWs) for PostgreSQL. These FDWs allow PostgreSQL to access and query data stored in external data sources as if they were local tables, facilitating data integration across different systems.
+SOURCE: https://github.com/supabase/postgres/blob/develop/README.md#_snippet_25
+
+LANGUAGE: APIDOC
+CODE:
+```
+supabase-wrappers:
+  Version: 0.4.4
+  Description: Various Foreign Data Wrappers (FDWs) for PostreSQL
+```
+
+----------------------------------------
+
+TITLE: pgsql-http Extension
+DESCRIPTION: An HTTP client for Postgres, allowing the database to make outgoing HTTP requests.
+SOURCE: https://github.com/supabase/postgres/blob/develop/README.md#_snippet_47
+
+LANGUAGE: APIDOC
+CODE:
+```
+Extension: pgsql-http
+Version: 1.6.1
+Description: HTTP client for Postgres
+```
+
+----------------------------------------
+
+TITLE: Updating Schema Files for All PostgreSQL Versions
+DESCRIPTION: This command uses the `dbmate-tool` via Nix to generate `schema.sql` files for all supported PostgreSQL versions, including OrioleDB. It is crucial for ensuring schema consistency and verifying migration idempotency across different database versions, and is checked in CI.
+SOURCE: https://github.com/supabase/postgres/blob/develop/migrations/README.md#_snippet_9
+
+LANGUAGE: shell
+CODE:
+```
+nix run .#dbmate-tool -- --version all
+```
+
+----------------------------------------
+
+TITLE: Building PostgreSQL 16 with Nix
+DESCRIPTION: This command builds a specific version of PostgreSQL (v16) and its plugins using Nix. It targets the `psql_16/bin` output, demonstrating how easily different versions can be built by changing the version specifier.
+SOURCE: https://github.com/supabase/postgres/blob/develop/nix/docs/build-postgres.md#_snippet_5
+
+LANGUAGE: bash
+CODE:
+```
+nix build .#psql_16/bin
+```
+
+----------------------------------------
+
+TITLE: PostgreSQL Extension: pg_plan_filter
+DESCRIPTION: Filter PostgreSQL statements by execution plans.
+SOURCE: https://github.com/supabase/postgres/blob/develop/README.md#_snippet_10
+
+LANGUAGE: APIDOC
+CODE:
+```
+Extension Name: pg_plan_filter
+Version: 5081a7b5cb890876e67d8e7486b6a64c38c9a492
+Description: Filter PostgreSQL statements by execution plans
+Source URL: https://github.com/pgexperts/pg_plan_filter/archive/5081a7b5cb890876e67d8e7486b6a64c38c9a492.tar.gz
+```
+
+----------------------------------------
+
+TITLE: Automating Local Testinfra Test Execution for Supabase Postgres
+DESCRIPTION: This comprehensive shell script automates the local execution of Testinfra integration tests for Supabase Postgres. It involves building Docker images for PostgreSQL extensions and binaries, packaging them into an AWS AMI using Packer, and finally executing the `pytest` suite against the built AMI.
+SOURCE: https://github.com/supabase/postgres/blob/develop/testinfra/README.md#_snippet_1
+
+LANGUAGE: sh
+CODE:
+```
+set -euo pipefail
+# cwd: repo root
+# docker must be running
+
+# build extensions & pg binaries
+docker buildx build \
+  $(yq 'to_entries | map(select(.value|type == "!!str")) |  map(" --build-arg " + .key + "=" + .value) | join("")' 'ansible/vars.yml') \
+  --target=extensions \
+  --tag=supabase/postgres:extensions \
+  --platform=linux/arm64 \
+  --load \
+  .
+mkdir -p /tmp/extensions ansible/files/extensions
+docker save supabase/postgres:extensions | tar xv -C /tmp/extensions
+for layer in /tmp/extensions/*/layer.tar; do
+  tar xvf "$layer" -C ansible/files/extensions --strip-components 1
+done
+docker buildx build \
+  --build-arg ubuntu_release=focal \
+  --build-arg ubuntu_release_no=20.04 \
+  --build-arg postgresql_major=15 \
+  --build-arg postgresql_release=15.1 \
+  --build-arg CPPFLAGS=-mcpu=neoverse-n1 \
+  --build-arg CFLAGS=-g3
+  --file=docker/Dockerfile \
+  --target=pg-deb \
+  --tag=supabase/postgres:deb \
+  --platform=linux/arm64 \
+  --load \
+  .
+mkdir -p /tmp/build ansible/files/postgres
+docker save supabase/postgres:deb | tar xv -C /tmp/build
+for layer in /tmp/build/*/layer.tar; do
+  tar xvf "$layer" -C ansible/files/postgres --strip-components 1
+done
+
+# build AMI
+AWS_PROFILE=supabase-dev packer build \
+  -var-file=development-arm.vars.pkr.hcl \
+  -var-file=common.vars.pkr.hcl \
+  -var "ansible_arguments=" \
+  -var "postgres-version=ci-ami-test" \
+  -var "region=ap-southeast-1" \
+  -var 'ami_regions=["ap-southeast-1"]' \
+  -var "force-deregister=true" \
+  amazon-arm64.pkr.hcl
+
+# run tests
+AWS_PROFILE=supabase-dev pytest -vv -s testinfra/test_*.py
+```
+
+----------------------------------------
+
+TITLE: Running Dbmate Tool from GitHub Flake URL
+DESCRIPTION: This demonstrates how to run the `dbmate-tool` directly from a GitHub flake URL, specifying a particular PostgreSQL version. This method is useful for executing the tool without cloning the repository locally, supporting specific branches or the main repository.
+SOURCE: https://github.com/supabase/postgres/blob/develop/migrations/README.md#_snippet_1
+
+LANGUAGE: shell
+CODE:
+```
+nix run github:supabase/postgres#dbmate-tool -- --version 15
+
+or
+
+nix run github:supabase/postgres/mybranch#dbmate-tool -- --version 15
+```
+
+----------------------------------------
+
+TITLE: Overriding GDAL Package in Nixpkgs Overlay
+DESCRIPTION: This Nixpkgs overlay snippet demonstrates how to globally override an existing package. It replaces the default `gdal` package with `gdalMinimal`, which is a version built with fewer features. The `final` and `prev` arguments refer to the package sets, allowing access to packages defined by other overlays or the base Nixpkgs.
+SOURCE: https://github.com/supabase/postgres/blob/develop/nix/docs/nix-overlays.md#_snippet_0
+
+LANGUAGE: Nix
+CODE:
+```
+final: prev: {
+    gdal = prev.gdalMinimal;
+}
+```
+
+----------------------------------------
+
+TITLE: Trigger Remote PostgreSQL Build and Cache
+DESCRIPTION: Initiates a GitHub Actions workflow to build PostgreSQL and extensions, run Nix flake check tests (including pg_regress and migrations), and cache results in the Supabase Nix binary cache. The process monitors workflow progress and runs on the current branch, prompting for confirmation on feature branches.
+SOURCE: https://github.com/supabase/postgres/blob/develop/nix/docs/development-workflow.md#_snippet_0
+
+LANGUAGE: bash
+CODE:
+```
+nix run .#trigger-nix-build
+```
+
+----------------------------------------
+
+TITLE: Packaging a C/C++ PostgreSQL Extension with Nix
+DESCRIPTION: This Nix derivation defines how to build and install a C/C++ PostgreSQL extension, specifically 'pgvector'. It uses 'stdenv.mkDerivation' to handle the build process, fetches the source from GitHub, and specifies the installation steps for shared libraries, SQL scripts, and control files. It also includes essential metadata for the package.
+SOURCE: https://github.com/supabase/postgres/blob/develop/nix/docs/adding-new-package.md#_snippet_0
+
+LANGUAGE: Nix
+CODE:
+```
+{ lib, stdenv, fetchFromGitHub, postgresql }:
+
+stdenv.mkDerivation rec {
+  pname = "pgvector";
+  version = "0.7.4";
+
+  buildInputs = [ postgresql ];
+
+  src = fetchFromGitHub {
+    owner = "pgvector";
+    repo = pname;
+    rev = "refs/tags/v${version}";
+    hash = "sha256-qwPaguQUdDHV8q6GDneLq3MuhVroPizpbqt7f08gKJI=";
+  };
+
+  installPhase = ''
+    mkdir -p $out/{lib,share/postgresql/extension}
+
+    cp *.so      $out/lib
+    cp sql/*.sql $out/share/postgresql/extension
+    cp *.control $out/share/postgresql/extension
+  '';
+
+  meta = with lib; {
+    description = "Open-source vector similarity search for Postgres";
+    homepage = "https://github.com/${src.owner}/${src.repo}";
+    maintainers = with maintainers; [ olirice ];
+    platforms = postgresql.meta.platforms;
+    license = licenses.postgresql;
+  };
+}
+```
+
+----------------------------------------
+
+TITLE: Build PostgreSQL AMI for Specific Versions
+DESCRIPTION: Constructs two AMI stages using Packer for specified PostgreSQL versions (e.g., 15, 17, orioledb-17) after the build is cached. This process cleans up temporary instances and outputs the final AMI name, which is essential for subsequent testing steps.
+SOURCE: https://github.com/supabase/postgres/blob/develop/nix/docs/development-workflow.md#_snippet_1
+
+LANGUAGE: bash
+CODE:
+```
+aws-vault exec <profile-name> -- nix run .#build-test-ami 15
+```
+
+LANGUAGE: bash
+CODE:
+```
+aws-vault exec <profile-name> -- nix run .#build-test-ami 17
+```
+
+LANGUAGE: bash
+CODE:
+```
+aws-vault exec  <profile-name> -- nix run .#build-test-ami orioledb-17
+```
+
+----------------------------------------
+
+TITLE: Monitoring PostgreSQL Upgrade Log (Bash)
+DESCRIPTION: This command is used to continuously monitor the `pg-upgrade-initiate.log` file, which records the progress and output of the PostgreSQL upgrade script. The `tail -f` command allows real-time viewing of new log entries as they are written, essential for tracking the upgrade process.
+SOURCE: https://github.com/supabase/postgres/blob/develop/nix/docs/testing-pg-upgrade-scripts.md#_snippet_1
+
+LANGUAGE: bash
+CODE:
+```
+# Watch the upgrade log
+tail -f /var/log/pg-upgrade-initiate.log
+```
+
+----------------------------------------
+
+TITLE: Testing Supabase Postgres Extension with pgTAP
+DESCRIPTION: This SQL snippet provides a minimal example of an automated test for a Supabase Postgres extension using pgTAP. It creates the 'wrappers' extension within the 'extensions' schema and ensures it can be enabled successfully, running as part of the CI process.
+SOURCE: https://github.com/supabase/postgres/blob/develop/CONTRIBUTING.md#_snippet_1
+
+LANGUAGE: SQL
+CODE:
+```
+BEGIN;
+create extension if not exists wrappers with schema "extensions";
+ROLLBACK;
+```
+
+----------------------------------------
+
+TITLE: Verifying Nix Flake with Local Checks
+DESCRIPTION: This command executes local tests on the Nix flake to verify that the extension update was successful and did not introduce any regressions. The '-L' flag ensures that detailed logs are displayed during the check process.
+SOURCE: https://github.com/supabase/postgres/blob/develop/nix/docs/update-extension.md#_snippet_5
+
+LANGUAGE: Shell
+CODE:
+```
+nix flake check -L
+```
+
+----------------------------------------
+
+TITLE: Connecting PostgreSQL Client to Replica Server
+DESCRIPTION: This command connects a PostgreSQL client to one of the replica servers. The first argument specifies the PostgreSQL version (e.g., 15), and the second argument specifies the replica server's port (e.g., 5439).
+SOURCE: https://github.com/supabase/postgres/blob/develop/nix/docs/start-client-server.md#_snippet_7
+
+LANGUAGE: Shell
+CODE:
+```
+$ start-postgres-client 15 5439
+```
+
+----------------------------------------
+
+TITLE: Running PostgreSQL Migration Test with Nix
+DESCRIPTION: This command initiates a PostgreSQL migration test using the `migration-test` tool. It requires specifying the 'from' and 'to' PostgreSQL versions and the desired upgrade mechanism, either `pg_dumpall` for full data dumps or `pg_upgrade` for in-place upgrades.
+SOURCE: https://github.com/supabase/postgres/blob/develop/nix/docs/migration-tests.md#_snippet_0
+
+LANGUAGE: Shell
+CODE:
+```
+nix run .#migration-test <from> <to> [pg_dumpall|pg_upgrade]
+```
+
+----------------------------------------
+
+TITLE: Running PostgreSQL Server and Client Concurrently with Nix
+DESCRIPTION: This sequence of commands demonstrates how to start a PostgreSQL server in the background and then connect a client to it. The `start-server` command runs version 15, and after a 5-second delay, `start-client` connects using version 16.
+SOURCE: https://github.com/supabase/postgres/blob/develop/nix/docs/start-client-server.md#_snippet_3
+
+LANGUAGE: Nix
+CODE:
+```
+nix run github:supabase/postgres#start-server 15 &
+sleep 5
+nix run github:supabase/postgres#start-client 16
+```
+
+----------------------------------------
+
+TITLE: Testing PostgreSQL Migrations Between Arbitrary Git Revisions
+DESCRIPTION: This example demonstrates how to test PostgreSQL migrations between specific Git revisions using `nix build` to obtain the PostgreSQL binaries from different repository states. It allows for testing custom extension updates or other changes by comparing two arbitrary versions, utilizing `pg_upgrade` as the migration method.
+SOURCE: https://github.com/supabase/postgres/blob/develop/nix/docs/migration-tests.md#_snippet_1
+
+LANGUAGE: Shell
+CODE:
+```
+OLD_GIT_VERSION=...
+NEW_GIT_VERSION=...
+
+nix run github:supabase/nix-postgres#migration-test \
+  $(nix build "github:supabase/nix-postgres/$OLD_GIT_VERSION#psql_14/bin") \
+  $(nix build "github:supabase/nix-postgres/$NEW_GIT_VERSION#psql_14/bin") \
+  pg_upgrade
+```
+
+----------------------------------------
+
+TITLE: Running Nix Flake Checks for PostgreSQL Versions
+DESCRIPTION: These Nix commands build and run 'flake check' for specific PostgreSQL major versions (15, 17, and OrioleDB-17) on `aarch64-darwin` architecture. The `-L` flag prints logs to stderr, which is useful for debugging and reviewing test output. This step ensures the postgres packages bundle succeeds evaluation and build.
+SOURCE: https://github.com/supabase/postgres/blob/develop/nix/docs/adding-tests.md#_snippet_0
+
+LANGUAGE: Nix
+CODE:
+```
+nix build .#checks.aarch64-darwin.psql_15 -L
+nix build .#checks.aarch64-darwin.psql_17 -L
+nix build .#checks.aarch64-darwin.psql_orioledb-17 -L
+```
+
+----------------------------------------
+
+TITLE: Entering Nix Development Shell
+DESCRIPTION: This command enters the Nix development shell for the `supabase/postgres` project. It provides access to necessary development tools, such as `dbmate`, which are required for managing database migrations.
+SOURCE: https://github.com/supabase/postgres/blob/develop/migrations/README.md#_snippet_3
+
+LANGUAGE: shell
+CODE:
+```
+nix develop
+```
+
+----------------------------------------
+
+TITLE: pgtap Extension
+DESCRIPTION: A comprehensive unit testing framework for PostgreSQL, enabling robust testing of database functions and procedures.
+SOURCE: https://github.com/supabase/postgres/blob/develop/README.md#_snippet_48
+
+LANGUAGE: APIDOC
+CODE:
+```
+Extension: pgtap
+Version: 1.2.0
+Description: A unit testing framework for PostgreSQL
+```
+
+----------------------------------------
+
+TITLE: PostgreSQL Extension: pgtap
+DESCRIPTION: A unit testing framework for PostgreSQL.
+SOURCE: https://github.com/supabase/postgres/blob/develop/README.md#_snippet_20
+
+LANGUAGE: APIDOC
+CODE:
+```
+Extension Name: pgtap
+Version: 1.2.0
+Description: A unit testing framework for PostgreSQL
+Source URL: https://github.com/theory/pgtap/archive/v1.2.0.tar.gz
+```
+
+----------------------------------------
+
+TITLE: Building PostgreSQL Binaries with Nix
+DESCRIPTION: This command initiates the build process for PostgreSQL version 15 binaries using Nix. It targets the `psql_15/bin` output from the current repository, generating an installation directory that includes a `receipt.json` file.
+SOURCE: https://github.com/supabase/postgres/blob/develop/nix/docs/receipt-files.md#_snippet_0
+
+LANGUAGE: bash
+CODE:
+```
+nix build .#psql_15/bin
+```
+
+----------------------------------------
+
+TITLE: Running Specific PostgreSQL Version at Git Revision with Nix
+DESCRIPTION: This command allows running a PostgreSQL server built from a specific version of the repository at a given Git commit hash. Replace `<some commit hash>` with the desired commit. The first argument specifies the PostgreSQL version (e.g., 15).
+SOURCE: https://github.com/supabase/postgres/blob/develop/nix/docs/start-client-server.md#_snippet_2
+
+LANGUAGE: Nix
+CODE:
+```
+nix run github:supabase/postgres/<some commit hash>#start-server 15
+```
+
+----------------------------------------
+
+TITLE: Running PostgreSQL Server from Arbitrary Directory with Nix
+DESCRIPTION: This command starts a PostgreSQL server using Nix from any directory, referencing the `supabase/postgres` repository as a flake. The first argument specifies the PostgreSQL version (e.g., 15).
+SOURCE: https://github.com/supabase/postgres/blob/develop/nix/docs/start-client-server.md#_snippet_1
+
+LANGUAGE: Nix
+CODE:
+```
+nix run github:supabase/postgres#start-server 15
+```
+
+----------------------------------------
+
+TITLE: Running PostgreSQL Upgrade Script in Local Mode (Bash)
+DESCRIPTION: This snippet demonstrates how to stop the PostgreSQL service and then execute the `initiate.sh` upgrade script in 'local mode'. The `NIX_FLAKE_VERSION` environment variable specifies the Nix flake version for binaries, and `IS_LOCAL_UPGRADE=true` ensures the script runs in the foreground for testing, preventing actual instance upgrade. The script is run with sudo privileges, targeting PostgreSQL version 17.
+SOURCE: https://github.com/supabase/postgres/blob/develop/nix/docs/testing-pg-upgrade-scripts.md#_snippet_0
+
+LANGUAGE: bash
+CODE:
+```
+# Stop PostgreSQL
+sudo systemctl stop postgresql
+
+# Run the upgrade script in local mode with your desired flake version
+sudo NIX_FLAKE_VERSION="your-flake-version-here" IS_LOCAL_UPGRADE=true /etc/adminapi/pg_upgrade_scripts/initiate.sh 17
+```
+
+----------------------------------------
+
+TITLE: Verifying PostgreSQL Upgrade Test Results (Bash)
+DESCRIPTION: This set of commands verifies the success of a PostgreSQL upgrade test run in local mode. It checks the upgrade log for a 'Upgrade complete' message, lists any generated SQL files in `/data_migration/sql/`, and inspects the newly created data directory at `/data_migration/pgdata/` to confirm the test's output.
+SOURCE: https://github.com/supabase/postgres/blob/develop/nix/docs/testing-pg-upgrade-scripts.md#_snippet_2
+
+LANGUAGE: bash
+CODE:
+```
+# Check the upgrade log for completion
+grep "Upgrade complete" /var/log/pg-upgrade-initiate.log
+
+# Check for any generated SQL files
+ls -l /data_migration/sql/
+
+# Check the new data directory
+ls -l /data_migration/pgdata/
+```
+
+----------------------------------------
+
+TITLE: Activating direnv Hook in Bash
+DESCRIPTION: Provides the command to integrate `direnv` into a Bash shell session by adding an `eval` command to the `.bashrc` file. This hook ensures `direnv` automatically loads and unloads environment variables when changing directories, providing dynamic project-specific environments.
+SOURCE: https://github.com/supabase/postgres/blob/develop/nix/docs/use-direnv.md#_snippet_2
+
+LANGUAGE: Bash
+CODE:
+```
+eval "$(direnv hook bash)"
+```
+
+----------------------------------------
+
+TITLE: Installing Nix with Determinate Systems Installer (Bash)
+DESCRIPTION: This command downloads and executes the Determinate Systems Nix installer script. It uses `curl` to fetch the script securely over HTTPS and pipes it to `sh` for execution, initiating the Nix installation process on Linux systems.
+SOURCE: https://github.com/supabase/postgres/blob/develop/nix/docs/start-here.md#_snippet_0
+
+LANGUAGE: bash
+CODE:
+```
+curl \
+  --proto '=https' --tlsv1.2 \
+  -sSf -L https://install.determinate.systems/nix \
+| sh -s -- install
+```
+
+----------------------------------------
+
+TITLE: Building and Testing Supabase Postgres with Nix
+DESCRIPTION: These commands build and run local tests for specific major versions of Supabase Postgres using Nix. They execute `pg_regress` and migration tests, ensuring the integrity of the database and its migrations. Dependencies like Postgres packages and extensions may rebuild if changes were made, otherwise prebuilt versions are downloaded.
+SOURCE: https://github.com/supabase/postgres/blob/develop/migrations/README.md#_snippet_10
+
+LANGUAGE: Nix
+CODE:
+```
+nix build .#checks.aarch64-darwin.psql_15 -L
+nix build .#checks.aarch64-darwin.psql_17 -L
+nix build .#checks.aarch64-darwin.psql_orioledb-17 -L
+```
+
+----------------------------------------
+
+TITLE: Installing direnv with Nix
+DESCRIPTION: Demonstrates how to install the `direnv` tool using the Nix package manager's `nix profile install` command. This command adds `direnv` to the user's Nix profile, making it available in the shell environment for use in managing project-specific dependencies.
+SOURCE: https://github.com/supabase/postgres/blob/develop/nix/docs/use-direnv.md#_snippet_0
+
+LANGUAGE: Shell
+CODE:
+```
+$ nix profile install nixpkgs#direnv
+```
+
+----------------------------------------
+
+TITLE: Verifying Nix Installation (Shell)
+DESCRIPTION: This command checks the installed version of Nix, confirming that the installation was successful and that the Nix tools are accessible in the shell's PATH. The output shows the Nix version number.
+SOURCE: https://github.com/supabase/postgres/blob/develop/nix/docs/start-here.md#_snippet_1
+
+LANGUAGE: shell
+CODE:
+```
+$ nix --version
+nix (Nix) 2.16.1
+```
+
+----------------------------------------
+
+TITLE: Clearing Extension Hash in Nix for Recalculation
+DESCRIPTION: This snippet demonstrates temporarily setting the 'hash' variable to an empty string in a Nix extension file. This action forces Nix to recalculate the SHA256 hash during the subsequent build process, which is necessary when the extension's content changes.
+SOURCE: https://github.com/supabase/postgres/blob/develop/nix/docs/update-extension.md#_snippet_1
+
+LANGUAGE: Nix
+CODE:
+```
+hash = "";
+```
+
+----------------------------------------
+
+TITLE: Verifying direnv Installation Path
+DESCRIPTION: Shows how to confirm that `direnv` has been successfully installed and to locate its executable path using the `which` command. This verification step ensures that `direnv` is properly accessible within the system's PATH, a prerequisite for its activation and use.
+SOURCE: https://github.com/supabase/postgres/blob/develop/nix/docs/use-direnv.md#_snippet_1
+
+LANGUAGE: Shell
+CODE:
+```
+$ which direnv
+/home/austin/.nix-profile/bin/direnv
+```
+
+----------------------------------------
+
+TITLE: Running pgTAP Tests with Nix Flake Check
+DESCRIPTION: This Nix command executes the `nix flake check` process, which includes running pgTAP tests located in the `tests/smoke/` directory. The `-L` flag ensures that logs are printed to stderr, providing detailed output for debugging and monitoring test execution. This is the primary way to run pgTAP tests.
+SOURCE: https://github.com/supabase/postgres/blob/develop/nix/docs/adding-tests.md#_snippet_3
+
+LANGUAGE: Nix
+CODE:
+```
+nix flake check -L
+```

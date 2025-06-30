@@ -1,0 +1,499 @@
+TITLE: Encoding and Decoding JWTs in Python
+DESCRIPTION: This example illustrates the basic usage of the PyJWT library for creating and verifying JSON Web Tokens. It shows how to encode a Python dictionary payload into a JWT using a secret key and the HS256 algorithm, and subsequently how to decode the resulting token back to its original payload using the same secret and algorithm.
+SOURCE: https://github.com/jpadilla/pyjwt/blob/master/README.rst#_snippet_1
+
+LANGUAGE: pycon
+CODE:
+```
+import jwt
+encoded = jwt.encode({"some": "payload"}, "secret", algorithm="HS256")
+print(encoded)
+jwt.decode(encoded, "secret", algorithms=["HS256"])
+```
+
+----------------------------------------
+
+TITLE: Encoding and Decoding JWTs with PyJWT in Python
+DESCRIPTION: This example illustrates the core functionality of PyJWT: encoding a Python dictionary into a JWT and then decoding it back. It shows how to import the `jwt` module, use `jwt.encode` with a payload, secret, and algorithm, and then `jwt.decode` to retrieve the original data.
+SOURCE: https://github.com/jpadilla/pyjwt/blob/master/docs/index.rst#_snippet_1
+
+LANGUAGE: Python
+CODE:
+```
+import jwt
+encoded_jwt = jwt.encode({"some": "payload"}, "secret", algorithm="HS256")
+jwt.decode(encoded_jwt, "secret", algorithms=["HS256"])
+```
+
+----------------------------------------
+
+TITLE: Encoding and Decoding JWT with HS256 in Python
+DESCRIPTION: This snippet demonstrates how to encode and decode a JSON Web Token (JWT) using the HS256 (HMAC-SHA256) symmetric algorithm. It uses a shared secret key for both encoding and decoding. The `jwt.encode` function creates the token, and `jwt.decode` verifies and extracts the payload.
+SOURCE: https://github.com/jpadilla/pyjwt/blob/master/docs/usage.rst#_snippet_0
+
+LANGUAGE: Python
+CODE:
+```
+>>> import jwt
+>>> key = "secret"
+>>> encoded = jwt.encode({"some": "payload"}, key, algorithm="HS256")
+>>> jwt.decode(encoded, key, algorithms="HS256")
+{'some': 'payload'}
+```
+
+----------------------------------------
+
+TITLE: Installing PyJWT via pip
+DESCRIPTION: This snippet demonstrates how to install the PyJWT library using pip, the Python package installer. It's the standard and recommended method for adding PyJWT to your Python environment, making it available for use in your projects.
+SOURCE: https://github.com/jpadilla/pyjwt/blob/master/README.rst#_snippet_0
+
+LANGUAGE: console
+CODE:
+```
+$ pip install PyJWT
+```
+
+----------------------------------------
+
+TITLE: Installing PyJWT with pip
+DESCRIPTION: This snippet demonstrates the standard command-line method for installing the PyJWT library using the pip package manager. It ensures the library and its dependencies are added to your Python environment, making it ready for use.
+SOURCE: https://github.com/jpadilla/pyjwt/blob/master/docs/index.rst#_snippet_0
+
+LANGUAGE: console
+CODE:
+```
+$ pip install pyjwt
+```
+
+----------------------------------------
+
+TITLE: Encoding and Decoding JWT with RS256 (RSA) in Python
+DESCRIPTION: This snippet illustrates the process of encoding and decoding a JSON Web Token (JWT) using the RS256 (RSA Signature with SHA-256) asymmetric algorithm. It requires a private key for encoding and a corresponding public key for decoding. The `cryptography` module is a prerequisite for RSA operations.
+SOURCE: https://github.com/jpadilla/pyjwt/blob/master/docs/usage.rst#_snippet_1
+
+LANGUAGE: Python
+CODE:
+```
+>>> import jwt
+>>> private_key = b"-----BEGIN RSA PRIVATE KEY-----\nMIIEpAIBAAKCAQEAwhvqCC+37A+UXgcvDl+7nbVjDI3QErdZBkI1VypVBMkKKWHM\nNLMdHk0bIKL+1aDYTRRsCKBy9ZmSSX1pwQlO/3+gRs/MWG27gdRNtf57uLk1+lQI\n6hBDozuyBR0YayQDIx6VsmpBn3Y8LS13p4pTBvirlsdX+jXrbOEaQphn0OdQo0WD\noOwwsPCNCKoIMbUOtUCowvjesFXlWkwG1zeMzlD1aDDS478PDZdckPjT96ICzqe4\nO1Ok6fRGnor2UTmuPy0f1tI0F7Ol5DHAD6pZbkhB70aTBuWDGLDR0iLenzyQecmD\n4aU19r1XC9AHsVbQzxHrP8FveZGlV/nJOBJwFwIDAQABAoIBAFCVFBA39yvJv/dV\nFiTqe1HahnckvFe4w/2EKO65xTfKWiyZzBOotBLrQbLH1/FJ5+H/82WVboQlMATQ\nSsH3olMRYbFj/NpNG8WnJGfEcQpb4Vu93UGGZP3z/1B+Jq/78E15Gf5KfFm91PeQ\nY5crJpLDU0CyGwTls4ms3aD98kNXuxhCGVbje5lCARizNKfm/+2qsnTYfKnAzN+n\nnm0WCjcHmvGYO8kGHWbFWMWvIlkoZ5YubSX2raNeg+YdMJUHz2ej1ocfW0A8/tmL\nwtFoBSuBe1Z2ykhX4t6mRHp0airhyc+MO0bIlW61vU/cPGPos16PoS7/V08S7ZED\nX64rkyECgYEA4iqeJZqny/PjOcYRuVOHBU9nEbsr2VJIf34/I9hta/mRq8hPxOdD\n/7ES/ZTZynTMnOdKht19Fi73Sf28NYE83y5WjGJV/JNj5uq2mLR7t2R0ZV8uK8tU\n4RR6b2bHBbhVLXZ9gqWtu9bWtsxWOkG1bs0iONgD3k5oZCXp+IWuklECgYEA27bA\n7UW+iBeB/2z4x1p/0wY+whBOtIUiZy6YCAOv/HtNppsUJM+W9GeaiMpPHlwDUWxr\n4xr6GbJSHrspkMtkX5bL9e7+9zBguqG5SiQVIzuues9Jio3ZHG1N2aNrr87+wMiB\nxX6Cyi0x1asmsmIBO7MdP/tSNB2ebr8qM6/6mecCgYBA82ZJfFm1+8uEuvo6E9/R\nyZTbBbq5BaVmX9Y4MB50hM6t26/050mi87J1err1Jofgg5fmlVMn/MLtz92uK/hU\nS9V1KYRyLc3h8gQQZLym1UWMG0KCNzmgDiZ/Oa/sV5y2mrG+xF/ZcwBkrNgSkO5O\n7MBoPLkXrcLTCARiZ9nTkQKBgQCsaBGnnkzOObQWnIny1L7s9j+UxHseCEJguR0v\nXMVh1+5uYc5CvGp1yj5nDGldJ1KrX6rIwMh0FYt+9dq99fwDTi8qAqoridi9Wl4t\nIXc8uH5HfBT3FivBtLucBjJgOIuK90ttj8JNp30tbynkXCcfk4NmS23L21oRCQyy\nlmqNDQKBgQDRvzEB26isJBr7/fwS0QbuIlgzEZ9T3ZkrGTFQNfUJZWcUllYI0ptv\ny7ShHOqyvjsC3LPrKGyEjeufaM5J8EFrqwtx6UB/tkGJ2bmd1YwOWFHvfHgHCZLP\n34ZNURCvxRV9ZojS1zmDRBJrSo7+/K0t28hXbiaTOjJA18XAyyWmGg==\n-----END RSA PRIVATE KEY-----
+"
+>>> public_key
+```
+
+----------------------------------------
+
+TITLE: Decoding JWT with Allowed Algorithms in Python
+DESCRIPTION: This snippet illustrates how to decode a JWT, specifying a list of permitted algorithms for validation. The `algorithms` parameter ensures that the token's `alg` header must match one of the provided algorithms (e.g., HS512 or HS256) to prevent `InvalidAlgorithmError` and mitigate algorithm confusion attacks. The secret key used for encoding must also be provided for verification.
+SOURCE: https://github.com/jpadilla/pyjwt/blob/master/docs/algorithms.rst#_snippet_1
+
+LANGUAGE: Python
+CODE:
+```
+jwt.decode(encoded, "secret", algorithms=["HS512", "HS256"])
+```
+
+----------------------------------------
+
+TITLE: Encoding JWTs with Expiration Time (exp) Claim in Python
+DESCRIPTION: This snippet shows how to include the "exp" (expiration time) claim when encoding a JWT. The expiration time can be provided as a UTC UNIX timestamp (integer) or a `datetime` object, which PyJWT automatically converts. This claim ensures the token is valid only until a specified time.
+SOURCE: https://github.com/jpadilla/pyjwt/blob/master/docs/usage.rst#_snippet_9
+
+LANGUAGE: Python
+CODE:
+```
+from datetime import datetime, timezone
+token = jwt.encode({"exp": 1371720939}, "secret")
+token = jwt.encode({"exp": datetime.now(tz=timezone.utc)}, "secret")
+```
+
+----------------------------------------
+
+TITLE: Decoding JWT with PyJWT in Python
+DESCRIPTION: This code decodes a complete JWT, extracting both its payload and header. It requires the `id_token`, the `signing_key` obtained previously, the expected `audience` (client ID), and a list of allowed `algorithms` for validation.
+SOURCE: https://github.com/jpadilla/pyjwt/blob/master/docs/usage.rst#_snippet_25
+
+LANGUAGE: Python
+CODE:
+```
+data = jwt.decode_complete(
+    id_token,
+    key=signing_key,
+    audience=client_id,
+    algorithms=signing_algos,
+)
+payload, header = data["payload"], data["header"]
+```
+
+----------------------------------------
+
+TITLE: Installing PyJWT Core Library
+DESCRIPTION: This snippet demonstrates the basic installation of the PyJWT library using the pip package manager. This command installs the core functionality of PyJWT without any optional cryptographic dependencies.
+SOURCE: https://github.com/jpadilla/pyjwt/blob/master/docs/installation.rst#_snippet_0
+
+LANGUAGE: Shell
+CODE:
+```
+$ pip install pyjwt
+```
+
+----------------------------------------
+
+TITLE: Verifying Issuer Claim in PyJWT
+DESCRIPTION: This snippet illustrates the process of encoding a JWT with an 'iss' (issuer) claim and then attempting to decode it while specifying an expected issuer. It demonstrates that a `jwt.InvalidIssuerError` is raised if the provided issuer does not match the one in the token.
+SOURCE: https://github.com/jpadilla/pyjwt/blob/master/docs/usage.rst#_snippet_15
+
+LANGUAGE: Python
+CODE:
+```
+payload = {"some": "payload", "iss": "urn:foo"}
+token = jwt.encode(payload, "secret")
+try:
+    jwt.decode(token, "secret", issuer="urn:invalid", algorithms=["HS256"])
+except jwt.InvalidIssuerError:
+    print("invalid issuer")
+```
+
+----------------------------------------
+
+TITLE: Verifying JWT Expiration Time (exp) Claim in Python
+DESCRIPTION: This example demonstrates how `jwt.decode()` automatically verifies the "exp" claim. If the token's expiration time is in the past relative to the current UTC time, a `jwt.ExpiredSignatureError` is raised, indicating the token is no longer valid.
+SOURCE: https://github.com/jpadilla/pyjwt/blob/master/docs/usage.rst#_snippet_10
+
+LANGUAGE: Python
+CODE:
+```
+try:
+    jwt.decode(token, "secret", algorithms=["HS256"])
+except jwt.ExpiredSignatureError:
+    print("expired")
+```
+
+----------------------------------------
+
+TITLE: Implementing OIDC Login Flow with PyJWT and at_hash Validation
+DESCRIPTION: This comprehensive snippet outlines the steps for an OpenID Connect (OIDC) login flow using PyJWT. It covers fetching OIDC configuration and JWKS, simulating a token response, and preparing for id_token decoding and at_hash validation, emphasizing external data reliance for at_hash.
+SOURCE: https://github.com/jpadilla/pyjwt/blob/master/docs/usage.rst#_snippet_23
+
+LANGUAGE: Python
+CODE:
+```
+import base64
+import jwt
+import requests
+
+# Part 1: setup
+# get the OIDC config and JWKs to use
+
+# in OIDC, you must know your client_id (this is the OAuth 2.0 client_id)
+client_id = ...
+
+# example of fetching data from your OIDC server
+# see: https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig
+oidc_server = ...
+oidc_config = requests.get(
+    f"https://{oidc_server}/.well-known/openid-configuration"
+).json
+```
+
+----------------------------------------
+
+TITLE: Validating JWT Audience Claim in PyJWT
+DESCRIPTION: This snippet demonstrates how PyJWT validates the 'aud' (audience) claim during token decoding. It shows an attempt to decode a token with an invalid audience, leading to a jwt.InvalidAudienceError being raised, highlighting the importance of matching audience values.
+SOURCE: https://github.com/jpadilla/pyjwt/blob/master/docs/usage.rst#_snippet_19
+
+LANGUAGE: Python
+CODE:
+```
+try:
+    jwt.decode(token, "secret", audience=["urn:invalid"], algorithms=["HS256"])
+except jwt.InvalidAudienceError:
+    print("invalid audience")
+```
+
+----------------------------------------
+
+TITLE: Installing PyJWT with Cryptographic Dependencies
+DESCRIPTION: This command installs PyJWT along with its optional cryptographic dependencies, specifically the `cryptography` library. This is essential for encoding or decoding tokens using digital signature algorithms such as RSA or ECDSA. The `pyjwt[crypto]` format is recommended for inclusion in project requirements files.
+SOURCE: https://github.com/jpadilla/pyjwt/blob/master/docs/installation.rst#_snippet_1
+
+LANGUAGE: Shell
+CODE:
+```
+$ pip install pyjwt[crypto]
+```
+
+----------------------------------------
+
+TITLE: Retrieving and Using RSA Signing Keys from JWKS Endpoint with PyJWT
+DESCRIPTION: This snippet demonstrates how to fetch RSA signing keys from a JWKS (JSON Web Key Set) endpoint using PyJWKClient to verify a JWT. It shows the process of initializing the client, retrieving the correct signing key based on the JWT's kid header, and then decoding the token with the obtained key.
+SOURCE: https://github.com/jpadilla/pyjwt/blob/master/docs/usage.rst#_snippet_22
+
+LANGUAGE: Python
+CODE:
+```
+import jwt
+from jwt import PyJWKClient
+token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik5FRTFRVVJCT1RNNE16STVSa0ZETlRZeE9UVTFNRGcyT0Rnd1EwVXpNVGsxUWpZeVJrUkZRdyJ9.eyJpc3MiOiJodHRwczovL2Rldi04N2V2eHlydS5hdXRoMC5jb20vIiwic3ViIjoiYVc0Q2NhNzl4UmVMV1V6MGFFMkg2a0QwTzNjWEJWdENAY2xpZW50cyIsImF1ZCI6Imh0dHBzOi8vZXhwZW5zZXMtYXBpIiwiaWF0IjoxNTcyMDA2OTU0LCJleHAiOjE1NzIwMDY5NjQsImF6cCI6ImFXNENjYTc5eFJlTFdVejBhRTJINmtEME8zY1hCVnRDIiwiZ3R5IjoiY2xpZW50LWNyZWRlbnRpYWxzIn0.PUxE7xn52aTCohGiWoSdMBZGiYAHwE5FYie0Y1qUT68IHSTXwXVd6hn02HTah6epvHHVKA2FqcFZ4GGv5VTHEvYpeggiiZMgbxFrmTEY0csL6VNkX1eaJGcuehwQCRBKRLL3zKmA5IKGy5GeUnIbpPHLHDxr-GXvgFzsdsyWlVQvPX2xjeaQ217r2PtxDeqjlf66UYl6oY6AqNS8DH3iryCvIfCcybRJkc_hdy-6ZMoKT6Piijvk_aXdm7-QQqKJFHLuEqrVSOuBqqiNfVrG27QzAPuPOxvfXTVLXL2jek5meH6n-VWgrBdoMFH93QEszEDowDAEhQPHVs0xj7SIzA"
+url = "https://dev-87evx9ru.auth0.com/.well-known/jwks.json"
+optional_custom_headers = {"User-agent": "custom-user-agent"}
+jwks_client = PyJWKClient(url, headers=optional_custom_headers)
+signing_key = jwks_client.get_signing_key_from_jwt(token)
+jwt.decode(
+    token,
+    signing_key,
+    audience="https://expenses-api",
+    options={"verify_exp": False},
+    algorithms=["RS256"]
+)
+```
+
+----------------------------------------
+
+TITLE: Decoding JWT with JWKS using PyJWT in Python
+DESCRIPTION: This snippet demonstrates how to decode a JSON Web Token (JWT) using the PyJWT library by fetching the signing key from a JSON Web Key Set (JWKS) endpoint. It initializes a PyJWKClient with the JWKS URL, retrieves the appropriate signing key based on the JWT's 'kid' header, and then decodes the token, specifying the algorithm and audience. The 'verify_exp' option is set to 'False' for demonstration purposes, allowing decoding of expired tokens.
+SOURCE: https://github.com/jpadilla/pyjwt/blob/master/CHANGELOG.rst#_snippet_3
+
+LANGUAGE: Python
+CODE:
+```
+token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik5FRTFRVVJCT1RNNE16STVSa0ZETlRZeE9UVTFNRGcyT0Rnd1EwVXpNVGsxUWpZeVJrUkZRdyJ9.eyJpc3MiOiJodHRwczovL2Rldi04N2V2eHlydS5hdXRoMC5jb20vIiwic3ViIjoiYVc0Q2NhNzl4UmVMV1V6MGFFMkg2a0QwTzNjWEJWdENAY2xpZW50cyIsImF1ZCI6Imh0dHBzOi8vZXhwZW5zZXMtYXBpIiwiaWF0IjoxNTcyMDA2OTU0LCJleHAiOjE1NzIwMDY5NjQsImF6cCI6ImFXNENjYTc5eFJlTFdVejBhRTJINmtEME8zY1hCVnRDIiwiZ3R5IjoiY2xpZW50LWNyZWRlbnRpYWxzIn0.PUxE7xn52aTCohGiWoSdMBZGiYAHwE5FYie0Y1qUT68IHSTXwXVd6hn02HTah6epvHHVKA2FqcFZ4GGv5VTHEvYpeggiiZMgbxFrmTEY0csL6VNkX1eaJGcuehwQCRBKRLL3zKmA5IKGy5GeUnIbpPHLHDxr-GXvgFzsdsyWlVQvPX2xjeaQ217r2PtxDeqjlf66UYl6oY6AqNS8DH3iryCvIfCcybRZkc_hdy-6ZMoKT6Piijvk_aXdm7-QQqKJFHLuEqrVSOuBqqiNfVrG27QzAPuPOxvfXTVLXL2jek5meH6n-VWgrBdoMFH93QEszEDowDAEhQPHVs0xj7SIzA"
+kid = "NEE1QURBOTM4MzI5RkFDNTYxOTU1MDg2ODgwQ0UzMTk1QjYyRkRFQw"
+url = "https://dev-87evx9ru.auth0.com/.well-known/jwks.json"
+
+jwks_client = PyJWKClient(url)
+signing_key = jwks_client.get_signing_key_from_jwt(token)
+
+data = jwt.decode(
+    token,
+    signing_key.key,
+    algorithms=["RS256"],
+    audience="https://expenses-api",
+    options={"verify_exp": False},
+)
+print(data)
+```
+
+----------------------------------------
+
+TITLE: Retrieving Signing Key from JWT in Python
+DESCRIPTION: This snippet retrieves the appropriate signing key from a JWKS client using the provided `id_token`. This key is essential for verifying the signature of the JWT.
+SOURCE: https://github.com/jpadilla/pyjwt/blob/master/docs/usage.rst#_snippet_24
+
+LANGUAGE: Python
+CODE:
+```
+signing_key = jwks_client.get_signing_key_from_jwt(id_token)
+```
+
+----------------------------------------
+
+TITLE: Reading JWT Headers Without Validation in Python
+DESCRIPTION: This snippet demonstrates how to extract the header of a JWT without performing any validation, using `jwt.get_unverified_header`. This is useful in scenarios where the key identifier (e.g., `kid`) is needed from the header to determine which key to use for subsequent validation.
+SOURCE: https://github.com/jpadilla/pyjwt/blob/master/docs/usage.rst#_snippet_8
+
+LANGUAGE: Python
+CODE:
+```
+encoded = jwt.encode(
+    {"some": "payload"},
+    "secret",
+    algorithm="HS256",
+    headers={"kid": "230498151c214b788dd97f22b85410a5"}
+)
+jwt.get_unverified_header(encoded)
+```
+
+----------------------------------------
+
+TITLE: Verifying Audience Claim with Iterable Parameter in PyJWT
+DESCRIPTION: This snippet begins to illustrate how the `audience` parameter for `jwt.decode` can accept an iterable (e.g., a list or tuple) when multiple audiences are accepted. This allows for flexible validation against a set of potential recipients.
+SOURCE: https://github.com/jpadilla/pyjwt/blob/master/docs/usage.rst#_snippet_18
+
+LANGUAGE: Python
+CODE:
+```
+payload = {"some": "payload", "aud": "urn:foo"}
+token = jwt.encode(payload, "secret")
+decoded = jwt.decode(
+```
+
+----------------------------------------
+
+TITLE: Verifying Array Audience Claim in PyJWT
+DESCRIPTION: This example shows how to encode a JWT with an 'aud' (audience) claim that contains an array of string values. It then demonstrates successfully decoding the token by providing one of the valid audience strings to the `jwt.decode` function.
+SOURCE: https://github.com/jpadilla/pyjwt/blob/master/docs/usage.rst#_snippet_16
+
+LANGUAGE: Python
+CODE:
+```
+payload = {"some": "payload", "aud": ["urn:foo", "urn:bar"]}
+token = jwt.encode(payload, "secret")
+decoded = jwt.decode(token, "secret", audience="urn:foo", algorithms=["HS256"])
+decoded = jwt.decode(token, "secret", audience="urn:bar", algorithms=["HS256"])
+```
+
+----------------------------------------
+
+TITLE: Verifying Single String Audience Claim in PyJWT
+DESCRIPTION: This snippet demonstrates encoding a JWT where the 'aud' (audience) claim is a single string value. It then shows how to successfully decode this token by providing the matching audience string to the `jwt.decode` function.
+SOURCE: https://github.com/jpadilla/pyjwt/blob/master/docs/usage.rst#_snippet_17
+
+LANGUAGE: Python
+CODE:
+```
+payload = {"some": "payload", "aud": "urn:foo"}
+token = jwt.encode(payload, "secret")
+decoded = jwt.decode(token, "secret", audience="urn:foo", algorithms=["HS256"])
+```
+
+----------------------------------------
+
+TITLE: Decoding JWT with Not Before Leeway in PyJWT
+DESCRIPTION: This code demonstrates how to apply leeway when validating the 'nbf' (not before) claim. By setting a leeway, a token with an 'nbf' time slightly in the future can still be considered valid, which is useful for mitigating clock synchronization issues between issuer and validator.
+SOURCE: https://github.com/jpadilla/pyjwt/blob/master/docs/usage.rst#_snippet_14
+
+LANGUAGE: Python
+CODE:
+```
+import time, datetime
+from datetime import timezone
+payload = {
+    "nbf": datetime.datetime.now(tz=timezone.utc) - datetime.timedelta(seconds=3)
+}
+token = jwt.encode(payload, "secret")
+# JWT payload is not valid yet
+# But with some leeway, it will still validate
+decoded = jwt.decode(token, "secret", leeway=5, algorithms=["HS256"])
+```
+
+----------------------------------------
+
+TITLE: Decoding JWT with Numeric Expiration Leeway in PyJWT
+DESCRIPTION: This snippet demonstrates how to decode an expired JWT by providing a numeric leeway (in seconds) to the `jwt.decode` function. This allows the token to be considered valid even if its expiration time is slightly in the past, accommodating minor clock differences or processing delays.
+SOURCE: https://github.com/jpadilla/pyjwt/blob/master/docs/usage.rst#_snippet_11
+
+LANGUAGE: Python
+CODE:
+```
+import time, datetime
+from datetime import timezone
+payload = {
+    "exp": datetime.datetime.now(tz=timezone.utc) + datetime.timedelta(seconds=1)
+}
+token = jwt.encode(payload, "secret")
+time.sleep(2)
+# JWT payload is now expired
+# But with some leeway, it will still validate
+decoded = jwt.decode(token, "secret", leeway=5, algorithms=["HS256"])
+```
+
+----------------------------------------
+
+TITLE: Encoding JWT with Not Before Claim in PyJWT
+DESCRIPTION: This snippet shows how to encode a JWT that includes the 'nbf' (not before) claim. The 'nbf' claim specifies a time before which the JWT must not be accepted for processing. Examples include setting 'nbf' using a Unix timestamp and a `datetime` object.
+SOURCE: https://github.com/jpadilla/pyjwt/blob/master/docs/usage.rst#_snippet_13
+
+LANGUAGE: Python
+CODE:
+```
+token = jwt.encode({"nbf": 1371720939}, "secret")
+token = jwt.encode({"nbf": datetime.datetime.now(tz=timezone.utc)}, "secret")
+```
+
+----------------------------------------
+
+TITLE: Decoding JWT with Timedelta Expiration Leeway in PyJWT
+DESCRIPTION: This example illustrates an alternative way to specify leeway for expiration time validation using a `datetime.timedelta` object instead of a raw number of seconds. This provides a more explicit and potentially readable way to define the acceptable margin.
+SOURCE: https://github.com/jpadilla/pyjwt/blob/master/docs/usage.rst#_snippet_12
+
+LANGUAGE: Python
+CODE:
+```
+decoded = jwt.decode(
+    token, "secret", leeway=datetime.timedelta(seconds=10), algorithms=["HS256"]
+)
+```
+
+----------------------------------------
+
+TITLE: Requiring Specific Claims in PyJWT Decoding
+DESCRIPTION: This snippet illustrates how to enforce the presence of specific claims during JWT decoding using PyJWT's options={'require': [...]} parameter. It demonstrates decoding a token that lacks a required claim ('exp'), resulting in a jwt.MissingRequiredClaimError.
+SOURCE: https://github.com/jpadilla/pyjwt/blob/master/docs/usage.rst#_snippet_21
+
+LANGUAGE: Python
+CODE:
+```
+token = jwt.encode({"sub": "1234567890", "iat": 1371720939}, "secret")
+try:
+    jwt.decode(
+        token,
+        "secret",
+        options={"require": ["exp", "iss", "sub"]},
+        algorithms=["HS256"]
+    )
+except jwt.MissingRequiredClaimError as e:
+    print(e)
+```
+
+----------------------------------------
+
+TITLE: Encoding JWT with RS256 using an Encrypted RSA Private Key (Python)
+DESCRIPTION: This snippet demonstrates how to load an encrypted RSA private key using the 'cryptography' library's serialization module and then use this loaded key to encode a JWT with the RS256 algorithm. Reusing the 'RSAPrivateKey' object offers performance benefits by avoiding repeated primality tests.
+SOURCE: https://github.com/jpadilla/pyjwt/blob/master/docs/usage.rst#_snippet_2
+
+LANGUAGE: Python
+CODE:
+```
+pem_bytes = b"-----BEGIN RSA PRIVATE KEY-----\nProc-Type: 4,ENCRYPTED\nDEK-Info: AES-128-CBC,C9C8F89EC68D15F26EB9B9695216C6DC\nE3lvX0dYjDxC0DIDitwNj+mEvU48Cqlp9esIeVmfcFmM6KpuQEA4asg/19kldbRq\ntOAYwmMuzz6GNYtX6sQXcStUE3pKMiMaTuP9WXzTc0boSYsGpGoQLtGv3h+0lkPu\nTGaktEhIfplAYlmsS/twr9Jh9QZjEs3dEMwpuF8A/iDZFeIE2thZL0bo38VWorgZ\nTCoOlC7qGtaeDvXXYrMvAUw3lN9A+DvxuPvbGqfqiHVBhxRcQEcR5p65lKP/V0WQ\nDe0AqCx1ghYGnExT7I4GLfr7Ux3F1UcVldPPsNeCTR/5YMOYDw7o5CZZ2TM39T33\nDBwfRhDqKe4bMUQcvcD54S2tfW7tEekm6mx5JwzW11sd0Gprj2uggDTOj3ce2yzM\nzl/dfbyFgh6v4jFeblIgvQ4VPg9nfCaRhatw5KXnfHBvmvdxlQ1Qp5P43ThXjI2a\njaJdm2lu1DLhf1OYGeQ0ytDDPzvhrZrdEJ8jbB3VCn4O/hvCtdsp7jVw2Djxmw2A\niRz2zlZJUlaytbi/DMpEVFwIzpuiDkpJ+ekzAsBbm/rGR/tjCEtHzVuoQNUWI93k\n0FML+Zzb6AkBWYjBXDZtzwJpMdNr8Vvh3krZySbRzQstqL2PYuNoSZ8/1xnnVqTV\nA0pDX7OS856AXQzQ1FRjjk/Jd0k6jGj8d7LzVgMnb8VknKvshlLmZDz8Sqa1coN4\n0Z1VfiT0Hzlk0fkoGtRjhSc3MB6ZLg7vVlY5vb4bRrTX79s/p8Y/OecYnGC6qhTi\n+VyJiMfwXyjFjIWYH8Y3G0QLkvOrTxLAY/3B2TU5wVSD7lfnPKOatMK1W0DHu5jp\nG9PPTzK9ol3v6Pk0prYg1fiApb6CCBUeZBvCIbJCzYrL/yBV/xYlCwAekLNGz9Vj\nNQUoiJqi27fOQi+ZXCrF7gYj8afo/xrg0tf7YqoOty8qfsozXzqwHKn+PcZOcqa5\n5rIqjLOO2f6KO2dxBeZK6zmzg7K/8RjvsNkEuXffec/nwnC10OVoMbE4wyPmNUQi\ndSuZ6xWBqiREjodLL+Ez/N1Qa52kuLSigrrSBTM2e42PWDV1sNW5V2wwlnolXFF6\n2Xp74WaGdnwF4Afrm7AnaBxdmfjk/a+c2uzPkZkpVnxrW3l8afphhKpRoTLzqDPp\nZGc5Fx9UZsmX18B8D1OGbf4aVLUkoqPPHbccCI+wByoAgIoq+y2391fP/Db6fY9A\nR4t2uuP2sNqDfYtzPYikePBXhYlldE1UHJ378g8pTiRHOI9BhuKIOIbVngPUYk4I\nwhYct2K84HjvR3iRnobK0UmmNOqtK0AtUqne+xaj1f3OwMZSvTUe7/jESgw1e1tn\nulKiWnKnmTSZkeTIp6itui2T7ewfNyitPtvnhoH1fBnMyUVACip0SLXp1fwQ7iCc\namPFFKo7p+C7P3l0ItegaMHywOSTBvK39DQTIpF9ml8VCQ+UyPOv/LnSJk1mbJN/\nc2Hdoj5dMa6T7ysIwZGEissJ/MEP+dpRs7VmCjWrHCDHfeAIO0n32g4zbzlNc/OA\nIdCXTvi4xUEn2n3JPt5Ba9qDUevaHSERlLxI+9a4ZaZeg4t+AzY0ur6+RWx+PaXB\n-----END RSA PRIVATE KEY-----\n"
+passphrase = b"abc123"
+
+private_key = serialization.load_pem_private_key(
+    pem_bytes, password=passphrase, backend=default_backend()
+)
+encoded = jwt.encode({"some": "payload"}, private_key, algorithm="RS256")
+```
+
+----------------------------------------
+
+TITLE: Encoding JWT with Issued At (iat) Claim in PyJWT
+DESCRIPTION: This snippet demonstrates how to include the 'iat' (issued at) claim when encoding a JWT using PyJWT. It shows two ways to set the 'iat' value: as a Unix timestamp (NumericDate) and using a datetime object with a timezone, which PyJWT converts automatically.
+SOURCE: https://github.com/jpadilla/pyjwt/blob/master/docs/usage.rst#_snippet_20
+
+LANGUAGE: Python
+CODE:
+```
+token = jwt.encode({"iat": 1371720939}, "secret")
+token = jwt.encode({"iat": datetime.datetime.now(tz=timezone.utc)}, "secret")
+```
+
+----------------------------------------
+
+TITLE: Encoding and Decoding JWTs with EdDSA in Python
+DESCRIPTION: This snippet demonstrates how to encode and decode a JWT using the EdDSA algorithm. It requires the `cryptography` module and uses a private key for encoding and a public key for decoding, ensuring the token's authenticity and integrity.
+SOURCE: https://github.com/jpadilla/pyjwt/blob/master/docs/usage.rst#_snippet_4
+
+LANGUAGE: Python
+CODE:
+```
+import jwt
+private_key = "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIPtUxyxlhjOWetjIYmc98dmB2GxpeaMPP64qBhZmG13r\n-----END PRIVATE KEY-----\n"
+public_key = "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEA7p4c1IU6aA65FWn6YZ+Bya5dRbfd4P6d4a6H0u9+gCg=\n-----END PUBLIC KEY-----\n"
+encoded = jwt.encode({"some": "payload"}, private_key, algorithm="EdDSA")
+jwt.decode(encoded, public_key, algorithms=["EdDSA"])
+```
+
+----------------------------------------
+
+TITLE: Encoding and Decoding JWTs with ES256 (ECDSA) in Python
+DESCRIPTION: This example illustrates encoding and decoding JWTs using the ES256 (ECDSA) algorithm. Similar to EdDSA, it depends on the `cryptography` module and utilizes a private key for signing and a public key for verification, ensuring secure token exchange.
+SOURCE: https://github.com/jpadilla/pyjwt/blob/master/docs/usage.rst#_snippet_5
+
+LANGUAGE: Python
+CODE:
+```
+import jwt
+private_key = b"-----BEGIN EC PRIVATE KEY-----\nMHcCAQEEIHAhM7P6HG3LgkDvgvfDeaMA6uELj+jEKWsSeOpS/SfYoAoGCCqGSM49\nAwEHoUQDQgAEXHVxB7s5SR7I9cWwry/JkECIRekaCwG3uOLCYbw5gVzn4dRmwMyY\nUJFcQWuFSfECRK+uQOOXD0YSEucBq0p5tA==\n-----END EC PRIVATE KEY-----\n"
+public_key = b"-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEXHVxB7s5SR7I9cWwry/JkECIReka\nCwG3uOLCYbw5gVzn4dRmwMyYUJFcQWuFSfECRK+uQOOXD0YSEucBq0p5tA==\n-----END PUBLIC KEY-----\n"
+encoded = jwt.encode({"some": "payload"}, private_key, algorithm="ES256")
+jwt.decode(encoded, public_key, algorithms=["ES256"])
+```

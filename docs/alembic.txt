@@ -1,0 +1,3697 @@
+TITLE: Initializing Alembic Environment in Project (Shell)
+DESCRIPTION: Executes the 'alembic init' command from within the virtual environment to set up the necessary directory structure and configuration file (alembic.ini) for Alembic migrations in your project.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/front.rst#_snippet_3
+
+LANGUAGE: shell
+CODE:
+```
+/path/to/your/project/.venv/bin/alembic init alembic
+```
+
+----------------------------------------
+
+TITLE: Adding Table Migration Logic (Python)
+DESCRIPTION: Example showing how to add database migration logic within the `upgrade()` and `downgrade()` functions of an Alembic script using `alembic.op` directives like `create_table` and `drop_table` to define schema changes.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/tutorial.rst#_snippet_4
+
+LANGUAGE: python
+CODE:
+```
+def upgrade():
+    op.create_table(
+        'account',
+        sa.Column('id', sa.Integer, primary_key=True),
+        sa.Column('name', sa.String(50), nullable=False),
+        sa.Column('description', sa.Unicode(200)),
+    )
+
+def downgrade():
+    op.drop_table('account')
+```
+
+----------------------------------------
+
+TITLE: Running Upgrade Alembic Shell
+DESCRIPTION: Executes database migrations up to the latest revision identified as `head`. This command applies all necessary `upgrade()` functions from the current database revision (or base if unversioned) up to the head revision defined in the project.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/tutorial.rst#_snippet_5
+
+LANGUAGE: Shell
+CODE:
+```
+alembic upgrade head
+```
+
+----------------------------------------
+
+TITLE: Activating Python Virtual Environment (Shell)
+DESCRIPTION: Sources the 'activate' script to modify the current shell's environment variables. After activation, commands like 'python' and 'alembic' will execute from the virtual environment's 'bin' directory without needing the full path.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/front.rst#_snippet_5
+
+LANGUAGE: shell
+CODE:
+```
+$ source /path/to/your/project/.venv/bin/activate
+```
+
+----------------------------------------
+
+TITLE: Downgrading Relatively Alembic Shell
+DESCRIPTION: Executes migrations one step backward from the current database revision. This command uses a relative identifier (`-1`) to specify the target revision by moving one step down the migration chain.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/tutorial.rst#_snippet_11
+
+LANGUAGE: Shell
+CODE:
+```
+alembic downgrade -1
+```
+
+----------------------------------------
+
+TITLE: Running Alembic Revision with Autogenerate (Shell)
+DESCRIPTION: This shell command demonstrates how to invoke the `alembic revision` command with the `--autogenerate` option. Alembic compares the database state with the `target_metadata` defined in `env.py` and generates a candidate migration script detailing detected differences.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/autogenerate.rst#_snippet_3
+
+LANGUAGE: Shell
+CODE:
+```
+alembic revision --autogenerate -m "Added account table"
+```
+
+----------------------------------------
+
+TITLE: Configuring Alembic Context for Online Migrations (Python)
+DESCRIPTION: This Python snippet shows how to configure the Alembic context within the `run_migrations_online` function. It associates a database connection and the target SQLAlchemy metadata with the context, preparing it for schema evolution operations on a live database connection.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/naming.rst#_snippet_12
+
+LANGUAGE: Python
+CODE:
+```
+context.configure(
+            connection=connection,
+            target_metadata=target_metadata
+            )
+```
+
+----------------------------------------
+
+TITLE: Alembic Configuration File Example (INI)
+DESCRIPTION: Example of the standard `alembic.ini` file structure, showing sections for Alembic configuration, logging, handlers, and formatters. It serves as the main configuration source for Alembic operations, read by `ConfigParser.SafeConfigParser`.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/tutorial.rst#_snippet_0
+
+LANGUAGE: ini
+CODE:
+```
+[alembic]
+script_location = %(here)s/alembic
+
+# file_template = %%(rev)s_%%(slug)s
+# file_template = %%(epoch)s_%%(rev)s_%%(slug)s
+# file_template = %%(year)d%%(month).2d%%(day).2d_%%(hour).2d%%(minute).2d%%(second).2d_%%(rev)s_%%(slug)s
+# timezone = UTC
+
+# truncate_slug_length = 40
+
+# sqlalchemy.url = driver://user:pass@host/db
+
+# revision_environment = false
+
+# sourceless = false
+
+# version_locations = %(here)s/alembic/versions
+
+# version_path_separator = os.path.sep
+
+# recursive_version_locations = false
+
+# output_encoding = utf-8
+
+
+[logging]
+level = INFO
+handlers = console
+qualname = alembic
+
+[logger_sqlalchemy]
+level = INFO
+handlers =
+qualname = sqlalchemy.engine
+
+[logger_alembic]
+level = INFO
+handlers =
+qualname = alembic
+
+[handler_console]
+class = StreamHandler
+args = (sys.stderr,)
+level = NOTSET
+formatter = generic
+
+[formatter_generic]
+format = %(levelname)-5.5s [%(name)s] %(message)s
+datefmt = %H:%M:%S
+```
+
+----------------------------------------
+
+TITLE: Creating Revision Alembic Shell
+DESCRIPTION: Generates a new, empty migration script file within the `versions` directory. The `-m` flag provides a descriptive message that is included in the generated file as a comment, helping to describe the migration's purpose.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/tutorial.rst#_snippet_6
+
+LANGUAGE: Shell
+CODE:
+```
+alembic revision -m "Add a column"
+```
+
+----------------------------------------
+
+TITLE: Applying Second Migration Alembic Shell
+DESCRIPTION: Executes database migrations up to the latest revision, which now includes the newly created and edited revision `ae1027a6acf`. This command applies the `upgrade()` function defined in the latest revision script.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/tutorial.rst#_snippet_8
+
+LANGUAGE: Shell
+CODE:
+```
+alembic upgrade head
+```
+
+----------------------------------------
+
+TITLE: Configuring Database Connection URL (INI)
+DESCRIPTION: Example showing how to configure the database connection URL within the `alembic.ini` file using the `sqlalchemy.url` key. This URL is typically used by the `env.py` script to establish database connections for migrations.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/tutorial.rst#_snippet_1
+
+LANGUAGE: ini
+CODE:
+```
+sqlalchemy.url = postgresql://scott:tiger@localhost/test
+```
+
+----------------------------------------
+
+TITLE: Switching Alembic Offline/Online Mode (Python)
+DESCRIPTION: This minimal snippet from `env.py` shows the conditional statement that checks `context.is_offline_mode()`. Based on this flag, it calls either the `run_migrations_offline()` or `run_migrations_online()` function, directing Alembic's execution flow depending on whether the `--sql` flag was used. This is a standard part of the generated `env.py` file. Requires `env.py` to be present and configured.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/offline.rst#_snippet_6
+
+LANGUAGE: Python
+CODE:
+```
+if context.is_offline_mode():
+    run_migrations_offline()
+else:
+    run_migrations_online()
+```
+
+----------------------------------------
+
+TITLE: Example Autogenerated Alembic Migration Script (Python)
+DESCRIPTION: This snippet shows a sample migration script automatically generated by Alembic when a new 'account' table defined in the target metadata is detected in the application but not in the database. It includes `upgrade` and `downgrade` functions using Alembic's operational methods.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/autogenerate.rst#_snippet_4
+
+LANGUAGE: Python
+CODE:
+```
+"""empty message
+
+Revision ID: 27c6a30d7c24
+Revises: None
+Create Date: 2011-11-08 11:40:27.089406
+
+"""
+
+# revision identifiers, used by Alembic.
+revision = '27c6a30d7c24'
+down_revision = None
+
+from alembic import op
+import sqlalchemy as sa
+
+def upgrade():
+    ### commands auto generated by Alembic - please adjust! ###
+    op.create_table(
+    'account',
+    sa.Column('id', sa.Integer()),
+    sa.Column('name', sa.String(length=50), nullable=False),
+    sa.Column('description', sa.VARCHAR(200)),
+    sa.Column('last_transaction_date', sa.DateTime()),
+    sa.PrimaryKeyConstraint('id')
+    )
+    ### end Alembic commands ###
+
+def downgrade():
+    ### commands auto generated by Alembic - please adjust! ###
+    op.drop_table("account")
+    ### end Alembic commands ###
+```
+
+----------------------------------------
+
+TITLE: Defining Migration Script Alembic Python
+DESCRIPTION: A Python script generated by Alembic defining `upgrade()` and `downgrade()` functions. The `upgrade` function adds a 'last_transaction_date' column to the 'account' table, while the `downgrade` function drops it, using operations provided by `alembic.op` and SQLAlchemy types.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/tutorial.rst#_snippet_7
+
+LANGUAGE: Python
+CODE:
+```
+"""Add a column
+
+Revision ID: ae1027a6acf
+Revises: 1975ea83b712
+Create Date: 2011-11-08 12:37:36.714947
+
+"""
+
+# revision identifiers, used by Alembic.
+revision = 'ae1027a6acf'
+down_revision = '1975ea83b712'
+
+from alembic import op
+import sqlalchemy as sa
+
+def upgrade():
+    op.add_column('account', sa.Column('last_transaction_date', sa.DateTime))
+
+def downgrade():
+    op.drop_column('account', 'last_transaction_date')
+```
+
+----------------------------------------
+
+TITLE: Configuring Alembic env.py for Autogenerate - Setting Metadata (Python)
+DESCRIPTION: This snippet shows how to modify the `env.py` file to point the `target_metadata` variable to the SQLAlchemy MetaData object containing your application's declarative base, enabling Alembic to use it for schema comparison during autogeneration.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/autogenerate.rst#_snippet_1
+
+LANGUAGE: Python
+CODE:
+```
+from myapp.mymodel import Base
+target_metadata = Base.metadata
+```
+
+----------------------------------------
+
+TITLE: Downgrading to Base Alembic Shell
+DESCRIPTION: Reverts all applied migrations, bringing the database back to its unversioned state. The `base` symbol represents the state before any migrations were applied, effectively running all `downgrade()` functions in reverse order.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/tutorial.rst#_snippet_19
+
+LANGUAGE: Shell
+CODE:
+```
+alembic downgrade base
+```
+
+----------------------------------------
+
+TITLE: First Alembic Migration Script - Create Table - Python
+DESCRIPTION: An example Alembic migration script defining `upgrade()` and `downgrade()` functions. The `upgrade` function creates a 'customer' table using standard `op.create_table`, and the `downgrade` function drops it using `op.drop_table`. This serves as the initial migration setting up the necessary table for subsequent objects.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/cookbook.rst#_snippet_10
+
+LANGUAGE: Python
+CODE:
+```
+"""create table
+
+Revision ID: 3ab8b2dfb055
+Revises:
+Create Date: 2015-07-27 16:22:44.918507
+
+"""
+
+# revision identifiers, used by Alembic.
+revision = '3ab8b2dfb055'
+down_revision = None
+branch_labels = None
+depends_on = None
+
+from alembic import op
+import sqlalchemy as sa
+
+
+def upgrade():
+    op.create_table(
+        "customer",
+        sa.Column('id', sa.Integer, primary_key=True),
+        sa.Column('name', sa.String),
+        sa.Column('order_count', sa.Integer),
+    )
+
+
+def downgrade():
+    op.drop_table('customer')
+```
+
+----------------------------------------
+
+TITLE: Running Alembic Check Command
+DESCRIPTION: Illustrates the use of the `alembic check` command to determine if any changes in the database model (detected by autogenerate) would require a new revision file. It returns a non-zero exit code and message if changes are detected, and a zero exit code with a message if no new operations are found.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/autogenerate.rst#_snippet_35
+
+LANGUAGE: shell
+CODE:
+```
+$ alembic check
+```
+
+----------------------------------------
+
+TITLE: Viewing Current Revision Alembic Shell
+DESCRIPTION: Displays the current revision applied to the database. This command queries the `alembic_version` table in the database to report which migration script corresponds to the database's current state.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/tutorial.rst#_snippet_13
+
+LANGUAGE: Shell
+CODE:
+```
+alembic current
+```
+
+----------------------------------------
+
+TITLE: Running Alembic Command with Shared Connection (Python)
+DESCRIPTION: This Python snippet shows how to execute an Alembic command, specifically alembic.command.upgrade, programmatically while sharing an existing SQLAlchemy connection obtained from engine.begin(). The connection is attached to the Alembic configuration object's attributes dictionary, allowing it to be accessed and used by the env.py script instead of creating a new engine/connection.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/cookbook.rst#_snippet_4
+
+LANGUAGE: Python
+CODE:
+```
+from alembic import command, config
+
+cfg = config.Config("/path/to/yourapp/alembic.ini")
+with engine.begin() as connection:
+    cfg.attributes['connection'] = connection
+    command.upgrade(cfg, "head")
+```
+
+----------------------------------------
+
+TITLE: Example Alembic Autogenerated Revision Script - Python
+DESCRIPTION: This snippet shows the typical structure and content of an Alembic revision script automatically generated based on database and model differences. It includes the revision identifiers and `upgrade()` and `downgrade()` functions containing Alembic operation directives to modify the database schema.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/api/autogenerate.rst#_snippet_0
+
+LANGUAGE: Python
+CODE:
+```
+"""create the organization table."""
+
+# revision identifiers, used by Alembic.
+revision = 'eced083f5df'
+down_revision = 'beafc7d709f'
+
+from alembic import op
+import sqlalchemy as sa
+
+
+def upgrade():
+    op.create_table(
+        'organization',
+        sa.Column('id', sa.Integer(), primary_key=True),
+        sa.Column('name', sa.String(50), nullable=False)
+    )
+    op.add_column(
+        'user',
+        sa.Column('organization_id', sa.Integer())
+    )
+    op.create_foreign_key(
+        'org_fk', 'user', 'organization', ['organization_id'], ['id']
+    )
+
+def downgrade():
+    op.drop_constraint('org_fk', 'user')
+    op.drop_column('user', 'organization_id')
+    op.drop_table('organization')
+```
+
+----------------------------------------
+
+TITLE: Creating New Migration Script (Shell)
+DESCRIPTION: Shell command to generate a new blank migration script using the `alembic revision` command with a message. The output shows the path and generated filename for the new script.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/tutorial.rst#_snippet_2
+
+LANGUAGE: shell
+CODE:
+```
+$ alembic revision -m "create account table"
+Generating /path/to/yourproject/alembic/versions/1975ea83b712_create_accoun
+t_table.py...done
+```
+
+----------------------------------------
+
+TITLE: Merging Alembic Branches - Shell
+DESCRIPTION: The `alembic merge` command is used to create a new migration file that joins two or more existing heads. This example shows merging two specific revisions by their prefixes (`ae1027` and `27c6a`) and provides a message (`-m "merge ae1 and 27c"`) for the new merge revision.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/branches.rst#_snippet_4
+
+LANGUAGE: Shell
+CODE:
+```
+$ alembic merge -m "merge ae1 and 27c" ae1027 27c6a
+  Generating /path/to/foo/versions/53fffde5ad5_merge_ae1_and_27c.py ... done
+```
+
+----------------------------------------
+
+TITLE: Generating Alembic SQL Script (Shell)
+DESCRIPTION: Demonstrates the basic use of `alembic upgrade --sql` to generate migration SQL up to a specific revision (`ae1027a6acf`). This command executes the migration scripts in offline mode, producing DDL/DML output to standard output instead of running against a database. It requires Alembic installed and an initialized environment.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/offline.rst#_snippet_0
+
+LANGUAGE: Shell
+CODE:
+```
+$ alembic upgrade ae1027a6acf --sql
+```
+
+----------------------------------------
+
+TITLE: Redirecting Alembic SQL Output (Shell)
+DESCRIPTION: Shows the common pattern for saving the SQL output generated by `alembic upgrade --sql` to a file (e.g., `migration.sql`) using shell redirection (`>`). This is essential for capturing the script for later execution by DBAs or deployment systems. Requires Alembic, shell access, and appropriate file write permissions.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/offline.rst#_snippet_1
+
+LANGUAGE: Shell
+CODE:
+```
+$ alembic upgrade ae1027a6acf --sql > migration.sql
+```
+
+----------------------------------------
+
+TITLE: Preventing Empty Alembic Autogenerate Migrations (Python)
+DESCRIPTION: Provides a `process_revision_directives` hook function for `context.configure`. This function checks if the autogenerated `MigrationScript` for the `upgrade_ops` is empty (`is_empty()`) and, if so, removes the directive from the list, preventing Alembic from generating a migration file when no schema changes are detected.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/cookbook.rst#_snippet_29
+
+LANGUAGE: Python
+CODE:
+```
+# for typing purposes
+from collections.abc import Iterable
+from alembic.environment import MigrationContext
+
+# this typing-only import requires alembic 1.12.1 or above
+from alembic.operations import MigrationScript
+
+
+def run_migrations_online():
+
+    # ...
+
+    def process_revision_directives(
+        context: MigrationContext,
+        revision: str | Iterable[str | None] | Iterable[str],
+        directives: list[MigrationScript],
+    ):
+        assert config.cmd_opts is not None
+        if getattr(config.cmd_opts, 'autogenerate', False):
+            script = directives[0]
+            assert script.upgrade_ops is not None
+            if script.upgrade_ops.is_empty():
+                directives[:] = []
+
+
+    # connectable = ...
+
+    with connectable.connect() as connection:
+        context.configure(
+            connection=connection,
+            target_metadata=target_metadata,
+            process_revision_directives=process_revision_directives
+        )
+
+        with context.begin_transaction():
+            context.run_migrations()
+```
+
+----------------------------------------
+
+TITLE: Applying Alembic Migrations to Head Shell
+DESCRIPTION: This shell command instructs Alembic to apply all pending migrations up to the latest revision ('head'). This runs the `upgrade()` function for each migration script that hasn't been applied yet in the database.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/cookbook.rst#_snippet_19
+
+LANGUAGE: Shell
+CODE:
+```
+alembic upgrade head
+```
+
+----------------------------------------
+
+TITLE: Upgrading to Alembic Heads (Shell)
+DESCRIPTION: Applies all pending migration revisions to reach the current set of heads. This command demonstrates how Alembic processes dependencies (like `55af2cb1c267`) during the upgrade path even if they are only 'effective' heads, showing the revisions being run in the correct order.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/branches.rst#_snippet_51
+
+LANGUAGE: shell
+CODE:
+```
+alembic upgrade heads
+```
+
+----------------------------------------
+
+TITLE: Defining Automated Naming Convention in SQLAlchemy MetaData
+DESCRIPTION: Illustrates how to define a dictionary containing naming patterns for different constraint types (index, unique, check, foreign key, primary key) and pass it to the `naming_convention` parameter when creating a SQLAlchemy MetaData object. This MetaData object will then automatically apply these naming rules to constraints and indexes defined within its scope, simplifying schema definition and ensuring consistent names.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/naming.rst#_snippet_7
+
+LANGUAGE: Python
+CODE:
+```
+convention = {
+  "ix": "ix_%(column_0_label)s",
+  "uq": "uq_%(table_name)s_%(column_0_name)s",
+  "ck": "ck_%(table_name)s_%(constraint_name)s",
+  "fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",
+  "pk": "pk_%(table_name)s"
+}
+
+metadata = MetaData(naming_convention=convention)
+```
+
+----------------------------------------
+
+TITLE: Adding/Dropping Column Alembic Migration Python
+DESCRIPTION: This Python snippet is an Alembic migration script designed to add or drop an 'email' column to the 'customer' table. The `upgrade()` function adds a `VARCHAR` column named 'email', while the `downgrade()` function removes it using Alembic's `op.add_column` and `op.drop_column` operations.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/cookbook.rst#_snippet_16
+
+LANGUAGE: Python
+CODE:
+```
+"""add email col
+
+Revision ID: 191a2d20b025
+Revises: 28af9800143f
+Create Date: 2015-07-27 16:25:59.277326
+
+"""
+
+# revision identifiers, used by Alembic.
+revision = '191a2d20b025'
+down_revision = '28af9800143f'
+branch_labels = None
+depends_on = None
+
+from alembic import op
+import sqlalchemy as sa
+
+
+def upgrade():
+    op.add_column("customer", sa.Column("email", sa.String()))
+
+
+def downgrade():
+    op.drop_column("customer", "email")
+```
+
+----------------------------------------
+
+TITLE: Preventing Alembic Autogenerated Table Drops - Python
+DESCRIPTION: Implements the `include_object` hook in `env.py` to prevent Alembic's autogenerate feature from proposing `DROP TABLE` directives for tables that exist in the target database but are not present in the local SQLAlchemy `MetaData`. It specifically checks for objects of type 'table' that are reflected from the database and have no corresponding object in the local metadata.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/cookbook.rst#_snippet_32
+
+LANGUAGE: python
+CODE:
+```
+def include_object(object, name, type_, reflected, compare_to):
+    if type_ == "table" and reflected and compare_to is None:
+        return False
+    else:
+        return True
+
+
+context.configure(
+    # ...
+    include_object = include_object
+)
+```
+
+----------------------------------------
+
+TITLE: Checking Database Revision Against Alembic Heads
+DESCRIPTION: Provides a Python function `check_current_head` that uses `MigrationContext.get_current_heads` and `ScriptDirectory.get_heads` to determine if the database's recorded revision(s) match the latest head revision(s) defined in the Alembic scripts directory. This is useful for verifying if a database is up-to-date with migrations.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/cookbook.rst#_snippet_41
+
+LANGUAGE: Python
+CODE:
+```
+from alembic import config, script
+from alembic.runtime import migration
+from sqlalchemy import engine
+
+
+def check_current_head(alembic_cfg, connectable):
+    # type: (config.Config, engine.Engine) -> bool
+    directory = script.ScriptDirectory.from_config(alembic_cfg)
+    with connectable.begin() as connection:
+        context = migration.MigrationContext.configure(connection)
+        return set(context.get_current_heads()) == set(directory.get_heads())
+
+e = engine.create_engine("mysql://scott:tiger@localhost/test", echo=True)
+cfg = config.Config("alembic.ini")
+print(check_current_head(cfg, e))
+```
+
+----------------------------------------
+
+TITLE: Define and Register Custom Alembic Operations - Python
+DESCRIPTION: This snippet defines two custom Alembic migration operation classes, `CreateSequenceOp` and `DropSequenceOp`, which inherit from `MigrateOperation`. The `@Operations.register_operation` decorator registers these classes with Alembic's operation system. These classes represent the state and reverse logic for 'CREATE SEQUENCE' and 'DROP SEQUENCE' DDL.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/api/operations.rst#_snippet_0
+
+LANGUAGE: python
+CODE:
+```
+from alembic.operations import Operations, MigrateOperation
+
+@Operations.register_operation("create_sequence")
+class CreateSequenceOp(MigrateOperation):
+    """Create a SEQUENCE."""
+
+    def __init__(self, sequence_name, schema=None):
+        self.sequence_name = sequence_name
+        self.schema = schema
+
+    @classmethod
+    def create_sequence(cls, operations, sequence_name, **kw):
+        """Issue a "CREATE SEQUENCE" instruction."""
+
+        op = CreateSequenceOp(sequence_name, **kw)
+        return operations.invoke(op)
+
+    def reverse(self):
+        # only needed to support autogenerate
+        return DropSequenceOp(self.sequence_name, schema=self.schema)
+
+@Operations.register_operation("drop_sequence")
+class DropSequenceOp(MigrateOperation):
+    """Drop a SEQUENCE."""
+
+    def __init__(self, sequence_name, schema=None):
+        self.sequence_name = sequence_name
+        self.schema = schema
+
+    @classmethod
+    def drop_sequence(cls, operations, sequence_name, **kw):
+        """Issue a "DROP SEQUENCE" instruction."""
+
+        op = DropSequenceOp(sequence_name, **kw)
+        return operations.invoke(op)
+
+    def reverse(self):
+        # only needed to support autogenerate
+        return CreateSequenceOp(self.sequence_name, schema=self.schema)
+```
+
+----------------------------------------
+
+TITLE: Installing Alembic in Virtual Environment with pip (Shell)
+DESCRIPTION: Installs the Alembic library and its dependencies (including SQLAlchemy) into the previously created virtual environment using the pip package manager. This makes the 'alembic' command available within this specific environment.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/front.rst#_snippet_2
+
+LANGUAGE: shell
+CODE:
+```
+/path/to/your/project/.venv/bin/pip install alembic
+```
+
+----------------------------------------
+
+TITLE: Full Example: Autogenerating and Invoking Alembic Ops Programmatically
+DESCRIPTION: Provides a complete script demonstrating the programmatic workflow: set up SQLAlchemy models and an engine, create initial schema, define target metadata, use `alembic.autogenerate.produce_migrations` to find differences, and then iterate through the resulting operations structure, invoking each operation directly against the database connection.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/cookbook.rst#_snippet_40
+
+LANGUAGE: Python
+CODE:
+```
+from sqlalchemy import Column
+from sqlalchemy import create_engine
+from sqlalchemy import Integer
+from sqlalchemy import MetaData
+from sqlalchemy import String
+from sqlalchemy import Table
+
+from alembic.autogenerate import produce_migrations
+from alembic.migration import MigrationContext
+from alembic.operations import Operations
+from alembic.operations.ops import ModifyTableOps
+
+
+engine = create_engine("sqlite://", echo=True)
+
+with engine.connect() as conn:
+    conn.execute(
+        """
+        create table foo (
+            id integer not null primary key,
+            old_data varchar(50),
+            x integer
+        )"""
+    )
+
+    conn.execute(
+        """
+        create table bar (
+            data varchar(50)
+        )"""
+    )
+
+metadata = MetaData()
+Table(
+    "foo",
+    metadata,
+    Column("id", Integer, primary_key=True),
+    Column("data", Integer),
+    Column("x", Integer, nullable=False),
+)
+Table("bat", metadata, Column("info", String(100)))
+
+mc = MigrationContext.configure(engine.connect())
+
+migrations = produce_migrations(mc, metadata)
+
+operations = Operations(mc)
+
+use_batch = engine.name == "sqlite"
+
+stack = [migrations.upgrade_ops]
+while stack:
+    elem = stack.pop(0)
+
+    if use_batch and isinstance(elem, ModifyTableOps):
+        with operations.batch_alter_table(
+            elem.table_name, schema=elem.schema
+        ) as batch_ops:
+            for table_elem in elem.ops:
+                batch_ops.invoke(table_elem)
+
+    elif hasattr(elem, "ops"):
+        stack.extend(elem.ops)
+    else:
+        operations.invoke(elem)
+```
+
+----------------------------------------
+
+TITLE: Passing Target Metadata in env.py run_migrations_online (Python)
+DESCRIPTION: This function from `env.py` demonstrates how the configured `target_metadata` variable is passed to the `context.configure` method when running migrations online. This step is crucial for Alembic's autogenerate feature to compare the application's schema with the database schema.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/autogenerate.rst#_snippet_2
+
+LANGUAGE: Python
+CODE:
+```
+def run_migrations_online():
+    engine = engine_from_config(
+                config.get_section(config.config_ini_section), prefix='sqlalchemy.')
+
+    with engine.connect() as connection:
+        context.configure(
+                    connection=connection,
+                    target_metadata=target_metadata
+                    )
+
+        with context.begin_transaction():
+            context.run_migrations()
+```
+
+----------------------------------------
+
+TITLE: Default Generated Migration Script (Python)
+DESCRIPTION: Structure of a newly generated Alembic migration script file. It includes revision identifiers (`revision`, `down_revision`), imports, and empty `upgrade()` and `downgrade()` functions that serve as placeholders for adding migration logic.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/tutorial.rst#_snippet_3
+
+LANGUAGE: python
+CODE:
+```
+"""create account table
+
+Revision ID: 1975ea83b712
+Revises:
+Create Date: 2011-11-08 11:40:27.089406
+
+"""
+
+# revision identifiers, used by Alembic.
+revision = '1975ea83b712'
+down_revision = None
+branch_labels = None
+
+from alembic import op
+import sqlalchemy as sa
+
+def upgrade():
+    pass
+
+def downgrade():
+    pass
+```
+
+----------------------------------------
+
+TITLE: Running Alembic Revision to Trigger Post Write Hooks
+DESCRIPTION: Demonstrates the shell command used to generate a new Alembic revision file with a message. When post-write hooks are configured, this command will trigger their execution after the file is generated, as shown by the subsequent output (not included in the snippet).
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/autogenerate.rst#_snippet_30
+
+LANGUAGE: shell
+CODE:
+```
+$ alembic revision -m "rev1"
+```
+
+----------------------------------------
+
+TITLE: Configuring Alembic Post Write Hook for pre-commit
+DESCRIPTION: Configures Alembic to run the `pre-commit` tool as a post-write hook using the `console_scripts` runner. It sets the entrypoint to `pre-commit`, provides options to run only on the new file, and specifies the working directory to ensure the `.pre-commit-config.yaml` is found.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/autogenerate.rst#_snippet_32
+
+LANGUAGE: ini
+CODE:
+```
+[post_write_hooks]
+
+hooks = pre-commit
+
+pre-commit.type = console_scripts
+pre-commit.entrypoint = pre-commit
+pre-commit.options = run --files REVISION_SCRIPT_FILENAME
+pre-commit.cwd = %(here)s
+```
+
+----------------------------------------
+
+TITLE: Defining Base Reversible Alembic Operation - Python
+DESCRIPTION: Creates a base class `ReversibleOp` inheriting from `alembic.operations.MigrateOperation`. This class provides a structure for custom operations that can be reversed and includes helper methods for invoking the operation and retrieving object definitions from previous migration versions.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/cookbook.rst#_snippet_7
+
+LANGUAGE: Python
+CODE:
+```
+from alembic.operations import Operations, MigrateOperation
+
+class ReversibleOp(MigrateOperation):
+    def __init__(self, target):
+        self.target = target
+
+    @classmethod
+    def invoke_for_target(cls, operations, target):
+        op = cls(target)
+        return operations.invoke(op)
+
+    def reverse(self):
+        raise NotImplementedError()
+
+    @classmethod
+    def _get_object_from_version(cls, operations, ident):
+        version, objname = ident.split(".")
+
+        module = operations.get_context().script.get_revision(version).module
+        obj = getattr(module, objname)
+        return obj
+
+    @classmethod
+    def replace(cls, operations, target, replaces=None, replace_with=None):
+
+        if replaces:
+            old_obj = cls._get_object_from_version(operations, replaces)
+            drop_old = cls(old_obj).reverse()
+            create_new = cls(target)
+        elif replace_with:
+            old_obj = cls._get_object_from_version(operations, replace_with)
+            drop_old = cls(target).reverse()
+            create_new = cls(old_obj)
+        else:
+            raise TypeError("replaces or replace_with is required")
+
+        operations.invoke(drop_old)
+        operations.invoke(create_new)
+```
+
+----------------------------------------
+
+TITLE: Switching Alembic Schema/Database Dynamically (Python)
+DESCRIPTION: Shows how to modify the `run_migrations_online` function in Alembic's `env.py` to dynamically set the target schema or database based on an `x` argument (`-xtenant`). It uses `context.get_x_argument` to retrieve the tenant name and then executes the appropriate SQL command (`SET search_path` for PostgreSQL or `USE` for MySQL/MariaDB) on the database connection. It also includes a workaround for reflection by setting `connection.dialect.default_schema_name`.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/cookbook.rst#_snippet_28
+
+LANGUAGE: Python
+CODE:
+```
+from sqlalchemy import text
+
+def run_migrations_online():
+    connectable = engine_from_config(
+        config.get_section(config.config_ini_section),
+        prefix="sqlalchemy.",
+        poolclass=pool.NullPool,
+    )
+
+    current_tenant = context.get_x_argument(as_dictionary=True).get("tenant")
+    with connectable.connect() as connection:
+
+        if connection.dialect.name == "postgresql":
+            # set search path on the connection, which ensures that
+            # PostgreSQL will emit all CREATE / ALTER / DROP statements
+            # in terms of this schema by default
+
+            connection.execute(text('set search_path to "%s"' % current_tenant))
+            # in SQLAlchemy v2+ the search path change needs to be committed
+            connection.commit()
+        elif connection.dialect.name in ("mysql", "mariadb"):
+            # set "USE" on the connection, which ensures that
+            # MySQL/MariaDB will emit all CREATE / ALTER / DROP statements
+            # in terms of this schema by default
+
+            connection.execute(text('USE %s' % current_tenant))
+
+        # make use of non-supported SQLAlchemy attribute to ensure
+        # the dialect reflects tables in terms of the current tenant name
+        connection.dialect.default_schema_name = current_tenant
+
+        context.configure(
+            connection=connection,
+            target_metadata=target_metadata,
+        )
+
+        with context.begin_transaction():
+            context.run_migrations()
+```
+
+----------------------------------------
+
+TITLE: Upgrading to a Specific Alembic Revision
+DESCRIPTION: This command upgrades the database to a single, specific revision identifier. Alembic will apply all necessary previous revisions to reach the target.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/branches.rst#_snippet_19
+
+LANGUAGE: Shell
+CODE:
+```
+$ alembic upgrade 27c6a
+INFO  [alembic.migration] Running upgrade  -> 1975ea83b712, create account table
+INFO  [alembic.migration] Running upgrade 1975ea83b712 -> 27c6a30d7c24, add shopping cart table
+```
+
+----------------------------------------
+
+TITLE: Viewing Alembic History After Merging - Shell
+DESCRIPTION: Running `alembic history` after a merge shows the new structure of the revision graph. The merge revision is now the head, and it points back to the multiple revisions that were merged, forming a 'diamond' shape.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/branches.rst#_snippet_7
+
+LANGUAGE: Shell
+CODE:
+```
+$ alembic history
+ae1027a6acf, 27c6a30d7c24 -> 53fffde5ad5 (head) (mergepoint), merge ae1 and 27c
+1975ea83b712 -> ae1027a6acf, add a column
+1975ea83b712 -> 27c6a30d7c24, add shopping cart table
+<base> -> 1975ea83b712 (branchpoint), create account table
+```
+
+----------------------------------------
+
+TITLE: Implementing Conditional Data Migrations in Revision (Python)
+DESCRIPTION: This Python snippet is an example of a migration script generated from the custom Mako template. It defines schema and data upgrade/downgrade steps within separate functions. The data migration functions include examples of using op.bulk_insert and op.execute for DML operations, which are executed only if the 'data' flag is passed during the migration run.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/cookbook.rst#_snippet_2
+
+LANGUAGE: Python
+CODE:
+```
+"""rev one
+
+Revision ID: 3ba2b522d10d
+Revises: None
+Create Date: 2014-03-04 18:05:36.992867
+
+"""
+
+# revision identifiers, used by Alembic.
+revision = '3ba2b522d10d'
+down_revision = None
+
+from alembic import op
+import sqlalchemy as sa
+from sqlalchemy import String, Column
+from sqlalchemy.sql import table, column
+
+from alembic import context
+
+def upgrade():
+    schema_upgrades()
+    if context.get_x_argument(as_dictionary=True).get('data', None):
+        data_upgrades()
+
+def downgrade():
+    if context.get_x_argument(as_dictionary=True).get('data', None):
+        data_downgrades()
+    schema_downgrades()
+
+def schema_upgrades():
+    """schema upgrade migrations go here."""
+    op.create_table("my_table", Column('data', String))
+
+def schema_downgrades():
+    """schema downgrade migrations go here."""
+    op.drop_table("my_table")
+
+def data_upgrades():
+    """Add any optional data upgrade migrations here!"""
+
+    my_table = table('my_table',
+        column('data', String),
+    )
+
+    op.bulk_insert(my_table,
+        [
+            {'data': 'data 1'},
+            {'data': 'data 2'},
+            {'data': 'data 3'},
+        ]
+    )
+
+def data_downgrades():
+    """Add any optional data downgrade migrations here!"""
+
+    op.execute("delete from my_table")
+```
+
+----------------------------------------
+
+TITLE: Viewing Overall Alembic History Tree (Shell)
+DESCRIPTION: Displays the complete migration history for the project, showing all branches, dependencies, and head revisions. This provides an overview of the branching structure and relationships between different revision paths.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/branches.rst#_snippet_56
+
+LANGUAGE: shell
+CODE:
+```
+alembic history
+```
+
+----------------------------------------
+
+TITLE: Alembic Asyncio env.py Example: Online Migrations
+DESCRIPTION: Shows the key functions `do_run_migrations`, `run_async_migrations`, and `run_migrations_online` needed in an Alembic `env.py` file to enable running migrations using SQLAlchemy's experimental asyncio support with an async DBAPI driver. `run_migrations_online` uses `asyncio.run` to execute the async migration logic.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/cookbook.rst#_snippet_42
+
+LANGUAGE: Python
+CODE:
+```
+import asyncio
+
+from sqlalchemy.ext.asyncio import async_engine_from_config
+
+# ... no change required to the rest of the code
+
+
+def do_run_migrations(connection):
+    context.configure(connection=connection, target_metadata=target_metadata)
+
+    with context.begin_transaction():
+        context.run_migrations()
+
+
+async def run_async_migrations():
+    """In this scenario we need to create an Engine
+    and associate a connection with the context.
+
+    """
+
+    connectable = async_engine_from_config(
+        config.get_section(config.config_ini_section),
+        prefix="sqlalchemy.",
+        poolclass=pool.NullPool,
+    )
+
+    async with connectable.connect() as connection:
+        await connection.run_sync(do_run_migrations)
+
+    await connectable.dispose()
+
+
+def run_migrations_online():
+    """Run migrations in 'online' mode."""
+
+    asyncio.run(run_async_migrations())
+```
+
+----------------------------------------
+
+TITLE: Downgrading Alembic Migrations Shell
+DESCRIPTION: This shell command instructs Alembic to revert migrations down to a specific revision identified by its hash ('28af9800143'). This runs the `downgrade()` function for each migration script between the current head and the target revision.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/cookbook.rst#_snippet_23
+
+LANGUAGE: Shell
+CODE:
+```
+alembic downgrade 28af9800143
+```
+
+----------------------------------------
+
+TITLE: Using Alembic Batch Alter Table Python
+DESCRIPTION: Demonstrates the basic usage of the `op.batch_alter_table` context manager to perform multiple schema modifications (adding and dropping columns) on a single table within a batch operation, which triggers a 'move and copy' process on SQLite.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/batch.rst#_snippet_0
+
+LANGUAGE: python
+CODE:
+```
+with op.batch_alter_table("some_table") as batch_op:
+    batch_op.add_column(Column('foo', Integer))
+    batch_op.drop_column('bar')
+```
+
+----------------------------------------
+
+TITLE: Configuring Alembic Context with include_name Hook (Python)
+DESCRIPTION: This snippet demonstrates configuring Alembic's environment context using `context.configure`. It enables schema inclusion (`include_schemas=True`) and applies the custom `include_name` function (defined previously) to filter which schemas and subsequent objects are processed during autogeneration.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/autogenerate.rst#_snippet_7
+
+LANGUAGE: Python
+CODE:
+```
+context.configure(
+    # ...
+    include_schemas = True,
+    include_name = include_name
+)
+```
+
+----------------------------------------
+
+TITLE: Integrating SQLAlchemy Naming Convention in Alembic env.py
+DESCRIPTION: Shows the configuration required in Alembic's `env.py` file to apply a SQLAlchemy MetaData object with a defined naming convention to Alembic operations and the autogenerate process. This is achieved by setting the `target_metadata` parameter in `context.configure` to the MetaData instance from the application's model.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/naming.rst#_snippet_8
+
+LANGUAGE: Python
+CODE:
+```
+# in your application's model:
+from sqlalchemy import MetaData
+from sqlalchemy.orm import DeclarativeBase
+
+class Base(DeclarativeBase):
+    metadata = MetaData(naming_convention={
+        "ix": "ix_%(column_0_label)s",
+        "uq": "uq_%(table_name)s_%(column_0_name)s",
+        "ck": "ck_%(table_name)s_`%(constraint_name)s`",
+        "fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",
+        "pk": "pk_%(table_name)s"
+    })
+
+# .. in your Alembic env.py:
+
+# add your model's MetaData object here
+# for 'autogenerate' support
+from myapp import mymodel
+target_metadata = mymodel.Base.metadata
+
+# ...
+
+def run_migrations_online():
+
+        # ...
+
+        context.configure(
+                    connection=connection,
+                    target_metadata=target_metadata
+                    )
+```
+
+----------------------------------------
+
+TITLE: Creating Alembic Revision on Specific Branch Head Using @head Syntax
+DESCRIPTION: This command generates a new revision file based specifically on the head of the branch identified by the label, using the `--head branchname@head` syntax. This resolves the ambiguity when multiple heads exist.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/branches.rst#_snippet_26
+
+LANGUAGE: Shell
+CODE:
+```
+$ alembic revision -m "add a shopping cart column"  --head shoppingcart@head
+Generating /path/to/foo/versions/d747a8a8879_add_a_shopping_cart_column.py ... done
+```
+
+----------------------------------------
+
+TITLE: Creating a New Labeled Base Revision in a Separate Directory (Alembic Shell)
+DESCRIPTION: Shows the command to create the initial revision file for a new independent base/branch. It specifies the message, the head ('base'), a branch label ('networking'), and the target directory (`--version-path`) where the new file should be placed.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/branches.rst#_snippet_38
+
+LANGUAGE: Shell
+CODE:
+```
+$ alembic revision -m "create networking branch" --head=base --branch-label=networking --version-path=model/networking
+```
+
+----------------------------------------
+
+TITLE: Alembic Asyncio env.py Example: Programmatic API with Connection Sharing
+DESCRIPTION: Modifies the `run_migrations_online` function in an async `env.py` to support both command-line execution (creating an async engine internally) and programmatic execution where an async connection is passed via the Alembic config's attributes.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/cookbook.rst#_snippet_43
+
+LANGUAGE: Python
+CODE:
+```
+def run_migrations_online():
+    """Run migrations in 'online' mode.
+
+    """
+
+    connectable = config.attributes.get("connection", None)
+
+    if connectable is None:
+        asyncio.run(run_async_migrations())
+    else:
+        do_run_migrations(connectable)
+```
+
+----------------------------------------
+
+TITLE: Second Alembic Migration Script - Create Views/SPs - Python
+DESCRIPTION: An example Alembic migration script demonstrating the use of the custom operations. It defines `ReplaceableObject` instances for a view and a stored procedure and uses the registered custom operations (`op.create_view`, `op.create_sp`, `op.drop_view`, `op.drop_sp`) in the `upgrade()` and `downgrade()` functions to manage these database objects.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/cookbook.rst#_snippet_11
+
+LANGUAGE: Python
+CODE:
+```
+"""create views/sp
+
+Revision ID: 28af9800143f
+Revises: 3ab8b2dfb055
+Create Date: 2015-07-27 16:24:03.589867
+
+"""
+
+# revision identifiers, used by Alembic.
+revision = '28af9800143f'
+down_revision = '3ab8b2dfb055'
+branch_labels = None
+depends_on = None
+
+from alembic import op
+import sqlalchemy as sa
+
+from foo import ReplaceableObject
+
+customer_view = ReplaceableObject(
+    "customer_view",
+    "SELECT name, order_count FROM customer WHERE order_count > 0"
+)
+
+add_customer_sp = ReplaceableObject(
+    "add_customer_sp(name varchar, order_count integer)",
+    """
+RETURNS integer AS $$
+BEGIN
+    insert into customer (name, order_count)
+    VALUES (in_name, in_order_count);
+END;
+$$ LANGUAGE plpgsql;
+"""
+)
+
+
+def upgrade():
+    op.create_view(customer_view)
+    op.create_sp(add_customer_sp)
+
+
+def downgrade():
+    op.drop_view(customer_view)
+    op.drop_sp(add_customer_sp)
+```
+
+----------------------------------------
+
+TITLE: Altering Column Type with Existing Type Python
+DESCRIPTION: Shows how to change the type of a column using `batch_op.alter_column` within a batch context. It highlights the requirement to provide the full `existing_type`, including details like `create_constraint` and `constraint_name` for schema types like Boolean, to ensure correct handling of associated constraints.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/batch.rst#_snippet_5
+
+LANGUAGE: python
+CODE:
+```
+with self.op.batch_alter_table("some_table") as batch_op:
+    batch_op.alter_column(
+        'q', type_=Integer,
+        existing_type=Boolean(create_constraint=True, constraint_name="ck1"))
+```
+
+----------------------------------------
+
+TITLE: Accepting Shared Connection in Alembic env.py (Python)
+DESCRIPTION: This Python snippet is a modified version of the run_migrations_online function typically found in Alembic's env.py. It checks if a connection object is already present in the Alembic configuration's attributes dictionary (presumably provided programmatically). If a connection is found, it uses that connection for the migration context; otherwise, it falls back to creating a new engine and connection from the configuration file, as is standard practice.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/cookbook.rst#_snippet_5
+
+LANGUAGE: Python
+CODE:
+```
+def run_migrations_online():
+    connectable = config.attributes.get('connection', None)
+
+    if connectable is None:
+        # only create Engine if we don't have a Connection
+        # from the outside
+        connectable = engine_from_config(
+            config.get_section(config.config_ini_section),
+            prefix='sqlalchemy.',
+            poolclass=pool.NullPool)
+
+        with connectable.connect() as connection:
+            context.configure(
+                connection=connection, target_metadata=target_metadata
+            )
+
+            with context.begin_transaction():
+                context.run_migrations()
+    else:
+        context.configure(
+            connection=connectable,
+            target_metadata=target_metadata
+        )
+
+        with context.begin_transaction():
+            context.run_migrations()
+```
+
+----------------------------------------
+
+TITLE: Handling Schema-Qualified Table Names in include_name (Python)
+DESCRIPTION: This code fragment illustrates logic within the `include_name` function to handle schema-qualified table names. It checks the `parent_names["schema_name"]` to determine if the table belongs to the default schema (`None`) or a named schema, then constructs the appropriate key (e.g., 'schemaname.tablename') to look up the table within `target_metadata.tables`.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/autogenerate.rst#_snippet_12
+
+LANGUAGE: Python
+CODE:
+```
+# example fragment
+
+if parent_names["schema_name"] is None:
+    return name in target_metadata.tables
+else:
+    # build out schema-qualified name explicitly...
+    return (
+        "%s.%s" % (parent_names["schema_name"], name) in
+        target_metadata.tables
+    )
+```
+
+----------------------------------------
+
+TITLE: Creating Revision with Branch Dependency (Alembic Shell)
+DESCRIPTION: Shows the command to create a new revision in the 'networking' branch while specifying a dependency on a revision ('55af2cb1c267') from another branch, using the `--depends-on` flag.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/branches.rst#_snippet_44
+
+LANGUAGE: Shell
+CODE:
+```
+$ alembic revision -m "add ip account table" --head=networking@head  --depends-on=55af2cb1c267
+```
+
+----------------------------------------
+
+TITLE: Filtering Tables with include_name Hook (Python)
+DESCRIPTION: This `include_name` function focuses on filtering database tables. When the object `type_` is 'table', it checks if the table `name` exists as a key in the `target_metadata.tables` dictionary, which represents the desired schema state. Only tables present in `target_metadata` are included (`return True`), preventing `drop_table` operations for extraneous database tables.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/autogenerate.rst#_snippet_10
+
+LANGUAGE: Python
+CODE:
+```
+def include_name(name, type_, parent_names):
+    if type_ == "table":
+        return name in target_metadata.tables
+    else:
+        return True
+```
+
+----------------------------------------
+
+TITLE: Alembic Revision Metadata (Python)
+DESCRIPTION: Illustrates the key variables found within a newly generated Alembic migration script. These variables define the revision's unique ID (`revision`), the revision it upgrades from (`down_revision`), associated branch labels (`branch_labels`), and explicit dependencies on other revisions (`depends_on`).
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/branches.rst#_snippet_47
+
+LANGUAGE: python
+CODE:
+```
+# revision identifiers, used by Alembic.
+revision = '2a95102259be'
+down_revision = '29f859a13ea'
+branch_labels = None
+depends_on = ('55af2cb1c267', 'd747a8a8879', 'fa4456a9201')
+```
+
+----------------------------------------
+
+TITLE: Viewing Detailed History Alembic Shell
+DESCRIPTION: Displays the full migration history, including details about each revision such as its parent, path, and docstring. The `--verbose` option provides more comprehensive information for each entry in the history log.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/tutorial.rst#_snippet_14
+
+LANGUAGE: Shell
+CODE:
+```
+alembic history --verbose
+```
+
+----------------------------------------
+
+TITLE: Re-applying Upgrade Alembic Shell
+DESCRIPTION: Executes migrations up to the latest revision (`head`) again after a full downgrade. This command demonstrates bringing the database back to the latest state after it has been fully downgraded to `base`.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/tutorial.rst#_snippet_20
+
+LANGUAGE: Shell
+CODE:
+```
+alembic upgrade head
+```
+
+----------------------------------------
+
+TITLE: Invoking Alembic Upgrade Command Programmatically - Python
+DESCRIPTION: Demonstrates how to load an Alembic configuration file and execute the 'upgrade' command programmatically using the `alembic.config.Config` object and the `alembic.command` package. Requires a valid `alembic.ini` file path.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/api/commands.rst#_snippet_0
+
+LANGUAGE: python
+CODE:
+```
+from alembic.config import Config
+from alembic import command
+alembic_cfg = Config("/path/to/yourapp/alembic.ini")
+command.upgrade(alembic_cfg, "head")
+```
+
+----------------------------------------
+
+TITLE: Configuring Alembic Context for Schema-Qualified Table Filtering (Python)
+DESCRIPTION: This configuration snippet sets up Alembic's `context` to use the `include_name` hook (Snippet 8) for filtering based on schema-qualified table names. It provides the `target_metadata`, assigns the custom `include_name` function, and enables `include_schemas`. This allows the autogenerate process to correctly handle and filter tables across multiple schemas based on the defined model metadata.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/autogenerate.rst#_snippet_14
+
+LANGUAGE: Python
+CODE:
+```
+context.configure(
+    # ...
+    target_metadata = target_metadata,
+    include_name = include_name,
+    include_schemas = True
+)
+```
+
+----------------------------------------
+
+TITLE: Showing Current Applied Revisions (Shell)
+DESCRIPTION: Displays the revisions currently recorded in the database's `alembic_version` table. This shows which migrations have been successfully applied and helps differentiate between 'real' heads recorded in the database and 'effective' heads recognized by `alembic heads`.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/branches.rst#_snippet_52
+
+LANGUAGE: shell
+CODE:
+```
+alembic current
+```
+
+----------------------------------------
+
+TITLE: Executing Alembic Migrations within Transaction - Python
+DESCRIPTION: Demonstrates running Alembic migrations within a database transaction using `context.begin_transaction()`. This pattern ensures that the entire migration script is treated as an atomic unit, rolling back automatically if any step fails.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/cookbook.rst#_snippet_31
+
+LANGUAGE: python
+CODE:
+```
+with context.begin_transaction():
+  context.run_migrations()
+```
+
+----------------------------------------
+
+TITLE: Alembic Merge Migration File Structure - Python
+DESCRIPTION: This Python snippet shows the structure of a migration file generated by `alembic merge`. The key difference from a regular migration is that the `down_revision` variable is a tuple containing the revision IDs of all the branches being merged.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/branches.rst#_snippet_5
+
+LANGUAGE: Python
+CODE:
+```
+"""merge ae1 and 27c
+
+Revision ID: 53fffde5ad5
+Revises: ae1027a6acf, 27c6a30d7c24
+Create Date: 2014-11-20 13:31:50.811663
+
+"""
+
+# revision identifiers, used by Alembic.
+revision = '53fffde5ad5'
+down_revision = ('ae1027a6acf', '27c6a30d7c24')
+branch_labels = None
+
+from alembic import op
+import sqlalchemy as sa
+
+
+def upgrade():
+    pass
+
+
+def downgrade():
+    pass
+```
+
+----------------------------------------
+
+TITLE: Filtering Schemas Including Default with include_name Hook (Python)
+DESCRIPTION: This version of the `include_name` function expands schema filtering to also include the database's default schema. When the object `type_` is 'schema', it returns `True` if the schema `name` is `None` (representing the default) or within the list ['schema_one', 'schema_two']. This ensures both explicitly named schemas and the default schema are included.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/autogenerate.rst#_snippet_8
+
+LANGUAGE: Python
+CODE:
+```
+def include_name(name, type_, parent_names):
+    if type_ == "schema":
+        # this **will* include the default schema
+        return name in [None, "schema_one", "schema_two"]
+    else:
+        return True
+```
+
+----------------------------------------
+
+TITLE: Configuring Alembic env.py with Multiple Metadata Collections (Python)
+DESCRIPTION: This snippet demonstrates how to configure `env.py` when your application uses multiple SQLAlchemy MetaData collections. By providing a list of MetaData objects to `target_metadata`, Alembic's autogenerate can compare against all defined schemas.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/autogenerate.rst#_snippet_5
+
+LANGUAGE: Python
+CODE:
+```
+from myapp.mymodel1 import Model1Base
+from myapp.mymodel2 import Model2Base
+target_metadata = [Model1Base.metadata, Model2Base.metadata]
+```
+
+----------------------------------------
+
+TITLE: Autogenerated Batch Upgrade Function Python
+DESCRIPTION: Provides an example of the Python code generated by Alembic's autogenerate feature when `render_as_batch` is enabled. It shows an `upgrade` function using a `with op.batch_alter_table(...)` block to add a column, representing a typical batch operation structure.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/batch.rst#_snippet_11
+
+LANGUAGE: Python
+CODE:
+```
+def upgrade():
+    ### commands auto generated by Alembic - please adjust! ###
+    with op.batch_alter_table('address', schema=None) as batch_op:
+        batch_op.add_column(sa.Column('street', sa.String(length=50), nullable=True))
+```
+
+----------------------------------------
+
+TITLE: Revision File Content with depends_on (Python)
+DESCRIPTION: Provides an example of the contents of a generated migration file that includes the `depends_on` directive, linking this revision to a specific revision in another branch while maintaining its primary `down_revision` within its own branch.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/branches.rst#_snippet_45
+
+LANGUAGE: Python
+CODE:
+```
+# revision identifiers, used by Alembic.
+revision = '2a95102259be'
+down_revision = '29f859a13ea'
+branch_labels = None
+depends_on='55af267'
+```
+
+----------------------------------------
+
+TITLE: Configuring Alembic env.py for Autogenerate - Initial State (Python)
+DESCRIPTION: This snippet shows the default placeholder for the target metadata variable in the generic `env.py` template provided by `alembic init`. It needs to be modified to point to the application's SQLAlchemy MetaData object for autogenerate to work.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/autogenerate.rst#_snippet_0
+
+LANGUAGE: Python
+CODE:
+```
+# add your model's MetaData object here
+# for 'autogenerate' support
+# from myapp import mymodel
+# target_metadata = mymodel.Base.metadata
+target_metadata = None
+```
+
+----------------------------------------
+
+TITLE: Defining Branch Labels in Alembic Migration File
+DESCRIPTION: This Python snippet shows how to add the `branch_labels` attribute to an Alembic migration script. This assigns one or more string names (labels) to the revision, which can then be used as aliases for that revision and its related path.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/branches.rst#_snippet_21
+
+LANGUAGE: Python
+CODE:
+```
+"""add shopping cart table
+
+"""
+
+# revision identifiers, used by Alembic.
+revision = '27c6a30d7c24'
+down_revision = '1975ea83b712'
+branch_labels = ('shoppingcart',)
+
+# ...
+```
+
+----------------------------------------
+
+TITLE: Using unique=True on SQLAlchemy Column
+DESCRIPTION: Demonstrates the convenience feature of adding `unique=True` to a SQLAlchemy Column definition. While simple, this approach automatically creates an unnamed UniqueConstraint, requiring manual lookup of the database-generated name if it needs to be dropped or altered later via Alembic operations.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/naming.rst#_snippet_5
+
+LANGUAGE: Python
+CODE:
+```
+user_account = Table('user_account', meta,
+                    Column('id', Integer, primary_key=True),
+                    Column('name', String(50), unique=True)
+                )
+```
+
+----------------------------------------
+
+TITLE: Generating Alembic Migration for Column Add Shell
+DESCRIPTION: This shell command uses the Alembic CLI to generate a new migration script. The '-m "add email col"' argument provides a message that will be included in the migration file's docstring, indicating the purpose of the migration (adding an 'email' column).
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/cookbook.rst#_snippet_15
+
+LANGUAGE: Shell
+CODE:
+```
+alembic revision -m "add email col"
+```
+
+----------------------------------------
+
+TITLE: Performing Alembic Upgrade After Merging - Shell
+DESCRIPTION: With a single head established after the merge, a standard `alembic upgrade head` command can successfully run. Alembic uses topological sorting to apply the necessary migrations from the current database state up to the new merge head, handling the branched path automatically.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/branches.rst#_snippet_8
+
+LANGUAGE: Shell
+CODE:
+```
+$ alembic upgrade head
+INFO  [alembic.migration] Context impl PostgresqlImpl.
+INFO  [alembic.migration] Will assume transactional DDL.
+INFO  [alembic.migration] Running upgrade  -> 1975ea83b712, create account table
+INFO  [alembic.migration] Running upgrade 1975ea83b712 -> 27c6a30d7c24, add shopping cart table
+INFO  [alembic.migration] Running upgrade 1975ea83b712 -> ae1027a6acf, add a column
+INFO  [alembic.migration] Running upgrade ae1027a6acf, 27c6a30d7c24 -> 53fffde5ad5, merge ae1 and 27c
+```
+
+----------------------------------------
+
+TITLE: Programmatic Alembic Command Execution with Asyncio Connection
+DESCRIPTION: Demonstrates how an async application can invoke a standard synchronous Alembic command (like `command.upgrade`) by obtaining an async connection and using SQLAlchemy's `connection.run_sync` method to execute the synchronous Alembic logic within the async context, passing the connection via the config attributes.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/cookbook.rst#_snippet_44
+
+LANGUAGE: Python
+CODE:
+```
+import asyncio
+from sqlalchemy.ext.asyncio import create_async_engine
+
+from alembic import command, config
+
+
+def run_upgrade(connection, cfg):
+    cfg.attributes["connection"] = connection
+    command.upgrade(cfg, "head")
+
+
+async def run_async_upgrade():
+    async_engine = create_async_engine("sqlite+aiosqlite://", echo=True)
+    async with async_engine.begin() as conn:
+        await conn.run_sync(run_upgrade, config.Config("alembic.ini"))
+
+
+asyncio.run(run_async_upgrade())
+```
+
+----------------------------------------
+
+TITLE: Upgrading All Branches (Alembic Shell)
+DESCRIPTION: Demonstrates upgrading the database to include all current head revisions across all branches. This command applies all migrations necessary to reach the latest state for every independent lineage.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/branches.rst#_snippet_43
+
+LANGUAGE: Shell
+CODE:
+```
+$ alembic upgrade heads
+```
+
+----------------------------------------
+
+TITLE: Registering Table Level Autogenerate Comparator (Python)
+DESCRIPTION: Registers a custom comparison function to run at the table level during Alembic's autogenerate process. This function compares table definitions between the database and the local metadata, receiving context, modify operations collection, schema/table names, and reflected/metadata table objects.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/api/autogenerate.rst#_snippet_12
+
+LANGUAGE: python
+CODE:
+```
+@comparators.dispatch_for("table")
+def compare_table_level(autogen_context, modify_ops,
+    schemaname, tablename, conn_table, metadata_table):
+    pass
+```
+
+----------------------------------------
+
+TITLE: Viewing Alembic History with Branches - Shell
+DESCRIPTION: This command shows the history of migrations, illustrating how branches appear in the revision graph. It clearly lists revisions, their parents, and identifies branch points and multiple heads.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/branches.rst#_snippet_1
+
+LANGUAGE: Shell
+CODE:
+```
+$ alembic history
+1975ea83b712 -> 27c6a30d7c24 (head), add shopping cart table
+1975ea83b712 -> ae1027a6acf (head), add a column
+<base> -> 1975ea83b712 (branchpoint), create account table
+```
+
+----------------------------------------
+
+TITLE: Filtering DROP INDEX for Dropped Tables (Python)
+DESCRIPTION: Implements a `process_revision_directives` hook to filter out `DropIndexOp` directives for tables that are also being dropped within the same migration script. This is useful for databases like MySQL where dropping an index on a column with a foreign key might cause issues if the table is also removed. It uses a recursive helper function `_filter_drop_indexes` to process nested operations.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/cookbook.rst#_snippet_30
+
+LANGUAGE: Python
+CODE:
+```
+def run_migrations_online():
+
+    # ...
+
+    from alembic.operations import ops
+
+    def process_revision_directives(context, revision, directives):
+        script = directives[0]
+
+        # process both "def upgrade()", "def downgrade()"
+        for directive in (script.upgrade_ops, script.downgrade_ops):
+
+            # make a set of tables that are being dropped within
+            # the migration function
+            tables_dropped = set()
+            for op in directive.ops:
+                if isinstance(op, ops.DropTableOp):
+                    tables_dropped.add((op.table_name, op.schema))
+
+            # now rewrite the list of "ops" such that DropIndexOp
+            # is removed for those tables.   Needs a recursive function.
+            directive.ops = list(
+                _filter_drop_indexes(directive.ops, tables_dropped)
+            )
+
+    def _filter_drop_indexes(directives, tables_dropped):
+        # given a set of (tablename, schemaname) to be dropped, filter
+        # out DropIndexOp from the list of directives and yield the result.
+
+        for directive in directives:
+            # ModifyTableOps is a container of ALTER TABLE types of
+            # commands.  process those in place recursively.
+            if isinstance(directive, ops.ModifyTableOps) and \
+                    (directive.table_name, directive.schema) in tables_dropped:
+                directive.ops = list(
+                    _filter_drop_indexes(directive.ops, tables_dropped)
+                )
+
+                # if we emptied out the directives, then skip the
+                # container altogether.
+                if not directive.ops:
+                    continue
+            elif isinstance(directive, ops.DropIndexOp) and \
+                    (directive.table_name, directive.schema) in tables_dropped:
+                # we found a target DropIndexOp.   keep looping
+                continue
+
+            # otherwise if not filtered, yield out the directive
+            yield directive
+
+    # connectable = ...
+
+    with connectable.connect() as connection:
+        context.configure(
+            connection=connection,
+            target_metadata=target_metadata,
+            process_revision_directives=process_revision_directives
+        )
+
+        with context.begin_transaction():
+            context.run_migrations()
+```
+
+----------------------------------------
+
+TITLE: Implementing Custom Alembic Operation Execution - Python
+DESCRIPTION: Provides concrete implementations for the registered custom operations (`CreateViewOp`, etc.) using the `@Operations.implementation_for` decorator. These functions receive the operation object and use `operations.execute()` to run the necessary SQL commands (CREATE VIEW, DROP VIEW, CREATE FUNCTION, DROP FUNCTION) based on the operation's target.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/cookbook.rst#_snippet_9
+
+LANGUAGE: Python
+CODE:
+```
+@Operations.implementation_for(CreateViewOp)
+def create_view(operations, operation):
+    operations.execute("CREATE VIEW %s AS %s" % (
+        operation.target.name,
+        operation.target.sqltext
+    ))
+
+
+@Operations.implementation_for(DropViewOp)
+def drop_view(operations, operation):
+    operations.execute("DROP VIEW %s" % operation.target.name)
+
+
+@Operations.implementation_for(CreateSPOp)
+def create_sp(operations, operation):
+    operations.execute(
+        "CREATE FUNCTION %s %s" % (
+            operation.target.name, operation.target.sqltext
+        )
+    )
+
+
+@Operations.implementation_for(DropSPOp)
+def drop_sp(operations, operation):
+    operations.execute("DROP FUNCTION %s" % operation.target.name)
+```
+
+----------------------------------------
+
+TITLE: Upgrading to All Alembic Heads
+DESCRIPTION: This command upgrades the database to all current heads simultaneously. It's used when multiple branches have been created and you want to apply all migrations up to the latest point on each branch.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/branches.rst#_snippet_11
+
+LANGUAGE: Shell
+CODE:
+```
+$ alembic upgrade heads
+INFO  [alembic.migration] Context impl PostgresqlImpl.
+INFO  [alembic.migration] Will assume transactional DDL.
+INFO  [alembic.migration] Running upgrade  -> 1975ea83b712, create account table
+INFO  [alembic.migration] Running upgrade 1975ea83b712 -> ae1027a6acf, add a column
+INFO  [alembic.migration] Running upgrade 1975ea83b712 -> 27c6a30d7c24, add shopping cart table
+```
+
+----------------------------------------
+
+TITLE: Registering Alembic Autogenerate Comparator for Sequences Python
+DESCRIPTION: This Python snippet demonstrates how to register a custom comparison function for Alembic's autogenerate process using the `@comparators.dispatch_for` decorator. The function compares sequences found in the PostgreSQL database schema against sequences stored in the application's SQLAlchemy MetaData `info` dictionary, generating `CreateSequenceOp` and `DropSequenceOp` directives to reconcile the differences.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/api/autogenerate.rst#_snippet_10
+
+LANGUAGE: Python
+CODE:
+```
+from alembic.autogenerate import comparators
+
+@comparators.dispatch_for("schema")
+def compare_sequences(autogen_context, upgrade_ops, schemas):
+    all_conn_sequences = set()
+
+    for sch in schemas:
+
+        all_conn_sequences.update([
+            (sch, row[0]) for row in
+            autogen_context.connection.execute(
+                "SELECT relname FROM pg_class c join "
+                "pg_namespace n on n.oid=c.relnamespace where "
+                "relkind='S' and n.nspname=%(nspname)s",
+
+                # note that we consider a schema of 'None' in our
+                # model to be the "default" name in the PG database;
+                # this usually is the name 'public'
+                nspname=autogen_context.dialect.default_schema_name
+                if sch is None else sch
+            )
+        ])
+
+    # get the collection of Sequence objects we're storing with
+    # our MetaData
+    metadata_sequences = autogen_context.metadata.info.setdefault(
+        "sequences", set())
+
+    # for new names, produce CreateSequenceOp directives
+    for sch, name in metadata_sequences.difference(all_conn_sequences):
+        upgrade_ops.ops.append(
+            CreateSequenceOp(name, schema=sch)
+        )
+
+    # for names that are going away, produce DropSequenceOp
+    # directives
+    for sch, name in all_conn_sequences.difference(metadata_sequences):
+        upgrade_ops.ops.append(
+            DropSequenceOp(name, schema=sch)
+        )
+```
+
+----------------------------------------
+
+TITLE: Alembic op.f() to Bypass Naming Convention
+DESCRIPTION: Illustrates the use of the `op.f()` wrapper function in Alembic (version >= 0.6.4) to provide a literal constraint name that bypasses the automated naming convention. This is useful when you need complete control over the name or when autogenerate identifies an existing constraint by its database-generated name.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/naming.rst#_snippet_11
+
+LANGUAGE: Python
+CODE:
+```
+def upgrade():
+        op.create_unique_constraint(op.f('uq_const_x'), 'some_table', 'x')
+```
+
+----------------------------------------
+
+TITLE: Updating Views/Functions Alembic Migration Python
+DESCRIPTION: This Python snippet is an Alembic migration script demonstrating how to update views and stored procedures using custom `ReplaceableObject`, `op.replace_view`, and `op.replace_sp` operations. It defines the updated view and function definitions and specifies how to replace them during upgrade and revert to a previous version during downgrade.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/cookbook.rst#_snippet_18
+
+LANGUAGE: Python
+CODE:
+```
+"""update views/sp
+
+Revision ID: 199028bf9856
+Revises: 191a2d20b025
+Create Date: 2015-07-27 16:26:31.344504
+
+"""
+
+# revision identifiers, used by Alembic.
+revision = '199028bf9856'
+down_revision = '191a2d20b025'
+branch_labels = None
+depends_on = None
+
+from alembic import op
+import sqlalchemy as sa
+
+from foo import ReplaceableObject
+
+customer_view = ReplaceableObject(
+    "customer_view",
+    "SELECT name, order_count, email "
+    "FROM customer WHERE order_count > 0"
+)
+
+add_customer_sp = ReplaceableObject(
+    "add_customer_sp(name varchar, order_count integer, email varchar)",
+    """
+        RETURNS integer AS $$
+        BEGIN
+            insert into customer (name, order_count, email)
+            VALUES (in_name, in_order_count, email);
+        END;
+        $$ LANGUAGE plpgsql;
+        """
+)
+
+
+def upgrade():
+    op.replace_view(customer_view, replaces="28af9800143f.customer_view")
+    op.replace_sp(add_customer_sp, replaces="28af9800143f.add_customer_sp")
+
+
+def downgrade():
+    op.replace_view(customer_view, replace_with="28af9800143f.customer_view")
+    op.replace_sp(add_customer_sp, replace_with="28af9800143f.add_customer_sp")
+```
+
+----------------------------------------
+
+TITLE: Executing Alembic Command Within Existing Connection - Python
+DESCRIPTION: Shows how to run an Alembic command, such as 'upgrade', using an existing database connection and transaction. The connection is passed via the `Config.attributes` dictionary, which must be consumed by the `env.py` script. Requires an active database engine and connection.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/api/commands.rst#_snippet_1
+
+LANGUAGE: python
+CODE:
+```
+with engine.begin() as connection:
+    alembic_cfg.attributes['connection'] = connection
+    command.upgrade(alembic_cfg, "head")
+```
+
+----------------------------------------
+
+TITLE: Excluding Flagged Views from Alembic Autogenerate - Python
+DESCRIPTION: Provides an implementation of the `include_object` hook in `env.py` that checks for a `is_view` flag in the object's `info` dictionary. If the flag is found and set to `True`, the function returns `False`, instructing Alembic's autogenerate to exclude this object from consideration.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/cookbook.rst#_snippet_35
+
+LANGUAGE: python
+CODE:
+```
+def include_object(object, name, type_, reflected, compare_to):
+    """
+    Exclude views from Alembic's consideration.
+    """
+
+    return not object.info.get('is_view', False)
+
+# Then in env.py's context.configure:
+# context.configure(
+#     # ...
+#     include_object=include_object
+# )
+```
+
+----------------------------------------
+
+TITLE: Filtering Schema-Qualified Tables with include_name Hook (Python)
+DESCRIPTION: This refined `include_name` function filters both schemas and tables, supporting schema-qualified names. For tables, it checks if the pre-formatted `parent_names["schema_qualified_table_name"]` exists in `target_metadata.tables`, simplifying the check for both default and non-default schemas. For schemas, it includes the default schema and specific named schemas.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/autogenerate.rst#_snippet_13
+
+LANGUAGE: Python
+CODE:
+```
+target_metadata = MyModel.metadata
+
+def include_name(name, type_, parent_names):
+    if type_ == "schema":
+        return name in [None, "schema_one", "schema_two"]
+    elif type_ == "table":
+        # use schema_qualified_table_name directly
+        return (
+            parent_names["schema_qualified_table_name"] in
+            target_metadata.tables
+        )
+    else:
+        return True
+```
+
+----------------------------------------
+
+TITLE: Registering Custom Alembic Operation Classes - Python
+DESCRIPTION: Defines specific operation classes (`CreateViewOp`, `DropViewOp`, `CreateSPOp`, `DropSPOp`) inheriting from `ReversibleOp`. These classes implement the `reverse()` method to provide down migration logic and are registered with Alembic's `op.*` namespace using the `@Operations.register_operation` decorator.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/cookbook.rst#_snippet_8
+
+LANGUAGE: Python
+CODE:
+```
+@Operations.register_operation("create_view", "invoke_for_target")
+@Operations.register_operation("replace_view", "replace")
+class CreateViewOp(ReversibleOp):
+    def reverse(self):
+        return DropViewOp(self.target)
+
+
+@Operations.register_operation("drop_view", "invoke_for_target")
+class DropViewOp(ReversibleOp):
+    def reverse(self):
+        return CreateViewOp(self.target)
+
+
+@Operations.register_operation("create_sp", "invoke_for_target")
+@Operations.register_operation("replace_sp", "replace")
+class CreateSPOp(ReversibleOp):
+    def reverse(self):
+        return DropSPOp(self.target)
+
+
+@Operations.register_operation("drop_sp", "invoke_for_target")
+class DropSPOp(ReversibleOp):
+    def reverse(self):
+        return CreateSPOp(self.target)
+```
+
+----------------------------------------
+
+TITLE: Upgrading to Another Specific Alembic Revision
+DESCRIPTION: This command upgrades the database to a different specific revision identifier after a previous upgrade. Alembic will apply only the difference needed to reach this new target from the current state.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/branches.rst#_snippet_20
+
+LANGUAGE: Shell
+CODE:
+```
+$ alembic upgrade ae102
+INFO  [alembic.migration] Running upgrade 1975ea83b712 -> ae1027a6acf, add a column
+```
+
+----------------------------------------
+
+TITLE: Flagging SQLAlchemy Objects as Views for Exclusion - Python
+DESCRIPTION: Demonstrates how to flag SQLAlchemy Core `Table` instances or Declarative mapped classes as views by adding a flag like `{'is_view': True}` to their `info` dictionary or `__table_args__`. This allows custom hooks, like `include_object`, to easily identify and exclude these objects from autogenerated migration operations.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/cookbook.rst#_snippet_34
+
+LANGUAGE: python
+CODE:
+```
+# Core Table example
+# from sqlalchemy import Table, MetaData
+# metadata = MetaData()
+my_view = Table('my_view', metadata, autoload=True, info=dict(is_view=True))
+```
+
+LANGUAGE: python
+CODE:
+```
+# Declarative example
+# from sqlalchemy.ext.declarative import declarative_base
+# Base = declarative_base()
+class MyView(Base):
+    __tablename__ = 'my_view'
+    __table_args__ = {'info': {'is_view': True}} # Flag this as a view
+```
+
+----------------------------------------
+
+TITLE: Listing Current Alembic Heads with Verbose Output (Before Merge) - Shell
+DESCRIPTION: Executing `alembic heads --verbose` reveals the current tip revision(s) of the migration graph. In a branched scenario before merging, this command will list all active heads, indicating the points where the migration paths diverge.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/branches.rst#_snippet_2
+
+LANGUAGE: Shell
+CODE:
+```
+$ alembic heads --verbose
+Rev: 27c6a30d7c24 (head)
+Parent: 1975ea83b712
+Path: foo/versions/27c6a30d7c24_add_shopping_cart_table.py
+
+    add shopping cart table
+
+    Revision ID: 27c6a30d7c24
+    Revises: 1975ea83b712
+    Create Date: 2014-11-20 13:03:11.436407
+
+Rev: ae1027a6acf (head)
+Parent: 1975ea83b712
+Path: foo/versions/ae1027a6acf_add_a_column.py
+
+    add a column
+
+    Revision ID: ae1027a6acf
+    Revises: 1975ea83b712
+    Create Date: 2014-11-20 13:02:54.849677
+```
+
+----------------------------------------
+
+TITLE: Alembic op.add_column Applying Naming Convention
+DESCRIPTION: Demonstrates how an Alembic `op.add_column` operation, when used in an environment configured with a naming convention, will automatically apply the convention to constraints implicitly created by column types (like a CHECK constraint for a Boolean column on certain database backends). The resulting constraint name follows the 'ck' pattern from the convention.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/naming.rst#_snippet_9
+
+LANGUAGE: Python
+CODE:
+```
+op.add_column('sometable', Column('q', Boolean(name='q_bool')))
+```
+
+----------------------------------------
+
+TITLE: Registering Column Level Autogenerate Comparator (Python)
+DESCRIPTION: Registers a custom comparison function to run at the column level during Alembic's autogenerate process. This function compares column definitions, receiving context, an AlterColumnOp object, schema/table/column names, and reflected/metadata column objects.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/api/autogenerate.rst#_snippet_13
+
+LANGUAGE: python
+CODE:
+```
+@comparators.dispatch_for("column")
+def compare_column_level(autogen_context, alter_column_op,
+    schemaname, tname, cname, conn_col, metadata_col):
+    pass
+```
+
+----------------------------------------
+
+TITLE: Manually Naming UniqueConstraint in SQLAlchemy Table
+DESCRIPTION: Shows the manual approach to defining and naming a UniqueConstraint object explicitly within a SQLAlchemy Table definition. This is necessary if you need a predictable name for the constraint and cannot rely on the `unique=True` column flag, which creates unnamed constraints.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/naming.rst#_snippet_6
+
+LANGUAGE: Python
+CODE:
+```
+user_account = Table('user_account', meta,
+                    Column('id', Integer, primary_key=True),
+                    Column('name', String(50)),
+                    UniqueConstraint('name', name='uq_user_account_name')
+                )
+```
+
+----------------------------------------
+
+TITLE: Listing Alembic Branches with Verbose Output - Shell
+DESCRIPTION: This shell command demonstrates how to use the `alembic branches --verbose` command to identify branch points and the revisions stemming from them. It shows which revisions act as branch points and lists the heads associated with those branches.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/branches.rst#_snippet_0
+
+LANGUAGE: Shell
+CODE:
+```
+$ alembic branches --verbose
+Rev: 1975ea83b712 (branchpoint)
+Parent: <base>
+Branches into: 27c6a30d7c24, ae1027a6acf
+Path: foo/versions/1975ea83b712_add_account_table.py
+
+    create account table
+
+    Revision ID: 1975ea83b712
+    Revises:
+    Create Date: 2014-11-20 13:02:46.257104
+
+             -> 27c6a30d7c24 (head), add shopping cart table
+             -> ae1027a6acf (head), add a column
+```
+
+----------------------------------------
+
+TITLE: Running Alembic Migrations for Multiple Engines Python
+DESCRIPTION: This Python snippet shows how to configure and run Alembic migrations against multiple database engines sequentially within a single `env.py` script. It iterates through defined engines, updates the migration context with connection details and engine-specific tokens, and invokes `context.run_migrations()` for each engine to generate combined operations for the revision script.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/api/autogenerate.rst#_snippet_7
+
+LANGUAGE: Python
+CODE:
+```
+for name, rec in engines.items():
+    logger.info("Migrating database %s" % name)
+    context.configure(
+        connection=rec['connection'],
+        upgrade_token="%s_upgrades" % name,
+        downgrade_token="%s_downgrades" % name,
+        target_metadata=target_metadata.get(name)
+    )
+    context.run_migrations(engine_name=name)
+```
+
+----------------------------------------
+
+TITLE: Downgrading Another Step in Alembic
+DESCRIPTION: Continuing the downgrade process when a single head remains after previous steps. This command will downgrade the remaining head, moving the database version down the migration path.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/branches.rst#_snippet_15
+
+LANGUAGE: Shell
+CODE:
+```
+$ alembic downgrade -1
+INFO  [alembic.migration] Running downgrade 27c6a30d7c24 -> 1975ea83b712, add shopping cart table
+```
+
+----------------------------------------
+
+TITLE: Manually Naming ForeignKey in SQLAlchemy Table
+DESCRIPTION: Shows how to define SQLAlchemy Table objects and explicitly provide a name for a ForeignKey constraint using the `name` parameter. This method ensures the constraint has a predictable name across different databases, but is noted as potentially tedious for many constraints.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/naming.rst#_snippet_4
+
+LANGUAGE: Python
+CODE:
+```
+from sqlalchemy import MetaData, Table, Column, Integer, ForeignKey
+
+meta = MetaData()
+
+user_account = Table('user_account', meta,
+                    Column('id', Integer, primary_key=True)
+                )
+
+user_order = Table('user_order', meta,
+                    Column('id', Integer, primary_key=True),
+                    Column('user_order_id', Integer,
+                      ForeignKey('user_account.id', name='fk_user_order_id'))
+                )
+```
+
+----------------------------------------
+
+TITLE: Implementing Custom Type Rendering Hook in Python
+DESCRIPTION: Defines a Python function (`render_item`) used as a custom hook for rendering items, specifically types, in autogenerated scripts. This function can inspect the type and object, potentially add necessary imports to the script's `imports` set, and return a custom string representation.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/autogenerate.rst#_snippet_22
+
+LANGUAGE: Python
+CODE:
+```
+def render_item(type_, obj, autogen_context):
+    """Apply custom rendering for selected items."""
+
+    if type_ == 'type' and isinstance(obj, MySpecialType):
+        # add import for this type
+        autogen_context.imports.add("from mymodel import types")
+        return "types.%r" % obj
+
+    # default rendering for other objects
+    return False
+```
+
+----------------------------------------
+
+TITLE: Dropping CHECK Constraint with Naming Convention (Python)
+DESCRIPTION: This Python snippet demonstrates how to drop a CHECK constraint using Alembic's `op.drop_constraint`. When the constraint name is provided directly, Alembic applies the configured naming convention to derive the final constraint name used in the generated SQL.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/naming.rst#_snippet_13
+
+LANGUAGE: Python
+CODE:
+```
+op.drop_constraint("some_check_const", "t1", type_="check")
+```
+
+----------------------------------------
+
+TITLE: Associating SQLAlchemy Sequence with MetaData Info Python
+DESCRIPTION: This Python snippet defines a helper function to store a SQLAlchemy `Sequence` object's schema and name within the `info` dictionary of a SQLAlchemy `MetaData` object. This pattern allows custom autogenerate comparison functions to easily access and compare the set of desired custom objects defined in the application's model.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/api/autogenerate.rst#_snippet_9
+
+LANGUAGE: Python
+CODE:
+```
+from sqlalchemy.schema import Sequence
+
+def add_sequence_to_model(sequence, metadata):
+    metadata.info.setdefault("sequences", set()).add(
+        (sequence.schema, sequence.name)
+    )
+
+my_seq = Sequence("my_sequence")
+add_sequence_to_model(my_seq, model_metadata)
+```
+
+----------------------------------------
+
+TITLE: Running Alembic Migration with Extra Argument (Shell)
+DESCRIPTION: This command-line snippet demonstrates how to pass extra arguments to an Alembic migration using the -x flag. The format is `alembic -x key=value command revision`. This allows custom logic within migration scripts or the env.py file to be triggered based on these arguments, in this case, enabling data migrations via -x data=true.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/cookbook.rst#_snippet_3
+
+LANGUAGE: Shell
+CODE:
+```
+alembic -x data=true upgrade head
+```
+
+----------------------------------------
+
+TITLE: Attempting Alembic Upgrade with Multiple Heads - Shell
+DESCRIPTION: When multiple heads exist due to branching, a simple `alembic upgrade head` command becomes ambiguous. Alembic detects this and fails, providing instructions on how to specify a target head, use `<branchname>@head`, or target all heads ('heads').
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/branches.rst#_snippet_3
+
+LANGUAGE: Shell
+CODE:
+```
+$ alembic upgrade head
+  FAILED: Multiple head revisions are present for given argument 'head'; please specify a specific
+  target revision, '<branchname>@head' to narrow to a specific head, or 'heads' for all heads
+```
+
+----------------------------------------
+
+TITLE: Adding Imports to Alembic Migration Mako Template
+DESCRIPTION: This snippet shows how to add necessary imports for custom modules, such as a custom type helper module, into the `script.py.mako` template. These imports become available in the generated migration scripts.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/autogenerate.rst#_snippet_21
+
+LANGUAGE: Mako
+CODE:
+```
+from alembic import op
+import sqlalchemy as sa
+import myapp.migration_types
+${imports if imports else ""}
+```
+
+----------------------------------------
+
+TITLE: Showing Alembic History Filtered by Branch Label
+DESCRIPTION: This command displays the migration history specifically for the branch identified by the label, starting from its root/base up to its current head(s), using the `-r branchname:` syntax.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/branches.rst#_snippet_28
+
+LANGUAGE: Shell
+CODE:
+```
+$ alembic history -r shoppingcart:
+27c6a30d7c24 -> d747a8a8879 (shoppingcart) (head), add a shopping cart column
+1975ea83b712 -> 27c6a30d7c24 (shoppingcart), add shopping cart table
+```
+
+----------------------------------------
+
+TITLE: Downgrading One Step in Alembic with Multiple Heads
+DESCRIPTION: This command performs a downgrade by one step. When multiple heads are present, a single step downgrade will remove one head from the database's applied revisions, deleting its entry from the `alembic_version` table.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/branches.rst#_snippet_13
+
+LANGUAGE: Shell
+CODE:
+```
+$ alembic downgrade -1
+INFO  [alembic.migration] Running downgrade ae1027a6acf -> 1975ea83b712, add a column
+```
+
+----------------------------------------
+
+TITLE: Writing Custom Alembic Post Write Hook Function in Python
+DESCRIPTION: Defines a custom Python function `convert_spaces_to_tabs` that modifies an Alembic revision file after creation. It uses the `@write_hooks.register` decorator to register itself with the name "spaces_to_tabs", reading the file, replacing leading spaces with tabs using regex, and writing the modified content back.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/autogenerate.rst#_snippet_33
+
+LANGUAGE: python
+CODE:
+```
+from alembic.script import write_hooks
+import re
+
+@write_hooks.register("spaces_to_tabs")
+def convert_spaces_to_tabs(filename, options):
+    lines = []
+    with open(filename) as file_:
+        for line in file_:
+            lines.append(
+                re.sub(
+                    r"^(    )+",
+                    lambda m: "\t" * (len(m.group(1)) // 4),
+                    line
+                )
+            )
+    with open(filename, "w") as to_write:
+        to_write.write("".join(lines))
+```
+
+----------------------------------------
+
+TITLE: Stamping Database with Alembic Head Revision (Python)
+DESCRIPTION: After creating database tables using SQLAlchemy's MetaData.create_all, this snippet demonstrates how to load the Alembic configuration and use the alembic.command.stamp function to mark the database as being at the 'head' revision. This bypasses the need to run historical migration scripts on a newly created database. It requires SQLAlchemy metadata, a database engine, and an Alembic configuration file.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/cookbook.rst#_snippet_0
+
+LANGUAGE: Python
+CODE:
+```
+# inside of a "create the database" script, first create
+# tables:
+my_metadata.create_all(engine)
+
+# then, load the Alembic configuration and generate the
+# version table, "stamping" it with the most recent rev:
+from alembic.config import Config
+from alembic import command
+alembic_cfg = Config("/path/to/yourapp/alembic.ini")
+command.stamp(alembic_cfg, "head")
+```
+
+----------------------------------------
+
+TITLE: Listing Alembic Heads
+DESCRIPTION: This command displays the current heads (latest revisions) in the Alembic migration history. It helps identify if multiple independent branches exist.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/branches.rst#_snippet_10
+
+LANGUAGE: Shell
+CODE:
+```
+$ alembic heads
+```
+
+----------------------------------------
+
+TITLE: Viewing History Range by ID Alembic Shell
+DESCRIPTION: Displays migration history within a specified range, using partial revision identifiers for the start and end points. This command shows only the revisions between the `1975ea` prefix and the `ae1027` prefix (inclusive, if they match).
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/tutorial.rst#_snippet_15
+
+LANGUAGE: Shell
+CODE:
+```
+alembic history -r1975ea:ae1027
+```
+
+----------------------------------------
+
+TITLE: Use Custom Alembic Operations in Migration Scripts - Python
+DESCRIPTION: This snippet demonstrates how to use the custom `create_sequence` and `drop_sequence` operations within typical Alembic `upgrade` and `downgrade` functions. Once the custom operations are registered and implemented (usually in `env.py`), they become available methods on the `op` object provided in migration scripts.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/api/operations.rst#_snippet_2
+
+LANGUAGE: python
+CODE:
+```
+def upgrade():
+    op.create_sequence("my_sequence")
+
+def downgrade():
+    op.drop_sequence("my_sequence")
+```
+
+----------------------------------------
+
+TITLE: Listing Current Alembic Heads (Shell)
+DESCRIPTION: Lists all current migration heads known to Alembic. This includes 'real' heads that would appear in the `alembic_version` table after a full upgrade, as well as 'effective' heads which are dependencies that haven't had new revisions branched off them.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/branches.rst#_snippet_50
+
+LANGUAGE: shell
+CODE:
+```
+alembic heads
+```
+
+----------------------------------------
+
+TITLE: Configuring Alembic Context with Default Schema Filter (Python)
+DESCRIPTION: This code configures Alembic's environment context using the `context.configure` method. It enables schema inclusion (`include_schemas=True`) and assigns the `include_name` function that includes the default schema. This ensures that the autogenerate process considers both the default schema and the specific schemas allowed by the function.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/autogenerate.rst#_snippet_9
+
+LANGUAGE: Python
+CODE:
+```
+context.configure(
+    # ...
+    include_schemas = True,
+    include_name = include_name
+)
+```
+
+----------------------------------------
+
+TITLE: Configuring Alembic Context for Table Filtering (Python)
+DESCRIPTION: This snippet configures Alembic's `context` to use the `include_name` function for filtering tables based on the `target_metadata`. It sets `target_metadata` to the schema definition object and assigns the table-filtering `include_name` function. Setting `include_schemas=False` in this example limits the scope to the default schema.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/autogenerate.rst#_snippet_11
+
+LANGUAGE: Python
+CODE:
+```
+context.configure(
+    # ...
+    target_metadata = target_metadata,
+    include_name = include_name,
+    include_schemas = False
+)
+```
+
+----------------------------------------
+
+TITLE: Listing Multiple Heads (Alembic Shell)
+DESCRIPTION: Displays the command to list all current head revisions in the Alembic environment. With multiple bases or branches, this command will show a head for each independent line of development.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/branches.rst#_snippet_39
+
+LANGUAGE: Shell
+CODE:
+```
+$ alembic heads
+```
+
+----------------------------------------
+
+TITLE: Showing Alembic History with Branch Labels
+DESCRIPTION: This command displays the migration history, now including the defined branch labels next to the relevant revisions. This helps visualize which revisions belong to named branches.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/branches.rst#_snippet_22
+
+LANGUAGE: Shell
+CODE:
+```
+$ alembic history
+1975ea83b712 -> 27c6a30d7c24 (shoppingcart) (head), add shopping cart table
+1975ea83b712 -> ae1027a6acf (head), add a column
+<base> -> 1975ea83b712 (branchpoint), create account table
+```
+
+----------------------------------------
+
+TITLE: Filtering Schemas with include_name Hook (Python)
+DESCRIPTION: This Python function, designed for use with Alembic's `context.configure(include_name=...)`, filters database schemas. It returns `True` only for schemas whose names are 'schema_one' or 'schema_two' when the object type is 'schema', effectively excluding all others. For any other object type (like tables or columns), it returns `True` to include them.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/autogenerate.rst#_snippet_6
+
+LANGUAGE: Python
+CODE:
+```
+def include_name(name, type_, parent_names):
+    if type_ == "schema":
+        # note this will not include the default schema
+        return name in ["schema_one", "schema_two"]
+    else:
+        return True
+```
+
+----------------------------------------
+
+TITLE: Viewing History Range (Alternative Syntax) Alembic Shell
+DESCRIPTION: Displays migration history within a range starting three revisions before the current database revision using the `--rev-range` option with an equals sign. This is an alternative syntax for specifying negative relative ranges due to `argparse` limitations.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/tutorial.rst#_snippet_17
+
+LANGUAGE: Shell
+CODE:
+```
+alembic history --rev-range=-3:current
+```
+
+----------------------------------------
+
+TITLE: Configuring Autogenerate for Batch Mode Python
+DESCRIPTION: Shows how to configure Alembic's autogenerate feature to render migration commands using `batch_alter_table`. This is done by setting the `render_as_batch` flag to `True` within the `context.configure` call in the `env.py` file.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/batch.rst#_snippet_10
+
+LANGUAGE: Python
+CODE:
+```
+context.configure(
+    connection=connection,
+    target_metadata=target_metadata,
+    render_as_batch=True
+)
+```
+
+----------------------------------------
+
+TITLE: Upgrading Relatively from Specific Revision Alembic Shell
+DESCRIPTION: Executes migrations up to two steps forward from a specific revision identified by a partial prefix (`ae10`). This command combines a partial revision identifier with a relative step count.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/tutorial.rst#_snippet_12
+
+LANGUAGE: Shell
+CODE:
+```
+alembic upgrade ae10+2
+```
+
+----------------------------------------
+
+TITLE: Generating Alembic SQL Script for Range (Shell)
+DESCRIPTION: Illustrates generating an offline SQL script covering a specific range of revisions using the `start:end` syntax (e.g., `1975ea83b712:ae1027a6acf`). This is useful for creating scripts that apply only a subset of migrations or migrate from a known non-base version in offline mode. Requires Alembic, shell access, and the specific revision identifiers.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/offline.rst#_snippet_2
+
+LANGUAGE: Shell
+CODE:
+```
+$ alembic upgrade 1975ea83b712:ae1027a6acf --sql > migration.sql
+```
+
+----------------------------------------
+
+TITLE: Configuring process_revision_directives in env.py - Python
+DESCRIPTION: Illustrates where within the `run_migrations_online` function in `env.py` to pass the custom `process_revision_directives` function (or a `Rewriter` instance) to the `context.configure` method. This makes Alembic invoke the provided callback before generating the revision script file.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/api/autogenerate.rst#_snippet_4
+
+LANGUAGE: Python
+CODE:
+```
+def run_migrations_online():
+
+    # ...
+    with engine.connect() as connection:
+
+        context.configure(
+            connection=connection,
+            target_metadata=target_metadata,
+            process_revision_directives=process_revision_directives)
+
+        with context.begin_transaction():
+            context.run_migrations()
+```
+
+----------------------------------------
+
+TITLE: Performing Batch Alter Table Offline Python
+DESCRIPTION: Demonstrates how to perform a batch table alteration in Alembic's offline mode. It requires defining the table structure explicitly using SQLAlchemy's `Table` and `Column` objects and passing it to `batch_alter_table` via the `copy_from` parameter, bypassing the need for database reflection.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/batch.rst#_snippet_9
+
+LANGUAGE: Python
+CODE:
+```
+meta = MetaData()
+some_table = Table(
+    'some_table', meta,
+    Column('id', Integer, primary_key=True),
+    Column('bar', String(50))
+)
+
+with op.batch_alter_table("some_table", copy_from=some_table) as batch_op:
+    batch_op.add_column(Column('foo', Integer))
+    batch_op.drop_column('bar')
+```
+
+----------------------------------------
+
+TITLE: Configuring Alembic Autogenerate User Type Prefix in Python
+DESCRIPTION: Illustrates setting the `user_module_prefix` option in `context.configure()` in `env.py`. This allows specifying a fixed module prefix for user-defined types during autogeneration, overriding the default behavior of using the type's `__module__` attribute.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/autogenerate.rst#_snippet_19
+
+LANGUAGE: Python
+CODE:
+```
+context.configure(
+ connection=connection,
+ target_metadata=target_metadata,
+ user_module_prefix="myapp.migration_types.",
+ # ...
+)
+```
+
+----------------------------------------
+
+TITLE: Viewing History Range to Head Alembic Shell
+DESCRIPTION: Displays migration history starting from a specific partial revision identifier (`1975ea`) up to the latest revision (`head`). Leaving the end of the range empty implies `head`.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/tutorial.rst#_snippet_18
+
+LANGUAGE: Shell
+CODE:
+```
+alembic history -r1975ea:
+```
+
+----------------------------------------
+
+TITLE: Setting Alembic sys.path Configuration (Configuration)
+DESCRIPTION: This configuration option in the `alembic.ini` file specifies paths to prepend to Python's `sys.path`. It ensures Alembic can correctly import application modules, resolving issues where the local project directory wasn't automatically included in `sys.path`. This is the default setting in newly generated configuration files.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/changelog.rst#_snippet_0
+
+LANGUAGE: Configuration
+CODE:
+```
+          # sys.path path, will be prepended to sys.path if present.\n          # defaults to the current working directory.\n          prepend_sys_path = .
+```
+
+----------------------------------------
+
+TITLE: Configuring Rewriter in env.py - Python
+DESCRIPTION: Shows how to configure the Alembic environment to use a `Rewriter` instance. The `Rewriter` instance, which has handler functions defined for specific operations, is passed to the `process_revision_directives` parameter of the `context.configure` method in the `run_migrations_online` function within `env.py`.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/api/autogenerate.rst#_snippet_6
+
+LANGUAGE: Python
+CODE:
+```
+def run_migrations_online():
+    # ...
+
+    with connectable.connect() as connection:
+        context.configure(
+            connection=connection,
+            target_metadata=target_metadata,
+            process_revision_directives=writer
+        )
+
+        with context.begin_transaction():
+```
+
+----------------------------------------
+
+TITLE: Setting up for Generating Alembic Code from Database Reflection - Python
+DESCRIPTION: Imports necessary classes from SQLAlchemy and Alembic and establishes a connection to a database using `create_engine`. This setup is the prerequisite for reflecting an existing database schema and generating corresponding Alembic migration operations or Python code for `op.` directives.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/cookbook.rst#_snippet_36
+
+LANGUAGE: python
+CODE:
+```
+from sqlalchemy import create_engine
+from sqlalchemy import MetaData, Table
+from alembic import autogenerate
+from alembic.operations import ops
+
+e = create_engine("mysql://scott:tiger@localhost/test")
+```
+
+----------------------------------------
+
+TITLE: Configuring SQLAlchemy Module Prefix (Python)
+DESCRIPTION: This snippet shows how to configure the module prefix used when SQLAlchemy types are rendered in migration scripts. By setting the `sqlalchemy_module_prefix` parameter in `context.configure`, you can control how type names (like `Integer`) are prefixed (e.g., `sa.Integer()`) in the generated Python code, making the scripts cleaner or matching specific import conventions.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/autogenerate.rst#_snippet_17
+
+LANGUAGE: Python
+CODE:
+```
+def run_migrations_online():
+    # ...
+
+    context.configure(
+                connection=connection,
+                target_metadata=target_metadata,
+                sqlalchemy_module_prefix="sa."
+    )
+```
+
+----------------------------------------
+
+TITLE: Showing Current Alembic Revision(s) After Final Downgrade
+DESCRIPTION: This command shows the currently applied revision(s) after downgrading past the initial revision. The database is now at the base state.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/branches.rst#_snippet_18
+
+LANGUAGE: Shell
+CODE:
+```
+$ alembic current
+
+```
+
+----------------------------------------
+
+TITLE: Alembic op.create_unique_constraint with None Name
+DESCRIPTION: Shows that providing `None` as the name to an Alembic constraint creation operation, such as `op.create_unique_constraint`, signals Alembic to generate the constraint name according to the configured naming convention. This is an alternative to explicitly calculating the name.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/naming.rst#_snippet_10
+
+LANGUAGE: Python
+CODE:
+```
+def upgrade():
+        op.create_unique_constraint(None, 'some_table', 'x')
+```
+
+----------------------------------------
+
+TITLE: Configuring Alembic Post Write Hook for Custom Python Function
+DESCRIPTION: Configures Alembic to use the custom `spaces_to_tabs` Python function as a post-write hook. It enables `revision_environment` to ensure `env.py` (where the custom hook might be defined) is loaded and sets the hook type and name to match the registered custom function.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/autogenerate.rst#_snippet_34
+
+LANGUAGE: ini
+CODE:
+```
+[alembic]
+
+# ...
+
+# ensure the revision command loads env.py
+revision_environment = true
+
+[post_write_hooks]
+
+hooks = spaces_to_tabs
+
+spaces_to_tabs.type = spaces_to_tabs
+```
+
+----------------------------------------
+
+TITLE: Upgrading to Alembic Heads After New Branch (Shell)
+DESCRIPTION: Runs the upgrade process again after a new revision has been created on a previously 'effective' head. This demonstrates how the new revision (`34e094ad6ef1`) is now included in the upgrade path.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/branches.rst#_snippet_54
+
+LANGUAGE: shell
+CODE:
+```
+alembic upgrade heads
+```
+
+----------------------------------------
+
+TITLE: Downgrading From an Alembic Branchpoint
+DESCRIPTION: This command continues the downgrade process from a branchpoint. It will apply the downgrade script for the revision that created the branchpoint.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/branches.rst#_snippet_17
+
+LANGUAGE: Shell
+CODE:
+```
+$ alembic downgrade -1
+INFO  [alembic.migration] Running downgrade 1975ea83b712 -> , create account table
+```
+
+----------------------------------------
+
+TITLE: Viewing History Range Relatively to Current Alembic Shell
+DESCRIPTION: Displays migration history within a range starting three revisions before the current database revision and ending at the current revision. This command utilizes relative identifiers and the `current` symbol to define the range.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/tutorial.rst#_snippet_16
+
+LANGUAGE: Shell
+CODE:
+```
+alembic history -r-3:current
+```
+
+----------------------------------------
+
+TITLE: Forcing Batch Alter Table Mode Python
+DESCRIPTION: Illustrates how to force Alembic to perform a batch table alteration process (`move and copy`) regardless of the database backend. This is achieved by passing the `recreate='always'` parameter to the `op.batch_alter_table` function.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/batch.rst#_snippet_12
+
+LANGUAGE: Python
+CODE:
+```
+with op.batch_alter_table("some_table", recreate='always') as batch_op:
+    batch_op.add_column(Column('foo', Integer))
+```
+
+----------------------------------------
+
+TITLE: Dropping Column and Named Check Constraint Python
+DESCRIPTION: Explains how to drop a column that is referenced by a *named* CHECK constraint within a batch operation. Because Alembic cannot automatically link reflected named CHECK constraints to specific columns, the constraint must be explicitly dropped using `drop_constraint` before the column is dropped.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/batch.rst#_snippet_7
+
+LANGUAGE: python
+CODE:
+```
+with self.op.batch_alter_table("some_table") as batch_op:
+    batch_op.drop_constraint("ck1", type_="check")
+    batch_op.drop_column('q')
+```
+
+----------------------------------------
+
+TITLE: Configuring Multiple Alembic Post Write Hooks (black, zimports)
+DESCRIPTION: Shows how to configure multiple post-write hooks to run sequentially. This example sets up `black` and `zimports` to run using the `console_scripts` runner, with specific options for each, applied to the generated revision file.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/autogenerate.rst#_snippet_31
+
+LANGUAGE: ini
+CODE:
+```
+[post_write_hooks]
+
+# format using "black", then "zimports"
+hooks=black, zimports
+
+black.type = console_scripts
+black.entrypoint = black
+black.options = -l 79 REVISION_SCRIPT_FILENAME
+
+zimports.type = console_scripts
+zimports.entrypoint = zimports
+zimports.options = --style google REVISION_SCRIPT_FILENAME
+```
+
+----------------------------------------
+
+TITLE: Upgrading with Partial ID Alembic Shell
+DESCRIPTION: Runs migrations up to a specific revision identified by a partial prefix (`ae1`). This command demonstrates that Alembic can identify a target revision using just the beginning of its ID, provided the prefix is unique.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/tutorial.rst#_snippet_9
+
+LANGUAGE: Shell
+CODE:
+```
+alembic upgrade ae1
+```
+
+----------------------------------------
+
+TITLE: Overriding Table Reflection Arguments Python
+DESCRIPTION: Shows how to pass arguments to the internal table reflection process using `reflect_args` within `batch_alter_table`, allowing modification of reflected column properties, such as disabling constraint creation for a Boolean column.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/batch.rst#_snippet_2
+
+LANGUAGE: python
+CODE:
+```
+with self.op.batch_alter_table(
+    "bar",
+    reflect_args=[Column('flag', Boolean(create_constraint=False))]
+) as batch_op:
+    batch_op.alter_column(
+        'flag', new_column_name='bflag', existing_type=Boolean)
+```
+
+----------------------------------------
+
+TITLE: Defining Custom Type Helper Module in Python
+DESCRIPTION: An example of a Python module (`myapp/migration_types.py`) designed to consolidate custom type imports. This allows referencing custom types via a single, potentially shorter prefix configured using `user_module_prefix`.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/autogenerate.rst#_snippet_20
+
+LANGUAGE: Python
+CODE:
+```
+# myapp/migration_types.py
+
+from myapp.models.utils.types import MyCustomType
+```
+
+----------------------------------------
+
+TITLE: Dropping Column with Schema Existing Type Python
+DESCRIPTION: Demonstrates dropping a column defined with a schema type (like Boolean or Enum) that might have an associated named CHECK constraint. As of Alembic 1.7, specifying the `existing_type` fully is required when dropping the column to ensure the corresponding named constraint is also removed.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/batch.rst#_snippet_6
+
+LANGUAGE: python
+CODE:
+```
+with self.op.batch_alter_table("some_table") as batch_op:
+    batch_op.drop_column(
+        'q',
+        existing_type=Boolean(create_constraint=True, constraint_name="ck1"))
+```
+
+----------------------------------------
+
+TITLE: Adding Reflection Listeners Python
+DESCRIPTION: Demonstrates how to attach event listeners, like `column_reflect`, to the table reflection process during a batch operation using `reflect_kwargs`. This allows dynamic modification of column information, such as correcting reflected ENUM types.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/batch.rst#_snippet_3
+
+LANGUAGE: python
+CODE:
+```
+def listen_for_reflect(inspector, table, column_info):
+    "correct an ENUM type"
+    if column_info['name'] == 'my_enum':
+        column_info['type'] = Enum('a', 'b', 'c')
+
+with self.op.batch_alter_table(
+    "bar",
+    reflect_kwargs=dict(
+        listeners=[
+            ('column_reflect', listen_for_reflect)
+        ]
+    )
+) as batch_op:
+    batch_op.alter_column(
+        'flag', new_column_name='bflag', existing_type=Boolean)
+```
+
+----------------------------------------
+
+TITLE: Upgrading Relatively Alembic Shell
+DESCRIPTION: Executes migrations two steps forward from the current database revision. This command uses a relative identifier (`+2`) to specify the target revision based on its position relative to the current applied revision.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/tutorial.rst#_snippet_10
+
+LANGUAGE: Shell
+CODE:
+```
+alembic upgrade +2
+```
+
+----------------------------------------
+
+TITLE: Querying Oracle for Foreign Key Name
+DESCRIPTION: A SQL query executed against an Oracle database to retrieve the database-generated name for a foreign key constraint on the 'USER_ORDER' table. Shows the unpredictable alphanumeric name generated by Oracle, contrasting with the pattern seen in PostgreSQL and emphasizing the difficulty of migration management without consistent naming.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/naming.rst#_snippet_3
+
+LANGUAGE: SQL
+CODE:
+```
+SQL> SELECT constraint_name FROM all_constraints WHERE
+  2     table_name='USER_ORDER' AND constraint_type in ('R');
+```
+
+----------------------------------------
+
+TITLE: Filtering Objects with include_object Hook (Python)
+DESCRIPTION: This `include_object` function allows fine-grained filtering of objects during autogeneration. It specifically targets columns (`type_ == "column"`) that are *not* reflected from the database (`not reflected`) and have a custom flag `'skip_autogenerate'` set to `True` in their `.info` dictionary. Such columns from the `target_metadata` will be excluded; all other objects are included.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/autogenerate.rst#_snippet_15
+
+LANGUAGE: Python
+CODE:
+```
+def include_object(object, name, type_, reflected, compare_to):
+    if (type_ == "column" and
+        not reflected and
+        object.info.get("skip_autogenerate", False)):
+        return False
+    else:
+        return True
+```
+
+----------------------------------------
+
+TITLE: Using Naming Convention for Batch Drop ForeignKey Python
+DESCRIPTION: Illustrates how to apply a naming convention via `naming_convention` to reflected constraints within a batch operation. This allows targeting and dropping constraints, particularly unnamed foreign keys on SQLite, using their generated names.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/batch.rst#_snippet_4
+
+LANGUAGE: python
+CODE:
+```
+naming_convention = {
+    "fk":
+    "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",
+}
+with self.op.batch_alter_table(
+        "bar", naming_convention=naming_convention) as batch_op:
+    batch_op.drop_constraint(
+        "fk_bar_foo_id_foo", type_="foreignkey")
+```
+
+----------------------------------------
+
+TITLE: Customizing Revision Directives with process_revision_directives Function - Python
+DESCRIPTION: Shows how to define a function for the `process_revision_directives` parameter in `env.py`. This function receives a list of `MigrationScript` objects (directives) and can modify them in-place or replace the list entirely, allowing customization of the generated revision script's head, downgrade operations, or other properties before it is written to a file.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/api/autogenerate.rst#_snippet_3
+
+LANGUAGE: Python
+CODE:
+```
+def process_revision_directives(context, revision, directives):
+    script = directives[0]
+
+    # set specific branch
+    script.head = "mybranch@head"
+
+    # erase downgrade operations
+    script.downgrade_ops.ops[:] = []
+```
+
+----------------------------------------
+
+TITLE: Generated SQL for SQLite Batch Migration SQL
+DESCRIPTION: Illustrates the sequence of SQL statements generated by Alembic's batch mode when executed on a SQLite backend, showing the creation of a temporary table, data transfer, dropping the original table, and renaming the temporary one.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/batch.rst#_snippet_1
+
+LANGUAGE: sql
+CODE:
+```
+CREATE TABLE _alembic_batch_temp (
+  id INTEGER NOT NULL,
+  foo INTEGER,
+  PRIMARY KEY (id)
+);
+INSERT INTO _alembic_batch_temp (id) SELECT some_table.id FROM some_table;
+DROP TABLE some_table;
+ALTER TABLE _alembic_batch_temp RENAME TO some_table;
+```
+
+----------------------------------------
+
+TITLE: Registering Custom Type Comparison Hook in Python
+DESCRIPTION: Shows how to register the custom `my_compare_type` function by passing it to the `compare_type` parameter in the `context.configure()` call within `env.py`. This hook is used during autogeneration to determine if a column's type has changed.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/autogenerate.rst#_snippet_26
+
+LANGUAGE: Python
+CODE:
+```
+context.configure(
+ # ...
+ compare_type = my_compare_type
+)
+```
+
+----------------------------------------
+
+TITLE: Registering Custom Type Rendering Hook in Python
+DESCRIPTION: Shows how to register the custom `render_item` function by passing it to the `render_item` parameter in the `context.configure()` call within `env.py`. This hook is invoked during autogeneration to customize item representations.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/autogenerate.rst#_snippet_23
+
+LANGUAGE: Python
+CODE:
+```
+context.configure(
+ connection=connection,
+ target_metadata=target_metadata,
+ render_item=render_item,
+ # ...
+)
+```
+
+----------------------------------------
+
+TITLE: Attempting to Create Alembic Revision with Multiple Heads Without Specifying Parent
+DESCRIPTION: This command attempts to generate a new revision file when multiple heads are present in the history. Alembic requires clarification on which head the new revision should branch from, resulting in an error.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/branches.rst#_snippet_25
+
+LANGUAGE: Shell
+CODE:
+```
+$ alembic revision -m "add a shopping cart column"
+FAILED: Multiple heads are present; please specify the head revision on
+which the new revision should be based, or perform a merge.
+```
+
+----------------------------------------
+
+TITLE: Implementing Custom Type Comparison Hook in Python
+DESCRIPTION: Defines a Python function (`my_compare_type`) to be used as a custom hook for comparing database-inspected types with metadata types. The function receives context and type information and should return `True` if they don't match, `False` if they match, or `None` to fall back to default logic.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/autogenerate.rst#_snippet_25
+
+LANGUAGE: Python
+CODE:
+```
+def my_compare_type(context, inspected_column,
+            metadata_column, inspected_type, metadata_type):
+    # return False if the metadata_type is the same as the inspected_type
+    # or None to allow the default implementation to compare these
+    # types. a return value of True means the two types do not
+    # match and should result in a type change operation.
+    return None
+```
+
+----------------------------------------
+
+TITLE: Upgrading to Labeled Branch Heads (Alembic Shell)
+DESCRIPTION: Demonstrates upgrading to the head revision of a specific branch labeled 'shoppingcart'. This targets only the latest revision within that particular branch lineage.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/branches.rst#_snippet_32
+
+LANGUAGE: Shell
+CODE:
+```
+$ alembic upgrade shoppingcart@heads
+```
+
+----------------------------------------
+
+TITLE: Defining a SQLAlchemy Sequence (Python)
+DESCRIPTION: Demonstrates how to define a SQLAlchemy `Sequence` object and add it to the target metadata, which is necessary for Alembic's autogenerate to detect it and generate corresponding migration operations.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/api/autogenerate.rst#_snippet_16
+
+LANGUAGE: python
+CODE:
+```
+from sqlalchemy.schema import Sequence
+
+my_seq_1 = Sequence("my_sequence_1")
+add_sequence_to_model(my_seq_1, target_metadata)
+```
+
+----------------------------------------
+
+TITLE: Disabling Default Type Comparison in Python
+DESCRIPTION: Configures `compare_type` to `False` in `context.configure()`. This disables Alembic's built-in type comparison logic during autogeneration, which is useful if the default logic doesn't suit specific needs or complex custom types.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/autogenerate.rst#_snippet_24
+
+LANGUAGE: Python
+CODE:
+```
+context.configure(
+ # ...
+ compare_type = False
+)
+```
+
+----------------------------------------
+
+TITLE: Rewriting Autogenerate Operations with Rewriter Class - Python
+DESCRIPTION: Provides an example of using the `Rewriter` class to modify specific operation directives during autogeneration. The `@writer.rewrites` decorator registers a function to handle a particular operation type (`ops.AddColumnOp` here). The function can inspect the operation and return it unchanged, modify it, or return a list of operations to replace it, enabling fine-grained control over the generated script.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/api/autogenerate.rst#_snippet_5
+
+LANGUAGE: Python
+CODE:
+```
+from alembic.autogenerate import rewriter
+from alembic.operations import ops
+
+writer = rewriter.Rewriter()
+
+@writer.rewrites(ops.AddColumnOp)
+def add_column(context, revision, op):
+    if op.column.nullable:
+        return op
+    else:
+        op.column.nullable = True
+        return [
+            op,
+            ops.AlterColumnOp(
+                op.table_name,
+                op.column.name,
+                modify_nullable=False,
+                existing_type=op.column.type,
+            )
+        ]
+```
+
+----------------------------------------
+
+TITLE: Showing Current Alembic Revision(s) After Upgrade Heads
+DESCRIPTION: This command displays the currently applied revision(s) in the database. After upgrading to multiple heads, it will show each head as the current revision, indicating multiple entries in the `alembic_version` table.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/branches.rst#_snippet_12
+
+LANGUAGE: Shell
+CODE:
+```
+$ alembic current
+ae1027a6acf (head)
+27c6a30d7c24 (head)
+```
+
+----------------------------------------
+
+TITLE: Configuring Alembic Autogenerate SQLAlchemy Prefix in Python
+DESCRIPTION: This snippet shows how to configure the `sqlalchemy_module_prefix` option within the `context.configure()` call in `env.py`. This setting controls the module prefix used when rendering SQLAlchemy built-in types in autogenerated migration scripts, defaulting to 'sa.'.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/autogenerate.rst#_snippet_18
+
+LANGUAGE: Python
+CODE:
+```
+context.configure(
+ connection=connection,
+ target_metadata=target_metadata,
+ sqlalchemy_module_prefix="sqla.",
+ # ...
+)
+```
+
+----------------------------------------
+
+TITLE: Showing Alembic History After Adding Revision to Branch
+DESCRIPTION: This command displays the migration history after a new revision has been created based on a specific branch head. The new revision appears as the new head of that branch.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/branches.rst#_snippet_27
+
+LANGUAGE: Shell
+CODE:
+```
+$ alembic history
+1975ea83b712 -> ae1027a6acf (head), add a column
+27c6a30d7c24 -> d747a8a8879 (shoppingcart) (head), add a shopping cart column
+1975ea83b712 -> 27c6a30d7c24 (shoppingcart), add shopping cart table
+<base> -> 1975ea83b712 (branchpoint), create account table
+```
+
+----------------------------------------
+
+TITLE: Adding Conditional Logic to Alembic Template (Mako)
+DESCRIPTION: This Mako template snippet for script.py.mako modifies the standard revision file structure to include separate schema_upgrades/downgrades and data_upgrades/downgrades functions. The 'data' functions are called conditionally based on the presence of a 'data' argument passed via the Alembic -x flag, allowing users to optionally include data migration steps.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/cookbook.rst#_snippet_1
+
+LANGUAGE: Mako
+CODE:
+```
+"""${message}
+
+Revision ID: ${up_revision}
+Revises: ${down_revision}
+Create Date: ${create_date}
+
+"""
+
+# revision identifiers, used by Alembic.
+revision = ${repr(up_revision)}
+down_revision = ${repr(down_revision)}
+
+from alembic import op
+import sqlalchemy as sa
+${imports if imports else ""}
+
+from alembic import context
+
+
+def upgrade():
+    schema_upgrades()
+    if context.get_x_argument(as_dictionary=True).get('data', None):
+        data_upgrades()
+
+def downgrade():
+    if context.get_x_argument(as_dictionary=True).get('data', None):
+        data_downgrades()
+    schema_downgrades()
+
+def schema_upgrades():
+    """schema upgrade migrations go here."""
+    ${upgrades if upgrades else "pass"}
+
+def schema_downgrades():
+    """schema downgrade migrations go here."""
+    ${downgrades if downgrades else "pass"}
+
+def data_upgrades():
+    """Add any optional data upgrade migrations here!"""
+    pass
+
+def data_downgrades():
+    """Add any optional data downgrade migrations here!"""
+    pass
+```
+
+----------------------------------------
+
+TITLE: Dropping Constraint Bypassing Naming Convention (Python)
+DESCRIPTION: This Python snippet shows how to drop a constraint using its literal name, bypassing any configured naming conventions. It uses `op.f()` to wrap the constraint name, ensuring the string is passed directly to the underlying SQL without modification by the convention.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/naming.rst#_snippet_15
+
+LANGUAGE: Python
+CODE:
+```
+op.drop_constraint(op.f("some_check_const"), "t1", type_="check")
+```
+
+----------------------------------------
+
+TITLE: Creating Alembic Revision on Head of Branch Containing Specific Revision
+DESCRIPTION: This command generates a new revision based on the head of the branch that contains a specific revision ID, using the `--head revision@head` syntax. This allows branching off an unlabeled branch via one of its revisions.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/branches.rst#_snippet_31
+
+LANGUAGE: Shell
+CODE:
+```
+$ alembic revision -m "add another account column" --head ae10@head
+Generating /path/to/foo/versions/55af2cb1c267_add_another_account_column.py ... done
+```
+
+----------------------------------------
+
+TITLE: Viewing Current Database Revision(s) with Multiple Heads - Shell
+DESCRIPTION: After upgrading a database along the branches but before applying the merge revision, the `alembic current --verbose` command will show multiple current revisions stored in the `alembic_version` table, representing the points where the migration paths diverged in the database.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/branches.rst#_snippet_9
+
+LANGUAGE: Shell
+CODE:
+```
+$ alembic current --verbose
+Current revision(s) for postgresql://scott:XXXXX@localhost/test:
+Rev: ae1027a6acf
+Parent: 1975ea83b712
+Path: foo/versions/ae1027a6acf_add_a_column.py
+
+    add a column
+
+    Revision ID: ae1027a6acf
+    Revises: 1975ea83b712
+    Create Date: 2014-11-20 13:02:54.849677
+
+Rev: 27c6a30d7c24
+Parent: 1975ea83b712
+Path: foo/versions/27c6a30d7c24_add_shopping_cart_table.py
+
+    add shopping cart table
+
+    Revision ID: 27c6a30d7c24
+    Revises: 1975ea83b712
+    Create Date: 2014-11-20 13:03:11.436407
+```
+
+----------------------------------------
+
+TITLE: Defining Replaceable Database Object Structure - Python
+DESCRIPTION: Defines a simple Python class `ReplaceableObject` to represent database objects like views or stored procedures that are defined by a name and associated SQL text. This class serves as a basic structure to hold the necessary information for custom operations.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/cookbook.rst#_snippet_6
+
+LANGUAGE: Python
+CODE:
+```
+class ReplaceableObject:
+    def __init__(self, name, sqltext):
+        self.name = name
+        self.sqltext = sqltext
+```
+
+----------------------------------------
+
+TITLE: Example Autogenerated Migration Script with Custom Type
+DESCRIPTION: An example of a generated Alembic migration script demonstrating the effect of custom type rendering and import handling. It shows the necessary import added and the custom type referenced using the specified prefix.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/autogenerate.rst#_snippet_27
+
+LANGUAGE: Python
+CODE:
+```
+from alembic import op
+import sqlalchemy as sa
+from mymodel import types
+
+def upgrade():
+    op.add_column('sometable', Column('mycolumn', types.MySpecialType()))
+```
+
+----------------------------------------
+
+TITLE: Viewing Alembic History (Upgrade Path) (Shell)
+DESCRIPTION: Displays the Alembic migration history for a specific branch head (`networking@head`). This command shows the sequence of revisions that would be applied during an upgrade operation to reach the specified head, including any dependencies.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/branches.rst#_snippet_48
+
+LANGUAGE: shell
+CODE:
+```
+alembic history -r :networking@head
+```
+
+----------------------------------------
+
+TITLE: Adding Branch Label Support to Mako Template (Python/Mako)
+DESCRIPTION: Provides the code snippet to add to the `script.py.mako` template file (used for generating new revision files) to ensure it includes the `branch_labels` variable. This is necessary for Alembic to correctly handle branch labels during revision generation.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/branches.rst#_snippet_37
+
+LANGUAGE: Python/Mako
+CODE:
+```
+# revision identifiers, used by Alembic.
+revision = ${repr(up_revision)}
+down_revision = ${repr(down_revision)}
+
+# add this here in order to use revision with branch_label
+branch_labels = ${repr(branch_labels)}
+```
+
+----------------------------------------
+
+TITLE: Upgrading Relatively on a Labeled Branch (Alembic Shell)
+DESCRIPTION: Shows how to upgrade from the current head of the 'shoppingcart' branch upwards two revisions. This uses relative addressing combined with a branch label.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/branches.rst#_snippet_33
+
+LANGUAGE: Shell
+CODE:
+```
+$ alembic upgrade shoppingcart@+2
+```
+
+----------------------------------------
+
+TITLE: Showing Alembic History From Base to Branch Head Using @head Syntax
+DESCRIPTION: This command displays the migration history starting from the base revision and ending at the head of the branch identified by the label, using the `-r :branchname@head` syntax.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/branches.rst#_snippet_29
+
+LANGUAGE: Shell
+CODE:
+```
+$ alembic history -r :shoppingcart@head
+27c6a30d7c24 -> d747a8a8879 (shoppingcart) (head), add a shopping cart column
+1975ea83b712 -> 27c6a30d7c24 (shoppingcart), add shopping cart table
+<base> -> 1975ea83b712 (branchpoint), create account table
+```
+
+----------------------------------------
+
+TITLE: SQL Output for Dropping Constraint (Literal Name) (SQL)
+DESCRIPTION: This SQL snippet shows the command generated by Alembic's `op.drop_constraint` when using `op.f()` to specify the constraint name. It executes the actual drop operation using the exact name provided, bypassing the naming convention.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/naming.rst#_snippet_16
+
+LANGUAGE: SQL
+CODE:
+```
+ALTER TABLE t1 DROP CONSTRAINT some_check_const
+```
+
+----------------------------------------
+
+TITLE: Viewing History from a Specific Base (Alembic Shell)
+DESCRIPTION: Illustrates how to view the migration history starting from the base revision of a specific branch ('networking'). The '-r networking@base:' range specifies the history path.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/branches.rst#_snippet_41
+
+LANGUAGE: Shell
+CODE:
+```
+$ alembic history -r networking@base:
+```
+
+----------------------------------------
+
+TITLE: Configuring Multiple Databases Online in env.py (Python)
+DESCRIPTION: Presents the corresponding `run_migrations_online` function for a multi-database setup. It iterates through databases, establishes a live connection for each, configures the context with the connection, and runs migrations against that database. This function is executed when Alembic is run in online mode (without `--sql`). Requires Alembic, Python, live database connections, and a multi-database application setup.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/offline.rst#_snippet_5
+
+LANGUAGE: Python
+CODE:
+```
+def run_migrations_online():
+    """Run migrations *with* a SQL connection."""
+
+    for name, engine in [
+        ("db1", db_1),
+        ("db2", db_2),
+    ]:
+        connection = engine.connect()
+        context.configure(connection=connection)
+        try:
+            context.run_migrations(name=name)
+            session.commit()
+        except:
+            session.rollback()
+            raise
+```
+
+----------------------------------------
+
+TITLE: Showing Alembic History From Branch Base to All Heads Using @base Syntax
+DESCRIPTION: This command displays the migration history starting from the base revision of the branch identified by the label and including all subsequent revisions up to *all* current heads, using the `-r branchname@base:` syntax.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/branches.rst#_snippet_30
+
+LANGUAGE: Shell
+CODE:
+```
+$ alembic history -r shoppingcart@base:
+1975ea83b712 -> ae1027a6acf (head), add a column
+27c6a30d7c24 -> d747a8a8879 (shoppingcart) (head), add a shopping cart column
+1975ea83b712 -> 27c6a30d7c24 (shoppingcart), add shopping cart table
+<base> -> 1975ea83b712 (branchpoint), create account table
+```
+
+----------------------------------------
+
+TITLE: Viewing History Relatively on a Labeled Branch (Alembic Shell)
+DESCRIPTION: Illustrates how to view the history log from the current revision up to two revisions above the head of the 'shoppingcart' branch using relative identifiers.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/branches.rst#_snippet_34
+
+LANGUAGE: Shell
+CODE:
+```
+$ alembic history -r current:shoppingcart@+2
+```
+
+----------------------------------------
+
+TITLE: Creating Customer View DDL PostgreSQL
+DESCRIPTION: This SQL snippet defines a database view named 'customer_view'. The view selects the 'name' and 'order_count' columns from the 'customer' table, filtering for rows where 'order_count' is greater than 0. This DDL is executed by Alembic.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/cookbook.rst#_snippet_13
+
+LANGUAGE: SQL
+CODE:
+```
+CREATE VIEW customer_view AS SELECT name, order_count FROM customer WHERE order_count > 0
+```
+
+----------------------------------------
+
+TITLE: Implement Custom Alembic Operations Logic - Python
+DESCRIPTION: This snippet provides the execution logic for the custom `CreateSequenceOp` and `DropSequenceOp` classes. The `@Operations.implementation_for` decorator links these functions to their respective operation classes. The functions use `operations.execute()` to run raw SQL commands to create or drop the sequence, handling schema qualification.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/api/operations.rst#_snippet_1
+
+LANGUAGE: python
+CODE:
+```
+@Operations.implementation_for(CreateSequenceOp)
+def create_sequence(operations, operation):
+    if operation.schema is not None:
+        name = "%s.%s" % (operation.schema, operation.sequence_name)
+    else:
+        name = operation.sequence_name
+    operations.execute("CREATE SEQUENCE %s" % name)
+
+
+@Operations.implementation_for(DropSequenceOp)
+def drop_sequence(operations, operation):
+    if operation.schema is not None:
+        name = "%s.%s" % (operation.schema, operation.sequence_name)
+    else:
+        name = operation.sequence_name
+    operations.execute("DROP SEQUENCE %s" % name)
+```
+
+----------------------------------------
+
+TITLE: Showing Current Applied Revisions After New Branch (Shell)
+DESCRIPTION: Checks the database's `alembic_version` table after upgrading. This shows that the new revision branched off the former effective head (`34e094ad6ef1`) is now a 'real' head and is recorded in the database alongside others.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/branches.rst#_snippet_55
+
+LANGUAGE: shell
+CODE:
+```
+alembic current
+```
+
+----------------------------------------
+
+TITLE: Querying Postgres for Foreign Key Name
+DESCRIPTION: A SQL query executed against a PostgreSQL database to retrieve the database-generated name for a foreign key constraint on the 'user_order' table. Illustrates the method (querying catalog tables) needed to discover these names when they aren't explicitly provided during table creation.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/naming.rst#_snippet_1
+
+LANGUAGE: SQL
+CODE:
+```
+test=> SELECT r.conname FROM
+test->  pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+test->  JOIN pg_catalog.pg_constraint r  ON c.oid = r.conrelid
+test->  WHERE c.relname='user_order' AND r.contype = 'f'
+test-> ;
+```
+
+----------------------------------------
+
+TITLE: Altering Table Add Column DDL PostgreSQL
+DESCRIPTION: This SQL snippet, observed in the Alembic logs, shows the DDL executed to add the 'email' column to the 'customer' table. This corresponds to the action performed by the `upgrade()` function of the 'add email col' migration script.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/cookbook.rst#_snippet_20
+
+LANGUAGE: SQL
+CODE:
+```
+ALTER TABLE customer ADD COLUMN email VARCHAR
+```
+
+----------------------------------------
+
+TITLE: Generated Alembic Upgrade Script for Sequence (Python)
+DESCRIPTION: Shows the automatically generated Python code in the `upgrade` function of an Alembic migration script when a new sequence is detected, using the custom renderer for `CreateSequenceOp`.
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/api/autogenerate.rst#_snippet_17
+
+LANGUAGE: python
+CODE:
+```
+def upgrade():
+    ### commands auto generated by Alembic - please adjust! ###
+    op.create_sequence('my_sequence_1', **{'schema': None})
+    ### end Alembic commands ###
+```
+
+----------------------------------------
+
+TITLE: Configuring Multiple Databases Offline in env.py (Python)
+DESCRIPTION: Shows how to customize `run_migrations_offline` in `env.py` to handle multiple databases, configuring the context for each database (`db1`, `db2`). For each database, it redirects the generated SQL output to a separate file using the `output_buffer` parameter of `context.configure`. This enables generating distinct migration scripts for different databases in a single Alembic environment. Requires Alembic, Python, and a setup defining multiple database engines (like `myapp.db_1`, `myapp.db_2`).
+SOURCE: https://github.com/sqlalchemy/alembic/blob/main/docs/build/offline.rst#_snippet_4
+
+LANGUAGE: Python
+CODE:
+```
+from alembic import context
+import myapp
+import sys
+
+db_1 = myapp.db_1
+db_2 = myapp.db_2
+
+def run_migrations_offline():
+    """Run migrations *without* a SQL connection."""
+
+    for name, engine, file_ in [
+        ("db1", db_1, "db1.sql"),
+        ("db2", db_2, "db2.sql"),
+    ]:
+        context.configure(
+                    url=engine.url,
+                    transactional_ddl=False,
+                    output_buffer=open(file_, 'w'))
+        context.execute("-- running migrations for '%s'" % name)
+        context.run_migrations(name=name)
+        sys.stderr.write("Wrote file '%s'" % file_)
+```

@@ -1,0 +1,1009 @@
+TITLE: Rails Controllers with JWTSessions (Ruby)
+DESCRIPTION: Example Rails controller classes demonstrating user login, token refresh, and protected resource access using JWTSessions, including handling access and refresh tokens.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/README.md#_snippet_46
+
+LANGUAGE: Ruby
+CODE:
+```
+class LoginController < ApplicationController
+  def create
+    user = User.find_by(email: params[:email])
+    if user&.authenticate(params[:password])
+
+      payload = { user_id: user.id, role: user.role, permissions: user.permissions }
+      refresh_payload = { user_id: user.id }
+      session = JWTSessions::Session.new(payload: payload, refresh_payload: refresh_payload)
+      tokens = session.login
+      response.set_cookie(JWTSessions.refresh_cookie,
+                          value: tokens[:refresh],
+                          httponly: true,
+                          secure: Rails.env.production?)
+
+      render json: { access: tokens[:access], csrf: tokens[:csrf] }
+    else
+      render json: "Cannot login", status: :unauthorized
+    end
+  end
+end
+
+class RefreshController < ApplicationController
+  before_action :authorize_refresh_request!
+
+  def create
+    tokens = JWTSessions::Session.new(payload: access_payload).refresh(found_token)
+    render json: { access: tokens[:access], csrf: tokens[:csrf] }
+  end
+
+  def access_payload
+    user = User.find_by!(email: payload["user_id"])
+    { user_id: user.id, role: user.role, permissions: user.permissions }
+  end
+end
+
+class ResourcesController < ApplicationController
+  before_action :authorize_access_request!
+  before_action :validate_role_and_permissions_from_payload
+
+  # ...
+end
+```
+
+----------------------------------------
+
+TITLE: Generating JWTSessions Tokens via Login (Ruby)
+DESCRIPTION: Calls the `login` method on the initialized session object. This method generates and returns a hash containing the CSRF token, access token, refresh token, and their respective expiration times.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/README.md#_snippet_6
+
+LANGUAGE: Ruby
+CODE:
+```
+session.login
+=> {:csrf=>"BmhxDRW5NAEIx...",
+    :access=>"eyJhbGciOiJIUzI1NiJ9...",
+    :access_expires_at=>"..."
+    :refresh=>"eyJhbGciOiJIUzI1NiJ9...",
+    :refresh_expires_at=>"..."}
+```
+
+----------------------------------------
+
+TITLE: Implement JWTSessions Login Controller
+DESCRIPTION: Creates a controller action to handle user login, authenticate credentials, and generate a set of JWT tokens (access, refresh, CSRF) using JWTSessions::Session, returning them as a JSON response.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/README.md#_snippet_11
+
+LANGUAGE: Ruby
+CODE:
+```
+class LoginController < ApplicationController
+  def create
+    user = User.find_by!(email: params[:email])
+    if user.authenticate(params[:password])
+      payload = { user_id: user.id }
+      session = JWTSessions::Session.new(payload: payload)
+      render json: session.login
+    else
+      render json: "Invalid user", status: :unauthorized
+    end
+  end
+end
+```
+
+----------------------------------------
+
+TITLE: Implementing Login with JWTSessions and Access Token Refresh (Rails)
+DESCRIPTION: Example Rails controller action for user login using JWTSessions. It creates a session with `refresh_by_access_allowed: true`, obtains tokens, sets the access token in an HTTP-only cookie, and returns the CSRF token.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/README.md#_snippet_32
+
+LANGUAGE: Ruby
+CODE:
+```
+class LoginController < ApplicationController
+  def create
+    user = User.find_by!(email: params[:email])
+    if user.authenticate(params[:password])
+
+      payload = { user_id: user.id }
+      session = JWTSessions::Session.new(payload: payload, refresh_by_access_allowed: true)
+      tokens = session.login
+      response.set_cookie(JWTSessions.access_cookie,
+                          value: tokens[:access],
+                          httponly: true,
+                          secure: Rails.env.production?)
+
+      render json: { csrf: tokens[:csrf] }
+    else
+      render json: "Invalid email or password", status: :unauthorized
+    end
+  end
+end
+```
+
+----------------------------------------
+
+TITLE: Integrate JWTSessions Authorization in Rails Controller
+DESCRIPTION: Includes the JWTSessions::RailsAuthorization module in a Rails API controller and sets up exception handling for unauthorized access, rendering a JSON error response.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/README.md#_snippet_8
+
+LANGUAGE: Ruby
+CODE:
+```
+class ApplicationController < ActionController::API
+  include JWTSessions::RailsAuthorization
+  rescue_from JWTSessions::Errors::Unauthorized, with: :not_authorized
+
+  private
+
+  def not_authorized
+    render json: { error: "Not authorized" }, status: :unauthorized
+  end
+end
+```
+
+----------------------------------------
+
+TITLE: Sinatra Example App with JWTSessions Integration
+DESCRIPTION: Provides a complete example of a Sinatra application integrating JWTSessions. It demonstrates setting header names, implementing the required request methods (`request_headers`, `request_cookies`, `request_method`), and handling login, refresh, and authorized payload retrieval endpoints.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/README.md#_snippet_19
+
+LANGUAGE: ruby
+CODE:
+```
+require "sinatra/base"
+
+JWTSessions.access_header = "authorization"
+JWTSessions.refresh_header = "x_refresh_token"
+JWTSessions.csrf_header = "x_csrf_token"
+JWTSessions.signing_key = "secret key"
+
+class SimpleApp < Sinatra::Base
+  include JWTSessions::Authorization
+
+  def request_headers
+    env.inject({}) { |acc, (k,v)| acc[$1.downcase] = v if k =~ /^http_(.*)/i; acc }
+  end
+
+  def request_cookies
+    request.cookies
+  end
+
+  def request_method
+    request.request_method
+  end
+
+  before do
+    content_type "application/json"
+  end
+
+  post "/login" do
+    access_payload = { key: "access value" }
+    refresh_payload = { key: "refresh value" }
+    session = JWTSessions::Session.new(payload: access_payload, refresh_payload: refresh_payload)
+    session.login.to_json
+  end
+
+  # POST /refresh
+  # x_refresh_token: ...
+  post "/refresh" do
+    authorize_refresh_request!
+    access_payload = { key: "reloaded access value" }
+    session = JWTSessions::Session.new(payload: access_payload, refresh_payload: payload)
+    session.refresh(found_token).to_json
+  end
+
+  # GET /payload
+  # authorization: Bearer ...
+  get "/payload" do
+    authorize_access_request!
+    payload.to_json
+  end
+
+  # ...
+end
+```
+
+----------------------------------------
+
+TITLE: Secure Rails Controller with JWTSessions Access Token
+DESCRIPTION: Demonstrates protecting controller actions that require authentication by using the authorize_access_request! before_action to ensure a valid access token is present in the request.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/README.md#_snippet_13
+
+LANGUAGE: Ruby
+CODE:
+```
+class UsersController < ApplicationController
+  before_action :authorize_access_request!
+
+  def index
+    ...
+  end
+
+  def show
+    ...
+end
+```
+
+----------------------------------------
+
+TITLE: Implementing Refresh Endpoint with Access Token (Rails)
+DESCRIPTION: Example Rails controller action for refreshing a session using an access token. It uses `authorize_refresh_by_access_request!` for protection, retrieves the payload using `claimless_payload`, performs the refresh, sets the new access token cookie, and returns the new CSRF token.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/README.md#_snippet_35
+
+LANGUAGE: Ruby
+CODE:
+```
+class RefreshController < ApplicationController
+  before_action :authorize_refresh_by_access_request!
+
+  def create
+    session = JWTSessions::Session.new(payload: claimless_payload, refresh_by_access_allowed: true)
+    tokens  = session.refresh_by_access_payload
+    response.set_cookie(JWTSessions.access_cookie,
+                        value: tokens[:access],
+                        httponly: true,
+                        secure: Rails.env.production?)
+
+    render json: { csrf: tokens[:csrf] }
+  end
+end
+```
+
+----------------------------------------
+
+TITLE: Implement JWTSessions Refresh Controller
+DESCRIPTION: Creates a controller action to handle token refreshing, using the authorize_refresh_request! before_action to validate the refresh token and issuing a new access token.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/README.md#_snippet_12
+
+LANGUAGE: Ruby
+CODE:
+```
+class RefreshController < ApplicationController
+  before_action :authorize_refresh_request!
+
+  def create
+    session = JWTSessions::Session.new(payload: access_payload)
+    render json: session.refresh(found_token)
+  end
+
+  def access_payload
+    # payload here stands for refresh token payload
+    build_access_payload_based_on_refresh(payload)
+  end
+end
+```
+
+----------------------------------------
+
+TITLE: Refreshing JWTSessions Tokens (Ruby)
+DESCRIPTION: Calls the `refresh` method on the session object, passing the current refresh token. This process validates the refresh token and generates a new set of tokens (CSRF, access, and access expiration).
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/README.md#_snippet_7
+
+LANGUAGE: Ruby
+CODE:
+```
+session.refresh(refresh_token)
+=> {:csrf=>"+pk2SQrXHRo1iV1x4O...",
+    :access=>"eyJhbGciOiJIUzI1...",
+    :access_expires_at=>"..."}
+```
+
+----------------------------------------
+
+TITLE: Access Payload from JWTSessions Token
+DESCRIPTION: Shows how to retrieve the decoded payload data from the authenticated token within a controller method, typically used to fetch associated resource information like the current user.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/README.md#_snippet_14
+
+LANGUAGE: Ruby
+CODE:
+```
+def current_user
+  @current_user ||= User.find(payload["user_id"])
+end
+```
+
+----------------------------------------
+
+TITLE: Configure JWTSessions Signing Key (HMAC)
+DESCRIPTION: Configures JWTSessions to use the HS256 algorithm and sets a shared signing key, typically retrieved from Rails credentials for security.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/README.md#_snippet_9
+
+LANGUAGE: Ruby
+CODE:
+```
+JWTSessions.algorithm = "HS256"
+JWTSessions.signing_key = Rails.application.credentials.secret_jwt_signing_key
+```
+
+----------------------------------------
+
+TITLE: Configure JWT Signing Key (Ruby)
+DESCRIPTION: Sets the global signing key for `JWTSessions`. This key is used to sign and verify the JWT tokens, ensuring their integrity. Replace 'secret' with a strong, unique key.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/README.md#_snippet_2
+
+LANGUAGE: Ruby
+CODE:
+```
+JWTSessions.signing_key = "secret"
+```
+
+----------------------------------------
+
+TITLE: Setting JWT Signing Key (HMAC) in Ruby
+DESCRIPTION: Specify the secret key to be used for HMAC algorithms like HS256. This is required when using symmetric signing algorithms.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/README.md#_snippet_25
+
+LANGUAGE: Ruby
+CODE:
+```
+JWTSessions.signing_key = "secret"
+```
+
+----------------------------------------
+
+TITLE: Configure JWTSessions Redis Token Store with Options in Ruby
+DESCRIPTION: Configures JWTSessions to use Redis as the token store, providing detailed options for host, port, database name, token prefix, and connection pool size. Requires the `redis-client` gem.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/README.md#_snippet_20
+
+LANGUAGE: ruby
+CODE:
+```
+JWTSessions.token_store = :redis, {
+  redis_host: "127.0.0.1",
+  redis_port: "6379",
+  redis_db_name: "0",
+  token_prefix: "jwt_",
+  pool_size: Integer(ENV.fetch("RAILS_MAX_THREADS", 5))
+}
+```
+
+----------------------------------------
+
+TITLE: Setting Global Token Expiration Times in Ruby
+DESCRIPTION: Define the global expiration times in seconds for access and refresh tokens. Access tokens typically have a short lifespan, while refresh tokens are longer.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/README.md#_snippet_30
+
+LANGUAGE: Ruby
+CODE:
+```
+JWTSessions.access_exp_time = 3600 # 1 hour in seconds
+JWTSessions.refresh_exp_time = 604800 # 1 week in seconds
+```
+
+----------------------------------------
+
+TITLE: Initializing JWTSessions Session with Payload (Ruby)
+DESCRIPTION: Creates a new instance of the JWTSessions::Session class, passing the previously defined payload. By default, this payload will be included in both the access and refresh tokens.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/README.md#_snippet_4
+
+LANGUAGE: Ruby
+CODE:
+```
+session = JWTSessions::Session.new(payload: payload)
+=> #<JWTSessions::Session:0x00007fbe2cce9ea0...>
+```
+
+----------------------------------------
+
+TITLE: Creating Basic Session Payload (Ruby)
+DESCRIPTION: Defines a simple Ruby hash to be used as the session payload. This hash typically contains data necessary to identify the user or session, such as a user ID.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/README.md#_snippet_3
+
+LANGUAGE: Ruby
+CODE:
+```
+payload = { user_id: user.id }
+=> {:user_id=>1}
+```
+
+----------------------------------------
+
+TITLE: Detecting Refresh Token Hijack Attempts
+DESCRIPTION: Demonstrates how to use the optional block argument with `JWTSessions::Session#refresh` to execute custom logic when a refresh is attempted before the access token has expired, helping to detect potential refresh token hijacking. The block receives the refresh token UID and access token expiration time.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/README.md#_snippet_37
+
+LANGUAGE: Ruby
+CODE:
+```
+session = JwtSessions::Session.new(payload: payload)
+session.refresh(refresh_token) { |refresh_token_uid, access_token_expiration| ... }
+```
+
+----------------------------------------
+
+TITLE: Setting JWT Asymmetric Keys in Ruby
+DESCRIPTION: Specify the private and public keys required when using asymmetric algorithms such as RSA, ECDSA, or EDDSA for signing and verification.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/README.md#_snippet_26
+
+LANGUAGE: Ruby
+CODE:
+```
+JWTSessions.private_key = "abcd"
+JWTSessions.public_key  = "efjh"
+```
+
+----------------------------------------
+
+TITLE: Handling Early Access Token Refresh Attempts
+DESCRIPTION: Shows how to provide a block to `JWTSessions::Session#refresh_by_access_payload` to detect and handle attempts to refresh the session before the access token has expired, which could indicate malicious activity.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/README.md#_snippet_34
+
+LANGUAGE: Ruby
+CODE:
+```
+tokens = session.refresh_by_access_payload do
+  # here goes malicious activity alert
+  raise JWTSessions::Errors::Unauthorized, "Refresh action is performed before the expiration of the access token."
+end
+```
+
+----------------------------------------
+
+TITLE: Refreshing Session Using Access Token (Basic)
+DESCRIPTION: Demonstrates the basic usage of `JWTSessions::Session#refresh_by_access_payload` to refresh a session using an access token, assuming the session was created with `refresh_by_access_allowed: true`.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/README.md#_snippet_33
+
+LANGUAGE: Ruby
+CODE:
+```
+session = JWTSessions::Session.new(payload: payload, refresh_by_access_allowed: true)
+tokens  = session.refresh_by_access_payload
+```
+
+----------------------------------------
+
+TITLE: Configure JWTSessions Redis Token Store with Advanced Options in Ruby
+DESCRIPTION: Configures JWTSessions Redis token store with advanced options such as read timeout, reconnect attempts, and SSL parameters. Useful for fine-tuning the Redis connection behavior.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/README.md#_snippet_22
+
+LANGUAGE: ruby
+CODE:
+```
+JWTSessions.token_store = :redis, {
+  read_timeout: 1.5,
+  reconnect_attempts: 10,
+  ssl_params: { verify_mode: OpenSSL::SSL::VERIFY_NONE }
+}
+```
+
+----------------------------------------
+
+TITLE: Flushing Session by Refresh Token
+DESCRIPTION: Shows how to use `JWTSessions::Session#flush_by_token` to invalidate and remove a session from storage using its refresh token. The method returns the number of sessions flushed.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/README.md#_snippet_38
+
+LANGUAGE: Ruby
+CODE:
+```
+session = JWTSessions::Session.new
+tokens = session.login
+session.flush_by_token(tokens[:refresh]) # => 1
+```
+
+----------------------------------------
+
+TITLE: Initializing JWTSessions Session with Separate Payloads (Ruby)
+DESCRIPTION: Creates a new session instance, providing distinct payloads for the access token (`payload`) and the refresh token (`refresh_payload`). This allows for different data sets in each token type.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/README.md#_snippet_5
+
+LANGUAGE: Ruby
+CODE:
+```
+session = JWTSessions::Session.new(payload: payload, refresh_payload: refresh_payload)
+```
+
+----------------------------------------
+
+TITLE: Implement request_cookies Method in Ruby
+DESCRIPTION: Defines the required `request_cookies` method within an authorization class for JWTSessions non-Rails integration. This method must return a hash-like object containing the request cookies.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/README.md#_snippet_17
+
+LANGUAGE: ruby
+CODE:
+```
+def request_cookies
+  # must return hash-like object with request cookies
+end
+```
+
+----------------------------------------
+
+TITLE: Implement request_method Method in Ruby
+DESCRIPTION: Defines the required `request_method` method within an authorization class for JWTSessions non-Rails integration. This method must return the current HTTP request verb as an uppercase string (e.g., 'GET', 'POST').
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/README.md#_snippet_18
+
+LANGUAGE: ruby
+CODE:
+```
+def request_method
+  # must return current request verb as a string in upcase, f.e. 'GET', 'HEAD', 'POST', 'PATCH', etc
+end
+```
+
+----------------------------------------
+
+TITLE: Implement request_headers Method in Ruby
+DESCRIPTION: Defines the required `request_headers` method within an authorization class for JWTSessions non-Rails integration. This method must return a hash-like object containing the request headers.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/README.md#_snippet_16
+
+LANGUAGE: ruby
+CODE:
+```
+def request_headers
+  # must return hash-like object with request headers
+end
+```
+
+----------------------------------------
+
+TITLE: Generating Masked CSRF Token in Ruby
+DESCRIPTION: Generate a new masked CSRF token using an existing access token. This is useful when using cookies for token transport and needing CSRF protection.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/README.md#_snippet_31
+
+LANGUAGE: Ruby
+CODE:
+```
+session = JWTSessions::Session.new
+session.masked_csrf(access_token)
+```
+
+----------------------------------------
+
+TITLE: JWTSessions Authorization by Token Transport
+DESCRIPTION: Lists alternative before_action methods provided by JWTSessions to enforce token authorization specifically based on whether the token is expected in headers or cookies.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/README.md#_snippet_15
+
+LANGUAGE: Ruby
+CODE:
+```
+authorize_by_access_cookie!
+authorize_by_access_header!
+authorize_by_refresh_cookie!
+authorize_by_refresh_header!
+```
+
+----------------------------------------
+
+TITLE: Authorizing Access Token Refresh by Transport Method
+DESCRIPTION: Lists alternative `before_action` methods provided by `jwt_sessions` to authorize access token refresh requests specifically based on the token transport mechanism (cookie or header) instead of the generic `authorize_refresh_by_access_request!`.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/README.md#_snippet_36
+
+LANGUAGE: Ruby
+CODE:
+```
+authorize_refresh_by_access_cookie!
+authorize_refresh_by_access_header!
+```
+
+----------------------------------------
+
+TITLE: Defining Controller Token Claims in Ruby
+DESCRIPTION: Define a `token_claims` method in your controller to provide specific claims (like aud) or override global verification options and leeways for tokens generated within that controller context.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/README.md#_snippet_28
+
+LANGUAGE: Ruby
+CODE:
+```
+class UsersController < ApplicationController
+  before_action :authorize_access_request!
+
+  def token_claims
+    {
+      aud: ["admin", "staff"],
+      verify_aud: true, # can be used locally instead of a global setting
+      exp_leeway: 15 # will be used instead of default leeway only for exp claim
+    }
+  end
+end
+```
+
+----------------------------------------
+
+TITLE: Flush All JWTSessions (Ruby)
+DESCRIPTION: Calls a class method on JWTSessions::Session to force flush and remove all sessions stored by the application, regardless of namespace.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/README.md#_snippet_45
+
+LANGUAGE: Ruby
+CODE:
+```
+JWTSessions::Session.flush_all
+```
+
+----------------------------------------
+
+TITLE: Flushing Session by Refresh Token UID
+DESCRIPTION: Shows how to use `JWTSessions::Session#flush_by_uid` to invalidate and remove a session from storage using the unique identifier (UID) of the refresh token. The method returns the number of sessions flushed.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/README.md#_snippet_40
+
+LANGUAGE: Ruby
+CODE:
+```
+session.flush_by_uid(uid) # => 1
+```
+
+----------------------------------------
+
+TITLE: Flush Access Tokens by Namespace (Ruby)
+DESCRIPTION: Initializes a session with a namespace and flushes only the access tokens associated with that namespace, leaving refresh tokens intact.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/README.md#_snippet_44
+
+LANGUAGE: Ruby
+CODE:
+```
+session = JWTSessions::Session.new(namespace: "ie-sessions")
+session.flush_namespaced_access_tokens
+```
+
+----------------------------------------
+
+TITLE: Initialize JWTSessions with Namespace (Ruby)
+DESCRIPTION: Creates a new JWTSessions session instance associated with a specific namespace, allowing for logical grouping of sessions.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/README.md#_snippet_41
+
+LANGUAGE: Ruby
+CODE:
+```
+session = JWTSessions::Session.new(namespace: "account-1")
+```
+
+----------------------------------------
+
+TITLE: Flushing Session by Access Token Payload
+DESCRIPTION: Demonstrates how to use `JWTSessions::Session#flush_by_access_payload` to invalidate a session based on the information contained within the access token payload. This requires the session to have been created with `refresh_by_access_allowed: true`.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/README.md#_snippet_39
+
+LANGUAGE: Ruby
+CODE:
+```
+session = JWTSessions::Session.new(refresh_by_access_allowed: true)
+tokens = session.login
+session.flush_by_access_payload
+# or
+session = JWTSessions::Session.new(refresh_by_access_allowed: true, payload: payload)
+session.flush_by_access_payload
+```
+
+----------------------------------------
+
+TITLE: Flush Specific Session by Access Payload within Namespace (Ruby)
+DESCRIPTION: Initializes a session with a namespace and payload, then flushes the specific session identified by its access token payload within that namespace.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/README.md#_snippet_43
+
+LANGUAGE: Ruby
+CODE:
+```
+session = JWTSessions::Session.new(namespace: "ie-sessions", payload: payload)
+session.flush_by_access_payload
+```
+
+----------------------------------------
+
+TITLE: Login Response Body - JSON
+DESCRIPTION: Example JSON response body received after a successful login request. It contains the access token, refresh token, CSRF token, and their expiration times.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/test/support/dummy_sinatra_api/README.md#_snippet_3
+
+LANGUAGE: JSON
+CODE:
+```
+{
+    "csrf": "5MSmNq2h/7fbrwpUeKLP12D+10NxcZ7TpyGl0R4LYBZxx6FM+yi3nYLgUxmVKguuF0I8nUxH6WqfItFVY0mFSA==",
+    "access": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjQxMzUwODAsImtleSI6ImJpZyBhY2Nlc3MgdmFsdWUiLCJ1aWQiOiIyYTk0Mzc2My00MTZkLTQ0ZDEtYjMyMy04MTgyYThlMjg1ODIifQ.S2MyLvdZ9et3NZSDpocIuo-QIgnG-k1B91PnCzomNTo",
+    "access_expires_at": "2018-04-19 13:51:20 +0300",
+    "refresh": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjQ3MzYyODAsInJlZnJlc2hfa2V5Ijoic21hbGwgcmVmcmVzaCB2YWx1ZSIsInVpZCI6IjJlM2UwODY4LWEzODAtNDA1ZC05Nzg1LWYwYjU5YmQ5MDg1ZiJ9.dnal80gMik5h26JWgmyfFDT4Y7AWYn0CZ5wWt7qwtvI",
+    "refresh_expires_at": "2018-04-26 12:51:20 +0300"
+}
+```
+
+----------------------------------------
+
+TITLE: Login Response Example - JWT Sessions API
+DESCRIPTION: Example JSON response received after a successful login request, containing CSRF token, access token, refresh token, and their expiration times.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/test/support/dummy_api/README.md#_snippet_4
+
+LANGUAGE: json
+CODE:
+```
+{
+    "csrf": "5MSmNq2h/7fbrwpUeKLP12D+10NxcZ7TpyGl0R4LYBZxx6FM+yi3nYLgUxmVKguuF0I8nUxH6WqfItFVY0mFSA==",
+    "access": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjQxMzUwODAsImtleSI6ImJpZyBhY2Nlc3MgdmFsdWUiLCJ1aWQiOiIyYTk0Mzc2My00MTZkLTQ0ZDEtYjMyMy04MTgyYThlMjg1ODIifQ.S2MyLvdZ9et3NZSDpocIuo-QIgnG-k1B91PnCzomNTo",
+    "access_expires_at": "2018-04-19 13:51:20 +0300",
+    "refresh": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjQ3MzYyODAsInJlZnJlc2hfa2V5Ijoic21hbGwgcmVmcmVzaCB2YWx1ZSIsInVpZCI6IjJlM2UwODY4LWEzODAtNDA1ZC05Nzg1LWYwYjU9mQ5MDg1ZiJ9.dnal80gMik5h26JWgmyfFDT4Y7AWYn0CZ5wWt7qwtvI",
+    "refresh_expires_at": "2018-04-26 12:51:20 +0300"
+}
+```
+
+----------------------------------------
+
+TITLE: Access Protected Resource Request - JWT Sessions API
+DESCRIPTION: Example GET request to a protected endpoint (/users/1) including the access token in the Authorization: Bearer header.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/test/support/dummy_api/README.md#_snippet_6
+
+LANGUAGE: http
+CODE:
+```
+GET /users/1
+Content-Type: 'application/json'
+Authorization: Bearer ...
+```
+
+----------------------------------------
+
+TITLE: Login Request - JWT Sessions API
+DESCRIPTION: Send a POST request to the /login endpoint with user credentials in the JSON body to obtain JWT access and refresh tokens.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/test/support/dummy_api/README.md#_snippet_3
+
+LANGUAGE: http
+CODE:
+```
+POST /login
+Content-Type: 'application/json'
+Body
+  {
+    email: user's email
+    password: user's password
+  }
+```
+
+----------------------------------------
+
+TITLE: Request Token Refresh - HTTP/API
+DESCRIPTION: Example HTTP POST request to the refresh endpoint (/api/v1/refreshs). It requires the X-Refresh-Token header containing the refresh token to obtain a new set of access and refresh tokens.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/test/support/dummy_sinatra_api/README.md#_snippet_5
+
+LANGUAGE: HTTP
+CODE:
+```
+POST /api/v1/refreshs
+Content-Type: 'application/json'
+X-Refresh-Token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjQ1ODU1MTksImtleSI6InNtYWxsIHJlZnJlc2ggdmFsdWUiLCJ1aWQiOiI2MWIzODg5NC1kMGFiLTQ1ZDMtYWE3Ni1lOTg0NWFjNWU0MjUifQ.qNDjCDk5zRYy3iXXTTSY_2kwiwLvEOu7u4fIuOvHTVU
+```
+
+----------------------------------------
+
+TITLE: Refresh Token Request - JWT Sessions API
+DESCRIPTION: Send a POST request to the /refresh endpoint with the refresh token in the X-Refresh-Token header to obtain a new access token.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/test/support/dummy_api/README.md#_snippet_5
+
+LANGUAGE: http
+CODE:
+```
+POST /refresh
+Content-Type: 'application/json'
+X-Refresh-Token: ...
+```
+
+----------------------------------------
+
+TITLE: Install Ruby Gems (Shell)
+DESCRIPTION: Executes the `bundle install` command to download and install the gems specified in the project's Gemfile, including `jwt_sessions`.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/README.md#_snippet_1
+
+LANGUAGE: Shell
+CODE:
+```
+bundle install
+```
+
+----------------------------------------
+
+TITLE: Add jwt_sessions Gem to Gemfile (Ruby)
+DESCRIPTION: Adds the `jwt_sessions` gem to the project's Gemfile, specifying it as a dependency required for the application. This is the standard way to include Ruby gems in a project.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/README.md#_snippet_0
+
+LANGUAGE: Ruby
+CODE:
+```
+gem "jwt_sessions"
+```
+
+----------------------------------------
+
+TITLE: Setup Database - Rails Dummy API
+DESCRIPTION: Run these commands to install dependencies, create the database, and run migrations for the Rails dummy API.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/test/support/dummy_api/README.md#_snippet_0
+
+LANGUAGE: shell
+CODE:
+```
+bundle install
+rake db:create
+rake db:migrate
+```
+
+----------------------------------------
+
+TITLE: Start Sinatra Application - Ruby
+DESCRIPTION: Executes the main application file (app.rb) using the Ruby interpreter to start the Sinatra web server.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/test/support/dummy_sinatra_api/README.md#_snippet_1
+
+LANGUAGE: Shell
+CODE:
+```
+ruby app.rb
+```
+
+----------------------------------------
+
+TITLE: Install Dependencies - Ruby/Bundler
+DESCRIPTION: Installs the necessary Ruby gems listed in the Gemfile using Bundler. This is a prerequisite for running the application.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/test/support/dummy_sinatra_api/README.md#_snippet_0
+
+LANGUAGE: Shell
+CODE:
+```
+bundle install
+```
+
+----------------------------------------
+
+TITLE: Install libsodium with Homebrew (Shell)
+DESCRIPTION: Command to install the libsodium cryptographic library using the Homebrew package manager on macOS, required for running tests.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/README.md#_snippet_47
+
+LANGUAGE: Shell
+CODE:
+```
+brew install libsodium
+```
+
+----------------------------------------
+
+TITLE: Configure JWTSessions Keys (RSA)
+DESCRIPTION: Configures JWTSessions to use the RS256 algorithm, generating and setting separate private and public keys required for asymmetric signing.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/README.md#_snippet_10
+
+LANGUAGE: Ruby
+CODE:
+```
+JWTSessions.algorithm   = "RS256"
+JWTSessions.private_key = OpenSSL::PKey::RSA.generate(2048)
+JWTSessions.public_key  = JWTSessions.private_key.public_key
+```
+
+----------------------------------------
+
+TITLE: Setting JWT Algorithm (HS256) in Ruby
+DESCRIPTION: Set the JWT algorithm to be used for signing tokens. This setting does not have a default value and must be specified.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/README.md#_snippet_24
+
+LANGUAGE: Ruby
+CODE:
+```
+JWTSessions.algorithm = "HS256"
+```
+
+----------------------------------------
+
+TITLE: Login Request with Cookies - JWT Sessions API
+DESCRIPTION: Alternatively, send a POST request to /login_with_cookies with user credentials to receive tokens via cookies instead of the response body.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/test/support/dummy_api/README.md#_snippet_7
+
+LANGUAGE: http
+CODE:
+```
+POST /login_with_cookies
+Content-Type: 'application/json'
+Body
+  {
+    email: user's email
+    password: user's password
+  }
+```
+
+----------------------------------------
+
+TITLE: Start Server - Rails Dummy API
+DESCRIPTION: Use this command to start the Rails development server for the dummy API.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/test/support/dummy_api/README.md#_snippet_2
+
+LANGUAGE: shell
+CODE:
+```
+rails s
+```
+
+----------------------------------------
+
+TITLE: Configuring JWT Claim Verification and Leeway in Ruby
+DESCRIPTION: Configure which additional JWT claims (like iss, sub, iat, aud) should be verified by default and set a leeway value to account for clock skew.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/README.md#_snippet_27
+
+LANGUAGE: Ruby
+CODE:
+```
+JWTSessions.jwt_options[:verify_iss] = true
+JWTSessions.jwt_options[:verify_sub] = true
+JWTSessions.jwt_options[:verify_iat] = true
+JWTSessions.jwt_options[:verify_aud] = true
+JWTSessions.jwt_options[:leeway]     = 30 # seconds
+```
+
+----------------------------------------
+
+TITLE: Configure JWTSessions Redis Token Store with Existing Client in Ruby
+DESCRIPTION: Configures JWTSessions to use an existing Redis client instance or connection pool. This avoids creating a new connection pool specifically for JWTSessions if one is already managed elsewhere in the application.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/README.md#_snippet_23
+
+LANGUAGE: ruby
+CODE:
+```
+JWTSessions.token_store = :redis, {redis_client: redis_pool}
+```
+
+----------------------------------------
+
+TITLE: Request Login - HTTP/API
+DESCRIPTION: Example HTTP POST request to the login endpoint (/api/v1/login) with the required Content-Type header. This endpoint is used to authenticate and receive JWT access and refresh tokens.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/test/support/dummy_sinatra_api/README.md#_snippet_2
+
+LANGUAGE: HTTP
+CODE:
+```
+POST /api/v1/login
+Content-Type: 'application/json'
+```
+
+----------------------------------------
+
+TITLE: Run Tests - Rails Dummy API
+DESCRIPTION: Execute this command to run the test suite for the Rails dummy API.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/test/support/dummy_api/README.md#_snippet_1
+
+LANGUAGE: shell
+CODE:
+```
+rake
+```
+
+----------------------------------------
+
+TITLE: Configure JWTSessions Redis Token Store with URL in Ruby
+DESCRIPTION: Configures JWTSessions to use Redis as the token store by providing a Redis connection URL. This is an alternative to specifying host, port, and database name separately.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/README.md#_snippet_21
+
+LANGUAGE: ruby
+CODE:
+```
+JWTSessions.token_store = :redis, { redis_url: "redis://localhost:6397" }
+```
+
+----------------------------------------
+
+TITLE: Configuring JWTSessions Header and Cookie Names in Ruby
+DESCRIPTION: Reconfigure the default names used for request headers and cookies when transporting access, refresh, and CSRF tokens.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/README.md#_snippet_29
+
+LANGUAGE: Ruby
+CODE:
+```
+JWTSessions.access_header  = "Authorization"
+JWTSessions.access_cookie  = "jwt_access"
+JWTSessions.refresh_header = "X-Refresh-Token"
+JWTSessions.refresh_cookie = "jwt_refresh"
+JWTSessions.csrf_header    = "X-CSRF-Token"
+```
+
+----------------------------------------
+
+TITLE: Flush Sessions by Namespace (Ruby)
+DESCRIPTION: Initializes a session with a namespace and then flushes all sessions belonging to that specific namespace from the store.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/README.md#_snippet_42
+
+LANGUAGE: Ruby
+CODE:
+```
+session = JWTSessions::Session.new(namespace: "ie-sessions")
+session.flush_namespaced
+```
+
+----------------------------------------
+
+TITLE: Request Payload with Access Token - HTTP/API
+DESCRIPTION: Example HTTP GET request to the payload endpoint (/api/v1/payload). It requires the Authorization header with the access token in the Bearer format to access protected resources.
+SOURCE: https://github.com/tuwukee/jwt_sessions/blob/main/test/support/dummy_sinatra_api/README.md#_snippet_4
+
+LANGUAGE: HTTP
+CODE:
+```
+GET /api/v1/payload
+Content-Type: 'application/json'
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjM5ODQzMTksImtleSI6ImJpZyBhY2Nlc3MgdmFsdWUiLCJ1aWQiOiI5Yjc5NTVkYi03OTgwLTQ5YjEtODYxNy03ZDg0OThkMzdmOGYifQ.bzXH5uCH6RwkGIgo0iFcJ4U5TgeSlJh5bFqO2LV6nB4
+```

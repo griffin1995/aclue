@@ -1,0 +1,583 @@
+TITLE: Attempt Authentication (PHP)
+DESCRIPTION: Attempts to authenticate a user using provided credentials. Returns a JWT token on success or null on failure.
+SOURCE: https://github.com/tymondesigns/jwt-auth/blob/2.x/docs/auth-guard.md#_snippet_1
+
+LANGUAGE: PHP
+CODE:
+```
+// Generate a token for the user if the credentials are valid
+$token = auth()->attempt($credentials);
+```
+
+----------------------------------------
+
+TITLE: Implementing Laravel Auth Controller for JWT
+DESCRIPTION: Provides the full implementation of an AuthController for handling JWT authentication flows, including methods for login, logout, refreshing tokens, getting the authenticated user, and a helper method to structure the token response. It uses the 'auth:api' middleware.
+SOURCE: https://github.com/tymondesigns/jwt-auth/blob/2.x/docs/quick-start.md#_snippet_4
+
+LANGUAGE: php
+CODE:
+```
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
+
+class AuthController extends Controller
+{
+    /**
+     *
+     * Create a new AuthController instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:api', ['except' => ['login']]);
+    }
+
+    /**
+     *
+     * Get a JWT via given credentials.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function login()
+    {
+        $credentials = request(['email', 'password']);
+
+        if (! $token = auth()->attempt($credentials)) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+
+        return $this->respondWithToken($token);
+    }
+
+    /**
+     *
+     * Get the authenticated User.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function me()
+    {
+        return response()->json(auth()->user());
+    }
+
+    /**
+     *
+     * Log the user out (Invalidate the token).
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function logout()
+    {
+        auth()->logout();
+
+        return response()->json(['message' => 'Successfully logged out']);
+    }
+
+    /**
+     *
+     * Refresh a token.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function refresh()
+    {
+        return $this->respondWithToken(auth()->refresh());
+    }
+
+    /**
+     *
+     * Get the token array structure.
+     *
+     * @param  string $token
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function respondWithToken($token)
+    {
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => auth()->factory()->getTTL() * 60
+        ]);
+    }
+}
+```
+
+----------------------------------------
+
+TITLE: Implementing JWTSubject in Laravel User Model
+DESCRIPTION: Demonstrates how to modify the Laravel User model to implement the Tymon\JWTAuth\Contracts\JWTSubject contract, requiring the implementation of getJWTIdentifier() and getJWTCustomClaims() methods for JWT authentication.
+SOURCE: https://github.com/tymondesigns/jwt-auth/blob/2.x/docs/quick-start.md#_snippet_0
+
+LANGUAGE: php
+CODE:
+```
+<?php
+
+namespace App;
+
+use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
+class User extends Authenticatable implements JWTSubject
+{
+    use Notifiable;
+
+    // Rest omitted for brevity
+
+    /**
+     *
+     * Get the identifier that will be stored in the subject claim of the JWT.
+     *
+     * @return mixed
+     */
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    /**
+     *
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
+}
+```
+
+----------------------------------------
+
+TITLE: Configuring Laravel Auth Guard for JWT
+DESCRIPTION: Shows the necessary changes in config/auth.php to configure Laravel's authentication system to use the 'jwt' driver for the 'api' guard, setting it as the default guard. Requires Laravel 5.2 and above.
+SOURCE: https://github.com/tymondesigns/jwt-auth/blob/2.x/docs/quick-start.md#_snippet_1
+
+LANGUAGE: php
+CODE:
+```
+'defaults' => [
+    'guard' => 'api',
+    'passwords' => 'users',
+],
+
+...
+
+'guards' => [
+    'api' => [
+        'driver' => 'jwt',
+        'provider' => 'users',
+    ],
+],
+```
+
+----------------------------------------
+
+TITLE: Log User Out (PHP)
+DESCRIPTION: Logs out the currently authenticated user by invalidating the current token and unsetting the user. Optionally forces the token to be blacklisted permanently.
+SOURCE: https://github.com/tymondesigns/jwt-auth/blob/2.x/docs/auth-guard.md#_snippet_5
+
+LANGUAGE: PHP
+CODE:
+```
+auth()->logout();
+
+// Pass true to force the token to be blacklisted "forever"
+auth()->logout(true);
+```
+
+----------------------------------------
+
+TITLE: Defining API Routes for JWT Authentication in Laravel
+DESCRIPTION: Provides an example of how to define API routes in routes/api.php using a route group with 'api' middleware and 'auth' prefix, including routes for login, logout, refresh, and getting the authenticated user ('me').
+SOURCE: https://github.com/tymondesigns/jwt-auth/blob/2.x/docs/quick-start.md#_snippet_2
+
+LANGUAGE: php
+CODE:
+```
+Route::group([
+
+    'middleware' => 'api',
+    'prefix' => 'auth'
+
+], function ($router) {
+
+    Route::post('login', 'AuthController@login');
+    Route::post('logout', 'AuthController@logout');
+    Route::post('refresh', 'AuthController@refresh');
+    Route.post('me', 'AuthController@me');
+
+});
+```
+
+----------------------------------------
+
+TITLE: Invalidate Token (PHP)
+DESCRIPTION: Invalidates the current JWT token by adding it to the blacklist. Optionally forces the token to be blacklisted permanently.
+SOURCE: https://github.com/tymondesigns/jwt-auth/blob/2.x/docs/auth-guard.md#_snippet_7
+
+LANGUAGE: PHP
+CODE:
+```
+auth()->invalidate();
+
+// Pass true as the first param to force the token to be blacklisted "forever".
+auth()->invalidate(true);
+```
+
+----------------------------------------
+
+TITLE: Get Authenticated User (PHP)
+DESCRIPTION: Retrieves the currently authenticated user instance. Returns the user object if authenticated, otherwise returns null.
+SOURCE: https://github.com/tymondesigns/jwt-auth/blob/2.x/docs/auth-guard.md#_snippet_3
+
+LANGUAGE: PHP
+CODE:
+```
+// Get the currently authenticated user
+$user = auth()->user();
+```
+
+----------------------------------------
+
+TITLE: Get Authenticated User or Fail (PHP)
+DESCRIPTION: Retrieves the currently authenticated user instance. If no user is authenticated, it throws a Tymon\JWTAuth\Exceptions\UserNotDefinedException. Includes a basic try-catch example.
+SOURCE: https://github.com/tymondesigns/jwt-auth/blob/2.x/docs/auth-guard.md#_snippet_4
+
+LANGUAGE: PHP
+CODE:
+```
+try {
+    $user = auth()->userOrFail();
+} catch (\Tymon\JWTAuth\Exceptions\UserNotDefinedException $e) {
+    // do something
+}
+```
+
+----------------------------------------
+
+TITLE: Refresh Token (PHP)
+DESCRIPTION: Refreshes the current JWT token, invalidating the old one and returning a new one. Options are available to force permanent blacklisting and reset claims.
+SOURCE: https://github.com/tymondesigns/jwt-auth/blob/2.x/docs/auth-guard.md#_snippet_6
+
+LANGUAGE: PHP
+CODE:
+```
+$newToken = auth()->refresh();
+
+// Pass true as the first param to force the token to be blacklisted "forever".
+// The second parameter will reset the claims for the new token
+$newToken = auth()->refresh(true, true);
+```
+
+----------------------------------------
+
+TITLE: Sending Token via Authorization Header (HTTP)
+DESCRIPTION: Example demonstrating how to include the JWT token in the standard HTTP Authorization header using the Bearer scheme, which is a common and recommended practice.
+SOURCE: https://github.com/tymondesigns/jwt-auth/blob/2.x/docs/quick-start.md#_snippet_6
+
+LANGUAGE: HTTP
+CODE:
+```
+Authorization: Bearer eyJhbGciOiJIUzI1NiI...
+```
+
+----------------------------------------
+
+TITLE: Example JWT Login Response
+DESCRIPTION: Shows an example JSON response returned after a successful login request using the implemented AuthController. It includes the access_token, token_type, and expires_in fields.
+SOURCE: https://github.com/tymondesigns/jwt-auth/blob/2.x/docs/quick-start.md#_snippet_5
+
+LANGUAGE: json
+CODE:
+```
+{
+    "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ",
+    "token_type": "bearer",
+    "expires_in": 3600
+}
+```
+
+----------------------------------------
+
+TITLE: Register JWT-Auth Service Provider in Lumen (php)
+DESCRIPTION: Registers the necessary service providers for JWT-Auth in the Lumen application's bootstrap file. This includes uncommenting the default AuthServiceProvider and adding the LumenServiceProvider provided by the jwt-auth package to enable its functionality.
+SOURCE: https://github.com/tymondesigns/jwt-auth/blob/2.x/docs/lumen-installation.md#_snippet_2
+
+LANGUAGE: php
+CODE:
+```
+// Uncomment this line
+$app->register(App\Providers\AuthServiceProvider::class);
+
+// Add this line
+$app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
+```
+
+----------------------------------------
+
+TITLE: Install JWT-Auth Package (Composer) - Bash
+DESCRIPTION: Run this command to install the latest version of the tymondesigns/jwt-auth package using Composer. This command fetches the package and its dependencies.
+SOURCE: https://github.com/tymondesigns/jwt-auth/blob/2.x/docs/laravel-installation.md#_snippet_0
+
+LANGUAGE: bash
+CODE:
+```
+composer require tymon/jwt-auth
+```
+
+----------------------------------------
+
+TITLE: Install JWT-Auth via Composer (bash)
+DESCRIPTION: Installs the tymon/jwt-auth package into the Lumen project using the Composer dependency manager. This command fetches the latest version of the library and adds it to the project's dependencies.
+SOURCE: https://github.com/tymondesigns/jwt-auth/blob/2.x/docs/lumen-installation.md#_snippet_0
+
+LANGUAGE: bash
+CODE:
+```
+composer require tymon/jwt-auth
+```
+
+----------------------------------------
+
+TITLE: Uncomment Auth Middleware in Lumen (php)
+DESCRIPTION: Enables the default 'auth' route middleware in the Lumen application's bootstrap file. This middleware is typically used to protect routes and requires the user to be authenticated, working in conjunction with the registered AuthServiceProvider.
+SOURCE: https://github.com/tymondesigns/jwt-auth/blob/2.x/docs/lumen-installation.md#_snippet_3
+
+LANGUAGE: php
+CODE:
+```
+$app->routeMiddleware([
+    'auth' => App\Http\Middleware\Authenticate::class,
+]);
+```
+
+----------------------------------------
+
+TITLE: Log User In (PHP)
+DESCRIPTION: Logs in a given user instance and returns a JWT token for them. Requires a User object.
+SOURCE: https://github.com/tymondesigns/jwt-auth/blob/2.x/docs/auth-guard.md#_snippet_2
+
+LANGUAGE: PHP
+CODE:
+```
+// Get some user from somewhere
+$user = User::first();
+
+// Get the token
+$token = auth()->login($user);
+```
+
+----------------------------------------
+
+TITLE: Generate JWT Secret Key (Artisan) - Bash
+DESCRIPTION: Run this Artisan command to generate a unique secret key required for signing JWT tokens. The command automatically updates your `.env` file with the generated key, typically as `JWT_SECRET`.
+SOURCE: https://github.com/tymondesigns/jwt-auth/blob/2.x/docs/laravel-installation.md#_snippet_3
+
+LANGUAGE: bash
+CODE:
+```
+php artisan jwt:secret
+```
+
+----------------------------------------
+
+TITLE: Generate JWT Secret Key (bash)
+DESCRIPTION: Executes an Artisan command provided by the jwt-auth package to generate a unique secret key. This key is crucial for signing JWT tokens and is automatically added to the project's .env file as JWT_SECRET.
+SOURCE: https://github.com/tymondesigns/jwt-auth/blob/2.x/docs/lumen-installation.md#_snippet_4
+
+LANGUAGE: bash
+CODE:
+```
+php artisan jwt:secret
+```
+
+----------------------------------------
+
+TITLE: Configuring JWT Secret Key (PHP)
+DESCRIPTION: This snippet shows the configuration option for the JWT secret key within the jwt-auth package's config file. The secret is retrieved from the environment variable 'JWT_SECRET' and is essential for signing and verifying JSON Web Tokens.
+SOURCE: https://github.com/tymondesigns/jwt-auth/blob/2.x/docs/configuration.md#_snippet_0
+
+LANGUAGE: php
+CODE:
+```
+'secret' => env('JWT_SECRET'),
+```
+
+----------------------------------------
+
+TITLE: Add Custom Claims to Token (PHP)
+DESCRIPTION: Adds custom claims to the JWT payload before attempting authentication and generating a token.
+SOURCE: https://github.com/tymondesigns/jwt-auth/blob/2.x/docs/auth-guard.md#_snippet_11
+
+LANGUAGE: PHP
+CODE:
+```
+$token = auth()->claims(['foo' => 'bar'])->attempt($credentials);
+```
+
+----------------------------------------
+
+TITLE: Publish JWT-Auth Config (Artisan) - Bash
+DESCRIPTION: Execute this Artisan command to publish the default configuration file for the JWT-Auth package. This creates a `config/jwt.php` file where you can customize package settings.
+SOURCE: https://github.com/tymondesigns/jwt-auth/blob/2.x/docs/laravel-installation.md#_snippet_2
+
+LANGUAGE: bash
+CODE:
+```
+php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"
+```
+
+----------------------------------------
+
+TITLE: Attempt Authentication with Specific Guard (PHP)
+DESCRIPTION: Explains how to specify a guard when calling auth() if the default is not set or multiple guards are defined. Shows attempting authentication using the 'api' guard.
+SOURCE: https://github.com/tymondesigns/jwt-auth/blob/2.x/docs/auth-guard.md#_snippet_0
+
+LANGUAGE: PHP
+CODE:
+```
+  $token = auth('api')->attempt($credentials);
+```
+
+----------------------------------------
+
+TITLE: Get JWT Payload (PHP)
+DESCRIPTION: Retrieves the raw JWT payload object for the current token. Shows examples of accessing claims using different methods (get, array access, function call) and converting to an array.
+SOURCE: https://github.com/tymondesigns/jwt-auth/blob/2.x/docs/auth-guard.md#_snippet_9
+
+LANGUAGE: PHP
+CODE:
+```
+$payload = auth()->payload();
+
+// then you can access the claims directly e.g.
+$payload->get('sub'); // = 123
+$payload['jti']; // = 'asfe4fq434asdf'
+$payload('exp') // = 123456
+$payload->toArray(); // = ['sub' => 123, 'exp' => 123456, 'jti' => 'asfe4fq434asdf'] etc
+```
+
+----------------------------------------
+
+TITLE: Get Token by User ID (PHP)
+DESCRIPTION: Generates a JWT token for a user based on their ID. Requires the user ID as a parameter.
+SOURCE: https://github.com/tymondesigns/jwt-auth/blob/2.x/docs/auth-guard.md#_snippet_8
+
+LANGUAGE: PHP
+CODE:
+```
+$token = auth()->tokenById(123);
+```
+
+----------------------------------------
+
+TITLE: Override Token TTL (PHP)
+DESCRIPTION: Overrides the default Time To Live (TTL) for the token being generated. The TTL is specified in minutes.
+SOURCE: https://github.com/tymondesigns/jwt-auth/blob/2.x/docs/auth-guard.md#_snippet_14
+
+LANGUAGE: PHP
+CODE:
+```
+$token = auth()->setTTL(7200)->attempt($credentials);
+```
+
+----------------------------------------
+
+TITLE: Validate Credentials (PHP)
+DESCRIPTION: Validates a user's credentials without logging them in or generating a token. Returns true if credentials are valid, false otherwise.
+SOURCE: https://github.com/tymondesigns/jwt-auth/blob/2.x/docs/auth-guard.md#_snippet_10
+
+LANGUAGE: PHP
+CODE:
+```
+if (auth()->validate($credentials)) {
+    // credentials are valid
+}
+```
+
+----------------------------------------
+
+TITLE: Register JWT Config in Lumen (php)
+DESCRIPTION: Registers the 'jwt' configuration file within the Lumen application's bootstrap file. This makes the configuration settings defined in config/jwt.php available to the application. It should be placed before middleware declarations.
+SOURCE: https://github.com/tymondesigns/jwt-auth/blob/2.x/docs/lumen-installation.md#_snippet_1
+
+LANGUAGE: php
+CODE:
+```
+$app->configure('jwt');
+```
+
+----------------------------------------
+
+TITLE: Creating Laravel Auth Controller via Artisan
+DESCRIPTION: Provides the Artisan command to generate a new controller named AuthController in Laravel, which will be used to handle authentication logic for JWT.
+SOURCE: https://github.com/tymondesigns/jwt-auth/blob/2.x/docs/quick-start.md#_snippet_3
+
+LANGUAGE: bash
+CODE:
+```
+php artisan make:controller AuthController
+```
+
+----------------------------------------
+
+TITLE: Set Token Explicitly (PHP)
+DESCRIPTION: Explicitly sets the JWT token to be used by the guard instance for subsequent operations like retrieving the user.
+SOURCE: https://github.com/tymondesigns/jwt-auth/blob/2.x/docs/auth-guard.md#_snippet_12
+
+LANGUAGE: PHP
+CODE:
+```
+$user = auth()->setToken('eyJhb...')->user();
+```
+
+----------------------------------------
+
+TITLE: Sending Token via Query String Parameter (URL)
+DESCRIPTION: Example showing how to pass the JWT token as a query string parameter named 'token' appended to the request URL. While simple, this method is less secure as tokens can be logged or exposed in browser history.
+SOURCE: https://github.com/tymondesigns/jwt-auth/blob/2.x/docs/quick-start.md#_snippet_7
+
+LANGUAGE: Text
+CODE:
+```
+http://example.dev/me?token=eyJhbGciOiJIUzI1NiI...
+```
+
+----------------------------------------
+
+TITLE: Set Request Instance Explicitly (PHP)
+DESCRIPTION: Explicitly sets the request instance to be used by the guard instance, which is useful for testing or specific scenarios.
+SOURCE: https://github.com/tymondesigns/jwt-auth/blob/2.x/docs/auth-guard.md#_snippet_13
+
+LANGUAGE: PHP
+CODE:
+```
+$user = auth()->setRequest($request)->user();
+```
+
+----------------------------------------
+
+TITLE: Add JWT-Auth Service Provider (Laravel 5.4-) - PHP
+DESCRIPTION: For Laravel versions 5.4 or below, add the JWT-Auth service provider class to the 'providers' array within the `config/app.php` file. This registers the package's services with Laravel.
+SOURCE: https://github.com/tymondesigns/jwt-auth/blob/2.x/docs/laravel-installation.md#_snippet_1
+
+LANGUAGE: php
+CODE:
+```
+'providers' => [
+
+    ...
+
+    Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+]
+```
