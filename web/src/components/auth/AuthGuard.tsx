@@ -55,7 +55,6 @@ const PROTECTED_ROUTES = [
   '/dashboard',
   '/profile',
   '/settings',
-  '/discover',
   '/recommendations',
   '/gift-links',
   '/onboarding',
