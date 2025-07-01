@@ -551,21 +551,18 @@ async def get_current_user_from_token(authorization: str) -> dict:
         
         user_id = user_response.user.id
         
-        # Get user profile from profiles table
-        profiles = await supabase.select(
-            "profiles",
-            select="*",
-            filters={"id": user_id},
-            use_service_key=True
-        )
+        # Extract user data from Supabase user metadata (same approach as get_current_user_dependency)
+        user_data = {
+            "id": user_id,
+            "email": user_response.user.email,
+            "first_name": user_response.user.user_metadata.get("first_name", ""),
+            "last_name": user_response.user.user_metadata.get("last_name", ""),
+            "subscription_tier": "free",
+            "created_at": user_response.user.created_at.isoformat() if user_response.user.created_at else datetime.now().isoformat(),
+            "updated_at": user_response.user.last_sign_in_at.isoformat() if user_response.user.last_sign_in_at else None
+        }
         
-        if not profiles:
-            raise HTTPException(
-                status_code=status.HTTP_401_UNAUTHORIZED,
-                detail="User profile not found"
-            )
-        
-        return profiles[0]
+        return user_data
         
     except HTTPException:
         raise
