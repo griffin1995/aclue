@@ -28,6 +28,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Gift, RotateCcw } from 'lucide-react';
+import { api } from '@/lib/api';
 
 // ==============================================================================
 // TYPE DEFINITIONS
@@ -55,7 +56,6 @@ interface WorkingSwipeInterfaceProps {
 export const WorkingSwipeInterface: React.FC<WorkingSwipeInterfaceProps> = ({
   sessionType = 'discovery',      // Default to general discovery session
   onSessionComplete,              // Optional session completion callback
-  onRecommendationsReady,         // Optional recommendations ready callback
   className = '',                 // Optional additional styling
 }) => {
   // ===========================================================================
@@ -97,16 +97,11 @@ export const WorkingSwipeInterface: React.FC<WorkingSwipeInterfaceProps> = ({
    */
   const fetchProducts = async () => {
     try {
-      // Attempt to fetch real products from backend API
-      const response = await fetch('http://localhost:8000/api/v1/products/?limit=5');
-      if (response.ok) {
-        const products = await response.json();
-        return products;
-      } else {
-        throw new Error('Failed to fetch products');
-      }
+      // Attempt to fetch real products from backend API using authenticated client
+      const response = await api.getProducts({ limit: 5 });
+      return response.data || response; // Handle both wrapped and direct responses
     } catch (error) {
-      console.error('Failed to fetch products:', error);
+      console.error('Failed to fetch products from API, using mock data:', error);
       // Fallback to local mock data for development reliability
       return [
         // ===========================================================================
@@ -230,7 +225,7 @@ export const WorkingSwipeInterface: React.FC<WorkingSwipeInterfaceProps> = ({
    * @param direction - Swipe direction ('left' for dislike, 'right' for like)
    */
   const handleSwipe = (direction: 'left' | 'right') => {
-    const currentProduct = products[currentIndex];
+    console.log(`Swiped ${direction} on product`, products[currentIndex]?.title);
     
     // TODO: Send swipe data to backend for preference learning
     // await fetch('/api/v1/swipes/', {
