@@ -63,6 +63,9 @@ const nextConfig = {
   // Next.js image optimization with CDN and external domain support
   
   images: {
+    // Disable image optimization for static export
+    unoptimized: true,
+    
     // Allowed external image domains for security and performance
     remotePatterns: [
       // Development environment
@@ -111,9 +114,6 @@ const nextConfig = {
         hostname: 'picsum.photos',                             // Lorem Picsum placeholder images
       }
     ],
-    
-    // Modern image formats for better performance
-    formats: ['image/webp', 'image/avif'],                    // WebP and AVIF for smaller file sizes
   },
 
   // ===========================================================================
