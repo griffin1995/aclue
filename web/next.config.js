@@ -241,7 +241,7 @@ const nextConfig = {
   // ===========================================================================
   
   // Build output mode for different deployment targets
-  output: process.env.BUILD_STANDALONE === 'true' ? 'standalone' : undefined,  // Docker/container deployment
+  output: process.env.BUILD_STANDALONE === 'true' ? 'standalone' : 'export',  // Static export for Cloudflare Pages
   
   // ===========================================================================
   // EXPERIMENTAL FEATURES
