@@ -80,8 +80,10 @@ export default function MaintenanceMode() {
                     className="rounded-lg"
                     onError={(e) => {
                       console.error('Logo failed to load:', e);
-                      // Fallback to a simple icon if logo fails
+                      // Show fallback icon
                       (e.target as HTMLImageElement).style.display = 'none';
+                      const fallback = document.getElementById('logo-fallback');
+                      if (fallback) fallback.style.display = 'block';
                     }}
                   />
                   <Gift className="w-8 h-8 text-white" style={{ display: 'none' }} id="logo-fallback" />

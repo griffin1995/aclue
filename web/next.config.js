@@ -63,8 +63,8 @@ const nextConfig = {
   // Next.js image optimization with CDN and external domain support
   
   images: {
-    // Disable image optimization for static export
-    unoptimized: true,
+    // Enable image optimization for better performance
+    unoptimized: false,
     
     // Allowed external image domains for security and performance
     remotePatterns: [
@@ -241,7 +241,7 @@ const nextConfig = {
   // ===========================================================================
   
   // Build output mode for different deployment targets
-  output: process.env.BUILD_STANDALONE === 'true' ? 'standalone' : 'export',  // Static export for Cloudflare Pages
+  output: process.env.BUILD_STANDALONE === 'true' ? 'standalone' : undefined,
   
   // ===========================================================================
   // EXPERIMENTAL FEATURES
@@ -250,6 +250,7 @@ const nextConfig = {
   
   experimental: {
     scrollRestoration: true,        // Restore scroll position on navigation
+    runtime: 'experimental-edge',   // Enable edge runtime for Cloudflare Pages
   },
 
   // ===========================================================================
@@ -294,14 +295,7 @@ const nextConfig = {
   
   trailingSlash: true,            // Add trailing slashes for S3 compatibility
   
-  // Enable static export for Cloudflare Pages
-  ...(process.env.STATIC_EXPORT === 'true' && {
-    output: 'export',
-    distDir: 'out',
-    images: {
-      unoptimized: true,
-    },
-  }),
+  // Cloudflare Pages SSR configuration - handled in existing experimental section below
   
   // ===========================================================================
   // PAGE EXTENSIONS
