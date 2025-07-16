@@ -72,18 +72,21 @@ export default function MaintenanceMode() {
             >
               <div className="relative">
                 <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-2xl flex items-center justify-center shadow-2xl border border-white/20">
-                  <Image 
+                  <img 
                     src="/logo.png" 
                     alt="prznt logo" 
                     width={40} 
                     height={40}
                     className="rounded-lg"
                     onError={(e) => {
-                      console.error('Logo failed to load:', e);
+                      console.error('Logo failed to load from /logo.png');
                       // Show fallback icon
                       (e.target as HTMLImageElement).style.display = 'none';
                       const fallback = document.getElementById('logo-fallback');
                       if (fallback) fallback.style.display = 'block';
+                    }}
+                    onLoad={() => {
+                      console.log('Logo loaded successfully from /logo.png');
                     }}
                   />
                   <Gift className="w-8 h-8 text-white" style={{ display: 'none' }} id="logo-fallback" />
@@ -172,7 +175,7 @@ export default function MaintenanceMode() {
               transition={{ duration: 0.8, delay: 0.8 }}
             >
               <Link
-                href="/?alpha=true"
+                href="/dashboard"
                 className="inline-flex items-center gap-2 text-blue-300 hover:text-blue-200 font-medium transition-colors group"
               >
                 <span>Explore Alpha Version</span>
