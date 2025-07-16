@@ -175,7 +175,7 @@ export default function MaintenanceMode() {
               transition={{ duration: 0.8, delay: 0.8 }}
             >
               <Link
-                href="/dashboard"
+                href="/landingpage"
                 className="inline-flex items-center gap-2 text-blue-300 hover:text-blue-200 font-medium transition-colors group"
               >
                 <span>Explore Alpha Version</span>
