@@ -60,7 +60,7 @@ export default function MaintenanceMode() {
         <div className="absolute inset-0 bg-black/30 backdrop-blur-[1px]" />
 
         {/* Main Content Container */}
-        <div className="relative z-10 w-full flex flex-col lg:flex-row max-w-7xl mx-auto">
+        <div className="relative z-10 w-full flex flex-col lg:flex-row max-w-7xl mx-auto px-6 lg:px-8">
           {/* Left Column - Hero Content */}
           <div className="w-full lg:w-1/2 flex flex-col justify-center px-8 lg:px-16 py-12 lg:py-20">
             {/* Logo */}
@@ -78,7 +78,13 @@ export default function MaintenanceMode() {
                     width={40} 
                     height={40}
                     className="rounded-lg"
+                    onError={(e) => {
+                      console.error('Logo failed to load:', e);
+                      // Fallback to a simple icon if logo fails
+                      (e.target as HTMLImageElement).style.display = 'none';
+                    }}
                   />
+                  <Gift className="w-8 h-8 text-white" style={{ display: 'none' }} id="logo-fallback" />
                 </div>
                 <div className="absolute -inset-2 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl opacity-20 blur-xl animate-pulse"></div>
               </div>
@@ -102,7 +108,7 @@ export default function MaintenanceMode() {
               
               <p className="text-lg md:text-xl text-blue-100 mb-8 leading-relaxed">
                 Our AI-powered platform is learning to understand your unique gift preferences. 
-                Experience personalized recommendations that actually understand what you and your loved ones want.
+                Experience personalised recommendations that actually understand what you and your loved ones want.
               </p>
             </motion.div>
 
