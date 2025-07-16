@@ -4,10 +4,10 @@ import { useRouter } from 'next/router';
 export default function HomePage() {
   const router = useRouter();
 
+  // Redirect to maintenance page
   useEffect(() => {
-    // Redirect to maintenance page
-    router.replace('/maintenance');
+    router.push('/maintenance');
   }, [router]);
 
-  return null; // Page will redirect to maintenance
+  return null;
 }

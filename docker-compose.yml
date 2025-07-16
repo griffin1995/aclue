@@ -56,7 +56,7 @@ services:
     container_name: giftsync_postgres
     environment:
       POSTGRES_USER: giftsync               # Database username
-      POSTGRES_PASSWORD: giftsync_dev_password  # Database password (change in production)
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-giftsync_dev_password}  # Database password (change in production)
       POSTGRES_DB: giftsync_dev             # Default database name
     ports:
       - "5433:5432"                         # Map to 5433 to avoid conflicts with local postgres
@@ -96,7 +96,7 @@ services:
       - "9001:9001"
     environment:
       - MINIO_ROOT_USER=giftsync
-      - MINIO_ROOT_PASSWORD=giftsync_dev_password
+      - MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD:-giftsync_dev_password}
     volumes:
       - minio_data:/data
     command: server /data --console-address ":9001"
@@ -114,16 +114,16 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - DATABASE_URL=postgresql://giftsync:giftsync_dev_password@postgres:5432/giftsync_dev
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-giftsync}:${POSTGRES_PASSWORD:-giftsync_dev_password}@postgres:5432/${POSTGRES_DB:-giftsync_dev}
       - REDIS_URL=redis://redis:6379
       - MINIO_ENDPOINT=http://minio:9000
       - MINIO_ACCESS_KEY=giftsync
-      - MINIO_SECRET_KEY=giftsync_dev_password
+      - MINIO_SECRET_KEY=${MINIO_ROOT_PASSWORD:-giftsync_dev_password}
       - SECRET_KEY=your-secret-key-change-in-production
       - ENVIRONMENT=development
-      - SUPABASE_URL=https://xchsarvamppwephulylt.supabase.co
-      - SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhjaHNhcnZhbXBwd2VwaHVseWx0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTAyNzY1MjksImV4cCI6MjA2NTg1MjUyOX0.qF2gpIKT7-wFOiIpgAe5unwHsAAttZXu_RAbVkexfb0
-      - SUPABASE_SERVICE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhjaHNhcnZhbXBwd2VwaHVseWx0Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1MDI3NjUyOSwiZXhwIjoyMDY1ODUyNTI5fQ.ylz1FGYPLvvfX6UkZhAm8i65nwcnO90QN90ZxXdYZLE
+      - SUPABASE_URL=${SUPABASE_URL:-}
+      - SUPABASE_ANON_KEY=${SUPABASE_ANON_KEY:-}
+      - SUPABASE_SERVICE_KEY=${SUPABASE_SERVICE_KEY:-}
     volumes:
       - ./backend:/app
       - backend_cache:/app/.cache
@@ -142,11 +142,11 @@ services:
       dockerfile: Dockerfile.dev
     container_name: giftsync_ml_training
     environment:
-      - DATABASE_URL=postgresql://giftsync:giftsync_dev_password@postgres:5432/giftsync_dev
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-giftsync}:${POSTGRES_PASSWORD:-giftsync_dev_password}@postgres:5432/${POSTGRES_DB:-giftsync_dev}
       - REDIS_URL=redis://redis:6379
       - MINIO_ENDPOINT=http://minio:9000
       - MINIO_ACCESS_KEY=giftsync
-      - MINIO_SECRET_KEY=giftsync_dev_password
+      - MINIO_SECRET_KEY=${MINIO_ROOT_PASSWORD:-giftsync_dev_password}
     volumes:
       - ./ml:/app
       - ml_models:/app/models
@@ -195,7 +195,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_SECURITY_ADMIN_PASSWORD=${GF_SECURITY_ADMIN_PASSWORD:-admin}
     volumes:
       - grafana_data:/var/lib/grafana
       - ./infrastructure/monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards

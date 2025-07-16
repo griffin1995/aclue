@@ -2,7 +2,7 @@ import { NextPage } from 'next';
 import Head from 'next/head';
 import MaintenanceMode from '@/components/MaintenanceMode';
 
-const MaintenancePage: NextPage = () => {
+const MaintenanceIndexPage: NextPage = () => {
   return (
     <>
       <Head>
@@ -15,4 +15,4 @@ const MaintenancePage: NextPage = () => {
   );
 };
 
-export default MaintenancePage;
+export default MaintenanceIndexPage;
