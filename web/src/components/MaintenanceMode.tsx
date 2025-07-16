@@ -102,7 +102,7 @@ export default function MaintenanceMode() {
               
               <p className="text-lg md:text-xl text-blue-100 mb-8 leading-relaxed">
                 Our AI-powered platform is learning to understand your unique gift preferences. 
-                Experience personalized recommendations that actually understand what you and your loved ones want.
+                Experience personalised recommendations that actually understand what you and your loved ones want.
               </p>
             </motion.div>
 
