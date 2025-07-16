@@ -1,5 +1,6 @@
 import type { AppProps } from 'next/app';
 import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 import { Toaster } from 'react-hot-toast';
 import { ThemeProvider } from '@/context/ThemeContext';
 import { AuthProvider } from '@/context/AuthContext';
@@ -10,8 +11,19 @@ import { useMobileOptimizations } from '@/hooks/useMobileOptimizations';
 import '@/styles/globals.css';
 
 export default function App({ Component, pageProps }: AppProps) {
+  const router = useRouter();
   // Initialize mobile optimizations
   const mobileOptimizations = useMobileOptimizations();
+
+  // Global maintenance mode redirect
+  useEffect(() => {
+    const currentPath = router.pathname;
+    
+    // Only redirect if we're not already on the maintenance page
+    if (currentPath !== '/maintenance' && currentPath !== '/maintenance/index') {
+      router.push('/maintenance');
+    }
+  }, [router, router.pathname]);
 
   useEffect(() => {
     // Add custom cursor for better UX
