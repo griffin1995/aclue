@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Gift, Mail, CheckCircle, Sparkles, Brain, Zap } from 'lucide-react';
-import NeuralNetworkBackground from '@/components/ui/NeuralNetworkBackground';
+// import NeuralNetworkBackground from '@/components/ui/NeuralNetworkBackground';
 
 export default function MaintenanceMode() {
   const [email, setEmail] = useState('');
@@ -42,18 +42,15 @@ export default function MaintenanceMode() {
       </Head>
 
       <div className="h-screen w-full bg-gradient-to-br from-slate-900 via-blue-900 to-purple-900 flex items-center justify-center relative overflow-hidden">
-        {/* Neural Network Background */}
-        <NeuralNetworkBackground 
-          nodeCount={120}
-          connectionDistance={180}
-          animationSpeed={0.3}
-          colors={{
-            primary: '#3b82f6',
-            secondary: '#8b5cf6',
-            accent: '#06b6d4',
-            connections: '#3b82f6'
-          }}
-        />
+        {/* Animated Background Pattern */}
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 via-purple-600/20 to-cyan-600/20 animate-pulse"></div>
+          <div className="absolute inset-0 opacity-30">
+            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-bounce"></div>
+            <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl animate-bounce" style={{ animationDelay: '1s' }}></div>
+            <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-cyan-500/20 rounded-full blur-3xl animate-bounce" style={{ animationDelay: '2s' }}></div>
+          </div>
+        </div>
 
         {/* Overlay for better text readability */}
         <div className="absolute inset-0 bg-black/20 backdrop-blur-[1px]" />

@@ -154,9 +154,17 @@ export const NeuralNetworkBackground: React.FC<NeuralNetworkBackgroundProps> = (
           connection.from.x, connection.from.y,
           connection.to.x, connection.to.y
         );
-        gradient.addColorStop(0, `${colors.connections}${Math.floor(connection.opacity * 255).toString(16).padStart(2, '0')}`);
-        gradient.addColorStop(0.5, `${colors.accent}${Math.floor(connection.opacity * 128).toString(16).padStart(2, '0')}`);
-        gradient.addColorStop(1, `${colors.connections}${Math.floor(connection.opacity * 255).toString(16).padStart(2, '0')}`);
+        // Convert hex to rgba for better browser compatibility
+        const hexToRgba = (hex: string, alpha: number) => {
+          const r = parseInt(hex.slice(1, 3), 16);
+          const g = parseInt(hex.slice(3, 5), 16);
+          const b = parseInt(hex.slice(5, 7), 16);
+          return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+        };
+        
+        gradient.addColorStop(0, hexToRgba(colors.connections, connection.opacity));
+        gradient.addColorStop(0.5, hexToRgba(colors.accent, connection.opacity * 0.5));
+        gradient.addColorStop(1, hexToRgba(colors.connections, connection.opacity));
         
         ctx.strokeStyle = gradient;
         ctx.lineWidth = connection.strength * 1.5;
@@ -178,9 +186,17 @@ export const NeuralNetworkBackground: React.FC<NeuralNetworkBackgroundProps> = (
           node.x, node.y, 0,
           node.x, node.y, node.size * 3
         );
-        gradient.addColorStop(0, `${color}${Math.floor(node.opacity * 255).toString(16).padStart(2, '0')}`);
-        gradient.addColorStop(0.3, `${color}${Math.floor(node.opacity * 128).toString(16).padStart(2, '0')}`);
-        gradient.addColorStop(1, `${color}00`);
+        // Convert hex to rgba for better browser compatibility
+        const hexToRgba = (hex: string, alpha: number) => {
+          const r = parseInt(hex.slice(1, 3), 16);
+          const g = parseInt(hex.slice(3, 5), 16);
+          const b = parseInt(hex.slice(5, 7), 16);
+          return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+        };
+        
+        gradient.addColorStop(0, hexToRgba(color, node.opacity));
+        gradient.addColorStop(0.3, hexToRgba(color, node.opacity * 0.5));
+        gradient.addColorStop(1, hexToRgba(color, 0));
         
         ctx.fillStyle = gradient;
         ctx.fill();
@@ -188,7 +204,14 @@ export const NeuralNetworkBackground: React.FC<NeuralNetworkBackgroundProps> = (
         // Inner bright core
         ctx.beginPath();
         ctx.arc(node.x, node.y, node.size * 0.4, 0, Math.PI * 2);
-        ctx.fillStyle = `${color}${Math.floor(Math.min(1, node.opacity * 1.5) * 255).toString(16).padStart(2, '0')}`;
+        const hexToRgba = (hex: string, alpha: number) => {
+          const r = parseInt(hex.slice(1, 3), 16);
+          const g = parseInt(hex.slice(3, 5), 16);
+          const b = parseInt(hex.slice(5, 7), 16);
+          return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+        };
+        
+        ctx.fillStyle = hexToRgba(color, Math.min(1, node.opacity * 1.5));
         ctx.fill();
       });
 
