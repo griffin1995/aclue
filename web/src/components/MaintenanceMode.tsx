@@ -41,7 +41,7 @@ export default function MaintenanceMode() {
         <meta name="robots" content="noindex, nofollow" />
       </Head>
 
-      <div className="h-screen w-full bg-gradient-to-br from-slate-900 via-blue-900 to-purple-900 flex items-center justify-center relative overflow-hidden">
+      <div className="min-h-screen w-full bg-gradient-to-br from-slate-900 via-blue-900 to-purple-900 flex items-center justify-center relative overflow-hidden py-8">
         {/* Animated Background Pattern */}
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 via-purple-600/20 to-cyan-600/20 animate-pulse"></div>
@@ -56,7 +56,7 @@ export default function MaintenanceMode() {
         <div className="absolute inset-0 bg-black/20 backdrop-blur-[1px]" />
 
         {/* Main Content */}
-        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
+        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center w-full">
           {/* Logo */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -70,7 +70,7 @@ export default function MaintenanceMode() {
               </div>
               <div className="absolute -inset-3 bg-gradient-to-br from-blue-500 to-purple-600 rounded-3xl opacity-20 blur-xl animate-pulse"></div>
             </div>
-            <span className="text-5xl font-bold text-white tracking-tight">prznt</span>
+            <span className="text-4xl md:text-5xl font-bold text-white tracking-tight">prznt</span>
           </motion.div>
 
           {/* Main Headline */}
@@ -80,7 +80,7 @@ export default function MaintenanceMode() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="mb-8"
           >
-            <h1 className="text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
               AI-Powered Gift
               <br />
               <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
