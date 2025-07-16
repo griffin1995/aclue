@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   Gift,
@@ -190,10 +191,10 @@ export default function DashboardPage() {
   return (
     <>
       <Head>
-        <title>Dashboard - GiftSync</title>
+        <title>Dashboard - prznt</title>
         <meta
           name="description"
-          content="Your personalised GiftSync dashboard with recommendations, gift links, and preferences."
+          content="Your personalised prznt dashboard with recommendations, gift links, and preferences."
         />
         <meta name="robots" content="noindex" />
       </Head>
@@ -205,11 +206,17 @@ export default function DashboardPage() {
             <div className="flex items-center justify-between h-16">
               {/* Logo */}
               <Link href="/" className="flex items-center gap-3">
-                <div className="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
-                  <Gift className="w-5 h-5 text-white" />
+                <div className="w-8 h-8 bg-gray-50 rounded-lg flex items-center justify-center border border-gray-200">
+                  <Image 
+                    src="/logo.png" 
+                    alt="prznt logo" 
+                    width={20} 
+                    height={20}
+                    className="rounded"
+                  />
                 </div>
                 <span className="text-xl font-bold text-gray-900">
-                  GiftSync
+                  prznt
                 </span>
               </Link>
 

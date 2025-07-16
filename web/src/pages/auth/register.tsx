@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -177,7 +178,7 @@ export default function RegisterPage() {
       }
 
       // Show success message
-      toast.success('Account created successfully! Welcome to GiftSync.');
+      toast.success('Account created successfully! Welcome to prznt.');
 
       // Redirect to dashboard
       setTimeout(() => {
@@ -247,10 +248,16 @@ export default function RegisterPage() {
             transition={{ duration: 0.5 }}
           >
             <div className="inline-flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 bg-primary-600 rounded-2xl flex items-center justify-center">
-                <Gift className="w-6 h-6 text-white" />
+              <div className="w-12 h-12 bg-gray-50 rounded-2xl flex items-center justify-center border border-gray-200">
+                <Image 
+                  src="/logo.png" 
+                  alt="prznt logo" 
+                  width={24} 
+                  height={24}
+                  className="rounded-lg"
+                />
               </div>
-              <h1 className="text-2xl font-bold text-gray-900">GiftSync</h1>
+              <h1 className="text-2xl font-bold text-gray-900">prznt</h1>
             </div>
             <h2 className="text-xl font-semibold text-gray-900 mb-2">
               Create your account

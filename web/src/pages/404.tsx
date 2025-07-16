@@ -1,6 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Gift, Home, Search, ArrowLeft, Sparkles } from 'lucide-react';
 
@@ -8,7 +9,7 @@ export default function NotFoundPage() {
   return (
     <>
       <Head>
-        <title>Page Not Found - GiftSync</title>
+        <title>Page Not Found - prznt</title>
         <meta name="description" content="The page you're looking for doesn't exist." />
         <meta name="robots" content="noindex,nofollow" />
       </Head>
@@ -73,7 +74,13 @@ export default function NotFoundPage() {
             className="relative mb-8"
           >
             <div className="w-32 h-32 gradient-primary rounded-full flex items-center justify-center mx-auto shadow-glow-lg">
-              <Gift className="w-16 h-16 text-white" />
+              <Image 
+                src="/logo.png" 
+                alt="prznt logo" 
+                width={64} 
+                height={64}
+                className="rounded-lg"
+              />
             </div>
             
             {/* Floating sparkles */}

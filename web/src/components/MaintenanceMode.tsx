@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Gift, Mail, CheckCircle, Sparkles, Brain, Zap, ArrowRight, Users, Clock, Star } from 'lucide-react';
 import NeuralNetworkBackground from '@/components/ui/NeuralNetworkBackground';
@@ -37,7 +38,7 @@ export default function MaintenanceMode() {
           property="og:description"
           content="prznt is getting ready to launch! Sign up for early access to our AI-powered gift recommendation platform."
         />
-        <meta property="og:image" content="/images/og-image.jpg" />
+        <meta property="og:image" content="/logo.png" />
         <meta name="robots" content="noindex, nofollow" />
       </Head>
 
@@ -67,11 +68,17 @@ export default function MaintenanceMode() {
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
-              className="flex items-center gap-3 mb-8"
+              className="flex items-center gap-4 mb-8"
             >
               <div className="relative">
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-2xl">
-                  <Gift className="w-8 h-8 text-white" />
+                <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-2xl flex items-center justify-center shadow-2xl border border-white/20">
+                  <Image 
+                    src="/logo.png" 
+                    alt="prznt logo" 
+                    width={40} 
+                    height={40}
+                    className="rounded-lg"
+                  />
                 </div>
                 <div className="absolute -inset-2 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl opacity-20 blur-xl animate-pulse"></div>
               </div>
