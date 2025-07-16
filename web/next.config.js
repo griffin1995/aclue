@@ -64,7 +64,7 @@ const nextConfig = {
   
   images: {
     // Disable image optimization for static export
-    unoptimized: true,
+    unoptimized: process.env.STATIC_EXPORT === 'true' ? true : false,
     
     // Allowed external image domains for security and performance
     remotePatterns: [
@@ -241,7 +241,7 @@ const nextConfig = {
   // ===========================================================================
   
   // Build output mode for different deployment targets
-  output: process.env.BUILD_STANDALONE === 'true' ? 'standalone' : 'export',  // Static export for Cloudflare Pages
+  output: process.env.STATIC_EXPORT === 'true' ? 'export' : (process.env.BUILD_STANDALONE === 'true' ? 'standalone' : undefined),
   
   // ===========================================================================
   // EXPERIMENTAL FEATURES
@@ -301,6 +301,8 @@ const nextConfig = {
     images: {
       unoptimized: true,
     },
+    trailingSlash: true,
+    skipTrailingSlashRedirect: true,
   }),
   
   // ===========================================================================
