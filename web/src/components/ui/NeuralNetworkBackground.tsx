@@ -99,6 +99,14 @@ export const NeuralNetworkBackground: React.FC<NeuralNetworkBackgroundProps> = (
     const animate = () => {
       ctx.clearRect(0, 0, dimensions.width, dimensions.height);
 
+      // Helper function to convert hex to rgba
+      const hexToRgba = (hex: string, alpha: number) => {
+        const r = parseInt(hex.slice(1, 3), 16);
+        const g = parseInt(hex.slice(3, 5), 16);
+        const b = parseInt(hex.slice(5, 7), 16);
+        return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+      };
+
       // Update nodes
       nodesRef.current.forEach(node => {
         // Update position
@@ -154,13 +162,6 @@ export const NeuralNetworkBackground: React.FC<NeuralNetworkBackgroundProps> = (
           connection.from.x, connection.from.y,
           connection.to.x, connection.to.y
         );
-        // Convert hex to rgba for better browser compatibility
-        const hexToRgba = (hex: string, alpha: number) => {
-          const r = parseInt(hex.slice(1, 3), 16);
-          const g = parseInt(hex.slice(3, 5), 16);
-          const b = parseInt(hex.slice(5, 7), 16);
-          return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-        };
         
         gradient.addColorStop(0, hexToRgba(colors.connections, connection.opacity));
         gradient.addColorStop(0.5, hexToRgba(colors.accent, connection.opacity * 0.5));
@@ -186,13 +187,6 @@ export const NeuralNetworkBackground: React.FC<NeuralNetworkBackgroundProps> = (
           node.x, node.y, 0,
           node.x, node.y, node.size * 3
         );
-        // Convert hex to rgba for better browser compatibility
-        const hexToRgba = (hex: string, alpha: number) => {
-          const r = parseInt(hex.slice(1, 3), 16);
-          const g = parseInt(hex.slice(3, 5), 16);
-          const b = parseInt(hex.slice(5, 7), 16);
-          return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-        };
         
         gradient.addColorStop(0, hexToRgba(color, node.opacity));
         gradient.addColorStop(0.3, hexToRgba(color, node.opacity * 0.5));
@@ -204,13 +198,6 @@ export const NeuralNetworkBackground: React.FC<NeuralNetworkBackgroundProps> = (
         // Inner bright core
         ctx.beginPath();
         ctx.arc(node.x, node.y, node.size * 0.4, 0, Math.PI * 2);
-        const hexToRgba = (hex: string, alpha: number) => {
-          const r = parseInt(hex.slice(1, 3), 16);
-          const g = parseInt(hex.slice(3, 5), 16);
-          const b = parseInt(hex.slice(5, 7), 16);
-          return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-        };
-        
         ctx.fillStyle = hexToRgba(color, Math.min(1, node.opacity * 1.5));
         ctx.fill();
       });

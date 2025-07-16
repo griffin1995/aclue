@@ -23,7 +23,6 @@ import { useAuth } from "@/context/AuthContext";
 import { formatDate } from "../../utils/formatting";
 import { User as UserType, Recommendation, GiftLink } from "@/types";
 import Link from "next/link";
-import Image from "next/image";
 import toast from "react-hot-toast";
 
 export default function DashboardPage() {
