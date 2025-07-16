@@ -63,8 +63,8 @@ const nextConfig = {
   // Next.js image optimization with CDN and external domain support
   
   images: {
-    // Disable image optimization for static export
-    unoptimized: process.env.STATIC_EXPORT === 'true' ? true : false,
+    // Enable image optimization for better performance
+    unoptimized: false,
     
     // Allowed external image domains for security and performance
     remotePatterns: [
@@ -241,7 +241,7 @@ const nextConfig = {
   // ===========================================================================
   
   // Build output mode for different deployment targets
-  output: process.env.STATIC_EXPORT === 'true' ? 'export' : (process.env.BUILD_STANDALONE === 'true' ? 'standalone' : undefined),
+  output: process.env.BUILD_STANDALONE === 'true' ? 'standalone' : undefined,
   
   // ===========================================================================
   // EXPERIMENTAL FEATURES
@@ -294,16 +294,8 @@ const nextConfig = {
   
   trailingSlash: true,            // Add trailing slashes for S3 compatibility
   
-  // Enable static export for Cloudflare Pages
-  ...(process.env.STATIC_EXPORT === 'true' && {
-    output: 'export',
-    distDir: 'out',
-    images: {
-      unoptimized: true,
-    },
-    trailingSlash: true,
-    skipTrailingSlashRedirect: true,
-  }),
+  // Enterprise deployment configuration
+  // Remove static export - use SSR for better performance and features
   
   // ===========================================================================
   // PAGE EXTENSIONS

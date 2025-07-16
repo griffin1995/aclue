@@ -72,7 +72,7 @@ export default function MaintenanceMode() {
             >
               <div className="relative">
                 <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-2xl flex items-center justify-center shadow-2xl border border-white/20">
-                  <img 
+                  <Image 
                     src="/logo.png" 
                     alt="prznt logo" 
                     width={40} 
