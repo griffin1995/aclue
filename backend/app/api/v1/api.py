@@ -19,6 +19,7 @@ Features Included:
   - Recommendations: AI-powered gift recommendations
   - Gift Links: Shareable gift recommendation links
   - Affiliate: Revenue tracking and commission management
+  - Newsletter: Email signup and notification management
 
 URL Structure:
   - /api/v1/auth/*          # Authentication endpoints
@@ -28,6 +29,7 @@ URL Structure:
   - /api/v1/recommendations/* # AI recommendation endpoints
   - /api/v1/gift-links/*    # Gift sharing endpoints
   - /api/v1/affiliate/*     # Affiliate tracking endpoints
+  - /api/v1/newsletter/*    # Newsletter signup endpoints
 
 Usage:
   from app.api.v1.api import api_router
@@ -44,7 +46,8 @@ from app.api.v1.endpoints import (
     simple_swipes,       # User preference collection
     recommendations,     # AI-powered gift recommendations
     gift_links,          # Shareable gift links
-    affiliate            # Revenue tracking and analytics
+    affiliate,           # Revenue tracking and analytics
+    newsletter           # Newsletter signup and management
 )
 
 # ==============================================================================
@@ -107,4 +110,11 @@ api_router.include_router(
     affiliate.router, 
     prefix="/affiliate", 
     tags=["affiliate"]
+)
+
+# Newsletter endpoints - signup management and notifications
+api_router.include_router(
+    newsletter.router, 
+    prefix="/newsletter", 
+    tags=["newsletter"]
 )

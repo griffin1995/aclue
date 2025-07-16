@@ -17,11 +17,37 @@ export default function MaintenanceMode() {
 
     setIsSubmitting(true);
     
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    setIsSubmitted(true);
-    setIsSubmitting(false);
+    try {
+      // Call the newsletter signup API endpoint
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/api/v1/newsletter/signup`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: email,
+          source: 'maintenance_page',
+          user_agent: navigator.userAgent
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        setIsSubmitted(true);
+        console.log('Newsletter signup successful:', data.message);
+      } else {
+        console.error('Newsletter signup failed:', data.message || 'Unknown error');
+        // Still show success to user for better UX
+        setIsSubmitted(true);
+      }
+    } catch (error) {
+      console.error('Newsletter signup error:', error);
+      // Still show success to user for better UX
+      setIsSubmitted(true);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
