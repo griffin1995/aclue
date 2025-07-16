@@ -250,7 +250,6 @@ const nextConfig = {
   
   experimental: {
     scrollRestoration: true,        // Restore scroll position on navigation
-    runtime: 'experimental-edge',   // Enable edge runtime for Cloudflare Pages
   },
 
   // ===========================================================================
