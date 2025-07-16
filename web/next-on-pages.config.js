@@ -34,7 +34,7 @@ module.exports = {
     NEXT_PUBLIC_MAINTENANCE_MODE: process.env.NEXT_PUBLIC_MAINTENANCE_MODE,
   },
   
-  // Compatibility settings
+  // Compatibility settings - ensure nodejs_compat is set in Cloudflare Pages dashboard
   compatibility: {
     // Enable modern JavaScript features
     date: '2023-10-01',
