@@ -261,3 +261,100 @@ With authentication fully resolved, the system is ready for:
 4. **Production deployment**: System ready for staging/production environments
 
 The authentication system is now enterprise-ready and meets all security requirements.
+
+---
+
+## Cloudflare Pages Deployment - PRODUCTION READY ✅
+
+### Deployment Architecture - ENTERPRISE SSR CONFIGURATION
+**Status**: Successfully deployed with enterprise-grade SSR configuration
+**URL**: https://prznt.app
+**Backend**: https://giftsync-backend-production.up.railway.app
+**Database**: Supabase PostgreSQL
+
+### Final Working Configuration
+**Build Command**: `npm run pages:deploy`
+**Build Output**: `.vercel/output/static`
+**Root Directory**: `/web`
+**Node Version**: 18.20.8
+
+### Environment Variables (Cloudflare Pages)
+```bash
+NODE_VERSION=18
+NEXT_PUBLIC_MAINTENANCE_MODE=true
+NEXT_PUBLIC_API_URL=https://giftsync-backend-production.up.railway.app
+NEXT_PUBLIC_WEB_URL=https://prznt.app
+```
+
+### Critical Configuration Files
+1. **`wrangler.toml`**: Cloudflare Pages configuration with nodejs_compat flag
+2. **`next-on-pages.config.js`**: Next.js adapter configuration for Cloudflare Pages
+3. **`package.json`**: Updated with @cloudflare/next-on-pages dependency
+
+### API Routes Edge Runtime Configuration
+All API routes configured for Cloudflare Pages edge runtime:
+- `/api/array/[...path]` - PostHog array proxy
+- `/api/e` - PostHog events proxy  
+- `/api/flags` - PostHog feature flags proxy
+- `/api/posthog-decide` - PostHog decide endpoint proxy
+- `/api/posthog-proxy` - General PostHog proxy
+
+Each route exports `export const runtime = 'edge';`
+
+### Page Structure - FINAL CONFIGURATION
+**Homepage Structure**: Simplified for maintenance mode deployment
+- **`/` (index.tsx)**: Maintenance page (default landing page)
+- **`/landingpage`**: Full prznt application (alpha version)
+- **`/maintenance`**: Dedicated maintenance page route (if needed)
+
+### Key Features Working
+✅ **Static Assets**: Logo and favicon loading correctly
+✅ **SSR Performance**: Enterprise-grade server-side rendering
+✅ **API Integration**: All backend API calls working via Railway
+✅ **Analytics**: PostHog integration working with proxy endpoints
+✅ **Edge Runtime**: All API routes optimised for Cloudflare edge
+✅ **Maintenance Mode**: Professional maintenance page with email signup
+✅ **Alpha Access**: Working link to full application
+
+### Logo Implementation - RESOLVED
+**Issue**: Logo not displaying on maintenance page
+**Solution**: 
+- Switched from Next.js Image component to standard HTML img tag
+- Added proper error handling and logging
+- Logo file located at `/web/public/logo.png`
+- Error fallback to Gift icon if logo fails to load
+
+### Navigation Flow - FINAL IMPLEMENTATION
+1. **prznt.app** → Maintenance page (immediate load)
+2. **"Explore Alpha Version"** → `/landingpage` (full application)
+3. **No redirects or complex logic** → Clean, direct page routing
+
+### Deployment Success Metrics
+- **Build Time**: ~1-2 minutes (Next.js + Cloudflare adapter)
+- **Static Assets**: All loading correctly (logo, favicon, CSS)
+- **API Connectivity**: Backend integration working
+- **Performance**: Fast global edge deployment
+- **Security**: All hardcoded secrets removed from git history
+
+### Development Workflow - ESTABLISHED
+- **Dev Branch**: All changes pushed to dev first
+- **Main Branch**: Only after confirmation on dev
+- **Deployment**: Auto-deploys from main branch
+- **Testing**: Cloudflare Pages deployment working correctly
+
+### Technical Stack Summary
+- **Frontend**: Next.js 14 with SSR on Cloudflare Pages
+- **Backend**: FastAPI on Railway
+- **Database**: Supabase PostgreSQL
+- **CDN**: Cloudflare global edge network
+- **Analytics**: PostHog with proxy endpoints
+- **Deployment**: Automated from GitHub main branch
+
+### Future Maintenance Notes
+- **Logo Updates**: Replace `/web/public/logo.png` as needed
+- **Maintenance Toggle**: Update MaintenanceMode component
+- **API Changes**: Backend deployed separately on Railway
+- **Analytics**: PostHog events tracked via edge-optimised proxies
+- **Static Assets**: All served via Cloudflare CDN for optimal performance
+
+The deployment is now enterprise-ready with professional maintenance mode and working alpha access.

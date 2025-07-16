@@ -176,13 +176,16 @@ class Settings(BaseSettings):
     # ===========================================================================
     # EMAIL CONFIGURATION
     # ===========================================================================
-    # SMTP email service settings for notifications
+    # Email service settings for notifications
     
     SMTP_HOST: Optional[str] = None               # SMTP server hostname
     SMTP_PORT: int = 587                          # SMTP server port (587 for TLS)
     SMTP_USERNAME: Optional[str] = None           # SMTP authentication username
     SMTP_PASSWORD: Optional[str] = None           # SMTP authentication password
     SMTP_USE_TLS: bool = True                     # Enable TLS encryption
+    
+    # Resend API configuration (preferred email service)
+    RESEND_API_KEY: Optional[str] = None          # Resend API key for email sending
     
     # ===========================================================================
     # EXTERNAL API CONFIGURATION
