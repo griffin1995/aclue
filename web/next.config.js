@@ -250,6 +250,7 @@ const nextConfig = {
   
   experimental: {
     scrollRestoration: true,        // Restore scroll position on navigation
+    runtime: 'experimental-edge',   // Enable edge runtime for Cloudflare Pages
   },
 
   // ===========================================================================
@@ -294,8 +295,7 @@ const nextConfig = {
   
   trailingSlash: true,            // Add trailing slashes for S3 compatibility
   
-  // Enterprise deployment configuration
-  // Remove static export - use SSR for better performance and features
+  // Cloudflare Pages SSR configuration - handled in existing experimental section below
   
   // ===========================================================================
   // PAGE EXTENSIONS
