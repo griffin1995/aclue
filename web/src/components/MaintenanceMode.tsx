@@ -60,9 +60,9 @@ export default function MaintenanceMode() {
         <div className="absolute inset-0 bg-black/30 backdrop-blur-[1px]" />
 
         {/* Main Content Container */}
-        <div className="relative z-10 w-full flex flex-col lg:flex-row">
+        <div className="relative z-10 w-full flex flex-col lg:flex-row max-w-7xl mx-auto px-6 lg:px-8">
           {/* Left Column - Hero Content */}
-          <div className="w-full lg:w-1/2 flex flex-col justify-center px-6 lg:px-12 py-8 lg:py-16">
+          <div className="w-full lg:w-1/2 flex flex-col justify-center px-8 lg:px-16 py-12 lg:py-20">
             {/* Logo */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -78,7 +78,13 @@ export default function MaintenanceMode() {
                     width={40} 
                     height={40}
                     className="rounded-lg"
+                    onError={(e) => {
+                      console.error('Logo failed to load:', e);
+                      // Fallback to a simple icon if logo fails
+                      (e.target as HTMLImageElement).style.display = 'none';
+                    }}
                   />
+                  <Gift className="w-8 h-8 text-white" style={{ display: 'none' }} id="logo-fallback" />
                 </div>
                 <div className="absolute -inset-2 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl opacity-20 blur-xl animate-pulse"></div>
               </div>
@@ -164,17 +170,17 @@ export default function MaintenanceMode() {
               transition={{ duration: 0.8, delay: 0.8 }}
             >
               <Link
-                href="/"
+                href="/?alpha=true"
                 className="inline-flex items-center gap-2 text-blue-300 hover:text-blue-200 font-medium transition-colors group"
               >
-                <span>Explore Current Version</span>
+                <span>Explore Alpha Version</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </motion.div>
           </div>
 
           {/* Right Column - Signup Form */}
-          <div className="w-full lg:w-1/2 flex flex-col justify-center px-6 lg:px-12 py-8 lg:py-16">
+          <div className="w-full lg:w-1/2 flex flex-col justify-center px-8 lg:px-16 py-12 lg:py-20">
             {/* Email Signup Card */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
