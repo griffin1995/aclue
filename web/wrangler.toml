@@ -1,0 +1,23 @@
+# Cloudflare Pages Configuration for prznt
+# This file configures Cloudflare Pages deployment settings
+
+name = "prznt"
+compatibility_date = "2023-10-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Environment variables (these should be set in Cloudflare dashboard)
+[vars]
+NODE_ENV = "production"
+
+# Build configuration
+[build]
+command = "npm run pages:deploy"
+cwd = "web"
+
+# Functions configuration
+[functions]
+node_compat = true
+
+# Assets configuration
+[assets]
+directory = "web/public"
