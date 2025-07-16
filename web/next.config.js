@@ -294,6 +294,15 @@ const nextConfig = {
   
   trailingSlash: true,            // Add trailing slashes for S3 compatibility
   
+  // Enable static export for Cloudflare Pages
+  ...(process.env.STATIC_EXPORT === 'true' && {
+    output: 'export',
+    distDir: 'out',
+    images: {
+      unoptimized: true,
+    },
+  }),
+  
   // ===========================================================================
   // PAGE EXTENSIONS
   // ===========================================================================
