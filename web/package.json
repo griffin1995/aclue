@@ -9,9 +9,9 @@
     "start": "next start",
     "lint": "next lint",
     "export": "next export",
-    "pages:build": "@cloudflare/next-on-pages",
+    "pages:build": "npx @cloudflare/next-on-pages",
     "pages:dev": "npx @cloudflare/next-on-pages --watch",
-    "pages:deploy": "npm run build && npm run pages:build",
+    "pages:deploy": "next build && npx @cloudflare/next-on-pages",
     "type-check": "tsc --noEmit",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -53,7 +53,7 @@
     "zod": "^3.22.0"
   },
   "devDependencies": {
-    "@cloudflare/next-on-pages": "^1.8.0",
+    "@cloudflare/next-on-pages": "^1.13.12",
     "@testing-library/jest-dom": "^6.1.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.5.0",
