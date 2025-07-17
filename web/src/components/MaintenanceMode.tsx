@@ -18,8 +18,9 @@ export default function MaintenanceMode() {
     setIsSubmitting(true);
     
     try {
-      // Call the newsletter signup API endpoint
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/api/v1/newsletter/signup`, {
+      // Call the newsletter signup API endpoint (directly to backend in production)
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://giftsync-backend-production.up.railway.app';
+      const response = await fetch(`${apiUrl}/api/v1/newsletter/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
