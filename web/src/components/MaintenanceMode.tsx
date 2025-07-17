@@ -18,9 +18,9 @@ export default function MaintenanceMode() {
     setIsSubmitting(true);
     
     try {
-      // Call the newsletter signup API endpoint (directly to backend in production)
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://giftsync-backend-production.up.railway.app';
-      const response = await fetch(`${apiUrl}/api/v1/newsletter/signup`, {
+      // Call the newsletter signup API endpoint (always use backend directly)
+      const backendUrl = 'https://giftsync-backend-production.up.railway.app';
+      const response = await fetch(`${backendUrl}/api/v1/newsletter/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -32,9 +32,13 @@ export default function MaintenanceMode() {
         }),
       });
 
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+
       const data = await response.json();
 
-      if (response.ok && data.success) {
+      if (data.success) {
         setIsSubmitted(true);
         console.log('Newsletter signup successful:', data.message);
       } else {
@@ -99,24 +103,7 @@ export default function MaintenanceMode() {
             >
               <div className="relative">
                 <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-2xl flex items-center justify-center shadow-2xl border border-white/20">
-                  <img 
-                    src="/logo.png" 
-                    alt="prznt logo" 
-                    width={40} 
-                    height={40}
-                    className="rounded-lg"
-                    onError={(e) => {
-                      console.error('Logo failed to load from /logo.png');
-                      // Show fallback icon
-                      (e.target as HTMLImageElement).style.display = 'none';
-                      const fallback = document.getElementById('logo-fallback');
-                      if (fallback) fallback.style.display = 'block';
-                    }}
-                    onLoad={() => {
-                      console.log('Logo loaded successfully from /logo.png');
-                    }}
-                  />
-                  <Gift className="w-8 h-8 text-white" style={{ display: 'none' }} id="logo-fallback" />
+                  <Gift className="w-8 h-8 text-white" />
                 </div>
                 <div className="absolute -inset-2 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl opacity-20 blur-xl animate-pulse"></div>
               </div>
