@@ -1,8 +1,13 @@
-# Prznt is a data-led insight layer that transforms how gifts are chosen, letting recipients share who they are, not what they want.
+# Prznt 
+A data-led insight layer that transforms how gifts are chosen, letting recipients share who they are, not what they want.
 
 ## 🎯 Project Overview
 
-GiftSync is an AI-powered gift recommendation platform using swipe-based preference discovery to generate personalized gift suggestions while maintaining the element of surprise. The platform targets the £45B global gift market with a projected £2.5M revenue by Year 3.
+Prznt is a data-led gifting platform that lets recipients privately share their preferences through swipe-based discovery. Instead of creating product wishlists, users build dynamic taste profiles that help others choose better gifts — while preserving the magic of surprise.
+
+Backed by a growing need for intelligent gifting, Prznt operates within the £400B+ global gifting market and forecasts £2.5M in Year 3 revenue through affiliate partnerships and data-driven monetization.
+
+Prznt bridges the gap between thoughtful giving and modern digital behavior — solving the universal problem of gift-giving uncertainty through insight, not awkwardness.
 
 ### Business Context
 - **Target Market**: £45B global gift market, £9.3B UK market
