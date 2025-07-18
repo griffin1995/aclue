@@ -1,4 +1,4 @@
-# GiftSync - AI-Powered Gift Recommendation Platform
+# Prznt is a data-led insight layer that transforms how gifts are chosen, letting recipients share who they are, not what they want.
 
 ## 🎯 Project Overview
 
