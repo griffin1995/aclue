@@ -10,10 +10,50 @@ Backed by a growing need for intelligent gifting, Prznt operates within the £40
 Prznt bridges the gap between thoughtful giving and modern digital behavior — solving the universal problem of gift-giving uncertainty through insight, not awkwardness.
 
 ### Business Context
-- **Target Market**: £45B global gift market, £9.3B UK market
-- **Revenue Model**: 7.5% average affiliate commissions + premium subscriptions  
-- **User Targets**: 1M+ users by Year 3, 25%+ conversion rate improvement
-- **Key Segments**: Digital natives (18-35), busy professionals (25-45), corporate gifting
+- **🎯 Target Market**
+	•	Operates within the £400B+ global gifting industry, covering personal, seasonal, and corporate occasions.
+	•	Focuses on the fast-growing £100B+ digital gifting segment, where consumers increasingly seek convenience, personalisation, and surprise.
+	•	UK market opportunity: ~£9.3B, with high ecommerce adoption and strong cultural gifting traditions.
+
+⸻
+
+- **💸 Revenue Model**
+	1.	Affiliate Commissions
+	•	Partners with retailers and marketplaces.
+	•	Earns an average 7.5% commission per purchase made through Prznt-generated gift links.
+	2.	Premium Subscriptions (future roadmap)
+	•	Optional upgrades for power users and businesses.
+	•	Includes features like deeper taste analytics, priority suggestions, and branded profiles.
+	3.	Future Revenue Streams (optional)
+	•	Insight licensing for corporate gifting tools.
+	•	API access for ecommerce platforms.
+
+⸻
+
+- **📈 User Growth Targets**
+	•	1M+ cumulative users by Year 3, driven by shareable, receiver-created profiles.
+	•	Viral loop: every gift shared brings a new user into the ecosystem.
+	•	Targeting a 25–30% improvement in gift satisfaction, measured via feedback loops and retention metrics.
+
+⸻
+
+- **👥 Primary Customer Segments**
+	1.	Digital Natives (18–35)
+	•	Social, tech-savvy users who want to give meaningful gifts with minimal friction.
+	•	Comfortable sharing personality data and expecting personalization in return.
+	2.	Busy Professionals (25–45)
+	•	Time-constrained but thoughtful — want smarter ways to shop for friends, partners, and colleagues.
+	3.	Corporate Gifting & HR Teams
+	•	Use cases in employee recognition, client gifting, and workplace culture tools.
+	•	Prznt can streamline discovery while preserving recipient delight.
+
+⸻
+
+- **🧠 Why Now?**
+	•	Wishlists are outdated: Static, awkward, and often ignored.
+	•	AI-only solutions fall short: Cold, inaccurate, and impersonal without input from the receiver.
+	•	Prznt offers a third way:
+Receiver-led. AI-enhanced. Surprise preserved.
 
 ## 🎉 MVP COMPLETION ACHIEVED! ✅
 
