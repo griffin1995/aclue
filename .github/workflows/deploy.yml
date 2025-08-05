@@ -260,11 +260,45 @@ jobs:
           else
             echo "❌ API token is invalid or expired"
             echo "Response: $response"
+            exit 1
+          fi
+          
+          echo ""
+          echo "🔍 Checking account access..."
+          account_response=$(curl -s -X GET "https://api.cloudflare.com/client/v4/accounts/${{ secrets.CLOUDFLARE_ACCOUNT_ID }}" \
+               -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
+               -H "Content-Type: application/json")
+          
+          account_success=$(echo $account_response | jq -r '.success // false')
+          if [ "$account_success" = "true" ]; then
+            echo "✅ Account access is valid"
+            account_name=$(echo $account_response | jq -r '.result.name')
+            echo "Account name: $account_name"
+          else
+            echo "❌ Cannot access account"
+            echo "Response: $account_response"
+            exit 1
+          fi
+          
+          echo ""
+          echo "🔍 Checking Pages project access..."
+          pages_response=$(curl -s -X GET "https://api.cloudflare.com/client/v4/accounts/${{ secrets.CLOUDFLARE_ACCOUNT_ID }}/pages/projects/prznt" \
+               -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
+               -H "Content-Type: application/json")
+          
+          pages_success=$(echo $pages_response | jq -r '.success // false')
+          if [ "$pages_success" = "true" ]; then
+            echo "✅ Pages project 'prznt' is accessible"
+            project_name=$(echo $pages_response | jq -r '.result.name')
+            echo "Project name: $project_name"
+          else
+            echo "❌ Cannot access Pages project 'prznt'"
+            echo "Response: $pages_response"
             echo ""
-            echo "🔄 To fix this issue:"
-            echo "1. Go to https://dash.cloudflare.com/profile/api-tokens"
-            echo "2. Create a new API token with Cloudflare Pages:Edit permissions"
-            echo "3. Update the CLOUDFLARE_API_TOKEN secret in GitHub"
+            echo "🔄 This could mean:"
+            echo "1. The project name 'prznt' doesn't exist"
+            echo "2. The API token doesn't have Cloudflare Pages:Edit permissions"
+            echo "3. The account ID is incorrect"
             exit 1
           fi
 
