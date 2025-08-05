@@ -1,5 +1,5 @@
 """
-GiftSync Shareable Gift Links API Endpoints
+aclue Shareable Gift Links API Endpoints
 
 Manages creation, sharing, and tracking of shareable gift recommendation links.
 Enables users to create curated gift collections that can be shared with friends,
@@ -125,7 +125,7 @@ async def create_gift_link(
         link_id = str(uuid.uuid4())
         
         # Create share URL
-        share_url = f"https://app.giftsync.com/gifts/{link_token}"
+        share_url = f"https://aclue.app/gifts/{link_token}"
         
         # Mock products for the gift link (in production, would fetch from Supabase based on product_ids)
         mock_products = [
@@ -187,7 +187,7 @@ async def get_user_gift_links(
                 "title": "Tech Essentials Collection",
                 "description": "Perfect gadgets for the tech enthusiast",
                 "link_token": "abc123def456",
-                "share_url": "https://app.giftsync.com/gifts/abc123def456",
+                "share_url": "https://aclue.app/gifts/abc123def456",
                 "user_id": current_user["id"],
                 "products": [
                     {
@@ -239,7 +239,7 @@ async def get_user_gift_links(
                 "title": "Coffee Lover's Paradise",
                 "description": "Everything needed for the perfect coffee experience",
                 "link_token": "xyz789uvw123",
-                "share_url": "https://app.giftsync.com/gifts/xyz789uvw123",
+                "share_url": "https://aclue.app/gifts/xyz789uvw123",
                 "user_id": current_user["id"],
                 "products": [
                     {
@@ -307,7 +307,7 @@ async def get_gift_link_by_token(link_token: str):
                 "title": "Tech Essentials Collection",
                 "description": "Perfect gadgets for the tech enthusiast",
                 "link_token": link_token,
-                "share_url": f"https://app.giftsync.com/gifts/{link_token}",
+                "share_url": f"https://aclue.app/gifts/{link_token}",
                 "user_id": "user_123",
                 "products": [
                     {

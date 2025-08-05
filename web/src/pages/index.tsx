@@ -54,7 +54,7 @@ export default function HomePage() {
       name: 'Sarah Johnson',
       role: 'Gift Enthusiast',
       avatar: '/images/testimonials/sarah.jpg',
-      content: 'GiftSync helped me find the perfect birthday gift for my sister. The AI recommendations were spot-on!',
+      content: 'aclue helped me find the perfect birthday gift for my sister. The data-led insights were spot-on!',
       rating: 5,
     },
     {
@@ -76,21 +76,21 @@ export default function HomePage() {
   return (
     <>
       <Head>
-        <title>GiftSync - AI-Powered Gift Recommendations</title>
+        <title>aclue - A data-led insight layer that transforms how gifts are chosen</title>
         <meta
           name="description"
-          content="Discover perfect gifts with AI. Swipe through products, get personalised recommendations, and create shareable gift links. Make gift-giving effortless with GiftSync."
+          content="A data-led insight layer that transforms how gifts are chosen. Swipe through products, get personalised recommendations, and create shareable gift links."
         />
         <meta name="keywords" content="gifts, AI recommendations, gift ideas, personalised gifts, gift finder" />
-        <meta property="og:title" content="GiftSync - AI-Powered Gift Recommendations" />
+        <meta property="og:title" content="aclue - A data-led insight layer that transforms how gifts are chosen" />
         <meta
           property="og:description"
           content="Discover perfect gifts with AI. Swipe through products, get personalised recommendations, and create shareable gift links."
         />
         <meta property="og:image" content="/images/og-image.jpg" />
-        <meta property="og:url" content="https://giftsync.com" />
+        <meta property="og:url" content="https://aclue.app" />
         <meta name="twitter:card" content="summary_large_image" />
-        <link rel="canonical" href="https://giftsync.com" />
+        <link rel="canonical" href="https://aclue.app" />
       </Head>
 
       {/* Navigation */}
@@ -102,7 +102,7 @@ export default function HomePage() {
               <div className="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
                 <Gift className="w-5 h-5 text-white" />
               </div>
-              <span className="text-xl font-bold text-gray-900">GiftSync</span>
+              <span className="text-xl font-bold text-gray-900">aclue</span>
             </Link>
 
             {/* Navigation Links */}
@@ -272,7 +272,7 @@ export default function HomePage() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-              Why GiftSync Works Better
+              Why aclue Works Better
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               We've reinvented gift discovery using cutting-edge AI and intuitive design. 
@@ -468,7 +468,7 @@ export default function HomePage() {
               Available Everywhere
             </h2>
             <p className="text-lg text-primary-100 max-w-2xl mx-auto">
-              Access GiftSync on all your devices. Seamless sync across platforms means your preferences travel with you.
+              Access aclue on all your devices. Seamless sync across platforms means your preferences travel with you.
             </p>
           </motion.div>
 
@@ -564,10 +564,10 @@ export default function HomePage() {
                 <div className="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
                   <Gift className="w-5 h-5 text-white" />
                 </div>
-                <span className="text-xl font-bold">GiftSync</span>
+                <span className="text-xl font-bold">aclue</span>
               </div>
               <p className="text-gray-400 mb-4">
-                AI-powered gift recommendations that actually make sense.
+                A data-led insight layer that transforms how gifts are chosen.
               </p>
               <div className="flex gap-4">
                 <a href="#" className="text-gray-400 hover:text-white transition-colors">
@@ -614,7 +614,7 @@ export default function HomePage() {
           </div>
           
           <div className="border-t border-gray-800 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 GiftSync. All rights reserved.</p>
+            <p>&copy; 2024 aclue. All rights reserved.</p>
           </div>
         </div>
       </footer>

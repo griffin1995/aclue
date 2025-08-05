@@ -66,7 +66,7 @@ async def newsletter_signup(
     2. Checks for existing subscription
     3. Stores signup in database
     4. Sends welcome email to subscriber
-    5. Sends admin notification to contact@prznt.app
+    5. Sends admin notification to contact@aclue.app
     
     Args:
         request: Newsletter signup request containing email and source
@@ -215,7 +215,7 @@ async def send_newsletter_emails(email: str, signup_id: str, source: str):
     
     This function runs in the background to send:
     1. Welcome email to the subscriber
-    2. Admin notification to contact@prznt.app
+    2. Admin notification to contact@aclue.app
     
     Args:
         email: Subscriber email address
@@ -226,7 +226,7 @@ async def send_newsletter_emails(email: str, signup_id: str, source: str):
         # Send welcome email to subscriber
         welcome_success = await email_service.send_welcome_email(email, source)
         
-        # Send admin notification to contact@prznt.app
+        # Send admin notification to contact@aclue.app
         admin_success = await email_service.send_admin_notification(email, source, signup_id)
         
         # Update database with email sending status

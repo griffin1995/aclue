@@ -12,8 +12,8 @@ export default function OfflinePage() {
   return (
     <>
       <Head>
-        <title>Offline - GiftSync</title>
-        <meta name="description" content="GiftSync is currently offline. Please check your internet connection." />
+        <title>Offline - aclue</title>
+        <meta name="description" content="aclue is currently offline. Please check your internet connection." />
         <meta name="robots" content="noindex" />
       </Head>
 
@@ -52,7 +52,7 @@ export default function OfflinePage() {
               transition={{ delay: 0.6 }}
               className="text-gray-600 mb-8 leading-relaxed"
             >
-              GiftSync needs an internet connection to discover new gifts and sync your preferences. 
+              aclue needs an internet connection to discover new gifts and sync your preferences. 
               Please check your connection and try again.
             </motion.p>
 
@@ -133,7 +133,7 @@ export default function OfflinePage() {
             transition={{ delay: 1.4 }}
             className="mt-6 text-sm text-gray-500"
           >
-            GiftSync works best with a stable internet connection for real-time recommendations.
+            aclue works best with a stable internet connection for real-time recommendations.
           </motion.p>
         </div>
       </div>

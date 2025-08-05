@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Load initial data into the GiftSync database.
+Load initial data into the aclue database.
 This script creates sample categories, brands, and featured products.
 """
 
@@ -156,7 +156,7 @@ async def create_sample_products(categories: List[Category], retailers: List[Ret
             "image_urls": ["https://m.media-amazon.com/images/I/61SUj2aKoEL._AC_SL1500_.jpg"],
             "primary_image_url": "https://m.media-amazon.com/images/I/61SUj2aKoEL._AC_SL1500_.jpg",
             "product_url": "https://amazon.com/dp/B08N5WRWNW",
-            "affiliate_url": "https://amazon.com/dp/B08N5WRWNW?tag=giftsync-20",
+            "affiliate_url": "https://amazon.com/dp/B08N5WRWNW?tag=aclue-20",
             "average_rating": 4.5,
             "review_count": 12543,
             "availability_status": "in_stock",
@@ -178,7 +178,7 @@ async def create_sample_products(categories: List[Category], retailers: List[Ret
             "image_urls": ["https://m.media-amazon.com/images/I/81-Q8XCa2JL._AC_UL1500_.jpg"],
             "primary_image_url": "https://m.media-amazon.com/images/I/81-Q8XCa2JL._AC_UL1500_.jpg",
             "product_url": "https://amazon.com/dp/B08G9J44ST",
-            "affiliate_url": "https://amazon.com/dp/B08G9J44ST?tag=giftsync-20",
+            "affiliate_url": "https://amazon.com/dp/B08G9J44ST?tag=aclue-20",
             "average_rating": 4.3,
             "review_count": 8967,
             "availability_status": "in_stock",
@@ -201,7 +201,7 @@ async def create_sample_products(categories: List[Category], retailers: List[Ret
             "image_urls": ["https://m.media-amazon.com/images/I/71xiHR7VdUL._AC_SL1500_.jpg"],
             "primary_image_url": "https://m.media-amazon.com/images/I/71xiHR7VdUL._AC_SL1500_.jpg",
             "product_url": "https://amazon.com/dp/B083JXMPB7",
-            "affiliate_url": "https://amazon.com/dp/B083JXMPB7?tag=giftsync-20",
+            "affiliate_url": "https://amazon.com/dp/B083JXMPB7?tag=aclue-20",
             "average_rating": 4.7,
             "review_count": 15632,
             "availability_status": "in_stock",
@@ -228,7 +228,7 @@ async def create_sample_products(categories: List[Category], retailers: List[Ret
 
 async def main():
     """Main function to load all initial data."""
-    print("🚀 Loading initial data for GiftSync...")
+    print("🚀 Loading initial data for aclue...")
     
     try:
         # Ensure tables exist
@@ -256,7 +256,7 @@ async def main():
         print(f"   Brands: {len(brands)}")
         print(f"   Retailers: {len(retailers)}")
         print(f"   Products: {len(products)}")
-        print("\nYour GiftSync database is ready for use! 🎁")
+        print("\nYour aclue database is ready for use! 🎁")
         
     except Exception as e:
         print(f"❌ Error loading initial data: {e}")

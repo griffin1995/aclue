@@ -1,7 +1,7 @@
 /**
- * GiftSync Application Configuration
+ * aclue Application Configuration
  * 
- * Centralised configuration management for the entire GiftSync application.
+ * Centralised configuration management for the entire aclue application.
  * Provides environment-specific settings, API endpoints, feature flags,
  * and business logic constants.
  * 
@@ -38,7 +38,7 @@ import { EnvironmentConfig } from '@/types';
  */
 export const config: EnvironmentConfig = {
   // Core service URLs
-  apiUrl: process.env.NEXT_PUBLIC_API_URL || 'https://giftsync-backend-production.up.railway.app',        // Backend API base URL
+  apiUrl: process.env.NEXT_PUBLIC_API_URL || 'https://aclue-backend-production.up.railway.app',        // Backend API base URL
   webUrl: process.env.NEXT_PUBLIC_WEB_URL || 'http://localhost:3000',        // Frontend application URL
   
   // Analytics and monitoring service keys
@@ -54,7 +54,7 @@ export const config: EnvironmentConfig = {
   version: process.env.npm_package_version || '1.0.0',                      // Application version
   
   // Amazon Associates affiliate program configuration
-  amazonAssociateTag: process.env.NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG || 'giftsync-21', // Approved associate tag
+  amazonAssociateTag: process.env.NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG || 'aclue-21', // Approved associate tag
   amazonRegion: process.env.NEXT_PUBLIC_AMAZON_REGION || 'uk',                       // Target market region
   amazonApiKey: process.env.NEXT_PUBLIC_AMAZON_API_KEY,                              // Product Advertising API key
   amazonSecretKey: process.env.NEXT_PUBLIC_AMAZON_SECRET_KEY,                        // API secret key
@@ -189,9 +189,9 @@ export const appConfig = {
   // ===========================================================================
   // BRAND AND MESSAGING
   // ===========================================================================
-  name: 'GiftSync',                                      // Application name
-  description: 'AI-powered gift recommendation platform', // SEO description
-  tagline: 'Find the perfect gift with AI',              // Marketing tagline
+  name: 'aclue',                                      // Application name
+  description: 'A data-led insight layer that transforms how gifts are chosen', // SEO description
+  tagline: 'A data-led insight layer that transforms how gifts are chosen',              // Marketing tagline
   
   // Swipe settings
   swipe: {
@@ -214,7 +214,7 @@ export const appConfig = {
     defaultProductImage: '/images/placeholder-product.png',
     defaultUserAvatar: '/images/default-avatar.png',
     defaultCategoryIcon: '/images/category-default.svg',
-    cloudinaryBaseUrl: 'https://res.cloudinary.com/giftsync',
+    cloudinaryBaseUrl: 'https://res.cloudinary.com/aclue',
   },
   
   // Animation settings
@@ -232,14 +232,14 @@ export const appConfig = {
   
   // Local storage keys
   storage: {
-    authToken: 'giftsync_auth_token',
-    refreshToken: 'giftsync_refresh_token',
-    user: 'giftsync_user',
-    preferences: 'giftsync_preferences',
-    recentSearches: 'giftsync_recent_searches',
-    viewedProducts: 'giftsync_viewed_products',
-    onboardingCompleted: 'giftsync_onboarding_completed',
-    theme: 'giftsync_theme',
+    authToken: 'aclue_auth_token',
+    refreshToken: 'aclue_refresh_token',
+    user: 'aclue_user',
+    preferences: 'aclue_preferences',
+    recentSearches: 'aclue_recent_searches',
+    viewedProducts: 'aclue_viewed_products',
+    onboardingCompleted: 'aclue_onboarding_completed',
+    theme: 'aclue_theme',
   },
   
   // Feature flags
@@ -274,25 +274,25 @@ export const appConfig = {
   
   // Social media
   social: {
-    twitter: 'https://twitter.com/giftsync',
-    facebook: 'https://facebook.com/giftsync',
-    instagram: 'https://instagram.com/giftsync',
-    linkedin: 'https://linkedin.com/company/giftsync',
-    youtube: 'https://youtube.com/c/giftsync',
+    twitter: 'https://twitter.com/aclue',
+    facebook: 'https://facebook.com/aclue',
+    instagram: 'https://instagram.com/aclue',
+    linkedin: 'https://linkedin.com/company/aclue',
+    youtube: 'https://youtube.com/c/aclue',
   },
   
   // Contact information
   contact: {
-    email: 'hello@giftsync.com',
-    support: 'support@giftsync.com',
-    press: 'press@giftsync.com',
-    partnerships: 'partnerships@giftsync.com',
+    email: 'hello@aclue.app',
+    support: 'support@aclue.app',
+    press: 'press@aclue.app',
+    partnerships: 'partnerships@aclue.app',
   },
   
   // App store links
   appStore: {
-    ios: 'https://apps.apple.com/app/giftsync',
-    android: 'https://play.google.com/store/apps/details?id=com.giftsync.app',
+    ios: 'https://apps.apple.com/app/aclue',
+    android: 'https://play.google.com/store/apps/details?id=com.aclue.app',
   },
   
   // Subscription tiers
@@ -380,7 +380,7 @@ export const appConfig = {
 export const amazonConfig = {
   // UK Amazon Associates Configuration
   uk: {
-    associateTag: 'giftsync-21',
+    associateTag: 'aclue-21',
     baseUrl: 'https://amazon.co.uk',
     apiHost: 'webservices.amazon.co.uk',
     marketplace: 'A1F83G8C2ARO7P',

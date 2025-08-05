@@ -14,13 +14,13 @@ const AccessibilityStatementPage: React.FC = () => {
   return (
     <>
       <Head>
-        <title>Accessibility Statement - GiftSync</title>
+        <title>Accessibility Statement - aclue</title>
         <meta 
           name="description" 
-          content="GiftSync's accessibility statement detailing our commitment to inclusive design and compliance with WCAG 2.1 AA accessibility standards." 
+          content="aclue's accessibility statement detailing our commitment to inclusive design and compliance with WCAG 2.1 AA accessibility standards." 
         />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://giftsync.com/accessibility" />
+        <link rel="canonical" href="https://aclue.app/accessibility" />
       </Head>
       
       <div className="min-h-screen bg-gray-50">
@@ -46,7 +46,7 @@ const AccessibilityStatementPage: React.FC = () => {
               <div>
                 <h2 className="text-lg font-semibold text-indigo-900 mb-2">Our Accessibility Commitment</h2>
                 <p className="text-indigo-800 leading-relaxed mb-3">
-                  GiftSync is committed to ensuring that our digital gift recommendation platform is accessible to 
+                  aclue is committed to ensuring that our digital gift recommendation platform is accessible to 
                   everyone, including people with disabilities. We strive to provide an inclusive experience that 
                   meets or exceeds Web Content Accessibility Guidelines (WCAG) 2.1 Level AA standards.
                 </p>
@@ -87,7 +87,7 @@ const AccessibilityStatementPage: React.FC = () => {
                 <h2 className="text-2xl font-bold text-gray-900">Accessibility Features</h2>
               </div>
               <p className="text-gray-700 mb-6">
-                We have implemented numerous features to ensure GiftSync is usable by people with diverse abilities and needs.
+                We have implemented numerous features to ensure aclue is usable by people with diverse abilities and needs.
               </p>
               
               <div className="grid md:grid-cols-2 gap-6">
@@ -167,7 +167,7 @@ const AccessibilityStatementPage: React.FC = () => {
                 <div className="bg-green-50 border border-green-200 p-4 rounded-lg">
                   <h3 className="font-semibold text-green-900 mb-2">WCAG 2.1 Level AA Compliance</h3>
                   <p className="text-green-800 text-sm mb-3">
-                    GiftSync substantially conforms to the Web Content Accessibility Guidelines (WCAG) 2.1 Level AA standards. 
+                    aclue substantially conforms to the Web Content Accessibility Guidelines (WCAG) 2.1 Level AA standards. 
                     We regularly audit our platform to maintain and improve accessibility.
                   </p>
                   <div className="grid md:grid-cols-3 gap-4 text-sm">
@@ -219,7 +219,7 @@ const AccessibilityStatementPage: React.FC = () => {
                 <h2 className="text-2xl font-bold text-gray-900">Assistive Technology Support</h2>
               </div>
               <p className="text-gray-700 mb-4">
-                GiftSync has been tested with various assistive technologies to ensure compatibility and usability.
+                aclue has been tested with various assistive technologies to ensure compatibility and usability.
               </p>
               
               <div className="grid md:grid-cols-2 gap-6">
@@ -300,7 +300,7 @@ const AccessibilityStatementPage: React.FC = () => {
                 <h2 className="text-2xl font-bold text-gray-900">Keyboard Navigation</h2>
               </div>
               <p className="text-gray-700 mb-4">
-                All functionality of GiftSync is available using only a keyboard. Here are the key shortcuts and navigation patterns:
+                All functionality of aclue is available using only a keyboard. Here are the key shortcuts and navigation patterns:
               </p>
               
               <div className="grid md:grid-cols-2 gap-6">
@@ -331,7 +331,7 @@ const AccessibilityStatementPage: React.FC = () => {
                 </div>
                 
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-3">GiftSync-Specific Shortcuts</h3>
+                  <h3 className="font-semibold text-gray-900 mb-3">aclue-Specific Shortcuts</h3>
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between items-center p-2 bg-indigo-50 rounded border border-indigo-200">
                       <span className="font-medium">Arrow Keys</span>
@@ -555,7 +555,7 @@ const AccessibilityStatementPage: React.FC = () => {
               </div>
               <div className="space-y-4">
                 <p className="text-gray-700">
-                  We welcome feedback about the accessibility of GiftSync. Your input helps us improve the experience for all users.
+                  We welcome feedback about the accessibility of aclue. Your input helps us improve the experience for all users.
                 </p>
                 
                 <div className="grid md:grid-cols-2 gap-6">
@@ -566,8 +566,8 @@ const AccessibilityStatementPage: React.FC = () => {
                         <Mail className="w-5 h-5 text-green-600 mt-0.5" />
                         <div>
                           <div className="font-medium text-green-900">Email (Preferred)</div>
-                          <a href="mailto:accessibility@giftsync.com" className="text-green-700 text-sm underline hover:text-green-900">
-                            accessibility@giftsync.com
+                          <a href="mailto:accessibility@aclue.app" className="text-green-700 text-sm underline hover:text-green-900">
+                            accessibility@aclue.app
                           </a>
                           <div className="text-xs text-green-600 mt-1">Response within 2 business days</div>
                         </div>
@@ -578,8 +578,8 @@ const AccessibilityStatementPage: React.FC = () => {
                         <div>
                           <div className="font-medium text-blue-900">Support Line</div>
                           <div className="text-blue-700 text-sm">Available for accessibility-related enquiries</div>
-                          <a href="mailto:support@giftsync.com" className="text-blue-700 text-sm underline hover:text-blue-900">
-                            Request callback via support@giftsync.com
+                          <a href="mailto:support@aclue.app" className="text-blue-700 text-sm underline hover:text-blue-900">
+                            Request callback via support@aclue.app
                           </a>
                         </div>
                       </div>

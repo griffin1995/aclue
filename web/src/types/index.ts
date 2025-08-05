@@ -1,8 +1,8 @@
 /**
- * GiftSync Frontend Type Definitions
+ * aclue Frontend Type Definitions
  * 
  * This file contains all TypeScript interfaces and types used throughout the
- * GiftSync frontend application. These types ensure type safety and provide
+ * aclue frontend application. These types ensure type safety and provide
  * clear contracts between components, API calls, and data structures.
  * 
  * Type Organization:
@@ -72,7 +72,7 @@ export interface PaginatedResponse<T> extends ApiResponse<T[]> {
 // User account and profile management types
 
 /**
- * Complete user profile representing a registered GiftSync user.
+ * Complete user profile representing a registered aclue user.
  * 
  * Contains all user information including authentication status,
  * personalisation data, and subscription details.

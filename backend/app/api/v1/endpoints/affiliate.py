@@ -1,9 +1,9 @@
 """
-GiftSync Affiliate Tracking API Endpoints
+aclue Affiliate Tracking API Endpoints
 
 Comprehensive affiliate marketing management for Amazon Associates program
 integration. Handles click tracking, conversion attribution, commission
-calculations, and revenue analytics for the GiftSync platform.
+calculations, and revenue analytics for the aclue platform.
 
 Key Features:
   - Affiliate click tracking with unique identifiers
@@ -94,12 +94,12 @@ class AffiliateClickResponse(BaseModel):
     
     Tracking Window:
         - Amazon Associates: 24-hour attribution window
-        - GiftSync internal: 30-day tracking for analytics
+        - aclue internal: 30-day tracking for analytics
     
     Example:
         {
             "click_id": "click_abc123def456",
-            "redirect_url": "https://amazon.co.uk/dp/B08GYKNCCP/?tag=giftsync-21&...",
+            "redirect_url": "https://amazon.co.uk/dp/B08GYKNCCP/?tag=aclue-21&...",
             "tracking_expires_at": "2024-01-01T23:59:59.999Z"
         }
     """
@@ -161,7 +161,7 @@ async def track_affiliate_click(
         Response:
         {
             "click_id": "click_abc123def456",
-            "redirect_url": "https://amazon.co.uk/dp/B08GYKNCCP/?tag=giftsync-21&...",
+            "redirect_url": "https://amazon.co.uk/dp/B08GYKNCCP/?tag=aclue-21&...",
             "tracking_expires_at": "2024-01-01T23:59:59.999Z"
         }
     """
@@ -355,7 +355,7 @@ async def get_affiliate_url(
     
     URL Generation:
         - Validates ASIN format (10-character alphanumeric)
-        - Adds Amazon Associates tag (giftsync-21)
+        - Adds Amazon Associates tag (aclue-21)
         - Includes tracking parameters for attribution
         - Generates unique click ID for basic tracking
     
@@ -382,9 +382,9 @@ async def get_affiliate_url(
         Response:
         {
             "asin": "B08GYKNCCP",
-            "affiliate_url": "https://amazon.co.uk/dp/B08GYKNCCP/?tag=giftsync-21&...",
+            "affiliate_url": "https://amazon.co.uk/dp/B08GYKNCCP/?tag=aclue-21&...",
             "click_id": "click_xyz789abc123",
-            "associate_tag": "giftsync-21"
+            "associate_tag": "aclue-21"
         }
     """
     try:

@@ -1,5 +1,5 @@
 """
-GiftSync Authentication API Endpoints
+aclue Authentication API Endpoints
 
 Provides secure user authentication services including registration,
 login, token refresh, and session management. Implements JWT-based

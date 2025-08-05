@@ -14,13 +14,13 @@ const PrivacyPolicyPage: React.FC = () => {
   return (
     <>
       <Head>
-        <title>Privacy Policy - GiftSync</title>
+        <title>Privacy Policy - aclue</title>
         <meta 
           name="description" 
-          content="GiftSync's comprehensive privacy policy outlining how we collect, use, and protect your personal data in compliance with GDPR and UK data protection laws." 
+          content="aclue's comprehensive privacy policy outlining how we collect, use, and protect your personal data in compliance with GDPR and UK data protection laws." 
         />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://giftsync.com/privacy" />
+        <link rel="canonical" href="https://aclue.app/privacy" />
       </Head>
       
       <div className="min-h-screen bg-gray-50">
@@ -103,7 +103,7 @@ const PrivacyPolicyPage: React.FC = () => {
               </div>
               <div className="prose prose-gray max-w-none">
                 <p className="text-gray-700 leading-relaxed mb-4">
-                  GiftSync operates as the data controller for personal data processed through our platform. 
+                  aclue operates as the data controller for personal data processed through our platform. 
                   We are responsible for determining how and why your personal data is processed.
                 </p>
                 <div className="bg-gray-50 p-4 rounded-lg border">
@@ -112,7 +112,7 @@ const PrivacyPolicyPage: React.FC = () => {
                     <div className="flex items-center gap-2">
                       <Globe className="w-4 h-4 text-gray-500" />
                       <span className="font-medium">Company:</span>
-                      <span>GiftSync Ltd</span>
+                      <span>aclue Ltd</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <MapPin className="w-4 h-4 text-gray-500" />
@@ -122,8 +122,8 @@ const PrivacyPolicyPage: React.FC = () => {
                     <div className="flex items-center gap-2">
                       <Mail className="w-4 h-4 text-gray-500" />
                       <span className="font-medium">Data Protection Officer:</span>
-                      <a href="mailto:privacy@giftsync.com" className="text-blue-600 hover:text-blue-800 underline">
-                        privacy@giftsync.com
+                      <a href="mailto:privacy@aclue.app" className="text-blue-600 hover:text-blue-800 underline">
+                        privacy@aclue.app
                       </a>
                     </div>
                     <div className="flex items-center gap-2">
@@ -641,14 +641,14 @@ const PrivacyPolicyPage: React.FC = () => {
                   <div className="space-y-2 text-sm">
                     <div className="flex items-center gap-2">
                       <Mail className="w-4 h-4 text-gray-500" />
-                      <a href="mailto:privacy@giftsync.com" className="text-blue-600 hover:text-blue-800 underline">
-                        privacy@giftsync.com
+                      <a href="mailto:privacy@aclue.app" className="text-blue-600 hover:text-blue-800 underline">
+                        privacy@aclue.app
                       </a>
                     </div>
                     <div className="flex items-center gap-2">
                       <Mail className="w-4 h-4 text-gray-500" />
-                      <a href="mailto:support@giftsync.com" className="text-blue-600 hover:text-blue-800 underline">
-                        support@giftsync.com
+                      <a href="mailto:support@aclue.app" className="text-blue-600 hover:text-blue-800 underline">
+                        support@aclue.app
                       </a>
                     </div>
                   </div>

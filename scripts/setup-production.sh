@@ -190,7 +190,7 @@ verify_deployment() {
     
     if [ ! -z "$ALB_URL" ]; then
         print_status "Application Load Balancer URL: $ALB_URL"
-        print_status "Set up your DNS to point api.aclue.com to this ALB"
+        print_status "Set up your DNS to point api.aclue.app to this ALB"
     fi
     
     print_status "Deployment verification complete ✓"
@@ -237,7 +237,7 @@ main() {
     echo "4. Set up monitoring alerts in CloudWatch"
     echo "5. Configure backup schedules"
     echo
-    echo "Your API should be available at: https://api.aclue.com"
+    echo "Your API should be available at: https://api.aclue.app"
     echo "Monitor your deployment: kubectl get pods -n aclue -w"
 }
 

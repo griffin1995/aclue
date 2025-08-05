@@ -39,7 +39,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const response = await fetch(url.toString(), {
       method: req.method || 'GET',
       headers: {
-        'User-Agent': req.headers['user-agent'] || 'GiftSync-Analytics/1.0',
+        'User-Agent': req.headers['user-agent'] || 'aclue-Analytics/1.0',
         ...(req.method === 'POST' && { 'Content-Type': 'application/json' }),
       },
       ...(req.method === 'POST' && { body: JSON.stringify(req.body) }),

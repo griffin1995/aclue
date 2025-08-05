@@ -13,13 +13,13 @@ const CareersPage: React.FC = () => {
   return (
     <>
       <Head>
-        <title>Careers - GiftSync</title>
+        <title>Careers - aclue</title>
         <meta 
           name="description" 
-          content="Join the GiftSync team and help revolutionise gift-giving with AI. Explore career opportunities in our growing company." 
+          content="Join the aclue team and help revolutionise gift-giving with AI. Explore career opportunities in our growing company." 
         />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://giftsync.com/careers" />
+        <link rel="canonical" href="https://aclue.app/careers" />
       </Head>
 
       <div className="min-h-screen bg-gray-50">

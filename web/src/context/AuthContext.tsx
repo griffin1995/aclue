@@ -1,5 +1,5 @@
 /**
- * GiftSync Authentication Context
+ * aclue Authentication Context
  * 
  * Centralised authentication state management for the entire application.
  * Provides secure user session handling, JWT token management, and

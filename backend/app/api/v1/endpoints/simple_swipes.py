@@ -1,5 +1,5 @@
 """
-GiftSync Swipe Interaction API Endpoints
+aclue Swipe Interaction API Endpoints
 
 Manages user preference collection through swipe-based interactions with products.
 Tracks user engagement patterns, session data, and preference learning for AI

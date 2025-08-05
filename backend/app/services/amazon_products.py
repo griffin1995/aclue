@@ -1,5 +1,5 @@
 """
-GiftSync Amazon Product Service
+aclue Amazon Product Service
 
 Centralised service for Amazon product integration with affiliate revenue
 generation. Provides real Amazon product data with proper affiliate link
@@ -13,7 +13,7 @@ Key Features:
   - Trending product recommendations based on ratings/reviews
 
 Revenue Model:
-  - Uses Amazon Associates affiliate program (giftsync-21 tag)
+  - Uses Amazon Associates affiliate program (aclue-21 tag)
   - Generates commission-eligible URLs for all product links
   - Tracks clicks and conversions for revenue analytics
   - Supports UK market with .co.uk domain targeting
@@ -119,7 +119,7 @@ class AmazonProductService:
       - Trending product algorithms
     
     Revenue Generation:
-      - All product URLs include affiliate tracking (giftsync-21)
+      - All product URLs include affiliate tracking (aclue-21)
       - Supports commission tracking for revenue reporting
       - Integrates with affiliate click analytics
     
@@ -143,11 +143,11 @@ class AmazonProductService:
         
         Configuration:
             - AMAZON_ASSOCIATE_TAG: Environment variable for affiliate tag
-            - Default: 'giftsync-20' for development/testing
-            - Production: Should use approved 'giftsync-21' tag
+            - Default: 'aclue-20' for development/testing
+            - Production: Should use approved 'aclue-21' tag
         """
         # Amazon Associates affiliate tag for commission tracking
-        self.associate_tag = settings.AMAZON_ASSOCIATE_TAG or "giftsync-20"
+        self.associate_tag = settings.AMAZON_ASSOCIATE_TAG or "aclue-20"
         
     def generate_affiliate_url(self, asin: str, base_url: str = "https://www.amazon.co.uk") -> str:
         """
@@ -176,7 +176,7 @@ class AmazonProductService:
         
         Example:
             url = generate_affiliate_url('B08GYKNCCP')
-            # Returns: https://amazon.co.uk/dp/B08GYKNCCP/?tag=giftsync-21&...
+            # Returns: https://amazon.co.uk/dp/B08GYKNCCP/?tag=aclue-21&...
         """
         # Amazon Associates required parameters for commission tracking
         params = {

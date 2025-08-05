@@ -2,7 +2,7 @@
  * Cookie Policy Page
  * 
  * Comprehensive cookie policy page that meets GDPR requirements and provides
- * transparency about how GiftSync uses cookies and tracking technologies.
+ * transparency about how aclue uses cookies and tracking technologies.
  */
 
 import React from 'react';
@@ -14,13 +14,13 @@ const CookiePolicyPage: React.FC = () => {
   return (
     <>
       <Head>
-        <title>Cookie Policy - GiftSync</title>
+        <title>Cookie Policy - aclue</title>
         <meta 
           name="description" 
-          content="Learn about how GiftSync uses cookies and tracking technologies to improve your experience and provide personalised gift recommendations." 
+          content="Learn about how aclue uses cookies and tracking technologies to improve your experience and provide personalised gift recommendations." 
         />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://giftsync.com/cookie-policy" />
+        <link rel="canonical" href="https://aclue.app/cookie-policy" />
       </Head>
       
       <div className="min-h-screen bg-gray-50">
@@ -46,7 +46,7 @@ const CookiePolicyPage: React.FC = () => {
               <div>
                 <h2 className="text-lg font-semibold text-orange-900 mb-2">Cookie Summary</h2>
                 <p className="text-orange-800 leading-relaxed">
-                  GiftSync uses cookies and similar technologies to provide personalised gift recommendations, 
+                  aclue uses cookies and similar technologies to provide personalised gift recommendations, 
                   improve our service, and analyse how you interact with our platform. You can control your 
                   cookie preferences at any time through your browser settings.
                 </p>
@@ -289,7 +289,7 @@ const CookiePolicyPage: React.FC = () => {
                 </div>
                 
                 <div className="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg">
-                  <h3 className="font-semibold text-blue-900 mb-2">GiftSync Cookie Preferences</h3>
+                  <h3 className="font-semibold text-blue-900 mb-2">aclue Cookie Preferences</h3>
                   <p className="text-blue-800 text-sm mb-3">
                     You can also manage your cookie preferences directly through our platform:
                   </p>
@@ -376,14 +376,14 @@ const CookiePolicyPage: React.FC = () => {
               <div className="space-y-2 text-sm">
                 <div className="flex items-center gap-2">
                   <span className="font-medium text-gray-900">Email:</span>
-                  <a href="mailto:privacy@giftsync.com" className="text-blue-600 hover:text-blue-800 underline">
-                    privacy@giftsync.com
+                  <a href="mailto:privacy@aclue.app" className="text-blue-600 hover:text-blue-800 underline">
+                    privacy@aclue.app
                   </a>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="font-medium text-gray-900">Support:</span>
-                  <a href="mailto:support@giftsync.com" className="text-blue-600 hover:text-blue-800 underline">
-                    support@giftsync.com
+                  <a href="mailto:support@aclue.app" className="text-blue-600 hover:text-blue-800 underline">
+                    support@aclue.app
                   </a>
                 </div>
               </div>

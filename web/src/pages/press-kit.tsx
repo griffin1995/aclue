@@ -24,13 +24,13 @@ const PressKitPage: React.FC = () => {
   return (
     <>
       <Head>
-        <title>Press Kit - GiftSync</title>
+        <title>Press Kit - aclue</title>
         <meta 
           name="description" 
-          content="GiftSync press kit with company information, logos, images, and media resources for journalists and media outlets." 
+          content="aclue press kit with company information, logos, images, and media resources for journalists and media outlets." 
         />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://giftsync.com/press-kit" />
+        <link rel="canonical" href="https://aclue.app/press-kit" />
       </Head>
 
       <div className="min-h-screen bg-gray-50">
@@ -63,9 +63,9 @@ const PressKitPage: React.FC = () => {
             
             <div className="grid lg:grid-cols-2 gap-8">
               <div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">About GiftSync</h3>
+                <h3 className="text-xl font-semibold text-gray-900 mb-4">About aclue</h3>
                 <p className="text-gray-600 mb-6">
-                  GiftSync is an AI-powered gift recommendation platform that revolutionises how people 
+                  aclue is an AI-powered gift recommendation platform that revolutionises how people 
                   discover and give meaningful gifts. Using advanced machine learning algorithms, we analyse 
                   user preferences through an intuitive swipe-based interface to generate personalised 
                   gift suggestions that strengthen relationships and create lasting memories.
@@ -186,7 +186,7 @@ const PressKitPage: React.FC = () => {
             
             <div className="mt-8 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
               <p className="text-yellow-800 text-sm">
-                <strong>Usage Guidelines:</strong> Please ensure all GiftSync branding follows our brand guidelines. 
+                <strong>Usage Guidelines:</strong> Please ensure all aclue branding follows our brand guidelines. 
                 For custom usage or modifications, please contact our media team for approval.
               </p>
             </div>
@@ -260,22 +260,22 @@ const PressKitPage: React.FC = () => {
                 <div>
                   <h3 className="font-semibold mb-2">Press Inquiries</h3>
                   <Link 
-                    href="mailto:press@giftsync.com"
+                    href="mailto:press@aclue.app"
                     className="inline-flex items-center gap-2 opacity-90 hover:opacity-100 transition-opacity"
                   >
                     <Mail className="w-4 h-4" />
-                    press@giftsync.com
+                    press@aclue.app
                   </Link>
                 </div>
                 
                 <div>
                   <h3 className="font-semibold mb-2">General Contact</h3>
                   <Link 
-                    href="mailto:hello@giftsync.com"
+                    href="mailto:hello@aclue.app"
                     className="inline-flex items-center gap-2 opacity-90 hover:opacity-100 transition-opacity"
                   >
                     <Mail className="w-4 h-4" />
-                    hello@giftsync.com
+                    hello@aclue.app
                   </Link>
                 </div>
               </div>

@@ -17,7 +17,7 @@ metadata:
     alb.ingress.kubernetes.io/unhealthy-threshold-count: '3'
 spec:
   rules:
-  - host: api.aclue.com
+  - host: api.aclue.app
     http:
       paths:
       - path: /

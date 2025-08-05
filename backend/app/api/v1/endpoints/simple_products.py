@@ -1,5 +1,5 @@
 """
-GiftSync Products API Endpoints
+aclue Products API Endpoints
 
 Provides product search, filtering, and retrieval functionality using
 real Amazon product data. Supports the swipe interface and recommendation
@@ -52,7 +52,7 @@ class ProductResponse(BaseModel):
     and user purchase decisions.
     
     Revenue Integration:
-        - affiliate_url: Generated with GiftSync tracking parameters
+        - affiliate_url: Generated with aclue tracking parameters
         - asin: Amazon identifier for affiliate commission tracking
         - retailer: Partner network identifier
     

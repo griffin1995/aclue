@@ -1,5 +1,5 @@
 """
-Database connection and utilities for GiftSync using official Supabase client
+Database connection and utilities for aclue using official Supabase client
 """
 from typing import Optional, Dict, Any, List
 from supabase import create_client, Client

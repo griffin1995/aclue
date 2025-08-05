@@ -45,7 +45,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // Prepare headers for PostHog request
     const headers: Record<string, string> = {
       'Content-Type': 'application/json',
-      'User-Agent': req.headers['user-agent'] || 'GiftSync-Analytics/1.0',
+      'User-Agent': req.headers['user-agent'] || 'aclue-Analytics/1.0',
     };
 
     // Forward authorization header if present

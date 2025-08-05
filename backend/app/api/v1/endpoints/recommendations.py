@@ -1,5 +1,5 @@
 """
-GiftSync AI Recommendation Engine API Endpoints
+aclue AI Recommendation Engine API Endpoints
 
 Provides intelligent gift recommendations using machine learning algorithms
 and user behavior analysis. Generates personalized product suggestions based

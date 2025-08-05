@@ -178,7 +178,7 @@ export default function RecommendationsPage() {
       try {
         await navigator.share({
           title: recommendation.product.name,
-          text: `Check out this gift recommendation from GiftSync!`,
+          text: `Check out this gift recommendation from aclue!`,
           url: window.location.origin + `/products/${recommendation.product.id}`,
         });
       } catch (error) {
@@ -213,7 +213,7 @@ export default function RecommendationsPage() {
   return (
     <>
       <Head>
-        <title>Recommendations - GiftSync</title>
+        <title>Recommendations - aclue</title>
         <meta name="description" content="Your personalized gift recommendations powered by AI" />
         <meta name="robots" content="noindex" />
       </Head>

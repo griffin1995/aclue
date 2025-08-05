@@ -1,8 +1,8 @@
 """
-GiftSync API - Main Application Entry Point
+aclue API - Main Application Entry Point
 Pipeline Test: 2025-08-05 14:30 UTC
 
-This module serves as the primary entry point for the GiftSync API application.
+This module serves as the primary entry point for the aclue API application.
 It configures the FastAPI application with all necessary middleware, routing,
 logging, and lifecycle management for a production-ready gift recommendation platform.
 
@@ -110,7 +110,7 @@ async def lifespan(app: FastAPI):
     # ============================
     
     logger.info(
-        "Starting up GiftSync API", 
+        "Starting up aclue API", 
         version=settings.VERSION,
         environment=settings.ENVIRONMENT,
         debug=settings.DEBUG
@@ -133,10 +133,10 @@ async def lifespan(app: FastAPI):
         # Verify Supabase connectivity, Amazon Associates API, etc.
         # await verify_external_services()
         
-        logger.info("GiftSync API startup complete - ready to serve requests")
+        logger.info("aclue API startup complete - ready to serve requests")
         
     except Exception as e:
-        logger.error("Failed to start GiftSync API", error=str(e), exc_info=True)
+        logger.error("Failed to start aclue API", error=str(e), exc_info=True)
         raise
     
     # Application is now running and serving requests
@@ -146,7 +146,7 @@ async def lifespan(app: FastAPI):
     # SHUTDOWN SEQUENCE
     # ============================
     
-    logger.info("Shutting down GiftSync API - beginning graceful shutdown")
+    logger.info("Shutting down aclue API - beginning graceful shutdown")
     
     try:
         # Clean up ML models and release memory
@@ -158,7 +158,7 @@ async def lifespan(app: FastAPI):
         # Flush any pending analytics or logs
         # await flush_pending_data()
         
-        logger.info("GiftSync API shutdown complete - all resources cleaned up")
+        logger.info("aclue API shutdown complete - all resources cleaned up")
         
     except Exception as e:
         logger.error("Error during shutdown", error=str(e), exc_info=True)
@@ -172,7 +172,7 @@ async def lifespan(app: FastAPI):
 # Create the main FastAPI application instance with comprehensive configuration
 app = FastAPI(
     title=settings.PROJECT_NAME,
-    description="GiftSync API - AI-powered gift recommendation platform with affiliate monetization",
+    description="aclue API - AI-powered gift recommendation platform with affiliate monetization",
     version=settings.VERSION,
     # Conditional API documentation - only expose in non-production environments
     openapi_url="/api/v1/openapi.json" if settings.ENVIRONMENT != "production" else None,
@@ -233,13 +233,13 @@ async def root():
         
     Example Response:
         {
-            "message": "GiftSync API is running",
+            "message": "aclue API is running",
             "version": "1.0.0",
             "environment": "development"
         }
     """
     return {
-        "message": "GiftSync API is running",
+        "message": "aclue API is running",
         "version": settings.VERSION,
         "environment": settings.ENVIRONMENT,
     }

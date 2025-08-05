@@ -202,7 +202,7 @@ async function sendSlackNotification(message, status = 'info') {
   const slackData = {
     attachments: [{
       color: colors[status] || colors.info,
-      title: 'GiftSync Deployment Notification',
+      title: 'aclue Deployment Notification',
       text: message,
       timestamp: Math.floor(Date.now() / 1000)
     }]

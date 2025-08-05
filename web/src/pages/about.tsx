@@ -1,7 +1,7 @@
 /**
  * About Us Page
  * 
- * Comprehensive about page explaining GiftSync's mission, story, and team.
+ * Comprehensive about page explaining aclue's mission, story, and team.
  */
 
 import React from 'react';
@@ -24,13 +24,13 @@ const AboutPage: React.FC = () => {
   return (
     <>
       <Head>
-        <title>About Us - GiftSync</title>
+        <title>About Us - aclue</title>
         <meta 
           name="description" 
-          content="Learn about GiftSync's mission to revolutionise gift-giving with AI-powered recommendations. Discover our story, values, and the team behind the platform." 
+          content="Learn about aclue's mission to revolutionise gift-giving with AI-powered recommendations. Discover our story, values, and the team behind the platform." 
         />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://giftsync.com/about" />
+        <link rel="canonical" href="https://aclue.app/about" />
       </Head>
 
       <div className="min-h-screen bg-gray-50">
@@ -49,7 +49,7 @@ const AboutPage: React.FC = () => {
                 <Users className="w-6 h-6 text-primary-600" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">About GiftSync</h1>
+                <h1 className="text-2xl font-bold text-gray-900">About aclue</h1>
                 <p className="text-gray-600">Revolutionising gift-giving with AI</p>
               </div>
             </div>
@@ -78,7 +78,7 @@ const AboutPage: React.FC = () => {
                 it becomes a source of stress and uncertainty. We're here to change that.
               </p>
               <p className="text-lg text-gray-600 mb-6">
-                GiftSync combines cutting-edge artificial intelligence with human understanding to create 
+                aclue combines cutting-edge artificial intelligence with human understanding to create 
                 a platform that truly gets your style, preferences, and the unique relationships you cherish.
               </p>
               <div className="flex items-center gap-3 bg-primary-50 p-4 rounded-lg">
@@ -129,7 +129,7 @@ const AboutPage: React.FC = () => {
             <h3 className="text-3xl font-bold text-gray-900 mb-6 text-center">Our Story</h3>
             <div className="max-w-4xl mx-auto">
               <p className="text-lg text-gray-600 mb-6">
-                GiftSync was born from a simple realisation: despite having access to millions of products online, 
+                aclue was born from a simple realisation: despite having access to millions of products online, 
                 finding the perfect gift remained frustratingly difficult. Traditional recommendation systems focused 
                 on popularity and sales data, ignoring the personal nuances that make a gift truly special.
               </p>
@@ -139,7 +139,7 @@ const AboutPage: React.FC = () => {
                 we built a platform that doesn't just suggest products—it understands what makes gifts meaningful.
               </p>
               <p className="text-lg text-gray-600">
-                Today, GiftSync serves thousands of users worldwide, helping them discover gifts that strengthen 
+                Today, aclue serves thousands of users worldwide, helping them discover gifts that strengthen 
                 relationships and create lasting memories. Every swipe, every recommendation, and every successful 
                 gift brings us closer to our vision of a world where gift-giving is always a joy, never a burden.
               </p>

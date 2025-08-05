@@ -1,7 +1,7 @@
 """
-GiftSync Backend Configuration
+aclue Backend Configuration
 
-Centralised configuration management for the GiftSync API backend.
+Centralised configuration management for the aclue API backend.
 Handles environment variables, feature flags, and application settings
 for all backend services including authentication, recommendations,
 affiliate tracking, and external integrations.
@@ -69,7 +69,7 @@ class Settings(BaseSettings):
     # ===========================================================================
     # Core application metadata and environment settings
     
-    PROJECT_NAME: str = "GiftSync API"           # Application name for logging/docs
+    PROJECT_NAME: str = "aclue API"           # Application name for logging/docs
     VERSION: str = "1.0.0"                       # API version for client compatibility
     ENVIRONMENT: str = "development"              # Runtime environment (dev/staging/prod)
     DEBUG: bool = True                            # Debug mode (disable in production)
@@ -105,7 +105,7 @@ class Settings(BaseSettings):
     # ===========================================================================
     # PostgreSQL connection settings and pool configuration
     
-    DATABASE_URL: str = "postgresql://giftsync:giftsync_dev_password@localhost:5432/giftsync_dev"  # Full connection string
+    DATABASE_URL: str = "postgresql://aclue:aclue_dev_password@localhost:5432/aclue_dev"  # Full connection string
     DATABASE_POOL_SIZE: int = 10                  # Connection pool base size
     DATABASE_MAX_OVERFLOW: int = 20               # Maximum additional connections
     
@@ -139,7 +139,7 @@ class Settings(BaseSettings):
     # ===========================================================================
     # Amazon S3 file storage settings
     
-    S3_BUCKET_NAME: str = "giftsync-assets"       # S3 bucket for file uploads
+    S3_BUCKET_NAME: str = "aclue-assets"       # S3 bucket for file uploads
     S3_BUCKET_REGION: str = "eu-west-2"           # S3 bucket region
     
     # ===========================================================================
@@ -147,14 +147,14 @@ class Settings(BaseSettings):
     # ===========================================================================
     # Amazon DynamoDB NoSQL database settings
     
-    DYNAMODB_TABLE_PREFIX: str = "giftsync"       # Table name prefix for multi-environment
+    DYNAMODB_TABLE_PREFIX: str = "aclue"       # Table name prefix for multi-environment
     
     # ===========================================================================
     # SAGEMAKER ML CONFIGURATION
     # ===========================================================================
     # Amazon SageMaker machine learning model settings
     
-    SAGEMAKER_ENDPOINT_NAME: str = "giftsync-recommendations"  # ML model endpoint for recommendations
+    SAGEMAKER_ENDPOINT_NAME: str = "aclue-recommendations"  # ML model endpoint for recommendations
     
     # ===========================================================================
     # MACHINE LEARNING CONFIGURATION
@@ -192,7 +192,7 @@ class Settings(BaseSettings):
     # ===========================================================================
     # Third-party service integration settings
     
-    AMAZON_ASSOCIATE_TAG: Optional[str] = None    # Amazon Associates affiliate tag (giftsync-21)
+    AMAZON_ASSOCIATE_TAG: Optional[str] = None    # Amazon Associates affiliate tag (aclue-21)
     AMAZON_ACCESS_KEY: Optional[str] = None       # Amazon Product Advertising API key
     AMAZON_SECRET_KEY: Optional[str] = None       # Amazon Product Advertising API secret
     

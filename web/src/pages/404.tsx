@@ -9,7 +9,7 @@ export default function NotFoundPage() {
   return (
     <>
       <Head>
-        <title>Page Not Found - prznt</title>
+        <title>Page Not Found - aclue</title>
         <meta name="description" content="The page you're looking for doesn't exist." />
         <meta name="robots" content="noindex,nofollow" />
       </Head>
@@ -76,7 +76,7 @@ export default function NotFoundPage() {
             <div className="w-32 h-32 gradient-primary rounded-full flex items-center justify-center mx-auto shadow-glow-lg">
               <Image 
                 src="/logo.png" 
-                alt="prznt logo" 
+                alt="aclue logo" 
                 width={64} 
                 height={64}
                 className="rounded-lg"

@@ -1,7 +1,7 @@
 """
-GiftSync User Data Model
+aclue User Data Model
 
-SQLAlchemy model for user entities in the GiftSync platform. Handles user
+SQLAlchemy model for user entities in the aclue platform. Handles user
 registration, authentication, profile management, and subscription tiers
 with comprehensive data validation and privacy controls.
 
@@ -63,7 +63,7 @@ class SubscriptionTier(str, enum.Enum):
     User subscription tier enumeration for feature access control.
     
     Defines different levels of service access and feature availability
-    within the GiftSync platform. Used for monetization and feature gating.
+    within the aclue platform. Used for monetization and feature gating.
     
     Tiers:
         FREE: Basic swipe functionality and limited recommendations

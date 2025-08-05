@@ -1,5 +1,5 @@
 """
-GiftSync API with Supabase integration
+aclue API with Supabase integration
 """
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
@@ -26,7 +26,7 @@ from datetime import timedelta
 app = FastAPI(
     title=settings.PROJECT_NAME,
     version=settings.VERSION,
-    description="GiftSync API - AI-powered gift recommendation platform",
+    description="aclue API - AI-powered gift recommendation platform",
     docs_url="/docs" if settings.DEBUG else None,
     redoc_url="/redoc" if settings.DEBUG else None,
 )
@@ -44,7 +44,7 @@ app.add_middleware(
 async def root():
     """Root endpoint."""
     return {
-        "message": "Welcome to GiftSync API",
+        "message": "Welcome to aclue API",
         "version": settings.VERSION,
         "environment": settings.ENVIRONMENT,
         "docs": "/docs" if settings.DEBUG else None
