@@ -1,0 +1,425 @@
+name: GiftSync Deployment Pipeline
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment environment'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+          - development
+          - staging
+          - production
+      skip_tests:
+        description: 'Skip tests'
+        required: false
+        default: false
+        type: boolean
+
+env:
+  NODE_VERSION: '18.20.8'
+  PYTHON_VERSION: '3.11'
+
+jobs:
+  # Determine deployment strategy
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      environment: ${{ steps.determine-env.outputs.environment }}
+      deploy-frontend: ${{ steps.changes.outputs.frontend }}
+      deploy-backend: ${{ steps.changes.outputs.backend }}
+      run-tests: ${{ steps.determine-env.outputs.run-tests }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Determine environment
+        id: determine-env
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            echo "environment=${{ github.event.inputs.environment }}" >> $GITHUB_OUTPUT
+            echo "run-tests=${{ github.event.inputs.skip_tests == 'false' }}" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+            echo "environment=production" >> $GITHUB_OUTPUT
+            echo "run-tests=true" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.ref }}" == "refs/heads/dev" ]]; then
+            echo "environment=staging" >> $GITHUB_OUTPUT
+            echo "run-tests=true" >> $GITHUB_OUTPUT
+          else
+            echo "environment=development" >> $GITHUB_OUTPUT
+            echo "run-tests=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Detect changes
+        id: changes
+        run: |
+          if [[ "${{ github.event_name }}" == "push" ]]; then
+            # Check for changes in last commit
+            if git diff --name-only HEAD~1 HEAD | grep -E '^web/|^frontend/' > /dev/null; then
+              echo "frontend=true" >> $GITHUB_OUTPUT
+            else
+              echo "frontend=false" >> $GITHUB_OUTPUT
+            fi
+            
+            if git diff --name-only HEAD~1 HEAD | grep -E '^backend/|^api/' > /dev/null; then
+              echo "backend=true" >> $GITHUB_OUTPUT
+            else
+              echo "backend=false" >> $GITHUB_OUTPUT
+            fi
+          else
+            # For PRs and manual deployments, deploy both
+            echo "frontend=true" >> $GITHUB_OUTPUT
+            echo "backend=true" >> $GITHUB_OUTPUT
+          fi
+
+  # Frontend Tests
+  frontend-tests:
+    runs-on: ubuntu-latest
+    needs: setup
+    if: needs.setup.outputs.run-tests == 'true' && needs.setup.outputs.deploy-frontend == 'true'
+    defaults:
+      run:
+        working-directory: ./web
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: web/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run linting
+        run: npm run lint
+
+      - name: Run type checking
+        run: npm run type-check
+
+      - name: Run unit tests
+        run: npm run test:ci
+
+      - name: Build application
+        run: npm run build
+        env:
+          NEXT_PUBLIC_API_URL: ${{ secrets.RAILWAY_BACKEND_URL }}
+          NEXT_PUBLIC_WEB_URL: https://aclue.co.uk
+
+  # Backend Tests
+  backend-tests:
+    runs-on: ubuntu-latest
+    needs: setup
+    if: needs.setup.outputs.run-tests == 'true' && needs.setup.outputs.deploy-backend == 'true'
+    defaults:
+      run:
+        working-directory: ./backend
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: test_db
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+          cache-dependency-path: backend/requirements.txt
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install pytest pytest-asyncio httpx
+
+      - name: Run backend tests
+        run: python -m pytest tests/ -v
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/test_db
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+
+  # Security Scan
+  security-scan:
+    runs-on: ubuntu-latest
+    needs: setup
+    if: needs.setup.outputs.run-tests == 'true'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+
+      - name: Upload Trivy scan results
+        uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        with:
+          sarif_file: 'trivy-results.sarif'
+
+  # Deploy Backend to Railway
+  deploy-backend:
+    runs-on: ubuntu-latest
+    needs: [setup, backend-tests]
+    if: always() && needs.setup.outputs.deploy-backend == 'true' && (needs.backend-tests.result == 'success' || needs.backend-tests.result == 'skipped')
+    environment: ${{ needs.setup.outputs.environment }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to Railway
+        run: |
+          echo "🚂 Deploying backend to Railway..."
+          echo "Environment: ${{ needs.setup.outputs.environment }}"
+          # Railway CLI deployment would go here
+          # For now, Railway auto-deploys from GitHub
+          echo "✅ Backend deployment triggered"
+
+      - name: Wait for Railway deployment
+        run: |
+          echo "⏳ Waiting for Railway deployment to complete..."
+          sleep 30
+          echo "✅ Railway deployment should be complete"
+
+  # Deploy Frontend to Vercel
+  deploy-frontend:
+    runs-on: ubuntu-latest
+    needs: [setup, frontend-tests]
+    if: always() && needs.setup.outputs.deploy-frontend == 'true' && (needs.frontend-tests.result == 'success' || needs.frontend-tests.result == 'skipped')
+    environment: ${{ needs.setup.outputs.environment }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: web/package-lock.json
+
+      - name: Install Vercel CLI
+        run: npm install -g vercel@latest
+
+      - name: Deploy to Vercel
+        working-directory: ./web
+        run: |
+          echo "🚀 Deploying frontend to Vercel..."
+          
+          # Set environment-specific variables
+          if [[ "${{ needs.setup.outputs.environment }}" == "production" ]]; then
+            vercel --prod --token ${{ secrets.VERCEL_TOKEN }} --yes
+          else
+            vercel --token ${{ secrets.VERCEL_TOKEN }} --yes
+          fi
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+  # Configure Cloudflare
+  configure-cloudflare:
+    runs-on: ubuntu-latest
+    needs: [setup, deploy-frontend, deploy-backend]
+    if: always() && (needs.deploy-frontend.result == 'success' || needs.deploy-backend.result == 'success')
+    environment: ${{ needs.setup.outputs.environment }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Cloudflare automation
+        working-directory: ./cloudflare-automation
+        run: |
+          # Make scripts executable
+          chmod +x *.sh scripts/*.sh
+          
+          # Source environment variables
+          cp .env.example .env
+          echo "CLOUDFLARE_API_TOKEN=${{ secrets.CLOUDFLARE_API_TOKEN }}" >> .env
+          echo "CLOUDFLARE_ACCOUNT_ID=${{ secrets.CLOUDFLARE_ACCOUNT_ID }}" >> .env
+          source .env
+          
+          echo "🌐 Configuring Cloudflare for ${{ needs.setup.outputs.environment }}"
+
+      - name: Deploy security settings
+        working-directory: ./cloudflare-automation
+        run: |
+          echo "🔒 Applying security settings..."
+          if [[ "${{ needs.setup.outputs.environment }}" == "production" ]]; then
+            ./deploy-security.sh production
+          else
+            ./deploy-security.sh staging
+          fi
+
+      - name: Purge cache
+        working-directory: ./cloudflare-automation
+        run: |
+          echo "🗑️ Purging Cloudflare cache..."
+          ./purge-cache.sh
+
+  # Health Checks
+  health-checks:
+    runs-on: ubuntu-latest
+    needs: [setup, deploy-frontend, deploy-backend, configure-cloudflare]
+    if: always() && (needs.deploy-frontend.result == 'success' || needs.deploy-backend.result == 'success')
+    environment: ${{ needs.setup.outputs.environment }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup environment
+        working-directory: ./cloudflare-automation
+        run: |
+          cp .env.example .env
+          echo "CLOUDFLARE_API_TOKEN=${{ secrets.CLOUDFLARE_API_TOKEN }}" >> .env
+          echo "CLOUDFLARE_ACCOUNT_ID=${{ secrets.CLOUDFLARE_ACCOUNT_ID }}" >> .env
+          echo "RAILWAY_BACKEND_URL=${{ secrets.RAILWAY_BACKEND_URL }}" >> .env
+          
+          # Set domains based on environment
+          if [[ "${{ needs.setup.outputs.environment }}" == "production" ]]; then
+            echo "DOMAINS=aclue.co.uk aclue.app" >> .env
+          else
+            echo "DOMAINS=staging.aclue.co.uk staging.aclue.app" >> .env
+          fi
+
+      - name: Run comprehensive health checks
+        working-directory: ./cloudflare-automation
+        run: |
+          echo "🏥 Running health checks..."
+          chmod +x scripts/health-check.sh
+          ./scripts/health-check.sh
+        id: health-check
+
+      - name: Upload health check results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: health-check-results-${{ needs.setup.outputs.environment }}
+          path: cloudflare-automation/logs/
+          retention-days: 7
+
+  # Post-deployment validation
+  validate-deployment:
+    runs-on: ubuntu-latest
+    needs: [setup, health-checks]
+    if: always() && needs.health-checks.result == 'success'
+    environment: ${{ needs.setup.outputs.environment }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Validate deployment
+        run: |
+          echo "✅ Deployment validation for ${{ needs.setup.outputs.environment }}"
+          
+          # Set URLs based on environment
+          if [[ "${{ needs.setup.outputs.environment }}" == "production" ]]; then
+            FRONTEND_URL="https://aclue.co.uk"
+            BACKEND_URL="${{ secrets.RAILWAY_BACKEND_URL }}"
+          else
+            FRONTEND_URL="https://staging.aclue.co.uk"
+            BACKEND_URL="${{ secrets.RAILWAY_BACKEND_URL }}"
+          fi
+          
+          echo "🌐 Testing frontend: $FRONTEND_URL"
+          if curl -f -s "$FRONTEND_URL" > /dev/null; then
+            echo "✅ Frontend is accessible"
+          else
+            echo "❌ Frontend is not accessible"
+            exit 1
+          fi
+          
+          echo "🚂 Testing backend: $BACKEND_URL"
+          if curl -f -s "$BACKEND_URL/health" > /dev/null; then
+            echo "✅ Backend is healthy"
+          else
+            echo "❌ Backend is not healthy"
+            exit 1
+          fi
+
+  # Rollback on failure
+  rollback:
+    runs-on: ubuntu-latest
+    needs: [setup, validate-deployment]
+    if: always() && needs.validate-deployment.result == 'failure' && needs.setup.outputs.environment == 'production'
+    environment: production
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup rollback environment
+        working-directory: ./cloudflare-automation
+        run: |
+          cp .env.example .env
+          echo "CLOUDFLARE_API_TOKEN=${{ secrets.CLOUDFLARE_API_TOKEN }}" >> .env
+          echo "CLOUDFLARE_ACCOUNT_ID=${{ secrets.CLOUDFLARE_ACCOUNT_ID }}" >> .env
+          chmod +x *.sh
+
+      - name: Execute rollback
+        working-directory: ./cloudflare-automation
+        run: |
+          echo "🔄 Executing rollback for production..."
+          ./rollback-manager.sh production
+          
+      - name: Notify team of rollback
+        if: always()
+        run: |
+          echo "📢 Production deployment rolled back due to validation failure"
+          # Add Slack/email notification here
+
+  # Deployment summary
+  deployment-summary:
+    runs-on: ubuntu-latest
+    needs: [setup, deploy-frontend, deploy-backend, health-checks, validate-deployment]
+    if: always()
+    steps:
+      - name: Generate deployment summary
+        run: |
+          echo "## 🚀 Deployment Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Environment:** ${{ needs.setup.outputs.environment }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Frontend Deployed:** ${{ needs.setup.outputs.deploy-frontend }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Backend Deployed:** ${{ needs.setup.outputs.deploy-backend }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          echo "### Results:" >> $GITHUB_STEP_SUMMARY
+          echo "- Frontend Tests: ${{ needs.frontend-tests.result || 'skipped' }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Backend Tests: ${{ needs.backend-tests.result || 'skipped' }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Frontend Deployment: ${{ needs.deploy-frontend.result || 'skipped' }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Backend Deployment: ${{ needs.deploy-backend.result || 'skipped' }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Health Checks: ${{ needs.health-checks.result || 'skipped' }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Validation: ${{ needs.validate-deployment.result || 'skipped' }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [[ "${{ needs.validate-deployment.result }}" == "success" ]]; then
+            echo "✅ **Deployment completed successfully!**" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ **Deployment failed or was rolled back**" >> $GITHUB_STEP_SUMMARY
+          fi

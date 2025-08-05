@@ -107,8 +107,8 @@ check_backend_health() {
     local issues=()
     
     # Health endpoint check
-    local health_status=$(curl -s -o /dev/null -w "%{http_code}" --max-time "$TIMEOUT" "$BACKEND_URL/health" 2>/dev/null || echo "000")
-    local response_time=$(curl -s -o /dev/null -w "%{time_total}" --max-time "$TIMEOUT" "$BACKEND_URL/health" 2>/dev/null || echo "999")
+    local health_status=$(curl -s -o /dev/null -w "%{http_code}" --max-time "$TIMEOUT" "$RAILWAY_BACKEND_URL/health" 2>/dev/null || echo "000")
+    local response_time=$(curl -s -o /dev/null -w "%{time_total}" --max-time "$TIMEOUT" "$RAILWAY_BACKEND_URL/health" 2>/dev/null || echo "999")
     
     if [[ "$health_status" == "200" ]]; then
         log "SUCCESS" "Backend health check passed (${response_time}s)"
@@ -117,7 +117,7 @@ check_backend_health() {
     fi
     
     # API endpoints check
-    local api_status=$(curl -s -o /dev/null -w "%{http_code}" --max-time "$TIMEOUT" "$BACKEND_URL/api/v1/products" 2>/dev/null || echo "000")
+    local api_status=$(curl -s -o /dev/null -w "%{http_code}" --max-time "$TIMEOUT" "$RAILWAY_BACKEND_URL/api/v1/products" 2>/dev/null || echo "000")
     
     if [[ "$api_status" == "401" || "$api_status" == "200" ]]; then
         log "SUCCESS" "API endpoints responding correctly"
@@ -140,7 +140,7 @@ check_database_connectivity() {
     log "INFO" "Checking database connectivity via backend"
     
     # Test database connection through backend
-    local db_check=$(curl -s --max-time "$TIMEOUT" "$BACKEND_URL/api/v1/health/db" 2>/dev/null || echo '{"status":"error"}')
+    local db_check=$(curl -s --max-time "$TIMEOUT" "$RAILWAY_BACKEND_URL/api/v1/health/db" 2>/dev/null || echo '{"status":"error"}')
     local db_status=$(echo "$db_check" | python3 -c "import json, sys; data=json.load(sys.stdin); print(data.get('status', 'unknown'))" 2>/dev/null || echo "unknown")
     
     if [[ "$db_status" == "healthy" || "$db_status" == "ok" ]]; then
@@ -197,7 +197,7 @@ DOMAIN_EOF
 done)
   ],
   "backend": {
-    "url": "$BACKEND_URL",
+    "url": "$RAILWAY_BACKEND_URL",
     "healthy": $(if check_backend_health >/dev/null 2>&1; then echo "true"; else echo "false"; fi)
   },
   "log_file": "$LOG_FILE"

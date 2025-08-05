@@ -9,13 +9,12 @@
     "start": "next start",
     "lint": "next lint",
     "export": "next export",
-    "pages:build": "npx @cloudflare/next-on-pages",
-    "pages:dev": "npx @cloudflare/next-on-pages --watch",
-    "pages:deploy": "next build && npx @cloudflare/next-on-pages",
     "type-check": "tsc --noEmit",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "vercel-build": "next build",
+    "deploy": "vercel --prod"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.0",
@@ -53,7 +52,6 @@
     "zod": "^3.22.0"
   },
   "devDependencies": {
-    "@cloudflare/next-on-pages": "^1.13.12",
     "@testing-library/jest-dom": "^6.1.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.5.0",

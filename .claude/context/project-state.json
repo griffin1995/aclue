@@ -1,0 +1,106 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2025-08-05T12:15:00.000Z",
+  "projectName": "GiftSync (Prznt)",
+  "mainBranch": "main",
+  "activeWorktrees": [],
+  "globalContext": {
+    "techStack": {
+      "frontend": [
+        "Next.js 14",
+        "React 18",
+        "TypeScript 5.0+"
+      ],
+      "backend": [
+        "FastAPI",
+        "Python 3.8+",
+        "Supabase PostgreSQL"
+      ],
+      "mobile": [
+        "Flutter 3.16+",
+        "Dart"
+      ],
+      "styling": [
+        "Tailwind CSS",
+        "Framer Motion"
+      ],
+      "state": [
+        "React Context",
+        "React Hook Form"
+      ],
+      "validation": [
+        "Zod",
+        "Pydantic"
+      ],
+      "ui": [
+        "Lucide React",
+        "Custom Components"
+      ],
+      "deployment": [
+        "Cloudflare Pages",
+        "Railway"
+      ],
+      "ml": [
+        "PyTorch",
+        "Neural Matrix Factorization"
+      ]
+    },
+    "architecture": {
+      "pattern": "Full-Stack Application with AI Recommendations",
+      "frontend": "Next.js SSR with API routes",
+      "backend": "FastAPI REST API with ML integration",
+      "database": "Supabase PostgreSQL with RLS policies",
+      "mobile": "Flutter cross-platform mobile app",
+      "ml": "Hybrid recommendation system (collaborative + content-based)",
+      "cms": "File-based configuration with API management"
+    },
+    "constraints": {
+      "performance": {
+        "apiResponse": "<100ms p95",
+        "pageLoad": "<2s initial load",
+        "availability": "99.9% uptime",
+        "recommendationAccuracy": ">75% user satisfaction"
+      },
+      "security": "JWT authentication, RLS policies, GDPR compliance",
+      "platforms": [
+        "Web",
+        "Mobile (iOS/Android)",
+        "API"
+      ],
+      "language": "British English"
+    },
+    "businessContext": {
+      "service": "AI-powered gifting platform",
+      "model": "Affiliate commissions (7.5% avg) + Premium subscriptions",
+      "market": "£45B+ global gifting market, £9.3B UK market",
+      "users": "Digital natives (18-35), busy professionals (25-45)",
+      "revenue": "£2.5M projected Year 3 revenue, 1M+ users target",
+      "status": "Production-ready MVP deployed at prznt.app"
+    }
+  },
+  "criticalRules": [
+    "MANDATORY: Check local docs/ before ANY code implementation",
+    "NEVER mention AI assistance in code or commits",
+    "ALWAYS use British English spelling",
+    "NEVER create minimal versions - always production-ready",
+    "Context7 MCP for ALL library documentation",
+    "Follow FastAPI + Next.js + Flutter architecture patterns"
+  ],
+  "recentResolutions": {
+    "authenticationSystem": "JWT tokens with Supabase user_metadata - fully resolved",
+    "discoverPage": "WorkingSwipeInterface with min-h-96 layout - working correctly",
+    "cloudflareDeployment": "SSR with next-on-pages adapter - production ready",
+    "recommendationEngine": "Confidence scoring 0.5-0.9 with preference learning - operational"
+  },
+  "developmentStatus": {
+    "mvpComplete": true,
+    "productionReady": true,
+    "deploymentUrl": "https://prznt.app",
+    "backendUrl": "https://giftsync-backend-production.up.railway.app",
+    "testAccount": {
+      "email": "john.doe@example.com",
+      "password": "password123",
+      "status": "Working with JWT tokens"
+    }
+  }
+}

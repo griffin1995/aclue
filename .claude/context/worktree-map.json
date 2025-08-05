@@ -1,0 +1,119 @@
+{
+  "worktreeDirectory": "/home/jack/Documents/giftsync-worktrees",
+  "mainRepository": "/home/jack/Documents/gift_sync",
+  "worktreeCategories": {
+    "feature": {
+      "prefix": "feature-",
+      "description": "New feature development",
+      "examples": [
+        "feature-affiliate-integration",
+        "feature-mobile-app",
+        "feature-gift-links",
+        "feature-social-sharing",
+        "feature-premium-subscriptions"
+      ]
+    },
+    "optimization": {
+      "prefix": "opt-",
+      "description": "Performance and optimization work",
+      "examples": [
+        "opt-recommendation-engine",
+        "opt-api-performance",
+        "opt-mobile-performance",
+        "opt-database-queries"
+      ]
+    },
+    "bugfix": {
+      "prefix": "bugfix-",
+      "description": "Bug fixes and patches",
+      "examples": [
+        "bugfix-swipe-interface",
+        "bugfix-auth-flow",
+        "bugfix-mobile-compatibility"
+      ]
+    },
+    "ml": {
+      "prefix": "ml-",
+      "description": "Machine learning and AI development",
+      "examples": [
+        "ml-neural-recommendations",
+        "ml-pytorch-integration",
+        "ml-hybrid-filtering",
+        "ml-analytics-dashboard"
+      ]
+    },
+    "deployment": {
+      "prefix": "deploy-",
+      "description": "Deployment and infrastructure",
+      "examples": [
+        "deploy-production",
+        "deploy-mobile-stores",
+        "deploy-staging-env"
+      ]
+    }
+  },
+  "recommendedWorktrees": [
+    {
+      "name": "feature-affiliate-integration",
+      "category": "feature",
+      "description": "Integrate Amazon Product Advertising API and affiliate links for revenue",
+      "primaryAgent": "api-engineer",
+      "supportAgents": [
+        "backend-architect",
+        "revenue-specialist"
+      ],
+      "estimatedDuration": "2-3 weeks",
+      "dependencies": []
+    },
+    {
+      "name": "ml-neural-recommendations",
+      "category": "ml",
+      "description": "Implement PyTorch neural recommendation models",
+      "primaryAgent": "ml-engineer",
+      "supportAgents": [
+        "data-scientist",
+        "backend-architect"
+      ],
+      "estimatedDuration": "3-4 weeks",
+      "dependencies": []
+    },
+    {
+      "name": "feature-mobile-app",
+      "category": "feature",
+      "description": "Complete Flutter mobile app development",
+      "primaryAgent": "mobile-developer",
+      "supportAgents": [
+        "ui-ux-designer",
+        "api-engineer"
+      ],
+      "estimatedDuration": "4-6 weeks",
+      "dependencies": []
+    },
+    {
+      "name": "opt-recommendation-engine",
+      "category": "optimization",
+      "description": "Optimize recommendation algorithms for better performance and accuracy",
+      "primaryAgent": "performance-engineer",
+      "supportAgents": [
+        "ml-engineer",
+        "database-optimizer"
+      ],
+      "estimatedDuration": "2-3 weeks",
+      "dependencies": []
+    },
+    {
+      "name": "feature-gift-links",
+      "category": "feature",
+      "description": "Implement shareable gift recommendation lists with QR codes",
+      "primaryAgent": "frontend-developer",
+      "supportAgents": [
+        "backend-architect",
+        "ui-ux-designer"
+      ],
+      "estimatedDuration": "2-3 weeks",
+      "dependencies": []
+    }
+  ],
+  "activeWorktrees": [],
+  "completedWorktrees": []
+}
