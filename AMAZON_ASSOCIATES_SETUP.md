@@ -1,17 +1,17 @@
-# Amazon Associates UK Setup Guide - GiftSync Integration
+# Amazon Associates UK Setup Guide - aclue Integration
 
 **Date**: June 20, 2025  
-**Project**: GiftSync AI-Powered Gift Recommendation Platform  
+**Project**: aclue AI-Powered Gift Recommendation Platform  
 **Status**: Ready for Application
 
 ## 🎯 Overview
 
-This document outlines the step-by-step process for setting up Amazon Associates UK integration with the GiftSync platform to enable affiliate revenue generation through the Amazon Product Advertising API.
+This document outlines the step-by-step process for setting up Amazon Associates UK integration with the aclue platform to enable affiliate revenue generation through the Amazon Product Advertising API.
 
 ## 📋 Prerequisites Checklist
 
 ### ✅ Technical Requirements Met
-- [x] **Working Website**: GiftSync web app at localhost:3000 (production-ready)
+- [x] **Working Website**: aclue web app at localhost:3000 (production-ready)
 - [x] **Content Requirements**: Complete platform with user interface, product displays, and recommendation system
 - [x] **Platform Functionality**: Full-stack application with authentication, recommendations, and analytics
 - [x] **Professional Design**: Modern, responsive UI with Tailwind CSS and proper UX
@@ -68,7 +68,7 @@ Content Strategy:
 
 ### Step 3: Content Compliance
 **Required Content Elements:**
-- [x] About page explaining GiftSync's mission
+- [x] About page explaining aclue's mission
 - [x] Privacy policy for data handling
 - [x] Terms of service
 - [x] Contact information
@@ -81,7 +81,7 @@ Content Strategy:
 ### Required Disclosure Statement
 **Add to website footer and relevant pages:**
 ```
-"As an Amazon Associate, GiftSync earns from qualifying purchases. Our AI recommendation system may include affiliate links to Amazon products. This does not affect the price you pay or our recommendation algorithm."
+"As an Amazon Associate, aclue earns from qualifying purchases. Our AI recommendation system may include affiliate links to Amazon products. This does not affect the price you pay or our recommendation algorithm."
 ```
 
 ### Content Standards to Maintain
