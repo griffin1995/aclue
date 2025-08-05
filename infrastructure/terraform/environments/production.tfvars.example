@@ -3,7 +3,7 @@
 
 # General
 environment = "production"
-project_name = "giftsync"
+project_name = "aclue"
 region = "us-east-1"
 
 # Networking
@@ -25,7 +25,7 @@ db_backup_retention_period = 7
 db_backup_window = "03:00-04:00"
 db_maintenance_window = "sun:04:00-sun:05:00"
 db_deletion_protection = true
-db_username = "giftsync_admin"
+db_username = "aclue_admin"
 
 # ElastiCache Configuration
 redis_node_type = "cache.t3.micro"
@@ -37,7 +37,7 @@ s3_versioning_enabled = true
 s3_lifecycle_enabled = true
 
 # Domain Configuration
-domain_name = "giftsync.com"
+domain_name = "aclue.com"
 api_subdomain = "api"
 app_subdomain = "app"
 
@@ -51,7 +51,7 @@ log_retention_in_days = 30
 # Tags
 tags = {
   Environment = "production"
-  Project     = "giftsync"
-  Owner       = "giftsync-team"
+  Project     = "aclue"
+  Owner       = "aclue-team"
   ManagedBy   = "terraform"
 }

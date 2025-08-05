@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-echo "🚀 Setting up GiftSync Production Environment"
+echo "🚀 Setting up aclue Production Environment"
 
 # Colors for output
 RED='\033[0;31m'
@@ -144,9 +144,9 @@ deploy_application() {
     
     # Build and push backend image
     cd backend
-    docker build -f Dockerfile.prod -t giftsync-api:latest .
-    docker tag giftsync-api:latest $ECR_REGISTRY/giftsync-api:latest
-    docker push $ECR_REGISTRY/giftsync-api:latest
+    docker build -f Dockerfile.prod -t aclue-api:latest .
+    docker tag aclue-api:latest $ECR_REGISTRY/aclue-api:latest
+    docker push $ECR_REGISTRY/aclue-api:latest
     cd ..
     
     # Update Kubernetes configs with actual values
@@ -154,7 +154,7 @@ deploy_application() {
     sed -i "s/123456789012/$AWS_ACCOUNT_ID/g" k8s/ingress.yaml
     
     # Configure kubectl for EKS
-    aws eks update-kubeconfig --region $AWS_REGION --name giftsync-prod-cluster
+    aws eks update-kubeconfig --region $AWS_REGION --name aclue-prod-cluster
     
     # Deploy to Kubernetes
     kubectl apply -f k8s/namespace.yaml
@@ -178,19 +178,19 @@ verify_deployment() {
     print_status "Verifying deployment..."
     
     # Wait for pods to be ready
-    kubectl wait --for=condition=ready pod -l app=giftsync-api -n giftsync --timeout=300s
+    kubectl wait --for=condition=ready pod -l app=aclue-api -n aclue --timeout=300s
     
     # Get service status
-    kubectl get pods -n giftsync
-    kubectl get services -n giftsync
-    kubectl get ingress -n giftsync
+    kubectl get pods -n aclue
+    kubectl get services -n aclue
+    kubectl get ingress -n aclue
     
     # Get Load Balancer URL
-    ALB_URL=$(kubectl get ingress giftsync-ingress -n giftsync -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
+    ALB_URL=$(kubectl get ingress aclue-ingress -n aclue -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
     
     if [ ! -z "$ALB_URL" ]; then
         print_status "Application Load Balancer URL: $ALB_URL"
-        print_status "Set up your DNS to point api.giftsync.com to this ALB"
+        print_status "Set up your DNS to point api.aclue.com to this ALB"
     fi
     
     print_status "Deployment verification complete ✓"
@@ -208,8 +208,8 @@ setup_monitoring() {
 
 # Main execution
 main() {
-    echo "🎉 Welcome to GiftSync Production Setup!"
-    echo "This script will deploy your complete GiftSync infrastructure to AWS."
+    echo "🎉 Welcome to aclue Production Setup!"
+    echo "This script will deploy your complete aclue infrastructure to AWS."
     echo
     
     read -p "Are you ready to proceed? (y/N): " -n 1 -r
@@ -228,7 +228,7 @@ main() {
     setup_monitoring
     
     echo
-    print_status "🎉 GiftSync production setup complete!"
+    print_status "🎉 aclue production setup complete!"
     echo
     echo "Next steps:"
     echo "1. Set up your domain DNS to point to the Load Balancer"
@@ -237,8 +237,8 @@ main() {
     echo "4. Set up monitoring alerts in CloudWatch"
     echo "5. Configure backup schedules"
     echo
-    echo "Your API should be available at: https://api.giftsync.com"
-    echo "Monitor your deployment: kubectl get pods -n giftsync -w"
+    echo "Your API should be available at: https://api.aclue.com"
+    echo "Monitor your deployment: kubectl get pods -n aclue -w"
 }
 
 # Run main function

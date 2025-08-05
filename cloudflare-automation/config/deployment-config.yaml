@@ -1,4 +1,4 @@
-# GiftSync Deployment Configuration
+# aclue Deployment Configuration
 # Environment-specific settings for automated deployments
 
 environments:
@@ -7,9 +7,9 @@ environments:
     domains:
       - dev.aclue.co.uk
     backends:
-      - https://giftsync-backend-dev.up.railway.app
+      - https://aclue-backend-dev.up.railway.app
     vercel:
-      project_name: "giftsync-dev"
+      project_name: "aclue-dev"
       framework: "nextjs"
     cloudflare:
       cache_ttl: 300  # 5 minutes
@@ -30,9 +30,9 @@ environments:
       - staging.aclue.co.uk
       - staging.aclue.app
     backends:
-      - https://giftsync-backend-staging.up.railway.app
+      - https://aclue-backend-staging.up.railway.app
     vercel:
-      project_name: "giftsync-staging"
+      project_name: "aclue-staging"
       framework: "nextjs"
     cloudflare:
       cache_ttl: 1800  # 30 minutes
@@ -58,9 +58,9 @@ environments:
       - aclue.co.uk
       - aclue.app
     backends:
-      - https://giftsync-backend-production.up.railway.app
+      - https://aclue-backend-production.up.railway.app
     vercel:
-      project_name: "giftsync-production"
+      project_name: "aclue-production"
       framework: "nextjs"
       regions: ["iad1", "lhr1"]  # US East, London
     cloudflare:

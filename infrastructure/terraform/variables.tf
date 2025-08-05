@@ -1,9 +1,9 @@
-# Variables for GiftSync Infrastructure
+# Variables for aclue Infrastructure
 
 variable "project_name" {
   description = "Name of the project"
   type        = string
-  default     = "giftsync"
+  default     = "aclue"
 }
 
 variable "environment" {

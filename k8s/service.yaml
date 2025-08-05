@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: giftsync-api-service
-  namespace: giftsync
+  name: aclue-api-service
+  namespace: aclue
   labels:
-    app: giftsync-api
+    app: aclue-api
 spec:
   selector:
-    app: giftsync-api
+    app: aclue-api
   ports:
     - protocol: TCP
       port: 80
