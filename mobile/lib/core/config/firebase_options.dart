@@ -47,9 +47,9 @@ class DefaultFirebaseOptions {
     apiKey: 'your-web-api-key',
     appId: '1:000000000000:web:0000000000000000000000',
     messagingSenderId: '000000000000',
-    projectId: 'giftsync-dev',
-    authDomain: 'giftsync-dev.firebaseapp.com',
-    storageBucket: 'giftsync-dev.appspot.com',
+    projectId: 'aclue-dev',
+    authDomain: 'aclue-dev.firebaseapp.com',
+    storageBucket: 'aclue-dev.appspot.com',
     measurementId: 'G-0000000000',
   );
 
@@ -57,25 +57,25 @@ class DefaultFirebaseOptions {
     apiKey: 'your-android-api-key',
     appId: '1:000000000000:android:0000000000000000000000',
     messagingSenderId: '000000000000',
-    projectId: 'giftsync-dev',
-    storageBucket: 'giftsync-dev.appspot.com',
+    projectId: 'aclue-dev',
+    storageBucket: 'aclue-dev.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'your-ios-api-key',
     appId: '1:000000000000:ios:0000000000000000000000',
     messagingSenderId: '000000000000',
-    projectId: 'giftsync-dev',
-    storageBucket: 'giftsync-dev.appspot.com',
-    iosBundleId: 'com.giftsync.app',
+    projectId: 'aclue-dev',
+    storageBucket: 'aclue-dev.appspot.com',
+    iosBundleId: 'com.aclue.app',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'your-macos-api-key',
     appId: '1:000000000000:ios:0000000000000000000000',
     messagingSenderId: '000000000000',
-    projectId: 'giftsync-dev',
-    storageBucket: 'giftsync-dev.appspot.com',
-    iosBundleId: 'com.giftsync.app',
+    projectId: 'aclue-dev',
+    storageBucket: 'aclue-dev.appspot.com',
+    iosBundleId: 'com.aclue.app',
   );
 }

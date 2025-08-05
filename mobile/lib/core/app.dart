@@ -6,8 +6,8 @@ import 'router/app_router.dart';
 import 'theme/app_theme.dart';
 import 'constants/app_constants.dart';
 
-class GiftSyncApp extends ConsumerWidget {
-  const GiftSyncApp({super.key});
+class AclueApp extends ConsumerWidget {
+  const AclueApp({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

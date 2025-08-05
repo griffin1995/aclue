@@ -106,7 +106,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
                       ),
                       const SizedBox(width: 8),
                       Text(
-                        'GiftSync',
+                        'aclue',
                         style: theme.textTheme.headlineSmall?.copyWith(
                           fontWeight: FontWeight.bold,
                           color: theme.colorScheme.primary,
