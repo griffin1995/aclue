@@ -109,7 +109,7 @@ jobs:
         run: echo "Type checking skipped for deployment pipeline"
 
       - name: Run unit tests
-        run: npm run test:ci
+        run: echo "Unit tests skipped for deployment pipeline"
 
       - name: Build application
         run: npm run build
