@@ -1,9 +1,11 @@
 """Basic health check tests for the backend API."""
 
 import pytest
+import httpx
 from fastapi.testclient import TestClient
 from app.main import app
 
+# Create TestClient instance
 client = TestClient(app)
 
 
