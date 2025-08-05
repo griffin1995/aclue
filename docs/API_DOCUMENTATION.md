@@ -7,7 +7,7 @@ The aclue API is a RESTful service built with FastAPI that powers the AI-driven 
 ## Base URL
 
 - **Development**: `http://localhost:8000`
-- **Production**: `https://api.aclue.com`
+- **Production**: `https://api.aclue.app`
 
 ## Authentication
 

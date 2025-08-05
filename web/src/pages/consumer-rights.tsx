@@ -14,13 +14,13 @@ const ConsumerRightsPage: React.FC = () => {
   return (
     <>
       <Head>
-        <title>Consumer Rights - GiftSync</title>
+        <title>Consumer Rights - aclue</title>
         <meta 
           name="description" 
-          content="Learn about your consumer rights when using GiftSync, including protections under UK Consumer Rights Act 2015 and EU consumer protection law." 
+          content="Learn about your consumer rights when using aclue, including protections under UK Consumer Rights Act 2015 and EU consumer protection law." 
         />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://giftsync.com/consumer-rights" />
+        <link rel="canonical" href="https://aclue.app/consumer-rights" />
       </Head>
       
       <div className="min-h-screen bg-gray-50">
@@ -31,7 +31,7 @@ const ConsumerRightsPage: React.FC = () => {
               <Scale className="w-8 h-8 text-blue-600" />
               <div>
                 <h1 className="text-3xl font-bold text-gray-900">Consumer Rights</h1>
-                <p className="text-gray-600 mt-1">Your rights and protections when using GiftSync</p>
+                <p className="text-gray-600 mt-1">Your rights and protections when using aclue</p>
               </div>
             </div>
           </div>
@@ -46,7 +46,7 @@ const ConsumerRightsPage: React.FC = () => {
               <div>
                 <h2 className="text-lg font-semibold text-blue-900 mb-2">Your Consumer Rights</h2>
                 <p className="text-blue-800 leading-relaxed mb-3">
-                  As a consumer using GiftSync's services, you are protected by comprehensive consumer rights under 
+                  As a consumer using aclue's services, you are protected by comprehensive consumer rights under 
                   UK law (Consumer Rights Act 2015) and EU consumer protection directives. These rights ensure you 
                   receive fair treatment and quality service.
                 </p>
@@ -96,7 +96,7 @@ const ConsumerRightsPage: React.FC = () => {
               <div className="space-y-4">
                 <p className="text-gray-700">
                   The Consumer Rights Act 2015 provides comprehensive protection for consumers in the UK. 
-                  Here's how these rights apply to your use of GiftSync:
+                  Here's how these rights apply to your use of aclue:
                 </p>
                 
                 <div className="grid md:grid-cols-2 gap-6">
@@ -106,7 +106,7 @@ const ConsumerRightsPage: React.FC = () => {
                       <div className="bg-green-50 border border-green-200 p-4 rounded-lg">
                         <h4 className="font-medium text-green-900 mb-2">Right to Service Quality</h4>
                         <p className="text-green-800 text-sm mb-2">
-                          GiftSync must provide its recommendation service with reasonable care and skill, 
+                          aclue must provide its recommendation service with reasonable care and skill, 
                           matching the description provided and being fit for purpose.
                         </p>
                         <ul className="text-xs text-green-700 space-y-1">
@@ -180,7 +180,7 @@ const ConsumerRightsPage: React.FC = () => {
                         This period starts from the day the contract is concluded.
                       </p>
                       <div className="text-xs text-purple-700">
-                        <div className="mb-1"><span className="font-medium">How to withdraw:</span> Email us at support@giftsync.com</div>
+                        <div className="mb-1"><span className="font-medium">How to withdraw:</span> Email us at support@aclue.app</div>
                         <div className="mb-1"><span className="font-medium">Refund timeline:</span> Within 14 days of withdrawal notice</div>
                         <div><span className="font-medium">Exceptions:</span> Services fully performed with your consent</div>
                       </div>
@@ -234,7 +234,7 @@ const ConsumerRightsPage: React.FC = () => {
               <div className="space-y-4">
                 <p className="text-gray-700">
                   We commit to providing high-quality service that meets professional standards. 
-                  Here's what you can expect from GiftSync:
+                  Here's what you can expect from aclue:
                 </p>
                 
                 <div className="grid md:grid-cols-2 gap-6">
@@ -329,7 +329,7 @@ const ConsumerRightsPage: React.FC = () => {
                       <div className="bg-orange-50 border border-orange-200 p-4 rounded-lg">
                         <h4 className="font-medium text-orange-900 mb-2">Free Service Guarantee</h4>
                         <p className="text-orange-800 text-sm mb-2">
-                          GiftSync's core recommendation service is provided free of charge. 
+                          aclue's core recommendation service is provided free of charge. 
                           You will never be charged for basic functionality.
                         </p>
                         <ul className="text-xs text-orange-700 space-y-1">
@@ -391,7 +391,7 @@ const ConsumerRightsPage: React.FC = () => {
               </div>
               <div className="space-y-4">
                 <p className="text-gray-700">
-                  You have comprehensive rights to cancel or terminate your use of GiftSync services.
+                  You have comprehensive rights to cancel or terminate your use of aclue services.
                 </p>
                 
                 <div className="grid md:grid-cols-2 gap-6">
@@ -435,7 +435,7 @@ const ConsumerRightsPage: React.FC = () => {
                       </p>
                       <div className="space-y-2 text-xs text-purple-700">
                         <div><span className="font-medium">Starts:</span> From the day you agree to the service</div>
-                        <div><span className="font-medium">How:</span> Email withdrawal notice to support@giftsync.com</div>
+                        <div><span className="font-medium">How:</span> Email withdrawal notice to support@aclue.app</div>
                         <div><span className="font-medium">Refund:</span> Within 14 days of withdrawal notice</div>
                         <div><span className="font-medium">Exception:</span> Services fully performed with your consent</div>
                       </div>
@@ -471,8 +471,8 @@ const ConsumerRightsPage: React.FC = () => {
                       <div className="space-y-3">
                         <div className="flex items-center gap-2">
                           <Mail className="w-4 h-4 text-blue-600" />
-                          <a href="mailto:support@giftsync.com" className="text-blue-700 text-sm underline">
-                            support@giftsync.com
+                          <a href="mailto:support@aclue.app" className="text-blue-700 text-sm underline">
+                            support@aclue.app
                           </a>
                         </div>
                         <div className="flex items-center gap-2">

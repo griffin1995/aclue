@@ -24,7 +24,7 @@ export interface AffiliateDisclosureProps {
 const disclosureTexts = {
   banner: {
     title: 'Amazon Associate Disclosure',
-    content: 'As an Amazon Associate, GiftSync earns from qualifying purchases. This means we may receive a small commission when you click on our Amazon links and make a purchase, at no additional cost to you. This helps support our platform and allows us to continue providing free gift recommendations.',
+    content: 'As an Amazon Associate, aclue earns from qualifying purchases. This means we may receive a small commission when you click on our Amazon links and make a purchase, at no additional cost to you. This helps support our platform and allows us to continue providing free gift recommendations.',
   },
   inline: {
     title: '',
@@ -32,7 +32,7 @@ const disclosureTexts = {
   },
   footer: {
     title: '',
-    content: 'GiftSync is a participant in the Amazon Associates Programme, an affiliate advertising programme designed to provide a means for sites to earn advertising fees by advertising and linking to Amazon.co.uk.',
+    content: 'aclue is a participant in the Amazon Associates Programme, an affiliate advertising programme designed to provide a means for sites to earn advertising fees by advertising and linking to Amazon.co.uk.',
   },
   product: {
     title: 'Affiliate Link Notice',
@@ -40,7 +40,7 @@ const disclosureTexts = {
   },
   modal: {
     title: 'About Our Affiliate Links',
-    content: 'GiftSync participates in the Amazon Associates Programme and other affiliate programs. When you click on product links from our recommendations and make a purchase, we may earn a commission. This commission comes at no additional cost to you and helps us maintain and improve our free service. Our recommendations are based on our AI analysis of your preferences and are not influenced by commission rates.',
+    content: 'aclue participates in the Amazon Associates Programme and other affiliate programs. When you click on product links from our recommendations and make a purchase, we may earn a commission. This commission comes at no additional cost to you and helps us maintain and improve our free service. Our recommendations are based on our AI analysis of your preferences and are not influenced by commission rates.',
   },
 };
 
@@ -59,7 +59,7 @@ export const AffiliateDisclosure: React.FC<AffiliateDisclosureProps> = ({
   React.useEffect(() => {
     // Check if user has previously dismissed this disclosure
     if (isDismissible && typeof window !== 'undefined') {
-      const dismissed = localStorage.getItem('giftsync_affiliate_disclosure_dismissed');
+      const dismissed = localStorage.getItem('aclue_affiliate_disclosure_dismissed');
       if (dismissed === 'true') {
         setIsDismissed(true);
       }
@@ -69,7 +69,7 @@ export const AffiliateDisclosure: React.FC<AffiliateDisclosureProps> = ({
   const handleDismiss = () => {
     if (isDismissible) {
       setIsDismissed(true);
-      localStorage.setItem('giftsync_affiliate_disclosure_dismissed', 'true');
+      localStorage.setItem('aclue_affiliate_disclosure_dismissed', 'true');
       onDismiss?.();
     }
   };

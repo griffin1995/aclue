@@ -1,8 +1,8 @@
 """
-GiftSync User Management API Endpoints
+aclue User Management API Endpoints
 
 Comprehensive user profile management, statistics tracking, and account
-operations for the GiftSync platform. Handles authenticated user operations
+operations for the aclue platform. Handles authenticated user operations
 including profile updates, statistics viewing, and account management.
 
 Key Features:

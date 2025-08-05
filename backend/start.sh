@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# GiftSync Backend Start Script
+# aclue Backend Start Script
 # Handles both development and production environments
 
 set -e
 
-echo "🚀 Starting GiftSync Backend..."
+echo "🚀 Starting aclue Backend..."
 echo "Environment: ${ENVIRONMENT:-production}"
 echo "Port: ${PORT:-8000}"
 

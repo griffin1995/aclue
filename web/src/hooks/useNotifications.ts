@@ -56,7 +56,7 @@ export function useNotifications(options: UseNotificationsOptions = {}): UseNoti
 
   // Load notifications from localStorage on mount
   useEffect(() => {
-    const savedNotifications = localStorage.getItem('giftsync_notifications');
+    const savedNotifications = localStorage.getItem('aclue_notifications');
     if (savedNotifications) {
       try {
         const parsed = JSON.parse(savedNotifications);
@@ -72,7 +72,7 @@ export function useNotifications(options: UseNotificationsOptions = {}): UseNoti
 
   // Save notifications to localStorage when they change
   useEffect(() => {
-    localStorage.setItem('giftsync_notifications', JSON.stringify(notifications));
+    localStorage.setItem('aclue_notifications', JSON.stringify(notifications));
   }, [notifications]);
 
   // Request notification permission

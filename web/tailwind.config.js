@@ -1,12 +1,12 @@
 /**
- * GiftSync Tailwind CSS Configuration
+ * aclue Tailwind CSS Configuration
  * 
- * Custom Tailwind CSS configuration for the GiftSync gift recommendation platform.
+ * Custom Tailwind CSS configuration for the aclue gift recommendation platform.
  * Defines the complete design system including brand colors, typography, spacing,
  * animations, and component styles for consistent UI/UX across the application.
  * 
  * Key Features:
- *   - GiftSync brand color palette with semantic naming
+ *   - aclue brand color palette with semantic naming
  *   - Extended utility classes for gift-specific UI patterns
  *   - Custom animations for swipe interactions and loading states
  *   - Typography scale optimized for readability and hierarchy
@@ -45,7 +45,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // GiftSync Brand Colors
+        // aclue Brand Colors
         primary: {
           50: '#fef7ff',
           100: '#fdeeff',

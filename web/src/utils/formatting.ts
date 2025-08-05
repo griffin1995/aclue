@@ -1,5 +1,5 @@
 /**
- * Formatting utilities for the GiftSync web application
+ * Formatting utilities for the aclue web application
  */
 
 /**

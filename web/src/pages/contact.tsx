@@ -14,13 +14,13 @@ const ContactPage: React.FC = () => {
   return (
     <>
       <Head>
-        <title>Contact Us - GiftSync</title>
+        <title>Contact Us - aclue</title>
         <meta 
           name="description" 
-          content="Get in touch with GiftSync. Find our contact information, support channels, company details, and legal contacts for privacy, accessibility, and consumer rights." 
+          content="Get in touch with aclue. Find our contact information, support channels, company details, and legal contacts for privacy, accessibility, and consumer rights." 
         />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://giftsync.com/contact" />
+        <link rel="canonical" href="https://aclue.app/contact" />
       </Head>
       
       <div className="min-h-screen bg-gray-50">
@@ -51,7 +51,7 @@ const ContactPage: React.FC = () => {
                   responds within 48 hours.
                 </p>
                 <div className="text-sm text-blue-800">
-                  <span className="font-medium">Quick Response:</span> For urgent matters, email support@giftsync.com | 
+                  <span className="font-medium">Quick Response:</span> For urgent matters, email support@aclue.app | 
                   <span className="font-medium ml-3">Business Hours:</span> Monday - Friday, 9AM - 5PM GMT
                 </div>
               </div>
@@ -61,46 +61,46 @@ const ContactPage: React.FC = () => {
           {/* Quick Contact Options */}
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
             <a 
-              href="mailto:support@giftsync.com" 
+              href="mailto:support@aclue.app" 
               className="flex flex-col items-center gap-3 p-6 bg-white rounded-lg shadow-sm border hover:border-blue-300 hover:bg-blue-50 transition-colors"
             >
               <Mail className="w-8 h-8 text-blue-600" />
               <div className="text-center">
                 <h3 className="font-semibold text-gray-900">General Support</h3>
-                <p className="text-sm text-gray-600 mt-1">support@giftsync.com</p>
+                <p className="text-sm text-gray-600 mt-1">support@aclue.app</p>
               </div>
             </a>
             
             <a 
-              href="mailto:privacy@giftsync.com" 
+              href="mailto:privacy@aclue.app" 
               className="flex flex-col items-center gap-3 p-6 bg-white rounded-lg shadow-sm border hover:border-green-300 hover:bg-green-50 transition-colors"
             >
               <Shield className="w-8 h-8 text-green-600" />
               <div className="text-center">
                 <h3 className="font-semibold text-gray-900">Privacy & Data</h3>
-                <p className="text-sm text-gray-600 mt-1">privacy@giftsync.com</p>
+                <p className="text-sm text-gray-600 mt-1">privacy@aclue.app</p>
               </div>
             </a>
             
             <a 
-              href="mailto:accessibility@giftsync.com" 
+              href="mailto:accessibility@aclue.app" 
               className="flex flex-col items-center gap-3 p-6 bg-white rounded-lg shadow-sm border hover:border-purple-300 hover:bg-purple-50 transition-colors"
             >
               <Users className="w-8 h-8 text-purple-600" />
               <div className="text-center">
                 <h3 className="font-semibold text-gray-900">Accessibility</h3>
-                <p className="text-sm text-gray-600 mt-1">accessibility@giftsync.com</p>
+                <p className="text-sm text-gray-600 mt-1">accessibility@aclue.app</p>
               </div>
             </a>
             
             <a 
-              href="mailto:legal@giftsync.com" 
+              href="mailto:legal@aclue.app" 
               className="flex flex-col items-center gap-3 p-6 bg-white rounded-lg shadow-sm border hover:border-orange-300 hover:bg-orange-50 transition-colors"
             >
               <FileText className="w-8 h-8 text-orange-600" />
               <div className="text-center">
                 <h3 className="font-semibold text-gray-900">Legal Matters</h3>
-                <p className="text-sm text-gray-600 mt-1">legal@giftsync.com</p>
+                <p className="text-sm text-gray-600 mt-1">legal@aclue.app</p>
               </div>
             </a>
           </div>
@@ -124,8 +124,8 @@ const ContactPage: React.FC = () => {
                         <p className="text-blue-800 text-sm mb-2">
                           Our preferred contact method for detailed enquiries
                         </p>
-                        <a href="mailto:support@giftsync.com" className="text-blue-700 underline hover:text-blue-900">
-                          support@giftsync.com
+                        <a href="mailto:support@aclue.app" className="text-blue-700 underline hover:text-blue-900">
+                          support@aclue.app
                         </a>
                         <div className="text-xs text-blue-600 mt-1">Response within 48 hours</div>
                       </div>
@@ -139,7 +139,7 @@ const ContactPage: React.FC = () => {
                           Request a callback for urgent or complex issues
                         </p>
                         <p className="text-green-700 text-sm">
-                          Available through email request to support@giftsync.com
+                          Available through email request to support@aclue.app
                         </p>
                         <div className="text-xs text-green-600 mt-1">Callback within 24 hours</div>
                       </div>
@@ -195,7 +195,7 @@ const ContactPage: React.FC = () => {
                       <div className="flex items-center gap-2">
                         <FileText className="w-4 h-4 text-green-600" />
                         <span className="font-medium text-green-900">Company Name:</span>
-                        <span className="text-green-800">GiftSync Ltd</span>
+                        <span className="text-green-800">aclue Ltd</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <MapPin className="w-4 h-4 text-green-600" />
@@ -235,7 +235,7 @@ const ContactPage: React.FC = () => {
                     <h4 className="font-medium text-purple-900 mb-2">Service of Legal Documents</h4>
                     <p className="text-purple-800 text-sm">
                       Legal documents should be served via registered post to our registered address 
-                      or by email to <a href="mailto:legal@giftsync.com" className="underline">legal@giftsync.com</a>
+                      or by email to <a href="mailto:legal@aclue.app" className="underline">legal@aclue.app</a>
                     </p>
                   </div>
                 </div>
@@ -259,7 +259,7 @@ const ContactPage: React.FC = () => {
                       Handle all privacy requests, GDPR compliance, and data protection matters
                     </p>
                     <div className="space-y-1 text-sm">
-                      <div><span className="font-medium">Email:</span> <a href="mailto:privacy@giftsync.com" className="text-blue-600 underline">privacy@giftsync.com</a></div>
+                      <div><span className="font-medium">Email:</span> <a href="mailto:privacy@aclue.app" className="text-blue-600 underline">privacy@aclue.app</a></div>
                       <div><span className="font-medium">Specialises in:</span> Data access, deletion, portability, consent management</div>
                       <div><span className="font-medium">Response time:</span> Within 2 business days</div>
                     </div>
@@ -274,7 +274,7 @@ const ContactPage: React.FC = () => {
                       Dedicated to ensuring our platform is accessible to users with disabilities
                     </p>
                     <div className="space-y-1 text-sm">
-                      <div><span className="font-medium">Email:</span> <a href="mailto:accessibility@giftsync.com" className="text-green-600 underline">accessibility@giftsync.com</a></div>
+                      <div><span className="font-medium">Email:</span> <a href="mailto:accessibility@aclue.app" className="text-green-600 underline">accessibility@aclue.app</a></div>
                       <div><span className="font-medium">Specialises in:</span> WCAG compliance, assistive technology, accessibility barriers</div>
                       <div><span className="font-medium">Response time:</span> Within 2 business days</div>
                     </div>
@@ -291,7 +291,7 @@ const ContactPage: React.FC = () => {
                       Handle legal enquiries, compliance matters, and regulatory correspondence
                     </p>
                     <div className="space-y-1 text-sm">
-                      <div><span className="font-medium">Email:</span> <a href="mailto:legal@giftsync.com" className="text-orange-600 underline">legal@giftsync.com</a></div>
+                      <div><span className="font-medium">Email:</span> <a href="mailto:legal@aclue.app" className="text-orange-600 underline">legal@aclue.app</a></div>
                       <div><span className="font-medium">Specialises in:</span> Consumer rights, contract disputes, regulatory compliance</div>
                       <div><span className="font-medium">Response time:</span> Within 3 business days</div>
                     </div>
@@ -306,7 +306,7 @@ const ContactPage: React.FC = () => {
                       General support, account assistance, and feature guidance
                     </p>
                     <div className="space-y-1 text-sm">
-                      <div><span className="font-medium">Email:</span> <a href="mailto:support@giftsync.com" className="text-purple-600 underline">support@giftsync.com</a></div>
+                      <div><span className="font-medium">Email:</span> <a href="mailto:support@aclue.app" className="text-purple-600 underline">support@aclue.app</a></div>
                       <div><span className="font-medium">Specialises in:</span> Account help, feature support, general enquiries</div>
                       <div><span className="font-medium">Response time:</span> Within 48 hours</div>
                     </div>
@@ -330,8 +330,8 @@ const ContactPage: React.FC = () => {
                   </p>
                   <div className="grid md:grid-cols-2 gap-4 text-sm">
                     <div>
-                      <div><span className="font-medium">Primary Contact:</span> <a href="mailto:legal@giftsync.com" className="text-amber-700 underline">legal@giftsync.com</a></div>
-                      <div><span className="font-medium">Data Protection Officer:</span> <a href="mailto:privacy@giftsync.com" className="text-amber-700 underline">privacy@giftsync.com</a></div>
+                      <div><span className="font-medium">Primary Contact:</span> <a href="mailto:legal@aclue.app" className="text-amber-700 underline">legal@aclue.app</a></div>
+                      <div><span className="font-medium">Data Protection Officer:</span> <a href="mailto:privacy@aclue.app" className="text-amber-700 underline">privacy@aclue.app</a></div>
                     </div>
                     <div>
                       <div><span className="font-medium">Response Commitment:</span> Within 5 business days</div>
@@ -412,7 +412,7 @@ const ContactPage: React.FC = () => {
                         <li>• Braille documents (upon request)</li>
                       </ul>
                       <p className="text-xs text-green-600 mt-2">
-                        Contact <a href="mailto:accessibility@giftsync.com" className="underline">accessibility@giftsync.com</a> to arrange alternative formats
+                        Contact <a href="mailto:accessibility@aclue.app" className="underline">accessibility@aclue.app</a> to arrange alternative formats
                       </p>
                     </div>
                   </div>
@@ -479,8 +479,8 @@ const ContactPage: React.FC = () => {
                     For urgent security matters, data breaches, or suspected fraud:
                   </p>
                   <div className="space-y-2 text-sm">
-                    <div><span className="font-medium">Primary:</span> <a href="mailto:security@giftsync.com" className="text-red-700 underline">security@giftsync.com</a></div>
-                    <div><span className="font-medium">Backup:</span> <a href="mailto:privacy@giftsync.com" className="text-red-700 underline">privacy@giftsync.com</a></div>
+                    <div><span className="font-medium">Primary:</span> <a href="mailto:security@aclue.app" className="text-red-700 underline">security@aclue.app</a></div>
+                    <div><span className="font-medium">Backup:</span> <a href="mailto:privacy@aclue.app" className="text-red-700 underline">privacy@aclue.app</a></div>
                     <div><span className="font-medium">Subject Line:</span> URGENT SECURITY INCIDENT</div>
                     <div><span className="font-medium">Response:</span> Within 4 hours during business days</div>
                   </div>
@@ -493,7 +493,7 @@ const ContactPage: React.FC = () => {
                       Service outages, critical bugs, or accessibility barriers preventing use:
                     </p>
                     <div className="text-sm">
-                      <div><span className="font-medium">Email:</span> <a href="mailto:support@giftsync.com" className="text-orange-700 underline">support@giftsync.com</a></div>
+                      <div><span className="font-medium">Email:</span> <a href="mailto:support@aclue.app" className="text-orange-700 underline">support@aclue.app</a></div>
                       <div><span className="font-medium">Subject:</span> URGENT TECHNICAL ISSUE</div>
                     </div>
                   </div>
@@ -504,7 +504,7 @@ const ContactPage: React.FC = () => {
                       Court orders, regulatory deadlines, or time-sensitive legal matters:
                     </p>
                     <div className="text-sm">
-                      <div><span className="font-medium">Email:</span> <a href="mailto:legal@giftsync.com" className="text-yellow-700 underline">legal@giftsync.com</a></div>
+                      <div><span className="font-medium">Email:</span> <a href="mailto:legal@aclue.app" className="text-yellow-700 underline">legal@aclue.app</a></div>
                       <div><span className="font-medium">Subject:</span> URGENT LEGAL MATTER</div>
                     </div>
                   </div>

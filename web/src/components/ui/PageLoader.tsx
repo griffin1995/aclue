@@ -8,7 +8,7 @@ interface PageLoaderProps {
 }
 
 export const PageLoader: React.FC<PageLoaderProps> = ({
-  text = 'Loading GiftSync...',
+  text = 'Loading aclue...',
   className = '',
 }) => {
   return (
@@ -58,7 +58,7 @@ export const PageLoader: React.FC<PageLoaderProps> = ({
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.5 }}
         >
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">GiftSync</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">aclue</h2>
           <p className="text-gray-600 loading-dots">{text}</p>
         </motion.div>
 

@@ -77,7 +77,7 @@ export default function SearchPage() {
   return (
     <>
       <Head>
-        <title>{query ? `Search: ${query} - GiftSync` : 'Search - GiftSync'}</title>
+        <title>{query ? `Search: ${query} - aclue` : 'Search - aclue'}</title>
         <meta name="description" content="Search for the perfect gifts with AI-powered recommendations" />
       </Head>
 

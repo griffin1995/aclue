@@ -1,5 +1,5 @@
 /**
- * GiftSync Analytics Service
+ * aclue Analytics Service
  * 
  * Comprehensive user behavior tracking and analytics integration using PostHog.
  * Provides business intelligence, user insights, and performance metrics for

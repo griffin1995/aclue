@@ -2,7 +2,7 @@
  * Terms and Conditions Page
  * 
  * Comprehensive terms of service covering UK/EU regulations, consumer rights,
- * e-commerce law, data protection, and platform-specific terms for GiftSync.
+ * e-commerce law, data protection, and platform-specific terms for aclue.
  */
 
 import React from 'react';
@@ -14,13 +14,13 @@ const TermsAndConditionsPage: React.FC = () => {
   return (
     <>
       <Head>
-        <title>Terms and Conditions - GiftSync</title>
+        <title>Terms and Conditions - aclue</title>
         <meta 
           name="description" 
-          content="GiftSync's terms and conditions covering service usage, user rights, consumer protection, and legal compliance under UK and EU law." 
+          content="aclue's terms and conditions covering service usage, user rights, consumer protection, and legal compliance under UK and EU law." 
         />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://giftsync.com/terms" />
+        <link rel="canonical" href="https://aclue.app/terms" />
       </Head>
       
       <div className="min-h-screen bg-gray-50">
@@ -31,7 +31,7 @@ const TermsAndConditionsPage: React.FC = () => {
               <Scale className="w-8 h-8 text-blue-600" />
               <div>
                 <h1 className="text-3xl font-bold text-gray-900">Terms and Conditions</h1>
-                <p className="text-gray-600 mt-1">Legal terms for using the GiftSync service</p>
+                <p className="text-gray-600 mt-1">Legal terms for using the aclue service</p>
               </div>
             </div>
           </div>
@@ -46,7 +46,7 @@ const TermsAndConditionsPage: React.FC = () => {
               <div>
                 <h2 className="text-lg font-semibold text-blue-900 mb-2">Legal Agreement</h2>
                 <p className="text-blue-800 leading-relaxed mb-3">
-                  These Terms and Conditions constitute a legally binding agreement between you and GiftSync Ltd. 
+                  These Terms and Conditions constitute a legally binding agreement between you and aclue Ltd. 
                   By using our service, you agree to be bound by these terms, which are governed by UK law and 
                   comply with EU consumer protection regulations.
                 </p>
@@ -96,7 +96,7 @@ const TermsAndConditionsPage: React.FC = () => {
               </div>
               <div className="prose prose-gray max-w-none">
                 <p className="text-gray-700 leading-relaxed mb-4">
-                  By accessing, browsing, or using the GiftSync website, mobile application, or any related services 
+                  By accessing, browsing, or using the aclue website, mobile application, or any related services 
                   (collectively, the "Service"), you acknowledge that you have read, understood, and agree to be bound 
                   by these Terms and Conditions ("Terms").
                 </p>
@@ -118,8 +118,8 @@ const TermsAndConditionsPage: React.FC = () => {
               </div>
               <div className="space-y-3 text-sm">
                 <div className="border border-gray-200 rounded p-3">
-                  <span className="font-semibold text-gray-900">"GiftSync", "we", "us", "our":</span>
-                  <span className="text-gray-700 ml-2">GiftSync Ltd, a company incorporated in England and Wales.</span>
+                  <span className="font-semibold text-gray-900">"aclue", "we", "us", "our":</span>
+                  <span className="text-gray-700 ml-2">aclue Ltd, a company incorporated in England and Wales.</span>
                 </div>
                 <div className="border border-gray-200 rounded p-3">
                   <span className="font-semibold text-gray-900">"User", "you", "your":</span>
@@ -127,7 +127,7 @@ const TermsAndConditionsPage: React.FC = () => {
                 </div>
                 <div className="border border-gray-200 rounded p-3">
                   <span className="font-semibold text-gray-900">"Service":</span>
-                  <span className="text-gray-700 ml-2">The GiftSync platform, including website, mobile applications, and all related services.</span>
+                  <span className="text-gray-700 ml-2">The aclue platform, including website, mobile applications, and all related services.</span>
                 </div>
                 <div className="border border-gray-200 rounded p-3">
                   <span className="font-semibold text-gray-900">"Account":</span>
@@ -152,7 +152,7 @@ const TermsAndConditionsPage: React.FC = () => {
               </div>
               <div className="space-y-4">
                 <p className="text-gray-700 leading-relaxed">
-                  GiftSync is an AI-powered gift recommendation platform that uses machine learning algorithms to provide 
+                  aclue is an AI-powered gift recommendation platform that uses machine learning algorithms to provide 
                   personalised gift suggestions based on user preferences discovered through an interactive swipe-based interface.
                 </p>
                 
@@ -375,11 +375,11 @@ const TermsAndConditionsPage: React.FC = () => {
                 <div className="bg-blue-50 border border-blue-200 p-4 rounded-lg">
                   <p className="text-blue-800 text-sm mb-3">
                     All content, features, and functionality of the Service, including but not limited to text, graphics, 
-                    logos, images, software, algorithms, and user interfaces, are owned by GiftSync Ltd and protected by 
+                    logos, images, software, algorithms, and user interfaces, are owned by aclue Ltd and protected by 
                     UK, EU, and international copyright, trademark, and other intellectual property laws.
                   </p>
                   <ul className="text-sm text-blue-800 space-y-1">
-                    <li>• "GiftSync" name and logo are registered trademarks</li>
+                    <li>• "aclue" name and logo are registered trademarks</li>
                     <li>• AI algorithms and recommendation systems are proprietary</li>
                     <li>• Database rights protect our product and user data compilations</li>
                     <li>• Software code and architecture are protected by copyright</li>
@@ -425,7 +425,7 @@ const TermsAndConditionsPage: React.FC = () => {
                 <h3 className="text-lg font-semibold text-gray-900">Amazon Associates Programme</h3>
                 <div className="bg-orange-50 border border-orange-200 p-4 rounded-lg">
                   <p className="text-orange-800 text-sm mb-3">
-                    GiftSync participates in the Amazon Associates Programme. When you purchase products through our 
+                    aclue participates in the Amazon Associates Programme. When you purchase products through our 
                     affiliate links, we may earn a commission at no additional cost to you. This helps support our 
                     free service whilst maintaining the integrity of our AI recommendations.
                   </p>
@@ -567,7 +567,7 @@ const TermsAndConditionsPage: React.FC = () => {
                 <div className="bg-red-50 border border-red-200 p-4 rounded-lg">
                   <h3 className="font-semibold text-red-900 mb-2">Liability Exclusions</h3>
                   <p className="text-red-800 text-sm mb-3">
-                    To the fullest extent permitted by law, GiftSync Ltd shall not be liable for any indirect, 
+                    To the fullest extent permitted by law, aclue Ltd shall not be liable for any indirect, 
                     incidental, special, consequential, or punitive damages, including but not limited to loss of 
                     profits, data, or business opportunities.
                   </p>
@@ -646,7 +646,7 @@ const TermsAndConditionsPage: React.FC = () => {
                     To exercise any of your consumer rights or to make a complaint:
                   </p>
                   <div className="text-sm text-blue-800 space-y-1">
-                    <div>• Contact us at <a href="mailto:support@giftsync.com" className="underline">support@giftsync.com</a></div>
+                    <div>• Contact us at <a href="mailto:support@aclue.app" className="underline">support@aclue.app</a></div>
                     <div>• Use the EU Online Dispute Resolution platform: <a href="https://ec.europa.eu/consumers/odr" className="underline" target="_blank" rel="noopener noreferrer">ec.europa.eu/consumers/odr</a></div>
                     <div>• Contact Citizens Advice (UK) or your local consumer protection authority</div>
                   </div>
@@ -667,7 +667,7 @@ const TermsAndConditionsPage: React.FC = () => {
                 </p>
                 <ul className="text-sm text-gray-700 space-y-1 ml-6">
                   <li>• Deleting your account through account settings</li>
-                  <li>• Contacting our support team at <a href="mailto:support@giftsync.com" className="text-blue-600 underline">support@giftsync.com</a></li>
+                  <li>• Contacting our support team at <a href="mailto:support@aclue.app" className="text-blue-600 underline">support@aclue.app</a></li>
                   <li>• Sending written notice to our registered address</li>
                 </ul>
                 
@@ -884,14 +884,14 @@ const TermsAndConditionsPage: React.FC = () => {
                   <div className="space-y-2 text-sm">
                     <div className="flex items-center gap-2">
                       <Scale className="w-4 h-4 text-gray-500" />
-                      <a href="mailto:legal@giftsync.com" className="text-blue-600 hover:text-blue-800 underline">
-                        legal@giftsync.com
+                      <a href="mailto:legal@aclue.app" className="text-blue-600 hover:text-blue-800 underline">
+                        legal@aclue.app
                       </a>
                     </div>
                     <div className="flex items-center gap-2">
                       <Users className="w-4 h-4 text-gray-500" />
-                      <a href="mailto:support@giftsync.com" className="text-blue-600 hover:text-blue-800 underline">
-                        support@giftsync.com
+                      <a href="mailto:support@aclue.app" className="text-blue-600 hover:text-blue-800 underline">
+                        support@aclue.app
                       </a>
                     </div>
                   </div>
@@ -902,7 +902,7 @@ const TermsAndConditionsPage: React.FC = () => {
                   <div className="space-y-2 text-sm">
                     <div className="flex items-center gap-2">
                       <Globe className="w-4 h-4 text-gray-500" />
-                      <span>GiftSync Ltd</span>
+                      <span>aclue Ltd</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <FileText className="w-4 h-4 text-gray-500" />

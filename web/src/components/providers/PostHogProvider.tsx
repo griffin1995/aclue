@@ -1,5 +1,5 @@
 /**
- * GiftSync PostHog Analytics Provider
+ * aclue PostHog Analytics Provider
  * 
  * Provides application-wide analytics tracking using PostHog for user behavior
  * analysis, feature usage monitoring, and business intelligence. Handles automatic

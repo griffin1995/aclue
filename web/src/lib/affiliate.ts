@@ -117,8 +117,8 @@ export class AmazonAffiliateService {
   private initializeTracking(): void {
     if (typeof window !== 'undefined') {
       // Load existing events from localStorage
-      const storedClicks = localStorage.getItem('giftsync_affiliate_clicks');
-      const storedConversions = localStorage.getItem('giftsync_affiliate_conversions');
+      const storedClicks = localStorage.getItem('aclue_affiliate_clicks');
+      const storedConversions = localStorage.getItem('aclue_affiliate_conversions');
       
       if (storedClicks) {
         try {
@@ -565,7 +565,7 @@ export class AmazonAffiliateService {
   private persistClickEvents(): void {
     if (typeof window !== 'undefined') {
       try {
-        localStorage.setItem('giftsync_affiliate_clicks', JSON.stringify(this.clickEvents));
+        localStorage.setItem('aclue_affiliate_clicks', JSON.stringify(this.clickEvents));
       } catch (error) {
         console.error('Error persisting affiliate click events:', error);
       }
@@ -578,7 +578,7 @@ export class AmazonAffiliateService {
   private persistConversionEvents(): void {
     if (typeof window !== 'undefined') {
       try {
-        localStorage.setItem('giftsync_affiliate_conversions', JSON.stringify(this.conversionEvents));
+        localStorage.setItem('aclue_affiliate_conversions', JSON.stringify(this.conversionEvents));
       } catch (error) {
         console.error('Error persisting affiliate conversion events:', error);
       }

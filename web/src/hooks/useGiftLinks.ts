@@ -166,13 +166,13 @@ export function useGiftLinks(): UseGiftLinksReturn {
   }, []);
 
   const getShareUrl = useCallback((giftLink: GiftLink): string => {
-    const baseUrl = process.env.NEXT_PUBLIC_WEB_URL || 'https://giftsync.app';
+    const baseUrl = process.env.NEXT_PUBLIC_WEB_URL || 'https://aclue.app';
     return `${baseUrl}/gift/${giftLink.token}`;
   }, []);
 
   const shareGiftLink = useCallback(async (giftLink: GiftLink, options: ShareOptions): Promise<void> => {
     const shareUrl = getShareUrl(giftLink);
-    const defaultMessage = `Check out these amazing gift recommendations I found on GiftSync: ${giftLink.title}`;
+    const defaultMessage = `Check out these amazing gift recommendations I found on aclue: ${giftLink.title}`;
     const message = options.message || defaultMessage;
 
     try {

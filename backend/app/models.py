@@ -1,7 +1,7 @@
 """
-GiftSync API Data Models
+aclue API Data Models
 
-This module defines all Pydantic models used throughout the GiftSync application.
+This module defines all Pydantic models used throughout the aclue application.
 These models serve as the primary data validation and serialisation layer between
 the API endpoints and the database, ensuring type safety and data integrity.
 
@@ -134,7 +134,7 @@ class ProductBase(BaseModel):
     """
     Base product model containing all user-modifiable fields.
     
-    Products are the core entities in the GiftSync recommendation system.
+    Products are the core entities in the aclue recommendation system.
     Each product contains comprehensive metadata for ML algorithms and user display.
     
     Price Structure:
@@ -233,7 +233,7 @@ class ProductCreate(ProductBase):
             "price_min": 5999,  // £59.99 in pence
             "currency": "GBP",
             "category_id": "uuid-electronics",
-            "affiliate_url": "https://amazon.co.uk/dp/B123?tag=giftsync-21"
+            "affiliate_url": "https://amazon.co.uk/dp/B123?tag=aclue-21"
         }
     """
     pass
@@ -241,13 +241,13 @@ class ProductCreate(ProductBase):
 # ==============================================================================
 # USER MODELS
 # ==============================================================================
-# Users represent registered individuals who interact with the GiftSync platform
+# Users represent registered individuals who interact with the aclue platform
 # Includes authentication, preferences, and subscription management
 class UserBase(BaseModel):
     """
     Base user model containing all user-modifiable profile fields.
     
-    Users are the central entity in the GiftSync platform, storing both
+    Users are the central entity in the aclue platform, storing both
     authentication credentials and personalisation data for recommendations.
     
     Privacy & GDPR:
@@ -622,13 +622,13 @@ class SwipeInteractionCreate(SwipeInteractionBase):
 # RECOMMENDATION MODELS
 # ==============================================================================
 # AI-generated product recommendations based on user preferences and ML algorithms
-# Core output of the GiftSync recommendation engine
+# Core output of the aclue recommendation engine
 
 class RecommendationBase(BaseModel):
     """
     Base recommendation model for AI-generated product suggestions.
     
-    Recommendations are the primary output of the GiftSync ML system,
+    Recommendations are the primary output of the aclue ML system,
     combining user preferences, product features, and collaborative signals
     to suggest relevant products.
     
@@ -807,7 +807,7 @@ class GiftLink(GiftLinkBase):
     
     Link Generation:
         - link_token: Unique sharing token for URL generation
-        - URL format: https://giftsync.com/gifts/{link_token}
+        - URL format: https://aclue.app/gifts/{link_token}
         - qr_code_url: Generated QR code image for mobile sharing
     
     Analytics Tracking:

@@ -48,7 +48,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       method: req.method || 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'User-Agent': req.headers['user-agent'] || 'GiftSync-Analytics/1.0',
+        'User-Agent': req.headers['user-agent'] || 'aclue-Analytics/1.0',
       },
       ...(body && { body }),
     });

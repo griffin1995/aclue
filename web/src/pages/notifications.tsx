@@ -79,8 +79,8 @@ export default function NotificationsPage() {
   return (
     <>
       <Head>
-        <title>Notifications - GiftSync</title>
-        <meta name="description" content="Manage your notifications and stay updated with GiftSync" />
+        <title>Notifications - aclue</title>
+        <meta name="description" content="Manage your notifications and stay updated with aclue" />
       </Head>
 
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900">

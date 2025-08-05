@@ -68,7 +68,7 @@ SMTP_USERNAME=your-email@example.com
 SMTP_PASSWORD=your-email-password
 
 # CORS
-ALLOWED_HOSTS=https://your-frontend-domain.com,https://app.aclue.com
+ALLOWED_HOSTS=https://your-frontend-domain.com,https://app.aclue.app
 
 # Feature Flags
 ENABLE_REGISTRATION=true
@@ -84,8 +84,8 @@ RATE_LIMIT_BURST=100
 #### Frontend (`web/.env.local`)
 ```bash
 # API Configuration
-NEXT_PUBLIC_API_URL=https://api.aclue.com
-NEXT_PUBLIC_WEB_URL=https://app.aclue.com
+NEXT_PUBLIC_API_URL=https://api.aclue.app
+NEXT_PUBLIC_WEB_URL=https://app.aclue.app
 
 # Analytics
 NEXT_PUBLIC_POSTHOG_KEY=your-posthog-key
@@ -245,11 +245,11 @@ vercel env add NEXT_PUBLIC_POSTHOG_KEY production
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "https://api.aclue.com/api/$1"
+      "dest": "https://api.aclue.app/api/$1"
     }
   ],
   "env": {
-    "NEXT_PUBLIC_API_URL": "https://api.aclue.com"
+    "NEXT_PUBLIC_API_URL": "https://api.aclue.app"
   }
 }
 ```
@@ -631,16 +631,16 @@ supabase db push
 ```nginx
 server {
     listen 80;
-    server_name api.aclue.com;
+    server_name api.aclue.app;
     return 301 https://$server_name$request_uri;
 }
 
 server {
     listen 443 ssl http2;
-    server_name api.aclue.com;
+    server_name api.aclue.app;
 
-    ssl_certificate /etc/letsencrypt/live/api.aclue.com/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/api.aclue.com/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/api.aclue.app/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/api.aclue.app/privkey.pem;
     
     ssl_protocols TLSv1.2 TLSv1.3;
     ssl_ciphers ECDHE-RSA-AES256-GCM-SHA512:DHE-RSA-AES256-GCM-SHA512;

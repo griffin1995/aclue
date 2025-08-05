@@ -3,7 +3,7 @@ Email Service for Newsletter and Notifications
 
 This service handles sending emails for:
 - Welcome emails to newsletter subscribers
-- Admin notifications to contact@prznt.app
+- Admin notifications to contact@aclue.app
 - Other email notifications
 
 Uses Resend API for reliable email delivery.
@@ -40,8 +40,8 @@ class EmailService:
     
     def __init__(self):
         self.resend_api_key = settings.RESEND_API_KEY
-        self.from_email = "prznt <noreply@prznt.app>"
-        self.admin_email = "contact@prznt.app"
+        self.from_email = "aclue <noreply@aclue.app>"
+        self.admin_email = "contact@aclue.app"
         self.base_url = "https://api.resend.com"
         
     async def send_welcome_email(self, email: str, source: str) -> bool:
@@ -164,7 +164,7 @@ class EmailService:
         Returns:
             EmailTemplate: Welcome email template
         """
-        subject = "Welcome to prznt - AI-Powered Gift Discovery! 🎁"
+        subject = "Welcome to aclue - AI-Powered Gift Discovery! 🎁"
         
         html_content = f"""
         <!DOCTYPE html>
@@ -172,7 +172,7 @@ class EmailService:
         <head>
             <meta charset="utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Welcome to prznt</title>
+            <title>Welcome to aclue</title>
             <style>
                 body {{ font-family: 'Arial', sans-serif; line-height: 1.6; color: #333; }}
                 .container {{ max-width: 600px; margin: 0 auto; padding: 20px; }}
@@ -189,7 +189,7 @@ class EmailService:
         <body>
             <div class="container">
                 <div class="header">
-                    <div class="logo">prznt</div>
+                    <div class="logo">aclue</div>
                     <div class="subtitle">AI-Powered Gift Discovery</div>
                 </div>
                 
@@ -222,17 +222,17 @@ class EmailService:
                     
                     <p>We're working hard to perfect the experience and will notify you the moment we're ready to launch. In the meantime, you can explore our alpha version to get a taste of what's coming!</p>
                     
-                    <a href="https://prznt.app/landingpage" class="cta-button">Explore Alpha Version</a>
+                    <a href="https://aclue.app/landingpage" class="cta-button">Explore Alpha Version</a>
                     
                     <p>Have questions or feedback? Simply reply to this email - we read and respond to every message!</p>
                     
                     <p>Excited to have you on board,<br>
-                    The prznt Team</p>
+                    The aclue Team</p>
                 </div>
                 
                 <div class="footer">
-                    <p>You're receiving this email because you signed up for prznt beta access.</p>
-                    <p>If you no longer wish to receive these emails, you can <a href="mailto:contact@prznt.app?subject=Unsubscribe">unsubscribe here</a>.</p>
+                    <p>You're receiving this email because you signed up for aclue beta access.</p>
+                    <p>If you no longer wish to receive these emails, you can <a href="mailto:contact@aclue.app?subject=Unsubscribe">unsubscribe here</a>.</p>
                 </div>
             </div>
         </body>
@@ -240,7 +240,7 @@ class EmailService:
         """
         
         text_content = f"""
-        Welcome to prznt - AI-Powered Gift Discovery!
+        Welcome to aclue - AI-Powered Gift Discovery!
 
         Thank you for joining our exclusive beta programme! You're now part of a select group who will be among the first to experience how AI can revolutionise gift-giving.
 
@@ -250,16 +250,16 @@ class EmailService:
         👥 Social Integration: Connect with friends and family for better gift ideas
         ⭐ Curated Quality: Only the best products make it to your recommendations
 
-        We're working hard to perfect the experience and will notify you the moment we're ready to launch. In the meantime, you can explore our alpha version at: https://prznt.app/landingpage
+        We're working hard to perfect the experience and will notify you the moment we're ready to launch. In the meantime, you can explore our alpha version at: https://aclue.app/landingpage
 
         Have questions or feedback? Simply reply to this email - we read and respond to every message!
 
         Excited to have you on board,
-        The prznt Team
+        The aclue Team
 
         ---
-        You're receiving this email because you signed up for prznt beta access.
-        If you no longer wish to receive these emails, you can unsubscribe by emailing contact@prznt.app
+        You're receiving this email because you signed up for aclue beta access.
+        If you no longer wish to receive these emails, you can unsubscribe by emailing contact@aclue.app
         """
         
         return EmailTemplate(subject, html_content, text_content)
@@ -298,11 +298,11 @@ class EmailService:
         <body>
             <div class="container">
                 <div class="header">
-                    <h2>🎉 New Newsletter Signup - prznt</h2>
+                    <h2>🎉 New Newsletter Signup - aclue</h2>
                 </div>
                 
                 <div class="content">
-                    <p>A new user has signed up for the prznt newsletter!</p>
+                    <p>A new user has signed up for the aclue newsletter!</p>
                     
                     <div class="info-box">
                         <div><span class="label">Email:</span> <span class="value">{subscriber_email}</span></div>
@@ -321,9 +321,9 @@ class EmailService:
         """
         
         text_content = f"""
-        New Newsletter Signup - prznt
+        New Newsletter Signup - aclue
 
-        A new user has signed up for the prznt newsletter!
+        A new user has signed up for the aclue newsletter!
 
         Details:
         Email: {subscriber_email}

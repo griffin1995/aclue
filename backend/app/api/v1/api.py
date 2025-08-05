@@ -1,7 +1,7 @@
 """
-GiftSync API v1 Router Configuration
+aclue API v1 Router Configuration
 
-Centralizes all API endpoint routing for the GiftSync application.
+Centralizes all API endpoint routing for the aclue application.
 This module aggregates all individual endpoint routers into a single
 API router with versioned prefix (/api/v1/).
 

@@ -1,7 +1,7 @@
 /**
- * GiftSync Loading Spinner UI Components
+ * aclue Loading Spinner UI Components
  * 
- * Provides animated loading indicators for the GiftSync application with
+ * Provides animated loading indicators for the aclue application with
  * consistent styling and multiple variants. Includes specialized loading
  * states for different UI contexts and components.
  * 
@@ -24,7 +24,7 @@
  *   - <LoadingOverlay isVisible={loading} text="Saving..." />
  * 
  * Design System Integration:
- *   - Follows GiftSync color palette and spacing
+ *   - Follows aclue color palette and spacing
  *   - Consistent with overall animation timing (1s rotation)
  *   - Responsive sizing with Tailwind CSS classes
  */
@@ -72,7 +72,7 @@ const variantClasses = {
 /**
  * Main loading spinner component with animated sparkles icon.
  * 
- * Provides a consistent loading indicator across the GiftSync application
+ * Provides a consistent loading indicator across the aclue application
  * with smooth rotation animation and optional loading text. Uses hardware-
  * accelerated CSS transforms for optimal performance.
  * 

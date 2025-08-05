@@ -19,7 +19,7 @@ export default function MaintenanceMode() {
     
     try {
       // Call the newsletter signup API endpoint (always use backend directly)
-      const backendUrl = 'https://giftsync-backend-production.up.railway.app';
+      const backendUrl = 'https://aclue-backend-production.up.railway.app';
       const response = await fetch(`${backendUrl}/api/v1/newsletter/signup`, {
         method: 'POST',
         headers: {
@@ -58,16 +58,16 @@ export default function MaintenanceMode() {
   return (
     <>
       <Head>
-        <title>prznt - AI-Powered Gift Discovery</title>
+        <title>aclue - AI-Powered Gift Discovery</title>
         <meta
           name="description"
-          content="prznt is getting ready to launch! Sign up for early access to our AI-powered gift recommendation platform."
+          content="aclue is getting ready to launch! Sign up for early access to our AI-powered gift recommendation platform."
         />
         <meta name="keywords" content="gifts, AI recommendations, gift ideas, coming soon, beta signup, neural network" />
-        <meta property="og:title" content="prznt - AI-Powered Gift Discovery" />
+        <meta property="og:title" content="aclue - AI-Powered Gift Discovery" />
         <meta
           property="og:description"
-          content="prznt is getting ready to launch! Sign up for early access to our AI-powered gift recommendation platform."
+          content="aclue is getting ready to launch! Sign up for early access to our AI-powered gift recommendation platform."
         />
         <meta property="og:image" content="/logo.png" />
         <meta name="robots" content="noindex, nofollow" />
@@ -107,7 +107,7 @@ export default function MaintenanceMode() {
                 </div>
                 <div className="absolute -inset-2 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl opacity-20 blur-xl animate-pulse"></div>
               </div>
-              <span className="text-4xl font-bold text-white tracking-tight">prznt</span>
+              <span className="text-4xl font-bold text-white tracking-tight">aclue</span>
             </motion.div>
 
             {/* Main Headline */}

@@ -190,10 +190,10 @@ export default function DashboardPage() {
   return (
     <>
       <Head>
-        <title>Dashboard - prznt</title>
+        <title>Dashboard - aclue</title>
         <meta
           name="description"
-          content="Your personalised prznt dashboard with recommendations, gift links, and preferences."
+          content="Your personalised aclue dashboard with recommendations, gift links, and preferences."
         />
         <meta name="robots" content="noindex" />
       </Head>
@@ -208,14 +208,14 @@ export default function DashboardPage() {
                 <div className="w-8 h-8 bg-gray-50 rounded-lg flex items-center justify-center border border-gray-200">
                   <Image 
                     src="/logo.png" 
-                    alt="prznt logo" 
+                    alt="aclue logo" 
                     width={20} 
                     height={20}
                     className="rounded"
                   />
                 </div>
                 <span className="text-xl font-bold text-gray-900">
-                  prznt
+                  aclue
                 </span>
               </Link>
 

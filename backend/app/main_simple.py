@@ -25,7 +25,7 @@ app.add_middleware(
 async def root():
     """Root endpoint."""
     return {
-        "message": "Welcome to GiftSync API",
+        "message": "Welcome to aclue API",
         "version": settings.VERSION,
         "environment": settings.ENVIRONMENT
     }
@@ -34,7 +34,7 @@ async def root():
 @app.get("/health")
 async def health():
     """Health check endpoint."""
-    return {"status": "healthy", "service": "giftsync-api"}
+    return {"status": "healthy", "service": "aclue-api"}
 
 
 if __name__ == "__main__":

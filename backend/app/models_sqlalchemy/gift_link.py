@@ -111,7 +111,7 @@ class GiftLink(Base):
     def full_url(self):
         """Get the full URL for this gift link."""
         # This would be constructed based on your domain
-        return f"https://giftsync.app/gift/{self.link_token}"
+        return f"https://aclue.app/gift/{self.link_token}"
     
     @property
     def conversion_rate(self):

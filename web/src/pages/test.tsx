@@ -3,7 +3,7 @@ import React from 'react';
 export default function TestPage() {
   return (
     <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
-      <h1>GiftSync Web App - Test Page</h1>
+      <h1>aclue Web App - Test Page</h1>
       <p>✅ Web app is running successfully!</p>
       <p>Available pages:</p>
       <ul>

@@ -74,7 +74,7 @@ export default function PostHogLiveTest() {
   const identifyTestUser = () => {
     const userId = `test_user_${Date.now()}`;
     analytics.identify(userId, {
-      email: 'test@giftsync.com',
+      email: 'test@aclue.app',
       name: 'PostHog Test User',
       test_session: true,
       created_at: new Date().toISOString(),

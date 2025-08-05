@@ -139,7 +139,7 @@ export function createPostHogConfig(): PostHogConfig {
       property_blacklist: [],
       sanitize_properties: null,
       xhr_headers: {
-        'X-PostHog-Source': 'giftsync-dev',
+        'X-PostHog-Source': 'aclue-dev',
       },
     };
   }
@@ -162,7 +162,7 @@ export function createPostHogConfig(): PostHogConfig {
     
     // Production headers
     xhr_headers: {
-      'X-PostHog-Source': 'giftsync-prod',
+      'X-PostHog-Source': 'aclue-prod',
     },
   };
 }

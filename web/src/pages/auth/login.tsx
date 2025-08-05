@@ -437,13 +437,13 @@ export default function LoginPage() {
               <div className="w-12 h-12 bg-gray-50 rounded-2xl flex items-center justify-center border border-gray-200">
                 <Image 
                   src="/logo.png" 
-                  alt="prznt logo" 
+                  alt="aclue logo" 
                   width={24} 
                   height={24}
                   className="rounded-lg"
                 />
               </div>
-              <h1 className="text-2xl font-bold text-gray-900">prznt</h1>
+              <h1 className="text-2xl font-bold text-gray-900">aclue</h1>
             </div>
             <h2 className="text-xl font-semibold text-gray-900 mb-2">
               Welcome back

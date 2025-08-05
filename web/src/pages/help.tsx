@@ -2,7 +2,7 @@
  * Help Centre Page
  * 
  * Comprehensive help and support page providing users with guides,
- * FAQs, and support resources for using GiftSync effectively.
+ * FAQs, and support resources for using aclue effectively.
  */
 
 import React, { useState } from 'react';
@@ -35,8 +35,8 @@ interface FAQItem {
 const faqs: FAQItem[] = [
   {
     id: "how-it-works",
-    question: "How does GiftSync work?",
-    answer: "GiftSync uses AI-powered recommendations based on your preferences. Simply swipe through products to help our algorithm learn your taste, then receive personalised gift suggestions for yourself or others.",
+    question: "How does aclue work?",
+    answer: "aclue uses AI-powered recommendations based on your preferences. Simply swipe through products to help our algorithm learn your taste, then receive personalised gift suggestions for yourself or others.",
     category: "Getting Started"
   },
   {
@@ -49,18 +49,18 @@ const faqs: FAQItem[] = [
     id: "swipe-system",
     question: "How does the swipe system work?",
     answer: "Swipe right on products you like, left on products you don't. The more you swipe, the better our AI understands your preferences and improves recommendations.",
-    category: "Using GiftSync"
+    category: "Using aclue"
   },
   {
     id: "recommendations",
     question: "How are recommendations generated?",
     answer: "Our AI analyses your swipe patterns, preferred categories, and interaction history to generate personalised recommendations with confidence scores.",
-    category: "Using GiftSync"
+    category: "Using aclue"
   },
   {
     id: "affiliate-links",
     question: "What are affiliate links?",
-    answer: "Some product links earn us a small commission when you make a purchase, at no extra cost to you. This helps keep GiftSync free whilst supporting quality recommendations.",
+    answer: "Some product links earn us a small commission when you make a purchase, at no extra cost to you. This helps keep aclue free whilst supporting quality recommendations.",
     category: "Shopping"
   },
   {
@@ -86,7 +86,7 @@ const faqs: FAQItem[] = [
 const categories = [
   "All",
   "Getting Started",
-  "Using GiftSync", 
+  "Using aclue", 
   "Shopping",
   "Privacy & Security",
   "Troubleshooting"
@@ -112,13 +112,13 @@ const HelpCentrePage: React.FC = () => {
   return (
     <>
       <Head>
-        <title>Help Centre - GiftSync</title>
+        <title>Help Centre - aclue</title>
         <meta 
           name="description" 
-          content="Get help with GiftSync - find answers to common questions, learn how to use our AI-powered gift recommendation system, and get support." 
+          content="Get help with aclue - find answers to common questions, learn how to use our AI-powered gift recommendation system, and get support." 
         />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://giftsync.com/help" />
+        <link rel="canonical" href="https://aclue.app/help" />
       </Head>
 
       <div className="min-h-screen bg-gray-50">
@@ -170,7 +170,7 @@ const HelpCentrePage: React.FC = () => {
                     <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-blue-200 transition-colors">
                       <Target className="w-6 h-6 text-blue-600" />
                     </div>
-                    <h3 className="font-semibold text-gray-900 mb-2">Using GiftSync</h3>
+                    <h3 className="font-semibold text-gray-900 mb-2">Using aclue</h3>
                     <p className="text-gray-600 text-sm">Learn how to swipe, get recommendations, and find perfect gifts</p>
                   </div>
                 </Link>
@@ -255,7 +255,7 @@ const HelpCentrePage: React.FC = () => {
                     <span>Contact Support</span>
                   </Link>
                   <Link 
-                    href="mailto:support@giftsync.com"
+                    href="mailto:support@aclue.app"
                     className="flex items-center gap-3 text-primary-600 hover:text-primary-700 transition-colors"
                   >
                     <ExternalLink className="w-5 h-5" />
@@ -312,7 +312,7 @@ const HelpCentrePage: React.FC = () => {
             href="/"
             className="inline-flex items-center gap-2 text-primary-600 hover:text-primary-700 transition-colors"
           >
-            ← Back to GiftSync
+            ← Back to aclue
           </Link>
         </div>
       </div>

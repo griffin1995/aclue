@@ -1,7 +1,7 @@
 /**
- * GiftSync Authentication Guard Component
+ * aclue Authentication Guard Component
  * 
- * Provides route-level authentication and authorization for the GiftSync application.
+ * Provides route-level authentication and authorization for the aclue application.
  * Handles protected routes, authentication redirects, and loading states during
  * authentication checks. Ensures secure access to user-specific features.
  * 
@@ -114,7 +114,7 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
 
   // Show loading state while initializing or during redirects
   if (!isInitialized || isLoading) {
-    return <PageLoader text="Loading GiftSync..." />;
+    return <PageLoader text="Loading aclue..." />;
   }
 
   // Show loading for protected routes while unauthenticated (redirect happening)

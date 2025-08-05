@@ -1,8 +1,8 @@
 # =============================================================================
-# GiftSync Backend Production Dockerfile
+# aclue Backend Production Dockerfile
 # =============================================================================
 # 
-# Multi-stage production Dockerfile for the GiftSync FastAPI backend service.
+# Multi-stage production Dockerfile for the aclue FastAPI backend service.
 # Optimized for security, performance, and minimal attack surface in production
 # deployment environments including Kubernetes, Docker Swarm, and cloud services.
 # 
@@ -26,8 +26,8 @@
 #   - Unbuffered Python output for real-time logs
 # 
 # Usage:
-#   docker build -t giftsync-backend .
-#   docker run -p 8000:8000 giftsync-backend
+#   docker build -t aclue-backend .
+#   docker run -p 8000:8000 aclue-backend
 # 
 # =============================================================================
 

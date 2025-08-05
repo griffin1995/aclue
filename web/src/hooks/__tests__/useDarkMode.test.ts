@@ -84,7 +84,7 @@ describe('useDarkMode', () => {
 
       expect(result.current.theme).toBe('light');
       expect(result.current.isDark).toBe(false);
-      expect(mockLocalStorage.setItem).toHaveBeenCalledWith('giftsync_theme', 'light');
+      expect(mockLocalStorage.setItem).toHaveBeenCalledWith('aclue_theme', 'light');
       expect(mockDocumentElement.classList.remove).toHaveBeenCalledWith('dark');
     });
 
@@ -97,7 +97,7 @@ describe('useDarkMode', () => {
 
       expect(result.current.theme).toBe('dark');
       expect(result.current.isDark).toBe(true);
-      expect(mockLocalStorage.setItem).toHaveBeenCalledWith('giftsync_theme', 'dark');
+      expect(mockLocalStorage.setItem).toHaveBeenCalledWith('aclue_theme', 'dark');
       expect(mockDocumentElement.classList.add).toHaveBeenCalledWith('dark');
     });
 
@@ -109,7 +109,7 @@ describe('useDarkMode', () => {
       });
 
       expect(result.current.theme).toBe('system');
-      expect(mockLocalStorage.setItem).toHaveBeenCalledWith('giftsync_theme', 'system');
+      expect(mockLocalStorage.setItem).toHaveBeenCalledWith('aclue_theme', 'system');
     });
   });
 

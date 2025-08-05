@@ -1,5 +1,5 @@
 """
-GiftSync API - Main Application
+aclue API - Main Application
 Unified API using structured v1 endpoints with working Supabase integration
 """
 
@@ -13,7 +13,7 @@ from app.api.v1.api import api_router
 app = FastAPI(
     title=settings.PROJECT_NAME,
     version=settings.VERSION,
-    description="GiftSync API - AI-powered gift recommendation platform",
+    description="aclue API - AI-powered gift recommendation platform",
     docs_url="/docs" if settings.DEBUG else None,
     redoc_url="/redoc" if settings.DEBUG else None,
 )
@@ -31,7 +31,7 @@ app.add_middleware(
 async def root():
     """Root endpoint."""
     return {
-        "message": "Welcome to GiftSync API",
+        "message": "Welcome to aclue API",
         "version": settings.VERSION,
         "environment": settings.ENVIRONMENT,
         "docs": "/docs" if settings.DEBUG else None

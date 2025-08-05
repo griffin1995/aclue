@@ -161,7 +161,7 @@ export default function DiscoverPage() {
       <div className="min-h-screen bg-gradient-to-br from-primary-50 to-secondary-50 flex items-center justify-center">
         <div className="text-center">
           <div className="w-12 h-12 border-4 border-primary-200 border-t-primary-600 rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-gray-600">Loading GiftSync...</p>
+          <p className="text-gray-600">Loading aclue...</p>
         </div>
       </div>
     );
@@ -170,7 +170,7 @@ export default function DiscoverPage() {
   return (
     <>
       <Head>
-        <title>Discover Gifts - GiftSync</title>
+        <title>Discover Gifts - aclue</title>
         <meta
           name="description"
           content="Discover amazing gifts by swiping through our curated collection. Train our AI to understand your preferences and get personalized recommendations."
@@ -197,7 +197,7 @@ export default function DiscoverPage() {
                   <div className="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
                     <Gift className="w-5 h-5 text-white" />
                   </div>
-                  <span className="text-xl font-bold text-gray-900">GiftSync</span>
+                  <span className="text-xl font-bold text-gray-900">aclue</span>
                 </div>
               </div>
 

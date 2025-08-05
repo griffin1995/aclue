@@ -109,13 +109,13 @@ export default function PricingPage() {
   return (
     <>
       <Head>
-        <title>Pricing - GiftSync</title>
+        <title>Pricing - aclue</title>
         <meta
           name="description"
           content="Choose the perfect plan for your gifting needs. Start free, upgrade when you're ready. Transparent pricing, no hidden fees."
         />
         <meta name="keywords" content="pricing, subscription, gift recommendations, premium features" />
-        <meta property="og:title" content="Pricing - GiftSync" />
+        <meta property="og:title" content="Pricing - aclue" />
         <meta
           property="og:description"
           content="Choose the perfect plan for your gifting needs. Start free, upgrade when you're ready."
@@ -131,7 +131,7 @@ export default function PricingPage() {
                 <div className="w-10 h-10 gradient-primary rounded-xl flex items-center justify-center">
                   <Gift className="w-6 h-6 text-white" />
                 </div>
-                <span className="text-xl font-bold text-gray-900">GiftSync</span>
+                <span className="text-xl font-bold text-gray-900">aclue</span>
               </Link>
               
               <Link

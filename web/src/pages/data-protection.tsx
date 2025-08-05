@@ -2,7 +2,7 @@
  * Data Protection Rights Page
  * 
  * Comprehensive page detailing GDPR data subject rights, how to exercise them,
- * and data protection information for GiftSync users.
+ * and data protection information for aclue users.
  */
 
 import React from 'react';
@@ -14,13 +14,13 @@ const DataProtectionRightsPage: React.FC = () => {
   return (
     <>
       <Head>
-        <title>Data Protection Rights - GiftSync</title>
+        <title>Data Protection Rights - aclue</title>
         <meta 
           name="description" 
-          content="Learn about your data protection rights under GDPR and UK data protection law, including how to access, correct, delete, or export your personal data from GiftSync." 
+          content="Learn about your data protection rights under GDPR and UK data protection law, including how to access, correct, delete, or export your personal data from aclue." 
         />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://giftsync.com/data-protection" />
+        <link rel="canonical" href="https://aclue.app/data-protection" />
       </Head>
       
       <div className="min-h-screen bg-gray-50">
@@ -52,7 +52,7 @@ const DataProtectionRightsPage: React.FC = () => {
                 </p>
                 <div className="text-sm text-purple-800">
                   <span className="font-medium">Quick Access:</span> Use the action buttons throughout this page to exercise your rights immediately, 
-                  or contact us at <a href="mailto:privacy@giftsync.com" className="underline hover:text-purple-900">privacy@giftsync.com</a>
+                  or contact us at <a href="mailto:privacy@aclue.app" className="underline hover:text-purple-900">privacy@aclue.app</a>
                 </div>
               </div>
             </div>
@@ -183,10 +183,10 @@ const DataProtectionRightsPage: React.FC = () => {
                         For complex corrections or data you cannot edit yourself, contact our support team.
                       </p>
                       <a 
-                        href="mailto:privacy@giftsync.com" 
+                        href="mailto:privacy@aclue.app" 
                         className="text-blue-600 text-sm underline hover:text-blue-800"
                       >
-                        privacy@giftsync.com
+                        privacy@aclue.app
                       </a>
                     </div>
                   </div>
@@ -514,10 +514,10 @@ const DataProtectionRightsPage: React.FC = () => {
                       Contact our Data Protection Officer for complex requests or assistance.
                     </p>
                     <a 
-                      href="mailto:privacy@giftsync.com" 
+                      href="mailto:privacy@aclue.app" 
                       className="inline-block bg-green-600 text-white px-4 py-2 rounded text-sm hover:bg-green-700 transition-colors"
                     >
-                      privacy@giftsync.com
+                      privacy@aclue.app
                     </a>
                   </div>
                   
@@ -562,15 +562,15 @@ const DataProtectionRightsPage: React.FC = () => {
                     <div className="flex items-center gap-2">
                       <Mail className="w-4 h-4 text-gray-500" />
                       <span className="font-medium">Primary Contact:</span>
-                      <a href="mailto:privacy@giftsync.com" className="text-blue-600 hover:text-blue-800 underline">
-                        privacy@giftsync.com
+                      <a href="mailto:privacy@aclue.app" className="text-blue-600 hover:text-blue-800 underline">
+                        privacy@aclue.app
                       </a>
                     </div>
                     <div className="flex items-center gap-2">
                       <Users className="w-4 h-4 text-gray-500" />
                       <span className="font-medium">Support Team:</span>
-                      <a href="mailto:support@giftsync.com" className="text-blue-600 hover:text-blue-800 underline">
-                        support@giftsync.com
+                      <a href="mailto:support@aclue.app" className="text-blue-600 hover:text-blue-800 underline">
+                        support@aclue.app
                       </a>
                     </div>
                     <div className="flex items-center gap-2">

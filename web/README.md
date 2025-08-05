@@ -1,10 +1,10 @@
-# GiftSync Web Application
+# aclue Web Application
 
-A modern, responsive web application for AI-powered gift recommendations built with Next.js, React, and TypeScript.
+A modern, responsive web application for data-led gift insights built with Next.js, React, and TypeScript.
 
 ## Features
 
-- 🎯 **AI-Powered Recommendations**: Personalized gift suggestions based on user preferences
+- 🎯 **Data-Led Insights**: Personalised gift suggestions based on user preferences
 - 📱 **Responsive Design**: Optimized for desktop, tablet, and mobile devices
 - 🔄 **Swipe Interface**: Tinder-style product discovery with touch and mouse support
 - 🔐 **Authentication**: Secure user registration and login with JWT tokens
@@ -187,16 +187,16 @@ Build and run with Docker:
 
 ```bash
 # Build image
-docker build -t giftsync-web .
+docker build -t aclue-web .
 
 # Run container
-docker run -p 3000:3000 giftsync-web
+docker run -p 3000:3000 aclue-web
 ```
 
 ## Configuration
 
 ### Tailwind CSS
-Custom design system with GiftSync branding:
+Custom design system with aclue branding:
 
 ```javascript
 // tailwind.config.js
@@ -223,7 +223,7 @@ Optimized for performance and security:
 // next.config.js
 module.exports = {
   images: {
-    domains: ['images.giftsync.com'],
+    domains: ['images.aclue.app'],
     formats: ['image/webp', 'image/avif'],
   },
   // Security headers, redirects, etc.

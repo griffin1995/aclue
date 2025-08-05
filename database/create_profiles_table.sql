@@ -1,4 +1,4 @@
--- Create profiles table for GiftSync user data
+-- Create profiles table for aclue user data
 -- This table stores additional user information beyond what Supabase Auth provides
 
 -- Create profiles table

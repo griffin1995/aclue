@@ -1,4 +1,4 @@
--- GiftSync Database Schema for Supabase
+-- aclue Database Schema for Supabase
 -- Run this SQL in your Supabase SQL Editor: https://supabase.com/dashboard/project/xchsarvamppwephulylt/sql
 
 -- Enable necessary extensions

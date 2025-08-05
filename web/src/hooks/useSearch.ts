@@ -88,7 +88,7 @@ export function useSearch(options: UseSearchOptions = {}): UseSearchReturn {
 
   // Load recent searches from localStorage
   useEffect(() => {
-    const saved = localStorage.getItem('giftsync_recent_searches');
+    const saved = localStorage.getItem('aclue_recent_searches');
     if (saved) {
       try {
         setRecentSearches(JSON.parse(saved));
@@ -100,7 +100,7 @@ export function useSearch(options: UseSearchOptions = {}): UseSearchReturn {
 
   // Save recent searches to localStorage
   useEffect(() => {
-    localStorage.setItem('giftsync_recent_searches', JSON.stringify(recentSearches));
+    localStorage.setItem('aclue_recent_searches', JSON.stringify(recentSearches));
   }, [recentSearches]);
 
   // Load popular searches
@@ -251,7 +251,7 @@ export function useSearch(options: UseSearchOptions = {}): UseSearchReturn {
   // Clear recent searches
   const clearRecentSearches = useCallback(() => {
     setRecentSearches([]);
-    localStorage.removeItem('giftsync_recent_searches');
+    localStorage.removeItem('aclue_recent_searches');
   }, []);
 
   return {

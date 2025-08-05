@@ -3,7 +3,7 @@
  * 
  * Comprehensive affiliate disclosure page that meets FTC guidelines,
  * Amazon Associates Operating Agreement requirements, and provides
- * transparency about GiftSync's affiliate marketing practices.
+ * transparency about aclue's affiliate marketing practices.
  */
 
 import React from 'react';
@@ -15,10 +15,10 @@ const AffiliateDisclosurePage: React.FC = () => {
   return (
     <>
       <Head>
-        <title>Affiliate Disclosure - GiftSync</title>
+        <title>Affiliate Disclosure - aclue</title>
         <meta 
           name="description" 
-          content="Learn about GiftSync's affiliate partnerships and how we earn commissions from qualifying purchases to support our free gift recommendation service." 
+          content="Learn about aclue's affiliate partnerships and how we earn commissions from qualifying purchases to support our free gift recommendation service." 
         />
         <meta name="robots" content="index, follow" />
       </Head>
@@ -46,7 +46,7 @@ const AffiliateDisclosurePage: React.FC = () => {
               <div>
                 <h2 className="text-lg font-semibold text-blue-900 mb-2">Quick Summary</h2>
                 <p className="text-blue-800 leading-relaxed">
-                  <strong>GiftSync participates in affiliate programmes</strong>, including the Amazon Associates Programme. 
+                  <strong>aclue participates in affiliate programmes</strong>, including the Amazon Associates Programme. 
                   When you purchase products through our recommendation links, we may earn a small commission at no additional cost to you. 
                   This helps us maintain our free service whilst ensuring our recommendations remain unbiased and based solely on AI analysis of your preferences.
                 </p>
@@ -65,14 +65,14 @@ const AffiliateDisclosurePage: React.FC = () => {
             <div className="space-y-2 text-sm">
               <div className="flex items-center gap-2">
                 <span className="font-medium text-gray-900">Email:</span>
-                <a href="mailto:hello@giftsync.com" className="text-blue-600 hover:text-blue-800 underline">
-                  hello@giftsync.com
+                <a href="mailto:hello@aclue.app" className="text-blue-600 hover:text-blue-800 underline">
+                  hello@aclue.app
                 </a>
               </div>
               <div className="flex items-center gap-2">
                 <span className="font-medium text-gray-900">Support:</span>
-                <a href="mailto:support@giftsync.com" className="text-blue-600 hover:text-blue-800 underline">
-                  support@giftsync.com
+                <a href="mailto:support@aclue.app" className="text-blue-600 hover:text-blue-800 underline">
+                  support@aclue.app
                 </a>
               </div>
             </div>

@@ -32,8 +32,8 @@ describe('API Client', () => {
 
       expect(tokenManager.getAccessToken()).toBe(accessToken);
       expect(tokenManager.getRefreshToken()).toBe(refreshToken);
-      expect(mockLocalStorage.setItem).toHaveBeenCalledWith('giftsync_auth_token', accessToken);
-      expect(mockLocalStorage.setItem).toHaveBeenCalledWith('giftsync_refresh_token', refreshToken);
+      expect(mockLocalStorage.setItem).toHaveBeenCalledWith('aclue_auth_token', accessToken);
+      expect(mockLocalStorage.setItem).toHaveBeenCalledWith('aclue_refresh_token', refreshToken);
     });
 
     it('clears tokens correctly', () => {
@@ -42,14 +42,14 @@ describe('API Client', () => {
 
       expect(tokenManager.getAccessToken()).toBeNull();
       expect(tokenManager.getRefreshToken()).toBeNull();
-      expect(mockLocalStorage.removeItem).toHaveBeenCalledWith('giftsync_auth_token');
-      expect(mockLocalStorage.removeItem).toHaveBeenCalledWith('giftsync_refresh_token');
+      expect(mockLocalStorage.removeItem).toHaveBeenCalledWith('aclue_auth_token');
+      expect(mockLocalStorage.removeItem).toHaveBeenCalledWith('aclue_refresh_token');
     });
 
     it('loads tokens from localStorage on initialization', () => {
       mockLocalStorage.getItem.mockImplementation((key) => {
-        if (key === 'giftsync_auth_token') return 'stored-access-token';
-        if (key === 'giftsync_refresh_token') return 'stored-refresh-token';
+        if (key === 'aclue_auth_token') return 'stored-access-token';
+        if (key === 'aclue_refresh_token') return 'stored-refresh-token';
         return null;
       });
 
