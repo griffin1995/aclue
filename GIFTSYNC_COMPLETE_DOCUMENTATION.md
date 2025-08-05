@@ -1,10 +1,10 @@
-# GiftSync - Complete Technical Documentation
+# aclue - Complete Technical Documentation
 **Comprehensive Technical, Business & Architecture Documentation**
 
 > **Last Updated**: July 1, 2025  
 > **Version**: 4.0.0  
 > **Status**: Production-Ready MVP with Full Authentication System  
-> **Environment**: `/home/jack/Documents/gift_sync`
+> **Environment**: `/home/jack/Documents/aclue`
 
 ---
 
@@ -30,7 +30,7 @@
 ## 🎯 Project Overview
 
 ### Business Context
-GiftSync is an AI-powered gift recommendation platform using swipe-based preference discovery to generate personalised gift suggestions whilst maintaining the element of surprise. The platform targets the £45B global gift market with a projected £2.5M revenue by Year 3.
+aclue is an AI-powered gift recommendation platform using swipe-based preference discovery to generate personalised gift suggestions whilst maintaining the element of surprise. The platform targets the £45B global gift market with a projected £2.5M revenue by Year 3.
 
 **Key Business Metrics:**
 - **Target Market**: £45B global gift market, £9.3B UK market
@@ -906,4 +906,4 @@ The authentication foundation is solid and the web application is fully function
 
 **End of Complete Technical Documentation**
 
-*This document serves as the single source of truth for the GiftSync project. All scattered documentation has been consolidated into this comprehensive guide.*
+*This document serves as the single source of truth for the aclue project. All scattered documentation has been consolidated into this comprehensive guide.*

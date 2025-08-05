@@ -1,8 +1,8 @@
-# GiftSync Backend Architecture
+# aclue Backend Architecture
 
 ## Overview
 
-The GiftSync backend is a production-ready FastAPI application that provides AI-powered gift recommendations, secure user authentication, and affiliate revenue tracking. Built with modern Python practices, it emphasizes performance, security, and scalability.
+The aclue backend is a production-ready FastAPI application that provides AI-powered gift recommendations, secure user authentication, and affiliate revenue tracking. Built with modern Python practices, it emphasizes performance, security, and scalability.
 
 ## Technology Stack
 
@@ -77,7 +77,7 @@ The main FastAPI application with comprehensive configuration:
 
 ```python
 app = FastAPI(
-    title="GiftSync API",
+    title="aclue API",
     description="AI-powered gift recommendation platform",
     version="1.0.0",
     lifespan=lifespan  # Startup/shutdown management
@@ -97,7 +97,7 @@ Environment-based configuration with validation:
 
 ```python
 class Settings(BaseSettings):
-    PROJECT_NAME: str = "GiftSync API"
+    PROJECT_NAME: str = "aclue API"
     SECRET_KEY: str  # JWT signing secret
     DATABASE_URL: str  # PostgreSQL connection
     SUPABASE_URL: str  # Supabase project URL
@@ -172,7 +172,7 @@ Comprehensive Amazon integration for affiliate revenue:
 - ASIN extraction and validation
 
 **Revenue Features:**
-- Amazon Associates program integration (giftsync-21)
+- Amazon Associates program integration (aclue-21)
 - Commission-eligible URL generation
 - Click tracking for attribution
 - Conversion rate optimization

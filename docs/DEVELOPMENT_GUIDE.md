@@ -1,8 +1,8 @@
-# GiftSync Development Guide
+# aclue Development Guide
 
 ## Overview
 
-This guide provides comprehensive instructions for setting up a development environment and contributing to the GiftSync platform. It covers everything from initial setup to advanced development workflows.
+This guide provides comprehensive instructions for setting up a development environment and contributing to the aclue platform. It covers everything from initial setup to advanced development workflows.
 
 ## Prerequisites
 
@@ -39,8 +39,8 @@ This guide provides comprehensive instructions for setting up a development envi
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-org/giftsync.git
-cd giftsync
+git clone https://github.com/your-org/aclue.git
+cd aclue
 
 # Install development tools
 npm install -g @vercel/cli
@@ -1227,4 +1227,4 @@ api.interceptors.response.use(
 - [ ] Analytics tracking is comprehensive
 - [ ] Responsive design works across devices
 
-This comprehensive development guide should help you contribute effectively to the GiftSync platform. Remember to follow the established patterns and conventions to maintain code quality and consistency.
+This comprehensive development guide should help you contribute effectively to the aclue platform. Remember to follow the established patterns and conventions to maintain code quality and consistency.

@@ -1,8 +1,8 @@
-# GiftSync Frontend Architecture
+# aclue Frontend Architecture
 
 ## Overview
 
-The GiftSync frontend is a modern React application built with Next.js 14, TypeScript, and Tailwind CSS. It provides a responsive, high-performance user interface for the AI-powered gift recommendation platform.
+The aclue frontend is a modern React application built with Next.js 14, TypeScript, and Tailwind CSS. It provides a responsive, high-performance user interface for the AI-powered gift recommendation platform.
 
 ## Technology Stack
 

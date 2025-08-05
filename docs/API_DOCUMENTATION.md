@@ -1,13 +1,13 @@
-# GiftSync API Documentation
+# aclue API Documentation
 
 ## Overview
 
-The GiftSync API is a RESTful service built with FastAPI that powers the AI-driven gift recommendation platform. It provides secure authentication, product management, recommendation algorithms, and affiliate revenue tracking.
+The aclue API is a RESTful service built with FastAPI that powers the AI-driven gift recommendation platform. It provides secure authentication, product management, recommendation algorithms, and affiliate revenue tracking.
 
 ## Base URL
 
 - **Development**: `http://localhost:8000`
-- **Production**: `https://api.giftsync.com`
+- **Production**: `https://api.aclue.com`
 
 ## Authentication
 
@@ -122,7 +122,7 @@ Search and filter products.
     "brand": "AudioTech",
     "retailer": "Amazon",
     "image_url": "https://example.com/image.jpg",
-    "affiliate_url": "https://amazon.co.uk/dp/B08GYKNCCP/?tag=giftsync-21",
+    "affiliate_url": "https://amazon.co.uk/dp/B08GYKNCCP/?tag=aclue-21",
     "asin": "B08GYKNCCP",
     "rating": 4.5,
     "review_count": 1250,
@@ -288,7 +288,7 @@ const products = await productsResponse.json();
 ## Deployment
 
 The API can be deployed using:
-- **Docker**: `docker run -p 8000:8000 giftsync-api`
+- **Docker**: `docker run -p 8000:8000 aclue-api`
 - **Uvicorn**: `uvicorn app.main:app --host 0.0.0.0 --port 8000`
 - **Gunicorn**: `gunicorn app.main:app -k uvicorn.workers.UvicornWorker`
 

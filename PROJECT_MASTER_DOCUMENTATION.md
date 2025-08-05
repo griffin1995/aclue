@@ -1,8 +1,8 @@
-# GiftSync - Master Project Documentation
+# aclue - Master Project Documentation
 *Complete Technical Architecture & Development Status*
 
 **Status**: Production-Ready MVP ✅  
-**Environment**: `/home/jack/Documents/gift_sync`  
+**Environment**: `/home/jack/Documents/aclue`  
 **Last Updated**: January 5, 2025  
 **Version**: 4.0.0 - Master Documentation  
 
@@ -10,13 +10,13 @@
 
 ## 🎯 EXECUTIVE SUMMARY
 
-**GiftSync** is a production-ready AI-powered gift recommendation platform that transforms how gifts are chosen through swipe-based preference discovery. The platform operates within the £45B global gift market, with active revenue generation through Amazon Associates integration and comprehensive legal compliance for UK/EU markets.
+**aclue** is a production-ready AI-powered gift recommendation platform that transforms how gifts are chosen through swipe-based preference discovery. The platform operates within the £45B global gift market, with active revenue generation through Amazon Associates integration and comprehensive legal compliance for UK/EU markets.
 
 ### Current Status - PRODUCTION READY ✅
 - **Frontend**: Live at https://prznt.app (Cloudflare Pages)
-- **Backend**: Live at https://giftsync-backend-production.up.railway.app (Railway)
+- **Backend**: Live at https://aclue-backend-production.up.railway.app (Railway)
 - **Database**: Supabase PostgreSQL with complete schema
-- **Revenue**: Active Amazon Associates integration (Tag: giftsync-21)
+- **Revenue**: Active Amazon Associates integration (Tag: aclue-21)
 - **Compliance**: Full UK/EU legal framework (GDPR, Consumer Rights Act)
 - **Analytics**: PostHog integration with comprehensive tracking
 
@@ -64,7 +64,7 @@ gift_links           # Shareable gift lists with QR codes (ready)
 
 ### Production URLs (LIVE)
 - **Frontend**: https://prznt.app (Maintenance mode with alpha access)
-- **Backend API**: https://giftsync-backend-production.up.railway.app
+- **Backend API**: https://aclue-backend-production.up.railway.app
 - **API Health**: ✅ Healthy (confirmed: {"status":"healthy","timestamp":"2025-01-01T00:00:00Z","version":"1.0.0"})
 - **Domain Status**: prznt.app operational with professional maintenance page
 
@@ -93,7 +93,7 @@ Supabase (Database):
 ```bash
 # Frontend (Cloudflare Pages)
 NEXT_PUBLIC_MAINTENANCE_MODE=true
-NEXT_PUBLIC_API_URL=https://giftsync-backend-production.up.railway.app
+NEXT_PUBLIC_API_URL=https://aclue-backend-production.up.railway.app
 NEXT_PUBLIC_WEB_URL=https://prznt.app
 
 # Backend (Railway)
@@ -120,7 +120,7 @@ SECRET_KEY=[production_secret]
 ### Amazon Associates Integration (PRODUCTION)
 ```typescript
 // Active Configuration
-associate_tag: 'giftsync-21'  // ✅ APPROVED & LIVE
+associate_tag: 'aclue-21'  // ✅ APPROVED & LIVE
 base_url: 'amazon.co.uk'
 commission_rates: {
   electronics: 1%, fashion: 4%, books: 4.5%
@@ -295,7 +295,7 @@ curl -X GET "http://localhost:8000/api/v1/recommendations/" \
   -H "Authorization: Bearer $TOKEN"
 
 # Health check
-curl https://giftsync-backend-production.up.railway.app/health
+curl https://aclue-backend-production.up.railway.app/health
 # Expected: {"status":"healthy","timestamp":"...","version":"1.0.0"}
 ```
 
@@ -445,7 +445,7 @@ pandas==2.1.3
 curl http://localhost:8000/health                    # Backend health
 curl -I http://localhost:3000                        # Frontend availability
 curl https://prznt.app                                # Production frontend
-curl https://giftsync-backend-production.up.railway.app/health  # Production backend
+curl https://aclue-backend-production.up.railway.app/health  # Production backend
 
 # Test authentication flow
 curl -X POST "http://localhost:8000/api/v1/auth/login" \
@@ -497,7 +497,7 @@ curl -X POST "http://localhost:8000/api/v1/auth/login" \
 - [x] **Quality Assurance**: Extensive testing with all systems operational
 
 ### Business Model Validation Ready
-The platform successfully demonstrates the complete GiftSync value proposition:
+The platform successfully demonstrates the complete aclue value proposition:
 - **Revenue Generation**: Amazon affiliate system generating immediate revenue
 - **User Acquisition**: Complete onboarding flow with preference learning
 - **Market Compliance**: Professional legal framework meeting UK/EU standards  
@@ -506,8 +506,8 @@ The platform successfully demonstrates the complete GiftSync value proposition:
 
 ---
 
-**GiftSync represents a complete, production-ready business solution in the £45B global gift market, with active revenue generation, comprehensive legal compliance, and enterprise-grade technical architecture ready for immediate market launch and scaling.**
+**aclue represents a complete, production-ready business solution in the £45B global gift market, with active revenue generation, comprehensive legal compliance, and enterprise-grade technical architecture ready for immediate market launch and scaling.**
 
 ---
 
-*This documentation serves as the master reference for the entire GiftSync project. All systems are operational, tested, and ready for production use.*
+*This documentation serves as the master reference for the entire aclue project. All systems are operational, tested, and ready for production use.*

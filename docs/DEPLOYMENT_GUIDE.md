@@ -1,8 +1,8 @@
-# GiftSync Deployment Guide
+# aclue Deployment Guide
 
 ## Overview
 
-This guide covers all deployment scenarios for the GiftSync platform, from local development to production environments. GiftSync consists of a FastAPI backend and Next.js frontend, designed for scalable deployment across multiple platforms.
+This guide covers all deployment scenarios for the aclue platform, from local development to production environments. aclue consists of a FastAPI backend and Next.js frontend, designed for scalable deployment across multiple platforms.
 
 ## Prerequisites
 
@@ -30,7 +30,7 @@ Create `.env` files for each environment:
 #### Backend (`backend/.env`)
 ```bash
 # Core Configuration
-PROJECT_NAME=GiftSync API
+PROJECT_NAME=aclue API
 VERSION=1.0.0
 ENVIRONMENT=production
 DEBUG=false
@@ -47,13 +47,13 @@ SUPABASE_ANON_KEY=your-anon-key
 SUPABASE_SERVICE_KEY=your-service-role-key
 
 # Optional: Direct PostgreSQL
-DATABASE_URL=postgresql://user:password@host:5432/giftsync
+DATABASE_URL=postgresql://user:password@host:5432/aclue
 
 # Redis (Optional)
 REDIS_URL=redis://localhost:6379
 
 # External Services
-AMAZON_ASSOCIATE_TAG=giftsync-21
+AMAZON_ASSOCIATE_TAG=aclue-21
 AMAZON_ACCESS_KEY=your-amazon-api-key
 AMAZON_SECRET_KEY=your-amazon-secret-key
 
@@ -68,7 +68,7 @@ SMTP_USERNAME=your-email@example.com
 SMTP_PASSWORD=your-email-password
 
 # CORS
-ALLOWED_HOSTS=https://your-frontend-domain.com,https://app.giftsync.com
+ALLOWED_HOSTS=https://your-frontend-domain.com,https://app.aclue.com
 
 # Feature Flags
 ENABLE_REGISTRATION=true
@@ -84,8 +84,8 @@ RATE_LIMIT_BURST=100
 #### Frontend (`web/.env.local`)
 ```bash
 # API Configuration
-NEXT_PUBLIC_API_URL=https://api.giftsync.com
-NEXT_PUBLIC_WEB_URL=https://app.giftsync.com
+NEXT_PUBLIC_API_URL=https://api.aclue.com
+NEXT_PUBLIC_WEB_URL=https://app.aclue.com
 
 # Analytics
 NEXT_PUBLIC_POSTHOG_KEY=your-posthog-key
@@ -97,7 +97,7 @@ NEXT_PUBLIC_GA_ID=your-google-analytics-id
 NEXT_PUBLIC_SENTRY_DSN=your-sentry-dsn
 
 # Amazon Affiliate
-NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG=giftsync-21
+NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG=aclue-21
 NEXT_PUBLIC_AMAZON_REGION=uk
 
 # Build Configuration
@@ -111,8 +111,8 @@ NODE_ENV=production
 
 1. **Clone the repository:**
 ```bash
-git clone https://github.com/your-org/giftsync.git
-cd giftsync
+git clone https://github.com/your-org/aclue.git
+cd aclue
 ```
 
 2. **Create environment files:**
@@ -245,11 +245,11 @@ vercel env add NEXT_PUBLIC_POSTHOG_KEY production
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "https://api.giftsync.com/api/$1"
+      "dest": "https://api.aclue.com/api/$1"
     }
   ],
   "env": {
-    "NEXT_PUBLIC_API_URL": "https://api.giftsync.com"
+    "NEXT_PUBLIC_API_URL": "https://api.aclue.com"
   }
 }
 ```
@@ -263,20 +263,20 @@ vercel env add NEXT_PUBLIC_POSTHOG_KEY production
 cd backend
 
 # Build image
-docker build -t giftsync-api .
+docker build -t aclue-api .
 
 # Tag for ECR
-docker tag giftsync-api:latest your-account.dkr.ecr.region.amazonaws.com/giftsync-api:latest
+docker tag aclue-api:latest your-account.dkr.ecr.region.amazonaws.com/aclue-api:latest
 
 # Push to ECR
 aws ecr get-login-password --region region | docker login --username AWS --password-stdin your-account.dkr.ecr.region.amazonaws.com
-docker push your-account.dkr.ecr.region.amazonaws.com/giftsync-api:latest
+docker push your-account.dkr.ecr.region.amazonaws.com/aclue-api:latest
 ```
 
 2. **ECS Task Definition (`ecs-task-definition.json`):**
 ```json
 {
-  "family": "giftsync-api",
+  "family": "aclue-api",
   "networkMode": "awsvpc",
   "requiresCompatibilities": ["FARGATE"],
   "cpu": "512",
@@ -284,8 +284,8 @@ docker push your-account.dkr.ecr.region.amazonaws.com/giftsync-api:latest
   "executionRoleArn": "arn:aws:iam::account:role/ecsTaskExecutionRole",
   "containerDefinitions": [
     {
-      "name": "giftsync-api",
-      "image": "your-account.dkr.ecr.region.amazonaws.com/giftsync-api:latest",
+      "name": "aclue-api",
+      "image": "your-account.dkr.ecr.region.amazonaws.com/aclue-api:latest",
       "portMappings": [
         {
           "containerPort": 8000,
@@ -301,17 +301,17 @@ docker push your-account.dkr.ecr.region.amazonaws.com/giftsync-api:latest
       "secrets": [
         {
           "name": "SECRET_KEY",
-          "valueFrom": "arn:aws:ssm:region:account:parameter/giftsync/secret-key"
+          "valueFrom": "arn:aws:ssm:region:account:parameter/aclue/secret-key"
         },
         {
           "name": "SUPABASE_SERVICE_KEY",
-          "valueFrom": "arn:aws:ssm:region:account:parameter/giftsync/supabase-key"
+          "valueFrom": "arn:aws:ssm:region:account:parameter/aclue/supabase-key"
         }
       ],
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
-          "awslogs-group": "/ecs/giftsync-api",
+          "awslogs-group": "/ecs/aclue-api",
           "awslogs-region": "region",
           "awslogs-stream-prefix": "ecs"
         }
@@ -327,7 +327,7 @@ docker push your-account.dkr.ecr.region.amazonaws.com/giftsync-api:latest
 aws ecs register-task-definition --cli-input-json file://ecs-task-definition.json
 
 # Update service
-aws ecs update-service --cluster giftsync-cluster --service giftsync-api-service --task-definition giftsync-api:latest
+aws ecs update-service --cluster aclue-cluster --service aclue-api-service --task-definition aclue-api:latest
 ```
 
 #### Frontend on S3 + CloudFront
@@ -343,7 +343,7 @@ echo "output: 'export'" >> next.config.js
 npm run build
 
 # Upload to S3
-aws s3 sync out/ s3://giftsync-frontend-bucket --delete
+aws s3 sync out/ s3://aclue-frontend-bucket --delete
 ```
 
 2. **CloudFront Configuration:**
@@ -351,15 +351,15 @@ aws s3 sync out/ s3://giftsync-frontend-bucket --delete
 {
   "Origins": [
     {
-      "Id": "S3-giftsync-frontend",
-      "DomainName": "giftsync-frontend-bucket.s3.amazonaws.com",
+      "Id": "S3-aclue-frontend",
+      "DomainName": "aclue-frontend-bucket.s3.amazonaws.com",
       "S3OriginConfig": {
         "OriginAccessIdentity": "origin-access-identity/cloudfront/E123456789"
       }
     }
   ],
   "DefaultCacheBehavior": {
-    "TargetOriginId": "S3-giftsync-frontend",
+    "TargetOriginId": "S3-aclue-frontend",
     "ViewerProtocolPolicy": "redirect-to-https",
     "Compress": true,
     "CachePolicyId": "4135ea2d-6df8-44a3-9df3-4b5a84be39ad"
@@ -383,11 +383,11 @@ aws s3 sync out/ s3://giftsync-frontend-bucket --delete
 cd backend
 
 # Build and submit to Cloud Build
-gcloud builds submit --tag gcr.io/PROJECT_ID/giftsync-api
+gcloud builds submit --tag gcr.io/PROJECT_ID/aclue-api
 
 # Deploy to Cloud Run
-gcloud run deploy giftsync-api \
-  --image gcr.io/PROJECT_ID/giftsync-api \
+gcloud run deploy aclue-api \
+  --image gcr.io/PROJECT_ID/aclue-api \
   --platform managed \
   --region us-central1 \
   --allow-unauthenticated \
@@ -399,17 +399,17 @@ gcloud run deploy giftsync-api \
 ```yaml
 steps:
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/$PROJECT_ID/giftsync-api', '.']
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/aclue-api', '.']
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/$PROJECT_ID/giftsync-api']
+    args: ['push', 'gcr.io/$PROJECT_ID/aclue-api']
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
     args:
       - 'run'
       - 'deploy'
-      - 'giftsync-api'
+      - 'aclue-api'
       - '--image'
-      - 'gcr.io/$PROJECT_ID/giftsync-api'
+      - 'gcr.io/$PROJECT_ID/aclue-api'
       - '--region'
       - 'us-central1'
       - '--platform'
@@ -421,12 +421,12 @@ steps:
 
 1. **App Specification (`.do/app.yaml`):**
 ```yaml
-name: giftsync
+name: aclue
 services:
   - name: api
     source_dir: backend/
     github:
-      repo: your-org/giftsync
+      repo: your-org/aclue
       branch: main
     run_command: uvicorn app.main:app --host 0.0.0.0 --port 8080
     environment_slug: python
@@ -443,7 +443,7 @@ services:
   - name: web
     source_dir: web/
     github:
-      repo: your-org/giftsync
+      repo: your-org/aclue
       branch: main
     build_command: npm run build
     run_command: npm start
@@ -454,7 +454,7 @@ services:
       - key: NEXT_PUBLIC_API_URL
         value: ${api.PUBLIC_URL}
 databases:
-  - name: giftsync-db
+  - name: aclue-db
     engine: PG
     version: "13"
     size: basic-xs
@@ -541,7 +541,7 @@ services:
       - "8000:8000"
     environment:
       - ENVIRONMENT=production
-      - DATABASE_URL=postgresql://postgres:password@db:5432/giftsync
+      - DATABASE_URL=postgresql://postgres:password@db:5432/aclue
       - REDIS_URL=redis://redis:6379
     depends_on:
       - db
@@ -561,7 +561,7 @@ services:
   db:
     image: postgres:15
     environment:
-      - POSTGRES_DB=giftsync
+      - POSTGRES_DB=aclue
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=password
     volumes:
@@ -631,16 +631,16 @@ supabase db push
 ```nginx
 server {
     listen 80;
-    server_name api.giftsync.com;
+    server_name api.aclue.com;
     return 301 https://$server_name$request_uri;
 }
 
 server {
     listen 443 ssl http2;
-    server_name api.giftsync.com;
+    server_name api.aclue.com;
 
-    ssl_certificate /etc/letsencrypt/live/api.giftsync.com/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/api.giftsync.com/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/api.aclue.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/api.aclue.com/privkey.pem;
     
     ssl_protocols TLSv1.2 TLSv1.3;
     ssl_ciphers ECDHE-RSA-AES256-GCM-SHA512:DHE-RSA-AES256-GCM-SHA512;
@@ -723,7 +723,7 @@ docker run -d \
 #!/bin/bash
 DATE=$(date +%Y%m%d_%H%M%S)
 pg_dump $DATABASE_URL > backup_${DATE}.sql
-aws s3 cp backup_${DATE}.sql s3://giftsync-backups/
+aws s3 cp backup_${DATE}.sql s3://aclue-backups/
 rm backup_${DATE}.sql
 ```
 
@@ -732,13 +732,13 @@ rm backup_${DATE}.sql
 ```bash
 # Code and configuration backup
 #!/bin/bash
-tar -czf giftsync_$(date +%Y%m%d).tar.gz \
+tar -czf aclue_$(date +%Y%m%d).tar.gz \
   --exclude=node_modules \
   --exclude=.git \
   --exclude=__pycache__ \
-  /path/to/giftsync
+  /path/to/aclue
 
-aws s3 cp giftsync_$(date +%Y%m%d).tar.gz s3://giftsync-backups/
+aws s3 cp aclue_$(date +%Y%m%d).tar.gz s3://aclue-backups/
 ```
 
 ## Scaling Considerations
@@ -827,4 +827,4 @@ curl -f http://localhost:3000/api/health
 pg_isready -h localhost -p 5432
 ```
 
-This deployment guide provides comprehensive instructions for deploying GiftSync in various environments. Choose the deployment method that best fits your infrastructure requirements and scaling needs.
+This deployment guide provides comprehensive instructions for deploying aclue in various environments. Choose the deployment method that best fits your infrastructure requirements and scaling needs.
