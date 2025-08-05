@@ -15,7 +15,8 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "vercel-build": "next build",
-    "deploy": "vercel --prod"
+    "deploy": "vercel --prod",
+    "pages:deploy": "next build"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.0",
