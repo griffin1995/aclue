@@ -1,0 +1,217 @@
+# GiftSync Deployment Configuration
+# Environment-specific settings for automated deployments
+
+environments:
+  # Development Environment
+  development:
+    domains:
+      - dev.aclue.co.uk
+    backends:
+      - https://giftsync-backend-dev.up.railway.app
+    vercel:
+      project_name: "giftsync-dev"
+      framework: "nextjs"
+    cloudflare:
+      cache_ttl: 300  # 5 minutes
+      purge_on_deploy: true
+      security_level: "medium"
+      ssl_mode: "full"
+    monitoring:
+      health_check_interval: 60  # 1 minute
+      alert_threshold: 3
+      rollback_enabled: false
+    notifications:
+      slack_channel: "#dev-deployments"
+      email_alerts: false
+
+  # Staging Environment  
+  staging:
+    domains:
+      - staging.aclue.co.uk
+      - staging.aclue.app
+    backends:
+      - https://giftsync-backend-staging.up.railway.app
+    vercel:
+      project_name: "giftsync-staging"
+      framework: "nextjs"
+    cloudflare:
+      cache_ttl: 1800  # 30 minutes
+      purge_on_deploy: true
+      security_level: "medium"
+      ssl_mode: "full"
+      always_use_https: true
+    monitoring:
+      health_check_interval: 300  # 5 minutes
+      alert_threshold: 2
+      rollback_enabled: true
+      rollback_timeout: 600  # 10 minutes
+    notifications:
+      slack_channel: "#staging-deployments"
+      email_alerts: true
+    features:
+      blue_green_deployment: true
+      canary_deployment: false
+
+  # Production Environment
+  production:
+    domains:
+      - aclue.co.uk
+      - aclue.app
+    backends:
+      - https://giftsync-backend-production.up.railway.app
+    vercel:
+      project_name: "giftsync-production"
+      framework: "nextjs"
+      regions: ["iad1", "lhr1"]  # US East, London
+    cloudflare:
+      cache_ttl: 3600  # 1 hour
+      browser_cache_ttl: 86400  # 24 hours
+      purge_on_deploy: true
+      security_level: "high"
+      ssl_mode: "full_strict"
+      always_use_https: true
+      hsts_enabled: true
+      hsts_max_age: 31536000  # 1 year
+      security_headers:
+        x_frame_options: "DENY"
+        x_content_type_options: "nosniff"
+        referrer_policy: "strict-origin-when-cross-origin"
+        permissions_policy: "camera=(), microphone=(), geolocation=()"
+    monitoring:
+      health_check_interval: 60   # 1 minute
+      alert_threshold: 1
+      rollback_enabled: true
+      rollback_timeout: 300  # 5 minutes
+      performance_budget:
+        max_response_time: 2.0
+        max_first_byte: 1.0
+    notifications:
+      slack_channel: "#production-deployments"
+      email_alerts: true
+      pager_duty: true
+    features:
+      blue_green_deployment: true
+      canary_deployment: true
+      maintenance_mode: true
+
+# Global Configuration
+global:
+  # Deployment Settings
+  deployment:
+    max_concurrent_deployments: 1
+    deployment_timeout: 1800  # 30 minutes
+    retry_attempts: 3
+    retry_delay: 30  # seconds
+    
+  # Health Check Settings
+  health_checks:
+    timeout: 10  # seconds
+    max_retries: 3
+    retry_delay: 5  # seconds
+    required_checks:
+      - http_status
+      - response_time
+      - ssl_certificate
+      - security_headers
+      - cdn_status
+    
+  # Security Settings
+  security:
+    required_headers:
+      - "X-Frame-Options"
+      - "X-Content-Type-Options"
+      - "Strict-Transport-Security"
+    ssl_check_enabled: true
+    vulnerability_scanning: true
+    
+  # Cache Settings
+  cache:
+    default_ttl: 3600
+    static_assets_ttl: 86400
+    api_cache_disabled: true
+    purge_strategies:
+      - "everything"
+      - "by_tag"
+      - "by_prefix"
+      
+  # Monitoring Settings
+  monitoring:
+    metrics_retention: 30  # days
+    log_retention: 7      # days
+    dashboard_refresh: 30  # seconds
+    
+  # Notification Settings
+  notifications:
+    rate_limit: 5  # max per hour for same alert
+    escalation_delay: 300  # 5 minutes
+    quiet_hours:
+      start: "22:00"
+      end: "08:00"
+      timezone: "UTC"
+
+# Rollback Configuration
+rollback:
+  triggers:
+    - "health_check_failure"
+    - "performance_degradation"
+    - "error_rate_spike"
+    - "manual_trigger"
+    
+  conditions:
+    max_error_rate: 5  # percent
+    max_response_time: 5.0  # seconds
+    min_success_rate: 95  # percent
+    
+  strategies:
+    - name: "vercel_promote_previous"
+      priority: 1
+      timeout: 300
+    - name: "cloudflare_maintenance_mode"
+      priority: 2
+      timeout: 60
+    - name: "dns_failover"
+      priority: 3
+      timeout: 120
+
+# Feature Flags
+features:
+  deployment_automation: true
+  cache_purging: true
+  health_monitoring: true
+  rollback_automation: true
+  security_scanning: true
+  performance_monitoring: true
+  blue_green_deployment: true
+  canary_deployment: false
+  maintenance_mode: true
+
+# Integration Settings
+integrations:
+  vercel:
+    api_version: "v6"
+    timeout: 30
+    retry_attempts: 3
+    
+  cloudflare:
+    api_version: "v4"
+    timeout: 30
+    retry_attempts: 3
+    
+  railway:
+    api_version: "v1"
+    timeout: 60
+    retry_attempts: 2
+    
+  github:
+    api_version: "v3"
+    timeout: 15
+    
+  slack:
+    timeout: 10
+    retry_attempts: 2
+    
+  monitoring:
+    providers:
+      - "internal"
+      - "cloudflare_analytics"
+      - "vercel_analytics"
