@@ -4,7 +4,17 @@
 
 # Get script directory and source .env file
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "$SCRIPT_DIR/.env"
+
+# Source .env file with error handling
+if [ -f "$SCRIPT_DIR/.env" ]; then
+    source "$SCRIPT_DIR/.env"
+else
+    echo "Warning: .env file not found, using defaults"
+fi
+
+# Set defaults
+CLOUDFLARE_API_TOKEN="${CLOUDFLARE_API_TOKEN:-}"
+DOMAINS="${DOMAINS:-prznt.app}"
 
 if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ "$CLOUDFLARE_API_TOKEN" = "YOUR_TOKEN_HERE" ]; then
     echo "❌ Please set your Cloudflare API token in $SCRIPT_DIR/.env"
