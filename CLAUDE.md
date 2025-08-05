@@ -28,7 +28,7 @@
 
 ---
 
-# GiftSync Development Notes
+# aclue Development Notes
 
 ## Authentication System - RESOLVED ✅
 
@@ -269,7 +269,7 @@ The authentication system is now enterprise-ready and meets all security require
 ### Deployment Architecture - ENTERPRISE SSR CONFIGURATION
 **Status**: Successfully deployed with enterprise-grade SSR configuration
 **URL**: https://prznt.app
-**Backend**: https://giftsync-backend-production.up.railway.app
+**Backend**: https://aclue-backend-production.up.railway.app
 **Database**: Supabase PostgreSQL
 
 ### Final Working Configuration
@@ -282,7 +282,7 @@ The authentication system is now enterprise-ready and meets all security require
 ```bash
 NODE_VERSION=18
 NEXT_PUBLIC_MAINTENANCE_MODE=true
-NEXT_PUBLIC_API_URL=https://giftsync-backend-production.up.railway.app
+NEXT_PUBLIC_API_URL=https://aclue-backend-production.up.railway.app
 NEXT_PUBLIC_WEB_URL=https://prznt.app
 ```
 

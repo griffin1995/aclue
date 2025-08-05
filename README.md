@@ -1,13 +1,13 @@
-# Prznt 
+# aclue 
 A data-led insight layer that transforms how gifts are chosen, letting recipients share who they are, not what they want.
 
 ## 🎯 Project Overview
 
-Prznt is a data-led gifting platform that lets recipients privately share their preferences through swipe-based discovery. Instead of creating product wishlists, users build dynamic taste profiles that help others choose better gifts — while preserving the magic of surprise.
+aclue is a data-led gifting platform that lets recipients privately share their preferences through swipe-based discovery. Instead of creating product wishlists, users build dynamic taste profiles that help others choose better gifts — while preserving the magic of surprise.
 
-Backed by a growing need for intelligent gifting, Prznt operates within the £400B+ global gifting market and forecasts £2.5M in Year 3 revenue through affiliate partnerships and data-driven monetization.
+Backed by a growing need for intelligent gifting, aclue operates within the £400B+ global gifting market and forecasts £2.5M in Year 3 revenue through affiliate partnerships and data-driven monetization.
 
-Prznt bridges the gap between thoughtful giving and modern digital behavior — solving the universal problem of gift-giving uncertainty through insight, not awkwardness.
+aclue bridges the gap between thoughtful giving and modern digital behavior — solving the universal problem of gift-giving uncertainty through insight, not awkwardness.
 
 ### Business Context
 - **🎯 Target Market**
@@ -20,7 +20,7 @@ Prznt bridges the gap between thoughtful giving and modern digital behavior — 
 - **💸 Revenue Model**
 	1.	Affiliate Commissions
 	•	Partners with retailers and marketplaces.
-	•	Earns an average 7.5% commission per purchase made through Prznt-generated gift links.
+	•	Earns an average 7.5% commission per purchase made through aclue-generated gift links.
 	2.	Premium Subscriptions (future roadmap)
 	•	Optional upgrades for power users and businesses.
 	•	Includes features like deeper taste analytics, priority suggestions, and branded profiles.
@@ -45,14 +45,14 @@ Prznt bridges the gap between thoughtful giving and modern digital behavior — 
 	•	Time-constrained but thoughtful — want smarter ways to shop for friends, partners, and colleagues.
 	3.	Corporate Gifting & HR Teams
 	•	Use cases in employee recognition, client gifting, and workplace culture tools.
-	•	Prznt can streamline discovery while preserving recipient delight.
+	•	aclue can streamline discovery while preserving recipient delight.
 
 ⸻
 
 - **🧠 Why Now?**
 	•	Wishlists are outdated: Static, awkward, and often ignored.
 	•	AI-only solutions fall short: Cold, inaccurate, and impersonal without input from the receiver.
-	•	Prznt offers a third way:
+	•	aclue offers a third way:
 Receiver-led. AI-enhanced. Surprise preserved.
 
 ## 🎉 MVP COMPLETION ACHIEVED! ✅
