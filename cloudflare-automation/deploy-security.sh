@@ -414,7 +414,7 @@ main() {
     local duration_formatted=$(printf '%02d:%02d:%02d' $((total_duration/3600)) $((total_duration%3600/60)) $((total_duration%60)))
     
     echo
-    log "INFO" "════════════════════════════════════════════════════════════════"
+    log "INFO" "================================================================"
     
     if [ "$deployment_success" = true ]; then
         log "SUCCESS" "🎉 DEPLOYMENT COMPLETED SUCCESSFULLY!"
@@ -429,7 +429,7 @@ main() {
     log "INFO" "Total deployment time: $duration_formatted"
     log "INFO" "Detailed deployment log: $LOG_FILE"
     log "INFO" "Comprehensive report: $report_path"
-    log "INFO" "════════════════════════════════════════════════════════════════"
+    log "INFO" "================================================================"
     
     # Return appropriate exit code
     if [ "$deployment_success" = true ]; then
