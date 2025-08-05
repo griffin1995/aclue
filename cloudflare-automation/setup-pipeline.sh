@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# GiftSync Deployment Pipeline Setup Script
+# aclue Deployment Pipeline Setup Script
 # Quick setup for the complete deployment automation system
 
 set -euo pipefail
@@ -33,12 +33,11 @@ log() {
 
 print_banner() {
     echo -e "${PURPLE}"
-    echo "   ____  _  __ _   ____                  "
-    echo "  / ___|(_)/ _| |_/ ___| _   _ _ __   ___ "
-    echo " | |  _| | |_| __\___ \| | | | '_ \ / __|"
-    echo " | |_| | |  _| |_ ___) | |_| | | | | (__ "
-    echo "  \____|_|_|  \__|____/ \__, |_| |_|\___| "
-    echo "                       |___/            "
+    echo "            _            "
+    echo "   __ _  ___| |_   _  ___ "
+    echo "  / _\` |/ __| | | | |/ _ \\"
+    echo " | (_| | (__| | |_| |  __/"
+    echo "  \__,_|\___|_|\__,_|\___|"
     echo
     echo "     Deployment Pipeline Setup"
     echo -e "${NC}"
@@ -242,7 +241,7 @@ main() {
     clear
     print_banner
     
-    echo "This script will set up the complete GiftSync deployment pipeline:"
+    echo "This script will set up the complete aclue deployment pipeline:"
     echo "  ✓ Check prerequisites and install missing tools"
     echo "  ✓ Set up script permissions"
     echo "  ✓ Configure credentials and API tokens"
@@ -270,7 +269,7 @@ main() {
 # Handle command line options
 case "${1:-}" in
     "--help")
-        echo "GiftSync Deployment Pipeline Setup"
+        echo "aclue Deployment Pipeline Setup"
         echo "Usage: $0 [options]"
         echo "Options:"
         echo "  --help        Show this help message"

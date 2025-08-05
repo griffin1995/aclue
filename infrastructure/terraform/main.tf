@@ -1,5 +1,5 @@
-# GiftSync AWS Infrastructure
-# This Terraform configuration sets up the complete AWS infrastructure for GiftSync
+# aclue AWS Infrastructure
+# This Terraform configuration sets up the complete AWS infrastructure for aclue
 
 terraform {
   required_version = ">= 1.0"
@@ -19,7 +19,7 @@ terraform {
   }
 
   backend "s3" {
-    bucket  = "giftsync-terraform-state"
+    bucket  = "aclue-terraform-state"
     key     = "infrastructure/terraform.tfstate"
     region  = "eu-west-2"
     encrypt = true
@@ -32,7 +32,7 @@ provider "aws" {
 
   default_tags {
     tags = {
-      Project     = "GiftSync"
+      Project     = "aclue"
       Environment = var.environment
       ManagedBy   = "Terraform"
     }
@@ -266,8 +266,8 @@ resource "aws_db_instance" "main" {
   storage_encrypted     = true
 
   # Database configuration
-  db_name  = "giftsync"
-  username = "giftsync"
+  db_name  = "aclue"
+  username = "aclue"
   password = var.db_password
 
   # Network & Security
@@ -330,7 +330,7 @@ resource "aws_elasticache_subnet_group" "main" {
 
 resource "aws_elasticache_replication_group" "main" {
   replication_group_id       = "${local.name_prefix}-redis"
-  description                = "Redis cluster for GiftSync"
+  description                = "Redis cluster for aclue"
   
   node_type                  = var.environment == "production" ? "cache.r6g.large" : "cache.t3.micro"
   port                       = 6379
@@ -406,7 +406,7 @@ resource "aws_cloudfront_distribution" "assets" {
   }
 
   enabled = true
-  comment = "GiftSync Assets CDN"
+  comment = "aclue Assets CDN"
 
   default_cache_behavior {
     allowed_methods        = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
@@ -443,7 +443,7 @@ resource "aws_cloudfront_distribution" "assets" {
 }
 
 resource "aws_cloudfront_origin_access_identity" "assets" {
-  comment = "OAI for GiftSync assets bucket"
+  comment = "OAI for aclue assets bucket"
 }
 
 # DynamoDB Tables

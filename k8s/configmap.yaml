@@ -1,8 +1,8 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: giftsync-config
-  namespace: giftsync
+  name: aclue-config
+  namespace: aclue
 data:
   # Environment variables
   ENVIRONMENT: "production"
@@ -15,7 +15,7 @@ data:
   
   # API settings
   API_VERSION: "v1"
-  CORS_ORIGINS: "https://app.giftsync.com,https://giftsync.com"
+  CORS_ORIGINS: "https://app.aclue.com,https://aclue.com"
   
   # Cache settings
   CACHE_TTL: "3600"

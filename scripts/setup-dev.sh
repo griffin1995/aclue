@@ -1,10 +1,10 @@
 #!/bin/bash
 set -e
 
-# GiftSync Development Setup Script
+# aclue Development Setup Script
 # This script sets up the local development environment with cost-effective services
 
-echo "🎁 GiftSync Development Setup"
+echo "🎁 aclue Development Setup"
 echo "=============================="
 
 # Check if Docker is installed

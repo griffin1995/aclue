@@ -1,8 +1,8 @@
 # =============================================================================
-# GiftSync Development Docker Compose Configuration
+# aclue Development Docker Compose Configuration
 # =============================================================================
 # 
-# Complete development environment setup for the GiftSync AI-powered gift
+# Complete development environment setup for the aclue AI-powered gift
 # recommendation platform. Provides all necessary services including database,
 # caching, object storage, ML training, and monitoring infrastructure.
 # 
@@ -53,18 +53,18 @@ services:
   
   postgres:
     image: postgres:15                       # Latest stable PostgreSQL version
-    container_name: giftsync_postgres
+    container_name: aclue_postgres
     environment:
-      POSTGRES_USER: giftsync               # Database username
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-giftsync_dev_password}  # Database password (change in production)
-      POSTGRES_DB: giftsync_dev             # Default database name
+      POSTGRES_USER: aclue               # Database username
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-aclue_dev_password}  # Database password (change in production)
+      POSTGRES_DB: aclue_dev             # Default database name
     ports:
       - "5433:5432"                         # Map to 5433 to avoid conflicts with local postgres
     volumes:
       - postgres_data:/var/lib/postgresql/data  # Persistent data storage
       - ./database/init:/docker-entrypoint-initdb.d  # Initialization scripts
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U giftsync"]  # Health check command
+      test: ["CMD-SHELL", "pg_isready -U aclue"]  # Health check command
       interval: 30s                         # Check every 30 seconds
       timeout: 10s                          # Timeout after 10 seconds
       retries: 3                            # Retry 3 times before marking unhealthy
@@ -76,7 +76,7 @@ services:
   
   redis:
     image: redis:7-alpine                    # Alpine Linux version for smaller size
-    container_name: giftsync_redis
+    container_name: aclue_redis
     ports:
       - "6379:6379"                         # Standard Redis port
     volumes:
@@ -90,13 +90,13 @@ services:
 
   minio:
     image: minio/minio:latest
-    container_name: giftsync_minio
+    container_name: aclue_minio
     ports:
       - "9000:9000"
       - "9001:9001"
     environment:
-      - MINIO_ROOT_USER=giftsync
-      - MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD:-giftsync_dev_password}
+      - MINIO_ROOT_USER=aclue
+      - MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD:-aclue_dev_password}
     volumes:
       - minio_data:/data
     command: server /data --console-address ":9001"
@@ -110,15 +110,15 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile.dev
-    container_name: giftsync_backend
+    container_name: aclue_backend
     ports:
       - "8000:8000"
     environment:
-      - DATABASE_URL=postgresql://${POSTGRES_USER:-giftsync}:${POSTGRES_PASSWORD:-giftsync_dev_password}@postgres:5432/${POSTGRES_DB:-giftsync_dev}
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-aclue}:${POSTGRES_PASSWORD:-aclue_dev_password}@postgres:5432/${POSTGRES_DB:-aclue_dev}
       - REDIS_URL=redis://redis:6379
       - MINIO_ENDPOINT=http://minio:9000
-      - MINIO_ACCESS_KEY=giftsync
-      - MINIO_SECRET_KEY=${MINIO_ROOT_PASSWORD:-giftsync_dev_password}
+      - MINIO_ACCESS_KEY=aclue
+      - MINIO_SECRET_KEY=${MINIO_ROOT_PASSWORD:-aclue_dev_password}
       - SECRET_KEY=your-secret-key-change-in-production
       - ENVIRONMENT=development
       - SUPABASE_URL=${SUPABASE_URL:-}
@@ -140,13 +140,13 @@ services:
     build:
       context: ./ml
       dockerfile: Dockerfile.dev
-    container_name: giftsync_ml_training
+    container_name: aclue_ml_training
     environment:
-      - DATABASE_URL=postgresql://${POSTGRES_USER:-giftsync}:${POSTGRES_PASSWORD:-giftsync_dev_password}@postgres:5432/${POSTGRES_DB:-giftsync_dev}
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-aclue}:${POSTGRES_PASSWORD:-aclue_dev_password}@postgres:5432/${POSTGRES_DB:-aclue_dev}
       - REDIS_URL=redis://redis:6379
       - MINIO_ENDPOINT=http://minio:9000
-      - MINIO_ACCESS_KEY=giftsync
-      - MINIO_SECRET_KEY=${MINIO_ROOT_PASSWORD:-giftsync_dev_password}
+      - MINIO_ACCESS_KEY=aclue
+      - MINIO_SECRET_KEY=${MINIO_ROOT_PASSWORD:-aclue_dev_password}
     volumes:
       - ./ml:/app
       - ml_models:/app/models
@@ -161,7 +161,7 @@ services:
 
   nginx:
     image: nginx:alpine
-    container_name: giftsync_nginx
+    container_name: aclue_nginx
     ports:
       - "80:80"
       - "443:443"
@@ -175,7 +175,7 @@ services:
 
   prometheus:
     image: prom/prometheus:latest
-    container_name: giftsync_prometheus
+    container_name: aclue_prometheus
     ports:
       - "9090:9090"
     volumes:
@@ -191,7 +191,7 @@ services:
 
   grafana:
     image: grafana/grafana:latest
-    container_name: giftsync_grafana
+    container_name: aclue_grafana
     ports:
       - "3000:3000"
     environment:
@@ -227,4 +227,4 @@ volumes:
 
 networks:
   default:
-    name: giftsync_network                  # Named network for easier management
+    name: aclue_network                  # Named network for easier management
