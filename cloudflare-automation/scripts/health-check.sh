@@ -7,12 +7,23 @@ set -euo pipefail
 
 # Get script directory and source .env file
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "$SCRIPT_DIR/../.env"
 
-# Configuration from .env file
-IFS=' ' read -ra DOMAINS <<< "$DOMAINS"
+# Source .env file with error handling
+if [[ -f "$SCRIPT_DIR/../.env" ]]; then
+    source "$SCRIPT_DIR/../.env"
+else
+    echo "Warning: .env file not found, using defaults"
+fi
+
+# Configuration with defaults
+DOMAINS="${DOMAINS:-prznt.app}"
+RAILWAY_BACKEND_URL="${RAILWAY_BACKEND_URL:-https://giftsync-backend-production.up.railway.app}"
+LOG_DIR="${LOG_DIR:-$SCRIPT_DIR/../logs}"
 TIMEOUT=10
 MAX_RESPONSE_TIME=3.0
+
+# Parse domains into array
+IFS=' ' read -ra DOMAINS <<< "$DOMAINS"
 mkdir -p "$LOG_DIR"
 LOG_FILE="$LOG_DIR/health-check-$(date +%Y%m%d-%H%M%S).log"
 
@@ -239,11 +250,11 @@ main() {
     # Summary
     if [[ "$overall_healthy" == "true" ]]; then
         log "SUCCESS" "All health checks passed"
-        echo "HEALTH_CHECK_STATUS=success" >> "$GITHUB_OUTPUT" 2>/dev/null || true
+        echo "HEALTH_CHECK_STATUS=success" >> "${GITHUB_OUTPUT:-/dev/null}" 2>/dev/null || true
         exit 0
     else
         log "ERROR" "Some health checks failed"
-        echo "HEALTH_CHECK_STATUS=failure" >> "$GITHUB_OUTPUT" 2>/dev/null || true
+        echo "HEALTH_CHECK_STATUS=failure" >> "${GITHUB_OUTPUT:-/dev/null}" 2>/dev/null || true
         exit 1
     fi
 }

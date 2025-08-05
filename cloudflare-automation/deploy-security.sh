@@ -17,14 +17,20 @@ NC='\033[0m' # No Color
 # Configuration
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# Source environment variables early
+# Source environment variables early with defaults
 if [ -f "$SCRIPT_DIR/.env" ]; then
     source "$SCRIPT_DIR/.env"
-    mkdir -p "$LOG_DIR"
-    LOG_FILE="$LOG_DIR/giftsync-security-deployment-$(date +%Y%m%d-%H%M%S).log"
 else
-    LOG_FILE="/tmp/giftsync-security-deployment-$(date +%Y%m%d-%H%M%S).log"
+    echo "Warning: .env file not found, using defaults"
 fi
+
+# Set defaults if not defined
+LOG_DIR="${LOG_DIR:-$SCRIPT_DIR/logs}"
+DOMAINS="${DOMAINS:-prznt.app}"
+CLOUDFLARE_API_TOKEN="${CLOUDFLARE_API_TOKEN:-}"
+
+mkdir -p "$LOG_DIR"
+LOG_FILE="$LOG_DIR/giftsync-security-deployment-$(date +%Y%m%d-%H%M%S).log"
 
 START_TIME=$(date +%s)
 
@@ -157,7 +163,9 @@ execute_phase() {
 perform_post_validation() {
     log "PHASE" "Performing post-deployment validation..."
     
-    local domains=("aclue.co.uk" "aclue.app")
+    # Parse domains from environment variable
+    local domains_str="${DOMAINS:-prznt.app}"
+    IFS=' ' read -ra domains <<< "$domains_str"
     local validation_passed=true
     
     for domain in "${domains[@]}"; do
@@ -248,7 +256,7 @@ generate_deployment_report() {
             <h1>🔐 GiftSync Security Deployment Report</h1>
             <p><strong>Deployment Date:</strong> $(date '+%Y-%m-%d %H:%M:%S UTC')</p>
             <p><strong>Duration:</strong> $duration_formatted</p>
-            <p><strong>Domains:</strong> aclue.co.uk, aclue.app</p>
+            <p><strong>Domains:</strong> ${DOMAINS:-prznt.app}</p>
         </div>
         
         <div class="section">
@@ -371,7 +379,7 @@ main() {
     
     log "INFO" "Starting comprehensive security deployment for GiftSync domains"
     log "INFO" "Deployment log: $LOG_FILE"
-    log "INFO" "Target domains: aclue.co.uk, aclue.app"
+    log "INFO" "Target domains: ${DOMAINS:-prznt.app}"
     
     # Pre-deployment checks
     if ! perform_pre_checks; then
