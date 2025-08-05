@@ -294,7 +294,6 @@ const nextConfig = {
   
   trailingSlash: true,            // Add trailing slashes for S3 compatibility
   
-  // Cloudflare Pages SSR configuration - handled in existing experimental section below
   
   // ===========================================================================
   // PAGE EXTENSIONS

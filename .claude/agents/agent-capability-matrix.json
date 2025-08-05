@@ -1,0 +1,839 @@
+{
+  "$schema": "https://claude-code.schemas.local/agent-capability-matrix.json",
+  "version": "1.0.0",
+  "lastUpdated": "2025-08-05",
+  "agents": {
+    "general-purpose": {
+      "description": "Versatile agent for general development tasks and initial project setup",
+      "specializations": ["project-setup", "general-development", "prototyping", "exploratory-work"],
+      "capabilities": {
+        "languages": ["javascript", "typescript", "python", "bash", "html", "css"],
+        "frameworks": ["react", "nextjs", "express", "fastapi"],
+        "domains": ["web-development", "api-development", "scripting", "automation"],
+        "complexity": "medium",
+        "team-role": "generalist"
+      },
+      "idealFor": ["initial-setup", "proof-of-concept", "multi-disciplinary-tasks", "fallback-option"],
+      "worksWith": ["all-agents"],
+      "conflictsWith": [],
+      "priority": "medium"
+    },
+    "context-manager": {
+      "description": "Specialized in coordinating multiple agents and maintaining project context",
+      "specializations": ["multi-agent-coordination", "context-preservation", "workflow-orchestration", "decision-tracking"],
+      "capabilities": {
+        "languages": ["markdown", "json", "yaml", "bash"],
+        "frameworks": ["project-management", "documentation"],
+        "domains": ["coordination", "planning", "knowledge-management", "workflow-design"],
+        "complexity": "high",
+        "team-role": "coordinator"
+      },
+      "idealFor": ["complex-projects", "multi-agent-workflows", "long-running-projects", "context-preservation"],
+      "worksWith": ["all-agents"],
+      "conflictsWith": [],
+      "priority": "critical"
+    },
+    "frontend-developer": {
+      "description": "Expert in modern frontend development and user interface creation",
+      "specializations": ["react-development", "ui-components", "responsive-design", "performance-optimization"],
+      "capabilities": {
+        "languages": ["typescript", "javascript", "html", "css", "scss"],
+        "frameworks": ["react", "nextjs", "tailwindcss", "framer-motion", "radix-ui"],
+        "domains": ["user-interface", "user-experience", "web-performance", "accessibility"],
+        "complexity": "high",
+        "team-role": "specialist"
+      },
+      "idealFor": ["ui-development", "component-libraries", "responsive-design", "frontend-architecture"],
+      "worksWith": ["ui-ux-designer", "backend-architect", "performance-engineer", "test-automator"],
+      "conflictsWith": [],
+      "priority": "high"
+    },
+    "backend-architect": {
+      "description": "Specialist in server-side architecture and API design",
+      "specializations": ["api-design", "database-architecture", "microservices", "scalable-systems"],
+      "capabilities": {
+        "languages": ["python", "javascript", "typescript", "sql"],
+        "frameworks": ["fastapi", "express", "nextjs-api", "prisma", "sqlalchemy"],
+        "domains": ["api-development", "database-design", "system-architecture", "security"],
+        "complexity": "high",
+        "team-role": "architect"
+      },
+      "idealFor": ["api-development", "database-design", "system-architecture", "integration-planning"],
+      "worksWith": ["database-admin", "security-auditor", "performance-engineer", "devops-troubleshooter"],
+      "conflictsWith": [],
+      "priority": "high"
+    },
+    "ui-ux-designer": {
+      "description": "Focused on user experience design and interface optimization",
+      "specializations": ["user-experience", "interface-design", "accessibility", "design-systems"],
+      "capabilities": {
+        "languages": ["css", "scss", "html", "typescript"],
+        "frameworks": ["design-systems", "tailwindcss", "figma-integration"],
+        "domains": ["user-experience", "visual-design", "accessibility", "usability-testing"],
+        "complexity": "high",
+        "team-role": "designer"
+      },
+      "idealFor": ["design-systems", "user-research", "accessibility-audits", "interface-optimization"],
+      "worksWith": ["frontend-developer", "accessibility-specialist", "content-marketer", "test-automator"],
+      "conflictsWith": [],
+      "priority": "high"
+    },
+    "typescript-pro": {
+      "description": "TypeScript expert for type-safe development and advanced TypeScript patterns",
+      "specializations": ["typescript-patterns", "type-safety", "generic-programming", "advanced-typescript"],
+      "capabilities": {
+        "languages": ["typescript", "javascript"],
+        "frameworks": ["any-typescript-compatible"],
+        "domains": ["type-systems", "code-safety", "developer-experience", "api-contracts"],
+        "complexity": "high",
+        "team-role": "specialist"
+      },
+      "idealFor": ["type-safety-implementation", "complex-type-systems", "typescript-migration", "api-contracts"],
+      "worksWith": ["frontend-developer", "backend-architect", "api-documenter", "code-reviewer"],
+      "conflictsWith": [],
+      "priority": "high"
+    },
+    "python-pro": {
+      "description": "Python specialist for backend development, data processing, and automation",
+      "specializations": ["python-development", "data-processing", "automation", "scientific-computing"],
+      "capabilities": {
+        "languages": ["python", "sql", "bash"],
+        "frameworks": ["fastapi", "django", "flask", "pandas", "numpy", "sqlalchemy"],
+        "domains": ["web-development", "data-science", "automation", "system-integration"],
+        "complexity": "high",
+        "team-role": "specialist"
+      },
+      "idealFor": ["backend-apis", "data-processing", "automation-scripts", "integration-work"],
+      "worksWith": ["backend-architect", "data-scientist", "database-admin", "devops-troubleshooter"],
+      "conflictsWith": [],
+      "priority": "high"
+    },
+    "javascript-pro": {
+      "description": "JavaScript expert for full-stack development and modern JS patterns",
+      "specializations": ["modern-javascript", "node-development", "frontend-frameworks", "full-stack"],
+      "capabilities": {
+        "languages": ["javascript", "typescript", "html", "css"],
+        "frameworks": ["react", "nextjs", "express", "node", "webpack", "vite"],
+        "domains": ["web-development", "full-stack", "build-tools", "module-systems"],
+        "complexity": "high",
+        "team-role": "specialist"
+      },
+      "idealFor": ["javascript-heavy-projects", "build-optimization", "module-design", "legacy-js-modernization"],
+      "worksWith": ["frontend-developer", "backend-architect", "performance-engineer", "test-automator"],
+      "conflictsWith": [],
+      "priority": "high"
+    },
+    "performance-engineer": {
+      "description": "Specialist in application performance optimization and monitoring",
+      "specializations": ["performance-optimization", "web-vitals", "bundle-analysis", "monitoring"],
+      "capabilities": {
+        "languages": ["javascript", "typescript", "python", "bash"],
+        "frameworks": ["performance-tools", "monitoring-solutions", "optimization-libraries"],
+        "domains": ["web-performance", "system-optimization", "monitoring", "analytics"],
+        "complexity": "high",
+        "team-role": "specialist"
+      },
+      "idealFor": ["performance-audits", "optimization-implementation", "monitoring-setup", "bottleneck-analysis"],
+      "worksWith": ["frontend-developer", "backend-architect", "devops-troubleshooter", "data-engineer"],
+      "conflictsWith": [],
+      "priority": "high"
+    },
+    "security-auditor": {
+      "description": "Security specialist for vulnerability assessment and secure coding practices",
+      "specializations": ["security-auditing", "vulnerability-assessment", "secure-coding", "penetration-testing"],
+      "capabilities": {
+        "languages": ["multiple", "security-tools"],
+        "frameworks": ["security-frameworks", "audit-tools"],
+        "domains": ["cybersecurity", "compliance", "risk-assessment", "secure-development"],
+        "complexity": "high",
+        "team-role": "auditor"
+      },
+      "idealFor": ["security-audits", "vulnerability-fixes", "compliance-implementation", "security-architecture"],
+      "worksWith": ["backend-architect", "devops-troubleshooter", "legal-advisor", "risk-manager"],
+      "conflictsWith": [],
+      "priority": "critical"
+    },
+    "test-automator": {
+      "description": "Testing specialist for automated testing strategies and implementation",
+      "specializations": ["test-automation", "testing-strategies", "qa-processes", "ci-cd-testing"],
+      "capabilities": {
+        "languages": ["javascript", "typescript", "python", "bash"],
+        "frameworks": ["jest", "playwright", "cypress", "testing-library", "pytest"],
+        "domains": ["quality-assurance", "test-automation", "ci-cd", "performance-testing"],
+        "complexity": "high",
+        "team-role": "qa-specialist"
+      },
+      "idealFor": ["test-suite-creation", "qa-automation", "ci-cd-setup", "testing-strategy"],
+      "worksWith": ["frontend-developer", "backend-architect", "performance-engineer", "security-auditor"],
+      "conflictsWith": [],
+      "priority": "high"
+    },
+    "devops-troubleshooter": {
+      "description": "DevOps specialist for deployment, infrastructure, and operational issues",
+      "specializations": ["deployment", "infrastructure", "ci-cd", "monitoring", "troubleshooting"],
+      "capabilities": {
+        "languages": ["bash", "yaml", "dockerfile", "terraform"],
+        "frameworks": ["docker", "kubernetes", "ci-cd-tools", "cloud-platforms"],
+        "domains": ["deployment", "infrastructure", "monitoring", "automation"],
+        "complexity": "high",
+        "team-role": "ops-specialist"
+      },
+      "idealFor": ["deployment-issues", "infrastructure-setup", "ci-cd-implementation", "operational-troubleshooting"],
+      "worksWith": ["cloud-architect", "security-auditor", "performance-engineer", "terraform-specialist"],
+      "conflictsWith": [],
+      "priority": "high"
+    },
+    "database-admin": {
+      "description": "Database specialist for design, optimization, and administration",
+      "specializations": ["database-design", "query-optimization", "data-modeling", "database-administration"],
+      "capabilities": {
+        "languages": ["sql", "python", "bash"],
+        "frameworks": ["postgresql", "mysql", "mongodb", "prisma", "sqlalchemy"],
+        "domains": ["database-design", "data-modeling", "performance-tuning", "backup-recovery"],
+        "complexity": "high",
+        "team-role": "data-specialist"
+      },
+      "idealFor": ["database-design", "query-optimization", "data-modeling", "migration-planning"],
+      "worksWith": ["backend-architect", "data-engineer", "performance-engineer", "database-optimizer"],
+      "conflictsWith": [],
+      "priority": "high"
+    },
+    "content-marketer": {
+      "description": "Content strategy and marketing communication specialist",
+      "specializations": ["content-strategy", "copywriting", "seo", "marketing-automation"],
+      "capabilities": {
+        "languages": ["markdown", "html", "css"],
+        "frameworks": ["cms-systems", "seo-tools", "analytics"],
+        "domains": ["content-marketing", "seo", "copywriting", "brand-messaging"],
+        "complexity": "medium",
+        "team-role": "marketing-specialist"
+      },
+      "idealFor": ["content-creation", "seo-optimization", "marketing-copy", "brand-messaging"],
+      "worksWith": ["ui-ux-designer", "frontend-developer", "business-analyst", "customer-support"],
+      "conflictsWith": [],
+      "priority": "medium"
+    },
+    "api-documenter": {
+      "description": "API documentation and technical writing specialist",
+      "specializations": ["api-documentation", "technical-writing", "documentation-systems", "developer-experience"],
+      "capabilities": {
+        "languages": ["markdown", "yaml", "json", "openapi"],
+        "frameworks": ["documentation-tools", "api-spec-tools"],
+        "domains": ["technical-documentation", "api-design", "developer-experience"],
+        "complexity": "medium",
+        "team-role": "documentation-specialist"
+      },
+      "idealFor": ["api-documentation", "technical-writing", "documentation-systems", "developer-guides"],
+      "worksWith": ["backend-architect", "frontend-developer", "typescript-pro", "dx-optimizer"],
+      "conflictsWith": [],
+      "priority": "medium"
+    },
+    "code-reviewer": {
+      "description": "Code quality and review specialist for maintaining high standards",
+      "specializations": ["code-quality", "best-practices", "architecture-review", "mentoring"],
+      "capabilities": {
+        "languages": ["multiple"],
+        "frameworks": ["code-quality-tools", "linting-tools"],
+        "domains": ["code-quality", "architecture-review", "best-practices", "team-mentoring"],
+        "complexity": "high",
+        "team-role": "quality-assurance"
+      },
+      "idealFor": ["code-reviews", "architecture-validation", "quality-improvements", "best-practice-implementation"],
+      "worksWith": ["all-technical-agents"],
+      "conflictsWith": [],
+      "priority": "high"
+    },
+    "error-detective": {
+      "description": "Specialist in debugging and error resolution",
+      "specializations": ["debugging", "error-analysis", "troubleshooting", "root-cause-analysis"],
+      "capabilities": {
+        "languages": ["multiple"],
+        "frameworks": ["debugging-tools", "monitoring-tools"],
+        "domains": ["debugging", "troubleshooting", "error-analysis", "system-diagnostics"],
+        "complexity": "high",
+        "team-role": "troubleshooter"
+      },
+      "idealFor": ["bug-fixing", "error-investigation", "system-debugging", "performance-issues"],
+      "worksWith": ["all-technical-agents"],
+      "conflictsWith": [],
+      "priority": "high"
+    },
+    "data-scientist": {
+      "description": "Data analysis, machine learning, and statistical modeling specialist",
+      "specializations": ["data-analysis", "machine-learning", "statistical-modeling", "data-visualization"],
+      "capabilities": {
+        "languages": ["python", "r", "sql", "javascript"],
+        "frameworks": ["pandas", "numpy", "scikit-learn", "tensorflow", "plotly"],
+        "domains": ["data-science", "machine-learning", "analytics", "visualization"],
+        "complexity": "high",
+        "team-role": "data-specialist"
+      },
+      "idealFor": ["data-analysis", "predictive-modeling", "user-analytics", "business-intelligence"],
+      "worksWith": ["data-engineer", "python-pro", "business-analyst", "performance-engineer"],
+      "conflictsWith": [],
+      "priority": "medium"
+    },
+    "data-engineer": {
+      "description": "Data pipeline and infrastructure specialist",
+      "specializations": ["data-pipelines", "etl-processes", "data-infrastructure", "big-data"],
+      "capabilities": {
+        "languages": ["python", "sql", "bash", "scala"],
+        "frameworks": ["airflow", "kafka", "spark", "dbt"],
+        "domains": ["data-engineering", "pipeline-development", "data-infrastructure"],
+        "complexity": "high",
+        "team-role": "infrastructure-specialist"
+      },
+      "idealFor": ["data-pipeline-development", "etl-processes", "data-infrastructure", "stream-processing"],
+      "worksWith": ["data-scientist", "database-admin", "cloud-architect", "devops-troubleshooter"],
+      "conflictsWith": [],
+      "priority": "medium"
+    },
+    "ml-engineer": {
+      "description": "Machine learning engineering and MLOps specialist",
+      "specializations": ["ml-engineering", "model-deployment", "ml-pipelines", "model-optimization"],
+      "capabilities": {
+        "languages": ["python", "tensorflow", "pytorch", "docker"],
+        "frameworks": ["tensorflow", "pytorch", "mlflow", "kubeflow"],
+        "domains": ["machine-learning", "model-deployment", "ml-operations"],
+        "complexity": "high",
+        "team-role": "ml-specialist"
+      },
+      "idealFor": ["ml-model-development", "model-deployment", "ml-pipeline-creation", "model-optimization"],
+      "worksWith": ["data-scientist", "mlops-engineer", "cloud-architect", "python-pro"],
+      "conflictsWith": [],
+      "priority": "low"
+    },
+    "mlops-engineer": {
+      "description": "MLOps and machine learning operations specialist",
+      "specializations": ["mlops", "model-monitoring", "ml-infrastructure", "automated-ml"],
+      "capabilities": {
+        "languages": ["python", "yaml", "bash", "docker"],
+        "frameworks": ["mlflow", "kubeflow", "kubernetes", "monitoring-tools"],
+        "domains": ["ml-operations", "model-monitoring", "automated-deployment"],
+        "complexity": "high",
+        "team-role": "ops-specialist"
+      },
+      "idealFor": ["ml-operations", "model-monitoring", "automated-ml-pipelines", "ml-infrastructure"],
+      "worksWith": ["ml-engineer", "devops-troubleshooter", "cloud-architect", "data-engineer"],
+      "conflictsWith": [],
+      "priority": "low"
+    },
+    "cloud-architect": {
+      "description": "Cloud infrastructure and architecture specialist",
+      "specializations": ["cloud-architecture", "scalable-systems", "cloud-migration", "cost-optimization"],
+      "capabilities": {
+        "languages": ["yaml", "terraform", "bash", "python"],
+        "frameworks": ["aws", "azure", "gcp", "terraform", "kubernetes"],
+        "domains": ["cloud-computing", "infrastructure-design", "scalability"],
+        "complexity": "high",
+        "team-role": "architect"
+      },
+      "idealFor": ["cloud-migration", "infrastructure-design", "scalability-planning", "cost-optimization"],
+      "worksWith": ["devops-troubleshooter", "terraform-specialist", "security-auditor", "performance-engineer"],
+      "conflictsWith": [],
+      "priority": "medium"
+    },
+    "terraform-specialist": {
+      "description": "Infrastructure as Code specialist using Terraform",
+      "specializations": ["infrastructure-as-code", "terraform", "cloud-provisioning", "resource-management"],
+      "capabilities": {
+        "languages": ["terraform", "hcl", "yaml", "bash"],
+        "frameworks": ["terraform", "terraform-modules"],
+        "domains": ["infrastructure-automation", "cloud-provisioning", "resource-management"],
+        "complexity": "high",
+        "team-role": "infrastructure-specialist"
+      },
+      "idealFor": ["infrastructure-automation", "cloud-resource-management", "terraform-modules", "iac-implementation"],
+      "worksWith": ["cloud-architect", "devops-troubleshooter", "security-auditor"],
+      "conflictsWith": [],
+      "priority": "low"
+    },
+    "mobile-developer": {
+      "description": "Mobile application development specialist",
+      "specializations": ["mobile-apps", "react-native", "progressive-web-apps", "mobile-optimization"],
+      "capabilities": {
+        "languages": ["javascript", "typescript", "swift", "kotlin"],
+        "frameworks": ["react-native", "expo", "ionic", "flutter"],
+        "domains": ["mobile-development", "cross-platform", "mobile-ui"],
+        "complexity": "high",
+        "team-role": "specialist"
+      },
+      "idealFor": ["mobile-app-development", "pwa-creation", "mobile-optimization", "cross-platform-apps"],
+      "worksWith": ["frontend-developer", "ui-ux-designer", "performance-engineer", "test-automator"],
+      "conflictsWith": [],
+      "priority": "low"
+    },
+    "ios-developer": {
+      "description": "iOS-specific development specialist",
+      "specializations": ["ios-development", "swift", "xcode", "app-store"],
+      "capabilities": {
+        "languages": ["swift", "objective-c"],
+        "frameworks": ["uikit", "swiftui", "core-data"],
+        "domains": ["ios-development", "apple-ecosystem"],
+        "complexity": "high",
+        "team-role": "specialist"
+      },
+      "idealFor": ["native-ios-apps", "swift-development", "apple-ecosystem-integration"],
+      "worksWith": ["mobile-developer", "ui-ux-designer", "test-automator"],
+      "conflictsWith": ["android-specific-agents"],
+      "priority": "low"
+    },
+    "unity-developer": {
+      "description": "Unity game development specialist",
+      "specializations": ["unity-development", "game-programming", "3d-graphics", "interactive-media"],
+      "capabilities": {
+        "languages": ["csharp", "javascript", "glsl"],
+        "frameworks": ["unity", "unity-engine"],
+        "domains": ["game-development", "interactive-applications", "3d-visualization"],
+        "complexity": "high",
+        "team-role": "specialist"
+      },
+      "idealFor": ["game-development", "interactive-3d-applications", "educational-games", "visualization"],
+      "worksWith": ["csharp-pro", "ui-ux-designer", "performance-engineer"],
+      "conflictsWith": [],
+      "priority": "low"
+    },
+    "debugger": {
+      "description": "Advanced debugging and system analysis specialist",
+      "specializations": ["advanced-debugging", "performance-profiling", "memory-analysis", "system-tracing"],
+      "capabilities": {
+        "languages": ["multiple"],
+        "frameworks": ["debugging-tools", "profiling-tools", "monitoring-systems"],
+        "domains": ["system-debugging", "performance-analysis", "memory-management"],
+        "complexity": "high",
+        "team-role": "troubleshooter"
+      },
+      "idealFor": ["complex-debugging", "performance-bottlenecks", "memory-leaks", "system-analysis"],
+      "worksWith": ["error-detective", "performance-engineer", "all-technical-agents"],
+      "conflictsWith": [],
+      "priority": "high"
+    },
+    "network-engineer": {
+      "description": "Network infrastructure and communication specialist",
+      "specializations": ["network-architecture", "api-integration", "distributed-systems", "protocol-design"],
+      "capabilities": {
+        "languages": ["bash", "python", "yaml", "networking-configs"],
+        "frameworks": ["networking-tools", "api-gateways", "load-balancers"],
+        "domains": ["network-engineering", "system-integration", "distributed-computing"],
+        "complexity": "high",
+        "team-role": "infrastructure-specialist"
+      },
+      "idealFor": ["network-configuration", "api-integration", "distributed-system-design", "protocol-implementation"],
+      "worksWith": ["backend-architect", "devops-troubleshooter", "security-auditor", "cloud-architect"],
+      "conflictsWith": [],
+      "priority": "medium"
+    },
+    "architect-reviewer": {
+      "description": "System architecture review and validation specialist",
+      "specializations": ["architecture-review", "system-design", "scalability-analysis", "design-patterns"],
+      "capabilities": {
+        "languages": ["architecture-documentation", "uml", "system-design"],
+        "frameworks": ["architecture-patterns", "design-principles"],
+        "domains": ["system-architecture", "design-review", "scalability-planning"],
+        "complexity": "high",
+        "team-role": "architect"
+      },
+      "idealFor": ["architecture-validation", "design-reviews", "scalability-assessments", "technology-decisions"],
+      "worksWith": ["backend-architect", "frontend-developer", "cloud-architect", "performance-engineer"],
+      "conflictsWith": [],
+      "priority": "high"
+    },
+    "legacy-modernizer": {
+      "description": "Legacy system modernization and migration specialist",
+      "specializations": ["legacy-migration", "system-modernization", "technology-upgrade", "refactoring"],
+      "capabilities": {
+        "languages": ["multiple-legacy-languages", "modern-alternatives"],
+        "frameworks": ["migration-tools", "modernization-frameworks"],
+        "domains": ["system-migration", "technology-modernization", "legacy-integration"],
+        "complexity": "high",
+        "team-role": "migration-specialist"
+      },
+      "idealFor": ["legacy-system-upgrades", "technology-migrations", "modernization-projects", "refactoring-initiatives"],
+      "worksWith": ["architect-reviewer", "database-admin", "security-auditor", "test-automator"],
+      "conflictsWith": [],
+      "priority": "medium"
+    },
+    "incident-responder": {
+      "description": "Incident response and crisis management specialist",
+      "specializations": ["incident-response", "crisis-management", "system-recovery", "post-mortem-analysis"],
+      "capabilities": {
+        "languages": ["bash", "python", "monitoring-queries"],
+        "frameworks": ["monitoring-tools", "alerting-systems", "recovery-procedures"],
+        "domains": ["incident-management", "system-recovery", "crisis-response"],
+        "complexity": "high",
+        "team-role": "response-specialist"
+      },
+      "idealFor": ["production-incidents", "system-failures", "emergency-fixes", "disaster-recovery"],
+      "worksWith": ["devops-troubleshooter", "security-auditor", "performance-engineer", "error-detective"],
+      "conflictsWith": [],
+      "priority": "critical"
+    },
+    "risk-manager": {
+      "description": "Risk assessment and mitigation specialist",
+      "specializations": ["risk-assessment", "compliance", "security-planning", "business-continuity"],
+      "capabilities": {
+        "languages": ["documentation", "compliance-frameworks"],
+        "frameworks": ["risk-frameworks", "compliance-tools"],
+        "domains": ["risk-management", "compliance", "business-continuity"],
+        "complexity": "medium",
+        "team-role": "governance-specialist"
+      },
+      "idealFor": ["risk-assessments", "compliance-planning", "security-governance", "business-continuity"],
+      "worksWith": ["security-auditor", "legal-advisor", "business-analyst", "incident-responder"],
+      "conflictsWith": [],
+      "priority": "medium"
+    },
+    "business-analyst": {
+      "description": "Business requirements and process analysis specialist",
+      "specializations": ["requirements-analysis", "process-optimization", "stakeholder-management", "business-intelligence"],
+      "capabilities": {
+        "languages": ["documentation", "analysis-tools"],
+        "frameworks": ["business-analysis-tools", "process-mapping"],
+        "domains": ["business-analysis", "requirements-gathering", "process-improvement"],
+        "complexity": "medium",
+        "team-role": "analyst"
+      },
+      "idealFor": ["requirements-gathering", "process-analysis", "stakeholder-communication", "business-optimization"],
+      "worksWith": ["content-marketer", "ui-ux-designer", "data-scientist", "customer-support"],
+      "conflictsWith": [],
+      "priority": "medium"
+    },
+    "customer-support": {
+      "description": "Customer support and user assistance specialist",
+      "specializations": ["user-support", "documentation", "training-materials", "customer-communication"],
+      "capabilities": {
+        "languages": ["documentation", "communication"],
+        "frameworks": ["support-tools", "knowledge-bases"],
+        "domains": ["customer-support", "user-education", "communication"],
+        "complexity": "medium",
+        "team-role": "support-specialist"
+      },
+      "idealFor": ["user-documentation", "support-systems", "training-materials", "customer-communication"],
+      "worksWith": ["content-marketer", "business-analyst", "ui-ux-designer", "api-documenter"],
+      "conflictsWith": [],
+      "priority": "medium"
+    },
+    "dx-optimizer": {
+      "description": "Developer experience optimization specialist",
+      "specializations": ["developer-experience", "tooling", "workflow-optimization", "productivity"],
+      "capabilities": {
+        "languages": ["multiple", "tooling-configs"],
+        "frameworks": ["development-tools", "ci-cd", "productivity-tools"],
+        "domains": ["developer-experience", "tooling", "workflow-optimization"],
+        "complexity": "high",
+        "team-role": "productivity-specialist"
+      },
+      "idealFor": ["developer-tooling", "workflow-improvements", "productivity-optimization", "development-setup"],
+      "worksWith": ["devops-troubleshooter", "test-automator", "api-documenter", "performance-engineer"],
+      "conflictsWith": [],
+      "priority": "medium"
+    },
+    "deployment-engineer": {
+      "description": "Application deployment and release management specialist",
+      "specializations": ["deployment-automation", "release-management", "ci-cd", "environment-management"],
+      "capabilities": {
+        "languages": ["bash", "yaml", "docker", "kubernetes"],
+        "frameworks": ["deployment-tools", "ci-cd-platforms", "orchestration"],
+        "domains": ["deployment", "release-management", "automation"],
+        "complexity": "high",
+        "team-role": "deployment-specialist"
+      },
+      "idealFor": ["deployment-automation", "release-management", "environment-setup", "ci-cd-implementation"],
+      "worksWith": ["devops-troubleshooter", "cloud-architect", "test-automator", "security-auditor"],
+      "conflictsWith": [],
+      "priority": "high"
+    },
+    "database-optimizer": {
+      "description": "Database performance and optimization specialist",
+      "specializations": ["query-optimization", "index-design", "performance-tuning", "database-scaling"],
+      "capabilities": {
+        "languages": ["sql", "database-specific-languages"],
+        "frameworks": ["database-systems", "monitoring-tools", "optimization-tools"],
+        "domains": ["database-optimization", "performance-tuning", "scalability"],
+        "complexity": "high",
+        "team-role": "performance-specialist"
+      },
+      "idealFor": ["query-optimization", "database-performance", "index-optimization", "scaling-strategies"],
+      "worksWith": ["database-admin", "backend-architect", "performance-engineer", "data-engineer"],
+      "conflictsWith": [],
+      "priority": "medium"
+    },
+    "payment-integration": {
+      "description": "Payment systems and financial integration specialist",
+      "specializations": ["payment-processing", "financial-apis", "compliance", "security"],
+      "capabilities": {
+        "languages": ["javascript", "python", "api-integration"],
+        "frameworks": ["payment-gateways", "financial-apis", "compliance-tools"],
+        "domains": ["payment-processing", "financial-integration", "compliance"],
+        "complexity": "high",
+        "team-role": "integration-specialist"
+      },
+      "idealFor": ["payment-system-integration", "financial-apis", "compliance-implementation", "transaction-processing"],
+      "worksWith": ["backend-architect", "security-auditor", "legal-advisor", "test-automator"],
+      "conflictsWith": [],
+      "priority": "medium"
+    },
+    "ai-engineer": {
+      "description": "AI and machine learning integration specialist",
+      "specializations": ["ai-integration", "llm-implementation", "intelligent-features", "ai-apis"],
+      "capabilities": {
+        "languages": ["python", "javascript", "ai-frameworks"],
+        "frameworks": ["openai", "anthropic", "tensorflow", "pytorch"],
+        "domains": ["ai-integration", "intelligent-applications", "nlp"],
+        "complexity": "high",
+        "team-role": "ai-specialist"
+      },
+      "idealFor": ["ai-feature-implementation", "llm-integration", "intelligent-automation", "ai-apis"],
+      "worksWith": ["ml-engineer", "backend-architect", "frontend-developer", "data-scientist"],
+      "conflictsWith": [],
+      "priority": "medium"
+    },
+    "prompt-engineer": {
+      "description": "AI prompt design and optimization specialist",
+      "specializations": ["prompt-engineering", "ai-interaction-design", "llm-optimization", "conversational-ai"],
+      "capabilities": {
+        "languages": ["natural-language", "prompt-templates"],
+        "frameworks": ["llm-frameworks", "ai-platforms"],
+        "domains": ["prompt-design", "ai-interaction", "conversational-systems"],
+        "complexity": "medium",
+        "team-role": "ai-specialist"
+      },
+      "idealFor": ["prompt-optimization", "ai-interaction-design", "conversational-systems", "llm-fine-tuning"],
+      "worksWith": ["ai-engineer", "content-marketer", "ui-ux-designer", "customer-support"],
+      "conflictsWith": [],
+      "priority": "low"
+    },
+    "sales-automator": {
+      "description": "Sales process automation and CRM specialist",
+      "specializations": ["sales-automation", "crm-integration", "lead-management", "conversion-optimization"],
+      "capabilities": {
+        "languages": ["javascript", "python", "api-integration"],
+        "frameworks": ["crm-systems", "automation-tools", "analytics"],
+        "domains": ["sales-automation", "customer-management", "conversion-optimization"],
+        "complexity": "medium",
+        "team-role": "automation-specialist"
+      },
+      "idealFor": ["sales-process-automation", "crm-integration", "lead-tracking", "conversion-optimization"],
+      "worksWith": ["content-marketer", "business-analyst", "data-scientist", "customer-support"],
+      "conflictsWith": [],
+      "priority": "low"
+    },
+    "search-specialist": {
+      "description": "Search functionality and SEO optimization specialist",
+      "specializations": ["search-implementation", "seo-optimization", "content-discovery", "search-analytics"],
+      "capabilities": {
+        "languages": ["javascript", "python", "elasticsearch"],
+        "frameworks": ["search-engines", "seo-tools", "analytics"],
+        "domains": ["search-functionality", "seo", "content-discovery"],
+        "complexity": "medium",
+        "team-role": "search-specialist"
+      },
+      "idealFor": ["search-implementation", "seo-optimization", "content-indexing", "search-analytics"],
+      "worksWith": ["content-marketer", "frontend-developer", "backend-architect", "data-scientist"],
+      "conflictsWith": [],
+      "priority": "medium"
+    },
+    "legal-advisor": {
+      "description": "Legal compliance and regulatory specialist",
+      "specializations": ["legal-compliance", "privacy-regulations", "terms-of-service", "regulatory-requirements"],
+      "capabilities": {
+        "languages": ["legal-documentation", "compliance-frameworks"],
+        "frameworks": ["compliance-tools", "legal-frameworks"],
+        "domains": ["legal-compliance", "privacy", "regulatory-requirements"],
+        "complexity": "medium",
+        "team-role": "compliance-specialist"
+      },
+      "idealFor": ["compliance-implementation", "privacy-policies", "legal-documentation", "regulatory-compliance"],
+      "worksWith": ["security-auditor", "risk-manager", "business-analyst", "content-marketer"],
+      "conflictsWith": [],
+      "priority": "medium"
+    },
+    "quant-analyst": {
+      "description": "Quantitative analysis and financial modeling specialist",
+      "specializations": ["quantitative-analysis", "financial-modeling", "statistical-analysis", "algorithmic-trading"],
+      "capabilities": {
+        "languages": ["python", "r", "matlab", "sql"],
+        "frameworks": ["numpy", "pandas", "scipy", "quantlib"],
+        "domains": ["quantitative-finance", "statistical-modeling", "risk-analysis"],
+        "complexity": "high",
+        "team-role": "analyst"
+      },
+      "idealFor": ["financial-modeling", "risk-analysis", "quantitative-research", "algorithmic-strategies"],
+      "worksWith": ["data-scientist", "risk-manager", "python-pro", "database-admin"],
+      "conflictsWith": [],
+      "priority": "low"
+    },
+    "sql-pro": {
+      "description": "SQL and database query specialist",
+      "specializations": ["sql-optimization", "complex-queries", "data-analysis", "database-design"],
+      "capabilities": {
+        "languages": ["sql", "postgresql", "mysql", "sqlite"],
+        "frameworks": ["database-systems", "query-tools", "data-analysis"],
+        "domains": ["database-queries", "data-analysis", "reporting"],
+        "complexity": "high",
+        "team-role": "data-specialist"
+      },
+      "idealFor": ["complex-sql-queries", "database-optimization", "data-analysis", "reporting-systems"],
+      "worksWith": ["database-admin", "database-optimizer", "data-scientist", "backend-architect"],
+      "conflictsWith": [],
+      "priority": "medium"
+    },
+    "graphql-architect": {
+      "description": "GraphQL API design and implementation specialist",
+      "specializations": ["graphql-design", "api-architecture", "schema-design", "query-optimization"],
+      "capabilities": {
+        "languages": ["graphql", "typescript", "javascript"],
+        "frameworks": ["apollo", "relay", "graphql-tools"],
+        "domains": ["api-design", "data-fetching", "schema-architecture"],
+        "complexity": "high",
+        "team-role": "api-specialist"
+      },
+      "idealFor": ["graphql-implementation", "api-design", "schema-architecture", "data-layer-design"],
+      "worksWith": ["backend-architect", "frontend-developer", "api-documenter", "database-admin"],
+      "conflictsWith": [],
+      "priority": "low"
+    },
+    "php-pro": {
+      "description": "PHP development and web application specialist",
+      "specializations": ["php-development", "web-applications", "cms-development", "legacy-php"],
+      "capabilities": {
+        "languages": ["php", "sql", "html", "css", "javascript"],
+        "frameworks": ["laravel", "symfony", "wordpress", "drupal"],
+        "domains": ["web-development", "cms-systems", "e-commerce"],
+        "complexity": "high",
+        "team-role": "specialist"
+      },
+      "idealFor": ["php-applications", "cms-development", "web-platforms", "legacy-php-systems"],
+      "worksWith": ["database-admin", "frontend-developer", "security-auditor", "legacy-modernizer"],
+      "conflictsWith": [],
+      "priority": "low"
+    },
+    "java-pro": {
+      "description": "Java development and enterprise application specialist",
+      "specializations": ["java-development", "enterprise-applications", "spring-framework", "microservices"],
+      "capabilities": {
+        "languages": ["java", "kotlin", "sql"],
+        "frameworks": ["spring", "spring-boot", "hibernate", "maven", "gradle"],
+        "domains": ["enterprise-development", "web-services", "microservices"],
+        "complexity": "high",
+        "team-role": "specialist"
+      },
+      "idealFor": ["java-applications", "enterprise-systems", "microservices", "spring-development"],
+      "worksWith": ["backend-architect", "database-admin", "test-automator", "cloud-architect"],
+      "conflictsWith": [],
+      "priority": "low"
+    },
+    "csharp-pro": {
+      "description": "C# and .NET development specialist",
+      "specializations": ["csharp-development", "dotnet-framework", "asp-net", "desktop-applications"],
+      "capabilities": {
+        "languages": ["csharp", "fsharp", "sql"],
+        "frameworks": ["dotnet", "asp-net", "entity-framework", "xamarin"],
+        "domains": ["web-development", "desktop-applications", "enterprise-systems"],
+        "complexity": "high",
+        "team-role": "specialist"
+      },
+      "idealFor": ["dotnet-applications", "csharp-development", "enterprise-systems", "desktop-applications"],
+      "worksWith": ["backend-architect", "database-admin", "unity-developer", "test-automator"],
+      "conflictsWith": [],
+      "priority": "low"
+    },
+    "cpp-pro": {
+      "description": "C++ development and systems programming specialist",
+      "specializations": ["cpp-development", "systems-programming", "performance-optimization", "embedded-systems"],
+      "capabilities": {
+        "languages": ["cpp", "c", "assembly"],
+        "frameworks": ["boost", "qt", "cmake"],
+        "domains": ["systems-programming", "performance-critical-applications", "embedded-systems"],
+        "complexity": "high",
+        "team-role": "specialist"
+      },
+      "idealFor": ["system-programming", "performance-critical-code", "embedded-development", "native-applications"],
+      "worksWith": ["performance-engineer", "debugger", "network-engineer", "unity-developer"],
+      "conflictsWith": [],
+      "priority": "low"
+    },
+    "c-pro": {
+      "description": "C programming and low-level systems specialist",
+      "specializations": ["c-programming", "embedded-systems", "kernel-development", "system-calls"],
+      "capabilities": {
+        "languages": ["c", "assembly", "shell"],
+        "frameworks": ["posix", "embedded-frameworks"],
+        "domains": ["system-programming", "embedded-development", "kernel-programming"],
+        "complexity": "high",
+        "team-role": "specialist"
+      },
+      "idealFor": ["embedded-systems", "kernel-development", "system-programming", "hardware-interfaces"],
+      "worksWith": ["cpp-pro", "network-engineer", "performance-engineer", "debugger"],
+      "conflictsWith": [],
+      "priority": "low"
+    },
+    "rust-pro": {
+      "description": "Rust programming and systems development specialist",
+      "specializations": ["rust-development", "memory-safety", "concurrent-programming", "web-assembly"],
+      "capabilities": {
+        "languages": ["rust", "web-assembly"],
+        "frameworks": ["tokio", "actix", "wasm-pack"],
+        "domains": ["systems-programming", "web-development", "blockchain"],
+        "complexity": "high",
+        "team-role": "specialist"
+      },
+      "idealFor": ["rust-applications", "memory-safe-systems", "concurrent-programming", "web-assembly"],
+      "worksWith": ["performance-engineer", "backend-architect", "security-auditor", "cpp-pro"],
+      "conflictsWith": [],
+      "priority": "low"
+    },
+    "golang-pro": {
+      "description": "Go programming and distributed systems specialist",
+      "specializations": ["go-development", "distributed-systems", "microservices", "cloud-native"],
+      "capabilities": {
+        "languages": ["go", "sql"],
+        "frameworks": ["gin", "echo", "kubernetes", "docker"],
+        "domains": ["distributed-systems", "microservices", "cloud-applications"],
+        "complexity": "high",
+        "team-role": "specialist"
+      },
+      "idealFor": ["go-applications", "microservices", "distributed-systems", "cloud-native-development"],
+      "worksWith": ["backend-architect", "cloud-architect", "devops-troubleshooter", "network-engineer"],
+      "conflictsWith": [],
+      "priority": "low"
+    }
+  },
+  "agentCombinations": {
+    "frontend-stack": ["frontend-developer", "ui-ux-designer", "typescript-pro", "test-automator"],
+    "backend-stack": ["backend-architect", "database-admin", "security-auditor", "api-documenter"],
+    "full-stack": ["frontend-developer", "backend-architect", "database-admin", "test-automator"],
+    "performance-optimization": ["performance-engineer", "database-optimizer", "frontend-developer", "devops-troubleshooter"],
+    "security-audit": ["security-auditor", "risk-manager", "legal-advisor", "incident-responder"],
+    "data-pipeline": ["data-engineer", "database-admin", "python-pro", "performance-engineer"],
+    "ml-development": ["ml-engineer", "data-scientist", "python-pro", "mlops-engineer"],
+    "devops-complete": ["devops-troubleshooter", "cloud-architect", "terraform-specialist", "deployment-engineer"],
+    "e-commerce": ["frontend-developer", "backend-architect", "payment-integration", "security-auditor"],
+    "content-management": ["content-marketer", "frontend-developer", "backend-architect", "search-specialist"],
+    "mobile-development": ["mobile-developer", "ui-ux-designer", "backend-architect", "test-automator"],
+    "legacy-modernization": ["legacy-modernizer", "architect-reviewer", "security-auditor", "test-automator"],
+    "startup-mvp": ["general-purpose", "frontend-developer", "backend-architect", "test-automator"],
+    "enterprise-solution": ["architect-reviewer", "backend-architect", "security-auditor", "devops-troubleshooter"],
+    "crisis-response": ["incident-responder", "devops-troubleshooter", "security-auditor", "error-detective"]
+  },
+  "taskClassification": {
+    "ui-development": ["frontend-developer", "ui-ux-designer", "typescript-pro"],
+    "api-development": ["backend-architect", "api-documenter", "typescript-pro"],
+    "database-work": ["database-admin", "sql-pro", "database-optimizer"],
+    "debugging": ["error-detective", "debugger", "performance-engineer"],
+    "deployment": ["devops-troubleshooter", "deployment-engineer", "cloud-architect"],
+    "testing": ["test-automator", "performance-engineer", "security-auditor"],
+    "documentation": ["api-documenter", "content-marketer", "customer-support"],
+    "security": ["security-auditor", "risk-manager", "legal-advisor"],
+    "performance": ["performance-engineer", "database-optimizer", "frontend-developer"],
+    "integration": ["backend-architect", "network-engineer", "api-documenter"],
+    "data-analysis": ["data-scientist", "quant-analyst", "business-analyst"],
+    "infrastructure": ["cloud-architect", "devops-troubleshooter", "terraform-specialist"],
+    "mobile": ["mobile-developer", "ios-developer", "ui-ux-designer"],
+    "ai-ml": ["ai-engineer", "ml-engineer", "data-scientist", "prompt-engineer"],
+    "content": ["content-marketer", "customer-support", "search-specialist"],
+    "compliance": ["legal-advisor", "risk-manager", "security-auditor"],
+    "modernization": ["legacy-modernizer", "architect-reviewer", "code-reviewer"],
+    "crisis": ["incident-responder", "error-detective", "devops-troubleshooter"]
+  }
+}
