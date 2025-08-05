@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 /// Simple test script to verify API connection
 /// Run with: dart test_api_connection.dart
 void main() async {
-  print('🧪 Testing GiftSync API Connection...\n');
+  print('🧪 Testing aclue API Connection...\n');
   
   final dio = Dio(BaseOptions(
     baseURL: 'http://localhost:8000',

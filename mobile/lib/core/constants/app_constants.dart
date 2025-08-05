@@ -1,5 +1,5 @@
 class AppConstants {
-  static const String appName = 'GiftSync';
+  static const String appName = 'aclue';
   static const String appTagline = 'The perfect gift, every time';
   
   // API Configuration
@@ -17,7 +17,7 @@ class AppConstants {
   // Firebase
   static const String firebaseProjectId = String.fromEnvironment(
     'FIREBASE_PROJECT_ID',
-    defaultValue: 'giftsync-dev',
+    defaultValue: 'aclue-dev',
   );
   
   // Storage Keys

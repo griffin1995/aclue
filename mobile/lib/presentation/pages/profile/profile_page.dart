@@ -322,7 +322,7 @@ class _SupportSection extends StatelessWidget {
         _ProfileOption(
           icon: Icons.feedback_outlined,
           title: 'Send Feedback',
-          subtitle: 'Help us improve GiftSync',
+          subtitle: 'Help us improve aclue',
           onTap: () {
             // TODO: Open feedback form
           },
