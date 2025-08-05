@@ -180,3 +180,10 @@ secrets/
 *.pem
 *.p12
 *.cert
+
+# Cloudflare Automation - Exclude sensitive data but keep structure
+cloudflare-automation/.env
+cloudflare-automation/backups/*
+!cloudflare-automation/backups/.gitkeep
+cloudflare-automation/logs/*
+!cloudflare-automation/logs/.gitkeep
