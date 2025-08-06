@@ -1,3 +1,40 @@
+# CRITICAL SESSION STARTUP INSTRUCTIONS - ALWAYS READ FIRST
+
+## 🚨 MOST CRITICAL INSTRUCTION - PROJECT MANAGEMENT ACTIVATION 🚨
+
+### WHEN USER TYPES "start project management" - EXECUTE THIS EXACT PROCESS:
+
+**STEP 1: IMMEDIATELY ACTIVATE CONTEXT MANAGER**
+```
+Use Task tool to call: context-manager
+```
+
+**STEP 2: CONTEXT MANAGER BECOMES PROJECT LEAD**
+- Context-manager agent MUST act as the main project manager for ALL future tasks
+- Context-manager MUST coordinate ALL subsequent work by selecting appropriate specialist agents
+- Context-manager MUST manage the complete workflow from start to finish
+
+**STEP 3: HANDOFF PROTOCOL**
+- This current session ENDS after successfully activating context-manager
+- Context-manager takes full control of the project
+- All future tasks go through context-manager's agent selection process
+
+### ERROR-PROOF VALIDATION CHECKLIST:
+- ✅ Did user type exactly "start project management"?
+- ✅ Did I use the Task tool to call context-manager?
+- ✅ Did context-manager confirm it's taking project management role?
+- ✅ Did I explain that context-manager is now the project lead?
+
+### ABSOLUTELY CRITICAL RULES:
+1. **NEVER SKIP THIS PROCESS** - If user says "start project management", this MUST happen
+2. **ZERO EXCEPTIONS** - No matter what else is requested, this takes absolute priority
+3. **COMPLETE HANDOFF** - Context-manager becomes the single source of truth for all project decisions
+4. **FOOLPROOF EXECUTION** - This instruction is designed to be impossible to misunderstand or skip
+
+**THIS IS THE MOST IMPORTANT INSTRUCTION IN THIS ENTIRE FILE - IT MUST BE EXECUTED PERFECTLY EVERY TIME**
+
+---
+
 # CRITICAL DEVELOPMENT RULES - READ FIRST
 
 ## ABSOLUTELY CRITICAL RULES - NEVER VIOLATE THESE - APPLIES TO ALL CONTEXT WINDOWS
@@ -28,7 +65,135 @@
 
 ---
 
-# aclue Development Notes
+# Aclue Development Notes
+
+## REBRANDING: GiftSync → Aclue - COMPREHENSIVE DOCUMENTATION ✅
+
+### Brand Transformation Overview
+**Date Completed**: August 2025
+**Scope**: Complete rebrand from GiftSync/prznt to Aclue
+**Domains**: Transitioned to aclue.app (primary) and aclue.co.uk (secondary)
+
+### Strategic Rationale
+1. **Brand Modernisation**: "Aclue" represents our evolution into a sophisticated AI-powered gifting platform
+2. **Domain Strategy**: 
+   - **aclue.app**: Modern, tech-focused primary domain
+   - **aclue.co.uk**: UK market credibility and local presence
+3. **Market Positioning**: Elevated brand identity reflecting advanced AI capabilities
+
+### Comprehensive Rebranding Changes
+
+#### Frontend Rebranding (`/web/` directory)
+1. **Brand Identity Updates**:
+   - Logo and favicon replaced across all assets
+   - Updated meta tags and SEO configurations
+   - Modified social sharing previews and descriptions
+
+2. **User Interface Changes**:
+   - Header component updated with Aclue branding
+   - Landing page content and messaging revised
+   - Navigation elements reflect new brand identity
+
+3. **Configuration Files Updated**:
+   - `package.json`: Project name changed to "aclue-web"
+   - `wrangler.toml`: Domain routing updated to aclue.app
+   - Environment variables updated with new branding prefixes
+
+#### Backend Rebranding (`/backend/` directory)
+1. **Service Configuration**:
+   - Project metadata updated in `app/core/config.py`
+   - Environment variable prefixes changed from GIFTSYNC_* to ACLUE_*
+   - API documentation and OpenAPI specs updated
+
+2. **Email Service Rebranding**:
+   - Email templates updated with Aclue branding
+   - Sender information and domain references modified
+   - Transactional email content revised
+
+3. **Affiliate Tracking Updates**:
+   - Affiliate tags updated to reflect Aclue branding
+   - Tracking parameters and referral codes modified
+   - Partnership integration configurations updated
+
+#### Deployment Infrastructure
+1. **Cloudflare Pages Configuration**:
+   - Updated routing from prznt.app to aclue.app
+   - Environment variables updated across all environments
+   - CDN configurations and edge routing updated
+
+2. **Railway Backend Deployment**:
+   - Service name updated to aclue-backend-production
+   - Environment variables and secrets updated
+   - Database connection strings and service configurations
+
+3. **Analytics and Monitoring**:
+   - PostHog project updated with Aclue branding
+   - Event tracking and user identification updated
+   - Error monitoring and logging services reconfigured
+
+### Technical Implementation Details
+
+#### Domain Architecture
+```
+Primary Production: aclue.app
+└── Frontend: Cloudflare Pages (Next.js SSR)
+└── API: aclue-backend-production.up.railway.app
+
+Secondary Market: aclue.co.uk  
+└── Future expansion for UK-specific features
+└── Redirect configuration to primary domain
+```
+
+#### Environment Variable Updates
+```bash
+# Before (GiftSync/prznt era)
+NEXT_PUBLIC_WEB_URL=https://aclue.app
+NEXT_PUBLIC_API_URL=https://giftsync-backend-production.up.railway.app
+
+# After (Aclue era)  
+NEXT_PUBLIC_WEB_URL=https://aclue.app
+NEXT_PUBLIC_API_URL=https://aclue-backend-production.up.railway.app
+```
+
+#### Code Comments Added
+- **Configuration files**: Added comments explaining rebranding rationale
+- **Service files**: Documented domain usage patterns
+- **Email templates**: Noted branding consistency requirements
+- **Affiliate components**: Commented on tag changes and tracking updates
+
+### File Change Mapping
+Detailed file-by-file changes documented in `REBRANDING_LOG.md`:
+- Frontend components: 15+ files updated
+- Backend services: 8+ files modified  
+- Configuration files: 6+ files updated
+- Documentation: All .md files revised
+
+### Brand Consistency Guidelines
+1. **Naming Convention**: Always use "Aclue" (proper case)
+2. **Domain Preference**: aclue.app for all primary references
+3. **UI Consistency**: Maintain modern, clean aesthetic
+4. **Communication**: Professional, AI-focused messaging
+
+### Deployment Status
+- ✅ **Frontend**: Successfully deployed to aclue.app
+- ✅ **Backend**: Running on aclue-backend-production.up.railway.app  
+- ✅ **Database**: All references updated in Supabase
+- ✅ **Analytics**: PostHog tracking updated with new domain
+- ✅ **Email Services**: All templates and configurations updated
+
+### Future Considerations
+1. **SEO Migration**: Monitor search rankings and implement redirects
+2. **Brand Recognition**: Track user adoption of new brand identity
+3. **Marketing Materials**: Update all external documentation and partnerships
+4. **Domain Expansion**: Consider additional TLD acquisitions for brand protection
+
+### Developer Notes
+- All legacy "GiftSync" and "prznt" references have been systematically replaced
+- Codebase maintains backward compatibility where necessary
+- Configuration changes require environment variable updates in all deployment environments
+- Brand assets are centralised in `/web/public/` directory
+
+---
 
 ## Authentication System - RESOLVED ✅
 
@@ -268,7 +433,7 @@ The authentication system is now enterprise-ready and meets all security require
 
 ### Deployment Architecture - ENTERPRISE SSR CONFIGURATION
 **Status**: Successfully deployed with enterprise-grade SSR configuration
-**URL**: https://prznt.app
+**URL**: https://aclue.app (rebranded from prznt.app)
 **Backend**: https://aclue-backend-production.up.railway.app
 **Database**: Supabase PostgreSQL
 
@@ -283,7 +448,7 @@ The authentication system is now enterprise-ready and meets all security require
 NODE_VERSION=18
 NEXT_PUBLIC_MAINTENANCE_MODE=true
 NEXT_PUBLIC_API_URL=https://aclue-backend-production.up.railway.app
-NEXT_PUBLIC_WEB_URL=https://prznt.app
+NEXT_PUBLIC_WEB_URL=https://aclue.app
 ```
 
 ### Critical Configuration Files
@@ -325,8 +490,8 @@ Each route exports `export const runtime = 'edge';`
 - Error fallback to Gift icon if logo fails to load
 
 ### Navigation Flow - FINAL IMPLEMENTATION
-1. **prznt.app** → Maintenance page (immediate load)
-2. **"Explore Alpha Version"** → `/landingpage` (full application)
+1. **aclue.app** → Maintenance page (immediate load) [Updated from prznt.app]
+2. **"Explore Alpha Version"** → `/landingpage` (full Aclue application)
 3. **No redirects or complex logic** → Clean, direct page routing
 
 ### Deployment Success Metrics

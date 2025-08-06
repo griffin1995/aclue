@@ -308,6 +308,14 @@ export default function MaintenanceMode() {
             </motion.div>
           </div>
         </div>
+        
+        {/* Legal Statement - Bottom Right */}
+        <div className="absolute bottom-4 right-4 z-20">
+          <div className="text-xs text-white/60 text-right leading-tight">
+            <div>© 2025 HITSENSE LTD</div>
+            <div className="text-white/40">Company No. 14659276</div>
+          </div>
+        </div>
       </div>
     </>
   );

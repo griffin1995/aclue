@@ -8,6 +8,7 @@ import { AuthGuard } from '@/components/auth/AuthGuard';
 import { PostHogProvider } from '@/components/providers/PostHogProvider';
 import { PWAManager } from '@/components/pwa/PWAManager';
 import { useMobileOptimizations } from '@/hooks/useMobileOptimizations';
+import MaintenanceWrapper from '@/components/MaintenanceWrapper';
 import '@/styles/globals.css';
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -15,15 +16,7 @@ export default function App({ Component, pageProps }: AppProps) {
   // Initialize mobile optimizations
   const mobileOptimizations = useMobileOptimizations();
 
-  // Global maintenance mode redirect
-  useEffect(() => {
-    const currentPath = router.pathname;
-    
-    // Only redirect if we're not already on the maintenance page
-    if (currentPath !== '/maintenance' && currentPath !== '/maintenance/index') {
-      router.push('/maintenance');
-    }
-  }, [router, router.pathname]);
+  // No more redirect logic needed - handled by MaintenanceWrapper
 
   useEffect(() => {
     // Add custom cursor for better UX
@@ -52,10 +45,12 @@ export default function App({ Component, pageProps }: AppProps) {
     <PostHogProvider>
       <ThemeProvider>
         <AuthProvider>
-          <AuthGuard>
-            <Component {...pageProps} />
-            <PWAManager />
-          </AuthGuard>
+          <MaintenanceWrapper>
+            <AuthGuard>
+              <Component {...pageProps} />
+              <PWAManager />
+            </AuthGuard>
+          </MaintenanceWrapper>
           <Toaster
           position="top-right"
           toastOptions={{

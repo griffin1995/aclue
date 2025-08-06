@@ -46,7 +46,7 @@ const AffiliateDisclosurePage: React.FC = () => {
               <div>
                 <h2 className="text-lg font-semibold text-blue-900 mb-2">Quick Summary</h2>
                 <p className="text-blue-800 leading-relaxed">
-                  <strong>aclue participates in affiliate programmes</strong>, including the Amazon Associates Programme. 
+                  <strong>HITSENSE LTD (trading as "Aclue") participates in affiliate programmes</strong>, including the Amazon Associates Programme. 
                   When you purchase products through our recommendation links, we may earn a small commission at no additional cost to you. 
                   This helps us maintain our free service whilst ensuring our recommendations remain unbiased and based solely on AI analysis of your preferences.
                 </p>

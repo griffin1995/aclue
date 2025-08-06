@@ -195,12 +195,24 @@ const ContactPage: React.FC = () => {
                       <div className="flex items-center gap-2">
                         <FileText className="w-4 h-4 text-green-600" />
                         <span className="font-medium text-green-900">Company Name:</span>
-                        <span className="text-green-800">aclue Ltd</span>
+                        <span className="text-green-800">HITSENSE LTD (trading as Aclue)</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <MapPin className="w-4 h-4 text-green-600" />
                         <span className="font-medium text-green-900">Jurisdiction:</span>
                         <span className="text-green-800">England and Wales</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <FileText className="w-4 h-4 text-green-600" />
+                        <span className="font-medium text-green-900">Company Number:</span>
+                        <span className="text-green-800">14659276</span>
+                      </div>
+                      <div className="flex items-start gap-2">
+                        <MapPin className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                        <div>
+                          <span className="font-medium text-green-900">Registered Address:</span>
+                          <div className="text-xs text-green-700 mt-1">Wash House Cottage, Newton St. Loe, Bath, England, BA2 9BT</div>
+                        </div>
                       </div>
                       <div className="flex items-center gap-2">
                         <Globe className="w-4 h-4 text-green-600" />

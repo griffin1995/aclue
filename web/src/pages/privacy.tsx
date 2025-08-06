@@ -103,7 +103,7 @@ const PrivacyPolicyPage: React.FC = () => {
               </div>
               <div className="prose prose-gray max-w-none">
                 <p className="text-gray-700 leading-relaxed mb-4">
-                  aclue operates as the data controller for personal data processed through our platform. 
+                  HITSENSE LTD (trading as "Aclue") operates as the data controller for personal data processed through our platform. 
                   We are responsible for determining how and why your personal data is processed.
                 </p>
                 <div className="bg-gray-50 p-4 rounded-lg border">
@@ -112,12 +112,19 @@ const PrivacyPolicyPage: React.FC = () => {
                     <div className="flex items-center gap-2">
                       <Globe className="w-4 h-4 text-gray-500" />
                       <span className="font-medium">Company:</span>
-                      <span>aclue Ltd</span>
+                      <span>HITSENSE LTD (trading as Aclue)</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <MapPin className="w-4 h-4 text-gray-500" />
-                      <span className="font-medium">Registered Address:</span>
-                      <span>United Kingdom</span>
+                      <FileText className="w-4 h-4 text-gray-500" />
+                      <span className="font-medium">Company Number:</span>
+                      <span>14659276</span>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <MapPin className="w-4 h-4 text-gray-500 mt-0.5 flex-shrink-0" />
+                      <div>
+                        <span className="font-medium">Registered Address:</span>
+                        <div className="text-xs text-gray-600 mt-1">Wash House Cottage, Newton St. Loe, Bath, England, BA2 9BT</div>
+                      </div>
                     </div>
                     <div className="flex items-center gap-2">
                       <Mail className="w-4 h-4 text-gray-500" />

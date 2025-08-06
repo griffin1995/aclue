@@ -1,10 +1,15 @@
 """
-aclue Backend Configuration
+Aclue Backend Configuration
 
-Centralised configuration management for the aclue API backend.
+Centralised configuration management for the Aclue API backend.
 Handles environment variables, feature flags, and application settings
 for all backend services including authentication, recommendations,
 affiliate tracking, and external integrations.
+
+REBRANDING NOTE (August 2025):
+This configuration file was updated during the comprehensive rebranding
+from GiftSync/prznt to Aclue. All service names, bucket names, and
+project identifiers have been updated to reflect the new brand identity.
 
 Key Features:
   - Environment-based configuration with validation
@@ -22,6 +27,11 @@ Security:
   - All sensitive data loaded from environment variables
   - No secrets committed to code
   - Production-ready defaults
+
+Branding Consistency:
+  - All service names use "aclue" prefix (lowercase for technical identifiers)
+  - API documentation uses "Aclue API" (proper case for user-facing content)
+  - Domain references point to aclue.app (primary) and aclue.co.uk (secondary)
 
 Usage:
   from app.core.config import settings
@@ -69,7 +79,7 @@ class Settings(BaseSettings):
     # ===========================================================================
     # Core application metadata and environment settings
     
-    PROJECT_NAME: str = "aclue API"           # Application name for logging/docs
+    PROJECT_NAME: str = "aclue API"           # Application name for logging/docs (rebranded from GiftSync/prznt)
     VERSION: str = "1.0.0"                       # API version for client compatibility
     ENVIRONMENT: str = "development"              # Runtime environment (dev/staging/prod)
     DEBUG: bool = True                            # Debug mode (disable in production)
@@ -139,7 +149,7 @@ class Settings(BaseSettings):
     # ===========================================================================
     # Amazon S3 file storage settings
     
-    S3_BUCKET_NAME: str = "aclue-assets"       # S3 bucket for file uploads
+    S3_BUCKET_NAME: str = "aclue-assets"       # S3 bucket for file uploads (rebranded from giftsync-assets)
     S3_BUCKET_REGION: str = "eu-west-2"           # S3 bucket region
     
     # ===========================================================================
@@ -147,14 +157,14 @@ class Settings(BaseSettings):
     # ===========================================================================
     # Amazon DynamoDB NoSQL database settings
     
-    DYNAMODB_TABLE_PREFIX: str = "aclue"       # Table name prefix for multi-environment
+    DYNAMODB_TABLE_PREFIX: str = "aclue"       # Table name prefix for multi-environment (rebranded from giftsync)
     
     # ===========================================================================
     # SAGEMAKER ML CONFIGURATION
     # ===========================================================================
     # Amazon SageMaker machine learning model settings
     
-    SAGEMAKER_ENDPOINT_NAME: str = "aclue-recommendations"  # ML model endpoint for recommendations
+    SAGEMAKER_ENDPOINT_NAME: str = "aclue-recommendations"  # ML model endpoint for recommendations (rebranded from giftsync-recommendations)
     
     # ===========================================================================
     # MACHINE LEARNING CONFIGURATION
@@ -192,7 +202,7 @@ class Settings(BaseSettings):
     # ===========================================================================
     # Third-party service integration settings
     
-    AMAZON_ASSOCIATE_TAG: Optional[str] = None    # Amazon Associates affiliate tag (aclue-21)
+    AMAZON_ASSOCIATE_TAG: Optional[str] = None    # Amazon Associates affiliate tag (aclue-21, rebranded from giftsync-21/prznt-21)
     AMAZON_ACCESS_KEY: Optional[str] = None       # Amazon Product Advertising API key
     AMAZON_SECRET_KEY: Optional[str] = None       # Amazon Product Advertising API secret
     

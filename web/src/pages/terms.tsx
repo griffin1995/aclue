@@ -46,7 +46,7 @@ const TermsAndConditionsPage: React.FC = () => {
               <div>
                 <h2 className="text-lg font-semibold text-blue-900 mb-2">Legal Agreement</h2>
                 <p className="text-blue-800 leading-relaxed mb-3">
-                  These Terms and Conditions constitute a legally binding agreement between you and aclue Ltd. 
+                  These Terms and Conditions constitute a legally binding agreement between you and HITSENSE LTD (trading as "Aclue"). 
                   By using our service, you agree to be bound by these terms, which are governed by UK law and 
                   comply with EU consumer protection regulations.
                 </p>
@@ -119,7 +119,7 @@ const TermsAndConditionsPage: React.FC = () => {
               <div className="space-y-3 text-sm">
                 <div className="border border-gray-200 rounded p-3">
                   <span className="font-semibold text-gray-900">"aclue", "we", "us", "our":</span>
-                  <span className="text-gray-700 ml-2">aclue Ltd, a company incorporated in England and Wales.</span>
+                  <span className="text-gray-700 ml-2">HITSENSE LTD (Company Number: 14659276), a company incorporated in England and Wales, trading as "Aclue".</span>
                 </div>
                 <div className="border border-gray-200 rounded p-3">
                   <span className="font-semibold text-gray-900">"User", "you", "your":</span>
@@ -375,7 +375,7 @@ const TermsAndConditionsPage: React.FC = () => {
                 <div className="bg-blue-50 border border-blue-200 p-4 rounded-lg">
                   <p className="text-blue-800 text-sm mb-3">
                     All content, features, and functionality of the Service, including but not limited to text, graphics, 
-                    logos, images, software, algorithms, and user interfaces, are owned by aclue Ltd and protected by 
+                    logos, images, software, algorithms, and user interfaces, are owned by HITSENSE LTD and protected by 
                     UK, EU, and international copyright, trademark, and other intellectual property laws.
                   </p>
                   <ul className="text-sm text-blue-800 space-y-1">
@@ -567,7 +567,7 @@ const TermsAndConditionsPage: React.FC = () => {
                 <div className="bg-red-50 border border-red-200 p-4 rounded-lg">
                   <h3 className="font-semibold text-red-900 mb-2">Liability Exclusions</h3>
                   <p className="text-red-800 text-sm mb-3">
-                    To the fullest extent permitted by law, aclue Ltd shall not be liable for any indirect, 
+                    To the fullest extent permitted by law, HITSENSE LTD shall not be liable for any indirect, 
                     incidental, special, consequential, or punitive damages, including but not limited to loss of 
                     profits, data, or business opportunities.
                   </p>
@@ -902,11 +902,19 @@ const TermsAndConditionsPage: React.FC = () => {
                   <div className="space-y-2 text-sm">
                     <div className="flex items-center gap-2">
                       <Globe className="w-4 h-4 text-gray-500" />
-                      <span>aclue Ltd</span>
+                      <span>HITSENSE LTD (trading as Aclue)</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <FileText className="w-4 h-4 text-gray-500" />
+                      <span>Company Number: 14659276</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <FileText className="w-4 h-4 text-gray-500" />
                       <span>Registered in England and Wales</span>
+                    </div>
+                    <div className="flex items-start gap-2 mt-2">
+                      <FileText className="w-4 h-4 text-gray-500 mt-0.5 flex-shrink-0" />
+                      <span className="text-xs text-gray-600">Registered Address: Wash House Cottage, Newton St. Loe, Bath, England, BA2 9BT</span>
                     </div>
                   </div>
                 </div>
