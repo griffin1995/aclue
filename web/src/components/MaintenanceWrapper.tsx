@@ -15,7 +15,9 @@ interface MaintenanceWrapperProps {
 
 const MaintenanceWrapper: React.FC<MaintenanceWrapperProps> = ({ children }) => {
   const router = useRouter();
-  const maintenanceMode = process.env.NEXT_PUBLIC_MAINTENANCE_MODE === 'true';
+  // CRITICAL FIX: Hardcode maintenance mode until Vercel environment variables are properly configured
+  // The environment variable isn't being passed to runtime in production
+  const maintenanceMode = true; // Previously: process.env.NEXT_PUBLIC_MAINTENANCE_MODE === 'true';
   const currentPath = router.pathname;
 
   // Routes that are allowed even in maintenance mode
