@@ -129,7 +129,7 @@ NEXT_PUBLIC_API_URL=https://aclue-backend-production.up.railway.app
 ```
 
 #### 2. Deployment Configuration
-**File**: `/web/wrangler.toml` (Cloudflare Pages)
+**File**: `/web/vercel.json` (Vercel)
 ```toml
 # Before
 name = "prznt-web"
@@ -147,7 +147,7 @@ compatibility_date = "2025-01-01"
 - **Environment Variables**: All rebranded to use Aclue references
 - **Database Names**: Updated connection strings and table prefixes
 
-#### 2. Cloudflare Pages Deployment  
+#### 2. Vercel Deployment  
 - **Project Name**: Updated from prznt-web to aclue-web
 - **Domain Routing**: Configured for aclue.app primary domain
 - **DNS Configuration**: A/AAAA records pointing to new brand
@@ -258,7 +258,7 @@ Every major configuration file now includes comments explaining:
 ## Deployment Status and Verification
 
 ### ✅ Completed Deployments
-1. **Frontend**: https://aclue.app (Cloudflare Pages)
+1. **Frontend**: https://aclue.app (Vercel)
 2. **Backend**: https://aclue-backend-production.up.railway.app (Railway)
 3. **Database**: Supabase with updated metadata
 4. **Analytics**: PostHog project updated and tracking correctly

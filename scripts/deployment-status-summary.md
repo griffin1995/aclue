@@ -1,5 +1,11 @@
 # GiftSync Deployment Pipeline - Status Summary
 
+> **⚠️ DEPRECATED DOCUMENT - Historical Reference Only**  
+> **Date**: This document references the old Cloudflare Pages deployment setup  
+> **Current Status**: Aclue project now uses Vercel for frontend hosting  
+> **Migration Date**: August 6, 2025  
+> **Current Documentation**: See `/DEPLOYMENT.md` for current deployment processes
+
 ## Issues Identified and Fixed ✅
 
 ### 1. Backend Tests - RESOLVED ✅

@@ -133,7 +133,7 @@ Development:
 └── PostHog (Analytics)
 
 Production Ready:
-├── AWS/Cloudflare (Hosting)
+├── Vercel (Hosting)
 ├── Supabase (Database)
 ├── CDN (Static Assets)
 └── Monitoring (Sentry + PostHog)
@@ -680,7 +680,7 @@ npm run lint                                # ESLint checking
 **Production Architecture (Ready):**
 ```
 Frontend: Next.js Static Build
-├── Cloudflare Pages (Hosting)
+├── Vercel (Hosting)
 ├── CDN (Global distribution)
 └── Custom Domain: giftsync.jackgriffin.dev
 
@@ -704,7 +704,7 @@ Analytics & Monitoring:
 
 **Staging Deployment:**
 ```bash
-# Frontend to Cloudflare Pages
+# Frontend to Vercel
 npm run build
 # Deploy to giftsync.jackgriffin.dev
 

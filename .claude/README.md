@@ -33,7 +33,7 @@ This directory contains a complete ecosystem for managing and coordinating all 5
 - **Backend**: FastAPI + Python + Supabase PostgreSQL
 - **Mobile**: Flutter 3.16+ (structure complete)
 - **ML**: PyTorch Neural Matrix Factorization
-- **Infrastructure**: Cloudflare Pages + Railway + Supabase
+- **Infrastructure**: Vercel + Railway + Supabase
 - **Authentication**: JWT tokens with automatic refresh
 
 ### Core Features (MVP Complete ✅)
@@ -132,7 +132,7 @@ This directory contains a complete ecosystem for managing and coordinating all 5
 
 ### Current Development Environment
 - **Backend**: FastAPI running on localhost:8000 or Railway production
-- **Frontend**: Next.js on localhost:3000 or Cloudflare Pages
+- **Frontend**: Next.js on localhost:3000 or Vercel
 - **Database**: Supabase PostgreSQL with complete schema
 - **Test Account**: john.doe@example.com / password123 (working with JWT tokens)
 

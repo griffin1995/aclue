@@ -112,7 +112,7 @@ GiftSync is an AI-powered gift recommendation platform using swipe-based prefere
 - **Backend**: FastAPI + Python + Supabase PostgreSQL
 - **Mobile**: Flutter 3.16+ (complete structure, ready for development)
 - **ML Pipeline**: PyTorch + Neural Matrix Factorisation (foundation ready)
-- **Infrastructure**: Supabase (current) + AWS/Cloudflare (production ready)
+- **Infrastructure**: Supabase (database) + Railway (backend) + Vercel (frontend)
 - **Authentication**: JWT tokens with automatic refresh
 - **Analytics**: PostHog + Custom tracking system
 - **Affiliate Marketing**: Amazon Associates UK integration with comprehensive tracking
