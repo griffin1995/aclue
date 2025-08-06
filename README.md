@@ -116,7 +116,7 @@ Receiver-led. AI-enhanced. Surprise preserved.
 - **Backend**: FastAPI + Python + Supabase PostgreSQL
 - **Mobile**: Flutter 3.16+ (complete structure, ready for development)
 - **ML Pipeline**: PyTorch + Neural Matrix Factorization (foundation ready)
-- **Infrastructure**: Supabase (current) + AWS/Cloudflare (production ready)
+- **Infrastructure**: Supabase (database) + Railway (backend) + Vercel (frontend)
 - **Authentication**: JWT tokens with automatic refresh
 
 #### Database Schema (Deployed & Working)
@@ -454,17 +454,17 @@ GET /docs       # Interactive API documentation (development)
 - **Performance**: Suitable for development and initial testing
 
 ### Staging Deployment (Ready)
-- **Frontend**: Cloudflare Pages (free tier with unlimited requests)
-- **API**: Cloudflare Workers or similar serverless platform
+- **Frontend**: Vercel (free tier with excellent Next.js integration)
+- **API**: Railway (straightforward deployment with GitHub integration)
 - **Database**: Supabase free tier (sufficient for staging)
 - **Domain**: giftsync.jackgriffin.dev (ready for deployment)
 - **Total Cost**: $0/month for staging environment
 
 ### Production Scaling Path
 - **Database**: Supabase Pro ($25/month) - unlimited database, advanced features
-- **Frontend**: Cloudflare Pro ($20/month) - unlimited builds, advanced analytics  
-- **Backend**: AWS Lambda/ECS or Google Cloud Run (pay-per-use scaling)
-- **CDN**: Cloudflare for global content delivery and performance
+- **Frontend**: Vercel Pro ($20/month) - unlimited builds, advanced analytics
+- **Backend**: Railway Pro ($20/month) - enhanced resources and priority support
+- **CDN**: Vercel Edge Network for global content delivery and performance
 - **Total Cost**: ~$50-100/month (significantly cheaper than traditional AWS setup)
 
 ### Deployment Automation Ready

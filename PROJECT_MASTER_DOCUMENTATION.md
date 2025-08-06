@@ -13,7 +13,7 @@
 **aclue** is a production-ready AI-powered gift recommendation platform that transforms how gifts are chosen through swipe-based preference discovery. The platform operates within the £45B global gift market, with active revenue generation through Amazon Associates integration and comprehensive legal compliance for UK/EU markets.
 
 ### Current Status - PRODUCTION READY ✅
-- **Frontend**: Live at https://prznt.app (Cloudflare Pages)
+- **Frontend**: Live at https://aclue.app (Vercel)
 - **Backend**: Live at https://aclue-backend-production.up.railway.app (Railway)
 - **Database**: Supabase PostgreSQL with complete schema
 - **Revenue**: Active Amazon Associates integration (Tag: aclue-21)
@@ -32,7 +32,7 @@ Mobile:       Flutter 3.16+ (structure complete, ready for development)
 ML Pipeline:  PyTorch + Neural Matrix Factorisation (foundation ready)
 Analytics:    PostHog + Custom tracking system
 Revenue:      Amazon Associates UK integration
-Deployment:   Cloudflare Pages + Railway + Auto-deployment
+Deployment:   Vercel + Railway + Auto-deployment
 Security:     JWT authentication + Row-level security + GDPR compliance
 ```
 
@@ -70,8 +70,8 @@ gift_links           # Shareable gift lists with QR codes (ready)
 
 ### Infrastructure Configuration
 ```
-Cloudflare Pages (Frontend):
-├── Build: npm run pages:deploy
+Vercel (Frontend):
+├── Build: npm run build
 ├── Framework: Next.js with SSR
 ├── CDN: Global edge network
 └── Auto-deploy: main branch
@@ -91,7 +91,7 @@ Supabase (Database):
 
 ### Environment Variables (Production)
 ```bash
-# Frontend (Cloudflare Pages)
+# Frontend (Vercel)
 NEXT_PUBLIC_MAINTENANCE_MODE=true
 NEXT_PUBLIC_API_URL=https://aclue-backend-production.up.railway.app
 NEXT_PUBLIC_WEB_URL=https://prznt.app
@@ -233,7 +233,7 @@ POST /api/v1/auth/refresh      # Token refresh ✅
 - **Framework**: Next.js 14 with React 18 and TypeScript
 - **Design**: Responsive Tailwind CSS with Framer Motion animations
 - **Features**: Complete authentication, dashboard, swipe interface
-- **Deployment**: Live on Cloudflare Pages with global CDN
+- **Deployment**: Live on Vercel with global edge network
 
 ### Mobile Application (STRUCTURE COMPLETE ✅)
 - **Framework**: Flutter 3.16+ with comprehensive project structure
@@ -332,7 +332,7 @@ Frontend (web/package.json):
   "tailwindcss": "^3.3.0",
   "framer-motion": "^10.16.0",
   "posthog-js": "^1.255.0",
-  "@cloudflare/next-on-pages": "^1.13.12"
+  "@vercel/analytics": "^1.0.0"
 }
 
 Backend (backend/requirements.txt):
@@ -365,8 +365,8 @@ pandas==2.1.3
    - Fixed layout issues with min-h-96 requirement
    - Resolved dependency conflicts with framer-motion
 
-3. **Cloudflare Pages Deployment** (Production Ready)
-   - Successfully deployed to https://prznt.app
+3. **Vercel Deployment** (Production Ready)
+   - Successfully deployed to https://aclue.app
    - Implemented maintenance mode with alpha access
    - Enterprise-grade SSR configuration
 

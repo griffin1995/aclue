@@ -1,5 +1,10 @@
 # Cloudflare API Token Fix - Production Deployment Issue
 
+> **⚠️ DEPRECATED DOCUMENT - Historical Reference Only**  
+> **Status**: This document is no longer relevant - Aclue project has migrated to Vercel  
+> **Migration Date**: August 6, 2025  
+> **Current Hosting**: Vercel (no API token required for standard GitHub integration)
+
 ## Issue Identified ✅
 
 **Root Cause**: The current Cloudflare API token is valid but lacks the necessary permissions to access the account and deploy to Cloudflare Pages.

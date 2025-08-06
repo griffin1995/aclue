@@ -96,7 +96,7 @@ Use Task tool to call: context-manager
 
 3. **Configuration Files Updated**:
    - `package.json`: Project name changed to "aclue-web"
-   - `wrangler.toml`: Domain routing updated to aclue.app
+   - `vercel.json`: Deployment configuration updated to aclue.app
    - Environment variables updated with new branding prefixes
 
 #### Backend Rebranding (`/backend/` directory)
@@ -116,7 +116,7 @@ Use Task tool to call: context-manager
    - Partnership integration configurations updated
 
 #### Deployment Infrastructure
-1. **Cloudflare Pages Configuration**:
+1. **Vercel Configuration**:
    - Updated routing from prznt.app to aclue.app
    - Environment variables updated across all environments
    - CDN configurations and edge routing updated
@@ -136,7 +136,7 @@ Use Task tool to call: context-manager
 #### Domain Architecture
 ```
 Primary Production: aclue.app
-└── Frontend: Cloudflare Pages (Next.js SSR)
+└── Frontend: Vercel (Next.js SSR)
 └── API: aclue-backend-production.up.railway.app
 
 Secondary Market: aclue.co.uk  
@@ -429,7 +429,7 @@ The authentication system is now enterprise-ready and meets all security require
 
 ---
 
-## Cloudflare Pages Deployment - PRODUCTION READY ✅
+## Vercel Deployment - PRODUCTION READY ✅
 
 ### Deployment Architecture - ENTERPRISE SSR CONFIGURATION
 **Status**: Successfully deployed with enterprise-grade SSR configuration
@@ -438,12 +438,12 @@ The authentication system is now enterprise-ready and meets all security require
 **Database**: Supabase PostgreSQL
 
 ### Final Working Configuration
-**Build Command**: `npm run pages:deploy`
-**Build Output**: `.vercel/output/static`
+**Build Command**: `npm run build`
+**Build Output**: `.next`
 **Root Directory**: `/web`
 **Node Version**: 18.20.8
 
-### Environment Variables (Cloudflare Pages)
+### Environment Variables (Vercel)
 ```bash
 NODE_VERSION=18
 NEXT_PUBLIC_MAINTENANCE_MODE=true
@@ -452,19 +452,19 @@ NEXT_PUBLIC_WEB_URL=https://aclue.app
 ```
 
 ### Critical Configuration Files
-1. **`wrangler.toml`**: Cloudflare Pages configuration with nodejs_compat flag
-2. **`next-on-pages.config.js`**: Next.js adapter configuration for Cloudflare Pages
-3. **`package.json`**: Updated with @cloudflare/next-on-pages dependency
+1. **`vercel.json`**: Vercel deployment configuration with security headers
+2. **`next.config.js`**: Next.js configuration for Vercel deployment
+3. **`package.json`**: Standard Next.js dependencies for Vercel
 
-### API Routes Edge Runtime Configuration
-All API routes configured for Cloudflare Pages edge runtime:
+### API Routes Configuration
+All API routes configured for standard Next.js API routes:
 - `/api/array/[...path]` - PostHog array proxy
 - `/api/e` - PostHog events proxy  
 - `/api/flags` - PostHog feature flags proxy
 - `/api/posthog-decide` - PostHog decide endpoint proxy
 - `/api/posthog-proxy` - General PostHog proxy
 
-Each route exports `export const runtime = 'edge';`
+Standard Next.js API route configuration without edge runtime dependencies
 
 ### Page Structure - FINAL CONFIGURATION
 **Homepage Structure**: Simplified for maintenance mode deployment
@@ -477,7 +477,7 @@ Each route exports `export const runtime = 'edge';`
 ✅ **SSR Performance**: Enterprise-grade server-side rendering
 ✅ **API Integration**: All backend API calls working via Railway
 ✅ **Analytics**: PostHog integration working with proxy endpoints
-✅ **Edge Runtime**: All API routes optimised for Cloudflare edge
+✅ **API Routes**: All API routes optimised for Next.js standard runtime
 ✅ **Maintenance Mode**: Professional maintenance page with email signup
 ✅ **Alpha Access**: Working link to full application
 
@@ -495,31 +495,31 @@ Each route exports `export const runtime = 'edge';`
 3. **No redirects or complex logic** → Clean, direct page routing
 
 ### Deployment Success Metrics
-- **Build Time**: ~1-2 minutes (Next.js + Cloudflare adapter)
+- **Build Time**: ~1-2 minutes (Next.js build process)
 - **Static Assets**: All loading correctly (logo, favicon, CSS)
 - **API Connectivity**: Backend integration working
-- **Performance**: Fast global edge deployment
+- **Performance**: Fast global edge deployment via Vercel Edge Network
 - **Security**: All hardcoded secrets removed from git history
 
 ### Development Workflow - ESTABLISHED
 - **Dev Branch**: All changes pushed to dev first
 - **Main Branch**: Only after confirmation on dev
-- **Deployment**: Auto-deploys from main branch
-- **Testing**: Cloudflare Pages deployment working correctly
+- **Deployment**: Auto-deploys from main branch to Vercel
+- **Testing**: Vercel deployment working correctly
 
 ### Technical Stack Summary
-- **Frontend**: Next.js 14 with SSR on Cloudflare Pages
+- **Frontend**: Next.js 14 with SSR on Vercel
 - **Backend**: FastAPI on Railway
 - **Database**: Supabase PostgreSQL
-- **CDN**: Cloudflare global edge network
+- **CDN**: Vercel Edge Network for global performance
 - **Analytics**: PostHog with proxy endpoints
-- **Deployment**: Automated from GitHub main branch
+- **Deployment**: Automated from GitHub main branch to Vercel
 
 ### Future Maintenance Notes
 - **Logo Updates**: Replace `/web/public/logo.png` as needed
 - **Maintenance Toggle**: Update MaintenanceMode component
 - **API Changes**: Backend deployed separately on Railway
-- **Analytics**: PostHog events tracked via edge-optimised proxies
-- **Static Assets**: All served via Cloudflare CDN for optimal performance
+- **Analytics**: PostHog events tracked via API route proxies
+- **Static Assets**: All served via Vercel CDN for optimal performance
 
 The deployment is now enterprise-ready with professional maintenance mode and working alpha access.

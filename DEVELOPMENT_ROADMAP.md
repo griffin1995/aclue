@@ -653,7 +653,7 @@ class OnlineLearningEngine:
 # Production architecture
 Production Stack:
   Frontend:
-    - Cloudflare Pages (Static hosting)
+    - Vercel (Static hosting)
     - Custom domain: giftsync.jackgriffin.dev
     - CDN: Global edge caching
     - SSL: Automatic HTTPS
@@ -706,8 +706,8 @@ jobs:
   deploy-frontend:
     needs: test
     steps:
-      - name: Build and deploy to Cloudflare
-        run: npm run build && wrangler pages deploy
+      - name: Build and deploy to Vercel
+        run: npm run build && vercel --prod
 ```
 
 ---

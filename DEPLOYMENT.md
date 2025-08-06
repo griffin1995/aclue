@@ -6,16 +6,16 @@
 
 **Current Live URLs (Post-Rebranding):**
 - **Backend**: https://aclue-backend-production.up.railway.app (Railway)
-- **Frontend**: https://aclue.app (Cloudflare Pages)
+- **Frontend**: https://aclue.app (Vercel)
 
 **Legacy URLs (Deprecated):**
-- ~~https://giftsync-backend-production.up.railway.app~~ (redirects to new backend)
+- ~~https://aclue-backend-production.up.railway.app~~ (redirects to new backend)
 - ~~https://prznt.app~~ (redirects to aclue.app)
 
 **Technology Stack:**
 - **Backend**: FastAPI + Supabase PostgreSQL
 - **Frontend**: Next.js 14 + React 18
-- **Hosting**: Railway (Backend) + Cloudflare Pages (Frontend) - Updated from Vercel
+- **Hosting**: Railway (Backend) + Vercel (Frontend)
 - **Repository**: GitHub integration for auto-deployment
 - **Domain**: aclue.app (primary) + aclue.co.uk (secondary)
 
@@ -118,8 +118,8 @@ web/
 
 **3. `/web/.env.production`** - Production Environment Variables
 ```bash
-NEXT_PUBLIC_API_URL=https://giftsync-backend-production.up.railway.app
-NEXT_PUBLIC_WEB_URL=https://giftsyncfrontend-aobih9dw4-jacks-projects-cf5effed.vercel.app
+NEXT_PUBLIC_API_URL=https://aclue-backend-production.up.railway.app
+NEXT_PUBLIC_WEB_URL=https://aclue.app
 NODE_ENV=production
 ```
 
@@ -148,7 +148,7 @@ export const config = {
 3. **Configuration** → Railway reads `/backend/railway.toml` for settings
 4. **Startup** → Runs `/backend/start.sh` with 4 FastAPI workers
 5. **Health Check** → Monitors `/health` endpoint
-6. **Live** → Available at `https://giftsync-backend-production.up.railway.app`
+6. **Live** → Available at `https://aclue-backend-production.up.railway.app`
 
 ### Environment Variables (Set in Railway Dashboard):
 ```bash
@@ -191,13 +191,13 @@ ENABLE_AFFILIATE_TRACKING=true
 3. **Environment** → Loads variables from Vercel dashboard + `/web/.env.production`
 4. **Optimization** → Next.js optimizes static assets and code splitting
 5. **CDN Deploy** → Distributes to global edge network
-6. **Live** → Available at `https://giftsyncfrontend-aobih9dw4-jacks-projects-cf5effed.vercel.app`
+6. **Live** → Available at `https://aclue.app`
 
 ### Environment Variables (Set in Vercel Dashboard):
 ```bash
 # API Connection
-NEXT_PUBLIC_API_URL=https://giftsync-backend-production.up.railway.app
-NEXT_PUBLIC_WEB_URL=https://giftsyncfrontend-aobih9dw4-jacks-projects-cf5effed.vercel.app
+NEXT_PUBLIC_API_URL=https://aclue-backend-production.up.railway.app
+NEXT_PUBLIC_WEB_URL=https://aclue.app
 
 # Build Settings
 NODE_ENV=production
@@ -253,18 +253,18 @@ NODE_ENV=production
 
 ### Backend Health Check:
 ```bash
-curl https://giftsync-backend-production.up.railway.app/health
+curl https://aclue-backend-production.up.railway.app/health
 # Expected: {"status":"healthy","timestamp":"...","version":"1.0.0"}
 ```
 
 ### Frontend Health Check:
 ```bash
-curl https://giftsyncfrontend-aobih9dw4-jacks-projects-cf5effed.vercel.app/
+curl https://aclue.app/
 # Expected: HTML page loads successfully
 ```
 
 ### End-to-End Test:
-1. **Visit Frontend** → https://giftsyncfrontend-aobih9dw4-jacks-projects-cf5effed.vercel.app
+1. **Visit Frontend** → https://aclue.app
 2. **Register Account** → Create new user
 3. **Login Successfully** → JWT authentication works
 4. **View Dashboard** → API calls to Railway backend work
