@@ -42,11 +42,15 @@ from fastapi import APIRouter, HTTPException, status, Header
 from typing import List, Optional
 from pydantic import BaseModel
 from datetime import datetime
-from app.database import supabase
+from app.services.database_service import database_service, DatabaseServiceError, ValidationError
 from app.api.v1.endpoints.auth import get_current_user_from_token
+import structlog
 
 # Create router for swipe interaction endpoints
 router = APIRouter()
+
+# Configure structured logging
+logger = structlog.get_logger(__name__)
 
 # ==============================================================================
 # REQUEST/RESPONSE MODELS
@@ -241,35 +245,85 @@ async def record_swipe(
         swipe_id = f"swipe_{int(timestamp.timestamp() * 1000)}"  # Millisecond precision
         
         # ===========================================================================
-        # DATABASE RECORDING (TODO: IMPLEMENT WITH REAL DATABASE)
+        # DATABASE RECORDING - REAL IMPLEMENTATION
         # ===========================================================================
-        # Future implementation will store swipe data for analytics and ML:
+        # Database Implementation: Record Swipe Interaction in Real Database
+        # Documentation Reference: Swipe interaction recording patterns from database service
         # 
-        # swipe_record = {
-        #     "id": swipe_id,
-        #     "user_id": user_id,
-        #     "product_id": swipe_data.product_id,
-        #     "direction": swipe_data.direction,
-        #     "session_id": swipe_data.session_id,
-        #     "timestamp": timestamp.isoformat(),
-        #     "ip_address": request.client.host,
-        #     "user_agent": request.headers.get("User-Agent"),
-        #     "platform": "web"  # Could be detected from user agent
-        # }
-        # 
-        # await supabase.insert("swipe_interactions", swipe_record)
+        # Why: Replaces TODO mock implementation with actual database recording
+        # How: Uses database_service to record swipe interactions with full context
+        # Logic: Maps swipe directions to ML preference signals and records in swipe_interactions table
         
-        # Log swipe for development and debugging
-        print(f"👍 Swipe recorded: {swipe_id} | User: {user_id} | Product: {swipe_data.product_id} | Direction: {swipe_data.direction}")
+        # Map frontend directions to database values
+        direction_mapping = {
+            "like": "right",
+            "dislike": "left", 
+            "super_like": "up"
+        }
+        db_direction = direction_mapping.get(swipe_data.direction, "right")
+        
+        # Calculate preference strength based on direction
+        preference_strength_mapping = {
+            "right": 0.8,   # Like
+            "left": 0.2,    # Dislike
+            "up": 0.95      # Super like
+        }
+        preference_strength = preference_strength_mapping.get(db_direction, 0.5)
+        
+        # Record swipe interaction in database
+        try:
+            interaction_id = await database_service.record_swipe_interaction(
+                user_id=user_id,
+                session_id=swipe_data.session_id,
+                product_id=swipe_data.product_id,
+                direction=db_direction,
+                time_spent_seconds=getattr(swipe_data, 'time_spent', None),
+                interaction_context={
+                    "platform": "web",
+                    "swipe_interface_version": "v1.0",
+                    "frontend_direction": swipe_data.direction
+                },
+                preference_strength=preference_strength
+            )
+            
+            # Update swipe_id with actual database ID
+            swipe_id = interaction_id
+            
+            # Log successful swipe recording
+            logger.info(
+                "Swipe interaction recorded successfully",
+                swipe_id=swipe_id,
+                user_id=user_id,
+                product_id=swipe_data.product_id,
+                direction=swipe_data.direction,
+                preference_strength=preference_strength
+            )
+            
+        except ValidationError as e:
+            # Validation error from database service
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"Invalid swipe data: {str(e)}"
+            )
+        except DatabaseServiceError as e:
+            # Database error from service
+            logger.error(
+                "Database error recording swipe",
+                user_id=user_id,
+                product_id=swipe_data.product_id,
+                error=str(e)
+            )
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail="Failed to record swipe interaction"
+            )
         
         # ===========================================================================
-        # PREFERENCE LEARNING (TODO: IMPLEMENT)
+        # PREFERENCE LEARNING - REAL IMPLEMENTATION
         # ===========================================================================
-        # Future implementation will update user preference model:
-        # - Update category preferences based on product category
-        # - Adjust price range preferences
-        # - Update brand preferences
-        # - Trigger ML model retraining if needed
+        # Preference learning is now handled automatically by the database service
+        # The calculate_user_preferences function will process this interaction
+        # in the next preference calculation cycle (triggered by recommendations)
         
         # ===========================================================================
         # RESPONSE PREPARATION
