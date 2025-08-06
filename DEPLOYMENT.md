@@ -1,16 +1,23 @@
-# GiftSync Production Deployment Guide
+# Aclue Production Deployment Guide
+
+> **REBRANDING NOTE (August 2025)**: This deployment guide has been updated to reflect the complete rebrand from GiftSync to Aclue. All service names, URLs, and configurations have been updated.
 
 ## 🚀 Deployment Architecture
 
-**Live URLs:**
-- **Backend**: https://giftsync-backend-production.up.railway.app (Railway)
-- **Frontend**: https://giftsyncfrontend-aobih9dw4-jacks-projects-cf5effed.vercel.app (Vercel)
+**Current Live URLs (Post-Rebranding):**
+- **Backend**: https://aclue-backend-production.up.railway.app (Railway)
+- **Frontend**: https://aclue.app (Cloudflare Pages)
+
+**Legacy URLs (Deprecated):**
+- ~~https://giftsync-backend-production.up.railway.app~~ (redirects to new backend)
+- ~~https://prznt.app~~ (redirects to aclue.app)
 
 **Technology Stack:**
 - **Backend**: FastAPI + Supabase PostgreSQL
 - **Frontend**: Next.js 14 + React 18
-- **Hosting**: Railway (Backend) + Vercel (Frontend)
+- **Hosting**: Railway (Backend) + Cloudflare Pages (Frontend) - Updated from Vercel
 - **Repository**: GitHub integration for auto-deployment
+- **Domain**: aclue.app (primary) + aclue.co.uk (secondary)
 
 ---
 

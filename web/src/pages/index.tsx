@@ -1,3 +1,12 @@
+/**
+ * Aclue Homepage Component
+ * 
+ * REBRANDING NOTE (August 2025):
+ * This component was updated during the comprehensive rebrand from GiftSync/prznt to Aclue.
+ * All branding elements, meta tags, and user-facing content have been updated to reflect
+ * the new Aclue brand identity and aclue.app domain.
+ */
+
 import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';

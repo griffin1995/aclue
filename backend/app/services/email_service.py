@@ -1,10 +1,21 @@
 """
-Email Service for Newsletter and Notifications
+Aclue Email Service for Newsletter and Notifications
+
+REBRANDING NOTE (August 2025):
+This service was updated during the comprehensive rebrand from GiftSync/prznt to Aclue.
+All email templates, sender addresses, and domain references have been updated to
+reflect the new Aclue brand identity and aclue.app domain.
 
 This service handles sending emails for:
-- Welcome emails to newsletter subscribers
+- Welcome emails to newsletter subscribers  
 - Admin notifications to contact@aclue.app
 - Other email notifications
+
+Key Branding Updates:
+- Sender email: aclue <noreply@aclue.app> (from prznt/giftsync addresses)
+- Admin email: contact@aclue.app (updated domain)
+- Email templates: Complete rebrand with Aclue messaging and branding
+- Domain references: All links point to aclue.app (primary domain)
 
 Uses Resend API for reliable email delivery.
 """
@@ -40,8 +51,9 @@ class EmailService:
     
     def __init__(self):
         self.resend_api_key = settings.RESEND_API_KEY
-        self.from_email = "aclue <noreply@aclue.app>"
-        self.admin_email = "contact@aclue.app"
+        # Rebranded email addresses (August 2025) - updated from prznt/giftsync domains
+        self.from_email = "aclue <noreply@aclue.app>"        # Primary sender for all notifications
+        self.admin_email = "contact@aclue.app"               # Admin notifications recipient
         self.base_url = "https://api.resend.com"
         
     async def send_welcome_email(self, email: str, source: str) -> bool:
