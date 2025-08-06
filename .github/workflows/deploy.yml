@@ -115,7 +115,7 @@ jobs:
         run: npm run build
         env:
           NEXT_PUBLIC_API_URL: ${{ secrets.RAILWAY_BACKEND_URL }}
-          NEXT_PUBLIC_WEB_URL: https://prznt.app
+          NEXT_PUBLIC_WEB_URL: https://aclue.app
 
   # Backend Tests
   backend-tests:
@@ -243,7 +243,7 @@ jobs:
         env:
           NODE_VERSION: ${{ env.NODE_VERSION }}
           NEXT_PUBLIC_API_URL: ${{ secrets.RAILWAY_BACKEND_URL }}
-          NEXT_PUBLIC_WEB_URL: https://prznt.app
+          NEXT_PUBLIC_WEB_URL: https://aclue.app
 
       - name: Skip API Token Validation
         run: |
@@ -255,7 +255,7 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: prznt
+          projectName: aclue
           directory: web/.vercel/output/static
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
           wranglerVersion: '3'
@@ -317,9 +317,9 @@ jobs:
           
           # Set domains based on environment
           if [[ "${{ needs.setup.outputs.environment }}" == "production" ]]; then
-            echo "DOMAINS=prznt.app" >> .env
+            echo "DOMAINS=aclue.app" >> .env
           else
-            echo "DOMAINS=prznt.app" >> .env
+            echo "DOMAINS=aclue.app" >> .env
           fi
 
       - name: Run comprehensive health checks
@@ -354,10 +354,10 @@ jobs:
           
           # Set URLs based on environment
           if [[ "${{ needs.setup.outputs.environment }}" == "production" ]]; then
-            FRONTEND_URL="https://prznt.app"
+            FRONTEND_URL="https://aclue.app"
             BACKEND_URL="${{ secrets.RAILWAY_BACKEND_URL }}"
           else
-            FRONTEND_URL="https://prznt.app"
+            FRONTEND_URL="https://aclue.app"
             BACKEND_URL="${{ secrets.RAILWAY_BACKEND_URL }}"
           fi
           
