@@ -1,0 +1,29 @@
+# GiftSync Backend Environment Configuration
+
+# Database Configuration - Using Supabase PostgreSQL
+DATABASE_URL=postgresql://postgres:2JsKj2!b&a]<)HGx@db.xchsarvamppwephulylt.supabase.co:5432/postgres
+
+# Security
+SECRET_KEY=giftsync-production-secret-key-2025-change-this-256-bit-railway
+ACCESS_TOKEN_EXPIRE_MINUTES=30
+REFRESH_TOKEN_EXPIRE_DAYS=30
+
+# Development Settings
+DEBUG=true
+ENVIRONMENT=development
+
+# Supabase Configuration
+SUPABASE_URL=https://xchsarvamppwephulylt.supabase.co
+SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhjaHNhcnZhbXBwd2VwaHVseWx0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTAyNzY1MjksImV4cCI6MjA2NTg1MjUyOX0.qF2gpIKT7-wFOiIpgAe5unwHsAAttZXu_RAbVkexfb0
+SUPABASE_SERVICE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhjaHNhcnZhbXBwd2VwaHVseWx0Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1MDI3NjUyOSwiZXhwIjoyMDY1ODUyNTI5fQ.ylz1FGYPLvvfX6UkZhAm8i65nwcnO90QN90ZxXdYZLE
+
+# CORS
+ALLOWED_HOSTS=["*"]
+
+# Feature Flags
+ENABLE_REGISTRATION=true
+ENABLE_SOCIAL_LOGIN=false
+ENABLE_ML_RECOMMENDATIONS=true
+
+# Email Configuration
+RESEND_API_KEY=re_jiUeEQis_3Y9vrR7yECq6hiWT83JzMrR6
