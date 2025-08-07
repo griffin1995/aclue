@@ -53,6 +53,7 @@ from app.main import app
 from app.core.config import settings
 from app.services.database_service import DatabaseService
 from app.core.security import create_access_token, verify_token
+from app.api.v1.endpoints.auth import get_current_user_from_token
 from tests.conftest import (
     test_client,
     mock_db_service,
