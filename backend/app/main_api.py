@@ -40,10 +40,12 @@ async def root():
 @app.get("/health")
 async def health_check():
     """Health check endpoint."""
+    from datetime import datetime, timezone
     return {
         "status": "healthy",
-        "timestamp": "2025-01-01T00:00:00Z",
-        "version": settings.VERSION
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "version": settings.VERSION,
+        "deployment": "2025-08-07-enhanced"
     }
 
 # Mount the v1 API router
