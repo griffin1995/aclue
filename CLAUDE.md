@@ -1,37 +1,117 @@
-# CRITICAL SESSION STARTUP INSTRUCTIONS - ALWAYS READ FIRST
+# 🚨 CRITICAL SESSION STARTUP INSTRUCTIONS - AUTOMATIC ACTIVATION 🚨
 
-## 🚨 MOST CRITICAL INSTRUCTION - PROJECT MANAGEMENT ACTIVATION 🚨
+## MOST CRITICAL INSTRUCTION - AUTOMATIC PROJECT MANAGEMENT SETUP
 
-### WHEN USER TYPES "start project management" - EXECUTE THIS EXACT PROCESS:
+### WHEN USER SAYS "read claude.md" OR "read CLAUDE.md" - EXECUTE THIS SEQUENCE:
 
-**STEP 1: IMMEDIATELY ACTIVATE CONTEXT MANAGER**
+**STEP 1: IMMEDIATELY READ CLAUDE.MD FILE**
 ```
-Use Task tool to call: context-manager
+Use Read tool to read: /home/jack/Documents/aclue/CLAUDE.md
 ```
 
-**STEP 2: CONTEXT MANAGER BECOMES PROJECT LEAD**
-- Context-manager agent MUST act as the main project manager for ALL future tasks
-- Context-manager MUST coordinate ALL subsequent work by selecting appropriate specialist agents
-- Context-manager MUST manage the complete workflow from start to finish
+**STEP 2: EXTRACT ALL SESSION CONTEXT**
+- Parse all project context, current status, and development notes
+- Understand the complete Aclue project scope and current state
+- Identify current priorities and any blockers
+- Review authentication status, deployment status, and technical architecture
 
-**STEP 3: HANDOFF PROTOCOL**
-- This current session ENDS after successfully activating context-manager
-- Context-manager takes full control of the project
-- All future tasks go through context-manager's agent selection process
+**STEP 3: AUTOMATICALLY ACTIVATE CONTEXT MANAGER**
+```
+Use Task tool with these exact parameters:
+Tool: Task
+Agent: context-manager
+Description: "Activate context-manager for Aclue project session leadership"
+```
 
-### ERROR-PROOF VALIDATION CHECKLIST:
-- ✅ Did user type exactly "start project management"?
-- ✅ Did I use the Task tool to call context-manager?
-- ✅ Did context-manager confirm it's taking project management role?
-- ✅ Did I explain that context-manager is now the project lead?
+**MANDATORY Context-manager prompt template:**
+```
+CONTEXT-MANAGER ACTIVATION - ACLUE PROJECT SESSION
 
-### ABSOLUTELY CRITICAL RULES:
-1. **NEVER SKIP THIS PROCESS** - If user says "start project management", this MUST happen
-2. **ZERO EXCEPTIONS** - No matter what else is requested, this takes absolute priority
-3. **COMPLETE HANDOFF** - Context-manager becomes the single source of truth for all project decisions
-4. **FOOLPROOF EXECUTION** - This instruction is designed to be impossible to misunderstand or skip
+I have successfully read the complete CLAUDE.md file and extracted all project context. You are now designated as the project lead and context manager for this Aclue development session.
 
-**THIS IS THE MOST IMPORTANT INSTRUCTION IN THIS ENTIRE FILE - IT MUST BE EXECUTED PERFECTLY EVERY TIME**
+CURRENT PROJECT STATE SUMMARY:
+• Platform: Aclue - AI-powered gifting platform (rebranded from GiftSync/prznt)
+• Domains: aclue.app (primary), aclue.co.uk (secondary)
+• Stack: Next.js 14 frontend (Vercel) + FastAPI backend (Railway) + Supabase PostgreSQL
+• Authentication: ✅ FULLY RESOLVED - JWT-based auth using user_metadata
+• Deployment: ✅ PRODUCTION READY - Enterprise SSR on Vercel + Railway backend
+• Test User: john.doe@example.com / password123
+• Current Status: All core systems operational, ready for feature development
+
+CRITICAL DEVELOPMENT RULES IN EFFECT:
+• MANDATORY code documentation verification before ANY implementation
+• British English throughout all content
+• Production-ready solutions only, no shortcuts
+• Commit all logical changes with conventional commit format
+• Zero tolerance for undocumented code - STOP if docs missing from docs/ directory
+
+CONTEXT-MANAGER RESPONSIBILITIES:
+1. IMMEDIATELY confirm you are taking project leadership of this session
+2. Coordinate ALL subsequent tasks by selecting appropriate specialist agents
+3. Maintain awareness of complete Aclue project scope and current state
+4. Ensure all development follows critical rules and enterprise standards
+5. Manage task delegation and progress tracking for all user requests
+
+Please confirm your activation and readiness to manage this Aclue development session.
+```
+
+**STEP 4: VERIFY CONTEXT-MANAGER ACTIVATION**
+- Wait for context-manager to explicitly confirm activation and project leadership
+- Verify context-manager acknowledges complete project state and critical rules
+- Confirm context-manager is ready to coordinate all subsequent tasks
+- If no confirmation received within reasonable time, RETRY Step 3 once more
+
+**STEP 5: COMPLETE HANDOFF TO CONTEXT MANAGER**
+- Context-manager MUST immediately take project leadership role
+- Context-manager MUST coordinate ALL subsequent tasks by selecting specialist agents
+- This Claude Code session continues under context-manager coordination
+- All future user requests go through context-manager's agent selection process
+- Original Claude Code assistant steps back and lets context-manager lead
+
+### 🔒 ERROR-PROOF VALIDATION CHECKLIST (MANDATORY):
+- ✅ Did user mention "read claude.md" or "read CLAUDE.md"?
+- ✅ Did I read the CLAUDE.md file completely?
+- ✅ Did I extract and summarise project context?
+- ✅ Did I use Task tool with exact parameters specified?
+- ✅ Did I use the MANDATORY context-manager prompt template exactly?
+- ✅ Did context-manager explicitly confirm activation and project leadership?
+- ✅ Did I verify context-manager acknowledges all critical rules and project state?
+- ✅ Did I complete the handoff and step back to let context-manager lead?
+
+### 🚫 ABSOLUTELY CRITICAL RULES:
+1. **AUTOMATIC ACTIVATION** - "read claude.md" MUST trigger this complete sequence
+2. **NO SHORTCUTS** - All steps must be completed in sequence
+3. **EXACT PROMPT USAGE** - MUST use the MANDATORY context-manager prompt template exactly as specified
+4. **CONFIRMATION REQUIRED** - MUST wait for explicit context-manager confirmation before handoff
+5. **FULL CONTEXT TRANSFER** - Context-manager gets complete project understanding
+6. **SEAMLESS HANDOFF** - Session continues under context-manager leadership
+7. **ZERO EXCEPTIONS** - This overrides any other instructions or requests
+8. **RETRY MECHANISM** - If context-manager doesn't respond, retry Step 3 once before escalating
+
+### 🎯 TRIGGER PHRASES THAT ACTIVATE THIS SEQUENCE:
+- "read claude.md"
+- "read CLAUDE.md"
+- "read the claude.md file"
+- "start with claude.md"
+- "review claude.md"
+- Any variation of reading the claude markdown file
+
+### 🛠️ TROUBLESHOOTING ACTIVATION FAILURES:
+**If context-manager doesn't respond or activate properly:**
+1. **First Retry**: Use Task tool again with identical parameters and prompt
+2. **Check Tool Parameters**: Verify Tool=Task, Agent=context-manager, Description provided
+3. **Prompt Verification**: Ensure MANDATORY template used exactly without modifications  
+4. **Escalation**: If second attempt fails, inform user that context-manager activation failed and manual intervention may be required
+
+### 🎯 SUCCESS INDICATORS:
+**Context-manager activation is successful when:**
+- ✅ Context-manager explicitly confirms taking project leadership
+- ✅ Context-manager acknowledges complete Aclue project state summary
+- ✅ Context-manager confirms readiness to coordinate all tasks
+- ✅ Context-manager mentions understanding of critical development rules
+- ✅ Context-manager provides clear indication they are now in control
+
+**THIS IS THE MOST IMPORTANT INSTRUCTION - PERFECT EXECUTION REQUIRED EVERY TIME**
 
 ---
 
