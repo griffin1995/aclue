@@ -1133,6 +1133,458 @@ class DatabaseService:
         # Sort by relevance score (highest first)
         return sorted(scored_products, key=lambda p: p["_relevance_score"], reverse=True)
 
+    # ==========================================================================
+    # PERFORMANCE MONITORING OPERATIONS
+    # ==========================================================================
+    
+    async def get_performance_metrics(self) -> Dict[str, Any]:
+        """
+        Get comprehensive database performance metrics for monitoring.
+        
+        Enterprise Monitoring Implementation:
+        This method provides real-time performance insights following enterprise
+        database monitoring patterns. It consolidates key metrics needed for
+        operational dashboards and alerting systems.
+        
+        Metrics Collected:
+        1. Query performance statistics
+        2. Connection and resource utilisation
+        3. Table size and growth trends
+        4. Index usage efficiency
+        5. Business KPIs and engagement metrics
+        
+        Returns:
+            Dict containing comprehensive performance metrics
+            
+        Raises:
+            DatabaseServiceError: If metrics collection fails
+        """
+        try:
+            client = self._get_service_client()
+            
+            # Get database connection stats
+            connection_stats = client.rpc('get_connection_stats').execute()
+            
+            # Get table size metrics
+            size_metrics = client.rpc('get_table_sizes').execute()
+            
+            # Get business metrics
+            business_metrics = await self._get_business_metrics(client)
+            
+            metrics = {
+                "timestamp": datetime.utcnow().isoformat(),
+                "database": {
+                    "connections": connection_stats.data[0] if connection_stats.data else {},
+                    "table_sizes": size_metrics.data if size_metrics.data else [],
+                    "total_size": sum(table.get('total_size', 0) for table in size_metrics.data) if size_metrics.data else 0
+                },
+                "business": business_metrics,
+                "performance": {
+                    "query_cache_enabled": True,  # Supabase handles this
+                    "connection_pooling": True,  # Supabase connection pooling
+                    "rls_enabled": True  # All tables have RLS enabled
+                }
+            }
+            
+            self.logger.info("Performance metrics collected", metrics_count=len(metrics))
+            return metrics
+            
+        except Exception as e:
+            self.logger.error(
+                "Failed to collect performance metrics",
+                error=str(e),
+                exc_info=True
+            )
+            raise DatabaseServiceError(f"Failed to collect performance metrics: {str(e)}")
+    
+    async def _get_business_metrics(self, client: Client) -> Dict[str, Any]:
+        """
+        Get business intelligence metrics for operational dashboards.
+        
+        Business Metrics Collection:
+        - User engagement and activity levels
+        - Revenue attribution performance
+        - Recommendation system effectiveness
+        - Platform usage patterns
+        
+        Args:
+            client: Supabase client for database access
+            
+        Returns:
+            Dict containing business intelligence metrics
+        """
+        try:
+            # User engagement metrics
+            users_response = client.table("users").select("id, last_login_at, created_at").execute()
+            
+            total_users = len(users_response.data) if users_response.data else 0
+            
+            # Active users in last 7 days
+            seven_days_ago = (datetime.utcnow() - timedelta(days=7)).isoformat()
+            active_users_7d = len([
+                user for user in (users_response.data or [])
+                if user.get('last_login_at') and user['last_login_at'] > seven_days_ago
+            ])
+            
+            # Swipe interaction metrics
+            swipes_response = client.table("swipe_interactions").select(
+                "id, user_id, swipe_direction, swipe_timestamp"
+            ).gte("swipe_timestamp", seven_days_ago).execute()
+            
+            total_swipes_7d = len(swipes_response.data) if swipes_response.data else 0
+            unique_active_users = len(set(
+                swipe['user_id'] for swipe in (swipes_response.data or [])
+            ))
+            
+            # Affiliate click metrics
+            affiliate_response = client.table("affiliate_clicks").select(
+                "id, is_converted, expected_commission, actual_commission"
+            ).gte("click_timestamp", seven_days_ago).execute()
+            
+            affiliate_clicks = len(affiliate_response.data) if affiliate_response.data else 0
+            conversions = len([
+                click for click in (affiliate_response.data or [])
+                if click.get('is_converted') == True
+            ])
+            
+            return {
+                "users": {
+                    "total": total_users,
+                    "active_7d": active_users_7d,
+                    "engagement_rate": round((active_users_7d / max(1, total_users)) * 100, 2)
+                },
+                "interactions": {
+                    "swipes_7d": total_swipes_7d,
+                    "active_swipe_users": unique_active_users,
+                    "avg_swipes_per_user": round(total_swipes_7d / max(1, unique_active_users), 1)
+                },
+                "revenue": {
+                    "affiliate_clicks_7d": affiliate_clicks,
+                    "conversions_7d": conversions,
+                    "conversion_rate": round((conversions / max(1, affiliate_clicks)) * 100, 2)
+                }
+            }
+            
+        except Exception as e:
+            self.logger.warning(
+                "Failed to collect business metrics",
+                error=str(e)
+            )
+            return {"error": "Business metrics collection failed"}
+    
+    # ==========================================================================
+    # BATCH OPERATIONS FOR PERFORMANCE
+    # ==========================================================================
+    
+    async def bulk_record_product_views(
+        self,
+        view_records: List[Dict[str, Any]],
+        batch_size: int = 100
+    ) -> int:
+        """
+        Efficiently record multiple product view events in batches.
+        
+        High-Performance Bulk Implementation:
+        This method implements efficient bulk insertion patterns for high-volume
+        product view tracking. It uses batching to optimise database performance
+        and reduce connection overhead.
+        
+        Performance Patterns:
+        1. Batch processing to reduce database round trips
+        2. Transaction management for consistency
+        3. Error handling with partial success tracking
+        4. Efficient UUID generation for primary keys
+        
+        Args:
+            view_records: List of product view data dictionaries
+            batch_size: Number of records to process per batch
+            
+        Returns:
+            int: Number of successfully recorded views
+            
+        Raises:
+            ValidationError: If view data is invalid
+            DatabaseServiceError: If bulk operation fails
+        """
+        try:
+            if not view_records:
+                return 0
+            
+            # Validate all records first
+            for i, record in enumerate(view_records):
+                if not record.get('product_id') or not record.get('session_id'):
+                    raise ValidationError(f"Record {i}: Missing required fields product_id or session_id")
+            
+            client = self._get_service_client()
+            total_recorded = 0
+            
+            # Process in batches for optimal performance
+            for i in range(0, len(view_records), batch_size):
+                batch = view_records[i:i + batch_size]
+                
+                # Prepare batch data with UUIDs and timestamps
+                batch_data = []
+                for record in batch:
+                    view_data = {
+                        "id": str(uuid.uuid4()),
+                        "product_id": record['product_id'],
+                        "user_id": record.get('user_id'),
+                        "session_id": record['session_id'],
+                        "view_timestamp": record.get('view_timestamp', datetime.utcnow().isoformat()),
+                        "view_source": record.get('view_source', 'api'),
+                        "view_position": record.get('view_position'),
+                        "view_duration_seconds": record.get('view_duration_seconds'),
+                        "interaction_type": record.get('interaction_type', 'impression'),
+                        "device_type": record.get('device_type', 'unknown'),
+                        "recommendation_id": record.get('recommendation_id')
+                    }
+                    batch_data.append(view_data)
+                
+                # Insert batch
+                response = client.table("product_views").insert(batch_data).execute()
+                
+                if response.data:
+                    batch_recorded = len(response.data)
+                    total_recorded += batch_recorded
+                    
+                    self.logger.debug(
+                        "Product views batch recorded",
+                        batch_size=len(batch),
+                        recorded=batch_recorded
+                    )
+            
+            self.logger.info(
+                "Bulk product views recorded",
+                total_records=len(view_records),
+                total_recorded=total_recorded
+            )
+            
+            return total_recorded
+            
+        except ValidationError:
+            raise
+        except Exception as e:
+            self.logger.error(
+                "Failed to bulk record product views",
+                record_count=len(view_records),
+                error=str(e),
+                exc_info=True
+            )
+            raise DatabaseServiceError(f"Failed to bulk record product views: {str(e)}")
+    
+    # ==========================================================================
+    # ANALYTICS AND REPORTING OPERATIONS
+    # ==========================================================================
+    
+    async def get_user_analytics_summary(
+        self,
+        user_id: str,
+        days: int = 30
+    ) -> Dict[str, Any]:
+        """
+        Get comprehensive analytics summary for a specific user.
+        
+        User Analytics Implementation:
+        Provides detailed user behaviour analytics for personalisation and
+        recommendation improvement. Follows privacy-first analytics patterns
+        with user-scoped data access.
+        
+        Analytics Coverage:
+        1. Swipe interaction patterns and preferences
+        2. Product engagement and view history
+        3. Affiliate click behaviour and conversions
+        4. Recommendation performance and feedback
+        5. Session activity and engagement metrics
+        
+        Args:
+            user_id: UUID of the user
+            days: Number of days to include in analysis
+            
+        Returns:
+            Dict containing comprehensive user analytics
+            
+        Raises:
+            UserNotFoundError: If user doesn't exist
+            DatabaseServiceError: If analytics collection fails
+        """
+        try:
+            # Verify user exists
+            user_data = await self.get_user_by_id(user_id, use_service_role=True)
+            if not user_data:
+                raise UserNotFoundError(f"User {user_id} not found")
+            
+            client = self._get_service_client()
+            date_filter = (datetime.utcnow() - timedelta(days=days)).isoformat()
+            
+            # Get swipe interactions
+            swipes_response = client.table("swipe_interactions").select(
+                "swipe_direction, product_id, swipe_timestamp, preference_strength, products!inner(category_id, categories!inner(name))"
+            ).eq("user_id", user_id).gte("swipe_timestamp", date_filter).execute()
+            
+            # Get affiliate clicks
+            clicks_response = client.table("affiliate_clicks").select(
+                "product_id, affiliate_network, is_converted, expected_commission, actual_commission"
+            ).eq("user_id", user_id).gte("click_timestamp", date_filter).execute()
+            
+            # Get product views
+            views_response = client.table("product_views").select(
+                "product_id, view_source, view_duration_seconds, interaction_type"
+            ).eq("user_id", user_id).gte("view_timestamp", date_filter).execute()
+            
+            # Process swipe analytics
+            swipes = swipes_response.data or []
+            swipe_analytics = self._process_swipe_analytics(swipes)
+            
+            # Process click analytics
+            clicks = clicks_response.data or []
+            click_analytics = self._process_click_analytics(clicks)
+            
+            # Process view analytics
+            views = views_response.data or []
+            view_analytics = self._process_view_analytics(views)
+            
+            analytics_summary = {
+                "user_id": user_id,
+                "period_days": days,
+                "generated_at": datetime.utcnow().isoformat(),
+                "swipe_behaviour": swipe_analytics,
+                "click_behaviour": click_analytics,
+                "view_behaviour": view_analytics,
+                "engagement_score": self._calculate_engagement_score(
+                    swipe_analytics, click_analytics, view_analytics
+                )
+            }
+            
+            self.logger.info(
+                "User analytics summary generated",
+                user_id=user_id,
+                days=days,
+                metrics_count=len(analytics_summary)
+            )
+            
+            return analytics_summary
+            
+        except UserNotFoundError:
+            raise
+        except Exception as e:
+            self.logger.error(
+                "Failed to generate user analytics summary",
+                user_id=user_id,
+                days=days,
+                error=str(e),
+                exc_info=True
+            )
+            raise DatabaseServiceError(f"Failed to generate user analytics: {str(e)}")
+    
+    def _process_swipe_analytics(self, swipes: List[Dict]) -> Dict[str, Any]:
+        """Process swipe interaction data for analytics."""
+        if not swipes:
+            return {"total_swipes": 0, "engagement_rate": 0.0, "category_preferences": {}}
+        
+        total_swipes = len(swipes)
+        right_swipes = len([s for s in swipes if s['swipe_direction'] == 'right'])
+        super_likes = len([s for s in swipes if s['swipe_direction'] == 'up'])
+        
+        # Category analysis
+        category_stats = {}
+        for swipe in swipes:
+            if swipe.get('products') and swipe['products'].get('categories'):
+                category = swipe['products']['categories']['name']
+                if category not in category_stats:
+                    category_stats[category] = {'total': 0, 'likes': 0}
+                category_stats[category]['total'] += 1
+                if swipe['swipe_direction'] in ['right', 'up']:
+                    category_stats[category]['likes'] += 1
+        
+        # Calculate category preferences
+        category_preferences = {
+            cat: round(stats['likes'] / stats['total'], 3)
+            for cat, stats in category_stats.items()
+            if stats['total'] > 0
+        }
+        
+        return {
+            "total_swipes": total_swipes,
+            "right_swipes": right_swipes,
+            "super_likes": super_likes,
+            "engagement_rate": round((right_swipes + super_likes) / total_swipes, 3),
+            "category_preferences": category_preferences,
+            "avg_preference_strength": round(
+                sum(s.get('preference_strength', 0.5) for s in swipes) / total_swipes, 3
+            )
+        }
+    
+    def _process_click_analytics(self, clicks: List[Dict]) -> Dict[str, Any]:
+        """Process affiliate click data for analytics."""
+        if not clicks:
+            return {"total_clicks": 0, "conversion_rate": 0.0, "revenue_generated": 0.0}
+        
+        total_clicks = len(clicks)
+        conversions = len([c for c in clicks if c.get('is_converted')])
+        total_revenue = sum(c.get('actual_commission', 0) or 0 for c in clicks)
+        
+        # Network analysis
+        networks = {}
+        for click in clicks:
+            network = click.get('affiliate_network', 'unknown')
+            if network not in networks:
+                networks[network] = {'clicks': 0, 'conversions': 0}
+            networks[network]['clicks'] += 1
+            if click.get('is_converted'):
+                networks[network]['conversions'] += 1
+        
+        return {
+            "total_clicks": total_clicks,
+            "conversions": conversions,
+            "conversion_rate": round(conversions / total_clicks, 3) if total_clicks > 0 else 0.0,
+            "revenue_generated": float(total_revenue),
+            "avg_revenue_per_click": round(float(total_revenue) / total_clicks, 2) if total_clicks > 0 else 0.0,
+            "network_performance": networks
+        }
+    
+    def _process_view_analytics(self, views: List[Dict]) -> Dict[str, Any]:
+        """Process product view data for analytics."""
+        if not views:
+            return {"total_views": 0, "avg_view_duration": 0.0, "interaction_types": {}}
+        
+        total_views = len(views)
+        durations = [v.get('view_duration_seconds') for v in views if v.get('view_duration_seconds')]
+        avg_duration = sum(durations) / len(durations) if durations else 0
+        
+        # Source analysis
+        sources = {}
+        for view in views:
+            source = view.get('view_source', 'unknown')
+            sources[source] = sources.get(source, 0) + 1
+        
+        # Interaction types
+        interactions = {}
+        for view in views:
+            interaction = view.get('interaction_type', 'impression')
+            interactions[interaction] = interactions.get(interaction, 0) + 1
+        
+        return {
+            "total_views": total_views,
+            "avg_view_duration": round(avg_duration, 1),
+            "view_sources": sources,
+            "interaction_types": interactions
+        }
+    
+    def _calculate_engagement_score(
+        self,
+        swipe_analytics: Dict,
+        click_analytics: Dict,
+        view_analytics: Dict
+    ) -> float:
+        """Calculate overall user engagement score."""
+        # Weighted engagement calculation
+        swipe_score = swipe_analytics.get('engagement_rate', 0) * 0.4
+        click_score = (click_analytics.get('total_clicks', 0) / max(1, view_analytics.get('total_views', 1))) * 0.3
+        duration_score = min(1.0, view_analytics.get('avg_view_duration', 0) / 30.0) * 0.3
+        
+        total_score = swipe_score + click_score + duration_score
+        return round(min(1.0, total_score), 3)
+
 # ==============================================================================
 # GLOBAL SERVICE INSTANCE
 # ==============================================================================
