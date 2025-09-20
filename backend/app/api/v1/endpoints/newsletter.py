@@ -79,12 +79,21 @@ async def newsletter_signup(
     try:
         # Get client IP address
         client_ip = http_request.client.host if http_request.client else None
-        
+        logger.info(f"Newsletter signup attempt from IP: {client_ip} for email: {request.email}")
+
+        # Debug: Check environment variables
+        logger.info(f"SUPABASE_URL configured: {bool(settings.SUPABASE_URL)}")
+        logger.info(f"SUPABASE_SERVICE_KEY configured: {bool(settings.SUPABASE_SERVICE_KEY)}")
+
         # Get Supabase service client
+        logger.info("Attempting to get Supabase service client...")
         supabase = get_supabase_service()
+        logger.info("Successfully obtained Supabase service client")
         
         # Check if email already exists
+        logger.info("Checking for existing newsletter signup...")
         existing_signup = supabase.table("newsletter_signups").select("*").eq("email", request.email).execute()
+        logger.info(f"Existing signup query result: {len(existing_signup.data) if existing_signup.data else 0} records found")
         
         if existing_signup.data:
             # Email already exists
@@ -106,7 +115,9 @@ async def newsletter_signup(
         }
         
         # Insert into database
+        logger.info(f"Attempting to insert newsletter signup data: {signup_data}")
         result = supabase.table("newsletter_signups").insert(signup_data).execute()
+        logger.info(f"Insert operation completed. Result data: {result.data}")
         
         if not result.data:
             logger.error(f"Failed to insert newsletter signup: {result}")
@@ -130,8 +141,19 @@ async def newsletter_signup(
         )
         
     except Exception as e:
-        logger.error(f"Newsletter signup error: {str(e)}")
-        raise HTTPException(status_code=500, detail="Internal server error during newsletter signup")
+        import traceback
+        error_details = {
+            "error_type": type(e).__name__,
+            "error_message": str(e),
+            "traceback": traceback.format_exc()
+        }
+        logger.error(f"Newsletter signup error: {error_details}")
+
+        # Return more specific error information for debugging
+        if settings.DEBUG or settings.ENVIRONMENT != "production":
+            raise HTTPException(status_code=500, detail=f"Debug info: {error_details['error_type']}: {error_details['error_message']}")
+        else:
+            raise HTTPException(status_code=500, detail="Internal server error during newsletter signup")
 
 @router.get("/subscribers", response_model=List[NewsletterSubscriberResponse])
 async def get_newsletter_subscribers(
@@ -151,7 +173,12 @@ async def get_newsletter_subscribers(
         List of newsletter subscribers
     """
     try:
+        logger.info("Newsletter subscribers endpoint called")
+        logger.info(f"SUPABASE_URL configured: {bool(settings.SUPABASE_URL)}")
+        logger.info(f"SUPABASE_SERVICE_KEY configured: {bool(settings.SUPABASE_SERVICE_KEY)}")
+
         supabase = get_supabase_service()
+        logger.info("Successfully obtained Supabase service client for subscribers endpoint")
         
         query = supabase.table("newsletter_signups").select("*")
         
@@ -175,8 +202,19 @@ async def get_newsletter_subscribers(
         ]
         
     except Exception as e:
-        logger.error(f"Error fetching newsletter subscribers: {str(e)}")
-        raise HTTPException(status_code=500, detail="Failed to fetch newsletter subscribers")
+        import traceback
+        error_details = {
+            "error_type": type(e).__name__,
+            "error_message": str(e),
+            "traceback": traceback.format_exc()
+        }
+        logger.error(f"Newsletter subscribers error: {error_details}")
+
+        # Return more specific error information for debugging
+        if settings.DEBUG or settings.ENVIRONMENT != "production":
+            raise HTTPException(status_code=500, detail=f"Debug info: {error_details['error_type']}: {error_details['error_message']}")
+        else:
+            raise HTTPException(status_code=500, detail="Failed to fetch newsletter subscribers")
 
 @router.delete("/unsubscribe/{email}")
 async def unsubscribe_newsletter(email: EmailStr):
