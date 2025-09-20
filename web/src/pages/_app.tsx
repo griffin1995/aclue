@@ -8,6 +8,8 @@ import { AuthGuard } from '@/components/auth/AuthGuard';
 import { PostHogProvider } from '@/components/providers/PostHogProvider';
 import { PWAManager } from '@/components/pwa/PWAManager';
 import { useMobileOptimizations } from '@/hooks/useMobileOptimizations';
+import { AppErrorBoundary } from '@/components/error/ErrorBoundary';
+import { PerformanceMonitor } from '@/components/performance/PerformanceMonitor';
 import MaintenanceWrapper from '@/components/MaintenanceWrapper';
 import '@/styles/globals.css';
 
@@ -42,45 +44,54 @@ export default function App({ Component, pageProps }: AppProps) {
   }, [mobileOptimizations.isMobile]);
 
   return (
-    <PostHogProvider>
-      <ThemeProvider>
-        <AuthProvider>
-          <MaintenanceWrapper>
-            <AuthGuard>
-              <Component {...pageProps} />
-              <PWAManager />
-            </AuthGuard>
-          </MaintenanceWrapper>
-          <Toaster
-          position="top-right"
-          toastOptions={{
-            duration: 5000,
-            style: {
-              background: '#ffffff',
-              color: '#1f2937',
-              border: '1px solid #e5e7eb',
-              borderRadius: '12px',
-              boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
-              padding: '16px',
-              fontSize: '14px',
-              fontWeight: '500',
-            },
-            success: {
-              iconTheme: {
-                primary: '#22c55e',
-                secondary: '#ffffff',
-              },
-            },
-            error: {
-              iconTheme: {
-                primary: '#ef4444',
-                secondary: '#ffffff',
-              },
-            },
-          }}
-          />
-        </AuthProvider>
-      </ThemeProvider>
-    </PostHogProvider>
+    <AppErrorBoundary>
+      <PerformanceMonitor
+        enabled={true}
+        trackWebVitals={true}
+        trackMemory={true}
+        reportingInterval={30000}
+      >
+        <PostHogProvider>
+          <ThemeProvider>
+            <AuthProvider>
+              <MaintenanceWrapper>
+                <AuthGuard>
+                  <Component {...pageProps} />
+                  <PWAManager />
+                </AuthGuard>
+              </MaintenanceWrapper>
+              <Toaster
+                position="top-right"
+                toastOptions={{
+                  duration: 5000,
+                  style: {
+                    background: '#ffffff',
+                    color: '#1f2937',
+                    border: '1px solid #e5e7eb',
+                    borderRadius: '12px',
+                    boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+                    padding: '16px',
+                    fontSize: '14px',
+                    fontWeight: '500',
+                  },
+                  success: {
+                    iconTheme: {
+                      primary: '#22c55e',
+                      secondary: '#ffffff',
+                    },
+                  },
+                  error: {
+                    iconTheme: {
+                      primary: '#ef4444',
+                      secondary: '#ffffff',
+                    },
+                  },
+                }}
+              />
+            </AuthProvider>
+          </ThemeProvider>
+        </PostHogProvider>
+      </PerformanceMonitor>
+    </AppErrorBoundary>
   );
 }
