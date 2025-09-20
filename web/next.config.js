@@ -65,7 +65,15 @@ const nextConfig = {
   images: {
     // Enable image optimization for better performance
     unoptimized: false,
-    
+
+    // Enhanced image optimization settings
+    formats: ['image/webp', 'image/avif'],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    minimumCacheTTL: 60 * 60 * 24 * 365, // Cache for 1 year
+    dangerouslyAllowSVG: false,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+
     // Allowed external image domains for security and performance
     remotePatterns: [
       // Development environment
@@ -128,11 +136,40 @@ const nextConfig = {
       use: ['@svgr/webpack']            // Transform SVGs to React components
     });
 
-    // Additional webpack optimizations could be added here:
-    // - Bundle analyzer configuration
-    // - Custom loaders for special file types
-    // - Polyfill configuration
-    // - Module federation setup
+    // Performance optimizations
+    if (!dev && !isServer) {
+      // Bundle splitting optimizations
+      config.optimization.splitChunks = {
+        ...config.optimization.splitChunks,
+        cacheGroups: {
+          ...config.optimization.splitChunks.cacheGroups,
+          vendor: {
+            test: /[\\/]node_modules[\\/]/,
+            name: 'vendors',
+            chunks: 'all',
+            priority: 10,
+          },
+          common: {
+            name: 'common',
+            minChunks: 2,
+            chunks: 'all',
+            priority: 5,
+            reuseExistingChunk: true,
+          },
+        },
+      };
+
+      // Tree shaking optimizations
+      config.optimization.usedExports = true;
+      config.optimization.sideEffects = false;
+    }
+
+    // Development optimizations
+    if (dev) {
+      config.optimization.removeAvailableModules = false;
+      config.optimization.removeEmptyChunks = false;
+      config.optimization.splitChunks = false;
+    }
 
     return config;
   },
@@ -247,9 +284,21 @@ const nextConfig = {
   // EXPERIMENTAL FEATURES
   // ===========================================================================
   // Next.js experimental features for enhanced functionality
-  
+
   experimental: {
     scrollRestoration: true,        // Restore scroll position on navigation
+    optimizeCss: true,             // Optimize CSS bundle for production
+    webVitalsAttribution: ['CLS', 'FCP', 'FID', 'LCP', 'TTFB'], // Enhanced Web Vitals tracking
+    optimizePackageImports: ['lucide-react', '@headlessui/react', 'framer-motion'], // Optimize package imports
+    turbo: {                       // Enable Turbo for faster builds
+      rules: {
+        '*.svg': {
+          loaders: ['@svgr/webpack'],
+          as: '*.js',
+        },
+      },
+    },
+    serverComponentsExternalPackages: ['sharp'], // Optimize server components
   },
 
   // ===========================================================================
@@ -282,10 +331,16 @@ const nextConfig = {
   // ===========================================================================
   // PERFORMANCE OPTIMIZATIONS
   // ===========================================================================
-  
+
   poweredByHeader: false,         // Remove "Powered by Next.js" header for security
-  generateEtags: false,           // Disable ETags for better caching control
+  generateEtags: true,            // Enable ETags for efficient caching
   compress: true,                 // Enable gzip compression
+
+  // Enhanced performance settings
+  onDemandEntries: {
+    maxInactiveAge: 60 * 60 * 1000, // Keep pages in memory for 1 hour
+    pagesBufferLength: 5,           // Keep 5 pages in buffer
+  },
 
   // ===========================================================================
   // STATIC EXPORT CONFIGURATION
