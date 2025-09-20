@@ -268,7 +268,7 @@ const nextConfig = {
   // ===========================================================================
   
   typescript: {
-    ignoreBuildErrors: true,        // Continue build even with TypeScript errors (for rapid development)
+    ignoreBuildErrors: process.env.NODE_ENV === 'development',  // Only ignore in development, strict in production
   },
 
   // ===========================================================================
