@@ -1,6 +1,7 @@
 """
 aclue API - Main Application Entry Point
 Pipeline Test: 2025-08-05 14:30 UTC
+Environment Update: 2025-09-20 22:47 UTC - Supabase keys refreshed
 
 This module serves as the primary entry point for the aclue API application.
 It configures the FastAPI application with all necessary middleware, routing,
