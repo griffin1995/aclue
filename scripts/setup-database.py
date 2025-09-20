@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Set up GiftSync database schema in Supabase
+Set up Aclue database schema in Supabase
 """
 import requests
 import json
@@ -42,9 +42,9 @@ def execute_sql(sql_query, description=""):
         return False
 
 def create_database_schema():
-    """Create the complete GiftSync database schema"""
+    """Create the complete Aclue database schema"""
     
-    print("🗄️  Creating GiftSync Database Schema")
+    print("🗄️  Creating Aclue Database Schema")
     print("=" * 40)
     
     # Enable necessary extensions

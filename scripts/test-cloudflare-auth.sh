@@ -77,24 +77,24 @@ fi
 
 # Test 3: Check Pages project access
 echo ""
-echo "🧪 Test 3: Checking Cloudflare Pages project 'prznt'..."
-response=$(curl -s -X GET "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects/prznt" \
+echo "🧪 Test 3: Checking Cloudflare Pages project 'aclue'..."
+response=$(curl -s -X GET "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects/aclue" \
      -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
      -H "Content-Type: application/json")
 
 success=$(echo $response | jq -r '.success // false')
 if [ "$success" = "true" ]; then
-    echo -e "${GREEN}✅ Can access Cloudflare Pages project 'prznt'${NC}"
+    echo -e "${GREEN}✅ Can access Cloudflare Pages project 'aclue'${NC}"
     project_name=$(echo $response | jq -r '.result.name')
     project_subdomain=$(echo $response | jq -r '.result.subdomain')
     echo "Project name: $project_name"
     echo "Project subdomain: $project_subdomain"
 else
-    echo -e "${RED}❌ Cannot access Cloudflare Pages project 'prznt'${NC}"
+    echo -e "${RED}❌ Cannot access Cloudflare Pages project 'aclue'${NC}"
     echo "Response: $response"
     echo ""
     echo -e "${YELLOW}🔄 Possible fixes:${NC}"
-    echo "1. Ensure the project name is correct in the workflow (currently: prznt)"
+    echo "1. Ensure the project name is correct in the workflow (currently: aclue)"
     echo "2. Verify the API token has Cloudflare Pages:Edit permissions"
     echo "3. Check if the project exists in your Cloudflare account"
 fi

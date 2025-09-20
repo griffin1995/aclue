@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-# Deploy GiftSync Web Application to AWS
+# Deploy Aclue Web Application to AWS
 # This script builds and deploys the Next.js web app to S3 + CloudFront
 
 # Colors for output
@@ -181,7 +181,7 @@ setup_environment() {
     
     # Create .env.production
     cat > .env.production << EOF
-# GiftSync Web App Production Environment
+# Aclue Web App Production Environment
 NODE_ENV=production
 NEXT_TELEMETRY_DISABLED=1
 
@@ -353,7 +353,7 @@ run_tests() {
 show_deployment_summary() {
     print_header "🎉 WEB APP DEPLOYMENT COMPLETE!"
     
-    echo -e "${GREEN}Your GiftSync web application has been deployed successfully!${NC}"
+    echo -e "${GREEN}Your Aclue web application has been deployed successfully!${NC}"
     echo
     echo "📊 Deployment Summary:"
     echo "  • Domain: https://$DOMAIN_NAME"
@@ -389,7 +389,7 @@ show_deployment_summary() {
     echo "  • CloudFront: https://docs.aws.amazon.com/cloudfront/"
     echo "  • Next.js Deployment: https://nextjs.org/docs/deployment"
     echo
-    print_success "GiftSync web application is live! 🚀"
+    print_success "Aclue web application is live! 🚀"
 }
 
 # Main execution

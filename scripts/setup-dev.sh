@@ -76,7 +76,7 @@ echo "🔍 Checking PostgreSQL connection..."
 max_attempts=30
 attempt=1
 while [ $attempt -le $max_attempts ]; do
-    if $DC_CMD exec postgres pg_isready -U giftsync >/dev/null 2>&1; then
+    if $DC_CMD exec postgres pg_isready -U aclue >/dev/null 2>&1; then
         echo "✅ PostgreSQL is ready"
         break
     fi
@@ -120,13 +120,13 @@ done
 
 # Create MinIO bucket
 echo "🪣 Creating MinIO bucket..."
-$DC_CMD exec minio mc alias set local http://localhost:9000 giftsync giftsync_dev_password >/dev/null 2>&1 || true
-$DC_CMD exec minio mc mb local/giftsync-dev >/dev/null 2>&1 || echo "   Bucket already exists"
+$DC_CMD exec minio mc alias set local http://localhost:9000 aclue aclue_dev_password >/dev/null 2>&1 || true
+$DC_CMD exec minio mc mb local/aclue-dev >/dev/null 2>&1 || echo "   Bucket already exists"
 
 # Set up database schema (if init scripts exist)
 if [ -f "database/init/01_schema.sql" ]; then
     echo "🗄️  Setting up database schema..."
-    $DC_CMD exec -T postgres psql -U giftsync -d giftsync_dev < database/init/01_schema.sql
+    $DC_CMD exec -T postgres psql -U aclue -d aclue_dev < database/init/01_schema.sql
     echo "✅ Database schema created"
 fi
 
@@ -154,7 +154,7 @@ echo ""
 echo "🎉 Development environment is ready!"
 echo ""
 echo "📋 Available services:"
-echo "   • PostgreSQL:     localhost:5432 (user: giftsync, db: giftsync_dev)"
+echo "   • PostgreSQL:     localhost:5432 (user: aclue, db: aclue_dev)"
 echo "   • Redis:          localhost:6379"
 echo "   • MinIO:          localhost:9000 (admin: localhost:9001)"
 echo "   • Backend API:    localhost:8000"
@@ -164,7 +164,7 @@ echo "🔧 Useful commands:"
 echo "   • View logs:      $DC_CMD logs [service]"
 echo "   • Stop all:       $DC_CMD down"
 echo "   • Restart:        $DC_CMD restart [service]"
-echo "   • Database shell: $DC_CMD exec postgres psql -U giftsync -d giftsync_dev"
+echo "   • Database shell: $DC_CMD exec postgres psql -U aclue -d aclue_dev"
 echo "   • Redis shell:    $DC_CMD exec redis redis-cli"
 echo ""
 echo "📝 Next steps:"
@@ -173,5 +173,5 @@ echo "   2. Add API keys to .env file"
 echo "   3. Test the API: curl http://localhost:8000/health"
 echo ""
 echo "🔗 MinIO Console: http://localhost:9001"
-echo "   Username: giftsync"
-echo "   Password: giftsync_dev_password"
+echo "   Username: aclue"
+echo "   Password: aclue_dev_password"
