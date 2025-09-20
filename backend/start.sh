@@ -22,5 +22,20 @@ if [ "${ENVIRONMENT}" = "development" ]; then
     exec uvicorn app.main_api:app --host 0.0.0.0 --port $PORT --reload
 else
     echo "🚀 Starting in production mode with ${WORKERS} workers..."
-    exec uvicorn app.main_api:app --host 0.0.0.0 --port $PORT --workers $WORKERS
+    echo "Worker timeout: ${WORKER_TIMEOUT:-30}s"
+    echo "Max requests per worker: ${WORKER_MAX_REQUESTS:-1000}"
+
+    # Use gunicorn for production deployment with uvicorn workers
+    exec gunicorn app.main_api:app \
+        --bind 0.0.0.0:$PORT \
+        --workers $WORKERS \
+        --worker-class uvicorn.workers.UvicornWorker \
+        --timeout ${WORKER_TIMEOUT:-30} \
+        --keepalive ${WORKER_KEEPALIVE:-5} \
+        --max-requests ${WORKER_MAX_REQUESTS:-1000} \
+        --max-requests-jitter ${WORKER_MAX_REQUESTS_JITTER:-50} \
+        --preload \
+        --access-logfile - \
+        --error-logfile - \
+        --log-level info
 fi
