@@ -52,8 +52,8 @@ s3_versioning_enabled = true
 
 # SSL/TLS Configuration
 # ssl_certificate_arn = "arn:aws:acm:eu-west-2:ACCOUNT:certificate/CERTIFICATE_ID"
-# api_domain_name     = "api.giftsync.app"
-# cdn_domain_name     = "cdn.giftsync.app"
+# api_domain_name     = "api.aclue.app"
+# cdn_domain_name     = "cdn.aclue.app"
 
 # Machine Learning
 sagemaker_instance_type = "ml.c5.xlarge"

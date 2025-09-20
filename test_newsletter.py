@@ -15,7 +15,7 @@ import sys
 import os
 
 # Add the backend directory to the path
-sys.path.insert(0, '/home/jack/Documents/gift_sync/backend')
+sys.path.insert(0, '/home/jack/Documents/aclue-preprod/backend')
 
 # Test configuration
 BASE_URL = "http://localhost:8000"
@@ -140,7 +140,7 @@ def main():
         print("\n📋 Next steps:")
         print("1. Set up RESEND_API_KEY in backend/.env for email sending")
         print("2. Test the frontend at http://localhost:3000")
-        print("3. Check that emails are sent to contact@prznt.app")
+        print("3. Check that emails are sent to contact@aclue.app")
     else:
         print("\n❌ Some tests failed. Check the output above for details.")
 
