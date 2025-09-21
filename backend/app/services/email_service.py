@@ -201,7 +201,7 @@ class EmailService:
         <body>
             <div class="container">
                 <div class="header">
-                    <img src="https://aclue.app/aclue_text_clean.png" alt="aclue - AI-Powered Gift Discovery" class="logo-img" />
+                    <img src="https://aclue.app/aclue_text_clean.png" alt="aclue - AI-Powered Gift Discovery" class="logo-img" onerror="this.style.display='none'; this.parentNode.innerHTML='<h3 style=&quot;color: white; margin: 0; font-family: Arial, sans-serif;&quot;>aclue</h3>';" />
                     <div class="subtitle">AI-Powered Gift Discovery</div>
                 </div>
                 
@@ -310,7 +310,7 @@ class EmailService:
         <body>
             <div class="container">
                 <div class="header">
-                    <img src="https://aclue.app/aclue_text_clean.png" alt="aclue - AI-Powered Gift Discovery" class="logo-img" />
+                    <img src="https://aclue.app/aclue_text_clean.png" alt="aclue - AI-Powered Gift Discovery" class="logo-img" onerror="this.style.display='none'; this.parentNode.innerHTML='<h3 style=&quot;color: white; margin: 0; font-family: Arial, sans-serif;&quot;>aclue</h3>';" />
                     <h2 class="header-title">🎉 New Newsletter Signup - aclue</h2>
                 </div>
                 
