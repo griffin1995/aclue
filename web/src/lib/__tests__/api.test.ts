@@ -1,5 +1,5 @@
 import { api, tokenManager } from '../api';
-import { SwipeRequest, CreateRecommendationRequest } from '@/types';
+import { SwipeRequest, RecommendationRequest } from '@/types';
 
 // Mock fetch
 const mockFetch = global.fetch as jest.MockedFunction<typeof fetch>;
@@ -254,7 +254,7 @@ describe('API Client', () => {
         json: async () => mockResponse,
       } as Response);
 
-      const requestData: CreateRecommendationRequest = {
+      const requestData: RecommendationRequest = {
         preferences: {
           categories: ['electronics'],
           priceRange: { min: 10, max: 100 },
