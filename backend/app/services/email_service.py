@@ -2,7 +2,7 @@
 Aclue Email Service for Newsletter and Notifications
 
 REBRANDING NOTE (August 2025):
-This service was updated during the comprehensive rebrand from GiftSync/prznt to Aclue.
+This service was updated during the comprehensive rebrand from Aclue/aclue to Aclue.
 All email templates, sender addresses, and domain references have been updated to
 reflect the new Aclue brand identity and aclue.app domain.
 
@@ -12,7 +12,7 @@ This service handles sending emails for:
 - Other email notifications
 
 Key Branding Updates:
-- Sender email: aclue <noreply@aclue.app> (from prznt/giftsync addresses)
+- Sender email: aclue <noreply@aclue.app> (from aclue/aclue addresses)
 - Admin email: contact@aclue.app (updated domain)
 - Email templates: Complete rebrand with Aclue messaging and branding
 - Domain references: All links point to aclue.app (primary domain)
@@ -51,7 +51,7 @@ class EmailService:
     
     def __init__(self):
         self.resend_api_key = settings.RESEND_API_KEY
-        # Rebranded email addresses (August 2025) - updated from prznt/giftsync domains
+        # Rebranded email addresses (August 2025) - updated from aclue/aclue domains
         self.from_email = "aclue <noreply@aclue.app>"        # Primary sender for all notifications
         self.admin_email = "contact@aclue.app"               # Admin notifications recipient
         self.base_url = "https://api.resend.com"
@@ -190,7 +190,7 @@ class EmailService:
                 .container {{ max-width: 600px; margin: 0 auto; padding: 20px; }}
                 .header {{ background: linear-gradient(135deg, #3b82f6, #8b5cf6); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0; }}
                 .content {{ background: #f8fafc; padding: 30px; border-radius: 0 0 10px 10px; }}
-                .logo {{ font-size: 32px; font-weight: bold; margin-bottom: 10px; }}
+                .logo-img {{ max-width: 200px; height: auto; margin-bottom: 15px; filter: invert(1); }}
                 .subtitle {{ font-size: 16px; opacity: 0.9; }}
                 .feature {{ display: flex; align-items: center; margin: 15px 0; }}
                 .feature-icon {{ width: 24px; height: 24px; margin-right: 12px; }}
@@ -201,7 +201,7 @@ class EmailService:
         <body>
             <div class="container">
                 <div class="header">
-                    <div class="logo">aclue</div>
+                    <img src="https://aclue.app/aclue-logo-email.png" alt="aclue - AI-Powered Gift Discovery" class="logo-img" />
                     <div class="subtitle">AI-Powered Gift Discovery</div>
                 </div>
                 
@@ -300,8 +300,10 @@ class EmailService:
             <style>
                 body {{ font-family: 'Arial', sans-serif; line-height: 1.6; color: #333; }}
                 .container {{ max-width: 600px; margin: 0 auto; padding: 20px; }}
-                .header {{ background: #1f2937; color: white; padding: 20px; border-radius: 8px 8px 0 0; }}
+                .header {{ background: #1f2937; color: white; padding: 20px; border-radius: 8px 8px 0 0; text-align: center; }}
                 .content {{ background: #f9fafb; padding: 20px; border-radius: 0 0 8px 8px; }}
+                .logo-img {{ max-width: 150px; height: auto; margin-bottom: 10px; filter: invert(1); }}
+                .header-title {{ margin: 0; font-size: 20px; }}
                 .info-box {{ background: white; padding: 15px; border-radius: 6px; margin: 15px 0; border-left: 4px solid #3b82f6; }}
                 .label {{ font-weight: bold; color: #374151; }}
                 .value {{ color: #1f2937; }}
@@ -310,7 +312,8 @@ class EmailService:
         <body>
             <div class="container">
                 <div class="header">
-                    <h2>🎉 New Newsletter Signup - aclue</h2>
+                    <img src="https://aclue.app/aclue-logo-email.png" alt="aclue - AI-Powered Gift Discovery" class="logo-img" />
+                    <h2 class="header-title">🎉 New Newsletter Signup - aclue</h2>
                 </div>
                 
                 <div class="content">
