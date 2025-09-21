@@ -136,43 +136,45 @@ class TokenManager {
 
   /**
    * Retrieve current access token for API requests.
-   * 
+   *
    * Checks memory cache first, then falls back to localStorage.
    * Returns null if no token is available.
-   * 
+   *
    * Returns:
    *   string | null: Current access token or null if not available
    */
   getAccessToken(): string | null {
     // Return cached token if available
     if (this.accessToken) return this.accessToken;
-    
+
     // Fallback to localStorage (handles page reloads)
     if (typeof window !== 'undefined') {
-      return localStorage.getItem(appConfig.storage.authToken);
+      const token = localStorage.getItem(appConfig.storage.authToken);
+      return token || null; // Ensure we return null instead of undefined
     }
-    
+
     return null;
   }
 
   /**
    * Retrieve current refresh token for session renewal.
-   * 
+   *
    * Checks memory cache first, then falls back to localStorage.
    * Returns null if no token is available.
-   * 
+   *
    * Returns:
    *   string | null: Current refresh token or null if not available
    */
   getRefreshToken(): string | null {
     // Return cached token if available
     if (this.refreshToken) return this.refreshToken;
-    
+
     // Fallback to localStorage (handles page reloads)
     if (typeof window !== 'undefined') {
-      return localStorage.getItem(appConfig.storage.refreshToken);
+      const token = localStorage.getItem(appConfig.storage.refreshToken);
+      return token || null; // Ensure we return null instead of undefined
     }
-    
+
     return null;
   }
 
@@ -660,38 +662,80 @@ export const apiClient = new ApiClient();
 // Export token manager for external use
 export const tokenManager = TokenManager.getInstance();
 
-// Export convenience methods
+// Export convenience methods with nested structure for better organisation
 export const api = {
-  // Auth
-  login: (data: LoginRequest) => apiClient.login(data),
-  register: (data: RegisterRequest) => apiClient.register(data),
-  logout: () => apiClient.logout(),
-  getCurrentUser: () => apiClient.getCurrentUser(),
-  
-  // Users
-  getUserStatistics: () => apiClient.getUserStatistics(),
-  
-  // Products
-  getProducts: (params?: any) => apiClient.getProducts(params),
-  searchProducts: (query: SearchQuery) => apiClient.searchProducts(query),
-  getProduct: (id: string) => apiClient.getProduct(id),
-  getCategories: () => apiClient.getCategories(),
-  
-  // Swipes
-  createSwipeSession: (data: any) => apiClient.createSwipeSession(data),
-  recordSwipe: (sessionId: string, data: SwipeRequest) => apiClient.recordSwipe(sessionId, data),
-  
-  // Recommendations
-  generateRecommendations: (data: RecommendationRequest) => apiClient.generateRecommendations(data),
-  getRecommendations: (params?: any) => apiClient.getRecommendations(params),
-  
-  // Gift Links
-  createGiftLink: (data: CreateGiftLinkRequest) => apiClient.createGiftLink(data),
-  getGiftLinks: () => apiClient.getGiftLinks(),
-  getGiftLinkByToken: (token: string) => apiClient.getGiftLinkByToken(token),
-  
-  // Analytics
-  trackEvent: (event: AnalyticsEvent) => apiClient.trackEvent(event),
+  // Authentication methods
+  auth: {
+    login: (data: LoginRequest) => apiClient.login(data),
+    register: (data: RegisterRequest) => apiClient.register(data),
+    logout: () => apiClient.logout(),
+    getCurrentUser: () => apiClient.getCurrentUser(),
+    forgotPassword: (email: string) => apiClient.forgotPassword(email),
+    resetPassword: (token: string, password: string) => apiClient.resetPassword(token, password),
+    verifyEmail: (token: string) => apiClient.verifyEmail(token),
+  },
+
+  // User management methods
+  users: {
+    updateProfile: (data: Partial<User>) => apiClient.updateProfile(data),
+    getPreferences: () => apiClient.getUserPreferences(),
+    updatePreferences: (data: any) => apiClient.updateUserPreferences(data),
+    getStatistics: () => apiClient.getUserStatistics(),
+    deleteAccount: () => apiClient.deleteAccount(),
+  },
+
+  // Product methods
+  products: {
+    getProducts: (params?: any) => apiClient.getProducts(params),
+    searchProducts: (query: SearchQuery) => apiClient.searchProducts(query),
+    getProduct: (id: string) => apiClient.getProduct(id),
+    getCategories: () => apiClient.getCategories(),
+    getFeatured: () => apiClient.getFeaturedProducts(),
+    getTrending: () => apiClient.getTrendingProducts(),
+    getByCategory: (categoryId: string, params?: any) => apiClient.getProductsByCategory(categoryId, params),
+  },
+
+  // Swipe methods
+  swipes: {
+    createSession: (data: any) => apiClient.createSwipeSession(data),
+    getCurrentSession: () => apiClient.getCurrentSwipeSession(),
+    recordSwipe: (sessionId: string, data: SwipeRequest) => apiClient.recordSwipe(sessionId, data),
+    getAnalytics: () => apiClient.getSwipeAnalytics(),
+
+    // Alternative method names for backward compatibility
+    startSession: (data: any) => apiClient.createSwipeSession(data),
+  },
+
+  // Recommendation methods
+  recommendations: {
+    generate: (data: RecommendationRequest) => apiClient.generateRecommendations(data),
+    getRecommendations: (params?: any) => apiClient.getRecommendations(params),
+    getRecommendation: (id: string) => apiClient.getRecommendation(id),
+    provideFeedback: (id: string, feedback: any) => apiClient.provideFeedback(id, feedback),
+    refresh: () => apiClient.refreshRecommendations(),
+
+    // Alternative method name for compatibility with tests
+    createRecommendationRequest: (data: RecommendationRequest) => apiClient.generateRecommendations(data),
+  },
+
+  // Gift Link methods
+  giftLinks: {
+    create: (data: CreateGiftLinkRequest) => apiClient.createGiftLink(data),
+    getAll: () => apiClient.getGiftLinks(),
+    getById: (id: string) => apiClient.getGiftLink(id),
+    getByToken: (token: string) => apiClient.getGiftLinkByToken(token),
+    delete: (id: string) => apiClient.deleteGiftLink(id),
+    getAnalytics: (id: string) => apiClient.getGiftLinkAnalytics(id),
+  },
+
+  // Analytics methods
+  analytics: {
+    trackEvent: (event: AnalyticsEvent) => apiClient.trackEvent(event),
+    getDashboard: () => apiClient.getAnalyticsDashboard(),
+  },
+
+  // Health check
+  health: () => apiClient.healthCheck(),
 };
 
 export default apiClient;

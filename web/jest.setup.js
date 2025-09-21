@@ -1,6 +1,16 @@
 import '@testing-library/jest-dom';
 import 'jest-canvas-mock';
 
+// Mock global fetch for API testing
+global.fetch = jest.fn(() =>
+  Promise.resolve({
+    ok: true,
+    status: 200,
+    json: () => Promise.resolve({}),
+    text: () => Promise.resolve(''),
+  })
+);
+
 // Mock Next.js router
 jest.mock('next/router', () => ({
   useRouter() {
