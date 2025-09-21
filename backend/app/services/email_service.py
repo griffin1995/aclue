@@ -201,7 +201,7 @@ class EmailService:
         <body>
             <div class="container">
                 <div class="header">
-                    <img src="https://aclue.app/aclue-logo-email.png" alt="aclue - AI-Powered Gift Discovery" class="logo-img" />
+                    <img src="https://aclue.app/aclue_text_clean.png" alt="aclue - AI-Powered Gift Discovery" class="logo-img" />
                     <div class="subtitle">AI-Powered Gift Discovery</div>
                 </div>
                 
@@ -232,10 +232,8 @@ class EmailService:
                         <span><strong>Curated Quality:</strong> Only the best products make it to your recommendations</span>
                     </div>
                     
-                    <p>We're working hard to perfect the experience and will notify you the moment we're ready to launch. In the meantime, you can explore our alpha version to get a taste of what's coming!</p>
-                    
-                    <a href="https://aclue.app/landingpage" class="cta-button">Explore Alpha Version</a>
-                    
+                    <p>We're working hard to perfect the experience and will notify you the moment we're ready to launch. We'll keep you updated on our progress and notify you as soon as we're ready for you to experience the full aclue platform!</p>
+
                     <p>Have questions or feedback? Simply reply to this email - we read and respond to every message!</p>
                     
                     <p>Excited to have you on board,<br>
@@ -262,7 +260,7 @@ class EmailService:
         👥 Social Integration: Connect with friends and family for better gift ideas
         ⭐ Curated Quality: Only the best products make it to your recommendations
 
-        We're working hard to perfect the experience and will notify you the moment we're ready to launch. In the meantime, you can explore our alpha version at: https://aclue.app/landingpage
+        We're working hard to perfect the experience and will notify you the moment we're ready to launch. We'll keep you updated on our progress and notify you as soon as we're ready for you to experience the full aclue platform!
 
         Have questions or feedback? Simply reply to this email - we read and respond to every message!
 
@@ -312,7 +310,7 @@ class EmailService:
         <body>
             <div class="container">
                 <div class="header">
-                    <img src="https://aclue.app/aclue-logo-email.png" alt="aclue - AI-Powered Gift Discovery" class="logo-img" />
+                    <img src="https://aclue.app/aclue_text_clean.png" alt="aclue - AI-Powered Gift Discovery" class="logo-img" />
                     <h2 class="header-title">🎉 New Newsletter Signup - aclue</h2>
                 </div>
                 
