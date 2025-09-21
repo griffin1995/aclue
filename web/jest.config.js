@@ -34,7 +34,7 @@ const customJestConfig = {
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   
   // Module path mapping for imports
-  moduleNameMapping: {
+  moduleNameMapper: {
     // Handle CSS imports (with CSS modules)
     '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',
     
@@ -141,11 +141,11 @@ const customJestConfig = {
   // Verbose output for debugging
   verbose: process.env.NODE_ENV === 'development',
   
-  // Watch plugins for development
-  watchPlugins: [
-    'jest-watch-typeahead/filename',
-    'jest-watch-typeahead/testname',
-  ],
+  // Watch plugins for development (removed due to version conflicts)
+  // watchPlugins: [
+  //   'jest-watch-typeahead/filename',
+  //   'jest-watch-typeahead/testname',
+  // ],
   
   // Error handling
   errorOnDeprecated: true,
