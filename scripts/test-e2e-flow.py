@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-End-to-end test for GiftSync user flow
+End-to-end test for Aclue user flow
 Tests the complete journey from user onboarding to recommendations
 """
 
@@ -13,7 +13,7 @@ from typing import Dict, List, Optional
 
 API_BASE_URL = "http://localhost:8000"
 
-class GiftSyncE2ETest:
+class AclueE2ETest:
     def __init__(self):
         self.session = requests.Session()
         self.user_id = str(uuid.uuid4())  # Use proper UUID
@@ -281,7 +281,7 @@ class GiftSyncE2ETest:
             
     def run_complete_test(self) -> bool:
         """Run the complete end-to-end test suite"""
-        self.log("Starting GiftSync End-to-End Test Suite")
+        self.log("Starting Aclue End-to-End Test Suite")
         self.log(f"   Test User ID: {self.user_id}")
         
         tests = [
@@ -321,13 +321,13 @@ class GiftSyncE2ETest:
         self.log(f"   Failed: {failed}/{total}")
         
         if failed == 0:
-            self.log("SUCCESS ALL TESTS PASSED - GiftSync E2E flow is working!", "SUCCESS")
+            self.log("SUCCESS ALL TESTS PASSED - Aclue E2E flow is working!", "SUCCESS")
         else:
             self.log(f"WARNING  {failed} tests failed - needs investigation", "WARNING")
             
         return failed == 0
 
 if __name__ == "__main__":
-    tester = GiftSyncE2ETest()
+    tester = AclueE2ETest()
     success = tester.run_complete_test()
     exit(0 if success else 1)

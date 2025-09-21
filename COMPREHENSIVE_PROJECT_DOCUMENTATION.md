@@ -1,4 +1,4 @@
-# GiftSync - Comprehensive Project Documentation
+# Aclue - Comprehensive Project Documentation
 
 > **CRITICAL DEVELOPMENT PRINCIPLES - READ BEFORE PROCEEDING:**
 > 
@@ -18,7 +18,7 @@
 
 ## 🎯 Project Overview
 
-GiftSync is an AI-powered gift recommendation platform using swipe-based preference discovery to generate personalised gift suggestions whilst maintaining the element of surprise. The platform targets the £45B global gift market with a projected £2.5M revenue by Year 3.
+Aclue is an AI-powered gift recommendation platform using swipe-based preference discovery to generate personalised gift suggestions whilst maintaining the element of surprise. The platform targets the £45B global gift market with a projected £2.5M revenue by Year 3.
 
 ### Business Context
 - **Target Market**: £45B global gift market, £9.3B UK market
@@ -159,7 +159,7 @@ NEXT_PUBLIC_API_URL=http://localhost:8000
 NEXT_PUBLIC_WEB_URL=http://localhost:3000
 
 # Amazon Associates Configuration
-NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG=giftsync-21
+NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG=aclue-21
 NEXT_PUBLIC_AMAZON_REGION=uk
 
 # Analytics
@@ -394,7 +394,7 @@ GET /docs       # Interactive API documentation (development)
 ```typescript
 // UK Amazon Associates Configuration (ACTIVE)
 uk: {
-  associateTag: 'giftsync-21',        // ✅ APPROVED & ACTIVE
+  associateTag: 'aclue-21',        // ✅ APPROVED & ACTIVE
   baseUrl: 'https://amazon.co.uk',
   apiHost: 'webservices.amazon.co.uk',
   marketplace: 'A1F83G8C2ARO7P',
@@ -432,7 +432,7 @@ const affiliateUrl = generateAffiliateLink(
 );
 
 // Generated URL includes:
-// - Associate tag: tag=giftsync-21
+// - Associate tag: tag=aclue-21
 // - UTM parameters for tracking
 // - Unique tracking identifier
 // - Timestamp for attribution
@@ -600,7 +600,7 @@ NODE_ENV=development
 - **Frontend**: Vercel (free tier with excellent Next.js integration)
 - **API**: Railway (straightforward deployment with GitHub integration)
 - **Database**: Supabase free tier (sufficient for staging)
-- **Domain**: giftsync.jackgriffin.dev (ready for deployment)
+- **Domain**: aclue.jackgriffin.dev (ready for deployment)
 - **Total Cost**: $0/month for staging environment
 
 ### Production Scaling Path
@@ -664,7 +664,7 @@ curl -X POST "http://localhost:8000/api/v1/swipes/sessions" \
 
 ### Affiliate APIs (Revenue Critical) ✅
 - **Amazon Associates Programme**: Primary affiliate integration for product data (ACTIVE)
-  - **Associate ID**: giftsync-21 ✅ APPROVED
+  - **Associate ID**: aclue-21 ✅ APPROVED
   - **Status**: ✅ Live and generating revenue
   - **Integration**: Complete affiliate link system implemented
 - **Commission Junction**: Secondary affiliate network for diverse product sources (planned)
@@ -864,19 +864,19 @@ This is a **production-ready foundation** for the £45B gift market opportunity 
 ✅ **Swipe Interface**: Tinder-style product discovery and preference learning  
 ✅ **Analytics Dashboard**: User insights and recommendation performance tracking  
 ✅ **Scalable Architecture**: Ready for production deployment and growth  
-✅ **Amazon Associates Integration**: Active affiliate revenue generation (Associate ID: giftsync-21)  
+✅ **Amazon Associates Integration**: Active affiliate revenue generation (Associate ID: aclue-21)  
 ✅ **Legal Compliance**: FTC-compliant disclosure pages and GDPR cookie policy  
 ✅ **Comprehensive Tracking**: Affiliate click and conversion analytics system  
 
 ### Current Revenue Status
-- **Amazon Associates Account**: ✅ APPROVED (Associate ID: giftsync-21)
+- **Amazon Associates Account**: ✅ APPROVED (Associate ID: aclue-21)
 - **Affiliate Link System**: ✅ FULLY IMPLEMENTED
 - **Revenue Tracking**: ✅ COMPREHENSIVE ANALYTICS
 - **Legal Compliance**: ✅ FTC & GDPR COMPLIANT
 - **Target**: Generate 3 qualifying sales for full API access
 
-The platform successfully demonstrates the core GiftSync value proposition with active revenue generation and is ready for the next phase of development, user acquisition, and scaling affiliate revenue.
+The platform successfully demonstrates the core Aclue value proposition with active revenue generation and is ready for the next phase of development, user acquisition, and scaling affiliate revenue.
 
 ---
 
-> **Remember**: Never take shortcuts, always use British English, never add Claude attribution, remember the complete tech stack, and commit logical changes with industry-standard messages. This documentation serves as the single source of truth for the entire GiftSync project.
+> **Remember**: Never take shortcuts, always use British English, never add Claude attribution, remember the complete tech stack, and commit logical changes with industry-standard messages. This documentation serves as the single source of truth for the entire Aclue project.

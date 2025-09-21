@@ -1,4 +1,4 @@
-# GiftSync Web Application - Features Implemented
+# Aclue Web Application - Features Implemented
 
 ## ✅ Authentication System (Complete)
 

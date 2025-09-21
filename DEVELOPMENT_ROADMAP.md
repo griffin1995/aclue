@@ -1,7 +1,7 @@
 # Aclue - Development Roadmap & Next Steps
 **Comprehensive Development Plan & Implementation Strategy**
 
-> **REBRANDING COMPLETE**: August 2025 - Full rebrand from GiftSync/prznt to Aclue successfully completed across all systems.
+> **REBRANDING COMPLETE**: August 2025 - Full rebrand from Aclue/aclue to Aclue successfully completed across all systems.
 
 > **Last Updated**: August 5, 2025  
 > **Current Phase**: Post-Rebranding Production Operations  
@@ -654,7 +654,7 @@ class OnlineLearningEngine:
 Production Stack:
   Frontend:
     - Vercel (Static hosting)
-    - Custom domain: giftsync.jackgriffin.dev
+    - Custom domain: aclue.jackgriffin.dev
     - CDN: Global edge caching
     - SSL: Automatic HTTPS
   
@@ -701,7 +701,7 @@ jobs:
     needs: test
     steps:
       - name: Deploy to Cloud Run
-        run: gcloud run deploy giftsync-api --source .
+        run: gcloud run deploy aclue-api --source .
   
   deploy-frontend:
     needs: test

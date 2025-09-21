@@ -20,6 +20,7 @@ import logging
 from app.database import get_supabase_service
 from app.core.config import settings
 from app.services.email_service import EmailService
+from app.core.middleware import limiter
 
 # Configure logging
 logger = logging.getLogger(__name__)
@@ -53,33 +54,40 @@ class NewsletterSubscriberResponse(BaseModel):
 email_service = EmailService()
 
 @router.post("/signup", response_model=NewsletterSignupResponse)
+@limiter.limit("5/minute")  # Allow 5 newsletter signups per minute per IP
 async def newsletter_signup(
-    request: NewsletterSignupRequest,
-    background_tasks: BackgroundTasks,
-    http_request: Request
+    request: Request,
+    newsletter_request: NewsletterSignupRequest,
+    background_tasks: BackgroundTasks
 ):
     """
     Handle newsletter signup with database storage and email notifications.
-    
+
     This endpoint:
     1. Validates email format
     2. Checks for existing subscription
     3. Stores signup in database
     4. Sends welcome email to subscriber
     5. Sends admin notification to contact@aclue.app
-    
+
+    Rate limiting: 5 requests per minute per IP address to prevent abuse.
+
     Args:
-        request: Newsletter signup request containing email and source
+        request: HTTP request object for IP address extraction
+        newsletter_request: Newsletter signup request containing email and source
         background_tasks: FastAPI background tasks for email sending
-        http_request: HTTP request object for IP address extraction
-    
+
     Returns:
         NewsletterSignupResponse with success status and message
+
+    Raises:
+        HTTPException: 429 if rate limit exceeded
+        HTTPException: 500 if database operation fails
     """
     try:
         # Get client IP address
-        client_ip = http_request.client.host if http_request.client else None
-        logger.info(f"Newsletter signup attempt from IP: {client_ip} for email: {request.email}")
+        client_ip = request.client.host if request.client else None
+        logger.info(f"Newsletter signup attempt from IP: {client_ip} for email: {newsletter_request.email}")
 
         # Debug: Check environment variables
         logger.info(f"SUPABASE_URL configured: {bool(settings.SUPABASE_URL)}")
@@ -92,12 +100,12 @@ async def newsletter_signup(
         
         # Check if email already exists
         logger.info("Checking for existing newsletter signup...")
-        existing_signup = supabase.table("newsletter_signups").select("*").eq("email", request.email).execute()
+        existing_signup = supabase.table("newsletter_signups").select("*").eq("email", newsletter_request.email).execute()
         logger.info(f"Existing signup query result: {len(existing_signup.data) if existing_signup.data else 0} records found")
-        
+
         if existing_signup.data:
             # Email already exists
-            logger.info(f"Newsletter signup attempted for existing email: {request.email}")
+            logger.info(f"Newsletter signup attempted for existing email: {newsletter_request.email}")
             return NewsletterSignupResponse(
                 success=True,
                 message="Thank you! You're already subscribed to our newsletter.",
@@ -106,9 +114,9 @@ async def newsletter_signup(
         
         # Create new newsletter signup record
         signup_data = {
-            "email": request.email,
-            "source": request.source,
-            "user_agent": request.user_agent,
+            "email": newsletter_request.email,
+            "source": newsletter_request.source,
+            "user_agent": newsletter_request.user_agent,
             "ip_address": client_ip,
             "signup_timestamp": datetime.utcnow().isoformat(),
             "is_active": True
@@ -124,14 +132,14 @@ async def newsletter_signup(
             raise HTTPException(status_code=500, detail="Failed to save newsletter signup")
         
         signup_id = result.data[0]["id"]
-        logger.info(f"Newsletter signup created successfully: {signup_id} for {request.email}")
-        
+        logger.info(f"Newsletter signup created successfully: {signup_id} for {newsletter_request.email}")
+
         # Send emails in background
         background_tasks.add_task(
             send_newsletter_emails,
-            request.email,
+            newsletter_request.email,
             signup_id,
-            request.source
+            newsletter_request.source
         )
         
         return NewsletterSignupResponse(

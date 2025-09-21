@@ -1,4 +1,4 @@
-# GiftSync Session State - Current Context
+# Aclue Session State - Current Context
 
 **Last Updated:** June 30, 2025  
 **Session Status:** Ready to continue from authentication completion

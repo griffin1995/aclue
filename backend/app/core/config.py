@@ -8,7 +8,7 @@ affiliate tracking, and external integrations.
 
 REBRANDING NOTE (August 2025):
 This configuration file was updated during the comprehensive rebranding
-from GiftSync/prznt to Aclue. All service names, bucket names, and
+from Aclue/aclue to Aclue. All service names, bucket names, and
 project identifiers have been updated to reflect the new brand identity.
 
 Key Features:
@@ -79,10 +79,11 @@ class Settings(BaseSettings):
     # ===========================================================================
     # Core application metadata and environment settings
     
-    PROJECT_NAME: str = "aclue API"           # Application name for logging/docs (rebranded from GiftSync/prznt)
+    PROJECT_NAME: str = "aclue API"           # Application name for logging/docs (rebranded from Aclue/aclue)
     VERSION: str = "1.0.0"                       # API version for client compatibility
     ENVIRONMENT: str = "development"              # Runtime environment (dev/staging/prod)
-    DEBUG: bool = True                            # Debug mode (disable in production)
+    # SECURITY CRITICAL: MUST be False in production to prevent information leakage
+    DEBUG: bool = os.getenv("DEBUG", "false").lower() in ("true", "1", "yes", "on") if os.getenv("DEBUG") else False
     
     # ===========================================================================
     # SERVER CONFIGURATION
@@ -98,7 +99,9 @@ class Settings(BaseSettings):
     # ===========================================================================
     # JWT authentication and cryptographic settings
     
-    SECRET_KEY: str = "your-secret-key-change-in-production"  # JWT signing secret (MUST change in production)
+    # SECURITY CRITICAL: This MUST be overridden via environment variable in production
+    # Use: openssl rand -hex 64 or python3 -c "import secrets; print(secrets.token_urlsafe(64))"
+    SECRET_KEY: str = os.getenv("SECRET_KEY", "INSECURE-DEVELOPMENT-KEY-NEVER-USE-IN-PRODUCTION")
     ALGORITHM: str = "HS256"                      # JWT algorithm (HMAC SHA-256)
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30         # Access token lifetime (30 minutes)
     REFRESH_TOKEN_EXPIRE_DAYS: int = 30           # Refresh token lifetime (30 days)
@@ -108,7 +111,21 @@ class Settings(BaseSettings):
     # ===========================================================================
     # Cross-Origin Resource Sharing settings
     
-    ALLOWED_HOSTS: List[str] = ["*"]              # Allowed origins (restrict in production)
+    # SECURITY: In production, restrict to specific domains only
+    # Example: ["aclue.app", "aclue.co.uk", "api.aclue.app"]
+    ALLOWED_HOSTS: List[str] = os.getenv(
+        "ALLOWED_HOSTS",
+        "localhost,127.0.0.1,aclue.app,aclue.co.uk,*.aclue.app,*.aclue.co.uk"
+    ).split(",") if os.getenv("ALLOWED_HOSTS") else [
+        "localhost",
+        "127.0.0.1",
+        "aclue.app",
+        "www.aclue.app",
+        "aclue.co.uk",
+        "www.aclue.co.uk",
+        "api.aclue.app",
+        "aclue-backend-production.up.railway.app"
+    ]
     
     # ===========================================================================
     # DATABASE CONFIGURATION
@@ -149,7 +166,7 @@ class Settings(BaseSettings):
     # ===========================================================================
     # Amazon S3 file storage settings
     
-    S3_BUCKET_NAME: str = "aclue-assets"       # S3 bucket for file uploads (rebranded from giftsync-assets)
+    S3_BUCKET_NAME: str = "aclue-assets"       # S3 bucket for file uploads (rebranded from aclue-assets)
     S3_BUCKET_REGION: str = "eu-west-2"           # S3 bucket region
     
     # ===========================================================================
@@ -157,14 +174,14 @@ class Settings(BaseSettings):
     # ===========================================================================
     # Amazon DynamoDB NoSQL database settings
     
-    DYNAMODB_TABLE_PREFIX: str = "aclue"       # Table name prefix for multi-environment (rebranded from giftsync)
+    DYNAMODB_TABLE_PREFIX: str = "aclue"       # Table name prefix for multi-environment (rebranded from aclue)
     
     # ===========================================================================
     # SAGEMAKER ML CONFIGURATION
     # ===========================================================================
     # Amazon SageMaker machine learning model settings
     
-    SAGEMAKER_ENDPOINT_NAME: str = "aclue-recommendations"  # ML model endpoint for recommendations (rebranded from giftsync-recommendations)
+    SAGEMAKER_ENDPOINT_NAME: str = "aclue-recommendations"  # ML model endpoint for recommendations (rebranded from aclue-recommendations)
     
     # ===========================================================================
     # MACHINE LEARNING CONFIGURATION
@@ -202,7 +219,7 @@ class Settings(BaseSettings):
     # ===========================================================================
     # Third-party service integration settings
     
-    AMAZON_ASSOCIATE_TAG: Optional[str] = None    # Amazon Associates affiliate tag (aclue-21, rebranded from giftsync-21/prznt-21)
+    AMAZON_ASSOCIATE_TAG: Optional[str] = None    # Amazon Associates affiliate tag (aclue-21, rebranded from aclue-21/aclue-21)
     AMAZON_ACCESS_KEY: Optional[str] = None       # Amazon Product Advertising API key
     AMAZON_SECRET_KEY: Optional[str] = None       # Amazon Product Advertising API secret
     

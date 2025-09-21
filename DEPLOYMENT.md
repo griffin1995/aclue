@@ -1,6 +1,6 @@
 # Aclue Production Deployment Guide
 
-> **REBRANDING NOTE (August 2025)**: This deployment guide has been updated to reflect the complete rebrand from GiftSync to Aclue. All service names, URLs, and configurations have been updated.
+> **REBRANDING NOTE (August 2025)**: This deployment guide has been updated to reflect the complete rebrand from Aclue to Aclue. All service names, URLs, and configurations have been updated.
 
 ## 🚀 Deployment Architecture
 
@@ -10,7 +10,7 @@
 
 **Legacy URLs (Deprecated):**
 - ~~https://aclue-backend-production.up.railway.app~~ (redirects to new backend)
-- ~~https://prznt.app~~ (redirects to aclue.app)
+- ~~https://aclue.app~~ (redirects to aclue.app)
 
 **Technology Stack:**
 - **Backend**: FastAPI + Supabase PostgreSQL
@@ -155,7 +155,7 @@ export const config = {
 # Core Settings
 ENVIRONMENT=production
 DEBUG=false
-SECRET_KEY=giftsync-production-secret-key-2025-change-this-256-bit-railway
+SECRET_KEY=aclue-production-secret-key-2025-change-this-256-bit-railway
 PORT=8000
 
 # Supabase Database

@@ -27,7 +27,7 @@ The newsletter signup system has been fully implemented with the following compo
 - **Status**: Fully implemented
 - **Features**:
   - Welcome email to subscriber
-  - Admin notification to contact@prznt.app
+  - Admin notification to contact@aclue.app
   - Professional HTML email templates
   - Resend API integration
 
@@ -90,7 +90,7 @@ curl -X POST "http://localhost:8000/api/v1/newsletter/signup" \
 
 ### Email Templates
 - **Welcome Email**: Professional branded template with beta access info
-- **Admin Notification**: Detailed signup information sent to contact@prznt.app
+- **Admin Notification**: Detailed signup information sent to contact@aclue.app
 - **Features**:
   - Professional HTML design
   - Mobile-responsive
@@ -100,25 +100,25 @@ curl -X POST "http://localhost:8000/api/v1/newsletter/signup" \
 ## 🎯 How It Works
 
 ### User Flow
-1. User visits https://prznt.app (maintenance page)
+1. User visits https://aclue.app (maintenance page)
 2. User enters email in newsletter signup form
 3. Frontend sends POST request to `/api/v1/newsletter/signup`
 4. Backend validates email and checks for duplicates
 5. Backend stores signup in `newsletter_signups` table
 6. Backend sends welcome email to user
-7. Backend sends admin notification to contact@prznt.app
+7. Backend sends admin notification to contact@aclue.app
 8. Frontend shows success message
 
 ### Email Flow
 1. **Welcome Email** → Subscriber
-   - Subject: "Welcome to prznt - AI-Powered Gift Discovery! 🎁"
+   - Subject: "Welcome to aclue - AI-Powered Gift Discovery! 🎁"
    - Content: Beta access info, features, alpha link
-   - From: "prznt <noreply@prznt.app>"
+   - From: "aclue <noreply@aclue.app>"
 
-2. **Admin Notification** → contact@prznt.app
+2. **Admin Notification** → contact@aclue.app
    - Subject: "New Newsletter Signup: {email}"
    - Content: Subscriber details, signup source, timestamp
-   - From: "prznt <noreply@prznt.app>"
+   - From: "aclue <noreply@aclue.app>"
 
 ## 🔧 Technical Implementation
 

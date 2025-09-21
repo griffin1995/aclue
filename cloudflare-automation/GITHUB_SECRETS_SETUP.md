@@ -1,6 +1,6 @@
 # GitHub Secrets Configuration Guide
 
-This guide provides step-by-step instructions for setting up the required GitHub secrets for the GiftSync deployment pipeline.
+This guide provides step-by-step instructions for setting up the required GitHub secrets for the Aclue deployment pipeline.
 
 ## Overview
 
@@ -70,7 +70,7 @@ The deployment pipeline requires the following secrets to be configured in your 
   - **Purpose**: Backend API endpoint for health checks and frontend integration
   - **Value**: Your Railway deployment URL
   - **How to get**: Railway Dashboard > Your Service > Settings > Domains
-  - **Example**: `https://giftsync-backend-production.up.railway.app`
+  - **Example**: `https://aclue-backend-production.up.railway.app`
 
 ## How to Add Secrets to GitHub
 

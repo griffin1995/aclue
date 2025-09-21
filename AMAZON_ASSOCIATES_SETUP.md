@@ -25,7 +25,7 @@ This document outlines the step-by-step process for setting up Amazon Associates
 - Tax ID/National Insurance Number: [TO BE PROVIDED]
 
 **Website Information:**
-- Primary Website URL: http://localhost:3000 (development) / https://giftsync.jackgriffin.dev (production)
+- Primary Website URL: http://localhost:3000 (development) / https://aclue.jackgriffin.dev (production)
 - Platform Type: Web Application
 - Category: Gift Recommendation & E-commerce
 - Content Description: AI-powered gift recommendation platform using swipe-based preference discovery
@@ -46,7 +46,7 @@ This document outlines the step-by-step process for setting up Amazon Associates
 ### Step 2: Website/Platform Registration
 **Primary Platform Details:**
 ```
-Website URL: https://giftsync.jackgriffin.dev (when deployed)
+Website URL: https://aclue.jackgriffin.dev (when deployed)
 Platform Type: Web Application
 Category: Shopping/Gift Recommendations
 Description: AI-powered gift recommendation platform that helps users discover personalized gift suggestions through intelligent swipe-based preference learning.
@@ -96,7 +96,7 @@ Content Strategy:
 ### Sales Requirement (Priority 1)
 **Goal**: Generate 3 qualifying sales within 180 days
 **Strategy**:
-1. Deploy to production domain (giftsync.jackgriffin.dev)
+1. Deploy to production domain (aclue.jackgriffin.dev)
 2. Implement manual affiliate links initially
 3. Focus on high-conversion gift categories
 4. Target seasonal gift-giving periods
@@ -115,9 +115,9 @@ Content Strategy:
 // Add to config/index.ts
 export const affiliateConfig = {
   amazon: {
-    associateTag: 'giftsync-21', // UK associate tag
+    associateTag: 'aclue-21', // UK associate tag
     baseUrl: 'https://amazon.co.uk',
-    trackingParam: 'tag=giftsync-21',
+    trackingParam: 'tag=aclue-21',
   },
 };
 
@@ -170,7 +170,7 @@ class AmazonProductService:
 ## 🎯 Action Items
 
 ### Immediate (This Week)
-- [ ] **Deploy production website** to giftsync.jackgriffin.dev
+- [ ] **Deploy production website** to aclue.jackgriffin.dev
 - [ ] **Add required compliance pages** (privacy, terms, affiliate disclosure)
 - [ ] **Complete Amazon Associates application** with production URL
 - [ ] **Implement basic affiliate link system** for manual testing
@@ -205,7 +205,7 @@ class AmazonProductService:
 ## 📞 Next Steps
 
 1. **Prepare Application Materials**: Gather personal/business information
-2. **Deploy Production Site**: Set up giftsync.jackgriffin.dev domain
+2. **Deploy Production Site**: Set up aclue.jackgriffin.dev domain
 3. **Add Compliance Content**: Affiliate disclosures and legal pages
 4. **Submit Application**: Complete Amazon Associates UK registration
 5. **Implement Manual Links**: Start with curated product recommendations

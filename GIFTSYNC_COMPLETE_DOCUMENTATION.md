@@ -1,7 +1,7 @@
 # Aclue - Complete Technical Documentation
 **Comprehensive Technical, Business & Architecture Documentation**
 
-> **REBRANDING NOTE**: This file was originally named GIFTSYNC_COMPLETE_DOCUMENTATION.md but contains the fully updated Aclue documentation. The filename is maintained for historical reference but all content reflects the current Aclue brand.
+> **REBRANDING NOTE**: This file was originally named ACLUE_COMPLETE_DOCUMENTATION.md but contains the fully updated Aclue documentation. The filename is maintained for historical reference but all content reflects the current Aclue brand.
 
 > **Last Updated**: August 5, 2025  
 > **Version**: 4.1.0 (Post-Rebranding)  
@@ -682,7 +682,7 @@ npm run lint                                # ESLint checking
 Frontend: Next.js Static Build
 ├── Vercel (Hosting)
 ├── CDN (Global distribution)
-└── Custom Domain: giftsync.jackgriffin.dev
+└── Custom Domain: aclue.jackgriffin.dev
 
 Backend: FastAPI API
 ├── AWS Lambda / Google Cloud Run
@@ -706,10 +706,10 @@ Analytics & Monitoring:
 ```bash
 # Frontend to Vercel
 npm run build
-# Deploy to giftsync.jackgriffin.dev
+# Deploy to aclue.jackgriffin.dev
 
 # Backend to cloud provider
-docker build -t giftsync-api .
+docker build -t aclue-api .
 # Deploy to serverless platform
 
 # Database migrations
@@ -772,19 +772,19 @@ Status: Fully functional account with JWT tokens
 
 ### Current Associate Configuration
 ```
-Associate Tag: giftsync-20
+Associate Tag: aclue-20
 Programme: Amazon Associates UK
 Commission Rate: 2.5% - 7.5% (category dependent)
-Link Format: https://www.amazon.co.uk/dp/{ASIN}/?tag=giftsync-20
+Link Format: https://www.amazon.co.uk/dp/{ASIN}/?tag=aclue-20
 ```
 
 ### Affiliate URL Structure
 ```javascript
 // Current implementation in database
-const affiliateUrl = `https://www.amazon.co.uk/dp/${asin}/?tag=giftsync-20&linkCode=as2&creative=1633&creativeASIN=${asin}`;
+const affiliateUrl = `https://www.amazon.co.uk/dp/${asin}/?tag=aclue-20&linkCode=as2&creative=1633&creativeASIN=${asin}`;
 
 // Tracking parameters:
-// tag=giftsync-20        // Associate ID
+// tag=aclue-20        // Associate ID
 // linkCode=as2           // Link type
 // creative=1633          // Creative ID  
 // creativeASIN={asin}    // Product identifier

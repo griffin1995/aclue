@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 
 class BaseRecommender(ABC):
     """
-    Abstract base class for all recommendation models in GiftSync.
+    Abstract base class for all recommendation models in Aclue.
     
     This defines the interface that all recommendation models must implement,
     ensuring consistency across different algorithms and approaches.

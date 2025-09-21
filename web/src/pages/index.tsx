@@ -2,7 +2,7 @@
  * Aclue Homepage Component
  * 
  * REBRANDING NOTE (August 2025):
- * This component was updated during the comprehensive rebrand from GiftSync/prznt to Aclue.
+ * This component was updated during the comprehensive rebrand from Aclue/aclue to Aclue.
  * All branding elements, meta tags, and user-facing content have been updated to reflect
  * the new Aclue brand identity and aclue.app domain.
  */
@@ -108,10 +108,21 @@ export default function HomePage() {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
+              <img
+                src="/aclue-logo.png"
+                alt="Aclue Logo"
+                className="h-8 w-auto object-contain"
+                onError={(e) => {
+                  // Fallback to Gift icon if logo fails to load
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const fallbackDiv = target.nextElementSibling as HTMLElement;
+                  if (fallbackDiv) fallbackDiv.style.display = 'flex';
+                }}
+              />
+              <div className="hidden w-8 h-8 bg-primary-600 rounded-lg items-center justify-center">
                 <Gift className="w-5 h-5 text-white" />
               </div>
-              <span className="text-xl font-bold text-gray-900">aclue</span>
             </Link>
 
             {/* Navigation Links */}
@@ -570,10 +581,21 @@ export default function HomePage() {
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
+                <img
+                  src="/aclue-logo.png"
+                  alt="Aclue Logo"
+                  className="h-8 w-auto object-contain"
+                  onError={(e) => {
+                    // Fallback to Gift icon if logo fails to load
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    const fallbackDiv = target.nextElementSibling as HTMLElement;
+                    if (fallbackDiv) fallbackDiv.style.display = 'flex';
+                  }}
+                />
+                <div className="hidden w-8 h-8 bg-primary-600 rounded-lg items-center justify-center">
                   <Gift className="w-5 h-5 text-white" />
                 </div>
-                <span className="text-xl font-bold">aclue</span>
               </div>
               <p className="text-gray-400 mb-4">
                 A data-led insight layer that transforms how gifts are chosen.

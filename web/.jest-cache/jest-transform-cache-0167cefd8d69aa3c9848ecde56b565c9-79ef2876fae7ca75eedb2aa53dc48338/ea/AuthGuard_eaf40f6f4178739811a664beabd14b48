@@ -1,0 +1,173 @@
+7515ccc9cd3c05416f52677c9b4dd122
+/**
+ * aclue Authentication Guard Component
+ * 
+ * Provides route-level authentication and authorization for the aclue application.
+ * Handles protected routes, authentication redirects, and loading states during
+ * authentication checks. Ensures secure access to user-specific features.
+ * 
+ * Key Features:
+ *   - Automatic authentication checking on route changes
+ *   - Protected route enforcement with redirect logic
+ *   - Public route access for unauthenticated users
+ *   - Authentication route handling (prevent double login)
+ *   - Loading states during authentication verification
+ *   - JWT token validation and refresh
+ * 
+ * Security Features:
+ *   - Server-side authentication validation
+ *   - Secure token storage and management
+ *   - Session timeout handling
+ *   - Unauthorized access prevention
+ *   - Seamless login/logout flow
+ * 
+ * Route Categories:
+ *   - Protected: Require valid authentication
+ *   - Auth: Login/register pages (redirect if logged in)
+ *   - Public: Accessible without authentication
+ * 
+ * Usage:
+ *   <AuthGuard>
+ *     <YourProtectedComponent />
+ *   </AuthGuard>
+ * 
+ * Integration:
+ *   - Works with AuthContext for global auth state
+ *   - Uses Next.js router for navigation
+ *   - Coordinates with PageLoader for UX
+ */ "use strict";
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+function _export(target, all) {
+    for(var name in all)Object.defineProperty(target, name, {
+        enumerable: true,
+        get: all[name]
+    });
+}
+_export(exports, {
+    AuthGuard: function() {
+        return AuthGuard;
+    },
+    default: function() {
+        return _default;
+    }
+});
+const _jsxruntime = require("react/jsx-runtime");
+const _react = /*#__PURE__*/ _interop_require_wildcard(require("react"));
+const _router = require("next/router");
+const _AuthContext = require("../../context/AuthContext");
+const _PageLoader = require("../ui/PageLoader");
+function _getRequireWildcardCache(nodeInterop) {
+    if (typeof WeakMap !== "function") return null;
+    var cacheBabelInterop = new WeakMap();
+    var cacheNodeInterop = new WeakMap();
+    return (_getRequireWildcardCache = function(nodeInterop) {
+        return nodeInterop ? cacheNodeInterop : cacheBabelInterop;
+    })(nodeInterop);
+}
+function _interop_require_wildcard(obj, nodeInterop) {
+    if (!nodeInterop && obj && obj.__esModule) {
+        return obj;
+    }
+    if (obj === null || typeof obj !== "object" && typeof obj !== "function") {
+        return {
+            default: obj
+        };
+    }
+    var cache = _getRequireWildcardCache(nodeInterop);
+    if (cache && cache.has(obj)) {
+        return cache.get(obj);
+    }
+    var newObj = {
+        __proto__: null
+    };
+    var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;
+    for(var key in obj){
+        if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) {
+            var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;
+            if (desc && (desc.get || desc.set)) {
+                Object.defineProperty(newObj, key, desc);
+            } else {
+                newObj[key] = obj[key];
+            }
+        }
+    }
+    newObj.default = obj;
+    if (cache) {
+        cache.set(obj, newObj);
+    }
+    return newObj;
+}
+// Routes that require authentication
+const PROTECTED_ROUTES = [
+    "/dashboard",
+    "/profile",
+    "/settings",
+    "/recommendations",
+    "/gift-links",
+    "/onboarding"
+];
+// Routes that should redirect authenticated users
+const AUTH_ROUTES = [
+    "/auth/login",
+    "/auth/register",
+    "/auth/forgot-password",
+    "/auth/reset-password"
+];
+const AuthGuard = ({ children })=>{
+    const { isAuthenticated, isInitialized, isLoading, isLoggingOut } = (0, _AuthContext.useAuth)();
+    const router = (0, _router.useRouter)();
+    const currentPath = router.asPath?.split("?")[0] || "/"; // Remove query params
+    (0, _react.useEffect)(()=>{
+        if (!isInitialized) return;
+        // Don't redirect during logout process
+        if (isLoggingOut) return;
+        const isProtectedRoute = PROTECTED_ROUTES.some((route)=>currentPath.startsWith(route));
+        const isAuthRoute = AUTH_ROUTES.some((route)=>currentPath.startsWith(route));
+        // Redirect unauthenticated users from protected routes
+        if (isProtectedRoute && !isAuthenticated) {
+            const redirectUrl = `/auth/login?redirect=${encodeURIComponent(currentPath)}`;
+            router.replace(redirectUrl);
+            return;
+        }
+        // Redirect authenticated users from auth routes
+        if (isAuthRoute && isAuthenticated) {
+            const redirectTo = router.query.redirect || "/dashboard";
+            router.replace(redirectTo);
+            return;
+        }
+    }, [
+        isAuthenticated,
+        isInitialized,
+        isLoggingOut,
+        currentPath,
+        router
+    ]);
+    // Show loading state while initializing or during redirects
+    if (!isInitialized || isLoading) {
+        return /*#__PURE__*/ (0, _jsxruntime.jsx)(_PageLoader.PageLoader, {
+            text: "Loading aclue..."
+        });
+    }
+    // Show loading for protected routes while unauthenticated (redirect happening)
+    const isProtectedRoute = PROTECTED_ROUTES.some((route)=>currentPath.startsWith(route));
+    if (isProtectedRoute && !isAuthenticated) {
+        return /*#__PURE__*/ (0, _jsxruntime.jsx)(_PageLoader.PageLoader, {
+            text: "Redirecting to login..."
+        });
+    }
+    // Show loading for auth routes while authenticated (redirect happening)
+    const isAuthRoute = AUTH_ROUTES.some((route)=>currentPath.startsWith(route));
+    if (isAuthRoute && isAuthenticated) {
+        return /*#__PURE__*/ (0, _jsxruntime.jsx)(_PageLoader.PageLoader, {
+            text: "Redirecting to dashboard..."
+        });
+    }
+    return /*#__PURE__*/ (0, _jsxruntime.jsx)(_jsxruntime.Fragment, {
+        children: children
+    });
+};
+const _default = AuthGuard;
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2phY2svRG9jdW1lbnRzL2FjbHVlLXByZXByb2Qvd2ViL3NyYy9jb21wb25lbnRzL2F1dGgvQXV0aEd1YXJkLnRzeCJdLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIGFjbHVlIEF1dGhlbnRpY2F0aW9uIEd1YXJkIENvbXBvbmVudFxuICogXG4gKiBQcm92aWRlcyByb3V0ZS1sZXZlbCBhdXRoZW50aWNhdGlvbiBhbmQgYXV0aG9yaXphdGlvbiBmb3IgdGhlIGFjbHVlIGFwcGxpY2F0aW9uLlxuICogSGFuZGxlcyBwcm90ZWN0ZWQgcm91dGVzLCBhdXRoZW50aWNhdGlvbiByZWRpcmVjdHMsIGFuZCBsb2FkaW5nIHN0YXRlcyBkdXJpbmdcbiAqIGF1dGhlbnRpY2F0aW9uIGNoZWNrcy4gRW5zdXJlcyBzZWN1cmUgYWNjZXNzIHRvIHVzZXItc3BlY2lmaWMgZmVhdHVyZXMuXG4gKiBcbiAqIEtleSBGZWF0dXJlczpcbiAqICAgLSBBdXRvbWF0aWMgYXV0aGVudGljYXRpb24gY2hlY2tpbmcgb24gcm91dGUgY2hhbmdlc1xuICogICAtIFByb3RlY3RlZCByb3V0ZSBlbmZvcmNlbWVudCB3aXRoIHJlZGlyZWN0IGxvZ2ljXG4gKiAgIC0gUHVibGljIHJvdXRlIGFjY2VzcyBmb3IgdW5hdXRoZW50aWNhdGVkIHVzZXJzXG4gKiAgIC0gQXV0aGVudGljYXRpb24gcm91dGUgaGFuZGxpbmcgKHByZXZlbnQgZG91YmxlIGxvZ2luKVxuICogICAtIExvYWRpbmcgc3RhdGVzIGR1cmluZyBhdXRoZW50aWNhdGlvbiB2ZXJpZmljYXRpb25cbiAqICAgLSBKV1QgdG9rZW4gdmFsaWRhdGlvbiBhbmQgcmVmcmVzaFxuICogXG4gKiBTZWN1cml0eSBGZWF0dXJlczpcbiAqICAgLSBTZXJ2ZXItc2lkZSBhdXRoZW50aWNhdGlvbiB2YWxpZGF0aW9uXG4gKiAgIC0gU2VjdXJlIHRva2VuIHN0b3JhZ2UgYW5kIG1hbmFnZW1lbnRcbiAqICAgLSBTZXNzaW9uIHRpbWVvdXQgaGFuZGxpbmdcbiAqICAgLSBVbmF1dGhvcml6ZWQgYWNjZXNzIHByZXZlbnRpb25cbiAqICAgLSBTZWFtbGVzcyBsb2dpbi9sb2dvdXQgZmxvd1xuICogXG4gKiBSb3V0ZSBDYXRlZ29yaWVzOlxuICogICAtIFByb3RlY3RlZDogUmVxdWlyZSB2YWxpZCBhdXRoZW50aWNhdGlvblxuICogICAtIEF1dGg6IExvZ2luL3JlZ2lzdGVyIHBhZ2VzIChyZWRpcmVjdCBpZiBsb2dnZWQgaW4pXG4gKiAgIC0gUHVibGljOiBBY2Nlc3NpYmxlIHdpdGhvdXQgYXV0aGVudGljYXRpb25cbiAqIFxuICogVXNhZ2U6XG4gKiAgIDxBdXRoR3VhcmQ+XG4gKiAgICAgPFlvdXJQcm90ZWN0ZWRDb21wb25lbnQgLz5cbiAqICAgPC9BdXRoR3VhcmQ+XG4gKiBcbiAqIEludGVncmF0aW9uOlxuICogICAtIFdvcmtzIHdpdGggQXV0aENvbnRleHQgZm9yIGdsb2JhbCBhdXRoIHN0YXRlXG4gKiAgIC0gVXNlcyBOZXh0LmpzIHJvdXRlciBmb3IgbmF2aWdhdGlvblxuICogICAtIENvb3JkaW5hdGVzIHdpdGggUGFnZUxvYWRlciBmb3IgVVhcbiAqL1xuXG5pbXBvcnQgUmVhY3QsIHsgUmVhY3ROb2RlLCB1c2VFZmZlY3QgfSBmcm9tICdyZWFjdCc7XG5pbXBvcnQgeyB1c2VSb3V0ZXIgfSBmcm9tICduZXh0L3JvdXRlcic7XG5pbXBvcnQgeyB1c2VBdXRoIH0gZnJvbSAnQC9jb250ZXh0L0F1dGhDb250ZXh0JztcbmltcG9ydCB7IFBhZ2VMb2FkZXIgfSBmcm9tICdAL2NvbXBvbmVudHMvdWkvUGFnZUxvYWRlcic7XG5cbi8qKlxuICogUHJvcHMgaW50ZXJmYWNlIGZvciBBdXRoR3VhcmQgY29tcG9uZW50LlxuICogXG4gKiBAcGFyYW0gY2hpbGRyZW4gLSBSZWFjdCBjb21wb25lbnRzIHRvIHJlbmRlciBpZiBhdXRoZW50aWNhdGlvbiBjaGVjayBwYXNzZXNcbiAqL1xuaW50ZXJmYWNlIEF1dGhHdWFyZFByb3BzIHtcbiAgY2hpbGRyZW46IFJlYWN0Tm9kZTtcbn1cblxuLy8gUm91dGVzIHRoYXQgcmVxdWlyZSBhdXRoZW50aWNhdGlvblxuY29uc3QgUFJPVEVDVEVEX1JPVVRFUyA9IFtcbiAgJy9kYXNoYm9hcmQnLFxuICAnL3Byb2ZpbGUnLFxuICAnL3NldHRpbmdzJyxcbiAgJy9yZWNvbW1lbmRhdGlvbnMnLFxuICAnL2dpZnQtbGlua3MnLFxuICAnL29uYm9hcmRpbmcnLFxuXTtcblxuLy8gUm91dGVzIHRoYXQgc2hvdWxkIHJlZGlyZWN0IGF1dGhlbnRpY2F0ZWQgdXNlcnNcbmNvbnN0IEFVVEhfUk9VVEVTID0gW1xuICAnL2F1dGgvbG9naW4nLFxuICAnL2F1dGgvcmVnaXN0ZXInLFxuICAnL2F1dGgvZm9yZ290LXBhc3N3b3JkJyxcbiAgJy9hdXRoL3Jlc2V0LXBhc3N3b3JkJyxcbl07XG5cbi8vIFB1YmxpYyByb3V0ZXMgdGhhdCBkb24ndCByZXF1aXJlIGFueSBhdXRoIGxvZ2ljXG4vLyBjb25zdCBQVUJMSUNfUk9VVEVTID0gW1xuLy8gICAnLycsXG4vLyAgICcvYWJvdXQnLFxuLy8gICAnL2NvbnRhY3QnLFxuLy8gICAnL3ByaXZhY3knLFxuLy8gICAnL3Rlcm1zJyxcbi8vICAgJy9wcmljaW5nJyxcbi8vICAgJy80MDQnLFxuLy8gXTtcblxuZXhwb3J0IGNvbnN0IEF1dGhHdWFyZDogUmVhY3QuRkM8QXV0aEd1YXJkUHJvcHM+ID0gKHsgY2hpbGRyZW4gfSkgPT4ge1xuICBjb25zdCB7IGlzQXV0aGVudGljYXRlZCwgaXNJbml0aWFsaXplZCwgaXNMb2FkaW5nLCBpc0xvZ2dpbmdPdXQgfSA9IHVzZUF1dGgoKTtcbiAgY29uc3Qgcm91dGVyID0gdXNlUm91dGVyKCk7XG4gIGNvbnN0IGN1cnJlbnRQYXRoID0gcm91dGVyLmFzUGF0aD8uc3BsaXQoJz8nKVswXSB8fCAnLyc7IC8vIFJlbW92ZSBxdWVyeSBwYXJhbXNcblxuICB1c2VFZmZlY3QoKCkgPT4ge1xuICAgIGlmICghaXNJbml0aWFsaXplZCkgcmV0dXJuO1xuICAgIFxuICAgIC8vIERvbid0IHJlZGlyZWN0IGR1cmluZyBsb2dvdXQgcHJvY2Vzc1xuICAgIGlmIChpc0xvZ2dpbmdPdXQpIHJldHVybjtcblxuICAgIGNvbnN0IGlzUHJvdGVjdGVkUm91dGUgPSBQUk9URUNURURfUk9VVEVTLnNvbWUocm91dGUgPT4gXG4gICAgICBjdXJyZW50UGF0aC5zdGFydHNXaXRoKHJvdXRlKVxuICAgICk7XG4gICAgY29uc3QgaXNBdXRoUm91dGUgPSBBVVRIX1JPVVRFUy5zb21lKHJvdXRlID0+IFxuICAgICAgY3VycmVudFBhdGguc3RhcnRzV2l0aChyb3V0ZSlcbiAgICApO1xuXG4gICAgLy8gUmVkaXJlY3QgdW5hdXRoZW50aWNhdGVkIHVzZXJzIGZyb20gcHJvdGVjdGVkIHJvdXRlc1xuICAgIGlmIChpc1Byb3RlY3RlZFJvdXRlICYmICFpc0F1dGhlbnRpY2F0ZWQpIHtcbiAgICAgIGNvbnN0IHJlZGlyZWN0VXJsID0gYC9hdXRoL2xvZ2luP3JlZGlyZWN0PSR7ZW5jb2RlVVJJQ29tcG9uZW50KGN1cnJlbnRQYXRoKX1gO1xuICAgICAgcm91dGVyLnJlcGxhY2UocmVkaXJlY3RVcmwpO1xuICAgICAgcmV0dXJuO1xuICAgIH1cblxuICAgIC8vIFJlZGlyZWN0IGF1dGhlbnRpY2F0ZWQgdXNlcnMgZnJvbSBhdXRoIHJvdXRlc1xuICAgIGlmIChpc0F1dGhSb3V0ZSAmJiBpc0F1dGhlbnRpY2F0ZWQpIHtcbiAgICAgIGNvbnN0IHJlZGlyZWN0VG8gPSByb3V0ZXIucXVlcnkucmVkaXJlY3QgYXMgc3RyaW5nIHx8ICcvZGFzaGJvYXJkJztcbiAgICAgIHJvdXRlci5yZXBsYWNlKHJlZGlyZWN0VG8pO1xuICAgICAgcmV0dXJuO1xuICAgIH1cbiAgfSwgW2lzQXV0aGVudGljYXRlZCwgaXNJbml0aWFsaXplZCwgaXNMb2dnaW5nT3V0LCBjdXJyZW50UGF0aCwgcm91dGVyXSk7XG5cbiAgLy8gU2hvdyBsb2FkaW5nIHN0YXRlIHdoaWxlIGluaXRpYWxpemluZyBvciBkdXJpbmcgcmVkaXJlY3RzXG4gIGlmICghaXNJbml0aWFsaXplZCB8fCBpc0xvYWRpbmcpIHtcbiAgICByZXR1cm4gPFBhZ2VMb2FkZXIgdGV4dD1cIkxvYWRpbmcgYWNsdWUuLi5cIiAvPjtcbiAgfVxuXG4gIC8vIFNob3cgbG9hZGluZyBmb3IgcHJvdGVjdGVkIHJvdXRlcyB3aGlsZSB1bmF1dGhlbnRpY2F0ZWQgKHJlZGlyZWN0IGhhcHBlbmluZylcbiAgY29uc3QgaXNQcm90ZWN0ZWRSb3V0ZSA9IFBST1RFQ1RFRF9ST1VURVMuc29tZShyb3V0ZSA9PiBcbiAgICBjdXJyZW50UGF0aC5zdGFydHNXaXRoKHJvdXRlKVxuICApO1xuICBpZiAoaXNQcm90ZWN0ZWRSb3V0ZSAmJiAhaXNBdXRoZW50aWNhdGVkKSB7XG4gICAgcmV0dXJuIDxQYWdlTG9hZGVyIHRleHQ9XCJSZWRpcmVjdGluZyB0byBsb2dpbi4uLlwiIC8+O1xuICB9XG5cbiAgLy8gU2hvdyBsb2FkaW5nIGZvciBhdXRoIHJvdXRlcyB3aGlsZSBhdXRoZW50aWNhdGVkIChyZWRpcmVjdCBoYXBwZW5pbmcpXG4gIGNvbnN0IGlzQXV0aFJvdXRlID0gQVVUSF9ST1VURVMuc29tZShyb3V0ZSA9PiBcbiAgICBjdXJyZW50UGF0aC5zdGFydHNXaXRoKHJvdXRlKVxuICApO1xuICBpZiAoaXNBdXRoUm91dGUgJiYgaXNBdXRoZW50aWNhdGVkKSB7XG4gICAgcmV0dXJuIDxQYWdlTG9hZGVyIHRleHQ9XCJSZWRpcmVjdGluZyB0byBkYXNoYm9hcmQuLi5cIiAvPjtcbiAgfVxuXG4gIHJldHVybiA8PntjaGlsZHJlbn08Lz47XG59O1xuXG5leHBvcnQgZGVmYXVsdCBBdXRoR3VhcmQ7Il0sIm5hbWVzIjpbIkF1dGhHdWFyZCIsIlBST1RFQ1RFRF9ST1VURVMiLCJBVVRIX1JPVVRFUyIsImNoaWxkcmVuIiwiaXNBdXRoZW50aWNhdGVkIiwiaXNJbml0aWFsaXplZCIsImlzTG9hZGluZyIsImlzTG9nZ2luZ091dCIsInVzZUF1dGgiLCJyb3V0ZXIiLCJ1c2VSb3V0ZXIiLCJjdXJyZW50UGF0aCIsImFzUGF0aCIsInNwbGl0IiwidXNlRWZmZWN0IiwiaXNQcm90ZWN0ZWRSb3V0ZSIsInNvbWUiLCJyb3V0ZSIsInN0YXJ0c1dpdGgiLCJpc0F1dGhSb3V0ZSIsInJlZGlyZWN0VXJsIiwiZW5jb2RlVVJJQ29tcG9uZW50IiwicmVwbGFjZSIsInJlZGlyZWN0VG8iLCJxdWVyeSIsInJlZGlyZWN0IiwiUGFnZUxvYWRlciIsInRleHQiXSwibWFwcGluZ3MiOiJBQUFBOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Q0FvQ0M7Ozs7Ozs7Ozs7O0lBNkNZQSxTQUFTO2VBQVRBOztJQXlEYixPQUF5QjtlQUF6Qjs7OzsrREFwRzRDO3dCQUNsQjs2QkFDRjs0QkFDRzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBVzNCLHFDQUFxQztBQUNyQyxNQUFNQyxtQkFBbUI7SUFDdkI7SUFDQTtJQUNBO0lBQ0E7SUFDQTtJQUNBO0NBQ0Q7QUFFRCxrREFBa0Q7QUFDbEQsTUFBTUMsY0FBYztJQUNsQjtJQUNBO0lBQ0E7SUFDQTtDQUNEO0FBYU0sTUFBTUYsWUFBc0MsQ0FBQyxFQUFFRyxRQUFRLEVBQUU7SUFDOUQsTUFBTSxFQUFFQyxlQUFlLEVBQUVDLGFBQWEsRUFBRUMsU0FBUyxFQUFFQyxZQUFZLEVBQUUsR0FBR0MsSUFBQUEsb0JBQU87SUFDM0UsTUFBTUMsU0FBU0MsSUFBQUEsaUJBQVM7SUFDeEIsTUFBTUMsY0FBY0YsT0FBT0csTUFBTSxFQUFFQyxNQUFNLElBQUksQ0FBQyxFQUFFLElBQUksS0FBSyxzQkFBc0I7SUFFL0VDLElBQUFBLGdCQUFTLEVBQUM7UUFDUixJQUFJLENBQUNULGVBQWU7UUFFcEIsdUNBQXVDO1FBQ3ZDLElBQUlFLGNBQWM7UUFFbEIsTUFBTVEsbUJBQW1CZCxpQkFBaUJlLElBQUksQ0FBQ0MsQ0FBQUEsUUFDN0NOLFlBQVlPLFVBQVUsQ0FBQ0Q7UUFFekIsTUFBTUUsY0FBY2pCLFlBQVljLElBQUksQ0FBQ0MsQ0FBQUEsUUFDbkNOLFlBQVlPLFVBQVUsQ0FBQ0Q7UUFHekIsdURBQXVEO1FBQ3ZELElBQUlGLG9CQUFvQixDQUFDWCxpQkFBaUI7WUFDeEMsTUFBTWdCLGNBQWMsQ0FBQyxxQkFBcUIsRUFBRUMsbUJBQW1CVixhQUFhLENBQUM7WUFDN0VGLE9BQU9hLE9BQU8sQ0FBQ0Y7WUFDZjtRQUNGO1FBRUEsZ0RBQWdEO1FBQ2hELElBQUlELGVBQWVmLGlCQUFpQjtZQUNsQyxNQUFNbUIsYUFBYWQsT0FBT2UsS0FBSyxDQUFDQyxRQUFRLElBQWM7WUFDdERoQixPQUFPYSxPQUFPLENBQUNDO1lBQ2Y7UUFDRjtJQUNGLEdBQUc7UUFBQ25CO1FBQWlCQztRQUFlRTtRQUFjSTtRQUFhRjtLQUFPO0lBRXRFLDREQUE0RDtJQUM1RCxJQUFJLENBQUNKLGlCQUFpQkMsV0FBVztRQUMvQixxQkFBTyxxQkFBQ29CLHNCQUFVO1lBQUNDLE1BQUs7O0lBQzFCO0lBRUEsK0VBQStFO0lBQy9FLE1BQU1aLG1CQUFtQmQsaUJBQWlCZSxJQUFJLENBQUNDLENBQUFBLFFBQzdDTixZQUFZTyxVQUFVLENBQUNEO0lBRXpCLElBQUlGLG9CQUFvQixDQUFDWCxpQkFBaUI7UUFDeEMscUJBQU8scUJBQUNzQixzQkFBVTtZQUFDQyxNQUFLOztJQUMxQjtJQUVBLHdFQUF3RTtJQUN4RSxNQUFNUixjQUFjakIsWUFBWWMsSUFBSSxDQUFDQyxDQUFBQSxRQUNuQ04sWUFBWU8sVUFBVSxDQUFDRDtJQUV6QixJQUFJRSxlQUFlZixpQkFBaUI7UUFDbEMscUJBQU8scUJBQUNzQixzQkFBVTtZQUFDQyxNQUFLOztJQUMxQjtJQUVBLHFCQUFPO2tCQUFHeEI7O0FBQ1o7TUFFQSxXQUFlSCJ9

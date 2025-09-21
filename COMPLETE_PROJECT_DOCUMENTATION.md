@@ -1,4 +1,4 @@
-# GiftSync - Complete Project Documentation
+# Aclue - Complete Project Documentation
 **Comprehensive Technical & Business Documentation**
 
 > **CRITICAL DEVELOPMENT PRINCIPLES - READ BEFORE PROCEEDING:**
@@ -19,7 +19,7 @@
 
 ## 🎯 PROJECT OVERVIEW
 
-GiftSync is an AI-powered gift recommendation platform using swipe-based preference discovery to generate personalised gift suggestions whilst maintaining the element of surprise. The platform targets the £45B global gift market with a projected £2.5M revenue by Year 3.
+Aclue is an AI-powered gift recommendation platform using swipe-based preference discovery to generate personalised gift suggestions whilst maintaining the element of surprise. The platform targets the £45B global gift market with a projected £2.5M revenue by Year 3.
 
 ### Business Context
 - **Target Market**: £45B global gift market, £9.3B UK market
@@ -593,8 +593,8 @@ PostHog EU (https://eu.i.posthog.com)
 ## 🚀 PRODUCTION DEPLOYMENT ARCHITECTURE
 
 ### Live Production URLs
-- **Backend**: https://giftsync-backend-production.up.railway.app (Railway)
-- **Frontend**: https://giftsyncfrontend-aobih9dw4-jacks-projects-cf5effed.vercel.app (Vercel)
+- **Backend**: https://aclue-backend-production.up.railway.app (Railway)
+- **Frontend**: https://acluefrontend-aobih9dw4-jacks-projects-cf5effed.vercel.app (Vercel)
 
 ### Deployment Technology Stack
 - **Backend Hosting**: Railway with Docker containerisation
@@ -620,7 +620,7 @@ PostHog EU (https://eu.i.posthog.com)
 ```bash
 ENVIRONMENT=production
 DEBUG=false
-SECRET_KEY=giftsync-production-secret-key-2025-change-this-256-bit-railway
+SECRET_KEY=aclue-production-secret-key-2025-change-this-256-bit-railway
 PORT=8000
 SUPABASE_URL=https://xchsarvamppwephulylt.supabase.co
 SUPABASE_ANON_KEY=[full_key]
@@ -646,8 +646,8 @@ ENABLE_AFFILIATE_TRACKING=true
 
 **Environment Variables (Production):**
 ```bash
-NEXT_PUBLIC_API_URL=https://giftsync-backend-production.up.railway.app
-NEXT_PUBLIC_WEB_URL=https://giftsyncfrontend-aobih9dw4-jacks-projects-cf5effed.vercel.app
+NEXT_PUBLIC_API_URL=https://aclue-backend-production.up.railway.app
+NEXT_PUBLIC_WEB_URL=https://acluefrontend-aobih9dw4-jacks-projects-cf5effed.vercel.app
 NODE_ENV=production
 ```
 
@@ -661,11 +661,11 @@ NODE_ENV=production
 ### Health Monitoring
 ```bash
 # Backend Health Check
-curl https://giftsync-backend-production.up.railway.app/health
+curl https://aclue-backend-production.up.railway.app/health
 # Expected: {"status":"healthy","timestamp":"...","version":"1.0.0"}
 
 # Frontend Health Check
-curl https://giftsyncfrontend-aobih9dw4-jacks-projects-cf5effed.vercel.app/
+curl https://acluefrontend-aobih9dw4-jacks-projects-cf5effed.vercel.app/
 # Expected: HTML page loads successfully
 ```
 
@@ -819,9 +819,9 @@ curl -X POST "http://localhost:8000/api/v1/swipes/sessions" \
 // Affiliate configuration
 export const affiliateConfig = {
   amazon: {
-    associateTag: 'giftsync-21', // UK associate tag
+    associateTag: 'aclue-21', // UK associate tag
     baseUrl: 'https://amazon.co.uk',
-    trackingParam: 'tag=giftsync-21',
+    trackingParam: 'tag=aclue-21',
   },
 };
 
@@ -871,7 +871,7 @@ export const generateAffiliateLink = (amazonUrl: string) => {
 1. **Amazon API Integration**: Connect real product data and affiliate links for revenue
 2. **Advanced ML Models**: Integrate PyTorch models with existing recommendation foundation
 3. **Mobile App Development**: Complete Flutter app using existing comprehensive API
-4. **Production Domain**: Deploy to custom domain (giftsync.jackgriffin.dev)
+4. **Production Domain**: Deploy to custom domain (aclue.jackgriffin.dev)
 
 ### Medium-term Features (1-2 months)
 1. **Gift Link Sharing**: Implement shareable recommendation lists with QR codes
@@ -992,7 +992,7 @@ This is a **production-ready foundation** for the £45B gift market opportunity 
 ✅ **Production Deployment**: Live on Railway and Vercel with auto-deployment  
 
 ### Business Model Validation Ready
-The platform successfully demonstrates the complete GiftSync value proposition with:
+The platform successfully demonstrates the complete Aclue value proposition with:
 - **Revenue Generation**: Amazon affiliate system ready for immediate monetisation
 - **User Acquisition**: Complete onboarding flow with preference learning
 - **Market Compliance**: Professional legal framework meeting UK/EU standards

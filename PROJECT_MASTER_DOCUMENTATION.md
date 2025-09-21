@@ -63,10 +63,10 @@ gift_links           # Shareable gift lists with QR codes (ready)
 ## 🚀 DEPLOYMENT STATUS
 
 ### Production URLs (LIVE)
-- **Frontend**: https://prznt.app (Maintenance mode with alpha access)
+- **Frontend**: https://aclue.app (Maintenance mode with alpha access)
 - **Backend API**: https://aclue-backend-production.up.railway.app
 - **API Health**: ✅ Healthy (confirmed: {"status":"healthy","timestamp":"2025-01-01T00:00:00Z","version":"1.0.0"})
-- **Domain Status**: prznt.app operational with professional maintenance page
+- **Domain Status**: aclue.app operational with professional maintenance page
 
 ### Infrastructure Configuration
 ```
@@ -94,7 +94,7 @@ Supabase (Database):
 # Frontend (Vercel)
 NEXT_PUBLIC_MAINTENANCE_MODE=true
 NEXT_PUBLIC_API_URL=https://aclue-backend-production.up.railway.app
-NEXT_PUBLIC_WEB_URL=https://prznt.app
+NEXT_PUBLIC_WEB_URL=https://aclue.app
 
 # Backend (Railway)
 ENVIRONMENT=production
@@ -416,7 +416,7 @@ pandas==2.1.3
 
 ### System Health Indicators ✅
 - Backend health: `{"status":"healthy","timestamp":"...","version":"1.0.0"}`
-- Frontend loads successfully at https://prznt.app
+- Frontend loads successfully at https://aclue.app
 - User authentication working end-to-end
 - Database queries returning expected data
 - All API endpoints responding with proper HTTP codes
@@ -444,7 +444,7 @@ pandas==2.1.3
 # Quick system check
 curl http://localhost:8000/health                    # Backend health
 curl -I http://localhost:3000                        # Frontend availability
-curl https://prznt.app                                # Production frontend
+curl https://aclue.app                                # Production frontend
 curl https://aclue-backend-production.up.railway.app/health  # Production backend
 
 # Test authentication flow

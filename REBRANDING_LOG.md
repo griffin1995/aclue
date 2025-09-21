@@ -1,10 +1,10 @@
-# Rebranding Documentation: GiftSync → Aclue
+# Rebranding Documentation: Aclue → Aclue
 
 ## Overview
-This document comprehensively logs the rebranding process from GiftSync/prznt to Aclue, detailing all changes made across the entire codebase. This was a complete brand transformation affecting frontend, backend, configuration, deployment, and documentation.
+This document comprehensively logs the rebranding process from Aclue/aclue to Aclue, detailing all changes made across the entire codebase. This was a complete brand transformation affecting frontend, backend, configuration, deployment, and documentation.
 
 ## Brand Transformation Summary
-- **Previous Brands**: GiftSync (original name), prznt (interim brand)  
+- **Previous Brands**: Aclue (original name), aclue (interim brand)  
 - **New Brand**: Aclue
 - **Scope**: Complete rebrand across all systems and documentation
 - **Implementation**: August 2025
@@ -13,12 +13,12 @@ This document comprehensively logs the rebranding process from GiftSync/prznt to
 ## Domain Strategy
 - **Primary Domain**: aclue.app (production deployment)
 - **Secondary Domain**: aclue.co.uk (UK market expansion)
-- **Legacy Domains**: prznt.app (redirects/sunset), giftsync.* (legacy)
+- **Legacy Domains**: aclue.app (redirects/sunset), aclue.* (legacy)
 
 ### Domain Selection Rationale
 1. **aclue.app**: Modern .app TLD suggests technology focus and mobile-first approach
 2. **aclue.co.uk**: UK market credibility for local partnerships and trust
-3. **Brand Evolution**: From "GiftSync" → "prznt" → "Aclue" representing platform maturity
+3. **Brand Evolution**: From "Aclue" → "aclue" → "Aclue" representing platform maturity
 4. **SEO Strategy**: Clean, brandable domain without legacy baggage
 
 ## Comprehensive File Changes
@@ -30,8 +30,8 @@ This document comprehensively logs the rebranding process from GiftSync/prznt to
 ```json
 // Before
 {
-  "name": "giftsync-web", // or "prznt-web"
-  "description": "GiftSync Web Application...",
+  "name": "aclue-web", // or "aclue-web"
+  "description": "Aclue Web Application...",
   
 // After  
 {
@@ -47,7 +47,7 @@ This document comprehensively logs the rebranding process from GiftSync/prznt to
 - All page components with meta descriptions
 
 **Changes**:
-- Updated all `<title>` tags from "GiftSync" to "Aclue"
+- Updated all `<title>` tags from "Aclue" to "Aclue"
 - Modified meta descriptions to reflect new brand messaging
 - Updated Open Graph tags for social sharing
 - Changed favicon references and brand assets
@@ -63,8 +63,8 @@ This document comprehensively logs the rebranding process from GiftSync/prznt to
 **Key Changes**:
 ```jsx
 // Before
-<h1>Welcome to GiftSync</h1>
-<img src="/logo-giftsync.png" alt="GiftSync" />
+<h1>Welcome to Aclue</h1>
+<img src="/logo-aclue.png" alt="Aclue" />
 
 // After
 <h1>Welcome to Aclue</h1>
@@ -77,10 +77,10 @@ This document comprehensively logs the rebranding process from GiftSync/prznt to
 **File**: `/backend/app/core/config.py`
 ```python
 # Before
-PROJECT_NAME: str = "GiftSync API"  # or "prznt API"
-S3_BUCKET_NAME: str = "giftsync-assets"
-DYNAMODB_TABLE_PREFIX: str = "giftsync"
-SAGEMAKER_ENDPOINT_NAME: str = "giftsync-recommendations"
+PROJECT_NAME: str = "Aclue API"  # or "aclue API"
+S3_BUCKET_NAME: str = "aclue-assets"
+DYNAMODB_TABLE_PREFIX: str = "aclue"
+SAGEMAKER_ENDPOINT_NAME: str = "aclue-recommendations"
 
 # After  
 PROJECT_NAME: str = "aclue API"
@@ -101,7 +101,7 @@ SAGEMAKER_ENDPOINT_NAME: str = "aclue-recommendations"
 **File**: `/backend/app/api/v1/endpoints/affiliate.py`
 ```python
 # Before
-AMAZON_ASSOCIATE_TAG: str = "giftsync-21"  # or "prznt-21"
+AMAZON_ASSOCIATE_TAG: str = "aclue-21"  # or "aclue-21"
 
 # After
 AMAZON_ASSOCIATE_TAG: str = "aclue-21"
@@ -120,8 +120,8 @@ AMAZON_ASSOCIATE_TAG: str = "aclue-21"
 **Files**: `.env`, `.env.local`, `.env.production`
 ```bash
 # Before
-NEXT_PUBLIC_WEB_URL=https://prznt.app
-NEXT_PUBLIC_API_URL=https://giftsync-backend-production.up.railway.app
+NEXT_PUBLIC_WEB_URL=https://aclue.app
+NEXT_PUBLIC_API_URL=https://aclue-backend-production.up.railway.app
 
 # After
 NEXT_PUBLIC_WEB_URL=https://aclue.app  
@@ -132,7 +132,7 @@ NEXT_PUBLIC_API_URL=https://aclue-backend-production.up.railway.app
 **File**: `/web/vercel.json` (Vercel)
 ```toml
 # Before
-name = "prznt-web"
+name = "aclue-web"
 compatibility_date = "2025-01-01"
 
 # After
@@ -143,12 +143,12 @@ compatibility_date = "2025-01-01"
 ### Infrastructure and Deployment
 
 #### 1. Railway Backend Deployment
-- **Service Name**: Changed from `giftsync-backend-production` to `aclue-backend-production`
+- **Service Name**: Changed from `aclue-backend-production` to `aclue-backend-production`
 - **Environment Variables**: All rebranded to use Aclue references
 - **Database Names**: Updated connection strings and table prefixes
 
 #### 2. Vercel Deployment  
-- **Project Name**: Updated from prznt-web to aclue-web
+- **Project Name**: Updated from aclue-web to aclue-web
 - **Domain Routing**: Configured for aclue.app primary domain
 - **DNS Configuration**: A/AAAA records pointing to new brand
 
@@ -170,12 +170,12 @@ compatibility_date = "2025-01-01"
 #### 2. Code Comments
 **Added Comments Across Codebase**:
 ```python
-# Aclue Configuration: Updated from GiftSync branding (August 2025)
+# Aclue Configuration: Updated from Aclue branding (August 2025)
 # This service handles affiliate tracking for aclue.app domain
 ```
 
 ```typescript  
-// Rebranded from prznt to Aclue - maintains backward compatibility
+// Rebranded from aclue to Aclue - maintains backward compatibility
 // Updated analytics tracking for aclue.app deployment
 ```
 
@@ -183,12 +183,12 @@ compatibility_date = "2025-01-01"
 
 #### 1. Logo and Visual Assets
 **Files**:
-- `/web/public/logo.png`: New Aclue logo (replaced GiftSync/prznt)
+- `/web/public/logo.png`: New Aclue logo (replaced Aclue/aclue)
 - `/web/public/favicon.ico`: Updated favicon with Aclue branding
 - `/web/Brand/`: All brand assets updated with new design system
 
 #### 2. Email Templates
-**Files**: `/web/Brand/prznt_welcome_email_*`
+**Files**: `/web/Brand/aclue_welcome_email_*`
 - Renamed and updated with Aclue branding
 - New color scheme and visual identity
 - Updated all text references and links
@@ -198,15 +198,15 @@ compatibility_date = "2025-01-01"
 ### Environment Variable Mapping
 ```bash
 # Legacy Variables (Deprecated)
-GIFTSYNC_* → ACLUE_*
-PRZNT_* → ACLUE_*
+ACLUE_* → ACLUE_*
+ACLUE_* → ACLUE_*
 
 # Domain Updates
-prznt.app → aclue.app
-giftsync.* → aclue.app (redirects)
+aclue.app → aclue.app
+aclue.* → aclue.app (redirects)
 
 # API Endpoints  
-giftsync-backend-production → aclue-backend-production
+aclue-backend-production → aclue-backend-production
 ```
 
 ### Database Schema Updates
@@ -303,7 +303,7 @@ Every major configuration file now includes comments explaining:
 ## Rollback Procedures
 While not anticipated, rollback procedures documented:
 1. Environment variable reversion process
-2. DNS rollback to prznt.app if needed
+2. DNS rollback to aclue.app if needed
 3. Asset rollback procedures for emergency situations
 4. Database metadata restoration process
 
@@ -317,7 +317,7 @@ While not anticipated, rollback procedures documented:
 ---
 
 ## Conclusion
-This comprehensive rebranding from GiftSync/prznt to Aclue represents a complete transformation of the platform's identity while maintaining all technical functionality. The implementation was successful with zero downtime and complete brand consistency across all systems.
+This comprehensive rebranding from Aclue/aclue to Aclue represents a complete transformation of the platform's identity while maintaining all technical functionality. The implementation was successful with zero downtime and complete brand consistency across all systems.
 
 **Total Files Modified**: 50+ files across frontend, backend, and documentation
 **Implementation Time**: Coordinated deployment completed successfully

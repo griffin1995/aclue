@@ -92,7 +92,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
    * Lifecycle method called when an error is caught.
    * Used for error reporting and logging.
    */
-  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+  override componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     this.setState({ errorInfo });
 
     // Report error to monitoring services
@@ -107,7 +107,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
   /**
    * Check if component should reset error state based on prop changes.
    */
-  componentDidUpdate(prevProps: ErrorBoundaryProps) {
+  override componentDidUpdate(prevProps: ErrorBoundaryProps) {
     const { resetOnPropsChange, resetKeys } = this.props;
     const { hasError } = this.state;
 
@@ -162,13 +162,13 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
       }
 
       // Report to Sentry if configured
-      if (process.env.NEXT_PUBLIC_SENTRY_DSN && typeof window !== 'undefined') {
+      if (process.env['NEXT_PUBLIC_SENTRY_DSN'] && typeof window !== 'undefined') {
         // Dynamic import to avoid bundle bloat if Sentry not used
         const Sentry = await import('@sentry/react');
         Sentry.withScope((scope) => {
           scope.setTag('errorBoundary', true);
           scope.setLevel('error');
-          scope.setContext('errorInfo', errorInfo);
+          scope.setContext('errorInfo', { componentStack: errorInfo.componentStack });
           scope.setContext('errorReport', errorReport);
           Sentry.captureException(error);
         });
@@ -376,7 +376,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
     );
   };
 
-  render() {
+  override render() {
     if (this.state.hasError) {
       return this.renderFallback();
     }
@@ -392,9 +392,9 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
 /**
  * Functional wrapper for ErrorBoundary with default props.
  */
-interface ErrorBoundaryWrapperProps extends Omit<ErrorBoundaryProps, 'children'> {
-  children: ReactNode;
-}
+// interface ErrorBoundaryWrapperProps extends Omit<ErrorBoundaryProps, 'children'> {
+//   children: ReactNode;
+// }
 
 export const withErrorBoundary = <P extends object>(
   Component: React.ComponentType<P>,

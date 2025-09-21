@@ -5,7 +5,7 @@
  * to prevent any content flashing by checking maintenance mode before rendering
  */
 
-import React, { ReactNode } from 'react';
+import React, { type ReactNode } from 'react';
 import { useRouter } from 'next/router';
 import MaintenanceMode from '@/components/MaintenanceMode';
 

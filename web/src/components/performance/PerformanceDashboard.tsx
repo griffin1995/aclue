@@ -13,7 +13,7 @@
  */
 
 import React, { useEffect, useState, useCallback } from 'react';
-import { getPerformanceMetrics, getPerformanceSummary } from '@/lib/performance-monitoring';
+import { getPerformanceSummary } from '@/lib/performance-monitoring';
 import {
   Activity,
   AlertTriangle,
@@ -25,8 +25,6 @@ import {
   HardDrive,
   RefreshCw,
   Server,
-  TrendingDown,
-  TrendingUp,
   Zap
 } from 'lucide-react';
 
@@ -130,6 +128,7 @@ export const PerformanceDashboard: React.FC = () => {
       const interval = setInterval(refreshMetrics, refreshInterval);
       return () => clearInterval(interval);
     }
+    return undefined;
   }, [autoRefresh, refreshInterval, refreshMetrics]);
 
   /**
@@ -148,18 +147,18 @@ export const PerformanceDashboard: React.FC = () => {
   /**
    * Get status color based on rating
    */
-  const getStatusColor = (rating: string): string => {
-    switch (rating) {
-      case 'good':
-        return 'text-green-600 bg-green-100';
-      case 'needs-improvement':
-        return 'text-yellow-600 bg-yellow-100';
-      case 'poor':
-        return 'text-red-600 bg-red-100';
-      default:
-        return 'text-gray-600 bg-gray-100';
-    }
-  };
+  // const getStatusColor = (rating: string): string => {
+  //   switch (rating) {
+  //     case 'good':
+  //       return 'text-green-600 bg-green-100';
+  //     case 'needs-improvement':
+  //       return 'text-yellow-600 bg-yellow-100';
+  //     case 'poor':
+  //       return 'text-red-600 bg-red-100';
+  //     default:
+  //       return 'text-gray-600 bg-gray-100';
+  //   }
+  // };
 
   /**
    * Get status icon based on rating

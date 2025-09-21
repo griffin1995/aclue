@@ -80,7 +80,7 @@ export const EnhancedSwipeCard: React.FC<EnhancedSwipeCardProps> = ({
       // Track the affiliate click
       await trackAffiliateClick({
         productId: product.id,
-        asin: extractASIN(product.url),
+        asin: extractASIN(product.url) || '',
         category: product.category,
         price: product.price,
         currency: product.currency || 'GBP',

@@ -1,8 +1,8 @@
-# GiftSync Enterprise Security Configuration
+# Aclue Enterprise Security Configuration
 
 ## Overview
 
-This repository contains comprehensive enterprise-grade security configuration scripts for the GiftSync platform domains (`aclue.co.uk` and `aclue.app`). The implementation follows OWASP security standards and UK/GDPR compliance requirements.
+This repository contains comprehensive enterprise-grade security configuration scripts for the Aclue platform domains (`aclue.co.uk` and `aclue.app`). The implementation follows OWASP security standards and UK/GDPR compliance requirements.
 
 ## 🔐 Security Features Implemented
 
@@ -205,10 +205,10 @@ CSP_POLICY="default-src 'self'; script-src 'self' 'unsafe-inline' ..."
 ```
 
 ### Log Files Location
-- **Deployment**: `/tmp/giftsync-security-deployment-*.log`
+- **Deployment**: `/tmp/aclue-security-deployment-*.log`
 - **Monitoring**: `/tmp/cloudflare-security-monitor-*.log`
 - **Alerts**: `/tmp/cloudflare-security-alerts-*.log`
-- **Incidents**: `/var/log/giftsync-security-incidents.log`
+- **Incidents**: `/var/log/aclue-security-incidents.log`
 
 ## 🎯 Security Compliance
 
@@ -240,7 +240,7 @@ CSP_POLICY="default-src 'self'; script-src 'self' 'unsafe-inline' ..."
 4. **Configuration Changes**: Change detection and notification
 
 ### Manual Response Procedures
-1. **Critical Incidents**: Check `/var/log/giftsync-security-incidents.log`
+1. **Critical Incidents**: Check `/var/log/aclue-security-incidents.log`
 2. **Review Firewall Events**: Cloudflare dashboard → Security → Events
 3. **Adjust Rate Limits**: Modify thresholds in `security-firewall-rules.sh`
 4. **Update WAF Rules**: Add new patterns to firewall configuration
@@ -271,10 +271,10 @@ chmod +x /home/jack/cloudflare-automation/*.sh
 **Log Analysis:**
 ```bash
 # View recent security incidents
-tail -f /var/log/giftsync-security-incidents.log
+tail -f /var/log/aclue-security-incidents.log
 
 # Check deployment logs
-ls -la /tmp/giftsync-security-deployment-*.log
+ls -la /tmp/aclue-security-deployment-*.log
 ```
 
 ## 📈 Performance Impact
@@ -325,4 +325,4 @@ git pull origin main
 
 ---
 
-*This security implementation provides enterprise-grade protection for the GiftSync platform while maintaining optimal performance and user experience. Regular monitoring and maintenance ensure continued security effectiveness.*
+*This security implementation provides enterprise-grade protection for the Aclue platform while maintaining optimal performance and user experience. Regular monitoring and maintenance ensure continued security effectiveness.*

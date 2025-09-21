@@ -72,7 +72,7 @@ export const PWAManager: React.FC<PWAManagerProps> = ({ className = '' }) => {
     if (typeof window !== 'undefined') {
       window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
       window.addEventListener('appinstalled', handleAppInstalled);
-      
+
       const mediaQuery = window.matchMedia('(display-mode: standalone)');
       mediaQuery.addEventListener('change', handleDisplayModeChange);
 
@@ -82,6 +82,7 @@ export const PWAManager: React.FC<PWAManagerProps> = ({ className = '' }) => {
         mediaQuery.removeEventListener('change', handleDisplayModeChange);
       };
     }
+    return undefined;
   }, [isInstalled]);
 
   const handleInstallClick = async () => {

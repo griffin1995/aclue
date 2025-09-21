@@ -193,17 +193,20 @@ export const useOptimizedComponent = (
    * Create lazy-loaded component.
    */
   const createLazyComponent = useCallback(
-    <T extends React.ComponentType<any>>(
-      importFn: () => Promise<{ default: T }>,
+    (
+      importFn: () => Promise<{ default: React.ComponentType<any> }>,
       fallback?: React.ComponentType
     ) => {
       const LazyComponent = React.lazy(importFn);
 
-      return React.forwardRef<any, React.ComponentProps<T>>((props, ref) => (
-        <React.Suspense fallback={fallback ? <fallback /> : <div>Loading...</div>}>
-          <LazyComponent {...props} ref={ref} />
-        </React.Suspense>
-      ));
+      return React.forwardRef<any, any>((props, ref) => {
+        const fallbackElement = fallback ? React.createElement(fallback) : React.createElement('div', {}, 'Loading...');
+        return (
+          <React.Suspense fallback={fallbackElement}>
+            <LazyComponent {...props} ref={ref} />
+          </React.Suspense>
+        );
+      });
     },
     []
   );

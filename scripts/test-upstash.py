@@ -28,7 +28,7 @@ def test_upstash_connection():
     
     try:
         # Test setting a value
-        test_key = "giftsync:test"
+        test_key = "aclue:test"
         test_value = "connection_test"
         
         set_response = requests.post(
@@ -86,7 +86,7 @@ def check_upstash_info():
     print(f"   Data Persistence: Yes")
 
 if __name__ == "__main__":
-    print("🎁 GiftSync Upstash Redis Connection Test")
+    print("🎁 Aclue Upstash Redis Connection Test")
     print("=" * 45)
     
     if test_upstash_connection():
