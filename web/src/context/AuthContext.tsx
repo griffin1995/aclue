@@ -330,7 +330,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
 
     // Call refresh endpoint
-    const response = await api.auth.refreshAccessToken({ refresh_token: refreshToken });
+    const response = await api.auth.refresh({ refresh_token: refreshToken });
     const { access_token, refresh_token: newRefreshToken } = response.data;
     
     // Store new tokens
@@ -343,7 +343,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       dispatch({ type: 'SET_LOADING', payload: true });
       dispatch({ type: 'SET_ERROR', payload: null });
 
-      const response = await api.login(credentials);
+      const response = await api.auth.login(credentials);
       const { access_token, refresh_token, user } = response.data;
 
       // Store tokens
@@ -393,7 +393,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       dispatch({ type: 'SET_LOADING', payload: true });
       dispatch({ type: 'SET_ERROR', payload: null });
 
-      const response = await api.register(userData);
+      const response = await api.auth.register(userData);
       const { access_token, refresh_token, user } = response.data;
 
       // Store tokens
@@ -448,7 +448,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
       // Call logout API
       try {
-        await api.logout();
+        await api.auth.logout();
       } catch (error) {
         console.warn('Logout API call failed:', error);
       }

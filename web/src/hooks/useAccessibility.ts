@@ -82,13 +82,13 @@ export function useAccessibility(options: UseAccessibilityOptions = {}): UseAcce
 
       if (event.shiftKey) {
         // Shift + Tab
-        if (document.activeElement === firstElement) {
+        if (document.activeElement === firstElement && lastElement) {
           lastElement.focus();
           event.preventDefault();
         }
       } else {
         // Tab
-        if (document.activeElement === lastElement) {
+        if (document.activeElement === lastElement && firstElement) {
           firstElement.focus();
           event.preventDefault();
         }
