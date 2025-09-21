@@ -78,7 +78,7 @@ export const NeuralNetworkBackground: React.FC<NeuralNetworkBackgroundProps> = (
         size: Math.random() * 4 + 2,
         opacity: Math.random() * 0.7 + 0.3,
         pulsePhase: Math.random() * Math.PI * 2,
-        type: nodeTypes[Math.floor(Math.random() * nodeTypes.length)]
+        type: nodeTypes[Math.floor(Math.random() * nodeTypes.length)] as "primary" | "secondary" | "accent"
       });
     }
 
@@ -134,7 +134,9 @@ export const NeuralNetworkBackground: React.FC<NeuralNetworkBackgroundProps> = (
         for (let j = i + 1; j < nodesRef.current.length; j++) {
           const nodeA = nodesRef.current[i];
           const nodeB = nodesRef.current[j];
-          
+
+          if (!nodeA || !nodeB) continue;
+
           const dx = nodeA.x - nodeB.x;
           const dy = nodeA.y - nodeB.y;
           const distance = Math.sqrt(dx * dx + dy * dy);

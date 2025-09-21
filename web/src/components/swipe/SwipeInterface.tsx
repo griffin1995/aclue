@@ -56,7 +56,7 @@ export const SwipeInterface: React.FC<SwipeInterfaceProps> = ({
         }
       };
 
-      const response = await api.createSwipeSession(sessionData);
+      const response = await api.swipes.createSession(sessionData);
       const newSession = response.data;
 
 
@@ -77,7 +77,7 @@ export const SwipeInterface: React.FC<SwipeInterfaceProps> = ({
   // Load more products for swiping
   const loadMoreProducts = useCallback(async (sessionId: string) => {
     try {
-      const params = {
+      const params: any = {
         limit: appConfig.swipe.cardPreloadCount,
         exclude_seen: true,
         session_id: sessionId,
@@ -87,7 +87,7 @@ export const SwipeInterface: React.FC<SwipeInterfaceProps> = ({
         params.category = categoryFocus;
       }
 
-      const response = await api.getProducts(params);
+      const response = await api.products.getProducts(params);
       const products = response.data;
 
       if (products.length === 0) {
@@ -128,6 +128,8 @@ export const SwipeInterface: React.FC<SwipeInterfaceProps> = ({
 
     try {
       // Record the swipe interaction
+      if (!currentCard) return;
+
       const swipeData = {
         product_id: currentCard.product.id,
         direction,
@@ -140,7 +142,7 @@ export const SwipeInterface: React.FC<SwipeInterfaceProps> = ({
         }
       };
 
-      await api.recordSwipe(session.id, swipeData);
+      await api.swipes.recordSwipe(session.id, swipeData);
 
       // Update local state
       const newSwipeCount = swipeState.swipeCount + 1;
@@ -235,7 +237,7 @@ export const SwipeInterface: React.FC<SwipeInterfaceProps> = ({
   // Handle product click (open product details)
   const handleProductClick = useCallback((product: Product) => {
     // Track product view
-    api.trackEvent({
+    api.analytics.trackEvent({
       event_name: 'product_viewed',
       properties: {
         product_id: product.id,
@@ -402,7 +404,7 @@ export const SwipeInterface: React.FC<SwipeInterfaceProps> = ({
             <div className="absolute inset-0 bg-blue-200 border-4 border-red-500 z-50 p-4">
               <h1 className="text-black text-2xl">DEBUG: SwipeInterface Rendering</h1>
               <p className="text-black">Current card exists: {currentCard ? 'YES' : 'NO'}</p>
-              <p className="text-black">Product title: {currentCard?.product?.title || currentCard?.product?.name || 'NO TITLE'}</p>
+              <p className="text-black">Product title: {currentCard?.product?.name || 'NO TITLE'}</p>
               <p className="text-black">Product ID: {currentCard?.product?.id || 'NO ID'}</p>
               <p className="text-black">Cards length: {swipeState.cards.length}</p>
               <pre className="text-black text-xs mt-2">{JSON.stringify(currentCard?.product, null, 2)}</pre>

@@ -206,7 +206,7 @@ export const NeuralNetworkBackgroundOptimized: React.FC<NeuralNetworkBackgroundP
         size: Math.random() * 4 + 2,
         opacity: Math.random() * 0.7 + 0.3,
         pulsePhase: Math.random() * Math.PI * 2,
-        type: nodeTypes[Math.floor(Math.random() * nodeTypes.length)]
+        type: nodeTypes[Math.floor(Math.random() * nodeTypes.length)] as "primary" | "secondary" | "accent"
       });
     }
 

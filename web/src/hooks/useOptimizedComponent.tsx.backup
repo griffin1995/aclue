@@ -179,7 +179,7 @@ export const useOptimizedComponent = (
    * Create optimized memoized value.
    */
   const useOptimizedMemo = useCallback(
-    <T>(factory: () => T, deps: React.DependencyList): T => {
+    function<T>(factory: () => T, deps: React.DependencyList): T {
       return useMemo(factory, deps);
     },
     []
@@ -297,7 +297,7 @@ export const useOptimizedComponent = (
    * Create debounced state for performance optimization.
    */
   const useDebouncedState = useCallback(
-    <T>(initialValue: T, delay: number = 300) => {
+    function<T>(initialValue: T, delay: number = 300) {
       const [value, setValue] = useState(initialValue);
       const [debouncedValue, setDebouncedValue] = useState(initialValue);
       const timeoutRef = useRef<NodeJS.Timeout>();

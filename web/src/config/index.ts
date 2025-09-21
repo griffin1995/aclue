@@ -36,7 +36,7 @@ import { EnvironmentConfig } from '@/types';
  * Automatically adapts between development and production environments
  * based on NODE_ENV and environment variable availability.
  */
-export const config: EnvironmentConfig = {
+export const config = {
   // Core service URLs
   apiUrl: process.env.NEXT_PUBLIC_API_URL || 'https://aclue-backend-production.up.railway.app',        // Backend API base URL
   webUrl: process.env.NEXT_PUBLIC_WEB_URL || 'http://localhost:3000',        // Frontend application URL
@@ -518,8 +518,8 @@ export class AffiliateLinksService {
     url.searchParams.set('k', searchTerm);
     url.searchParams.set('tag', options.associateTag || amazonConfig.uk.associateTag);
     
-    if (category && amazonConfig.productCategories[category]) {
-      url.searchParams.set('i', amazonConfig.productCategories[category]);
+    if (category && amazonConfig.productCategories[category as keyof typeof amazonConfig.productCategories]) {
+      url.searchParams.set('i', amazonConfig.productCategories[category as keyof typeof amazonConfig.productCategories]);
     }
     
     if (options.ref) {
@@ -610,7 +610,7 @@ export class AffiliateLinksService {
     };
     
     const mappedCategory = categoryMappings[normalizedCategory];
-    return amazonConfig.commissionRates[mappedCategory] || amazonConfig.commissionRates.default;
+    return (mappedCategory && amazonConfig.commissionRates[mappedCategory as keyof typeof amazonConfig.commissionRates]) || amazonConfig.commissionRates.default;
   }
 }
 

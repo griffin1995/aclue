@@ -739,4 +739,8 @@ export interface EnvironmentConfig {
   isProduction: boolean;
   isDevelopment: boolean;
   version: string;
+  amazonAssociateTag?: string;
+  amazonRegion?: string;
+  amazonApiKey?: string;
+  amazonSecretKey?: string;
 }
