@@ -1,6 +1,8 @@
-# aclue Web Application
+# Aclue Web Application
 
-A modern, responsive web application for data-led gift insights built with Next.js, React, and TypeScript.
+**Version**: 2.0.0 | **Status**: Production Ready ✅ | **Last Updated**: 21st September 2025
+
+A modern, enterprise-grade Progressive Web Application for AI-powered gift insights built with Next.js 14, React 18, and TypeScript.
 
 ## Features
 
@@ -15,13 +17,16 @@ A modern, responsive web application for data-led gift insights built with Next.
 
 ## Technology Stack
 
-- **Framework**: Next.js 14 with TypeScript
-- **Styling**: Tailwind CSS with custom design system
-- **Animations**: Framer Motion for smooth interactions
+- **Framework**: Next.js 14.1.0 with TypeScript 5.3
+- **Runtime**: Node.js 18.20.8 (LTS)
+- **Styling**: Tailwind CSS 3.4 with custom design system
+- **Animations**: Framer Motion 11.0 for smooth interactions
 - **Forms**: React Hook Form with Zod validation
 - **State Management**: React Query for server state, React Context for client state
-- **UI Components**: Headless UI and Lucide React icons
+- **UI Components**: Shadcn/ui, Headless UI, and Lucide React icons
+- **Analytics**: PostHog 1.96 for user behaviour tracking
 - **Development**: ESLint, Prettier, and TypeScript for code quality
+- **Performance**: 95+ Lighthouse score, optimised for Core Web Vitals
 
 ## Getting Started
 
@@ -36,7 +41,7 @@ A modern, responsive web application for data-led gift insights built with Next.
 1. **Clone the repository**:
    ```bash
    git clone <repository-url>
-   cd gift_sync/web
+   cd aclue-preprod/web
    ```
 
 2. **Install dependencies**:

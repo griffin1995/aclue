@@ -1,0 +1,532 @@
+aa8d5c021fca3fd73d5a9f41c8791ea0
+"use strict";
+
+/* istanbul ignore next */
+function cov_2pfyu91onh() {
+  var path = "/home/jack/Documents/aclue-preprod/web/src/lib/posthog.ts";
+  var hash = "451d8ce8f8a58c60bddedf13d0c9484763575145";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/home/jack/Documents/aclue-preprod/web/src/lib/posthog.ts",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 4,
+          column: 3
+        }
+      },
+      "1": {
+        start: {
+          line: 6,
+          column: 4
+        },
+        end: {
+          line: 9,
+          column: 7
+        }
+      },
+      "2": {
+        start: {
+          line: 6,
+          column: 24
+        },
+        end: {
+          line: 9,
+          column: 7
+        }
+      },
+      "3": {
+        start: {
+          line: 11,
+          column: 0
+        },
+        end: {
+          line: 18,
+          column: 3
+        }
+      },
+      "4": {
+        start: {
+          line: 13,
+          column: 8
+        },
+        end: {
+          line: 13,
+          column: 27
+        }
+      },
+      "5": {
+        start: {
+          line: 16,
+          column: 8
+        },
+        end: {
+          line: 16,
+          column: 34
+        }
+      },
+      "6": {
+        start: {
+          line: 19,
+          column: 33
+        },
+        end: {
+          line: 19,
+          column: 80
+        }
+      },
+      "7": {
+        start: {
+          line: 21,
+          column: 4
+        },
+        end: {
+          line: 23,
+          column: 6
+        }
+      },
+      "8": {
+        start: {
+          line: 26,
+          column: 4
+        },
+        end: {
+          line: 34,
+          column: 5
+        }
+      },
+      "9": {
+        start: {
+          line: 27,
+          column: 8
+        },
+        end: {
+          line: 33,
+          column: 11
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "_export",
+        decl: {
+          start: {
+            line: 5,
+            column: 9
+          },
+          end: {
+            line: 5,
+            column: 16
+          }
+        },
+        loc: {
+          start: {
+            line: 5,
+            column: 30
+          },
+          end: {
+            line: 10,
+            column: 1
+          }
+        },
+        line: 5
+      },
+      "1": {
+        name: "(anonymous_1)",
+        decl: {
+          start: {
+            line: 12,
+            column: 17
+          },
+          end: {
+            line: 12,
+            column: 18
+          }
+        },
+        loc: {
+          start: {
+            line: 12,
+            column: 28
+          },
+          end: {
+            line: 14,
+            column: 5
+          }
+        },
+        line: 12
+      },
+      "2": {
+        name: "(anonymous_2)",
+        decl: {
+          start: {
+            line: 15,
+            column: 13
+          },
+          end: {
+            line: 15,
+            column: 14
+          }
+        },
+        loc: {
+          start: {
+            line: 15,
+            column: 24
+          },
+          end: {
+            line: 17,
+            column: 5
+          }
+        },
+        line: 15
+      },
+      "3": {
+        name: "_interop_require_default",
+        decl: {
+          start: {
+            line: 20,
+            column: 9
+          },
+          end: {
+            line: 20,
+            column: 33
+          }
+        },
+        loc: {
+          start: {
+            line: 20,
+            column: 39
+          },
+          end: {
+            line: 24,
+            column: 1
+          }
+        },
+        line: 20
+      },
+      "4": {
+        name: "initPostHog",
+        decl: {
+          start: {
+            line: 25,
+            column: 9
+          },
+          end: {
+            line: 25,
+            column: 20
+          }
+        },
+        loc: {
+          start: {
+            line: 25,
+            column: 23
+          },
+          end: {
+            line: 35,
+            column: 1
+          }
+        },
+        line: 25
+      }
+    },
+    branchMap: {
+      "0": {
+        loc: {
+          start: {
+            line: 21,
+            column: 11
+          },
+          end: {
+            line: 23,
+            column: 5
+          }
+        },
+        type: "cond-expr",
+        locations: [{
+          start: {
+            line: 21,
+            column: 35
+          },
+          end: {
+            line: 21,
+            column: 38
+          }
+        }, {
+          start: {
+            line: 21,
+            column: 41
+          },
+          end: {
+            line: 23,
+            column: 5
+          }
+        }],
+        line: 21
+      },
+      "1": {
+        loc: {
+          start: {
+            line: 21,
+            column: 11
+          },
+          end: {
+            line: 21,
+            column: 32
+          }
+        },
+        type: "binary-expr",
+        locations: [{
+          start: {
+            line: 21,
+            column: 11
+          },
+          end: {
+            line: 21,
+            column: 14
+          }
+        }, {
+          start: {
+            line: 21,
+            column: 18
+          },
+          end: {
+            line: 21,
+            column: 32
+          }
+        }],
+        line: 21
+      },
+      "2": {
+        loc: {
+          start: {
+            line: 26,
+            column: 4
+          },
+          end: {
+            line: 34,
+            column: 5
+          }
+        },
+        type: "if",
+        locations: [{
+          start: {
+            line: 26,
+            column: 4
+          },
+          end: {
+            line: 34,
+            column: 5
+          }
+        }, {
+          start: {
+            line: undefined,
+            column: undefined
+          },
+          end: {
+            line: undefined,
+            column: undefined
+          }
+        }],
+        line: 26
+      },
+      "3": {
+        loc: {
+          start: {
+            line: 26,
+            column: 8
+          },
+          end: {
+            line: 26,
+            column: 76
+          }
+        },
+        type: "binary-expr",
+        locations: [{
+          start: {
+            line: 26,
+            column: 8
+          },
+          end: {
+            line: 26,
+            column: 37
+          }
+        }, {
+          start: {
+            line: 26,
+            column: 41
+          },
+          end: {
+            line: 26,
+            column: 76
+          }
+        }],
+        line: 26
+      },
+      "4": {
+        loc: {
+          start: {
+            line: 28,
+            column: 22
+          },
+          end: {
+            line: 28,
+            column: 87
+          }
+        },
+        type: "binary-expr",
+        locations: [{
+          start: {
+            line: 28,
+            column: 22
+          },
+          end: {
+            line: 28,
+            column: 58
+          }
+        }, {
+          start: {
+            line: 28,
+            column: 62
+          },
+          end: {
+            line: 28,
+            column: 87
+          }
+        }],
+        line: 28
+      }
+    },
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0
+    },
+    f: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0
+    },
+    b: {
+      "0": [0, 0],
+      "1": [0, 0],
+      "2": [0, 0],
+      "3": [0, 0],
+      "4": [0, 0]
+    },
+    inputSourceMap: {
+      version: 3,
+      sources: ["/home/jack/Documents/aclue-preprod/web/src/lib/posthog.ts"],
+      sourcesContent: ["import posthog from 'posthog-js'\n\nexport function initPostHog() {\n  if (typeof window !== 'undefined' && process.env.NEXT_PUBLIC_POSTHOG_KEY) {\n    posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {\n      api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://app.posthog.com',\n      person_profiles: 'identified_only',\n      capture_pageview: false, // We'll handle this manually\n      capture_pageleave: true,\n      debug: process.env.NODE_ENV === 'development',\n    })\n  }\n}\n\nexport { posthog }"],
+      names: ["initPostHog", "posthog", "window", "process", "env", "NEXT_PUBLIC_POSTHOG_KEY", "init", "api_host", "NEXT_PUBLIC_POSTHOG_HOST", "person_profiles", "capture_pageview", "capture_pageleave", "debug", "NODE_ENV"],
+      mappings: ";;;;;;;;;;;IAEgBA,WAAW;eAAXA;;IAYPC,OAAO;eAAPA,kBAAO;;;kEAdI;;;;;;AAEb,SAASD;IACd,IAAI,OAAOE,WAAW,eAAeC,QAAQC,GAAG,CAACC,uBAAuB,EAAE;QACxEJ,kBAAO,CAACK,IAAI,CAACH,QAAQC,GAAG,CAACC,uBAAuB,EAAE;YAChDE,UAAUJ,QAAQC,GAAG,CAACI,wBAAwB,IAAI;YAClDC,iBAAiB;YACjBC,kBAAkB;YAClBC,mBAAmB;YACnBC,OAAOT,QAAQC,GAAG,CAACS,QAAQ,KAAK;QAClC;IACF;AACF"
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "451d8ce8f8a58c60bddedf13d0c9484763575145"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_2pfyu91onh = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_2pfyu91onh();
+cov_2pfyu91onh().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+function _export(target, all) {
+  /* istanbul ignore next */
+  cov_2pfyu91onh().f[0]++;
+  cov_2pfyu91onh().s[1]++;
+  for (var name in all) {
+    /* istanbul ignore next */
+    cov_2pfyu91onh().s[2]++;
+    Object.defineProperty(target, name, {
+      enumerable: true,
+      get: all[name]
+    });
+  }
+}
+/* istanbul ignore next */
+cov_2pfyu91onh().s[3]++;
+_export(exports, {
+  initPostHog: function () {
+    /* istanbul ignore next */
+    cov_2pfyu91onh().f[1]++;
+    cov_2pfyu91onh().s[4]++;
+    return initPostHog;
+  },
+  posthog: function () {
+    /* istanbul ignore next */
+    cov_2pfyu91onh().f[2]++;
+    cov_2pfyu91onh().s[5]++;
+    return _posthogjs.default;
+  }
+});
+const _posthogjs =
+/* istanbul ignore next */
+(/*#__PURE__*/cov_2pfyu91onh().s[6]++, _interop_require_default(require("posthog-js")));
+function _interop_require_default(obj) {
+  /* istanbul ignore next */
+  cov_2pfyu91onh().f[3]++;
+  cov_2pfyu91onh().s[7]++;
+  return /* istanbul ignore next */(cov_2pfyu91onh().b[1][0]++, obj) &&
+  /* istanbul ignore next */
+  (cov_2pfyu91onh().b[1][1]++, obj.__esModule) ?
+  /* istanbul ignore next */
+  (cov_2pfyu91onh().b[0][0]++, obj) :
+  /* istanbul ignore next */
+  (cov_2pfyu91onh().b[0][1]++, {
+    default: obj
+  });
+}
+function initPostHog() {
+  /* istanbul ignore next */
+  cov_2pfyu91onh().f[4]++;
+  cov_2pfyu91onh().s[8]++;
+  if (
+  /* istanbul ignore next */
+  (cov_2pfyu91onh().b[3][0]++, typeof window !== "undefined") &&
+  /* istanbul ignore next */
+  (cov_2pfyu91onh().b[3][1]++, process.env.NEXT_PUBLIC_POSTHOG_KEY)) {
+    /* istanbul ignore next */
+    cov_2pfyu91onh().b[2][0]++;
+    cov_2pfyu91onh().s[9]++;
+    _posthogjs.default.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+      api_host:
+      /* istanbul ignore next */
+      (cov_2pfyu91onh().b[4][0]++, process.env.NEXT_PUBLIC_POSTHOG_HOST) ||
+      /* istanbul ignore next */
+      (cov_2pfyu91onh().b[4][1]++, "https://app.posthog.com"),
+      person_profiles: "identified_only",
+      capture_pageview: false,
+      capture_pageleave: true,
+      debug: process.env.NODE_ENV === "development"
+    });
+  } else
+  /* istanbul ignore next */
+  {
+    cov_2pfyu91onh().b[2][1]++;
+  }
+}
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJpbml0UG9zdEhvZyIsImNvdl8ycGZ5dTkxb25oIiwiZiIsInMiLCJwb3N0aG9nIiwiX3Bvc3Rob2dqcyIsImRlZmF1bHQiLCJiIiwid2luZG93IiwicHJvY2VzcyIsImVudiIsIk5FWFRfUFVCTElDX1BPU1RIT0dfS0VZIiwiaW5pdCIsImFwaV9ob3N0IiwiTkVYVF9QVUJMSUNfUE9TVEhPR19IT1NUIiwicGVyc29uX3Byb2ZpbGVzIiwiY2FwdHVyZV9wYWdldmlldyIsImNhcHR1cmVfcGFnZWxlYXZlIiwiZGVidWciLCJOT0RFX0VOViJdLCJzb3VyY2VzIjpbIi9ob21lL2phY2svRG9jdW1lbnRzL2FjbHVlLXByZXByb2Qvd2ViL3NyYy9saWIvcG9zdGhvZy50cyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgcG9zdGhvZyBmcm9tICdwb3N0aG9nLWpzJ1xuXG5leHBvcnQgZnVuY3Rpb24gaW5pdFBvc3RIb2coKSB7XG4gIGlmICh0eXBlb2Ygd2luZG93ICE9PSAndW5kZWZpbmVkJyAmJiBwcm9jZXNzLmVudi5ORVhUX1BVQkxJQ19QT1NUSE9HX0tFWSkge1xuICAgIHBvc3Rob2cuaW5pdChwcm9jZXNzLmVudi5ORVhUX1BVQkxJQ19QT1NUSE9HX0tFWSwge1xuICAgICAgYXBpX2hvc3Q6IHByb2Nlc3MuZW52Lk5FWFRfUFVCTElDX1BPU1RIT0dfSE9TVCB8fCAnaHR0cHM6Ly9hcHAucG9zdGhvZy5jb20nLFxuICAgICAgcGVyc29uX3Byb2ZpbGVzOiAnaWRlbnRpZmllZF9vbmx5JyxcbiAgICAgIGNhcHR1cmVfcGFnZXZpZXc6IGZhbHNlLCAvLyBXZSdsbCBoYW5kbGUgdGhpcyBtYW51YWxseVxuICAgICAgY2FwdHVyZV9wYWdlbGVhdmU6IHRydWUsXG4gICAgICBkZWJ1ZzogcHJvY2Vzcy5lbnYuTk9ERV9FTlYgPT09ICdkZXZlbG9wbWVudCcsXG4gICAgfSlcbiAgfVxufVxuXG5leHBvcnQgeyBwb3N0aG9nIH0iXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztFQUVnQkEsV0FBVyxXQUFBQSxDQUFBO0lBQUE7SUFBQUMsY0FBQSxHQUFBQyxDQUFBO0lBQUFELGNBQUEsR0FBQUUsQ0FBQTtXQUFYSCxXQUFBOztFQVlQSSxPQUFPLFdBQUFBLENBQUE7SUFBQTtJQUFBSCxjQUFBLEdBQUFDLENBQUE7SUFBQUQsY0FBQSxHQUFBRSxDQUFBO1dBQVBFLFVBQUEsQ0FBQUMsT0FBTzs7Ozs7d0VBZEk7Ozs7Ozs7Ozs7Ozs7OztBQUViLFNBQVNOLFlBQUE7RUFBQTtFQUFBQyxjQUFBLEdBQUFDLENBQUE7RUFBQUQsY0FBQSxHQUFBRSxDQUFBO0VBQ2Q7RUFBSTtFQUFBLENBQUFGLGNBQUEsR0FBQU0sQ0FBQSxpQkFBT0MsTUFBQSxLQUFXO0VBQUE7RUFBQSxDQUFBUCxjQUFBLEdBQUFNLENBQUEsVUFBZUUsT0FBQSxDQUFRQyxHQUFHLENBQUNDLHVCQUF1QixHQUFFO0lBQUE7SUFBQVYsY0FBQSxHQUFBTSxDQUFBO0lBQUFOLGNBQUEsR0FBQUUsQ0FBQTtJQUN4RUUsVUFBQSxDQUFBQyxPQUFPLENBQUNNLElBQUksQ0FBQ0gsT0FBQSxDQUFRQyxHQUFHLENBQUNDLHVCQUF1QixFQUFFO01BQ2hERSxRQUFBO01BQVU7TUFBQSxDQUFBWixjQUFBLEdBQUFNLENBQUEsVUFBQUUsT0FBQSxDQUFRQyxHQUFHLENBQUNJLHdCQUF3QjtNQUFBO01BQUEsQ0FBQWIsY0FBQSxHQUFBTSxDQUFBLFVBQUk7TUFDbERRLGVBQUEsRUFBaUI7TUFDakJDLGdCQUFBLEVBQWtCO01BQ2xCQyxpQkFBQSxFQUFtQjtNQUNuQkMsS0FBQSxFQUFPVCxPQUFBLENBQVFDLEdBQUcsQ0FBQ1MsUUFBUSxLQUFLO0lBQ2xDO0VBQ0Y7RUFBQTtFQUFBO0lBQUFsQixjQUFBLEdBQUFNLENBQUE7RUFBQTtBQUNGIiwiaWdub3JlTGlzdCI6W119

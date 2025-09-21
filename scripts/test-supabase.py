@@ -62,7 +62,7 @@ def check_supabase_setup():
     print("5. Set up Row Level Security policies")
 
 if __name__ == "__main__":
-    print("🎁 GiftSync Supabase Connection Test")
+    print("🎁 Aclue Supabase Connection Test")
     print("=" * 40)
     
     if test_supabase_connection():

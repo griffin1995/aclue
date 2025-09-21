@@ -178,8 +178,8 @@ export const SwipeCard: React.FC<SwipeCardProps> = ({
     }
     
     // Generate affiliate link and track click if it's an Amazon product
-    if (product.url && isValidAmazonUrl(product.url)) {
-      const affiliateUrl = generateAffiliateLink(product.url, {
+    if ((product as any).url && isValidAmazonUrl((product as any).url)) {
+      const affiliateUrl = generateAffiliateLink((product as any).url, {
         campaign: 'gift_recommendation',
         medium: 'swipe_interface',
         source: 'product_click',
@@ -189,20 +189,20 @@ export const SwipeCard: React.FC<SwipeCardProps> = ({
       // Track the affiliate click
       await trackAffiliateClick({
         productId: product.id,
-        asin: extractASIN(product.url),
+        asin: extractASIN((product as any).url) || '',
         category: product.category.name,
         price: product.price,
         currency: product.currency || 'GBP',
         affiliateUrl,
-        originalUrl: product.url,
+        originalUrl: (product as any).url,
         source: 'recommendation'
       });
       
       // Open affiliate link in new tab
       window.open(affiliateUrl, '_blank', 'noopener,noreferrer');
-    } else if (product.url) {
+    } else if ((product as any).url) {
       // Open regular product link
-      window.open(product.url, '_blank', 'noopener,noreferrer');
+      window.open((product as any).url, '_blank', 'noopener,noreferrer');
     }
   };
 
@@ -347,7 +347,7 @@ export const SwipeCard: React.FC<SwipeCardProps> = ({
               <button
                 onClick={handleProductClick}
                 className="ml-2 p-2 text-gray-400 hover:text-primary-600 transition-colors"
-                title={product.url && isValidAmazonUrl(product.url) ? 'View on Amazon (affiliate link)' : 'View product'}
+                title={(product as any).url && isValidAmazonUrl((product as any).url) ? 'View on Amazon (affiliate link)' : 'View product'}
               >
                 <ExternalLink className="w-4 h-4" />
               </button>

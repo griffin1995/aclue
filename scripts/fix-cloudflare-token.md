@@ -16,7 +16,7 @@
 From our enhanced validation:
 - ✅ API token is valid (token status: active)
 - ❌ Cannot access account (missing Account:Read permission)
-- ❌ Cannot access Pages project "prznt" (missing Cloudflare Pages:Edit permission)
+- ❌ Cannot access Pages project "aclue" (missing Cloudflare Pages:Edit permission)
 
 ## Fix Required
 
@@ -37,7 +37,7 @@ Account Resources:
 ├── Include: All accounts
 
 Zone Resources:
-├── Include: All zones (or specifically prznt.app if preferred)
+├── Include: All zones (or specifically aclue.app if preferred)
 ```
 
 ### Step 2: Update GitHub Secrets
@@ -58,7 +58,7 @@ gh workflow run deploy.yml --field environment=production --field skip_tests=fal
 The enhanced validation should show:
 - ✅ API token is valid
 - ✅ Account access is valid
-- ✅ Pages project 'prznt' is accessible
+- ✅ Pages project 'aclue' is accessible
 - ✅ Deploy to Cloudflare Pages (success)
 
 ## Technical Details

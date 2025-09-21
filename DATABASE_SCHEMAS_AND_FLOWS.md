@@ -1,4 +1,4 @@
-# GiftSync - Database Schemas & Application Flows
+# Aclue - Database Schemas & Application Flows
 **Comprehensive Database Design & Business Logic Documentation**
 
 > **Last Updated**: July 1, 2025  
@@ -109,7 +109,7 @@ CREATE TABLE IF NOT EXISTS products (
 --   "brand": "Amazon",
 --   "retailer": "Amazon", 
 --   "image_url": "https://m.media-amazon.com/images/I/714Rq4k05UL._AC_SL1000_.jpg",
---   "affiliate_url": "https://www.amazon.co.uk/dp/B08N5WRWNW/?tag=giftsync-20...",
+--   "affiliate_url": "https://www.amazon.co.uk/dp/B08N5WRWNW/?tag=aclue-20...",
 --   "asin": "B08N5WRWNW",
 --   "rating": 4.5,
 --   "review_count": 89247,
@@ -928,4 +928,4 @@ ALTER TABLE recommendations ADD COLUMN IF NOT EXISTS conversion_value DECIMAL(10
 
 **End of Database Schemas & Application Flows Documentation**
 
-*This document provides comprehensive coverage of all database schemas, relationships, flows, and business logic within the GiftSync application.*
+*This document provides comprehensive coverage of all database schemas, relationships, flows, and business logic within the Aclue application.*

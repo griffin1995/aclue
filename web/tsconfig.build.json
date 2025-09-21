@@ -1,0 +1,95 @@
+{
+  "_description": "Optimised TypeScript Build Configuration for Production",
+  "_features": [
+    "Optimised compilation for production builds",
+    "Advanced performance settings for large codebases",
+    "Type checking optimisations for CI/CD pipelines",
+    "Memory usage optimisations for build servers"
+  ],
+
+  "extends": "./tsconfig.json",
+
+  "compilerOptions": {
+    // ==========================================================================
+    // PERFORMANCE OPTIMISATIONS
+    // ==========================================================================
+    "incremental": true,                        // Enable incremental compilation
+    "composite": true,                          // Enable project references
+    "tsBuildInfoFile": "./.next/tsbuildinfo",  // Store build info for incremental builds
+    "assumeChangesOnlyAffectDirectDependencies": true, // Optimise dependency checking
+
+    // ==========================================================================
+    // ADVANCED TYPE CHECKING OPTIMISATIONS
+    // ==========================================================================
+    "skipLibCheck": true,                       // Skip type checking of declaration files
+    "skipDefaultLibCheck": true,                // Skip type checking of default library files
+
+    // ==========================================================================
+    // MEMORY OPTIMISATIONS
+    // ==========================================================================
+    "preserveWatchOutput": true,                // Keep output from previous compilations
+    "pretty": false,                            // Disable pretty printing for faster builds
+
+    // ==========================================================================
+    // OUTPUT OPTIMISATIONS
+    // ==========================================================================
+    "removeComments": true,                     // Remove comments to reduce bundle size
+    "importHelpers": true,                      // Use tslib for helper functions
+    "downlevelIteration": true,                 // Emit more compliant but verbose iteration
+
+    // ==========================================================================
+    // BUILD VALIDATION
+    // ==========================================================================
+    "noEmitOnError": true,                      // Don't emit output if there are errors
+    "forceConsistentCasingInFileNames": true,   // Ensure consistent file name casing
+
+    // ==========================================================================
+    // ADVANCED STRICTNESS FOR PRODUCTION
+    // ==========================================================================
+    "exactOptionalPropertyTypes": true,         // Strict optional property checking
+    "noImplicitReturns": true,                  // Ensure all code paths return a value
+    "noFallthroughCasesInSwitch": true,         // Prevent fallthrough cases in switch
+    "noUncheckedIndexedAccess": true,           // Add undefined to index signature results
+    "noImplicitOverride": true,                 // Require explicit override keywords
+    "allowUnreachableCode": false,              // Report errors on unreachable code
+    "allowUnusedLabels": false,                 // Report errors on unused labels
+    "noPropertyAccessFromIndexSignature": true, // Require dot notation for known properties
+    "useUnknownInCatchVariables": true          // Use 'unknown' type for catch variables
+  },
+
+  // ============================================================================
+  // OPTIMISED FILE INCLUSION FOR BUILDS
+  // ============================================================================
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
+
+  // ============================================================================
+  // EXCLUDE DEVELOPMENT AND TEST FILES
+  // ============================================================================
+  "exclude": [
+    "node_modules",
+    ".next",
+    "out",
+    "dist",
+    "build",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.spec.ts",
+    "**/*.spec.tsx",
+    "**/__tests__/**",
+    "**/__mocks__/**",
+    "jest.config.js",
+    "jest.setup.js",
+    "playwright.config.ts",
+    "e2e/**"
+  ],
+
+  // ============================================================================
+  // PROJECT REFERENCES FOR MONOREPO OPTIMISATION
+  // ============================================================================
+  "references": []
+}

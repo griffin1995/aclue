@@ -175,7 +175,7 @@ DATABASE_URL=postgresql://postgres:[PASSWORD]@db.xchsarvamppwephulylt.supabase.c
 SUPABASE_URL=https://xchsarvamppwephulylt.supabase.co
 SUPABASE_ANON_KEY=[ANON_KEY]
 SUPABASE_SERVICE_KEY=[SERVICE_KEY]
-SECRET_KEY=giftsync-production-secret-key-2025-change-this-256-bit-railway
+SECRET_KEY=aclue-production-secret-key-2025-change-this-256-bit-railway
 RESEND_API_KEY=re_jiUeEQis_3Y9vrR7yECq6hiWT83JzMrR6
 ```
 

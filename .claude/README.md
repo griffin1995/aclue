@@ -1,7 +1,7 @@
-# Claude Code Agent Ecosystem - GiftSync (Prznt)
+# Claude Code Agent Ecosystem - Aclue (Aclue)
 ## Comprehensive Multi-Agent Development System
 
-This directory contains a complete ecosystem for managing and coordinating all 50+ Claude Code agents through intelligent worktree-based workflows for the GiftSync project.
+This directory contains a complete ecosystem for managing and coordinating all 50+ Claude Code agents through intelligent worktree-based workflows for the Aclue project.
 
 ## 🚀 Quick Start
 
@@ -19,14 +19,14 @@ This directory contains a complete ecosystem for managing and coordinating all 5
 ./.claude/scripts/agent-manager.sh status
 ```
 
-## 🎯 GiftSync Project Context
+## 🎯 Aclue Project Context
 
 ### Business Overview
 - **Platform**: AI-powered gifting platform with swipe-based discovery
 - **Market**: £45B+ global gifting market, £9.3B UK opportunity
 - **Revenue**: Affiliate commissions (7.5% avg) + Premium subscriptions
 - **Target**: 1M+ users by Year 3, £2.5M projected revenue
-- **Status**: Production-ready MVP deployed at https://prznt.app
+- **Status**: Production-ready MVP deployed at https://aclue.app
 
 ### Technical Architecture
 - **Frontend**: Next.js 14 + React 18 + TypeScript
@@ -75,7 +75,7 @@ This directory contains a complete ecosystem for managing and coordinating all 5
 - **revenue-specialist** - Affiliate integration and monetization
 - **customer-support** - User documentation and support systems
 
-## 🎪 GiftSync-Specific Workflows
+## 🎪 Aclue-Specific Workflows
 
 ### High-Priority Development Areas
 
@@ -114,7 +114,7 @@ This directory contains a complete ecosystem for managing and coordinating all 5
 - **performance-stack**: performance-engineer + database-optimizer + frontend-developer
 - **full-stack**: frontend-developer + backend-architect + database-admin
 
-## 📊 GiftSync Metrics & KPIs
+## 📊 Aclue Metrics & KPIs
 
 ### Business Metrics to Track
 - **User Engagement**: Session duration, swipe completion rates, retention
@@ -175,7 +175,7 @@ This directory contains a complete ecosystem for managing and coordinating all 5
 │   ├── create-worktree.sh          # Worktree creation
 │   └── worktree-status.sh          # Status monitoring
 ├── context/                         # Project state
-│   ├── project-state.json          # GiftSync context
+│   ├── project-state.json          # Aclue context
 │   ├── worktree-map.json           # Worktree organization
 │   └── agent-performance.json      # Performance tracking
 ├── workflows/                       # Example workflows
@@ -215,19 +215,19 @@ This directory contains a complete ecosystem for managing and coordinating all 5
 
 # Backend connectivity
 curl http://localhost:8000/health
-curl https://giftsync-backend-production.up.railway.app/health
+curl https://aclue-backend-production.up.railway.app/health
 
 # Frontend status
 curl -I http://localhost:3000
-curl -I https://prznt.app
+curl -I https://aclue.app
 ```
 
-## 📞 GiftSync Development Context
+## 📞 Aclue Development Context
 
 ### Working Environment
 - **Project Root**: `/home/jack/Documents/gift_sync`
-- **Production URL**: https://prznt.app
-- **Backend API**: https://giftsync-backend-production.up.railway.app
+- **Production URL**: https://aclue.app
+- **Backend API**: https://aclue-backend-production.up.railway.app
 - **Git Status**: 46+ commits, production-ready codebase
 
 ### Business Readiness
@@ -238,6 +238,6 @@ curl -I https://prznt.app
 
 ---
 
-**The GiftSync Claude Code Agent Ecosystem is now fully operational and ready to accelerate development across all aspects of the platform - from revenue generation to ML enhancement to mobile expansion.**
+**The Aclue Claude Code Agent Ecosystem is now fully operational and ready to accelerate development across all aspects of the platform - from revenue generation to ML enhancement to mobile expansion.**
 
 Transform your gifting platform development with the power of 53+ specialized AI agents working in perfect harmony under intelligent coordination.

@@ -1,0 +1,668 @@
+adb78af829a9ef19e2f458ac07e9e730
+/**
+ * About Us Page
+ * 
+ * Comprehensive about page explaining aclue's mission, story, and team.
+ */"use strict";
+
+/* istanbul ignore next */
+function cov_xdodg3hx8() {
+  var path = "/home/jack/Documents/aclue-preprod/web/src/pages/about.tsx";
+  var hash = "665f202f53f5bb189aa5854127091a81fa4e6d33";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/home/jack/Documents/aclue-preprod/web/src/pages/about.tsx",
+    statementMap: {
+      "0": {
+        start: {
+          line: 6,
+          column: 0
+        },
+        end: {
+          line: 8,
+          column: 3
+        }
+      },
+      "1": {
+        start: {
+          line: 9,
+          column: 0
+        },
+        end: {
+          line: 14,
+          column: 3
+        }
+      },
+      "2": {
+        start: {
+          line: 12,
+          column: 8
+        },
+        end: {
+          line: 12,
+          column: 24
+        }
+      },
+      "3": {
+        start: {
+          line: 15,
+          column: 20
+        },
+        end: {
+          line: 15,
+          column: 48
+        }
+      },
+      "4": {
+        start: {
+          line: 16,
+          column: 29
+        },
+        end: {
+          line: 16,
+          column: 71
+        }
+      },
+      "5": {
+        start: {
+          line: 17,
+          column: 28
+        },
+        end: {
+          line: 17,
+          column: 74
+        }
+      },
+      "6": {
+        start: {
+          line: 18,
+          column: 28
+        },
+        end: {
+          line: 18,
+          column: 74
+        }
+      },
+      "7": {
+        start: {
+          line: 19,
+          column: 21
+        },
+        end: {
+          line: 19,
+          column: 44
+        }
+      },
+      "8": {
+        start: {
+          line: 21,
+          column: 4
+        },
+        end: {
+          line: 23,
+          column: 6
+        }
+      },
+      "9": {
+        start: {
+          line: 25,
+          column: 18
+        },
+        end: {
+          line: 441,
+          column: 1
+        }
+      },
+      "10": {
+        start: {
+          line: 26,
+          column: 4
+        },
+        end: {
+          line: 440,
+          column: 7
+        }
+      },
+      "11": {
+        start: {
+          line: 442,
+          column: 17
+        },
+        end: {
+          line: 442,
+          column: 26
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 11,
+            column: 9
+          },
+          end: {
+            line: 11,
+            column: 10
+          }
+        },
+        loc: {
+          start: {
+            line: 11,
+            column: 20
+          },
+          end: {
+            line: 13,
+            column: 5
+          }
+        },
+        line: 11
+      },
+      "1": {
+        name: "_interop_require_default",
+        decl: {
+          start: {
+            line: 20,
+            column: 9
+          },
+          end: {
+            line: 20,
+            column: 33
+          }
+        },
+        loc: {
+          start: {
+            line: 20,
+            column: 39
+          },
+          end: {
+            line: 24,
+            column: 1
+          }
+        },
+        line: 20
+      },
+      "2": {
+        name: "(anonymous_2)",
+        decl: {
+          start: {
+            line: 25,
+            column: 18
+          },
+          end: {
+            line: 25,
+            column: 19
+          }
+        },
+        loc: {
+          start: {
+            line: 25,
+            column: 22
+          },
+          end: {
+            line: 441,
+            column: 1
+          }
+        },
+        line: 25
+      }
+    },
+    branchMap: {
+      "0": {
+        loc: {
+          start: {
+            line: 21,
+            column: 11
+          },
+          end: {
+            line: 23,
+            column: 5
+          }
+        },
+        type: "cond-expr",
+        locations: [{
+          start: {
+            line: 21,
+            column: 35
+          },
+          end: {
+            line: 21,
+            column: 38
+          }
+        }, {
+          start: {
+            line: 21,
+            column: 41
+          },
+          end: {
+            line: 23,
+            column: 5
+          }
+        }],
+        line: 21
+      },
+      "1": {
+        loc: {
+          start: {
+            line: 21,
+            column: 11
+          },
+          end: {
+            line: 21,
+            column: 32
+          }
+        },
+        type: "binary-expr",
+        locations: [{
+          start: {
+            line: 21,
+            column: 11
+          },
+          end: {
+            line: 21,
+            column: 14
+          }
+        }, {
+          start: {
+            line: 21,
+            column: 18
+          },
+          end: {
+            line: 21,
+            column: 32
+          }
+        }],
+        line: 21
+      }
+    },
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0,
+      "10": 0,
+      "11": 0
+    },
+    f: {
+      "0": 0,
+      "1": 0,
+      "2": 0
+    },
+    b: {
+      "0": [0, 0],
+      "1": [0, 0]
+    },
+    inputSourceMap: {
+      version: 3,
+      sources: ["/home/jack/Documents/aclue-preprod/web/src/pages/about.tsx"],
+      sourcesContent: ["/**\n * About Us Page\n * \n * Comprehensive about page explaining aclue's mission, story, and team.\n */\n\nimport React from 'react';\nimport Head from 'next/head';\nimport Link from 'next/link';\nimport { \n  ArrowLeft, \n  Gift, \n  Heart, \n  Sparkles, \n  Target, \n  Users, \n  Zap,\n  Brain,\n  Globe,\n  Shield\n} from 'lucide-react';\n\nconst AboutPage: React.FC = () => {\n  return (\n    <>\n      <Head>\n        <title>About Us - aclue</title>\n        <meta \n          name=\"description\" \n          content=\"Learn about aclue's mission to revolutionise gift-giving with AI-powered recommendations. Discover our story, values, and the team behind the platform.\" \n        />\n        <meta name=\"robots\" content=\"index, follow\" />\n        <link rel=\"canonical\" href=\"https://aclue.app/about\" />\n      </Head>\n\n      <div className=\"min-h-screen bg-gray-50\">\n        {/* Header */}\n        <div className=\"bg-white shadow-sm\">\n          <div className=\"max-w-6xl mx-auto px-4 py-6\">\n            <Link \n              href=\"/\"\n              className=\"inline-flex items-center gap-2 text-primary-600 hover:text-primary-700 transition-colors mb-4\"\n            >\n              <ArrowLeft className=\"w-4 h-4\" />\n              Back to Home\n            </Link>\n            <div className=\"flex items-center gap-3\">\n              <div className=\"w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center\">\n                <Users className=\"w-6 h-6 text-primary-600\" />\n              </div>\n              <div>\n                <h1 className=\"text-2xl font-bold text-gray-900\">About aclue</h1>\n                <p className=\"text-gray-600\">Revolutionising gift-giving with AI</p>\n              </div>\n            </div>\n          </div>\n        </div>\n\n        <div className=\"max-w-6xl mx-auto px-4 py-12\">\n          {/* Hero Section */}\n          <div className=\"text-center mb-16\">\n            <h2 className=\"text-4xl font-bold text-gray-900 mb-6\">\n              Making Gift-Giving \n              <span className=\"text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-secondary-600\"> Effortless</span>\n            </h2>\n            <p className=\"text-xl text-gray-600 max-w-3xl mx-auto\">\n              We believe that finding the perfect gift shouldn't be stressful. Our AI-powered platform \n              learns your preferences to suggest gifts that truly resonate with you and your loved ones.\n            </p>\n          </div>\n\n          {/* Mission Section */}\n          <div className=\"grid lg:grid-cols-2 gap-12 items-center mb-16\">\n            <div>\n              <h3 className=\"text-3xl font-bold text-gray-900 mb-6\">Our Mission</h3>\n              <p className=\"text-lg text-gray-600 mb-6\">\n                Gift-giving is one of humanity's most beautiful expressions of love and care. Yet too often, \n                it becomes a source of stress and uncertainty. We're here to change that.\n              </p>\n              <p className=\"text-lg text-gray-600 mb-6\">\n                aclue combines cutting-edge artificial intelligence with human understanding to create \n                a platform that truly gets your style, preferences, and the unique relationships you cherish.\n              </p>\n              <div className=\"flex items-center gap-3 bg-primary-50 p-4 rounded-lg\">\n                <Target className=\"w-6 h-6 text-primary-600\" />\n                <span className=\"font-semibold text-primary-800\">\n                  Making every gift meaningful, every time\n                </span>\n              </div>\n            </div>\n            \n            <div className=\"grid grid-cols-2 gap-4\">\n              <div className=\"bg-white p-6 rounded-lg shadow-sm border\">\n                <div className=\"w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4\">\n                  <Brain className=\"w-6 h-6 text-blue-600\" />\n                </div>\n                <h4 className=\"font-semibold text-gray-900 mb-2\">AI-Powered</h4>\n                <p className=\"text-gray-600 text-sm\">Advanced machine learning that understands your unique taste</p>\n              </div>\n              \n              <div className=\"bg-white p-6 rounded-lg shadow-sm border\">\n                <div className=\"w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4\">\n                  <Heart className=\"w-6 h-6 text-green-600\" />\n                </div>\n                <h4 className=\"font-semibold text-gray-900 mb-2\">Thoughtful</h4>\n                <p className=\"text-gray-600 text-sm\">Every recommendation considers the relationship and occasion</p>\n              </div>\n              \n              <div className=\"bg-white p-6 rounded-lg shadow-sm border\">\n                <div className=\"w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4\">\n                  <Shield className=\"w-6 h-6 text-purple-600\" />\n                </div>\n                <h4 className=\"font-semibold text-gray-900 mb-2\">Privacy-First</h4>\n                <p className=\"text-gray-600 text-sm\">Your data is protected with industry-leading security</p>\n              </div>\n              \n              <div className=\"bg-white p-6 rounded-lg shadow-sm border\">\n                <div className=\"w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4\">\n                  <Globe className=\"w-6 h-6 text-orange-600\" />\n                </div>\n                <h4 className=\"font-semibold text-gray-900 mb-2\">Global</h4>\n                <p className=\"text-gray-600 text-sm\">Curated products from the world's best retailers</p>\n              </div>\n            </div>\n          </div>\n\n          {/* Story Section */}\n          <div className=\"bg-white rounded-2xl p-8 lg:p-12 shadow-sm border mb-16\">\n            <h3 className=\"text-3xl font-bold text-gray-900 mb-6 text-center\">Our Story</h3>\n            <div className=\"max-w-4xl mx-auto\">\n              <p className=\"text-lg text-gray-600 mb-6\">\n                aclue was born from a simple realisation: despite having access to millions of products online, \n                finding the perfect gift remained frustratingly difficult. Traditional recommendation systems focused \n                on popularity and sales data, ignoring the personal nuances that make a gift truly special.\n              </p>\n              <p className=\"text-lg text-gray-600 mb-6\">\n                Our founders, passionate about both technology and human connection, set out to create something different. \n                By combining advanced machine learning with deep understanding of human relationships and preferences, \n                we built a platform that doesn't just suggest products\u2014it understands what makes gifts meaningful.\n              </p>\n              <p className=\"text-lg text-gray-600\">\n                Today, aclue serves thousands of users worldwide, helping them discover gifts that strengthen \n                relationships and create lasting memories. Every swipe, every recommendation, and every successful \n                gift brings us closer to our vision of a world where gift-giving is always a joy, never a burden.\n              </p>\n            </div>\n          </div>\n\n          {/* Values Section */}\n          <div className=\"mb-16\">\n            <h3 className=\"text-3xl font-bold text-gray-900 mb-12 text-center\">Our Values</h3>\n            <div className=\"grid md:grid-cols-3 gap-8\">\n              <div className=\"text-center\">\n                <div className=\"w-16 h-16 bg-primary-100 rounded-2xl flex items-center justify-center mx-auto mb-6\">\n                  <Sparkles className=\"w-8 h-8 text-primary-600\" />\n                </div>\n                <h4 className=\"text-xl font-semibold text-gray-900 mb-4\">Innovation</h4>\n                <p className=\"text-gray-600\">\n                  We constantly push the boundaries of what's possible, using cutting-edge AI to solve \n                  real human problems with creativity and precision.\n                </p>\n              </div>\n\n              <div className=\"text-center\">\n                <div className=\"w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-6\">\n                  <Heart className=\"w-8 h-8 text-blue-600\" />\n                </div>\n                <h4 className=\"text-xl font-semibold text-gray-900 mb-4\">Empathy</h4>\n                <p className=\"text-gray-600\">\n                  Every feature we build is designed with deep understanding of human emotions, \n                  relationships, and the meaningful moments that connect us.\n                </p>\n              </div>\n\n              <div className=\"text-center\">\n                <div className=\"w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-6\">\n                  <Shield className=\"w-8 h-8 text-green-600\" />\n                </div>\n                <h4 className=\"text-xl font-semibold text-gray-900 mb-4\">Trust</h4>\n                <p className=\"text-gray-600\">\n                  We earn trust through transparency, security, and consistently delivering \n                  recommendations that genuinely improve our users' gift-giving experiences.\n                </p>\n              </div>\n            </div>\n          </div>\n\n          {/* Impact Section */}\n          <div className=\"bg-gradient-to-r from-primary-600 to-secondary-600 rounded-2xl p-8 lg:p-12 text-white mb-16\">\n            <div className=\"text-center\">\n              <h3 className=\"text-3xl font-bold mb-6\">Our Impact</h3>\n              <p className=\"text-xl opacity-90 mb-12 max-w-3xl mx-auto\">\n                Since launching, we've helped thousands of people find meaningful gifts and strengthen their relationships.\n              </p>\n              \n              <div className=\"grid md:grid-cols-4 gap-8\">\n                <div className=\"text-center\">\n                  <div className=\"text-4xl font-bold mb-2\">50K+</div>\n                  <div className=\"opacity-90\">Gifts Recommended</div>\n                </div>\n                <div className=\"text-center\">\n                  <div className=\"text-4xl font-bold mb-2\">95%</div>\n                  <div className=\"opacity-90\">User Satisfaction</div>\n                </div>\n                <div className=\"text-center\">\n                  <div className=\"text-4xl font-bold mb-2\">25+</div>\n                  <div className=\"opacity-90\">Countries Served</div>\n                </div>\n                <div className=\"text-center\">\n                  <div className=\"text-4xl font-bold mb-2\">\xA32M+</div>\n                  <div className=\"opacity-90\">In Gift Value</div>\n                </div>\n              </div>\n            </div>\n          </div>\n\n          {/* Join Us Section */}\n          <div className=\"text-center\">\n            <h3 className=\"text-3xl font-bold text-gray-900 mb-6\">Join Our Journey</h3>\n            <p className=\"text-xl text-gray-600 mb-8 max-w-3xl mx-auto\">\n              Whether you're looking for the perfect gift or want to be part of revolutionising how we connect \n              through giving, we'd love to have you with us.\n            </p>\n            \n            <div className=\"flex flex-col sm:flex-row gap-4 justify-center\">\n              <Link\n                href=\"/auth/register\"\n                className=\"inline-flex items-center gap-2 bg-primary-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-700 transition-colors\"\n              >\n                Start Finding Gifts\n                <Gift className=\"w-5 h-5\" />\n              </Link>\n              \n              <Link\n                href=\"/careers\"\n                className=\"inline-flex items-center gap-2 bg-gray-100 text-gray-700 px-8 py-3 rounded-lg font-semibold hover:bg-gray-200 transition-colors\"\n              >\n                Join Our Team\n                <Users className=\"w-5 h-5\" />\n              </Link>\n            </div>\n          </div>\n        </div>\n      </div>\n    </>\n  );\n};\n\nexport default AboutPage;"],
+      names: ["AboutPage", "Head", "title", "meta", "name", "content", "link", "rel", "href", "div", "className", "Link", "ArrowLeft", "Users", "h1", "p", "h2", "span", "h3", "Target", "Brain", "h4", "Heart", "Shield", "Globe", "Sparkles", "Gift"],
+      mappings: "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"
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "665f202f53f5bb189aa5854127091a81fa4e6d33"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_xdodg3hx8 = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_xdodg3hx8();
+cov_xdodg3hx8().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/* istanbul ignore next */
+cov_xdodg3hx8().s[1]++;
+Object.defineProperty(exports, "default", {
+  enumerable: true,
+  get: function () {
+    /* istanbul ignore next */
+    cov_xdodg3hx8().f[0]++;
+    cov_xdodg3hx8().s[2]++;
+    return _default;
+  }
+});
+const _jsxruntime =
+/* istanbul ignore next */
+(cov_xdodg3hx8().s[3]++, require("react/jsx-runtime"));
+const _react =
+/* istanbul ignore next */
+(/*#__PURE__*/cov_xdodg3hx8().s[4]++, _interop_require_default(require("react")));
+const _head =
+/* istanbul ignore next */
+(/*#__PURE__*/cov_xdodg3hx8().s[5]++, _interop_require_default(require("next/head")));
+const _link =
+/* istanbul ignore next */
+(/*#__PURE__*/cov_xdodg3hx8().s[6]++, _interop_require_default(require("next/link")));
+const _lucidereact =
+/* istanbul ignore next */
+(cov_xdodg3hx8().s[7]++, require("lucide-react"));
+function _interop_require_default(obj) {
+  /* istanbul ignore next */
+  cov_xdodg3hx8().f[1]++;
+  cov_xdodg3hx8().s[8]++;
+  return /* istanbul ignore next */(cov_xdodg3hx8().b[1][0]++, obj) &&
+  /* istanbul ignore next */
+  (cov_xdodg3hx8().b[1][1]++, obj.__esModule) ?
+  /* istanbul ignore next */
+  (cov_xdodg3hx8().b[0][0]++, obj) :
+  /* istanbul ignore next */
+  (cov_xdodg3hx8().b[0][1]++, {
+    default: obj
+  });
+}
+/* istanbul ignore next */
+cov_xdodg3hx8().s[9]++;
+const AboutPage = () => {
+  /* istanbul ignore next */
+  cov_xdodg3hx8().f[2]++;
+  cov_xdodg3hx8().s[10]++;
+  return /*#__PURE__*/(0, _jsxruntime.jsxs)(_jsxruntime.Fragment, {
+    children: [/*#__PURE__*/(0, _jsxruntime.jsxs)(_head.default, {
+      children: [/*#__PURE__*/(0, _jsxruntime.jsx)("title", {
+        children: "About Us - aclue"
+      }), /*#__PURE__*/(0, _jsxruntime.jsx)("meta", {
+        name: "description",
+        content: "Learn about aclue's mission to revolutionise gift-giving with AI-powered recommendations. Discover our story, values, and the team behind the platform."
+      }), /*#__PURE__*/(0, _jsxruntime.jsx)("meta", {
+        name: "robots",
+        content: "index, follow"
+      }), /*#__PURE__*/(0, _jsxruntime.jsx)("link", {
+        rel: "canonical",
+        href: "https://aclue.app/about"
+      })]
+    }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+      className: "min-h-screen bg-gray-50",
+      children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+        className: "bg-white shadow-sm",
+        children: /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+          className: "max-w-6xl mx-auto px-4 py-6",
+          children: [/*#__PURE__*/(0, _jsxruntime.jsxs)(_link.default, {
+            href: "/",
+            className: "inline-flex items-center gap-2 text-primary-600 hover:text-primary-700 transition-colors mb-4",
+            children: [/*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.ArrowLeft, {
+              className: "w-4 h-4"
+            }), "Back to Home"]
+          }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+            className: "flex items-center gap-3",
+            children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+              className: "w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center",
+              children: /*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.Users, {
+                className: "w-6 h-6 text-primary-600"
+              })
+            }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+              children: [/*#__PURE__*/(0, _jsxruntime.jsx)("h1", {
+                className: "text-2xl font-bold text-gray-900",
+                children: "About aclue"
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+                className: "text-gray-600",
+                children: "Revolutionising gift-giving with AI"
+              })]
+            })]
+          })]
+        })
+      }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+        className: "max-w-6xl mx-auto px-4 py-12",
+        children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+          className: "text-center mb-16",
+          children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("h2", {
+            className: "text-4xl font-bold text-gray-900 mb-6",
+            children: ["Making Gift-Giving", /*#__PURE__*/(0, _jsxruntime.jsx)("span", {
+              className: "text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-secondary-600",
+              children: " Effortless"
+            })]
+          }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+            className: "text-xl text-gray-600 max-w-3xl mx-auto",
+            children: "We believe that finding the perfect gift shouldn't be stressful. Our AI-powered platform learns your preferences to suggest gifts that truly resonate with you and your loved ones."
+          })]
+        }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+          className: "grid lg:grid-cols-2 gap-12 items-center mb-16",
+          children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+            children: [/*#__PURE__*/(0, _jsxruntime.jsx)("h3", {
+              className: "text-3xl font-bold text-gray-900 mb-6",
+              children: "Our Mission"
+            }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+              className: "text-lg text-gray-600 mb-6",
+              children: "Gift-giving is one of humanity's most beautiful expressions of love and care. Yet too often, it becomes a source of stress and uncertainty. We're here to change that."
+            }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+              className: "text-lg text-gray-600 mb-6",
+              children: "aclue combines cutting-edge artificial intelligence with human understanding to create a platform that truly gets your style, preferences, and the unique relationships you cherish."
+            }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+              className: "flex items-center gap-3 bg-primary-50 p-4 rounded-lg",
+              children: [/*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.Target, {
+                className: "w-6 h-6 text-primary-600"
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("span", {
+                className: "font-semibold text-primary-800",
+                children: "Making every gift meaningful, every time"
+              })]
+            })]
+          }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+            className: "grid grid-cols-2 gap-4",
+            children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+              className: "bg-white p-6 rounded-lg shadow-sm border",
+              children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                className: "w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4",
+                children: /*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.Brain, {
+                  className: "w-6 h-6 text-blue-600"
+                })
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("h4", {
+                className: "font-semibold text-gray-900 mb-2",
+                children: "AI-Powered"
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+                className: "text-gray-600 text-sm",
+                children: "Advanced machine learning that understands your unique taste"
+              })]
+            }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+              className: "bg-white p-6 rounded-lg shadow-sm border",
+              children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                className: "w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4",
+                children: /*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.Heart, {
+                  className: "w-6 h-6 text-green-600"
+                })
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("h4", {
+                className: "font-semibold text-gray-900 mb-2",
+                children: "Thoughtful"
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+                className: "text-gray-600 text-sm",
+                children: "Every recommendation considers the relationship and occasion"
+              })]
+            }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+              className: "bg-white p-6 rounded-lg shadow-sm border",
+              children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                className: "w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4",
+                children: /*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.Shield, {
+                  className: "w-6 h-6 text-purple-600"
+                })
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("h4", {
+                className: "font-semibold text-gray-900 mb-2",
+                children: "Privacy-First"
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+                className: "text-gray-600 text-sm",
+                children: "Your data is protected with industry-leading security"
+              })]
+            }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+              className: "bg-white p-6 rounded-lg shadow-sm border",
+              children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                className: "w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4",
+                children: /*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.Globe, {
+                  className: "w-6 h-6 text-orange-600"
+                })
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("h4", {
+                className: "font-semibold text-gray-900 mb-2",
+                children: "Global"
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+                className: "text-gray-600 text-sm",
+                children: "Curated products from the world's best retailers"
+              })]
+            })]
+          })]
+        }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+          className: "bg-white rounded-2xl p-8 lg:p-12 shadow-sm border mb-16",
+          children: [/*#__PURE__*/(0, _jsxruntime.jsx)("h3", {
+            className: "text-3xl font-bold text-gray-900 mb-6 text-center",
+            children: "Our Story"
+          }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+            className: "max-w-4xl mx-auto",
+            children: [/*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+              className: "text-lg text-gray-600 mb-6",
+              children: "aclue was born from a simple realisation: despite having access to millions of products online, finding the perfect gift remained frustratingly difficult. Traditional recommendation systems focused on popularity and sales data, ignoring the personal nuances that make a gift truly special."
+            }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+              className: "text-lg text-gray-600 mb-6",
+              children: "Our founders, passionate about both technology and human connection, set out to create something different. By combining advanced machine learning with deep understanding of human relationships and preferences, we built a platform that doesn't just suggest products—it understands what makes gifts meaningful."
+            }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+              className: "text-lg text-gray-600",
+              children: "Today, aclue serves thousands of users worldwide, helping them discover gifts that strengthen relationships and create lasting memories. Every swipe, every recommendation, and every successful gift brings us closer to our vision of a world where gift-giving is always a joy, never a burden."
+            })]
+          })]
+        }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+          className: "mb-16",
+          children: [/*#__PURE__*/(0, _jsxruntime.jsx)("h3", {
+            className: "text-3xl font-bold text-gray-900 mb-12 text-center",
+            children: "Our Values"
+          }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+            className: "grid md:grid-cols-3 gap-8",
+            children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+              className: "text-center",
+              children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                className: "w-16 h-16 bg-primary-100 rounded-2xl flex items-center justify-center mx-auto mb-6",
+                children: /*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.Sparkles, {
+                  className: "w-8 h-8 text-primary-600"
+                })
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("h4", {
+                className: "text-xl font-semibold text-gray-900 mb-4",
+                children: "Innovation"
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+                className: "text-gray-600",
+                children: "We constantly push the boundaries of what's possible, using cutting-edge AI to solve real human problems with creativity and precision."
+              })]
+            }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+              className: "text-center",
+              children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                className: "w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-6",
+                children: /*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.Heart, {
+                  className: "w-8 h-8 text-blue-600"
+                })
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("h4", {
+                className: "text-xl font-semibold text-gray-900 mb-4",
+                children: "Empathy"
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+                className: "text-gray-600",
+                children: "Every feature we build is designed with deep understanding of human emotions, relationships, and the meaningful moments that connect us."
+              })]
+            }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+              className: "text-center",
+              children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                className: "w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-6",
+                children: /*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.Shield, {
+                  className: "w-8 h-8 text-green-600"
+                })
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("h4", {
+                className: "text-xl font-semibold text-gray-900 mb-4",
+                children: "Trust"
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+                className: "text-gray-600",
+                children: "We earn trust through transparency, security, and consistently delivering recommendations that genuinely improve our users' gift-giving experiences."
+              })]
+            })]
+          })]
+        }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+          className: "bg-gradient-to-r from-primary-600 to-secondary-600 rounded-2xl p-8 lg:p-12 text-white mb-16",
+          children: /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+            className: "text-center",
+            children: [/*#__PURE__*/(0, _jsxruntime.jsx)("h3", {
+              className: "text-3xl font-bold mb-6",
+              children: "Our Impact"
+            }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+              className: "text-xl opacity-90 mb-12 max-w-3xl mx-auto",
+              children: "Since launching, we've helped thousands of people find meaningful gifts and strengthen their relationships."
+            }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+              className: "grid md:grid-cols-4 gap-8",
+              children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                className: "text-center",
+                children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                  className: "text-4xl font-bold mb-2",
+                  children: "50K+"
+                }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                  className: "opacity-90",
+                  children: "Gifts Recommended"
+                })]
+              }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                className: "text-center",
+                children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                  className: "text-4xl font-bold mb-2",
+                  children: "95%"
+                }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                  className: "opacity-90",
+                  children: "User Satisfaction"
+                })]
+              }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                className: "text-center",
+                children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                  className: "text-4xl font-bold mb-2",
+                  children: "25+"
+                }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                  className: "opacity-90",
+                  children: "Countries Served"
+                })]
+              }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                className: "text-center",
+                children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                  className: "text-4xl font-bold mb-2",
+                  children: "\xa32M+"
+                }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                  className: "opacity-90",
+                  children: "In Gift Value"
+                })]
+              })]
+            })]
+          })
+        }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+          className: "text-center",
+          children: [/*#__PURE__*/(0, _jsxruntime.jsx)("h3", {
+            className: "text-3xl font-bold text-gray-900 mb-6",
+            children: "Join Our Journey"
+          }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+            className: "text-xl text-gray-600 mb-8 max-w-3xl mx-auto",
+            children: "Whether you're looking for the perfect gift or want to be part of revolutionising how we connect through giving, we'd love to have you with us."
+          }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+            className: "flex flex-col sm:flex-row gap-4 justify-center",
+            children: [/*#__PURE__*/(0, _jsxruntime.jsxs)(_link.default, {
+              href: "/auth/register",
+              className: "inline-flex items-center gap-2 bg-primary-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-700 transition-colors",
+              children: ["Start Finding Gifts", /*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.Gift, {
+                className: "w-5 h-5"
+              })]
+            }), /*#__PURE__*/(0, _jsxruntime.jsxs)(_link.default, {
+              href: "/careers",
+              className: "inline-flex items-center gap-2 bg-gray-100 text-gray-700 px-8 py-3 rounded-lg font-semibold hover:bg-gray-200 transition-colors",
+              children: ["Join Our Team", /*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.Users, {
+                className: "w-5 h-5"
+              })]
+            })]
+          })]
+        })]
+      })]
+    })]
+  });
+};
+const _default =
+/* istanbul ignore next */
+(cov_xdodg3hx8().s[11]++, AboutPage);
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJjb3ZfeGRvZGczaHg4IiwicGF0aCIsImhhc2giLCJnbG9iYWwiLCJGdW5jdGlvbiIsImdjdiIsImNvdmVyYWdlRGF0YSIsInN0YXRlbWVudE1hcCIsInN0YXJ0IiwibGluZSIsImNvbHVtbiIsImVuZCIsImZuTWFwIiwibmFtZSIsImRlY2wiLCJsb2MiLCJicmFuY2hNYXAiLCJ0eXBlIiwibG9jYXRpb25zIiwicyIsImYiLCJiIiwiaW5wdXRTb3VyY2VNYXAiLCJ2ZXJzaW9uIiwic291cmNlcyIsInNvdXJjZXNDb250ZW50IiwibmFtZXMiLCJtYXBwaW5ncyIsIl9jb3ZlcmFnZVNjaGVtYSIsImNvdmVyYWdlIiwiYWN0dWFsQ292ZXJhZ2UiLCJfZGVmYXVsdCIsIkFib3V0UGFnZSIsIl9qc3hydW50aW1lIiwianN4cyIsIkZyYWdtZW50IiwiX2hlYWQiLCJkZWZhdWx0IiwianN4IiwiY29udGVudCIsInJlbCIsImhyZWYiLCJjbGFzc05hbWUiLCJfbGluayIsIl9sdWNpZGVyZWFjdCIsIkFycm93TGVmdCIsIlVzZXJzIiwiVGFyZ2V0IiwiQnJhaW4iLCJIZWFydCIsIlNoaWVsZCIsIkdsb2JlIiwiU3BhcmtsZXMiLCJHaWZ0Il0sInNvdXJjZXMiOlsiL2hvbWUvamFjay9Eb2N1bWVudHMvYWNsdWUtcHJlcHJvZC93ZWIvc3JjL3BhZ2VzL2Fib3V0LnRzeCJdLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIEFib3V0IFVzIFBhZ2VcbiAqIFxuICogQ29tcHJlaGVuc2l2ZSBhYm91dCBwYWdlIGV4cGxhaW5pbmcgYWNsdWUncyBtaXNzaW9uLCBzdG9yeSwgYW5kIHRlYW0uXG4gKi9cblxuaW1wb3J0IFJlYWN0IGZyb20gJ3JlYWN0JztcbmltcG9ydCBIZWFkIGZyb20gJ25leHQvaGVhZCc7XG5pbXBvcnQgTGluayBmcm9tICduZXh0L2xpbmsnO1xuaW1wb3J0IHsgXG4gIEFycm93TGVmdCwgXG4gIEdpZnQsIFxuICBIZWFydCwgXG4gIFNwYXJrbGVzLCBcbiAgVGFyZ2V0LCBcbiAgVXNlcnMsIFxuICBaYXAsXG4gIEJyYWluLFxuICBHbG9iZSxcbiAgU2hpZWxkXG59IGZyb20gJ2x1Y2lkZS1yZWFjdCc7XG5cbmNvbnN0IEFib3V0UGFnZTogUmVhY3QuRkMgPSAoKSA9PiB7XG4gIHJldHVybiAoXG4gICAgPD5cbiAgICAgIDxIZWFkPlxuICAgICAgICA8dGl0bGU+QWJvdXQgVXMgLSBhY2x1ZTwvdGl0bGU+XG4gICAgICAgIDxtZXRhIFxuICAgICAgICAgIG5hbWU9XCJkZXNjcmlwdGlvblwiIFxuICAgICAgICAgIGNvbnRlbnQ9XCJMZWFybiBhYm91dCBhY2x1ZSdzIG1pc3Npb24gdG8gcmV2b2x1dGlvbmlzZSBnaWZ0LWdpdmluZyB3aXRoIEFJLXBvd2VyZWQgcmVjb21tZW5kYXRpb25zLiBEaXNjb3ZlciBvdXIgc3RvcnksIHZhbHVlcywgYW5kIHRoZSB0ZWFtIGJlaGluZCB0aGUgcGxhdGZvcm0uXCIgXG4gICAgICAgIC8+XG4gICAgICAgIDxtZXRhIG5hbWU9XCJyb2JvdHNcIiBjb250ZW50PVwiaW5kZXgsIGZvbGxvd1wiIC8+XG4gICAgICAgIDxsaW5rIHJlbD1cImNhbm9uaWNhbFwiIGhyZWY9XCJodHRwczovL2FjbHVlLmFwcC9hYm91dFwiIC8+XG4gICAgICA8L0hlYWQ+XG5cbiAgICAgIDxkaXYgY2xhc3NOYW1lPVwibWluLWgtc2NyZWVuIGJnLWdyYXktNTBcIj5cbiAgICAgICAgey8qIEhlYWRlciAqL31cbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJiZy13aGl0ZSBzaGFkb3ctc21cIj5cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cIm1heC13LTZ4bCBteC1hdXRvIHB4LTQgcHktNlwiPlxuICAgICAgICAgICAgPExpbmsgXG4gICAgICAgICAgICAgIGhyZWY9XCIvXCJcbiAgICAgICAgICAgICAgY2xhc3NOYW1lPVwiaW5saW5lLWZsZXggaXRlbXMtY2VudGVyIGdhcC0yIHRleHQtcHJpbWFyeS02MDAgaG92ZXI6dGV4dC1wcmltYXJ5LTcwMCB0cmFuc2l0aW9uLWNvbG9ycyBtYi00XCJcbiAgICAgICAgICAgID5cbiAgICAgICAgICAgICAgPEFycm93TGVmdCBjbGFzc05hbWU9XCJ3LTQgaC00XCIgLz5cbiAgICAgICAgICAgICAgQmFjayB0byBIb21lXG4gICAgICAgICAgICA8L0xpbms+XG4gICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImZsZXggaXRlbXMtY2VudGVyIGdhcC0zXCI+XG4gICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwidy0xMCBoLTEwIGJnLXByaW1hcnktMTAwIHJvdW5kZWQtbGcgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXJcIj5cbiAgICAgICAgICAgICAgICA8VXNlcnMgY2xhc3NOYW1lPVwidy02IGgtNiB0ZXh0LXByaW1hcnktNjAwXCIgLz5cbiAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgIDxkaXY+XG4gICAgICAgICAgICAgICAgPGgxIGNsYXNzTmFtZT1cInRleHQtMnhsIGZvbnQtYm9sZCB0ZXh0LWdyYXktOTAwXCI+QWJvdXQgYWNsdWU8L2gxPlxuICAgICAgICAgICAgICAgIDxwIGNsYXNzTmFtZT1cInRleHQtZ3JheS02MDBcIj5SZXZvbHV0aW9uaXNpbmcgZ2lmdC1naXZpbmcgd2l0aCBBSTwvcD5cbiAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgPC9kaXY+XG5cbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJtYXgtdy02eGwgbXgtYXV0byBweC00IHB5LTEyXCI+XG4gICAgICAgICAgey8qIEhlcm8gU2VjdGlvbiAqL31cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInRleHQtY2VudGVyIG1iLTE2XCI+XG4gICAgICAgICAgICA8aDIgY2xhc3NOYW1lPVwidGV4dC00eGwgZm9udC1ib2xkIHRleHQtZ3JheS05MDAgbWItNlwiPlxuICAgICAgICAgICAgICBNYWtpbmcgR2lmdC1HaXZpbmcgXG4gICAgICAgICAgICAgIDxzcGFuIGNsYXNzTmFtZT1cInRleHQtdHJhbnNwYXJlbnQgYmctY2xpcC10ZXh0IGJnLWdyYWRpZW50LXRvLXIgZnJvbS1wcmltYXJ5LTYwMCB0by1zZWNvbmRhcnktNjAwXCI+IEVmZm9ydGxlc3M8L3NwYW4+XG4gICAgICAgICAgICA8L2gyPlxuICAgICAgICAgICAgPHAgY2xhc3NOYW1lPVwidGV4dC14bCB0ZXh0LWdyYXktNjAwIG1heC13LTN4bCBteC1hdXRvXCI+XG4gICAgICAgICAgICAgIFdlIGJlbGlldmUgdGhhdCBmaW5kaW5nIHRoZSBwZXJmZWN0IGdpZnQgc2hvdWxkbid0IGJlIHN0cmVzc2Z1bC4gT3VyIEFJLXBvd2VyZWQgcGxhdGZvcm0gXG4gICAgICAgICAgICAgIGxlYXJucyB5b3VyIHByZWZlcmVuY2VzIHRvIHN1Z2dlc3QgZ2lmdHMgdGhhdCB0cnVseSByZXNvbmF0ZSB3aXRoIHlvdSBhbmQgeW91ciBsb3ZlZCBvbmVzLlxuICAgICAgICAgICAgPC9wPlxuICAgICAgICAgIDwvZGl2PlxuXG4gICAgICAgICAgey8qIE1pc3Npb24gU2VjdGlvbiAqL31cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImdyaWQgbGc6Z3JpZC1jb2xzLTIgZ2FwLTEyIGl0ZW1zLWNlbnRlciBtYi0xNlwiPlxuICAgICAgICAgICAgPGRpdj5cbiAgICAgICAgICAgICAgPGgzIGNsYXNzTmFtZT1cInRleHQtM3hsIGZvbnQtYm9sZCB0ZXh0LWdyYXktOTAwIG1iLTZcIj5PdXIgTWlzc2lvbjwvaDM+XG4gICAgICAgICAgICAgIDxwIGNsYXNzTmFtZT1cInRleHQtbGcgdGV4dC1ncmF5LTYwMCBtYi02XCI+XG4gICAgICAgICAgICAgICAgR2lmdC1naXZpbmcgaXMgb25lIG9mIGh1bWFuaXR5J3MgbW9zdCBiZWF1dGlmdWwgZXhwcmVzc2lvbnMgb2YgbG92ZSBhbmQgY2FyZS4gWWV0IHRvbyBvZnRlbiwgXG4gICAgICAgICAgICAgICAgaXQgYmVjb21lcyBhIHNvdXJjZSBvZiBzdHJlc3MgYW5kIHVuY2VydGFpbnR5LiBXZSdyZSBoZXJlIHRvIGNoYW5nZSB0aGF0LlxuICAgICAgICAgICAgICA8L3A+XG4gICAgICAgICAgICAgIDxwIGNsYXNzTmFtZT1cInRleHQtbGcgdGV4dC1ncmF5LTYwMCBtYi02XCI+XG4gICAgICAgICAgICAgICAgYWNsdWUgY29tYmluZXMgY3V0dGluZy1lZGdlIGFydGlmaWNpYWwgaW50ZWxsaWdlbmNlIHdpdGggaHVtYW4gdW5kZXJzdGFuZGluZyB0byBjcmVhdGUgXG4gICAgICAgICAgICAgICAgYSBwbGF0Zm9ybSB0aGF0IHRydWx5IGdldHMgeW91ciBzdHlsZSwgcHJlZmVyZW5jZXMsIGFuZCB0aGUgdW5pcXVlIHJlbGF0aW9uc2hpcHMgeW91IGNoZXJpc2guXG4gICAgICAgICAgICAgIDwvcD5cbiAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJmbGV4IGl0ZW1zLWNlbnRlciBnYXAtMyBiZy1wcmltYXJ5LTUwIHAtNCByb3VuZGVkLWxnXCI+XG4gICAgICAgICAgICAgICAgPFRhcmdldCBjbGFzc05hbWU9XCJ3LTYgaC02IHRleHQtcHJpbWFyeS02MDBcIiAvPlxuICAgICAgICAgICAgICAgIDxzcGFuIGNsYXNzTmFtZT1cImZvbnQtc2VtaWJvbGQgdGV4dC1wcmltYXJ5LTgwMFwiPlxuICAgICAgICAgICAgICAgICAgTWFraW5nIGV2ZXJ5IGdpZnQgbWVhbmluZ2Z1bCwgZXZlcnkgdGltZVxuICAgICAgICAgICAgICAgIDwvc3Bhbj5cbiAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgIFxuICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJncmlkIGdyaWQtY29scy0yIGdhcC00XCI+XG4gICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiYmctd2hpdGUgcC02IHJvdW5kZWQtbGcgc2hhZG93LXNtIGJvcmRlclwiPlxuICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwidy0xMiBoLTEyIGJnLWJsdWUtMTAwIHJvdW5kZWQtbGcgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIgbWItNFwiPlxuICAgICAgICAgICAgICAgICAgPEJyYWluIGNsYXNzTmFtZT1cInctNiBoLTYgdGV4dC1ibHVlLTYwMFwiIC8+XG4gICAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgICAgPGg0IGNsYXNzTmFtZT1cImZvbnQtc2VtaWJvbGQgdGV4dC1ncmF5LTkwMCBtYi0yXCI+QUktUG93ZXJlZDwvaDQ+XG4gICAgICAgICAgICAgICAgPHAgY2xhc3NOYW1lPVwidGV4dC1ncmF5LTYwMCB0ZXh0LXNtXCI+QWR2YW5jZWQgbWFjaGluZSBsZWFybmluZyB0aGF0IHVuZGVyc3RhbmRzIHlvdXIgdW5pcXVlIHRhc3RlPC9wPlxuICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgXG4gICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiYmctd2hpdGUgcC02IHJvdW5kZWQtbGcgc2hhZG93LXNtIGJvcmRlclwiPlxuICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwidy0xMiBoLTEyIGJnLWdyZWVuLTEwMCByb3VuZGVkLWxnIGZsZXggaXRlbXMtY2VudGVyIGp1c3RpZnktY2VudGVyIG1iLTRcIj5cbiAgICAgICAgICAgICAgICAgIDxIZWFydCBjbGFzc05hbWU9XCJ3LTYgaC02IHRleHQtZ3JlZW4tNjAwXCIgLz5cbiAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICA8aDQgY2xhc3NOYW1lPVwiZm9udC1zZW1pYm9sZCB0ZXh0LWdyYXktOTAwIG1iLTJcIj5UaG91Z2h0ZnVsPC9oND5cbiAgICAgICAgICAgICAgICA8cCBjbGFzc05hbWU9XCJ0ZXh0LWdyYXktNjAwIHRleHQtc21cIj5FdmVyeSByZWNvbW1lbmRhdGlvbiBjb25zaWRlcnMgdGhlIHJlbGF0aW9uc2hpcCBhbmQgb2NjYXNpb248L3A+XG4gICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICBcbiAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJiZy13aGl0ZSBwLTYgcm91bmRlZC1sZyBzaGFkb3ctc20gYm9yZGVyXCI+XG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJ3LTEyIGgtMTIgYmctcHVycGxlLTEwMCByb3VuZGVkLWxnIGZsZXggaXRlbXMtY2VudGVyIGp1c3RpZnktY2VudGVyIG1iLTRcIj5cbiAgICAgICAgICAgICAgICAgIDxTaGllbGQgY2xhc3NOYW1lPVwidy02IGgtNiB0ZXh0LXB1cnBsZS02MDBcIiAvPlxuICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICAgIDxoNCBjbGFzc05hbWU9XCJmb250LXNlbWlib2xkIHRleHQtZ3JheS05MDAgbWItMlwiPlByaXZhY3ktRmlyc3Q8L2g0PlxuICAgICAgICAgICAgICAgIDxwIGNsYXNzTmFtZT1cInRleHQtZ3JheS02MDAgdGV4dC1zbVwiPllvdXIgZGF0YSBpcyBwcm90ZWN0ZWQgd2l0aCBpbmR1c3RyeS1sZWFkaW5nIHNlY3VyaXR5PC9wPlxuICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgXG4gICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiYmctd2hpdGUgcC02IHJvdW5kZWQtbGcgc2hhZG93LXNtIGJvcmRlclwiPlxuICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwidy0xMiBoLTEyIGJnLW9yYW5nZS0xMDAgcm91bmRlZC1sZyBmbGV4IGl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNlbnRlciBtYi00XCI+XG4gICAgICAgICAgICAgICAgICA8R2xvYmUgY2xhc3NOYW1lPVwidy02IGgtNiB0ZXh0LW9yYW5nZS02MDBcIiAvPlxuICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICAgIDxoNCBjbGFzc05hbWU9XCJmb250LXNlbWlib2xkIHRleHQtZ3JheS05MDAgbWItMlwiPkdsb2JhbDwvaDQ+XG4gICAgICAgICAgICAgICAgPHAgY2xhc3NOYW1lPVwidGV4dC1ncmF5LTYwMCB0ZXh0LXNtXCI+Q3VyYXRlZCBwcm9kdWN0cyBmcm9tIHRoZSB3b3JsZCdzIGJlc3QgcmV0YWlsZXJzPC9wPlxuICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgIDwvZGl2PlxuXG4gICAgICAgICAgey8qIFN0b3J5IFNlY3Rpb24gKi99XG4gICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJiZy13aGl0ZSByb3VuZGVkLTJ4bCBwLTggbGc6cC0xMiBzaGFkb3ctc20gYm9yZGVyIG1iLTE2XCI+XG4gICAgICAgICAgICA8aDMgY2xhc3NOYW1lPVwidGV4dC0zeGwgZm9udC1ib2xkIHRleHQtZ3JheS05MDAgbWItNiB0ZXh0LWNlbnRlclwiPk91ciBTdG9yeTwvaDM+XG4gICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cIm1heC13LTR4bCBteC1hdXRvXCI+XG4gICAgICAgICAgICAgIDxwIGNsYXNzTmFtZT1cInRleHQtbGcgdGV4dC1ncmF5LTYwMCBtYi02XCI+XG4gICAgICAgICAgICAgICAgYWNsdWUgd2FzIGJvcm4gZnJvbSBhIHNpbXBsZSByZWFsaXNhdGlvbjogZGVzcGl0ZSBoYXZpbmcgYWNjZXNzIHRvIG1pbGxpb25zIG9mIHByb2R1Y3RzIG9ubGluZSwgXG4gICAgICAgICAgICAgICAgZmluZGluZyB0aGUgcGVyZmVjdCBnaWZ0IHJlbWFpbmVkIGZydXN0cmF0aW5nbHkgZGlmZmljdWx0LiBUcmFkaXRpb25hbCByZWNvbW1lbmRhdGlvbiBzeXN0ZW1zIGZvY3VzZWQgXG4gICAgICAgICAgICAgICAgb24gcG9wdWxhcml0eSBhbmQgc2FsZXMgZGF0YSwgaWdub3JpbmcgdGhlIHBlcnNvbmFsIG51YW5jZXMgdGhhdCBtYWtlIGEgZ2lmdCB0cnVseSBzcGVjaWFsLlxuICAgICAgICAgICAgICA8L3A+XG4gICAgICAgICAgICAgIDxwIGNsYXNzTmFtZT1cInRleHQtbGcgdGV4dC1ncmF5LTYwMCBtYi02XCI+XG4gICAgICAgICAgICAgICAgT3VyIGZvdW5kZXJzLCBwYXNzaW9uYXRlIGFib3V0IGJvdGggdGVjaG5vbG9neSBhbmQgaHVtYW4gY29ubmVjdGlvbiwgc2V0IG91dCB0byBjcmVhdGUgc29tZXRoaW5nIGRpZmZlcmVudC4gXG4gICAgICAgICAgICAgICAgQnkgY29tYmluaW5nIGFkdmFuY2VkIG1hY2hpbmUgbGVhcm5pbmcgd2l0aCBkZWVwIHVuZGVyc3RhbmRpbmcgb2YgaHVtYW4gcmVsYXRpb25zaGlwcyBhbmQgcHJlZmVyZW5jZXMsIFxuICAgICAgICAgICAgICAgIHdlIGJ1aWx0IGEgcGxhdGZvcm0gdGhhdCBkb2Vzbid0IGp1c3Qgc3VnZ2VzdCBwcm9kdWN0c+KAlGl0IHVuZGVyc3RhbmRzIHdoYXQgbWFrZXMgZ2lmdHMgbWVhbmluZ2Z1bC5cbiAgICAgICAgICAgICAgPC9wPlxuICAgICAgICAgICAgICA8cCBjbGFzc05hbWU9XCJ0ZXh0LWxnIHRleHQtZ3JheS02MDBcIj5cbiAgICAgICAgICAgICAgICBUb2RheSwgYWNsdWUgc2VydmVzIHRob3VzYW5kcyBvZiB1c2VycyB3b3JsZHdpZGUsIGhlbHBpbmcgdGhlbSBkaXNjb3ZlciBnaWZ0cyB0aGF0IHN0cmVuZ3RoZW4gXG4gICAgICAgICAgICAgICAgcmVsYXRpb25zaGlwcyBhbmQgY3JlYXRlIGxhc3RpbmcgbWVtb3JpZXMuIEV2ZXJ5IHN3aXBlLCBldmVyeSByZWNvbW1lbmRhdGlvbiwgYW5kIGV2ZXJ5IHN1Y2Nlc3NmdWwgXG4gICAgICAgICAgICAgICAgZ2lmdCBicmluZ3MgdXMgY2xvc2VyIHRvIG91ciB2aXNpb24gb2YgYSB3b3JsZCB3aGVyZSBnaWZ0LWdpdmluZyBpcyBhbHdheXMgYSBqb3ksIG5ldmVyIGEgYnVyZGVuLlxuICAgICAgICAgICAgICA8L3A+XG4gICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICA8L2Rpdj5cblxuICAgICAgICAgIHsvKiBWYWx1ZXMgU2VjdGlvbiAqL31cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cIm1iLTE2XCI+XG4gICAgICAgICAgICA8aDMgY2xhc3NOYW1lPVwidGV4dC0zeGwgZm9udC1ib2xkIHRleHQtZ3JheS05MDAgbWItMTIgdGV4dC1jZW50ZXJcIj5PdXIgVmFsdWVzPC9oMz5cbiAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZ3JpZCBtZDpncmlkLWNvbHMtMyBnYXAtOFwiPlxuICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInRleHQtY2VudGVyXCI+XG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJ3LTE2IGgtMTYgYmctcHJpbWFyeS0xMDAgcm91bmRlZC0yeGwgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIgbXgtYXV0byBtYi02XCI+XG4gICAgICAgICAgICAgICAgICA8U3BhcmtsZXMgY2xhc3NOYW1lPVwidy04IGgtOCB0ZXh0LXByaW1hcnktNjAwXCIgLz5cbiAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICA8aDQgY2xhc3NOYW1lPVwidGV4dC14bCBmb250LXNlbWlib2xkIHRleHQtZ3JheS05MDAgbWItNFwiPklubm92YXRpb248L2g0PlxuICAgICAgICAgICAgICAgIDxwIGNsYXNzTmFtZT1cInRleHQtZ3JheS02MDBcIj5cbiAgICAgICAgICAgICAgICAgIFdlIGNvbnN0YW50bHkgcHVzaCB0aGUgYm91bmRhcmllcyBvZiB3aGF0J3MgcG9zc2libGUsIHVzaW5nIGN1dHRpbmctZWRnZSBBSSB0byBzb2x2ZSBcbiAgICAgICAgICAgICAgICAgIHJlYWwgaHVtYW4gcHJvYmxlbXMgd2l0aCBjcmVhdGl2aXR5IGFuZCBwcmVjaXNpb24uXG4gICAgICAgICAgICAgICAgPC9wPlxuICAgICAgICAgICAgICA8L2Rpdj5cblxuICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInRleHQtY2VudGVyXCI+XG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJ3LTE2IGgtMTYgYmctYmx1ZS0xMDAgcm91bmRlZC0yeGwgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIgbXgtYXV0byBtYi02XCI+XG4gICAgICAgICAgICAgICAgICA8SGVhcnQgY2xhc3NOYW1lPVwidy04IGgtOCB0ZXh0LWJsdWUtNjAwXCIgLz5cbiAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICA8aDQgY2xhc3NOYW1lPVwidGV4dC14bCBmb250LXNlbWlib2xkIHRleHQtZ3JheS05MDAgbWItNFwiPkVtcGF0aHk8L2g0PlxuICAgICAgICAgICAgICAgIDxwIGNsYXNzTmFtZT1cInRleHQtZ3JheS02MDBcIj5cbiAgICAgICAgICAgICAgICAgIEV2ZXJ5IGZlYXR1cmUgd2UgYnVpbGQgaXMgZGVzaWduZWQgd2l0aCBkZWVwIHVuZGVyc3RhbmRpbmcgb2YgaHVtYW4gZW1vdGlvbnMsIFxuICAgICAgICAgICAgICAgICAgcmVsYXRpb25zaGlwcywgYW5kIHRoZSBtZWFuaW5nZnVsIG1vbWVudHMgdGhhdCBjb25uZWN0IHVzLlxuICAgICAgICAgICAgICAgIDwvcD5cbiAgICAgICAgICAgICAgPC9kaXY+XG5cbiAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJ0ZXh0LWNlbnRlclwiPlxuICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwidy0xNiBoLTE2IGJnLWdyZWVuLTEwMCByb3VuZGVkLTJ4bCBmbGV4IGl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNlbnRlciBteC1hdXRvIG1iLTZcIj5cbiAgICAgICAgICAgICAgICAgIDxTaGllbGQgY2xhc3NOYW1lPVwidy04IGgtOCB0ZXh0LWdyZWVuLTYwMFwiIC8+XG4gICAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgICAgPGg0IGNsYXNzTmFtZT1cInRleHQteGwgZm9udC1zZW1pYm9sZCB0ZXh0LWdyYXktOTAwIG1iLTRcIj5UcnVzdDwvaDQ+XG4gICAgICAgICAgICAgICAgPHAgY2xhc3NOYW1lPVwidGV4dC1ncmF5LTYwMFwiPlxuICAgICAgICAgICAgICAgICAgV2UgZWFybiB0cnVzdCB0aHJvdWdoIHRyYW5zcGFyZW5jeSwgc2VjdXJpdHksIGFuZCBjb25zaXN0ZW50bHkgZGVsaXZlcmluZyBcbiAgICAgICAgICAgICAgICAgIHJlY29tbWVuZGF0aW9ucyB0aGF0IGdlbnVpbmVseSBpbXByb3ZlIG91ciB1c2VycycgZ2lmdC1naXZpbmcgZXhwZXJpZW5jZXMuXG4gICAgICAgICAgICAgICAgPC9wPlxuICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgIDwvZGl2PlxuXG4gICAgICAgICAgey8qIEltcGFjdCBTZWN0aW9uICovfVxuICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiYmctZ3JhZGllbnQtdG8tciBmcm9tLXByaW1hcnktNjAwIHRvLXNlY29uZGFyeS02MDAgcm91bmRlZC0yeGwgcC04IGxnOnAtMTIgdGV4dC13aGl0ZSBtYi0xNlwiPlxuICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJ0ZXh0LWNlbnRlclwiPlxuICAgICAgICAgICAgICA8aDMgY2xhc3NOYW1lPVwidGV4dC0zeGwgZm9udC1ib2xkIG1iLTZcIj5PdXIgSW1wYWN0PC9oMz5cbiAgICAgICAgICAgICAgPHAgY2xhc3NOYW1lPVwidGV4dC14bCBvcGFjaXR5LTkwIG1iLTEyIG1heC13LTN4bCBteC1hdXRvXCI+XG4gICAgICAgICAgICAgICAgU2luY2UgbGF1bmNoaW5nLCB3ZSd2ZSBoZWxwZWQgdGhvdXNhbmRzIG9mIHBlb3BsZSBmaW5kIG1lYW5pbmdmdWwgZ2lmdHMgYW5kIHN0cmVuZ3RoZW4gdGhlaXIgcmVsYXRpb25zaGlwcy5cbiAgICAgICAgICAgICAgPC9wPlxuICAgICAgICAgICAgICBcbiAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJncmlkIG1kOmdyaWQtY29scy00IGdhcC04XCI+XG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJ0ZXh0LWNlbnRlclwiPlxuICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJ0ZXh0LTR4bCBmb250LWJvbGQgbWItMlwiPjUwSys8L2Rpdj5cbiAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwib3BhY2l0eS05MFwiPkdpZnRzIFJlY29tbWVuZGVkPC9kaXY+XG4gICAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJ0ZXh0LWNlbnRlclwiPlxuICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJ0ZXh0LTR4bCBmb250LWJvbGQgbWItMlwiPjk1JTwvZGl2PlxuICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJvcGFjaXR5LTkwXCI+VXNlciBTYXRpc2ZhY3Rpb248L2Rpdj5cbiAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInRleHQtY2VudGVyXCI+XG4gICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInRleHQtNHhsIGZvbnQtYm9sZCBtYi0yXCI+MjUrPC9kaXY+XG4gICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cIm9wYWNpdHktOTBcIj5Db3VudHJpZXMgU2VydmVkPC9kaXY+XG4gICAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJ0ZXh0LWNlbnRlclwiPlxuICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJ0ZXh0LTR4bCBmb250LWJvbGQgbWItMlwiPsKjMk0rPC9kaXY+XG4gICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cIm9wYWNpdHktOTBcIj5JbiBHaWZ0IFZhbHVlPC9kaXY+XG4gICAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgPC9kaXY+XG5cbiAgICAgICAgICB7LyogSm9pbiBVcyBTZWN0aW9uICovfVxuICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwidGV4dC1jZW50ZXJcIj5cbiAgICAgICAgICAgIDxoMyBjbGFzc05hbWU9XCJ0ZXh0LTN4bCBmb250LWJvbGQgdGV4dC1ncmF5LTkwMCBtYi02XCI+Sm9pbiBPdXIgSm91cm5leTwvaDM+XG4gICAgICAgICAgICA8cCBjbGFzc05hbWU9XCJ0ZXh0LXhsIHRleHQtZ3JheS02MDAgbWItOCBtYXgtdy0zeGwgbXgtYXV0b1wiPlxuICAgICAgICAgICAgICBXaGV0aGVyIHlvdSdyZSBsb29raW5nIGZvciB0aGUgcGVyZmVjdCBnaWZ0IG9yIHdhbnQgdG8gYmUgcGFydCBvZiByZXZvbHV0aW9uaXNpbmcgaG93IHdlIGNvbm5lY3QgXG4gICAgICAgICAgICAgIHRocm91Z2ggZ2l2aW5nLCB3ZSdkIGxvdmUgdG8gaGF2ZSB5b3Ugd2l0aCB1cy5cbiAgICAgICAgICAgIDwvcD5cbiAgICAgICAgICAgIFxuICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJmbGV4IGZsZXgtY29sIHNtOmZsZXgtcm93IGdhcC00IGp1c3RpZnktY2VudGVyXCI+XG4gICAgICAgICAgICAgIDxMaW5rXG4gICAgICAgICAgICAgICAgaHJlZj1cIi9hdXRoL3JlZ2lzdGVyXCJcbiAgICAgICAgICAgICAgICBjbGFzc05hbWU9XCJpbmxpbmUtZmxleCBpdGVtcy1jZW50ZXIgZ2FwLTIgYmctcHJpbWFyeS02MDAgdGV4dC13aGl0ZSBweC04IHB5LTMgcm91bmRlZC1sZyBmb250LXNlbWlib2xkIGhvdmVyOmJnLXByaW1hcnktNzAwIHRyYW5zaXRpb24tY29sb3JzXCJcbiAgICAgICAgICAgICAgPlxuICAgICAgICAgICAgICAgIFN0YXJ0IEZpbmRpbmcgR2lmdHNcbiAgICAgICAgICAgICAgICA8R2lmdCBjbGFzc05hbWU9XCJ3LTUgaC01XCIgLz5cbiAgICAgICAgICAgICAgPC9MaW5rPlxuICAgICAgICAgICAgICBcbiAgICAgICAgICAgICAgPExpbmtcbiAgICAgICAgICAgICAgICBocmVmPVwiL2NhcmVlcnNcIlxuICAgICAgICAgICAgICAgIGNsYXNzTmFtZT1cImlubGluZS1mbGV4IGl0ZW1zLWNlbnRlciBnYXAtMiBiZy1ncmF5LTEwMCB0ZXh0LWdyYXktNzAwIHB4LTggcHktMyByb3VuZGVkLWxnIGZvbnQtc2VtaWJvbGQgaG92ZXI6YmctZ3JheS0yMDAgdHJhbnNpdGlvbi1jb2xvcnNcIlxuICAgICAgICAgICAgICA+XG4gICAgICAgICAgICAgICAgSm9pbiBPdXIgVGVhbVxuICAgICAgICAgICAgICAgIDxVc2VycyBjbGFzc05hbWU9XCJ3LTUgaC01XCIgLz5cbiAgICAgICAgICAgICAgPC9MaW5rPlxuICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgPC9kaXY+XG4gICAgICAgIDwvZGl2PlxuICAgICAgPC9kaXY+XG4gICAgPC8+XG4gICk7XG59O1xuXG5leHBvcnQgZGVmYXVsdCBBYm91dFBhZ2U7Il0sIm1hcHBpbmdzIjoiQUFBQTs7OztHQUlDOztBQUFBO0FBQUEsU0FBQUEsY0FBQTtFQUFBLElBQUFDLElBQUE7RUFBQSxJQUFBQyxJQUFBO0VBQUEsSUFBQUMsTUFBQSxPQUFBQyxRQUFBO0VBQUEsSUFBQUMsR0FBQTtFQUFBLElBQUFDLFlBQUE7SUFBQUwsSUFBQTtJQUFBTSxZQUFBO01BQUE7UUFBQUMsS0FBQTtVQUFBQyxJQUFBO1VBQUFDLE1BQUE7UUFBQTtRQUFBQyxHQUFBO1VBQUFGLElBQUE7VUFBQUMsTUFBQTtRQUFBO01BQUE7TUFBQTtRQUFBRixLQUFBO1VBQUFDLElBQUE7VUFBQUMsTUFBQTtRQUFBO1FBQUFDLEdBQUE7VUFBQUYsSUFBQTtVQUFBQyxNQUFBO1FBQUE7TUFBQTtNQUFBO1FBQUFGLEtBQUE7VUFBQUMsSUFBQTtVQUFBQyxNQUFBO1FBQUE7UUFBQUMsR0FBQTtVQUFBRixJQUFBO1VBQUFDLE1BQUE7UUFBQTtNQUFBO01BQUE7UUFBQUYsS0FBQTtVQUFBQyxJQUFBO1VBQUFDLE1BQUE7UUFBQTtRQUFBQyxHQUFBO1VBQUFGLElBQUE7VUFBQUMsTUFBQTtRQUFBO01BQUE7TUFBQTtRQUFBRixLQUFBO1VBQUFDLElBQUE7VUFBQUMsTUFBQTtRQUFBO1FBQUFDLEdBQUE7VUFBQUYsSUFBQTtVQUFBQyxNQUFBO1FBQUE7TUFBQTtNQUFBO1FBQUFGLEtBQUE7VUFBQUMsSUFBQTtVQUFBQyxNQUFBO1FBQUE7UUFBQUMsR0FBQTtVQUFBRixJQUFBO1VBQUFDLE1BQUE7UUFBQTtNQUFBO01BQUE7UUFBQUYsS0FBQTtVQUFBQyxJQUFBO1VBQUFDLE1BQUE7UUFBQTtRQUFBQyxHQUFBO1VBQUFGLElBQUE7VUFBQUMsTUFBQTtRQUFBO01BQUE7TUFBQTtRQUFBRixLQUFBO1VBQUFDLElBQUE7VUFBQUMsTUFBQTtRQUFBO1FBQUFDLEdBQUE7VUFBQUYsSUFBQTtVQUFBQyxNQUFBO1FBQUE7TUFBQTtNQUFBO1FBQUFGLEtBQUE7VUFBQUMsSUFBQTtVQUFBQyxNQUFBO1FBQUE7UUFBQUMsR0FBQTtVQUFBRixJQUFBO1VBQUFDLE1BQUE7UUFBQTtNQUFBO01BQUE7UUFBQUYsS0FBQTtVQUFBQyxJQUFBO1VBQUFDLE1BQUE7UUFBQTtRQUFBQyxHQUFBO1VBQUFGLElBQUE7VUFBQUMsTUFBQTtRQUFBO01BQUE7TUFBQTtRQUFBRixLQUFBO1VBQUFDLElBQUE7VUFBQUMsTUFBQTtRQUFBO1FBQUFDLEdBQUE7VUFBQUYsSUFBQTtVQUFBQyxNQUFBO1FBQUE7TUFBQTtNQUFBO1FBQUFGLEtBQUE7VUFBQUMsSUFBQTtVQUFBQyxNQUFBO1FBQUE7UUFBQUMsR0FBQTtVQUFBRixJQUFBO1VBQUFDLE1BQUE7UUFBQTtNQUFBO0lBQUE7SUFBQUUsS0FBQTtNQUFBO1FBQUFDLElBQUE7UUFBQUMsSUFBQTtVQUFBTixLQUFBO1lBQUFDLElBQUE7WUFBQUMsTUFBQTtVQUFBO1VBQUFDLEdBQUE7WUFBQUYsSUFBQTtZQUFBQyxNQUFBO1VBQUE7UUFBQTtRQUFBSyxHQUFBO1VBQUFQLEtBQUE7WUFBQUMsSUFBQTtZQUFBQyxNQUFBO1VBQUE7VUFBQUMsR0FBQTtZQUFBRixJQUFBO1lBQUFDLE1BQUE7VUFBQTtRQUFBO1FBQUFELElBQUE7TUFBQTtNQUFBO1FBQUFJLElBQUE7UUFBQUMsSUFBQTtVQUFBTixLQUFBO1lBQUFDLElBQUE7WUFBQUMsTUFBQTtVQUFBO1VBQUFDLEdBQUE7WUFBQUYsSUFBQTtZQUFBQyxNQUFBO1VBQUE7UUFBQTtRQUFBSyxHQUFBO1VBQUFQLEtBQUE7WUFBQUMsSUFBQTtZQUFBQyxNQUFBO1VBQUE7VUFBQUMsR0FBQTtZQUFBRixJQUFBO1lBQUFDLE1BQUE7VUFBQTtRQUFBO1FBQUFELElBQUE7TUFBQTtNQUFBO1FBQUFJLElBQUE7UUFBQUMsSUFBQTtVQUFBTixLQUFBO1lBQUFDLElBQUE7WUFBQUMsTUFBQTtVQUFBO1VBQUFDLEdBQUE7WUFBQUYsSUFBQTtZQUFBQyxNQUFBO1VBQUE7UUFBQTtRQUFBSyxHQUFBO1VBQUFQLEtBQUE7WUFBQUMsSUFBQTtZQUFBQyxNQUFBO1VBQUE7VUFBQUMsR0FBQTtZQUFBRixJQUFBO1lBQUFDLE1BQUE7VUFBQTtRQUFBO1FBQUFELElBQUE7TUFBQTtJQUFBO0lBQUFPLFNBQUE7TUFBQTtRQUFBRCxHQUFBO1VBQUFQLEtBQUE7WUFBQUMsSUFBQTtZQUFBQyxNQUFBO1VBQUE7VUFBQUMsR0FBQTtZQUFBRixJQUFBO1lBQUFDLE1BQUE7VUFBQTtRQUFBO1FBQUFPLElBQUE7UUFBQUMsU0FBQTtVQUFBVixLQUFBO1lBQUFDLElBQUE7WUFBQUMsTUFBQTtVQUFBO1VBQUFDLEdBQUE7WUFBQUYsSUFBQTtZQUFBQyxNQUFBO1VBQUE7UUFBQTtVQUFBRixLQUFBO1lBQUFDLElBQUE7WUFBQUMsTUFBQTtVQUFBO1VBQUFDLEdBQUE7WUFBQUYsSUFBQTtZQUFBQyxNQUFBO1VBQUE7UUFBQTtRQUFBRCxJQUFBO01BQUE7TUFBQTtRQUFBTSxHQUFBO1VBQUFQLEtBQUE7WUFBQUMsSUFBQTtZQUFBQyxNQUFBO1VBQUE7VUFBQUMsR0FBQTtZQUFBRixJ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

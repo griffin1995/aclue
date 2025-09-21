@@ -185,8 +185,8 @@ export const PerformanceMonitor: React.FC<PerformanceMonitorProps> = ({
     // @ts-ignore - memory API is experimental
     if ('memory' in performance) {
       // @ts-ignore
-      const memoryInfo = performance.memory;
-      const memoryUsageMB = memoryInfo.usedJSHeapSize / (1024 * 1024);
+      const memoryInfo = performance.memory as any;
+      const memoryUsageMB = memoryInfo?.usedJSHeapSize ? memoryInfo.usedJSHeapSize / (1024 * 1024) : 0;
       updateMetric('memoryUsage', memoryUsageMB);
 
       // Alert if memory usage is high (>100MB)
@@ -301,7 +301,7 @@ export const PerformanceMonitor: React.FC<PerformanceMonitorProps> = ({
       });
 
       // Report to Sentry if configured
-      if (process.env.NEXT_PUBLIC_SENTRY_DSN) {
+      if (process.env['NEXT_PUBLIC_SENTRY_DSN']) {
         const Sentry = await import('@sentry/react');
         Sentry.addBreadcrumb({
           category: 'performance',

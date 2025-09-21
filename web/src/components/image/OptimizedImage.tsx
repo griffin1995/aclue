@@ -24,7 +24,7 @@
 
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import Image from 'next/image';
-import { ImageIcon, AlertCircle } from 'lucide-react';
+import { AlertCircle } from 'lucide-react';
 
 // ==============================================================================
 // TYPE DEFINITIONS
@@ -394,6 +394,7 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
       {/* Main image */}
       <Image
         {...imageProps}
+        alt={imageProps.alt || ''}
         ref={imageRef}
       />
 
@@ -421,9 +422,11 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
  * Higher-order component that wraps OptimizedImage with default props.
  */
 export const withImageOptimization = (defaultProps: Partial<OptimizedImageProps> = {}) => {
-  return (props: OptimizedImageProps) => (
+  const WithImageOptimization = (props: OptimizedImageProps) => (
     <OptimizedImage {...defaultProps} {...props} />
   );
+  WithImageOptimization.displayName = 'WithImageOptimization';
+  return WithImageOptimization;
 };
 
 // ==============================================================================

@@ -1,8 +1,8 @@
-# GiftSync Deployment Pipeline Documentation
+# Aclue Deployment Pipeline Documentation
 
 ## Overview
 
-This document provides comprehensive guidance for the GiftSync automated deployment pipeline, including CI/CD integration, Cloudflare automation, and operational procedures.
+This document provides comprehensive guidance for the Aclue automated deployment pipeline, including CI/CD integration, Cloudflare automation, and operational procedures.
 
 ## Architecture
 
@@ -270,7 +270,7 @@ Triggers for automatic rollback:
 **Solutions**:
 ```bash
 # Check logs
-cat /tmp/giftsync-deployment-*.log
+cat /tmp/aclue-deployment-*.log
 
 # Verify credentials
 ./config-manager.sh validate production
@@ -322,14 +322,14 @@ tail -f /tmp/cloudflare-security-*.log
 ./rollback-manager.sh emergency-stop
 
 # Review rollback logs
-cat /tmp/giftsync-rollback-*.log
+cat /tmp/aclue-rollback-*.log
 ```
 
 ### Log Files
 
-- **Deployment**: `/tmp/giftsync-deployment-*.log`
+- **Deployment**: `/tmp/aclue-deployment-*.log`
 - **Security**: `/tmp/cloudflare-security-*.log`
-- **Rollback**: `/tmp/giftsync-rollback-*.log`
+- **Rollback**: `/tmp/aclue-rollback-*.log`
 - **Health Checks**: `/tmp/health-check-*.log`
 - **Domain Monitoring**: `~/domain-monitoring.log`
 
@@ -402,8 +402,8 @@ cat /tmp/giftsync-rollback-*.log
 
 ### Contact Information
 
-- **Slack**: `#giftsync-deployments`, `#giftsync-alerts`
-- **Email**: `devops@giftsync.com`
+- **Slack**: `#aclue-deployments`, `#aclue-alerts`
+- **Email**: `devops@aclue.com`
 - **Emergency**: PagerDuty integration for critical issues
 
 ## Additional Resources
@@ -423,4 +423,4 @@ cat /tmp/giftsync-rollback-*.log
 
 ---
 
-*This documentation is maintained by the GiftSync DevOps team. Last updated: $(date -u +%Y-%m-%d)*
+*This documentation is maintained by the Aclue DevOps team. Last updated: $(date -u +%Y-%m-%d)*

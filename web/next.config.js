@@ -287,7 +287,7 @@ const nextConfig = {
 
   experimental: {
     scrollRestoration: true,        // Restore scroll position on navigation
-    optimizeCss: true,             // Optimize CSS bundle for production
+    // optimizeCss: true,           // Temporarily disabled - causing critters dependency issues
     webVitalsAttribution: ['CLS', 'FCP', 'FID', 'LCP', 'TTFB'], // Enhanced Web Vitals tracking
     optimizePackageImports: ['lucide-react', '@headlessui/react', 'framer-motion'], // Optimize package imports
     turbo: {                       // Enable Turbo for faster builds

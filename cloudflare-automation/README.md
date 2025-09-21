@@ -1,6 +1,6 @@
-# GiftSync Cloudflare Automation
+# Aclue Cloudflare Automation
 
-Enterprise-grade Cloudflare automation scripts integrated into the GiftSync project structure.
+Enterprise-grade Cloudflare automation scripts integrated into the Aclue project structure.
 
 ## Directory Structure
 
@@ -51,7 +51,7 @@ cd /home/jack/Documents/gift_sync/cloudflare-automation
 
 ## Integration
 
-These scripts are fully integrated into the GiftSync project:
+These scripts are fully integrated into the Aclue project:
 - ✅ Project-relative paths for all operations
 - ✅ Centralised .env configuration 
 - ✅ Proper logging to project log directory

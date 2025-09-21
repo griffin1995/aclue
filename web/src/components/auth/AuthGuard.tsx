@@ -106,7 +106,7 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
 
     // Redirect authenticated users from auth routes
     if (isAuthRoute && isAuthenticated) {
-      const redirectTo = router.query.redirect as string || '/dashboard';
+      const redirectTo = router.query['redirect'] as string || '/dashboard';
       router.replace(redirectTo);
       return;
     }

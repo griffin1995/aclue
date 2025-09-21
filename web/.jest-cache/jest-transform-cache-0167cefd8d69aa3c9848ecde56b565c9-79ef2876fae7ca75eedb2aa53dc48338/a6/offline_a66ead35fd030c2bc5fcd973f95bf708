@@ -1,0 +1,588 @@
+2d917fb9c630e169d6fe5a377283d193
+"use strict";
+
+/* istanbul ignore next */
+function cov_tcgj4ub6w() {
+  var path = "/home/jack/Documents/aclue-preprod/web/src/pages/offline.tsx";
+  var hash = "83b6a3731f9f0e9fdc40fda1381ea900ac68b213";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/home/jack/Documents/aclue-preprod/web/src/pages/offline.tsx",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 4,
+          column: 3
+        }
+      },
+      "1": {
+        start: {
+          line: 5,
+          column: 0
+        },
+        end: {
+          line: 10,
+          column: 3
+        }
+      },
+      "2": {
+        start: {
+          line: 8,
+          column: 8
+        },
+        end: {
+          line: 8,
+          column: 27
+        }
+      },
+      "3": {
+        start: {
+          line: 11,
+          column: 20
+        },
+        end: {
+          line: 11,
+          column: 48
+        }
+      },
+      "4": {
+        start: {
+          line: 12,
+          column: 29
+        },
+        end: {
+          line: 12,
+          column: 71
+        }
+      },
+      "5": {
+        start: {
+          line: 13,
+          column: 28
+        },
+        end: {
+          line: 13,
+          column: 74
+        }
+      },
+      "6": {
+        start: {
+          line: 14,
+          column: 28
+        },
+        end: {
+          line: 14,
+          column: 74
+        }
+      },
+      "7": {
+        start: {
+          line: 15,
+          column: 22
+        },
+        end: {
+          line: 15,
+          column: 46
+        }
+      },
+      "8": {
+        start: {
+          line: 16,
+          column: 21
+        },
+        end: {
+          line: 16,
+          column: 44
+        }
+      },
+      "9": {
+        start: {
+          line: 18,
+          column: 4
+        },
+        end: {
+          line: 20,
+          column: 6
+        }
+      },
+      "10": {
+        start: {
+          line: 23,
+          column: 24
+        },
+        end: {
+          line: 25,
+          column: 5
+        }
+      },
+      "11": {
+        start: {
+          line: 24,
+          column: 8
+        },
+        end: {
+          line: 24,
+          column: 33
+        }
+      },
+      "12": {
+        start: {
+          line: 26,
+          column: 4
+        },
+        end: {
+          line: 246,
+          column: 7
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 7,
+            column: 9
+          },
+          end: {
+            line: 7,
+            column: 10
+          }
+        },
+        loc: {
+          start: {
+            line: 7,
+            column: 20
+          },
+          end: {
+            line: 9,
+            column: 5
+          }
+        },
+        line: 7
+      },
+      "1": {
+        name: "_interop_require_default",
+        decl: {
+          start: {
+            line: 17,
+            column: 9
+          },
+          end: {
+            line: 17,
+            column: 33
+          }
+        },
+        loc: {
+          start: {
+            line: 17,
+            column: 39
+          },
+          end: {
+            line: 21,
+            column: 1
+          }
+        },
+        line: 17
+      },
+      "2": {
+        name: "OfflinePage",
+        decl: {
+          start: {
+            line: 22,
+            column: 9
+          },
+          end: {
+            line: 22,
+            column: 20
+          }
+        },
+        loc: {
+          start: {
+            line: 22,
+            column: 23
+          },
+          end: {
+            line: 247,
+            column: 1
+          }
+        },
+        line: 22
+      },
+      "3": {
+        name: "(anonymous_3)",
+        decl: {
+          start: {
+            line: 23,
+            column: 24
+          },
+          end: {
+            line: 23,
+            column: 25
+          }
+        },
+        loc: {
+          start: {
+            line: 23,
+            column: 28
+          },
+          end: {
+            line: 25,
+            column: 5
+          }
+        },
+        line: 23
+      }
+    },
+    branchMap: {
+      "0": {
+        loc: {
+          start: {
+            line: 18,
+            column: 11
+          },
+          end: {
+            line: 20,
+            column: 5
+          }
+        },
+        type: "cond-expr",
+        locations: [{
+          start: {
+            line: 18,
+            column: 35
+          },
+          end: {
+            line: 18,
+            column: 38
+          }
+        }, {
+          start: {
+            line: 18,
+            column: 41
+          },
+          end: {
+            line: 20,
+            column: 5
+          }
+        }],
+        line: 18
+      },
+      "1": {
+        loc: {
+          start: {
+            line: 18,
+            column: 11
+          },
+          end: {
+            line: 18,
+            column: 32
+          }
+        },
+        type: "binary-expr",
+        locations: [{
+          start: {
+            line: 18,
+            column: 11
+          },
+          end: {
+            line: 18,
+            column: 14
+          }
+        }, {
+          start: {
+            line: 18,
+            column: 18
+          },
+          end: {
+            line: 18,
+            column: 32
+          }
+        }],
+        line: 18
+      }
+    },
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0,
+      "10": 0,
+      "11": 0,
+      "12": 0
+    },
+    f: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0
+    },
+    b: {
+      "0": [0, 0],
+      "1": [0, 0]
+    },
+    inputSourceMap: {
+      version: 3,
+      sources: ["/home/jack/Documents/aclue-preprod/web/src/pages/offline.tsx"],
+      sourcesContent: ["import React from 'react';\nimport Head from 'next/head';\nimport Link from 'next/link';\nimport { motion } from 'framer-motion';\nimport { WifiOff, RefreshCw, Gift, Home } from 'lucide-react';\n\nexport default function OfflinePage() {\n  const handleRetry = () => {\n    window.location.reload();\n  };\n\n  return (\n    <>\n      <Head>\n        <title>Offline - aclue</title>\n        <meta name=\"description\" content=\"aclue is currently offline. Please check your internet connection.\" />\n        <meta name=\"robots\" content=\"noindex\" />\n      </Head>\n\n      <div className=\"min-h-screen bg-gradient-to-br from-primary-50 to-secondary-50 flex items-center justify-center px-6\">\n        <div className=\"max-w-md w-full text-center\">\n          <motion.div\n            initial={{ opacity: 0, y: 20 }}\n            animate={{ opacity: 1, y: 0 }}\n            transition={{ duration: 0.6 }}\n            className=\"bg-white rounded-2xl shadow-xl p-8\"\n          >\n            {/* Icon */}\n            <motion.div\n              initial={{ scale: 0 }}\n              animate={{ scale: 1 }}\n              transition={{ duration: 0.5, delay: 0.2 }}\n              className=\"w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6\"\n            >\n              <WifiOff className=\"w-12 h-12 text-gray-600\" />\n            </motion.div>\n\n            {/* Title */}\n            <motion.h1\n              initial={{ opacity: 0 }}\n              animate={{ opacity: 1 }}\n              transition={{ delay: 0.4 }}\n              className=\"text-2xl font-bold text-gray-900 mb-4\"\n            >\n              You're Offline\n            </motion.h1>\n\n            {/* Description */}\n            <motion.p\n              initial={{ opacity: 0 }}\n              animate={{ opacity: 1 }}\n              transition={{ delay: 0.6 }}\n              className=\"text-gray-600 mb-8 leading-relaxed\"\n            >\n              aclue needs an internet connection to discover new gifts and sync your preferences. \n              Please check your connection and try again.\n            </motion.p>\n\n            {/* Actions */}\n            <motion.div\n              initial={{ opacity: 0 }}\n              animate={{ opacity: 1 }}\n              transition={{ delay: 0.8 }}\n              className=\"space-y-4\"\n            >\n              <button\n                onClick={handleRetry}\n                className=\"w-full bg-primary-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-primary-700 transition-colors flex items-center justify-center gap-2\"\n              >\n                <RefreshCw className=\"w-5 h-5\" />\n                Try Again\n              </button>\n\n              <Link\n                href=\"/\"\n                className=\"w-full bg-gray-100 text-gray-700 py-3 px-6 rounded-lg font-medium hover:bg-gray-200 transition-colors flex items-center justify-center gap-2\"\n              >\n                <Home className=\"w-5 h-5\" />\n                Go Home\n              </Link>\n            </motion.div>\n\n            {/* Offline Features */}\n            <motion.div\n              initial={{ opacity: 0 }}\n              animate={{ opacity: 1 }}\n              transition={{ delay: 1 }}\n              className=\"mt-8 p-4 bg-blue-50 rounded-lg\"\n            >\n              <div className=\"flex items-center gap-2 mb-2\">\n                <Gift className=\"w-5 h-5 text-blue-600\" />\n                <span className=\"font-medium text-blue-900\">Offline Mode</span>\n              </div>\n              <p className=\"text-sm text-blue-700\">\n                While offline, you can still browse previously loaded content. \n                Your swipes and preferences will sync when you're back online.\n              </p>\n            </motion.div>\n\n            {/* Connection Tips */}\n            <motion.div\n              initial={{ opacity: 0 }}\n              animate={{ opacity: 1 }}\n              transition={{ delay: 1.2 }}\n              className=\"mt-6 text-left\"\n            >\n              <h3 className=\"font-medium text-gray-900 mb-3\">Connection Tips:</h3>\n              <ul className=\"text-sm text-gray-600 space-y-2\">\n                <li className=\"flex items-start gap-2\">\n                  <span className=\"w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0\"></span>\n                  Check your WiFi or mobile data connection\n                </li>\n                <li className=\"flex items-start gap-2\">\n                  <span className=\"w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0\"></span>\n                  Try switching between WiFi and mobile data\n                </li>\n                <li className=\"flex items-start gap-2\">\n                  <span className=\"w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0\"></span>\n                  Check if other apps are working\n                </li>\n                <li className=\"flex items-start gap-2\">\n                  <span className=\"w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0\"></span>\n                  Try refreshing the page\n                </li>\n              </ul>\n            </motion.div>\n          </motion.div>\n\n          {/* Footer */}\n          <motion.p\n            initial={{ opacity: 0 }}\n            animate={{ opacity: 1 }}\n            transition={{ delay: 1.4 }}\n            className=\"mt-6 text-sm text-gray-500\"\n          >\n            aclue works best with a stable internet connection for real-time recommendations.\n          </motion.p>\n        </div>\n      </div>\n    </>\n  );\n}"],
+      names: ["OfflinePage", "handleRetry", "window", "location", "reload", "Head", "title", "meta", "name", "content", "div", "className", "motion", "initial", "opacity", "y", "animate", "transition", "duration", "scale", "delay", "WifiOff", "h1", "p", "button", "onClick", "RefreshCw", "Link", "href", "Home", "Gift", "span", "h3", "ul", "li"],
+      mappings: "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"
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "83b6a3731f9f0e9fdc40fda1381ea900ac68b213"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_tcgj4ub6w = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_tcgj4ub6w();
+cov_tcgj4ub6w().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/* istanbul ignore next */
+cov_tcgj4ub6w().s[1]++;
+Object.defineProperty(exports, "default", {
+  enumerable: true,
+  get: function () {
+    /* istanbul ignore next */
+    cov_tcgj4ub6w().f[0]++;
+    cov_tcgj4ub6w().s[2]++;
+    return OfflinePage;
+  }
+});
+const _jsxruntime =
+/* istanbul ignore next */
+(cov_tcgj4ub6w().s[3]++, require("react/jsx-runtime"));
+const _react =
+/* istanbul ignore next */
+(/*#__PURE__*/cov_tcgj4ub6w().s[4]++, _interop_require_default(require("react")));
+const _head =
+/* istanbul ignore next */
+(/*#__PURE__*/cov_tcgj4ub6w().s[5]++, _interop_require_default(require("next/head")));
+const _link =
+/* istanbul ignore next */
+(/*#__PURE__*/cov_tcgj4ub6w().s[6]++, _interop_require_default(require("next/link")));
+const _framermotion =
+/* istanbul ignore next */
+(cov_tcgj4ub6w().s[7]++, require("framer-motion"));
+const _lucidereact =
+/* istanbul ignore next */
+(cov_tcgj4ub6w().s[8]++, require("lucide-react"));
+function _interop_require_default(obj) {
+  /* istanbul ignore next */
+  cov_tcgj4ub6w().f[1]++;
+  cov_tcgj4ub6w().s[9]++;
+  return /* istanbul ignore next */(cov_tcgj4ub6w().b[1][0]++, obj) &&
+  /* istanbul ignore next */
+  (cov_tcgj4ub6w().b[1][1]++, obj.__esModule) ?
+  /* istanbul ignore next */
+  (cov_tcgj4ub6w().b[0][0]++, obj) :
+  /* istanbul ignore next */
+  (cov_tcgj4ub6w().b[0][1]++, {
+    default: obj
+  });
+}
+function OfflinePage() {
+  /* istanbul ignore next */
+  cov_tcgj4ub6w().f[2]++;
+  cov_tcgj4ub6w().s[10]++;
+  const handleRetry = () => {
+    /* istanbul ignore next */
+    cov_tcgj4ub6w().f[3]++;
+    cov_tcgj4ub6w().s[11]++;
+    window.location.reload();
+  };
+  /* istanbul ignore next */
+  cov_tcgj4ub6w().s[12]++;
+  return /*#__PURE__*/(0, _jsxruntime.jsxs)(_jsxruntime.Fragment, {
+    children: [/*#__PURE__*/(0, _jsxruntime.jsxs)(_head.default, {
+      children: [/*#__PURE__*/(0, _jsxruntime.jsx)("title", {
+        children: "Offline - aclue"
+      }), /*#__PURE__*/(0, _jsxruntime.jsx)("meta", {
+        name: "description",
+        content: "aclue is currently offline. Please check your internet connection."
+      }), /*#__PURE__*/(0, _jsxruntime.jsx)("meta", {
+        name: "robots",
+        content: "noindex"
+      })]
+    }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+      className: "min-h-screen bg-gradient-to-br from-primary-50 to-secondary-50 flex items-center justify-center px-6",
+      children: /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+        className: "max-w-md w-full text-center",
+        children: [/*#__PURE__*/(0, _jsxruntime.jsxs)(_framermotion.motion.div, {
+          initial: {
+            opacity: 0,
+            y: 20
+          },
+          animate: {
+            opacity: 1,
+            y: 0
+          },
+          transition: {
+            duration: 0.6
+          },
+          className: "bg-white rounded-2xl shadow-xl p-8",
+          children: [/*#__PURE__*/(0, _jsxruntime.jsx)(_framermotion.motion.div, {
+            initial: {
+              scale: 0
+            },
+            animate: {
+              scale: 1
+            },
+            transition: {
+              duration: 0.5,
+              delay: 0.2
+            },
+            className: "w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6",
+            children: /*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.WifiOff, {
+              className: "w-12 h-12 text-gray-600"
+            })
+          }), /*#__PURE__*/(0, _jsxruntime.jsx)(_framermotion.motion.h1, {
+            initial: {
+              opacity: 0
+            },
+            animate: {
+              opacity: 1
+            },
+            transition: {
+              delay: 0.4
+            },
+            className: "text-2xl font-bold text-gray-900 mb-4",
+            children: "You're Offline"
+          }), /*#__PURE__*/(0, _jsxruntime.jsx)(_framermotion.motion.p, {
+            initial: {
+              opacity: 0
+            },
+            animate: {
+              opacity: 1
+            },
+            transition: {
+              delay: 0.6
+            },
+            className: "text-gray-600 mb-8 leading-relaxed",
+            children: "aclue needs an internet connection to discover new gifts and sync your preferences. Please check your connection and try again."
+          }), /*#__PURE__*/(0, _jsxruntime.jsxs)(_framermotion.motion.div, {
+            initial: {
+              opacity: 0
+            },
+            animate: {
+              opacity: 1
+            },
+            transition: {
+              delay: 0.8
+            },
+            className: "space-y-4",
+            children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("button", {
+              onClick: handleRetry,
+              className: "w-full bg-primary-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-primary-700 transition-colors flex items-center justify-center gap-2",
+              children: [/*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.RefreshCw, {
+                className: "w-5 h-5"
+              }), "Try Again"]
+            }), /*#__PURE__*/(0, _jsxruntime.jsxs)(_link.default, {
+              href: "/",
+              className: "w-full bg-gray-100 text-gray-700 py-3 px-6 rounded-lg font-medium hover:bg-gray-200 transition-colors flex items-center justify-center gap-2",
+              children: [/*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.Home, {
+                className: "w-5 h-5"
+              }), "Go Home"]
+            })]
+          }), /*#__PURE__*/(0, _jsxruntime.jsxs)(_framermotion.motion.div, {
+            initial: {
+              opacity: 0
+            },
+            animate: {
+              opacity: 1
+            },
+            transition: {
+              delay: 1
+            },
+            className: "mt-8 p-4 bg-blue-50 rounded-lg",
+            children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+              className: "flex items-center gap-2 mb-2",
+              children: [/*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.Gift, {
+                className: "w-5 h-5 text-blue-600"
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("span", {
+                className: "font-medium text-blue-900",
+                children: "Offline Mode"
+              })]
+            }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+              className: "text-sm text-blue-700",
+              children: "While offline, you can still browse previously loaded content. Your swipes and preferences will sync when you're back online."
+            })]
+          }), /*#__PURE__*/(0, _jsxruntime.jsxs)(_framermotion.motion.div, {
+            initial: {
+              opacity: 0
+            },
+            animate: {
+              opacity: 1
+            },
+            transition: {
+              delay: 1.2
+            },
+            className: "mt-6 text-left",
+            children: [/*#__PURE__*/(0, _jsxruntime.jsx)("h3", {
+              className: "font-medium text-gray-900 mb-3",
+              children: "Connection Tips:"
+            }), /*#__PURE__*/(0, _jsxruntime.jsxs)("ul", {
+              className: "text-sm text-gray-600 space-y-2",
+              children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("li", {
+                className: "flex items-start gap-2",
+                children: [/*#__PURE__*/(0, _jsxruntime.jsx)("span", {
+                  className: "w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"
+                }), "Check your WiFi or mobile data connection"]
+              }), /*#__PURE__*/(0, _jsxruntime.jsxs)("li", {
+                className: "flex items-start gap-2",
+                children: [/*#__PURE__*/(0, _jsxruntime.jsx)("span", {
+                  className: "w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"
+                }), "Try switching between WiFi and mobile data"]
+              }), /*#__PURE__*/(0, _jsxruntime.jsxs)("li", {
+                className: "flex items-start gap-2",
+                children: [/*#__PURE__*/(0, _jsxruntime.jsx)("span", {
+                  className: "w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"
+                }), "Check if other apps are working"]
+              }), /*#__PURE__*/(0, _jsxruntime.jsxs)("li", {
+                className: "flex items-start gap-2",
+                children: [/*#__PURE__*/(0, _jsxruntime.jsx)("span", {
+                  className: "w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"
+                }), "Try refreshing the page"]
+              })]
+            })]
+          })]
+        }), /*#__PURE__*/(0, _jsxruntime.jsx)(_framermotion.motion.p, {
+          initial: {
+            opacity: 0
+          },
+          animate: {
+            opacity: 1
+          },
+          transition: {
+            delay: 1.4
+          },
+          className: "mt-6 text-sm text-gray-500",
+          children: "aclue works best with a stable internet connection for real-time recommendations."
+        })]
+      })
+    })]
+  });
+}
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJPZmZsaW5lUGFnZSIsImNvdl90Y2dqNHViNnciLCJmIiwicyIsImhhbmRsZVJldHJ5Iiwid2luZG93IiwibG9jYXRpb24iLCJyZWxvYWQiLCJfanN4cnVudGltZSIsImpzeHMiLCJGcmFnbWVudCIsIl9oZWFkIiwiZGVmYXVsdCIsImpzeCIsIm5hbWUiLCJjb250ZW50IiwiY2xhc3NOYW1lIiwiX2ZyYW1lcm1vdGlvbiIsIm1vdGlvbiIsImRpdiIsImluaXRpYWwiLCJvcGFjaXR5IiwieSIsImFuaW1hdGUiLCJ0cmFuc2l0aW9uIiwiZHVyYXRpb24iLCJzY2FsZSIsImRlbGF5IiwiX2x1Y2lkZXJlYWN0IiwiV2lmaU9mZiIsImgxIiwicCIsIm9uQ2xpY2siLCJSZWZyZXNoQ3ciLCJfbGluayIsImhyZWYiLCJIb21lIiwiR2lmdCJdLCJzb3VyY2VzIjpbIi9ob21lL2phY2svRG9jdW1lbnRzL2FjbHVlLXByZXByb2Qvd2ViL3NyYy9wYWdlcy9vZmZsaW5lLnRzeCJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgUmVhY3QgZnJvbSAncmVhY3QnO1xuaW1wb3J0IEhlYWQgZnJvbSAnbmV4dC9oZWFkJztcbmltcG9ydCBMaW5rIGZyb20gJ25leHQvbGluayc7XG5pbXBvcnQgeyBtb3Rpb24gfSBmcm9tICdmcmFtZXItbW90aW9uJztcbmltcG9ydCB7IFdpZmlPZmYsIFJlZnJlc2hDdywgR2lmdCwgSG9tZSB9IGZyb20gJ2x1Y2lkZS1yZWFjdCc7XG5cbmV4cG9ydCBkZWZhdWx0IGZ1bmN0aW9uIE9mZmxpbmVQYWdlKCkge1xuICBjb25zdCBoYW5kbGVSZXRyeSA9ICgpID0+IHtcbiAgICB3aW5kb3cubG9jYXRpb24ucmVsb2FkKCk7XG4gIH07XG5cbiAgcmV0dXJuIChcbiAgICA8PlxuICAgICAgPEhlYWQ+XG4gICAgICAgIDx0aXRsZT5PZmZsaW5lIC0gYWNsdWU8L3RpdGxlPlxuICAgICAgICA8bWV0YSBuYW1lPVwiZGVzY3JpcHRpb25cIiBjb250ZW50PVwiYWNsdWUgaXMgY3VycmVudGx5IG9mZmxpbmUuIFBsZWFzZSBjaGVjayB5b3VyIGludGVybmV0IGNvbm5lY3Rpb24uXCIgLz5cbiAgICAgICAgPG1ldGEgbmFtZT1cInJvYm90c1wiIGNvbnRlbnQ9XCJub2luZGV4XCIgLz5cbiAgICAgIDwvSGVhZD5cblxuICAgICAgPGRpdiBjbGFzc05hbWU9XCJtaW4taC1zY3JlZW4gYmctZ3JhZGllbnQtdG8tYnIgZnJvbS1wcmltYXJ5LTUwIHRvLXNlY29uZGFyeS01MCBmbGV4IGl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNlbnRlciBweC02XCI+XG4gICAgICAgIDxkaXYgY2xhc3NOYW1lPVwibWF4LXctbWQgdy1mdWxsIHRleHQtY2VudGVyXCI+XG4gICAgICAgICAgPG1vdGlvbi5kaXZcbiAgICAgICAgICAgIGluaXRpYWw9e3sgb3BhY2l0eTogMCwgeTogMjAgfX1cbiAgICAgICAgICAgIGFuaW1hdGU9e3sgb3BhY2l0eTogMSwgeTogMCB9fVxuICAgICAgICAgICAgdHJhbnNpdGlvbj17eyBkdXJhdGlvbjogMC42IH19XG4gICAgICAgICAgICBjbGFzc05hbWU9XCJiZy13aGl0ZSByb3VuZGVkLTJ4bCBzaGFkb3cteGwgcC04XCJcbiAgICAgICAgICA+XG4gICAgICAgICAgICB7LyogSWNvbiAqL31cbiAgICAgICAgICAgIDxtb3Rpb24uZGl2XG4gICAgICAgICAgICAgIGluaXRpYWw9e3sgc2NhbGU6IDAgfX1cbiAgICAgICAgICAgICAgYW5pbWF0ZT17eyBzY2FsZTogMSB9fVxuICAgICAgICAgICAgICB0cmFuc2l0aW9uPXt7IGR1cmF0aW9uOiAwLjUsIGRlbGF5OiAwLjIgfX1cbiAgICAgICAgICAgICAgY2xhc3NOYW1lPVwidy0yNCBoLTI0IGJnLWdyYXktMTAwIHJvdW5kZWQtZnVsbCBmbGV4IGl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNlbnRlciBteC1hdXRvIG1iLTZcIlxuICAgICAgICAgICAgPlxuICAgICAgICAgICAgICA8V2lmaU9mZiBjbGFzc05hbWU9XCJ3LTEyIGgtMTIgdGV4dC1ncmF5LTYwMFwiIC8+XG4gICAgICAgICAgICA8L21vdGlvbi5kaXY+XG5cbiAgICAgICAgICAgIHsvKiBUaXRsZSAqL31cbiAgICAgICAgICAgIDxtb3Rpb24uaDFcbiAgICAgICAgICAgICAgaW5pdGlhbD17eyBvcGFjaXR5OiAwIH19XG4gICAgICAgICAgICAgIGFuaW1hdGU9e3sgb3BhY2l0eTogMSB9fVxuICAgICAgICAgICAgICB0cmFuc2l0aW9uPXt7IGRlbGF5OiAwLjQgfX1cbiAgICAgICAgICAgICAgY2xhc3NOYW1lPVwidGV4dC0yeGwgZm9udC1ib2xkIHRleHQtZ3JheS05MDAgbWItNFwiXG4gICAgICAgICAgICA+XG4gICAgICAgICAgICAgIFlvdSdyZSBPZmZsaW5lXG4gICAgICAgICAgICA8L21vdGlvbi5oMT5cblxuICAgICAgICAgICAgey8qIERlc2NyaXB0aW9uICovfVxuICAgICAgICAgICAgPG1vdGlvbi5wXG4gICAgICAgICAgICAgIGluaXRpYWw9e3sgb3BhY2l0eTogMCB9fVxuICAgICAgICAgICAgICBhbmltYXRlPXt7IG9wYWNpdHk6IDEgfX1cbiAgICAgICAgICAgICAgdHJhbnNpdGlvbj17eyBkZWxheTogMC42IH19XG4gICAgICAgICAgICAgIGNsYXNzTmFtZT1cInRleHQtZ3JheS02MDAgbWItOCBsZWFkaW5nLXJlbGF4ZWRcIlxuICAgICAgICAgICAgPlxuICAgICAgICAgICAgICBhY2x1ZSBuZWVkcyBhbiBpbnRlcm5ldCBjb25uZWN0aW9uIHRvIGRpc2NvdmVyIG5ldyBnaWZ0cyBhbmQgc3luYyB5b3VyIHByZWZlcmVuY2VzLiBcbiAgICAgICAgICAgICAgUGxlYXNlIGNoZWNrIHlvdXIgY29ubmVjdGlvbiBhbmQgdHJ5IGFnYWluLlxuICAgICAgICAgICAgPC9tb3Rpb24ucD5cblxuICAgICAgICAgICAgey8qIEFjdGlvbnMgKi99XG4gICAgICAgICAgICA8bW90aW9uLmRpdlxuICAgICAgICAgICAgICBpbml0aWFsPXt7IG9wYWNpdHk6IDAgfX1cbiAgICAgICAgICAgICAgYW5pbWF0ZT17eyBvcGFjaXR5OiAxIH19XG4gICAgICAgICAgICAgIHRyYW5zaXRpb249e3sgZGVsYXk6IDAuOCB9fVxuICAgICAgICAgICAgICBjbGFzc05hbWU9XCJzcGFjZS15LTRcIlxuICAgICAgICAgICAgPlxuICAgICAgICAgICAgICA8YnV0dG9uXG4gICAgICAgICAgICAgICAgb25DbGljaz17aGFuZGxlUmV0cnl9XG4gICAgICAgICAgICAgICAgY2xhc3NOYW1lPVwidy1mdWxsIGJnLXByaW1hcnktNjAwIHRleHQtd2hpdGUgcHktMyBweC02IHJvdW5kZWQtbGcgZm9udC1tZWRpdW0gaG92ZXI6YmctcHJpbWFyeS03MDAgdHJhbnNpdGlvbi1jb2xvcnMgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIgZ2FwLTJcIlxuICAgICAgICAgICAgICA+XG4gICAgICAgICAgICAgICAgPFJlZnJlc2hDdyBjbGFzc05hbWU9XCJ3LTUgaC01XCIgLz5cbiAgICAgICAgICAgICAgICBUcnkgQWdhaW5cbiAgICAgICAgICAgICAgPC9idXR0b24+XG5cbiAgICAgICAgICAgICAgPExpbmtcbiAgICAgICAgICAgICAgICBocmVmPVwiL1wiXG4gICAgICAgICAgICAgICAgY2xhc3NOYW1lPVwidy1mdWxsIGJnLWdyYXktMTAwIHRleHQtZ3JheS03MDAgcHktMyBweC02IHJvdW5kZWQtbGcgZm9udC1tZWRpdW0gaG92ZXI6YmctZ3JheS0yMDAgdHJhbnNpdGlvbi1jb2xvcnMgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIgZ2FwLTJcIlxuICAgICAgICAgICAgICA+XG4gICAgICAgICAgICAgICAgPEhvbWUgY2xhc3NOYW1lPVwidy01IGgtNVwiIC8+XG4gICAgICAgICAgICAgICAgR28gSG9tZVxuICAgICAgICAgICAgICA8L0xpbms+XG4gICAgICAgICAgICA8L21vdGlvbi5kaXY+XG5cbiAgICAgICAgICAgIHsvKiBPZmZsaW5lIEZlYXR1cmVzICovfVxuICAgICAgICAgICAgPG1vdGlvbi5kaXZcbiAgICAgICAgICAgICAgaW5pdGlhbD17eyBvcGFjaXR5OiAwIH19XG4gICAgICAgICAgICAgIGFuaW1hdGU9e3sgb3BhY2l0eTogMSB9fVxuICAgICAgICAgICAgICB0cmFuc2l0aW9uPXt7IGRlbGF5OiAxIH19XG4gICAgICAgICAgICAgIGNsYXNzTmFtZT1cIm10LTggcC00IGJnLWJsdWUtNTAgcm91bmRlZC1sZ1wiXG4gICAgICAgICAgICA+XG4gICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZmxleCBpdGVtcy1jZW50ZXIgZ2FwLTIgbWItMlwiPlxuICAgICAgICAgICAgICAgIDxHaWZ0IGNsYXNzTmFtZT1cInctNSBoLTUgdGV4dC1ibHVlLTYwMFwiIC8+XG4gICAgICAgICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPVwiZm9udC1tZWRpdW0gdGV4dC1ibHVlLTkwMFwiPk9mZmxpbmUgTW9kZTwvc3Bhbj5cbiAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgIDxwIGNsYXNzTmFtZT1cInRleHQtc20gdGV4dC1ibHVlLTcwMFwiPlxuICAgICAgICAgICAgICAgIFdoaWxlIG9mZmxpbmUsIHlvdSBjYW4gc3RpbGwgYnJvd3NlIHByZXZpb3VzbHkgbG9hZGVkIGNvbnRlbnQuIFxuICAgICAgICAgICAgICAgIFlvdXIgc3dpcGVzIGFuZCBwcmVmZXJlbmNlcyB3aWxsIHN5bmMgd2hlbiB5b3UncmUgYmFjayBvbmxpbmUuXG4gICAgICAgICAgICAgIDwvcD5cbiAgICAgICAgICAgIDwvbW90aW9uLmRpdj5cblxuICAgICAgICAgICAgey8qIENvbm5lY3Rpb24gVGlwcyAqL31cbiAgICAgICAgICAgIDxtb3Rpb24uZGl2XG4gICAgICAgICAgICAgIGluaXRpYWw9e3sgb3BhY2l0eTogMCB9fVxuICAgICAgICAgICAgICBhbmltYXRlPXt7IG9wYWNpdHk6IDEgfX1cbiAgICAgICAgICAgICAgdHJhbnNpdGlvbj17eyBkZWxheTogMS4yIH19XG4gICAgICAgICAgICAgIGNsYXNzTmFtZT1cIm10LTYgdGV4dC1sZWZ0XCJcbiAgICAgICAgICAgID5cbiAgICAgICAgICAgICAgPGgzIGNsYXNzTmFtZT1cImZvbnQtbWVkaXVtIHRleHQtZ3JheS05MDAgbWItM1wiPkNvbm5lY3Rpb24gVGlwczo8L2gzPlxuICAgICAgICAgICAgICA8dWwgY2xhc3NOYW1lPVwidGV4dC1zbSB0ZXh0LWdyYXktNjAwIHNwYWNlLXktMlwiPlxuICAgICAgICAgICAgICAgIDxsaSBjbGFzc05hbWU9XCJmbGV4IGl0ZW1zLXN0YXJ0IGdhcC0yXCI+XG4gICAgICAgICAgICAgICAgICA8c3BhbiBjbGFzc05hbWU9XCJ3LTEuNSBoLTEuNSBiZy1ncmF5LTQwMCByb3VuZGVkLWZ1bGwgbXQtMiBmbGV4LXNocmluay0wXCI+PC9zcGFuPlxuICAgICAgICAgICAgICAgICAgQ2hlY2sgeW91ciBXaUZpIG9yIG1vYmlsZSBkYXRhIGNvbm5lY3Rpb25cbiAgICAgICAgICAgICAgICA8L2xpPlxuICAgICAgICAgICAgICAgIDxsaSBjbGFzc05hbWU9XCJmbGV4IGl0ZW1zLXN0YXJ0IGdhcC0yXCI+XG4gICAgICAgICAgICAgICAgICA8c3BhbiBjbGFzc05hbWU9XCJ3LTEuNSBoLTEuNSBiZy1ncmF5LTQwMCByb3VuZGVkLWZ1bGwgbXQtMiBmbGV4LXNocmluay0wXCI+PC9zcGFuPlxuICAgICAgICAgICAgICAgICAgVHJ5IHN3aXRjaGluZyBiZXR3ZWVuIFdpRmkgYW5kIG1vYmlsZSBkYXRhXG4gICAgICAgICAgICAgICAgPC9saT5cbiAgICAgICAgICAgICAgICA8bGkgY2xhc3NOYW1lPVwiZmxleCBpdGVtcy1zdGFydCBnYXAtMlwiPlxuICAgICAgICAgICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPVwidy0xLjUgaC0xLjUgYmctZ3JheS00MDAgcm91bmRlZC1mdWxsIG10LTIgZmxleC1zaHJpbmstMFwiPjwvc3Bhbj5cbiAgICAgICAgICAgICAgICAgIENoZWNrIGlmIG90aGVyIGFwcHMgYXJlIHdvcmtpbmdcbiAgICAgICAgICAgICAgICA8L2xpPlxuICAgICAgICAgICAgICAgIDxsaSBjbGFzc05hbWU9XCJmbGV4IGl0ZW1zLXN0YXJ0IGdhcC0yXCI+XG4gICAgICAgICAgICAgICAgICA8c3BhbiBjbGFzc05hbWU9XCJ3LTEuNSBoLTEuNSBiZy1ncmF5LTQwMCByb3VuZGVkLWZ1bGwgbXQtMiBmbGV4LXNocmluay0wXCI+PC9zcGFuPlxuICAgICAgICAgICAgICAgICAgVHJ5IHJlZnJlc2hpbmcgdGhlIHBhZ2VcbiAgICAgICAgICAgICAgICA8L2xpPlxuICAgICAgICAgICAgICA8L3VsPlxuICAgICAgICAgICAgPC9tb3Rpb24uZGl2PlxuICAgICAgICAgIDwvbW90aW9uLmRpdj5cblxuICAgICAgICAgIHsvKiBGb290ZXIgKi99XG4gICAgICAgICAgPG1vdGlvbi5wXG4gICAgICAgICAgICBpbml0aWFsPXt7IG9wYWNpdHk6IDAgfX1cbiAgICAgICAgICAgIGFuaW1hdGU9e3sgb3BhY2l0eTogMSB9fVxuICAgICAgICAgICAgdHJhbnNpdGlvbj17eyBkZWxheTogMS40IH19XG4gICAgICAgICAgICBjbGFzc05hbWU9XCJtdC02IHRleHQtc20gdGV4dC1ncmF5LTUwMFwiXG4gICAgICAgICAgPlxuICAgICAgICAgICAgYWNsdWUgd29ya3MgYmVzdCB3aXRoIGEgc3RhYmxlIGludGVybmV0IGNvbm5lY3Rpb24gZm9yIHJlYWwtdGltZSByZWNvbW1lbmRhdGlvbnMuXG4gICAgICAgICAgPC9tb3Rpb24ucD5cbiAgICAgICAgPC9kaXY+XG4gICAgICA8L2Rpdj5cbiAgICA8Lz5cbiAgKTtcbn0iXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7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
