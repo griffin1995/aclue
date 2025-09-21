@@ -98,7 +98,7 @@ export const WorkingSwipeInterface: React.FC<WorkingSwipeInterfaceProps> = ({
   const fetchProducts = async () => {
     try {
       // Attempt to fetch real products from backend API using authenticated client
-      const response = await api.getProducts({ limit: 5 });
+      const response = await api.products.getProducts({ limit: 5 });
       return response.data || response; // Handle both wrapped and direct responses
     } catch (error) {
       console.error('Failed to fetch products from API, using mock data:', error);

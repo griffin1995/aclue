@@ -255,7 +255,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
         // Verify token with backend and get fresh user data
         try {
-          const response = await api.getCurrentUser();
+          const response = await api.auth.getCurrentUser();
           // Handle different response formats - sometimes data is wrapped, sometimes direct
           const userData = response.data || response;
           dispatch({ type: 'SET_USER', payload: userData });
@@ -330,7 +330,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
 
     // Call refresh endpoint
-    const response = await api.refreshAccessToken({ refresh_token: refreshToken });
+    const response = await api.auth.refreshAccessToken({ refresh_token: refreshToken });
     const { access_token, refresh_token: newRefreshToken } = response.data;
     
     // Store new tokens
