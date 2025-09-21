@@ -670,6 +670,7 @@ export const api = {
     register: (data: RegisterRequest) => apiClient.register(data),
     logout: () => apiClient.logout(),
     getCurrentUser: () => apiClient.getCurrentUser(),
+    refresh: (data: RefreshTokenRequest) => apiClient.refreshAccessToken(data),
     forgotPassword: (email: string) => apiClient.forgotPassword(email),
     resetPassword: (token: string, password: string) => apiClient.resetPassword(token, password),
     verifyEmail: (token: string) => apiClient.verifyEmail(token),
