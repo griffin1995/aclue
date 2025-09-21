@@ -44,7 +44,7 @@ export interface Product {
 export interface CreateGiftLinkRequest {
   title: string;
   description?: string;
-  productIds: string[];
+  product_ids: string[];
   preferences?: any;
   isPublic?: boolean;
   expiresAt?: Date;
