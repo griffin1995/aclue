@@ -314,7 +314,7 @@ export default function MaintenanceMode() {
         {/* Legal Statement - Bottom Right */}
         <div className="absolute bottom-2 sm:bottom-4 right-2 sm:right-4 z-20">
           <div className="text-xs text-white/60 text-right leading-tight">
-            <div>© 2025 HITSENSE LTD</div>
+            <div>© 2025 ACLUE LTD</div>
             <div className="text-white/40">Company No. 14659276</div>
           </div>
         </div>
