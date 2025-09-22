@@ -44,11 +44,6 @@ interface SwipeData {
   timestamp?: Date;
 }
 
-interface CartItem {
-  productId: string;
-  quantity: number;
-  variant?: string;
-}
 
 // ==============================================================================
 // PRODUCT FETCHING ACTIONS
@@ -288,103 +283,6 @@ export async function recordSwipe(swipeData: SwipeData) {
   }
 }
 
-// ==============================================================================
-// CART MANAGEMENT ACTIONS
-// ==============================================================================
-
-/**
- * Add item to cart
- */
-export async function addToCartAction(cartItem: CartItem) {
-  try {
-    // Get authentication token from cookies
-    const cookieStore = cookies();
-    const token = cookieStore.get('access_token')?.value;
-
-    if (!token) {
-      return {
-        success: false,
-        error: 'Please sign in to add items to cart'
-      };
-    }
-
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/v1/cart/`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          product_id: cartItem.productId,
-          quantity: cartItem.quantity,
-          variant: cartItem.variant,
-        }),
-      }
-    );
-
-    if (!response.ok) {
-      throw new Error(`Failed to add to cart: ${response.status}`);
-    }
-
-    // Revalidate cart cache
-    revalidateTag('cart');
-    revalidatePath('/cart');
-
-    return { success: true, message: 'Item added to cart!' };
-  } catch (error) {
-    console.error('Error adding to cart:', error);
-    return {
-      success: false,
-      error: 'Failed to add item to cart. Please try again.'
-    };
-  }
-}
-
-/**
- * Remove item from cart
- */
-export async function removeFromCartAction(productId: string) {
-  try {
-    // Get authentication token from cookies
-    const cookieStore = cookies();
-    const token = cookieStore.get('access_token')?.value;
-
-    if (!token) {
-      return {
-        success: false,
-        error: 'Authentication required'
-      };
-    }
-
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/v1/cart/${productId}`,
-      {
-        method: 'DELETE',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-      }
-    );
-
-    if (!response.ok) {
-      throw new Error(`Failed to remove from cart: ${response.status}`);
-    }
-
-    // Revalidate cart cache
-    revalidateTag('cart');
-    revalidatePath('/cart');
-
-    return { success: true, message: 'Item removed from cart!' };
-  } catch (error) {
-    console.error('Error removing from cart:', error);
-    return {
-      success: false,
-      error: 'Failed to remove item from cart. Please try again.'
-    };
-  }
-}
 
 // ==============================================================================
 // WISHLIST ACTIONS
