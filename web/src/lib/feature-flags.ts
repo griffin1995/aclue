@@ -230,6 +230,14 @@ export function evaluateAppRouterForRequest(
   const pathSegments = pathname.split('/').filter(segment => segment !== '')
   const routeCategory = pathSegments[0]
 
+  // Special handling for root route (/) - always use App Router when globally enabled
+  if (!routeCategory || routeCategory === '') {
+    return {
+      shouldUseAppRouter: true,
+      reason: 'Root route always uses App Router when globally enabled'
+    }
+  }
+
   if (!config.enabledRoutes.includes(routeCategory)) {
     return {
       shouldUseAppRouter: false,

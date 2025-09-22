@@ -129,8 +129,8 @@ export async function middleware(request: NextRequest) {
   }
 
   // Handle App Router feature flag routing
-  if (shouldUseAppRouter && isAuthRoute(pathname)) {
-    // Auth routes are already implemented in App Router
+  if (shouldUseAppRouter) {
+    // For App Router routes (auth routes, root route, etc.)
     const response = NextResponse.next()
 
     // Add security headers for enhanced protection
@@ -139,6 +139,7 @@ export async function middleware(request: NextRequest) {
     response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin')
     response.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()')
 
+    console.log(`✅ App Router serving: ${pathname}`)
     return response
   }
 
