@@ -1,10 +1,14 @@
 /**
  * Aclue Homepage Component
- * 
+ *
  * REBRANDING NOTE (August 2025):
  * This component was updated during the comprehensive rebrand from Aclue/aclue to Aclue.
  * All branding elements, meta tags, and user-facing content have been updated to reflect
  * the new Aclue brand identity and aclue.app domain.
+ *
+ * MAINTENANCE MODE NOTE (September 2025):
+ * This component now respects the NEXT_PUBLIC_MAINTENANCE_MODE environment variable.
+ * When set to 'true', it displays the newsletter signup page instead of the full marketing site.
  */
 
 import React from 'react';
@@ -12,22 +16,30 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { 
-  Gift, 
-  Sparkles, 
-  Heart, 
-  Zap, 
-  Users, 
-  Star, 
-  ArrowRight, 
+import {
+  Gift,
+  Sparkles,
+  Heart,
+  Zap,
+  Users,
+  Star,
+  ArrowRight,
   Play,
   CheckCircle,
   Smartphone,
   Monitor,
   Globe
 } from 'lucide-react';
+import MaintenanceMode from '@/components/MaintenanceMode';
 
 export default function HomePage() {
+  // Check if maintenance mode is enabled
+  const isMaintenanceMode = process.env.NEXT_PUBLIC_MAINTENANCE_MODE === 'true';
+
+  // If maintenance mode is enabled, show the newsletter signup page
+  if (isMaintenanceMode) {
+    return <MaintenanceMode />;
+  }
   const features = [
     {
       icon: <Sparkles className="w-6 h-6" />,
