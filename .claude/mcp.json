@@ -9,12 +9,31 @@
         "project-configuration",
         "build-logs"
       ]
+    },
+    "railway": {
+      "command": "npx",
+      "args": ["-y", "@railway/mcp-server"],
+      "description": "Railway MCP integration for Aclue backend deployment management",
+      "capabilities": [
+        "deployment-management",
+        "service-monitoring",
+        "environment-variables",
+        "container-logs",
+        "database-management"
+      ]
     }
   },
   "project": {
     "name": "aclue-preprod",
     "vercelProjectId": "prj_sdJnObPzA8DJNqXyziukom25tqlJ",
     "vercelOrgId": "team_y92C6ejUue5Xhz3Hdu4eHkN8",
-    "domain": "aclue.app"
+    "railwayProject": "aclue-backend",
+    "railwayProjectId": "6ecc7e6d-96b8-4cf7-ab5e-9cd776d49051",
+    "railwayService": "aclue-backend",
+    "railwayServiceId": "877fcd1f-1430-427b-a3e7-cc192e4b605f",
+    "railwayEnvironment": "production",
+    "railwayEnvironmentId": "5ddc367c-7a3a-473d-87ea-c5b35eb37cd3",
+    "domain": "aclue.app",
+    "backendUrl": "https://aclue-backend-production.up.railway.app"
   }
 }
