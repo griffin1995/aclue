@@ -1,44 +1,36 @@
-import { redirect } from 'next/navigation'
 import NewsletterMaintenancePage from '@/components/NewsletterMaintenancePage'
 
 /**
- * App Router Root Page - Newsletter/Maintenance Mode Handler
+ * App Router Root Page - Newsletter Landing Page
  *
  * This is the App Router implementation of the root page that provides:
- * 1. Maintenance mode newsletter signup when NEXT_PUBLIC_MAINTENANCE_MODE=true
- * 2. Redirect to full application when NEXT_PUBLIC_MAINTENANCE_MODE=false
+ * 1. Newsletter signup as the primary landing page at /
+ * 2. Beta program signup with email collection
+ * 3. Future of gift discovery messaging
  *
  * Features:
- * - Server-side maintenance mode evaluation
+ * - Server-side rendering for optimal performance
  * - Newsletter signup using server actions
  * - Optimal performance with server components
  * - Preserves all Phase 3 authentication work
  * - Consistent branding with aclue_text_clean.png
+ * - Always displays newsletter page (no redirects)
  *
  * Architecture:
  * - Server component for optimal performance
- * - Server-side redirect when not in maintenance mode
+ * - No maintenance mode dependency
  * - Newsletter component handles client interactions
- * - Integrates with existing feature flag system
+ * - Primary landing page for all users
  */
 
 /**
  * Root page server component
- * Handles maintenance mode logic and newsletter display
+ * Always displays the newsletter landing page
  */
 export default function RootPage() {
-  // Server-side evaluation of maintenance mode
-  const isMaintenanceMode = process.env.NEXT_PUBLIC_MAINTENANCE_MODE === 'true'
+  console.log('🏠 Newsletter landing page rendered at root')
 
-  console.log('🏠 Root page rendered, maintenance mode:', isMaintenanceMode)
-
-  // If not in maintenance mode, redirect to the full application
-  if (!isMaintenanceMode) {
-    console.log('🚀 Redirecting to landingpage - maintenance mode disabled')
-    redirect('/landingpage')
-  }
-
-  // Render newsletter/maintenance page when in maintenance mode
+  // Always render newsletter landing page - no redirects
   return (
     <main className="min-h-screen">
       <NewsletterMaintenancePage />
