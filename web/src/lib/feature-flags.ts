@@ -1,9 +1,15 @@
 /**
- * Feature Flag System for App Router Migration
+ * Feature Flag System for App Router Migration - Phase 4
  *
  * This system provides gradual rollout control for the Pages Router to App Router migration.
  * It allows for safe, incremental deployment of App Router pages while maintaining
  * fallback to Pages Router for stability.
+ *
+ * Phase 4 Features:
+ * - Product discovery and search routes
+ * - 50% user rollout with consistent hashing
+ * - Enhanced route matching for shop sections
+ * - Server component optimization tracking
  *
  * Features:
  * - Environment-based feature flagging
@@ -13,13 +19,13 @@
  *
  * Usage:
  *   const enabled = isAppRouterEnabled()
- *   const routeEnabled = isRouteAppRouter('auth')
+ *   const routeEnabled = isRouteAppRouter('discover')
  *   const userEnabled = isAppRouterEnabledForUser(userId)
  *
  * Environment Variables:
  *   NEXT_PUBLIC_APP_ROUTER_ENABLED=true|false
- *   NEXT_PUBLIC_APP_ROUTER_ROUTES=auth,products,marketing
- *   NEXT_PUBLIC_APP_ROUTER_ROLLOUT_PERCENTAGE=25
+ *   NEXT_PUBLIC_APP_ROUTER_ROUTES=auth,profile,discover,products,search
+ *   NEXT_PUBLIC_APP_ROUTER_ROLLOUT_PERCENTAGE=50
  */
 
 export interface FeatureFlagConfig {

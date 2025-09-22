@@ -3,10 +3,16 @@ import { cookies } from 'next/headers'
 import { evaluateAppRouterForRequest } from '@/lib/feature-flags'
 
 /**
- * Enhanced Middleware - Phase 3: Tier 1 Migration
+ * Enhanced Middleware - Phase 4: Tier 2 Migration
  *
  * Enterprise-grade middleware for App Router authentication and route protection.
  * Provides secure session validation, automatic redirects, and feature flag evaluation.
+ *
+ * Phase 4 Features:
+ * - Product discovery route protection
+ * - Search functionality access control
+ * - Shopping cart session management
+ * - Enhanced performance monitoring
  *
  * Security Features:
  * - Server-side session validation
@@ -30,9 +36,9 @@ const AUTH_CONFIG = {
     user: 'auth_user_data',
   },
   routes: {
-    protected: ['/dashboard', '/profile', '/settings', '/admin'],
+    protected: ['/dashboard', '/profile', '/settings', '/admin', '/cart', '/wishlist'],
     auth: ['/auth/login', '/auth/register'],
-    public: ['/', '/about', '/contact', '/terms', '/privacy'],
+    public: ['/', '/about', '/contact', '/terms', '/privacy', '/discover', '/search', '/products'],
   },
   api: {
     baseUrl: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000',
