@@ -299,6 +299,27 @@ const nextConfig = {
       },
     },
     serverComponentsExternalPackages: ['sharp'], // Optimize server components
+
+    // ===========================================================================
+    // APP ROUTER MIGRATION SUPPORT
+    // ===========================================================================
+    // Enable App Router alongside Pages Router for gradual migration
+
+    appDir: true,                   // Enable App Router support
+    serverActions: true,            // Enable Server Actions
+    serverActionBodySizeLimit: '2mb', // Set Server Action payload limit
+
+    // App Router optimization features
+    typedRoutes: true,              // Enable typed routes for better DX
+    mdxRs: true,                    // Enable MDX with Rust-based parser
+    optimisticClientCache: true,    // Enable optimistic client cache
+
+    // Performance optimizations for dual router setup
+    optimizeServerReact: true,      // Optimize React for server components
+    ppr: false,                     // Partial Pre-rendering (experimental, disabled for stability)
+
+    // Migration-specific features
+    allowMiddlewareResponseBody: true, // Enable middleware response body modification
   },
 
   // ===========================================================================
