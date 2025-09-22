@@ -31,7 +31,7 @@ else
         --workers $WORKERS \
         --worker-class uvicorn.workers.UvicornWorker \
         --timeout ${WORKER_TIMEOUT:-30} \
-        --keepalive ${WORKER_KEEPALIVE:-5} \
+        --keep-alive ${WORKER_KEEPALIVE:-5} \
         --max-requests ${WORKER_MAX_REQUESTS:-1000} \
         --max-requests-jitter ${WORKER_MAX_REQUESTS_JITTER:-50} \
         --preload \
