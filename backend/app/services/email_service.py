@@ -208,7 +208,7 @@ class EmailService:
                 <div class="content">
                     <h2>Welcome to the Future of Gift Discovery! 🚀</h2>
                     
-                    <p>Thank you for joining our exclusive beta programme! You're now part of a select group who will be among the first to experience how AI can revolutionise gift-giving.</p>
+                    <p>Thank you for joining our community! You're among the first to experience how AI can revolutionise gift-giving.</p>
                     
                     <h3>What's Coming Your Way:</h3>
                     
@@ -232,7 +232,7 @@ class EmailService:
                         <span><strong>Curated Quality:</strong> Only the best products make it to your recommendations</span>
                     </div>
                     
-                    <p>We're working hard to perfect the experience and will notify you the moment we're ready to launch. We'll keep you updated on our progress and notify you as soon as we're ready for you to experience the full aclue platform!</p>
+                    <p>We're continuously improving the aclue platform to deliver the most innovative gift discovery experience. Stay tuned for exciting updates!</p>
 
                     <p>Have questions or feedback? Simply reply to this email - we read and respond to every message!</p>
                     
@@ -241,7 +241,7 @@ class EmailService:
                 </div>
                 
                 <div class="footer">
-                    <p>You're receiving this email because you signed up for aclue beta access.</p>
+                    <p>You're receiving this email because you signed up for aclue updates.</p>
                     <p>If you no longer wish to receive these emails, you can <a href="mailto:contact@aclue.app?subject=Unsubscribe">unsubscribe here</a>.</p>
                 </div>
             </div>
@@ -252,7 +252,7 @@ class EmailService:
         text_content = f"""
         Welcome to aclue - AI-Powered Gift Discovery!
 
-        Thank you for joining our exclusive beta programme! You're now part of a select group who will be among the first to experience how AI can revolutionise gift-giving.
+        Thank you for joining our community! You're among the first to experience how AI can revolutionise gift-giving.
 
         What's Coming Your Way:
         🧠 AI-Powered Learning: Our neural network learns your unique preferences
@@ -260,7 +260,7 @@ class EmailService:
         👥 Social Integration: Connect with friends and family for better gift ideas
         ⭐ Curated Quality: Only the best products make it to your recommendations
 
-        We're working hard to perfect the experience and will notify you the moment we're ready to launch. We'll keep you updated on our progress and notify you as soon as we're ready for you to experience the full aclue platform!
+        We're continuously improving the aclue platform to deliver the most innovative gift discovery experience. Stay tuned for exciting updates!
 
         Have questions or feedback? Simply reply to this email - we read and respond to every message!
 
@@ -268,7 +268,7 @@ class EmailService:
         The aclue Team
 
         ---
-        You're receiving this email because you signed up for aclue beta access.
+        You're receiving this email because you signed up for aclue updates.
         If you no longer wish to receive these emails, you can unsubscribe by emailing contact@aclue.app
         """
         
