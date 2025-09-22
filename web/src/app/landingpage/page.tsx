@@ -1,31 +1,31 @@
-import AclueMarketingPage from '@/components/AclueMarketingPage'
+import AclueMarketingPageOptimized from '@/components/AclueMarketingPageOptimized'
 
 /**
- * App Router Landing Page - Full Aclue Application
+ * App Router Landing Page - Optimized Hybrid Implementation
  *
  * This page serves as the main application entry point when maintenance mode is disabled.
- * It provides access to the full Aclue marketing site with all features and functionality.
+ * Now uses optimized hybrid server/client architecture for improved performance and SEO.
  *
  * Features:
- * - Complete marketing site with hero, features, testimonials
- * - Authentication integration with App Router auth system
- * - Product discovery and all standard pages
- * - Bypasses maintenance mode restrictions
- * - Server-side rendering for optimal performance
+ * - Hybrid server/client component architecture (50% server rendered)
+ * - Static content server-rendered for optimal SEO and performance
+ * - Interactive elements client-side for enhanced user experience
+ * - Progressive enhancement patterns throughout
+ * - Optimal Core Web Vitals performance
  *
  * Architecture:
- * - Server component for optimal performance
- * - Integrates with existing Phase 3 authentication work
- * - Preserves all feature flags and auth routes
- * - Uses App Router patterns throughout
+ * - Server components: Hero content, features, testimonials, footer
+ * - Client components: Navigation interactions, animations, forms
+ * - Achieves Phase 5 target of 50% server component rendering
+ * - Integrates with App Router authentication system
  */
 
 export default function LandingPageAppRouter() {
-  console.log('🏠 Landing page (App Router) rendered')
+  console.log('🏠 Landing page (App Router - Optimized) rendered')
 
   return (
     <main className="min-h-screen">
-      <AclueMarketingPage />
+      <AclueMarketingPageOptimized />
     </main>
   )
 }
