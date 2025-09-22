@@ -127,7 +127,8 @@ export async function newsletterSignupAction(formData: FormData): Promise<Newsle
         'User-Agent': 'Aclue-Web-Server/1.0',
       },
       body: JSON.stringify(newsletterPayload),
-      signal: AbortSignal.timeout(NEWSLETTER_CONFIG.api.timeout),
+      // Temporarily remove AbortSignal.timeout to test if this is causing the issue
+      // signal: AbortSignal.timeout(NEWSLETTER_CONFIG.api.timeout),
     })
 
     // Handle API response
