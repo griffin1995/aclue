@@ -181,6 +181,10 @@ secrets/
 *.p12
 *.cert
 
+# MCP Configuration - Keep structure but exclude sensitive auth
+.claude/auth.json
+.claude/tokens.json
+
 # Cloudflare Automation - Exclude sensitive data but keep structure
 cloudflare-automation/.env
 cloudflare-automation/backups/*
