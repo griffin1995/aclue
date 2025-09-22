@@ -5,7 +5,7 @@
  * Configures mocks, utilities, and environment for consistent testing.
  */
 
-import '@testing-library/jest-dom'
+import React from 'react'
 
 // Mock Next.js App Router modules
 jest.mock('next/navigation', () => ({
@@ -63,8 +63,7 @@ jest.mock('@/lib/feature-flags', () => ({
 // Mock Image component
 jest.mock('next/image', () => {
   const MockedImage = ({ src, alt, ...props }: any) => {
-    // eslint-disable-next-line @next/next/no-img-element
-    return <img src={src} alt={alt} {...props} />
+    return React.createElement('img', { src, alt, ...props })
   }
   MockedImage.displayName = 'MockedImage'
   return MockedImage
@@ -73,7 +72,7 @@ jest.mock('next/image', () => {
 // Mock Link component
 jest.mock('next/link', () => {
   const MockedLink = ({ children, href, ...props }: any) => {
-    return <a href={href} {...props}>{children}</a>
+    return React.createElement('a', { href, ...props }, children)
   }
   MockedLink.displayName = 'MockedLink'
   return MockedLink
@@ -105,11 +104,11 @@ process.on('unhandledRejection', (reason, promise) => {
 
 // Suppress console warnings for known issues in tests
 const originalConsoleWarn = console.warn
-console.warn = (...args) => {
+console.warn = (...args: any[]) => {
   // Suppress specific warnings that are expected in tests
   if (
-    args[0]?.includes?.('Warning: ReactDOM.render is no longer supported') ||
-    args[0]?.includes?.('Warning: Function components cannot be given refs')
+    (typeof args[0] === 'string' && args[0].includes('Warning: ReactDOM.render is no longer supported')) ||
+    (typeof args[0] === 'string' && args[0].includes('Warning: Function components cannot be given refs'))
   ) {
     return
   }
