@@ -100,7 +100,7 @@ test.describe('Complete User Journeys', () => {
      * 
      * User Journey Steps:
      * 1. Land on homepage as anonymous user
-     * 2. Explore alpha version / discover page
+     * 2. Navigate to application / discover page
      * 3. Hit authentication prompt
      * 4. Complete registration process
      * 5. Complete onboarding flow
@@ -115,8 +115,8 @@ test.describe('Complete User Journeys', () => {
       await expect(page.locator('h1')).toContainText('Aclue');
       await expect(page.locator('.hero-section')).toBeVisible();
       
-      // Step 2: Click explore alpha version
-      await page.click('[data-testid="explore-alpha-button"]');
+      // Step 2: Navigate to application
+      await page.click('[data-testid="app-entry-button"]');
       await page.waitForURL('/landingpage');
       
       // Verify landing page content

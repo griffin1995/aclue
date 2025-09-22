@@ -194,20 +194,6 @@ export default function MaintenanceMode() {
               </div>
             </motion.div>
 
-            {/* CTA Link */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
-            >
-              <Link
-                href="/landingpage"
-                className="inline-flex items-center gap-2 text-blue-300 hover:text-blue-200 font-medium transition-colors group"
-              >
-                <span>Explore Alpha Version</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </motion.div>
           </section>
 
           {/* Right Column - Signup Form */}

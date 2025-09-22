@@ -1,9 +1,8 @@
 /**
- * Landing Page for Alpha Version Access
- * 
- * This page serves as the main application when users click "Explore Alpha Version"
- * from the maintenance page. It bypasses maintenance mode to provide access
- * to the full Aclue application.
+ * Landing Page for Aclue Application
+ *
+ * This page serves as the main application entry point.
+ * It bypasses maintenance mode to provide access to the full Aclue application.
  */
 
 import React from 'react';
