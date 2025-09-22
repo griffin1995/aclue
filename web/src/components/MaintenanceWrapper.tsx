@@ -26,6 +26,9 @@ const MaintenanceWrapper: React.FC<MaintenanceWrapperProps> = ({ children }) => 
     '/maintenance/index',
     '/landingpage', // Allow alpha version access
     '/api', // Allow API routes
+    '/auth', // Allow authentication routes for testing
+    '/dashboard', // Allow dashboard routes for testing
+    '/profile', // Allow profile routes for testing
   ];
 
   // Check if current path is allowed in maintenance mode
