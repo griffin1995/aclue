@@ -1,0 +1,563 @@
+91c92677ce251f85a0b039a8841e8332
+/**
+ * aclue Analytics Service
+ * 
+ * Comprehensive user behavior tracking and analytics integration using PostHog.
+ * Provides business intelligence, user insights, and performance metrics for
+ * data-driven product decisions and revenue optimization.
+ * 
+ * Key Features:
+ *   - User behavior tracking (swipes, clicks, conversions)
+ *   - Revenue analytics (affiliate clicks, commissions)
+ *   - Feature flag management for A/B testing
+ *   - User segmentation and cohort analysis
+ *   - Error tracking and performance monitoring
+ * 
+ * Business Intelligence:
+ *   - Track user journey from discovery to purchase
+ *   - Measure recommendation algorithm effectiveness
+ *   - Monitor affiliate conversion rates and revenue
+ *   - Analyze user engagement and retention patterns
+ * 
+ * Privacy & Compliance:
+ *   - GDPR-compliant user consent management
+ *   - User opt-out functionality
+ *   - Data anonymization and retention policies
+ *   - Cookie consent integration
+ * 
+ * Integration:
+ *   - PostHog for event tracking and analytics
+ *   - Feature flags for controlled rollouts
+ *   - User identification for personalized experiences
+ *   - Custom event validation and enrichment
+ * 
+ * Usage:
+ *   import { analytics, trackEvent, identifyUser } from '@/lib/analytics';
+ *   
+ *   // Initialize analytics
+ *   await analytics.init();
+ *   
+ *   // Track user events
+ *   trackEvent('product_swiped', { direction: 'right', product_id: '123' });
+ *   
+ *   // Identify users
+ *   identifyUser('user_123', { subscription_tier: 'premium' });
+ */ "use strict";
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+function _export(target, all) {
+    for(var name in all)Object.defineProperty(target, name, {
+        enumerable: true,
+        get: all[name]
+    });
+}
+_export(exports, {
+    analytics: function() {
+        return analytics;
+    },
+    // Default export for importing as single module
+    default: function() {
+        return _default // Export all public interfaces
+         // Exported: analytics, trackEvent, identifyUser, trackPageView, AnalyticsService
+        ;
+    },
+    identifyUser: function() {
+        return identifyUser;
+    },
+    trackEvent: function() {
+        return trackEvent;
+    },
+    trackPageView: function() {
+        return trackPageView;
+    }
+});
+const _posthogjs = /*#__PURE__*/ _interop_require_default(require("posthog-js"));
+const _config = require("../config");
+const _posthogconfig = require("./posthog-config");
+function _interop_require_default(obj) {
+    return obj && obj.__esModule ? obj : {
+        default: obj
+    };
+}
+/**
+ * Analytics Service class for comprehensive user behavior tracking.
+ * 
+ * Manages PostHog integration with robust error handling, retry logic,
+ * and business-specific event tracking. Provides type-safe analytics
+ * interface for the entire application.
+ * 
+ * Architecture:
+ *   - Singleton pattern for consistent analytics instance
+ *   - Automatic initialization with retry logic
+ *   - Event validation and enrichment
+ *   - Feature flag integration
+ *   - Privacy controls and opt-out functionality
+ * 
+ * Error Handling:
+ *   - Graceful degradation when analytics unavailable
+ *   - Automatic retry on initialization failures
+ *   - Comprehensive logging for debugging
+ *   - Fallback behavior for critical paths
+ */ class AnalyticsService {
+    /**
+   * Initialize PostHog analytics service with robust error handling.
+   * 
+   * Performs comprehensive setup including:
+   *   - PostHog SDK initialization with custom configuration
+   *   - Connection testing and validation
+   *   - Automatic retry on failures
+   *   - Development vs production environment handling
+   * 
+   * Error Recovery:
+   *   - Retries initialization up to maxRetries times
+   *   - Exponential backoff for retry delays
+   *   - Graceful degradation if initialization fails
+   * 
+   * Environment Handling:
+   *   - Server-side rendering compatibility (no window)
+   *   - Development debugging and logging
+   *   - Production optimizations
+   * 
+   * Returns:
+   *   Promise<void>: Resolves when initialization complete
+   */ async init() {
+        // Prevent initialization in invalid environments
+        if (typeof window === "undefined" || this.initialized || !_config.config.posthogKey) {
+            return;
+        }
+        try {
+            // Create PostHog configuration with environment-specific settings
+            const posthogConfig = (0, _posthogconfig.createPostHogConfig)();
+            console.log("[PostHog] Initializing analytics service...", {
+                key: _config.config.posthogKey?.substring(0, 10) + "...",
+                host: posthogConfig.api_host,
+                debug: posthogConfig.debug
+            });
+            // Initialize PostHog SDK with configuration
+            _posthogjs.default.init(_config.config.posthogKey, posthogConfig);
+            // Mark as successfully initialized
+            this.initialized = true;
+            this.retryCount = 0; // Reset retry counter
+            // Verify analytics connectivity with test event
+            await this.testConnection();
+        } catch (error) {
+            console.error("[PostHog] Initialization failed:", error);
+            // Implement retry logic with exponential backoff
+            if (this.retryCount < this.maxRetries) {
+                this.retryCount++;
+                const delayMs = 1000 * this.retryCount; // Exponential backoff
+                console.log(`[PostHog] Retrying initialization (${this.retryCount}/${this.maxRetries}) in ${delayMs}ms...`);
+                setTimeout(()=>this.init(), delayMs);
+            } else {
+                console.error("[PostHog] Maximum retry attempts reached, analytics disabled");
+            }
+        }
+    }
+    /**
+   * Test PostHog connectivity with diagnostic event.
+   * 
+   * Sends a test event to verify that analytics are working correctly.
+   * Provides debugging information for troubleshooting connection issues.
+   * 
+   * Test Event Data:
+   *   - Common properties (user agent, URL, timestamp)
+   *   - Initialization metadata (time, retry count)
+   *   - Environment information for debugging
+   * 
+   * Returns:
+   *   Promise<void>: Resolves when test complete
+   */ async testConnection() {
+        if (!this.initialized) return;
+        try {
+            // Send diagnostic event with initialization metadata
+            this.track("analytics_service_initialized", {
+                ...(0, _posthogconfig.getCommonEventProperties)(),
+                initialization_time: Date.now(),
+                retry_count: this.retryCount,
+                environment: _config.config.isProduction ? "production" : "development"
+            });
+            console.log("[PostHog] Connection test successful - analytics ready");
+        } catch (error) {
+            console.warn("[PostHog] Connection test failed:", error);
+        }
+    }
+    /**
+   * Identify user for personalized analytics and targeting.
+   * 
+   * Associates all future events with a specific user ID, enabling:
+   *   - Cross-device tracking and session continuity
+   *   - Personalized feature flags and A/B tests
+   *   - User-specific analytics and cohort analysis
+   *   - Revenue attribution and lifetime value tracking
+   * 
+   * Privacy Compliance:
+   *   - Only identifies users who have provided consent
+   *   - Supports pseudonymous identifiers for privacy
+   *   - Respects user opt-out preferences
+   * 
+   * Parameters:
+   *   userId: Unique user identifier (UUID, email hash, etc.)
+   *   properties: Additional user attributes for segmentation
+   * 
+   * Example:
+   *   analytics.identify('user_123', {
+   *     email: 'user@example.com',
+   *     subscription_tier: 'premium',
+   *     first_name: 'John',
+   *     signup_date: '2024-01-01'
+   *   });
+   */ identify(userId, properties) {
+        if (this.initialized) {
+            console.log("[PostHog] Identifying user:", userId, properties);
+            _posthogjs.default.identify(userId, properties);
+        }
+    }
+    /**
+   * Track user events for analytics and business intelligence.
+   * 
+   * Records user actions, behaviors, and system events for:
+   *   - Product analytics and user journey mapping
+   *   - Revenue tracking and conversion optimization
+   *   - A/B testing and feature performance measurement
+   *   - Error monitoring and performance analysis
+   * 
+   * Event Processing:
+   *   - Validates event name and properties
+   *   - Enriches events with common properties (timestamp, user agent, etc.)
+   *   - Handles errors gracefully without breaking user experience
+   *   - Logs events for debugging in development
+   * 
+   * Common Event Categories:
+   *   - User actions: swipe_left, swipe_right, product_clicked
+   *   - Revenue events: affiliate_click, purchase_completed
+   *   - System events: page_viewed, error_occurred
+   *   - Engagement: session_started, feature_used
+   * 
+   * Parameters:
+   *   eventName: Descriptive event name (snake_case convention)
+   *   properties: Event-specific data for analysis
+   * 
+   * Example:
+   *   analytics.track('product_swiped', {
+   *     direction: 'right',
+   *     product_id: 'B08GYKNCCP',
+   *     category: 'Electronics',
+   *     session_id: 'session_123'
+   *   });
+   */ track(eventName, properties) {
+        // Handle analytics not initialized gracefully
+        if (!this.initialized) {
+            console.warn("[PostHog] Analytics not initialized, event queued:", eventName);
+            // In production, could queue events for later sending
+            return;
+        }
+        // Validate event meets naming and data requirements
+        if (!(0, _posthogconfig.validateEvent)(eventName, properties)) {
+            return;
+        }
+        try {
+            // Enrich event with common properties for consistent analytics
+            const enrichedProperties = {
+                ...(0, _posthogconfig.getCommonEventProperties)(),
+                ...properties
+            };
+            console.log("[PostHog] Tracking event:", eventName, enrichedProperties);
+            _posthogjs.default.capture(eventName, enrichedProperties);
+        } catch (error) {
+            console.error("[PostHog] Failed to track event:", eventName, error);
+        // Continue execution even if analytics fails
+        }
+    }
+    /**
+   * Set or update user properties for segmentation and personalization.
+   * 
+   * Updates user profile data for:
+   *   - User segmentation and cohort analysis
+   *   - Personalized feature flags and targeting
+   *   - Revenue analysis and lifetime value tracking
+   *   - Customer support and user insights
+   * 
+   * Property Categories:
+   *   - Demographics: age, location, gender
+   *   - Subscription: tier, status, billing_cycle
+   *   - Behavior: last_login, total_swipes, preferences
+   *   - Revenue: total_spent, commission_generated
+   * 
+   * Parameters:
+   *   properties: Key-value pairs of user attributes
+   * 
+   * Example:
+   *   analytics.setUserProperties({
+   *     subscription_tier: 'premium',
+   *     total_swipes: 150,
+   *     last_active: '2024-01-01',
+   *     favorite_categories: ['Electronics', 'Books']
+   *   });
+   */ setUserProperties(properties) {
+        if (this.initialized) {
+            console.log("[PostHog] Setting user properties:", properties);
+            _posthogjs.default.people.set(properties);
+        }
+    }
+    /**
+   * Track page views for navigation analytics and user journey mapping.
+   * 
+   * Records page navigation events for:
+   *   - User flow analysis and conversion funnels
+   *   - Page performance and engagement metrics
+   *   - A/B testing of page layouts and content
+   *   - SEO and content optimization insights
+   * 
+   * Automatic Enrichment:
+   *   - Referrer information for traffic source analysis
+   *   - Page load time and performance metrics
+   *   - Device and browser information
+   *   - User session context
+   * 
+   * Parameters:
+   *   path: Optional page path (defaults to current URL)
+   * 
+   * Example:
+   *   analytics.trackPageView('/discover'); // Track specific page
+   *   analytics.trackPageView();            // Track current page
+   */ trackPageView(path) {
+        if (this.initialized) {
+            const pageUrl = path || window.location.href;
+            console.log("[PostHog] Tracking page view:", pageUrl);
+            _posthogjs.default.capture("$pageview", {
+                $current_url: pageUrl,
+                page_title: document.title,
+                referrer: document.referrer
+            });
+        }
+    }
+    /**
+   * Reset user session for logout and privacy compliance.
+   * 
+   * Clears all user identification and session data for:
+   *   - User logout and session termination
+   *   - Privacy compliance and data protection
+   *   - Shared device usage scenarios
+   *   - Testing and development environments
+   * 
+   * Reset Actions:
+   *   - Clears user identification and properties
+   *   - Resets feature flag cache
+   *   - Generates new anonymous session ID
+   *   - Maintains analytics functionality for anonymous tracking
+   * 
+   * Privacy Compliance:
+   *   - Ensures no personal data persists after logout
+   *   - Supports "right to be forgotten" requirements
+   *   - Clears all locally stored user data
+   * 
+   * Example:
+   *   // On user logout
+   *   analytics.reset();
+   */ reset() {
+        if (this.initialized) {
+            console.log("[PostHog] Resetting user session");
+            _posthogjs.default.reset();
+        }
+    }
+    /**
+   * Associate user with groups for organizational analytics.
+   * 
+   * Groups users by organization, team, or other entities for:
+   *   - B2B analytics and enterprise insights
+   *   - Team collaboration feature usage
+   *   - Organization-level reporting and billing
+   *   - Multi-tenant application analytics
+   * 
+   * Group Types:
+   *   - organization: Company or business entity
+   *   - team: Department or project team
+   *   - subscription: Shared subscription account
+   *   - family: Family gift-giving groups
+   * 
+   * Parameters:
+   *   groupType: Type of group (organization, team, etc.)
+   *   groupKey: Unique identifier for the group
+   *   properties: Group-specific attributes
+   * 
+   * Example:
+   *   analytics.group('organization', 'acme-corp', {
+   *     name: 'Acme Corporation',
+   *     plan: 'enterprise',
+   *     employees: 500
+   *   });
+   */ group(groupType, groupKey, properties) {
+        if (this.initialized) {
+            console.log("[PostHog] Setting group:", groupType, groupKey, properties);
+            _posthogjs.default.group(groupType, groupKey, properties);
+        }
+    }
+    /**
+   * Check if a feature flag is enabled for the current user.
+   * 
+   * Enables controlled feature rollouts and A/B testing for:
+   *   - Gradual feature releases to user segments
+   *   - A/B testing of new functionality
+   *   - Kill switches for problematic features
+   *   - Personalized user experiences
+   * 
+   * Feature Flag Categories:
+   *   - UI features: new_swipe_interface, dark_mode
+   *   - Business logic: premium_recommendations, affiliate_tracking
+   *   - Experiments: recommendation_algorithm_v2
+   *   - Rollouts: mobile_app_promotion
+   * 
+   * Parameters:
+   *   flag: Feature flag name (snake_case convention)
+   * 
+   * Returns:
+   *   boolean: True if feature is enabled for current user
+   * 
+   * Example:
+   *   if (analytics.isFeatureEnabled('new_recommendation_engine')) {
+   *     // Show new recommendation UI
+   *   }
+   */ isFeatureEnabled(flag) {
+        if (this.initialized) {
+            const enabled = _posthogjs.default.isFeatureEnabled(flag) === true;
+            console.log(`[PostHog] Feature flag '${flag}':`, enabled);
+            return enabled;
+        }
+        return false; // Default to disabled if analytics not available
+    }
+    /**
+   * Get feature flag value for advanced flag configurations.
+   * 
+   * Retrieves feature flag values that can be:
+   *   - Boolean: true/false for simple on/off features
+   *   - String: variant names for multivariate tests
+   *   - Number: configuration values or percentages
+   * 
+   * Advanced Use Cases:
+   *   - Multivariate testing with multiple variants
+   *   - Configuration flags with specific values
+   *   - Percentage-based rollouts
+   *   - String-based feature variants
+   * 
+   * Parameters:
+   *   flag: Feature flag name
+   * 
+   * Returns:
+   *   string | boolean | undefined: Flag value or undefined if not set
+   * 
+   * Example:
+   *   const variant = analytics.getFeatureFlag('recommendation_algorithm');
+   *   if (variant === 'collaborative_filtering') {
+   *     // Use collaborative filtering algorithm
+   *   } else if (variant === 'content_based') {
+   *     // Use content-based algorithm
+   *   }
+   */ getFeatureFlag(flag) {
+        if (this.initialized) {
+            const value = _posthogjs.default.getFeatureFlag(flag);
+            console.log(`[PostHog] Feature flag '${flag}' value:`, value);
+            return value;
+        }
+        return undefined;
+    }
+    /**
+   * Opt user out of analytics tracking for privacy compliance.
+   * 
+   * Provides user control over data collection for:
+   *   - GDPR and privacy regulation compliance
+   *   - User preference and consent management
+   *   - Cookie banner and privacy controls
+   *   - Data minimization principles
+   * 
+   * Opt-Out Effects:
+   *   - Stops all event tracking and data collection
+   *   - Disables feature flags and personalization
+   *   - Maintains basic functionality without analytics
+   *   - Sets persistent opt-out preference
+   * 
+   * Privacy Compliance:
+   *   - Respects user privacy choices
+   *   - Provides clear opt-out mechanism
+   *   - Maintains opt-out status across sessions
+   * 
+   * Example:
+   *   // User clicks "Opt out of analytics"
+   *   analytics.optOut();
+   */ optOut() {
+        if (this.initialized) {
+            console.log("[PostHog] User opted out of analytics tracking");
+            _posthogjs.default.opt_out_capturing();
+        }
+    }
+    /**
+   * Opt user into analytics tracking after previous opt-out.
+   * 
+   * Re-enables analytics for users who previously opted out:
+   *   - Restores full analytics functionality
+   *   - Re-enables feature flags and personalization
+   *   - Resumes event tracking and data collection
+   *   - Updates user consent preferences
+   * 
+   * Use Cases:
+   *   - User changes privacy preferences
+   *   - Premium users enabling advanced features
+   *   - Onboarding flow consent updates
+   *   - Settings page privacy controls
+   * 
+   * Example:
+   *   // User clicks "Enable analytics"
+   *   analytics.optIn();
+   */ optIn() {
+        if (this.initialized) {
+            console.log("[PostHog] User opted into analytics tracking");
+            _posthogjs.default.opt_in_capturing();
+        }
+    }
+    /**
+   * Check if user has opted out of analytics tracking.
+   * 
+   * Determines user's current privacy preference for:
+   *   - Conditional UI rendering based on consent
+   *   - Privacy settings page status display
+   *   - Feature availability and functionality
+   *   - Compliance with privacy regulations
+   * 
+   * Returns:
+   *   boolean: True if user has opted out, false otherwise
+   * 
+   * Example:
+   *   if (!analytics.hasOptedOut()) {
+   *     // Show analytics-dependent features
+   *     renderPersonalizedRecommendations();
+   *   }
+   */ hasOptedOut() {
+        if (this.initialized) {
+            return _posthogjs.default.has_opted_out_capturing();
+        }
+        return false; // Default to opted-in if analytics not available
+    }
+    constructor(){
+        /**
+   * Service state management for reliable analytics operation.
+   */ this.initialized = false // Analytics initialization status
+        ;
+        this.retryCount = 0 // Current retry attempt counter
+        ;
+        this.maxRetries = 3 // Maximum initialization retry attempts
+        ;
+    }
+}
+const analytics = new AnalyticsService();
+const trackEvent = (eventName, properties)=>{
+    analytics.track(eventName, properties);
+};
+const identifyUser = (userId, properties)=>{
+    analytics.identify(userId, properties);
+};
+const trackPageView = (path)=>{
+    analytics.trackPageView(path);
+};
+const _default = analytics;
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2phY2svRG9jdW1lbnRzL2FjbHVlLXByZXByb2Qvd2ViL3NyYy9saWIvYW5hbHl0aWNzLnRzIl0sInNvdXJjZXNDb250ZW50IjpbIi8qKlxuICogYWNsdWUgQW5hbHl0aWNzIFNlcnZpY2VcbiAqIFxuICogQ29tcHJlaGVuc2l2ZSB1c2VyIGJlaGF2aW9yIHRyYWNraW5nIGFuZCBhbmFseXRpY3MgaW50ZWdyYXRpb24gdXNpbmcgUG9zdEhvZy5cbiAqIFByb3ZpZGVzIGJ1c2luZXNzIGludGVsbGlnZW5jZSwgdXNlciBpbnNpZ2h0cywgYW5kIHBlcmZvcm1hbmNlIG1ldHJpY3MgZm9yXG4gKiBkYXRhLWRyaXZlbiBwcm9kdWN0IGRlY2lzaW9ucyBhbmQgcmV2ZW51ZSBvcHRpbWl6YXRpb24uXG4gKiBcbiAqIEtleSBGZWF0dXJlczpcbiAqICAgLSBVc2VyIGJlaGF2aW9yIHRyYWNraW5nIChzd2lwZXMsIGNsaWNrcywgY29udmVyc2lvbnMpXG4gKiAgIC0gUmV2ZW51ZSBhbmFseXRpY3MgKGFmZmlsaWF0ZSBjbGlja3MsIGNvbW1pc3Npb25zKVxuICogICAtIEZlYXR1cmUgZmxhZyBtYW5hZ2VtZW50IGZvciBBL0IgdGVzdGluZ1xuICogICAtIFVzZXIgc2VnbWVudGF0aW9uIGFuZCBjb2hvcnQgYW5hbHlzaXNcbiAqICAgLSBFcnJvciB0cmFja2luZyBhbmQgcGVyZm9ybWFuY2UgbW9uaXRvcmluZ1xuICogXG4gKiBCdXNpbmVzcyBJbnRlbGxpZ2VuY2U6XG4gKiAgIC0gVHJhY2sgdXNlciBqb3VybmV5IGZyb20gZGlzY292ZXJ5IHRvIHB1cmNoYXNlXG4gKiAgIC0gTWVhc3VyZSByZWNvbW1lbmRhdGlvbiBhbGdvcml0aG0gZWZmZWN0aXZlbmVzc1xuICogICAtIE1vbml0b3IgYWZmaWxpYXRlIGNvbnZlcnNpb24gcmF0ZXMgYW5kIHJldmVudWVcbiAqICAgLSBBbmFseXplIHVzZXIgZW5nYWdlbWVudCBhbmQgcmV0ZW50aW9uIHBhdHRlcm5zXG4gKiBcbiAqIFByaXZhY3kgJiBDb21wbGlhbmNlOlxuICogICAtIEdEUFItY29tcGxpYW50IHVzZXIgY29uc2VudCBtYW5hZ2VtZW50XG4gKiAgIC0gVXNlciBvcHQtb3V0IGZ1bmN0aW9uYWxpdHlcbiAqICAgLSBEYXRhIGFub255bWl6YXRpb24gYW5kIHJldGVudGlvbiBwb2xpY2llc1xuICogICAtIENvb2tpZSBjb25zZW50IGludGVncmF0aW9uXG4gKiBcbiAqIEludGVncmF0aW9uOlxuICogICAtIFBvc3RIb2cgZm9yIGV2ZW50IHRyYWNraW5nIGFuZCBhbmFseXRpY3NcbiAqICAgLSBGZWF0dXJlIGZsYWdzIGZvciBjb250cm9sbGVkIHJvbGxvdXRzXG4gKiAgIC0gVXNlciBpZGVudGlmaWNhdGlvbiBmb3IgcGVyc29uYWxpemVkIGV4cGVyaWVuY2VzXG4gKiAgIC0gQ3VzdG9tIGV2ZW50IHZhbGlkYXRpb24gYW5kIGVucmljaG1lbnRcbiAqIFxuICogVXNhZ2U6XG4gKiAgIGltcG9ydCB7IGFuYWx5dGljcywgdHJhY2tFdmVudCwgaWRlbnRpZnlVc2VyIH0gZnJvbSAnQC9saWIvYW5hbHl0aWNzJztcbiAqICAgXG4gKiAgIC8vIEluaXRpYWxpemUgYW5hbHl0aWNzXG4gKiAgIGF3YWl0IGFuYWx5dGljcy5pbml0KCk7XG4gKiAgIFxuICogICAvLyBUcmFjayB1c2VyIGV2ZW50c1xuICogICB0cmFja0V2ZW50KCdwcm9kdWN0X3N3aXBlZCcsIHsgZGlyZWN0aW9uOiAncmlnaHQnLCBwcm9kdWN0X2lkOiAnMTIzJyB9KTtcbiAqICAgXG4gKiAgIC8vIElkZW50aWZ5IHVzZXJzXG4gKiAgIGlkZW50aWZ5VXNlcigndXNlcl8xMjMnLCB7IHN1YnNjcmlwdGlvbl90aWVyOiAncHJlbWl1bScgfSk7XG4gKi9cblxuaW1wb3J0IHBvc3Rob2cgZnJvbSAncG9zdGhvZy1qcyc7XG5pbXBvcnQgeyBjb25maWcgfSBmcm9tICdAL2NvbmZpZyc7XG5pbXBvcnQgeyBjcmVhdGVQb3N0SG9nQ29uZmlnLCB2YWxpZGF0ZUV2ZW50LCBnZXRDb21tb25FdmVudFByb3BlcnRpZXMgfSBmcm9tICcuL3Bvc3Rob2ctY29uZmlnJztcblxuLyoqXG4gKiBBbmFseXRpY3MgU2VydmljZSBjbGFzcyBmb3IgY29tcHJlaGVuc2l2ZSB1c2VyIGJlaGF2aW9yIHRyYWNraW5nLlxuICogXG4gKiBNYW5hZ2VzIFBvc3RIb2cgaW50ZWdyYXRpb24gd2l0aCByb2J1c3QgZXJyb3IgaGFuZGxpbmcsIHJldHJ5IGxvZ2ljLFxuICogYW5kIGJ1c2luZXNzLXNwZWNpZmljIGV2ZW50IHRyYWNraW5nLiBQcm92aWRlcyB0eXBlLXNhZmUgYW5hbHl0aWNzXG4gKiBpbnRlcmZhY2UgZm9yIHRoZSBlbnRpcmUgYXBwbGljYXRpb24uXG4gKiBcbiAqIEFyY2hpdGVjdHVyZTpcbiAqICAgLSBTaW5nbGV0b24gcGF0dGVybiBmb3IgY29uc2lzdGVudCBhbmFseXRpY3MgaW5zdGFuY2VcbiAqICAgLSBBdXRvbWF0aWMgaW5pdGlhbGl6YXRpb24gd2l0aCByZXRyeSBsb2dpY1xuICogICAtIEV2ZW50IHZhbGlkYXRpb24gYW5kIGVucmljaG1lbnRcbiAqICAgLSBGZWF0dXJlIGZsYWcgaW50ZWdyYXRpb25cbiAqICAgLSBQcml2YWN5IGNvbnRyb2xzIGFuZCBvcHQtb3V0IGZ1bmN0aW9uYWxpdHlcbiAqIFxuICogRXJyb3IgSGFuZGxpbmc6XG4gKiAgIC0gR3JhY2VmdWwgZGVncmFkYXRpb24gd2hlbiBhbmFseXRpY3MgdW5hdmFpbGFibGVcbiAqICAgLSBBdXRvbWF0aWMgcmV0cnkgb24gaW5pdGlhbGl6YXRpb24gZmFpbHVyZXNcbiAqICAgLSBDb21wcmVoZW5zaXZlIGxvZ2dpbmcgZm9yIGRlYnVnZ2luZ1xuICogICAtIEZhbGxiYWNrIGJlaGF2aW9yIGZvciBjcml0aWNhbCBwYXRoc1xuICovXG5jbGFzcyBBbmFseXRpY3NTZXJ2aWNlIHtcbiAgLyoqXG4gICAqIFNlcnZpY2Ugc3RhdGUgbWFuYWdlbWVudCBmb3IgcmVsaWFibGUgYW5hbHl0aWNzIG9wZXJhdGlvbi5cbiAgICovXG4gIHByaXZhdGUgaW5pdGlhbGl6ZWQgPSBmYWxzZTsgICAgICAgIC8vIEFuYWx5dGljcyBpbml0aWFsaXphdGlvbiBzdGF0dXNcbiAgcHJpdmF0ZSByZXRyeUNvdW50ID0gMDsgICAgICAgICAgICAgLy8gQ3VycmVudCByZXRyeSBhdHRlbXB0IGNvdW50ZXJcbiAgcHJpdmF0ZSBtYXhSZXRyaWVzID0gMzsgICAgICAgICAgICAgLy8gTWF4aW11bSBpbml0aWFsaXphdGlvbiByZXRyeSBhdHRlbXB0c1xuXG4gIC8qKlxuICAgKiBJbml0aWFsaXplIFBvc3RIb2cgYW5hbHl0aWNzIHNlcnZpY2Ugd2l0aCByb2J1c3QgZXJyb3IgaGFuZGxpbmcuXG4gICAqIFxuICAgKiBQZXJmb3JtcyBjb21wcmVoZW5zaXZlIHNldHVwIGluY2x1ZGluZzpcbiAgICogICAtIFBvc3RIb2cgU0RLIGluaXRpYWxpemF0aW9uIHdpdGggY3VzdG9tIGNvbmZpZ3VyYXRpb25cbiAgICogICAtIENvbm5lY3Rpb24gdGVzdGluZyBhbmQgdmFsaWRhdGlvblxuICAgKiAgIC0gQXV0b21hdGljIHJldHJ5IG9uIGZhaWx1cmVzXG4gICAqICAgLSBEZXZlbG9wbWVudCB2cyBwcm9kdWN0aW9uIGVudmlyb25tZW50IGhhbmRsaW5nXG4gICAqIFxuICAgKiBFcnJvciBSZWNvdmVyeTpcbiAgICogICAtIFJldHJpZXMgaW5pdGlhbGl6YXRpb24gdXAgdG8gbWF4UmV0cmllcyB0aW1lc1xuICAgKiAgIC0gRXhwb25lbnRpYWwgYmFja29mZiBmb3IgcmV0cnkgZGVsYXlzXG4gICAqICAgLSBHcmFjZWZ1bCBkZWdyYWRhdGlvbiBpZiBpbml0aWFsaXphdGlvbiBmYWlsc1xuICAgKiBcbiAgICogRW52aXJvbm1lbnQgSGFuZGxpbmc6XG4gICAqICAgLSBTZXJ2ZXItc2lkZSByZW5kZXJpbmcgY29tcGF0aWJpbGl0eSAobm8gd2luZG93KVxuICAgKiAgIC0gRGV2ZWxvcG1lbnQgZGVidWdnaW5nIGFuZCBsb2dnaW5nXG4gICAqICAgLSBQcm9kdWN0aW9uIG9wdGltaXphdGlvbnNcbiAgICogXG4gICAqIFJldHVybnM6XG4gICAqICAgUHJvbWlzZTx2b2lkPjogUmVzb2x2ZXMgd2hlbiBpbml0aWFsaXphdGlvbiBjb21wbGV0ZVxuICAgKi9cbiAgYXN5bmMgaW5pdCgpIHtcbiAgICAvLyBQcmV2ZW50IGluaXRpYWxpemF0aW9uIGluIGludmFsaWQgZW52aXJvbm1lbnRzXG4gICAgaWYgKHR5cGVvZiB3aW5kb3cgPT09ICd1bmRlZmluZWQnIHx8IHRoaXMuaW5pdGlhbGl6ZWQgfHwgIWNvbmZpZy5wb3N0aG9nS2V5KSB7XG4gICAgICByZXR1cm47XG4gICAgfVxuXG4gICAgdHJ5IHtcbiAgICAgIC8vIENyZWF0ZSBQb3N0SG9nIGNvbmZpZ3VyYXRpb24gd2l0aCBlbnZpcm9ubWVudC1zcGVjaWZpYyBzZXR0aW5nc1xuICAgICAgY29uc3QgcG9zdGhvZ0NvbmZpZyA9IGNyZWF0ZVBvc3RIb2dDb25maWcoKTtcbiAgICAgIFxuICAgICAgY29uc29sZS5sb2coJ1tQb3N0SG9nXSBJbml0aWFsaXppbmcgYW5hbHl0aWNzIHNlcnZpY2UuLi4nLCB7XG4gICAgICAgIGtleTogY29uZmlnLnBvc3Rob2dLZXk/LnN1YnN0cmluZygwLCAxMCkgKyAnLi4uJywgIC8vIE1hc2tlZCBrZXkgZm9yIHNlY3VyaXR5XG4gICAgICAgIGhvc3Q6IHBvc3Rob2dDb25maWcuYXBpX2hvc3QsICAgICAgICAgICAgICAgICAgICAgICAvLyBQb3N0SG9nIHNlcnZlciBob3N0XG4gICAgICAgIGRlYnVnOiBwb3N0aG9nQ29uZmlnLmRlYnVnLCAgICAgICAgICAgICAgICAgICAgICAgICAvLyBEZWJ1ZyBtb2RlIHN0YXR1c1xuICAgICAgfSk7XG5cbiAgICAgIC8vIEluaXRpYWxpemUgUG9zdEhvZyBTREsgd2l0aCBjb25maWd1cmF0aW9uXG4gICAgICBwb3N0aG9nLmluaXQoY29uZmlnLnBvc3Rob2dLZXksIHBvc3Rob2dDb25maWcpO1xuICAgICAgXG4gICAgICAvLyBNYXJrIGFzIHN1Y2Nlc3NmdWxseSBpbml0aWFsaXplZFxuICAgICAgdGhpcy5pbml0aWFsaXplZCA9IHRydWU7XG4gICAgICB0aGlzLnJldHJ5Q291bnQgPSAwOyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAvLyBSZXNldCByZXRyeSBjb3VudGVyXG5cbiAgICAgIC8vIFZlcmlmeSBhbmFseXRpY3MgY29ubmVjdGl2aXR5IHdpdGggdGVzdCBldmVudFxuICAgICAgYXdhaXQgdGhpcy50ZXN0Q29ubmVjdGlvbigpO1xuICAgICAgXG4gICAgfSBjYXRjaCAoZXJyb3IpIHtcbiAgICAgIGNvbnNvbGUuZXJyb3IoJ1tQb3N0SG9nXSBJbml0aWFsaXphdGlvbiBmYWlsZWQ6JywgZXJyb3IpO1xuICAgICAgXG4gICAgICAvLyBJbXBsZW1lbnQgcmV0cnkgbG9naWMgd2l0aCBleHBvbmVudGlhbCBiYWNrb2ZmXG4gICAgICBpZiAodGhpcy5yZXRyeUNvdW50IDwgdGhpcy5tYXhSZXRyaWVzKSB7XG4gICAgICAgIHRoaXMucmV0cnlDb3VudCsrO1xuICAgICAgICBjb25zdCBkZWxheU1zID0gMTAwMCAqIHRoaXMucmV0cnlDb3VudDsgICAgICAgICAgICAgIC8vIEV4cG9uZW50aWFsIGJhY2tvZmZcbiAgICAgICAgY29uc29sZS5sb2coYFtQb3N0SG9nXSBSZXRyeWluZyBpbml0aWFsaXphdGlvbiAoJHt0aGlzLnJldHJ5Q291bnR9LyR7dGhpcy5tYXhSZXRyaWVzfSkgaW4gJHtkZWxheU1zfW1zLi4uYCk7XG4gICAgICAgIHNldFRpbWVvdXQoKCkgPT4gdGhpcy5pbml0KCksIGRlbGF5TXMpO1xuICAgICAgfSBlbHNlIHtcbiAgICAgICAgY29uc29sZS5lcnJvcignW1Bvc3RIb2ddIE1heGltdW0gcmV0cnkgYXR0ZW1wdHMgcmVhY2hlZCwgYW5hbHl0aWNzIGRpc2FibGVkJyk7XG4gICAgICB9XG4gICAgfVxuICB9XG5cbiAgLyoqXG4gICAqIFRlc3QgUG9zdEhvZyBjb25uZWN0aXZpdHkgd2l0aCBkaWFnbm9zdGljIGV2ZW50LlxuICAgKiBcbiAgICogU2VuZHMgYSB0ZXN0IGV2ZW50IHRvIHZlcmlmeSB0aGF0IGFuYWx5dGljcyBhcmUgd29ya2luZyBjb3JyZWN0bHkuXG4gICAqIFByb3ZpZGVzIGRlYnVnZ2luZyBpbmZvcm1hdGlvbiBmb3IgdHJvdWJsZXNob290aW5nIGNvbm5lY3Rpb24gaXNzdWVzLlxuICAgKiBcbiAgICogVGVzdCBFdmVudCBEYXRhOlxuICAgKiAgIC0gQ29tbW9uIHByb3BlcnRpZXMgKHVzZXIgYWdlbnQsIFVSTCwgdGltZXN0YW1wKVxuICAgKiAgIC0gSW5pdGlhbGl6YXRpb24gbWV0YWRhdGEgKHRpbWUsIHJldHJ5IGNvdW50KVxuICAgKiAgIC0gRW52aXJvbm1lbnQgaW5mb3JtYXRpb24gZm9yIGRlYnVnZ2luZ1xuICAgKiBcbiAgICogUmV0dXJuczpcbiAgICogICBQcm9taXNlPHZvaWQ+OiBSZXNvbHZlcyB3aGVuIHRlc3QgY29tcGxldGVcbiAgICovXG4gIHByaXZhdGUgYXN5bmMgdGVzdENvbm5lY3Rpb24oKTogUHJvbWlzZTx2b2lkPiB7XG4gICAgaWYgKCF0aGlzLmluaXRpYWxpemVkKSByZXR1cm47XG5cbiAgICB0cnkge1xuICAgICAgLy8gU2VuZCBkaWFnbm9zdGljIGV2ZW50IHdpdGggaW5pdGlhbGl6YXRpb24gbWV0YWRhdGFcbiAgICAgIHRoaXMudHJhY2soJ2FuYWx5dGljc19zZXJ2aWNlX2luaXRpYWxpemVkJywge1xuICAgICAgICAuLi5nZXRDb21tb25FdmVudFByb3BlcnRpZXMoKSwgICAgICAgICAgICAgIC8vIFN0YW5kYXJkIGV2ZW50IHByb3BlcnRpZXNcbiAgICAgICAgaW5pdGlhbGl6YXRpb25fdGltZTogRGF0ZS5ub3coKSwgICAgICAgICAgIC8vIFRpbWVzdGFtcCBmb3IgcGVyZm9ybWFuY2UgdHJhY2tpbmdcbiAgICAgICAgcmV0cnlfY291bnQ6IHRoaXMucmV0cnlDb3VudCwgICAgICAgICAgICAgIC8vIE51bWJlciBvZiByZXRyaWVzIGZvciBkZWJ1Z2dpbmdcbiAgICAgICAgZW52aXJvbm1lbnQ6IGNvbmZpZy5pc1Byb2R1Y3Rpb24gPyAncHJvZHVjdGlvbicgOiAnZGV2ZWxvcG1lbnQnLFxuICAgICAgfSk7XG4gICAgICBcbiAgICAgIGNvbnNvbGUubG9nKCdbUG9zdEhvZ10gQ29ubmVjdGlvbiB0ZXN0IHN1Y2Nlc3NmdWwgLSBhbmFseXRpY3MgcmVhZHknKTtcbiAgICB9IGNhdGNoIChlcnJvcikge1xuICAgICAgY29uc29sZS53YXJuKCdbUG9zdEhvZ10gQ29ubmVjdGlvbiB0ZXN0IGZhaWxlZDonLCBlcnJvcik7XG4gICAgfVxuICB9XG5cbiAgLyoqXG4gICAqIElkZW50aWZ5IHVzZXIgZm9yIHBlcnNvbmFsaXplZCBhbmFseXRpY3MgYW5kIHRhcmdldGluZy5cbiAgICogXG4gICAqIEFzc29jaWF0ZXMgYWxsIGZ1dHVyZSBldmVudHMgd2l0aCBhIHNwZWNpZmljIHVzZXIgSUQsIGVuYWJsaW5nOlxuICAgKiAgIC0gQ3Jvc3MtZGV2aWNlIHRyYWNraW5nIGFuZCBzZXNzaW9uIGNvbnRpbnVpdHlcbiAgICogICAtIFBlcnNvbmFsaXplZCBmZWF0dXJlIGZsYWdzIGFuZCBBL0IgdGVzdHNcbiAgICogICAtIFVzZXItc3BlY2lmaWMgYW5hbHl0aWNzIGFuZCBjb2hvcnQgYW5hbHlzaXNcbiAgICogICAtIFJldmVudWUgYXR0cmlidXRpb24gYW5kIGxpZmV0aW1lIHZhbHVlIHRyYWNraW5nXG4gICAqIFxuICAgKiBQcml2YWN5IENvbXBsaWFuY2U6XG4gICAqICAgLSBPbmx5IGlkZW50aWZpZXMgdXNlcnMgd2hvIGhhdmUgcHJvdmlkZWQgY29uc2VudFxuICAgKiAgIC0gU3VwcG9ydHMgcHNldWRvbnltb3VzIGlkZW50aWZpZXJzIGZvciBwcml2YWN5XG4gICAqICAgLSBSZXNwZWN0cyB1c2VyIG9wdC1vdXQgcHJlZmVyZW5jZXNcbiAgICogXG4gICAqIFBhcmFtZXRlcnM6XG4gICAqICAgdXNlcklkOiBVbmlxdWUgdXNlciBpZGVudGlmaWVyIChVVUlELCBlbWFpbCBoYXNoLCBldGMuKVxuICAgKiAgIHByb3BlcnRpZXM6IEFkZGl0aW9uYWwgdXNlciBhdHRyaWJ1dGVzIGZvciBzZWdtZW50YXRpb25cbiAgICogXG4gICAqIEV4YW1wbGU6XG4gICAqICAgYW5hbHl0aWNzLmlkZW50aWZ5KCd1c2VyXzEyMycsIHtcbiAgICogICAgIGVtYWlsOiAndXNlckBleGFtcGxlLmNvbScsXG4gICAqICAgICBzdWJzY3JpcHRpb25fdGllcjogJ3ByZW1pdW0nLFxuICAgKiAgICAgZmlyc3RfbmFtZTogJ0pvaG4nLFxuICAgKiAgICAgc2lnbnVwX2RhdGU6ICcyMDI0LTAxLTAxJ1xuICAgKiAgIH0pO1xuICAgKi9cbiAgaWRlbnRpZnkodXNlcklkOiBzdHJpbmcsIHByb3BlcnRpZXM/OiBSZWNvcmQ8c3RyaW5nLCBhbnk+KSB7XG4gICAgaWYgKHRoaXMuaW5pdGlhbGl6ZWQpIHtcbiAgICAgIGNvbnNvbGUubG9nKCdbUG9zdEhvZ10gSWRlbnRpZnlpbmcgdXNlcjonLCB1c2VySWQsIHByb3BlcnRpZXMpO1xuICAgICAgcG9zdGhvZy5pZGVudGlmeSh1c2VySWQsIHByb3BlcnRpZXMpO1xuICAgIH1cbiAgfVxuXG4gIC8qKlxuICAgKiBUcmFjayB1c2VyIGV2ZW50cyBmb3IgYW5hbHl0aWNzIGFuZCBidXNpbmVzcyBpbnRlbGxpZ2VuY2UuXG4gICAqIFxuICAgKiBSZWNvcmRzIHVzZXIgYWN0aW9ucywgYmVoYXZpb3JzLCBhbmQgc3lzdGVtIGV2ZW50cyBmb3I6XG4gICAqICAgLSBQcm9kdWN0IGFuYWx5dGljcyBhbmQgdXNlciBqb3VybmV5IG1hcHBpbmdcbiAgICogICAtIFJldmVudWUgdHJhY2tpbmcgYW5kIGNvbnZlcnNpb24gb3B0aW1pemF0aW9uXG4gICAqICAgLSBBL0IgdGVzdGluZyBhbmQgZmVhdHVyZSBwZXJmb3JtYW5jZSBtZWFzdXJlbWVudFxuICAgKiAgIC0gRXJyb3IgbW9uaXRvcmluZyBhbmQgcGVyZm9ybWFuY2UgYW5hbHlzaXNcbiAgICogXG4gICAqIEV2ZW50IFByb2Nlc3Npbmc6XG4gICAqICAgLSBWYWxpZGF0ZXMgZXZlbnQgbmFtZSBhbmQgcHJvcGVydGllc1xuICAgKiAgIC0gRW5yaWNoZXMgZXZlbnRzIHdpdGggY29tbW9uIHByb3BlcnRpZXMgKHRpbWVzdGFtcCwgdXNlciBhZ2VudCwgZXRjLilcbiAgICogICAtIEhhbmRsZXMgZXJyb3JzIGdyYWNlZnVsbHkgd2l0aG91dCBicmVha2luZyB1c2VyIGV4cGVyaWVuY2VcbiAgICogICAtIExvZ3MgZXZlbnRzIGZvciBkZWJ1Z2dpbmcgaW4gZGV2ZWxvcG1lbnRcbiAgICogXG4gICAqIENvbW1vbiBFdmVudCBDYXRlZ29yaWVzOlxuICAgKiAgIC0gVXNlciBhY3Rpb25zOiBzd2lwZV9sZWZ0LCBzd2lwZV9yaWdodCwgcHJvZHVjdF9jbGlja2VkXG4gICAqICAgLSBSZXZlbnVlIGV2ZW50czogYWZmaWxpYXRlX2NsaWNrLCBwdXJjaGFzZV9jb21wbGV0ZWRcbiAgICogICAtIFN5c3RlbSBldmVudHM6IHBhZ2Vfdmlld2VkLCBlcnJvcl9vY2N1cnJlZFxuICAgKiAgIC0gRW5nYWdlbWVudDogc2Vzc2lvbl9zdGFydGVkLCBmZWF0dXJlX3VzZWRcbiAgICogXG4gICAqIFBhcmFtZXRlcnM6XG4gICAqICAgZXZlbnROYW1lOiBEZXNjcmlwdGl2ZSBldmVudCBuYW1lIChzbmFrZV9jYXNlIGNvbnZlbnRpb24pXG4gICAqICAgcHJvcGVydGllczogRXZlbnQtc3BlY2lmaWMgZGF0YSBmb3IgYW5hbHlzaXNcbiAgICogXG4gICAqIEV4YW1wbGU6XG4gICAqICAgYW5hbHl0aWNzLnRyYWNrKCdwcm9kdWN0X3N3aXBlZCcsIHtcbiAgICogICAgIGRpcmVjdGlvbjogJ3JpZ2h0JyxcbiAgICogICAgIHByb2R1Y3RfaWQ6ICdCMDhHWUtOQ0NQJyxcbiAgICogICAgIGNhdGVnb3J5OiAnRWxlY3Ryb25pY3MnLFxuICAgKiAgICAgc2Vzc2lvbl9pZDogJ3Nlc3Npb25fMTIzJ1xuICAgKiAgIH0pO1xuICAgKi9cbiAgdHJhY2soZXZlbnROYW1lOiBzdHJpbmcsIHByb3BlcnRpZXM/OiBSZWNvcmQ8c3RyaW5nLCBhbnk+KSB7XG4gICAgLy8gSGFuZGxlIGFuYWx5dGljcyBub3QgaW5pdGlhbGl6ZWQgZ3JhY2VmdWxseVxuICAgIGlmICghdGhpcy5pbml0aWFsaXplZCkge1xuICAgICAgY29uc29sZS53YXJuKCdbUG9zdEhvZ10gQW5hbHl0aWNzIG5vdCBpbml0aWFsaXplZCwgZXZlbnQgcXVldWVkOicsIGV2ZW50TmFtZSk7XG4gICAgICAvLyBJbiBwcm9kdWN0aW9uLCBjb3VsZCBxdWV1ZSBldmVudHMgZm9yIGxhdGVyIHNlbmRpbmdcbiAgICAgIHJldHVybjtcbiAgICB9XG5cbiAgICAvLyBWYWxpZGF0ZSBldmVudCBtZWV0cyBuYW1pbmcgYW5kIGRhdGEgcmVxdWlyZW1lbnRzXG4gICAgaWYgKCF2YWxpZGF0ZUV2ZW50KGV2ZW50TmFtZSwgcHJvcGVydGllcykpIHtcbiAgICAgIHJldHVybjtcbiAgICB9XG5cbiAgICB0cnkge1xuICAgICAgLy8gRW5yaWNoIGV2ZW50IHdpdGggY29tbW9uIHByb3BlcnRpZXMgZm9yIGNvbnNpc3RlbnQgYW5hbHl0aWNzXG4gICAgICBjb25zdCBlbnJpY2hlZFByb3BlcnRpZXMgPSB7XG4gICAgICAgIC4uLmdldENvbW1vbkV2ZW50UHJvcGVydGllcygpLCAgICAgIC8vIFN0YW5kYXJkIHByb3BlcnRpZXMgKHRpbWVzdGFtcCwgVVJMLCBldGMuKVxuICAgICAgICAuLi5wcm9wZXJ0aWVzLCAgICAgICAgICAgICAgICAgICAgICAvLyBFdmVudC1zcGVjaWZpYyBwcm9wZXJ0aWVzXG4gICAgICB9O1xuXG4gICAgICBjb25zb2xlLmxvZygnW1Bvc3RIb2ddIFRyYWNraW5nIGV2ZW50OicsIGV2ZW50TmFtZSwgZW5yaWNoZWRQcm9wZXJ0aWVzKTtcbiAgICAgIHBvc3Rob2cuY2FwdHVyZShldmVudE5hbWUsIGVucmljaGVkUHJvcGVydGllcyk7XG4gICAgfSBjYXRjaCAoZXJyb3IpIHtcbiAgICAgIGNvbnNvbGUuZXJyb3IoJ1tQb3N0SG9nXSBGYWlsZWQgdG8gdHJhY2sgZXZlbnQ6JywgZXZlbnROYW1lLCBlcnJvcik7XG4gICAgICAvLyBDb250aW51ZSBleGVjdXRpb24gZXZlbiBpZiBhbmFseXRpY3MgZmFpbHNcbiAgICB9XG4gIH1cblxuICAvKipcbiAgICogU2V0IG9yIHVwZGF0ZSB1c2VyIHByb3BlcnRpZXMgZm9yIHNlZ21lbnRhdGlvbiBhbmQgcGVyc29uYWxpemF0aW9uLlxuICAgKiBcbiAgICogVXBkYXRlcyB1c2VyIHByb2ZpbGUgZGF0YSBmb3I6XG4gICAqICAgLSBVc2VyIHNlZ21lbnRhdGlvbiBhbmQgY29ob3J0IGFuYWx5c2lzXG4gICAqICAgLSBQZXJzb25hbGl6ZWQgZmVhdHVyZSBmbGFncyBhbmQgdGFyZ2V0aW5nXG4gICAqICAgLSBSZXZlbnVlIGFuYWx5c2lzIGFuZCBsaWZldGltZSB2YWx1ZSB0cmFja2luZ1xuICAgKiAgIC0gQ3VzdG9tZXIgc3VwcG9ydCBhbmQgdXNlciBpbnNpZ2h0c1xuICAgKiBcbiAgICogUHJvcGVydHkgQ2F0ZWdvcmllczpcbiAgICogICAtIERlbW9ncmFwaGljczogYWdlLCBsb2NhdGlvbiwgZ2VuZGVyXG4gICAqICAgLSBTdWJzY3JpcHRpb246IHRpZXIsIHN0YXR1cywgYmlsbGluZ19jeWNsZVxuICAgKiAgIC0gQmVoYXZpb3I6IGxhc3RfbG9naW4sIHRvdGFsX3N3aXBlcywgcHJlZmVyZW5jZXNcbiAgICogICAtIFJldmVudWU6IHRvdGFsX3NwZW50LCBjb21taXNzaW9uX2dlbmVyYXRlZFxuICAgKiBcbiAgICogUGFyYW1ldGVyczpcbiAgICogICBwcm9wZXJ0aWVzOiBLZXktdmFsdWUgcGFpcnMgb2YgdXNlciBhdHRyaWJ1dGVzXG4gICAqIFxuICAgKiBFeGFtcGxlOlxuICAgKiAgIGFuYWx5dGljcy5zZXRVc2VyUHJvcGVydGllcyh7XG4gICAqICAgICBzdWJzY3JpcHRpb25fdGllcjogJ3ByZW1pdW0nLFxuICAgKiAgICAgdG90YWxfc3dpcGVzOiAxNTAsXG4gICAqICAgICBsYXN0X2FjdGl2ZTogJzIwMjQtMDEtMDEnLFxuICAgKiAgICAgZmF2b3JpdGVfY2F0ZWdvcmllczogWydFbGVjdHJvbmljcycsICdCb29rcyddXG4gICAqICAgfSk7XG4gICAqL1xuICBzZXRVc2VyUHJvcGVydGllcyhwcm9wZXJ0aWVzOiBSZWNvcmQ8c3RyaW5nLCBhbnk+KSB7XG4gICAgaWYgKHRoaXMuaW5pdGlhbGl6ZWQpIHtcbiAgICAgIGNvbnNvbGUubG9nKCdbUG9zdEhvZ10gU2V0dGluZyB1c2VyIHByb3BlcnRpZXM6JywgcHJvcGVydGllcyk7XG4gICAgICBwb3N0aG9nLnBlb3BsZS5zZXQocHJvcGVydGllcyk7XG4gICAgfVxuICB9XG5cbiAgLyoqXG4gICAqIFRyYWNrIHBhZ2Ugdmlld3MgZm9yIG5hdmlnYXRpb24gYW5hbHl0aWNzIGFuZCB1c2VyIGpvdXJuZXkgbWFwcGluZy5cbiAgICogXG4gICAqIFJlY29yZHMgcGFnZSBuYXZpZ2F0aW9uIGV2ZW50cyBmb3I6XG4gICAqICAgLSBVc2VyIGZsb3cgYW5hbHlzaXMgYW5kIGNvbnZlcnNpb24gZnVubmVsc1xuICAgKiAgIC0gUGFnZSBwZXJmb3JtYW5jZSBhbmQgZW5nYWdlbWVudCBtZXRyaWNzXG4gICAqICAgLSBBL0IgdGVzdGluZyBvZiBwYWdlIGxheW91dHMgYW5kIGNvbnRlbnRcbiAgICogICAtIFNFTyBhbmQgY29udGVudCBvcHRpbWl6YXRpb24gaW5zaWdodHNcbiAgICogXG4gICAqIEF1dG9tYXRpYyBFbnJpY2htZW50OlxuICAgKiAgIC0gUmVmZXJyZXIgaW5mb3JtYXRpb24gZm9yIHRyYWZmaWMgc291cmNlIGFuYWx5c2lzXG4gICAqICAgLSBQYWdlIGxvYWQgdGltZSBhbmQgcGVyZm9ybWFuY2UgbWV0cmljc1xuICAgKiAgIC0gRGV2aWNlIGFuZCBicm93c2VyIGluZm9ybWF0aW9uXG4gICAqICAgLSBVc2VyIHNlc3Npb24gY29udGV4dFxuICAgKiBcbiAgICogUGFyYW1ldGVyczpcbiAgICogICBwYXRoOiBPcHRpb25hbCBwYWdlIHBhdGggKGRlZmF1bHRzIHRvIGN1cnJlbnQgVVJMKVxuICAgKiBcbiAgICogRXhhbXBsZTpcbiAgICogICBhbmFseXRpY3MudHJhY2tQYWdlVmlldygnL2Rpc2NvdmVyJyk7IC8vIFRyYWNrIHNwZWNpZmljIHBhZ2VcbiAgICogICBhbmFseXRpY3MudHJhY2tQYWdlVmlldygpOyAgICAgICAgICAgIC8vIFRyYWNrIGN1cnJlbnQgcGFnZVxuICAgKi9cbiAgdHJhY2tQYWdlVmlldyhwYXRoPzogc3RyaW5nKSB7XG4gICAgaWYgKHRoaXMuaW5pdGlhbGl6ZWQpIHtcbiAgICAgIGNvbnN0IHBhZ2VVcmwgPSBwYXRoIHx8IHdpbmRvdy5sb2NhdGlvbi5ocmVmO1xuICAgICAgY29uc29sZS5sb2coJ1tQb3N0SG9nXSBUcmFja2luZyBwYWdlIHZpZXc6JywgcGFnZVVybCk7XG4gICAgICBcbiAgICAgIHBvc3Rob2cuY2FwdHVyZSgnJHBhZ2V2aWV3Jywge1xuICAgICAgICAkY3VycmVudF91cmw6IHBhZ2VVcmwsICAgICAgICAgICAgICAvLyBQYWdlIFVSTCBmb3IgbmF2aWdhdGlvbiB0cmFja2luZ1xuICAgICAgICBwYWdlX3RpdGxlOiBkb2N1bWVudC50aXRsZSwgICAgICAgICAvLyBQYWdlIHRpdGxlIGZvciBjb250ZW50IGFuYWx5c2lzXG4gICAgICAgIHJlZmVycmVyOiBkb2N1bWVudC5yZWZlcnJlciwgICAgICAgIC8vIFByZXZpb3VzIHBhZ2UgZm9yIHRyYWZmaWMgZmxvd1xuICAgICAgfSk7XG4gICAgfVxuICB9XG5cbiAgLyoqXG4gICAqIFJlc2V0IHVzZXIgc2Vzc2lvbiBmb3IgbG9nb3V0IGFuZCBwcml2YWN5IGNvbXBsaWFuY2UuXG4gICAqIFxuICAgKiBDbGVhcnMgYWxsIHVzZXIgaWRlbnRpZmljYXRpb24gYW5kIHNlc3Npb24gZGF0YSBmb3I6XG4gICAqICAgLSBVc2VyIGxvZ291dCBhbmQgc2Vzc2lvbiB0ZXJtaW5hdGlvblxuICAgKiAgIC0gUHJpdmFjeSBjb21wbGlhbmNlIGFuZCBkYXRhIHByb3RlY3Rpb25cbiAgICogICAtIFNoYXJlZCBkZXZpY2UgdXNhZ2Ugc2NlbmFyaW9zXG4gICAqICAgLSBUZXN0aW5nIGFuZCBkZXZlbG9wbWVudCBlbnZpcm9ubWVudHNcbiAgICogXG4gICAqIFJlc2V0IEFjdGlvbnM6XG4gICAqICAgLSBDbGVhcnMgdXNlciBpZGVudGlmaWNhdGlvbiBhbmQgcHJvcGVydGllc1xuICAgKiAgIC0gUmVzZXRzIGZlYXR1cmUgZmxhZyBjYWNoZVxuICAgKiAgIC0gR2VuZXJhdGVzIG5ldyBhbm9ueW1vdXMgc2Vzc2lvbiBJRFxuICAgKiAgIC0gTWFpbnRhaW5zIGFuYWx5dGljcyBmdW5jdGlvbmFsaXR5IGZvciBhbm9ueW1vdXMgdHJhY2tpbmdcbiAgICogXG4gICAqIFByaXZhY3kgQ29tcGxpYW5jZTpcbiAgICogICAtIEVuc3VyZXMgbm8gcGVyc29uYWwgZGF0YSBwZXJzaXN0cyBhZnRlciBsb2dvdXRcbiAgICogICAtIFN1cHBvcnRzIFwicmlnaHQgdG8gYmUgZm9yZ290dGVuXCIgcmVxdWlyZW1lbnRzXG4gICAqICAgLSBDbGVhcnMgYWxsIGxvY2FsbHkgc3RvcmVkIHVzZXIgZGF0YVxuICAgKiBcbiAgICogRXhhbXBsZTpcbiAgICogICAvLyBPbiB1c2VyIGxvZ291dFxuICAgKiAgIGFuYWx5dGljcy5yZXNldCgpO1xuICAgKi9cbiAgcmVzZXQoKSB7XG4gICAgaWYgKHRoaXMuaW5pdGlhbGl6ZWQpIHtcbiAgICAgIGNvbnNvbGUubG9nKCdbUG9zdEhvZ10gUmVzZXR0aW5nIHVzZXIgc2Vzc2lvbicpO1xuICAgICAgcG9zdGhvZy5yZXNldCgpO1xuICAgIH1cbiAgfVxuXG4gIC8qKlxuICAgKiBBc3NvY2lhdGUgdXNlciB3aXRoIGdyb3VwcyBmb3Igb3JnYW5pemF0aW9uYWwgYW5hbHl0aWNzLlxuICAgKiBcbiAgICogR3JvdXBzIHVzZXJzIGJ5IG9yZ2FuaXphdGlvbiwgdGVhbSwgb3Igb3RoZXIgZW50aXRpZXMgZm9yOlxuICAgKiAgIC0gQjJCIGFuYWx5dGljcyBhbmQgZW50ZXJwcmlzZSBpbnNpZ2h0c1xuICAgKiAgIC0gVGVhbSBjb2xsYWJvcmF0aW9uIGZlYXR1cmUgdXNhZ2VcbiAgICogICAtIE9yZ2FuaXphdGlvbi1sZXZlbCByZXBvcnRpbmcgYW5kIGJpbGxpbmdcbiAgICogICAtIE11bHRpLXRlbmFudCBhcHBsaWNhdGlvbiBhbmFseXRpY3NcbiAgICogXG4gICAqIEdyb3VwIFR5cGVzOlxuICAgKiAgIC0gb3JnYW5pemF0aW9uOiBDb21wYW55IG9yIGJ1c2luZXNzIGVudGl0eVxuICAgKiAgIC0gdGVhbTogRGVwYXJ0bWVudCBvciBwcm9qZWN0IHRlYW1cbiAgICogICAtIHN1YnNjcmlwdGlvbjogU2hhcmVkIHN1YnNjcmlwdGlvbiBhY2NvdW50XG4gICAqICAgLSBmYW1pbHk6IEZhbWlseSBnaWZ0LWdpdmluZyBncm91cHNcbiAgICogXG4gICAqIFBhcmFtZXRlcnM6XG4gICAqICAgZ3JvdXBUeXBlOiBUeXBlIG9mIGdyb3VwIChvcmdhbml6YXRpb24sIHRlYW0sIGV0Yy4pXG4gICAqICAgZ3JvdXBLZXk6IFVuaXF1ZSBpZGVudGlmaWVyIGZvciB0aGUgZ3JvdXBcbiAgICogICBwcm9wZXJ0aWVzOiBHcm91cC1zcGVjaWZpYyBhdHRyaWJ1dGVzXG4gICAqIFxuICAgKiBFeGFtcGxlOlxuICAgKiAgIGFuYWx5dGljcy5ncm91cCgnb3JnYW5pemF0aW9uJywgJ2FjbWUtY29ycCcsIHtcbiAgICogICAgIG5hbWU6ICdBY21lIENvcnBvcmF0aW9uJyxcbiAgICogICAgIHBsYW46ICdlbnRlcnByaXNlJyxcbiAgICogICAgIGVtcGxveWVlczogNTAwXG4gICAqICAgfSk7XG4gICAqL1xuICBncm91cChncm91cFR5cGU6IHN0cmluZywgZ3JvdXBLZXk6IHN0cmluZywgcHJvcGVydGllcz86IFJlY29yZDxzdHJpbmcsIGFueT4pIHtcbiAgICBpZiAodGhpcy5pbml0aWFsaXplZCkge1xuICAgICAgY29uc29sZS5sb2coJ1tQb3N0SG9nXSBTZXR0aW5nIGdyb3VwOicsIGdyb3VwVHlwZSwgZ3JvdXBLZXksIHByb3BlcnRpZXMpO1xuICAgICAgcG9zdGhvZy5ncm91cChncm91cFR5cGUsIGdyb3VwS2V5LCBwcm9wZXJ0aWVzKTtcbiAgICB9XG4gIH1cblxuICAvKipcbiAgICogQ2hlY2sgaWYgYSBmZWF0dXJlIGZsYWcgaXMgZW5hYmxlZCBmb3IgdGhlIGN1cnJlbnQgdXNlci5cbiAgICogXG4gICAqIEVuYWJsZXMgY29udHJvbGxlZCBmZWF0dXJlIHJvbGxvdXRzIGFuZCBBL0IgdGVzdGluZyBmb3I6XG4gICAqICAgLSBHcmFkdWFsIGZlYXR1cmUgcmVsZWFzZXMgdG8gdXNlciBzZWdtZW50c1xuICAgKiAgIC0gQS9CIHRlc3Rpbmcgb2YgbmV3IGZ1bmN0aW9uYWxpdHlcbiAgICogICAtIEtpbGwgc3dpdGNoZXMgZm9yIHByb2JsZW1hdGljIGZlYXR1cmVzXG4gICAqICAgLSBQZXJzb25hbGl6ZWQgdXNlciBleHBlcmllbmNlc1xuICAgKiBcbiAgICogRmVhdHVyZSBGbGFnIENhdGVnb3JpZXM6XG4gICAqICAgLSBVSSBmZWF0dXJlczogbmV3X3N3aXBlX2ludGVyZmFjZSwgZGFya19tb2RlXG4gICAqICAgLSBCdXNpbmVzcyBsb2dpYzogcHJlbWl1bV9yZWNvbW1lbmRhdGlvbnMsIGFmZmlsaWF0ZV90cmFja2luZ1xuICAgKiAgIC0gRXhwZXJpbWVudHM6IHJlY29tbWVuZGF0aW9uX2FsZ29yaXRobV92MlxuICAgKiAgIC0gUm9sbG91dHM6IG1vYmlsZV9hcHBfcHJvbW90aW9uXG4gICAqIFxuICAgKiBQYXJhbWV0ZXJzOlxuICAgKiAgIGZsYWc6IEZlYXR1cmUgZmxhZyBuYW1lIChzbmFrZV9jYXNlIGNvbnZlbnRpb24pXG4gICAqIFxuICAgKiBSZXR1cm5zOlxuICAgKiAgIGJvb2xlYW46IFRydWUgaWYgZmVhdHVyZSBpcyBlbmFibGVkIGZvciBjdXJyZW50IHVzZXJcbiAgICogXG4gICAqIEV4YW1wbGU6XG4gICAqICAgaWYgKGFuYWx5dGljcy5pc0ZlYXR1cmVFbmFibGVkKCduZXdfcmVjb21tZW5kYXRpb25fZW5naW5lJykpIHtcbiAgICogICAgIC8vIFNob3cgbmV3IHJlY29tbWVuZGF0aW9uIFVJXG4gICAqICAgfVxuICAgKi9cbiAgaXNGZWF0dXJlRW5hYmxlZChmbGFnOiBzdHJpbmcpOiBib29sZWFuIHtcbiAgICBpZiAodGhpcy5pbml0aWFsaXplZCkge1xuICAgICAgY29uc3QgZW5hYmxlZCA9IHBvc3Rob2cuaXNGZWF0dXJlRW5hYmxlZChmbGFnKSA9PT0gdHJ1ZTtcbiAgICAgIGNvbnNvbGUubG9nKGBbUG9zdEhvZ10gRmVhdHVyZSBmbGFnICcke2ZsYWd9JzpgLCBlbmFibGVkKTtcbiAgICAgIHJldHVybiBlbmFibGVkO1xuICAgIH1cbiAgICByZXR1cm4gZmFsc2U7ICAvLyBEZWZhdWx0IHRvIGRpc2FibGVkIGlmIGFuYWx5dGljcyBub3QgYXZhaWxhYmxlXG4gIH1cblxuICAvKipcbiAgICogR2V0IGZlYXR1cmUgZmxhZyB2YWx1ZSBmb3IgYWR2YW5jZWQgZmxhZyBjb25maWd1cmF0aW9ucy5cbiAgICogXG4gICAqIFJldHJpZXZlcyBmZWF0dXJlIGZsYWcgdmFsdWVzIHRoYXQgY2FuIGJlOlxuICAgKiAgIC0gQm9vbGVhbjogdHJ1ZS9mYWxzZSBmb3Igc2ltcGxlIG9uL29mZiBmZWF0dXJlc1xuICAgKiAgIC0gU3RyaW5nOiB2YXJpYW50IG5hbWVzIGZvciBtdWx0aXZhcmlhdGUgdGVzdHNcbiAgICogICAtIE51bWJlcjogY29uZmlndXJhdGlvbiB2YWx1ZXMgb3IgcGVyY2VudGFnZXNcbiAgICogXG4gICAqIEFkdmFuY2VkIFVzZSBDYXNlczpcbiAgICogICAtIE11bHRpdmFyaWF0ZSB0ZXN0aW5nIHdpdGggbXVsdGlwbGUgdmFyaWFudHNcbiAgICogICAtIENvbmZpZ3VyYXRpb24gZmxhZ3Mgd2l0aCBzcGVjaWZpYyB2YWx1ZXNcbiAgICogICAtIFBlcmNlbnRhZ2UtYmFzZWQgcm9sbG91dHNcbiAgICogICAtIFN0cmluZy1iYXNlZCBmZWF0dXJlIHZhcmlhbnRzXG4gICAqIFxuICAgKiBQYXJhbWV0ZXJzOlxuICAgKiAgIGZsYWc6IEZlYXR1cmUgZmxhZyBuYW1lXG4gICAqIFxuICAgKiBSZXR1cm5zOlxuICAgKiAgIHN0cmluZyB8IGJvb2xlYW4gfCB1bmRlZmluZWQ6IEZsYWcgdmFsdWUgb3IgdW5kZWZpbmVkIGlmIG5vdCBzZXRcbiAgICogXG4gICAqIEV4YW1wbGU6XG4gICAqICAgY29uc3QgdmFyaWFudCA9IGFuYWx5dGljcy5nZXRGZWF0dXJlRmxhZygncmVjb21tZW5kYXRpb25fYWxnb3JpdGhtJyk7XG4gICAqICAgaWYgKHZhcmlhbnQgPT09ICdjb2xsYWJvcmF0aXZlX2ZpbHRlcmluZycpIHtcbiAgICogICAgIC8vIFVzZSBjb2xsYWJvcmF0aXZlIGZpbHRlcmluZyBhbGdvcml0aG1cbiAgICogICB9IGVsc2UgaWYgKHZhcmlhbnQgPT09ICdjb250ZW50X2Jhc2VkJykge1xuICAgKiAgICAgLy8gVXNlIGNvbnRlbnQtYmFzZWQgYWxnb3JpdGhtXG4gICAqICAgfVxuICAgKi9cbiAgZ2V0RmVhdHVyZUZsYWcoZmxhZzogc3RyaW5nKTogc3RyaW5nIHwgYm9vbGVhbiB8IHVuZGVmaW5lZCB7XG4gICAgaWYgKHRoaXMuaW5pdGlhbGl6ZWQpIHtcbiAgICAgIGNvbnN0IHZhbHVlID0gcG9zdGhvZy5nZXRGZWF0dXJlRmxhZyhmbGFnKTtcbiAgICAgIGNvbnNvbGUubG9nKGBbUG9zdEhvZ10gRmVhdHVyZSBmbGFnICcke2ZsYWd9JyB2YWx1ZTpgLCB2YWx1ZSk7XG4gICAgICByZXR1cm4gdmFsdWU7XG4gICAgfVxuICAgIHJldHVybiB1bmRlZmluZWQ7XG4gIH1cblxuICAvKipcbiAgICogT3B0IHVzZXIgb3V0IG9mIGFuYWx5dGljcyB0cmFja2luZyBmb3IgcHJpdmFjeSBjb21wbGlhbmNlLlxuICAgKiBcbiAgICogUHJvdmlkZXMgdXNlciBjb250cm9sIG92ZXIgZGF0YSBjb2xsZWN0aW9uIGZvcjpcbiAgICogICAtIEdEUFIgYW5kIHByaXZhY3kgcmVndWxhdGlvbiBjb21wbGlhbmNlXG4gICAqICAgLSBVc2VyIHByZWZlcmVuY2UgYW5kIGNvbnNlbnQgbWFuYWdlbWVudFxuICAgKiAgIC0gQ29va2llIGJhbm5lciBhbmQgcHJpdmFjeSBjb250cm9sc1xuICAgKiAgIC0gRGF0YSBtaW5pbWl6YXRpb24gcHJpbmNpcGxlc1xuICAgKiBcbiAgICogT3B0LU91dCBFZmZlY3RzOlxuICAgKiAgIC0gU3RvcHMgYWxsIGV2ZW50IHRyYWNraW5nIGFuZCBkYXRhIGNvbGxlY3Rpb25cbiAgICogICAtIERpc2FibGVzIGZlYXR1cmUgZmxhZ3MgYW5kIHBlcnNvbmFsaXphdGlvblxuICAgKiAgIC0gTWFpbnRhaW5zIGJhc2ljIGZ1bmN0aW9uYWxpdHkgd2l0aG91dCBhbmFseXRpY3NcbiAgICogICAtIFNldHMgcGVyc2lzdGVudCBvcHQtb3V0IHByZWZlcmVuY2VcbiAgICogXG4gICAqIFByaXZhY3kgQ29tcGxpYW5jZTpcbiAgICogICAtIFJlc3BlY3RzIHVzZXIgcHJpdmFjeSBjaG9pY2VzXG4gICAqICAgLSBQcm92aWRlcyBjbGVhciBvcHQtb3V0IG1lY2hhbmlzbVxuICAgKiAgIC0gTWFpbnRhaW5zIG9wdC1vdXQgc3RhdHVzIGFjcm9zcyBzZXNzaW9uc1xuICAgKiBcbiAgICogRXhhbXBsZTpcbiAgICogICAvLyBVc2VyIGNsaWNrcyBcIk9wdCBvdXQgb2YgYW5hbHl0aWNzXCJcbiAgICogICBhbmFseXRpY3Mub3B0T3V0KCk7XG4gICAqL1xuICBvcHRPdXQoKSB7XG4gICAgaWYgKHRoaXMuaW5pdGlhbGl6ZWQpIHtcbiAgICAgIGNvbnNvbGUubG9nKCdbUG9zdEhvZ10gVXNlciBvcHRlZCBvdXQgb2YgYW5hbHl0aWNzIHRyYWNraW5nJyk7XG4gICAgICBwb3N0aG9nLm9wdF9vdXRfY2FwdHVyaW5nKCk7XG4gICAgfVxuICB9XG5cbiAgLyoqXG4gICAqIE9wdCB1c2VyIGludG8gYW5hbHl0aWNzIHRyYWNraW5nIGFmdGVyIHByZXZpb3VzIG9wdC1vdXQuXG4gICAqIFxuICAgKiBSZS1lbmFibGVzIGFuYWx5dGljcyBmb3IgdXNlcnMgd2hvIHByZXZpb3VzbHkgb3B0ZWQgb3V0OlxuICAgKiAgIC0gUmVzdG9yZXMgZnVsbCBhbmFseXRpY3MgZnVuY3Rpb25hbGl0eVxuICAgKiAgIC0gUmUtZW5hYmxlcyBmZWF0dXJlIGZsYWdzIGFuZCBwZXJzb25hbGl6YXRpb25cbiAgICogICAtIFJlc3VtZXMgZXZlbnQgdHJhY2tpbmcgYW5kIGRhdGEgY29sbGVjdGlvblxuICAgKiAgIC0gVXBkYXRlcyB1c2VyIGNvbnNlbnQgcHJlZmVyZW5jZXNcbiAgICogXG4gICAqIFVzZSBDYXNlczpcbiAgICogICAtIFVzZXIgY2hhbmdlcyBwcml2YWN5IHByZWZlcmVuY2VzXG4gICAqICAgLSBQcmVtaXVtIHVzZXJzIGVuYWJsaW5nIGFkdmFuY2VkIGZlYXR1cmVzXG4gICAqICAgLSBPbmJvYXJkaW5nIGZsb3cgY29uc2VudCB1cGRhdGVzXG4gICAqICAgLSBTZXR0aW5ncyBwYWdlIHByaXZhY3kgY29udHJvbHNcbiAgICogXG4gICAqIEV4YW1wbGU6XG4gICAqICAgLy8gVXNlciBjbGlja3MgXCJFbmFibGUgYW5hbHl0aWNzXCJcbiAgICogICBhbmFseXRpY3Mub3B0SW4oKTtcbiAgICovXG4gIG9wdEluKCkge1xuICAgIGlmICh0aGlzLmluaXRpYWxpemVkKSB7XG4gICAgICBjb25zb2xlLmxvZygnW1Bvc3RIb2ddIFVzZXIgb3B0ZWQgaW50byBhbmFseXRpY3MgdHJhY2tpbmcnKTtcbiAgICAgIHBvc3Rob2cub3B0X2luX2NhcHR1cmluZygpO1xuICAgIH1cbiAgfVxuXG4gIC8qKlxuICAgKiBDaGVjayBpZiB1c2VyIGhhcyBvcHRlZCBvdXQgb2YgYW5hbHl0aWNzIHRyYWNraW5nLlxuICAgKiBcbiAgICogRGV0ZXJtaW5lcyB1c2VyJ3MgY3VycmVudCBwcml2YWN5IHByZWZlcmVuY2UgZm9yOlxuICAgKiAgIC0gQ29uZGl0aW9uYWwgVUkgcmVuZGVyaW5nIGJhc2VkIG9uIGNvbnNlbnRcbiAgICogICAtIFByaXZhY3kgc2V0dGluZ3MgcGFnZSBzdGF0dXMgZGlzcGxheVxuICAgKiAgIC0gRmVhdHVyZSBhdmFpbGFiaWxpdHkgYW5kIGZ1bmN0aW9uYWxpdHlcbiAgICogICAtIENvbXBsaWFuY2Ugd2l0aCBwcml2YWN5IHJlZ3VsYXRpb25zXG4gICAqIFxuICAgKiBSZXR1cm5zOlxuICAgKiAgIGJvb2xlYW46IFRydWUgaWYgdXNlciBoYXMgb3B0ZWQgb3V0LCBmYWxzZSBvdGhlcndpc2VcbiAgICogXG4gICAqIEV4YW1wbGU6XG4gICAqICAgaWYgKCFhbmFseXRpY3MuaGFzT3B0ZWRPdXQoKSkge1xuICAgKiAgICAgLy8gU2hvdyBhbmFseXRpY3MtZGVwZW5kZW50IGZlYXR1cmVzXG4gICAqICAgICByZW5kZXJQZXJzb25hbGl6ZWRSZWNvbW1lbmRhdGlvbnMoKTtcbiAgICogICB9XG4gICAqL1xuICBoYXNPcHRlZE91dCgpOiBib29sZWFuIHtcbiAgICBpZiAodGhpcy5pbml0aWFsaXplZCkge1xuICAgICAgcmV0dXJuIHBvc3Rob2cuaGFzX29wdGVkX291dF9jYXB0dXJpbmcoKTtcbiAgICB9XG4gICAgcmV0dXJuIGZhbHNlOyAgLy8gRGVmYXVsdCB0byBvcHRlZC1pbiBpZiBhbmFseXRpY3Mgbm90IGF2YWlsYWJsZVxuICB9XG59XG5cbi8vID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PVxuLy8gU0lOR0xFVE9OIEFOQUxZVElDUyBJTlNUQU5DRVxuLy8gPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09XG4vLyBHbG9iYWwgYW5hbHl0aWNzIGluc3RhbmNlIGZvciBhcHBsaWNhdGlvbi13aWRlIHVzYWdlXG5cbi8qKlxuICogR2xvYmFsIGFuYWx5dGljcyBzZXJ2aWNlIGluc3RhbmNlLlxuICogXG4gKiBTaW5nbGV0b24gcGF0dGVybiBlbnN1cmVzIGNvbnNpc3RlbnQgYW5hbHl0aWNzIGFjcm9zcyB0aGUgZW50aXJlIGFwcGxpY2F0aW9uLlxuICogVXNlIHRoaXMgaW5zdGFuY2UgZm9yIGFsbCBhbmFseXRpY3Mgb3BlcmF0aW9ucyB0byBtYWludGFpbiBzdGF0ZSBhbmQgY29uZmlndXJhdGlvbi5cbiAqL1xuZXhwb3J0IGNvbnN0IGFuYWx5dGljcyA9IG5ldyBBbmFseXRpY3NTZXJ2aWNlKCk7XG5cbi8vID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PVxuLy8gQ09OVkVOSUVOQ0UgRlVOQ1RJT05TXG4vLyA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT1cbi8vIFNpbXBsaWZpZWQgQVBJIGZvciBjb21tb24gYW5hbHl0aWNzIG9wZXJhdGlvbnNcblxuLyoqXG4gKiBUcmFjayB1c2VyIGV2ZW50IHdpdGggc2ltcGxpZmllZCBBUEkuXG4gKiBcbiAqIENvbnZlbmllbmNlIGZ1bmN0aW9uIGZvciB0aGUgbW9zdCBjb21tb24gYW5hbHl0aWNzIG9wZXJhdGlvbi5cbiAqIFByb3ZpZGVzIHR5cGUtc2FmZSBldmVudCB0cmFja2luZyB3aXRob3V0IGRpcmVjdCBzZXJ2aWNlIGFjY2Vzcy5cbiAqIFxuICogUGFyYW1ldGVyczpcbiAqICAgZXZlbnROYW1lOiBEZXNjcmlwdGl2ZSBldmVudCBuYW1lIChzbmFrZV9jYXNlKVxuICogICBwcm9wZXJ0aWVzOiBPcHRpb25hbCBldmVudCBkYXRhXG4gKiBcbiAqIEV4YW1wbGU6XG4gKiAgIHRyYWNrRXZlbnQoJ2J1dHRvbl9jbGlja2VkJywgeyBidXR0b25faWQ6ICdzaWdudXAnIH0pO1xuICovXG5leHBvcnQgY29uc3QgdHJhY2tFdmVudCA9IChldmVudE5hbWU6IHN0cmluZywgcHJvcGVydGllcz86IFJlY29yZDxzdHJpbmcsIGFueT4pID0+IHtcbiAgYW5hbHl0aWNzLnRyYWNrKGV2ZW50TmFtZSwgcHJvcGVydGllcyk7XG59O1xuXG4vKipcbiAqIElkZW50aWZ5IHVzZXIgd2l0aCBzaW1wbGlmaWVkIEFQSS5cbiAqIFxuICogQ29udmVuaWVuY2UgZnVuY3Rpb24gZm9yIHVzZXIgaWRlbnRpZmljYXRpb24gd2l0aG91dCBkaXJlY3Qgc2VydmljZSBhY2Nlc3MuXG4gKiBcbiAqIFBhcmFtZXRlcnM6XG4gKiAgIHVzZXJJZDogVW5pcXVlIHVzZXIgaWRlbnRpZmllclxuICogICBwcm9wZXJ0aWVzOiBPcHRpb25hbCB1c2VyIGF0dHJpYnV0ZXNcbiAqIFxuICogRXhhbXBsZTpcbiAqICAgaWRlbnRpZnlVc2VyKCd1c2VyXzEyMycsIHsgZW1haWw6ICd1c2VyQGV4YW1wbGUuY29tJyB9KTtcbiAqL1xuZXhwb3J0IGNvbnN0IGlkZW50aWZ5VXNlciA9ICh1c2VySWQ6IHN0cmluZywgcHJvcGVydGllcz86IFJlY29yZDxzdHJpbmcsIGFueT4pID0+IHtcbiAgYW5hbHl0aWNzLmlkZW50aWZ5KHVzZXJJZCwgcHJvcGVydGllcyk7XG59O1xuXG4vKipcbiAqIFRyYWNrIHBhZ2UgdmlldyB3aXRoIHNpbXBsaWZpZWQgQVBJLlxuICogXG4gKiBDb252ZW5pZW5jZSBmdW5jdGlvbiBmb3IgcGFnZSB2aWV3IHRyYWNraW5nIHdpdGhvdXQgZGlyZWN0IHNlcnZpY2UgYWNjZXNzLlxuICogXG4gKiBQYXJhbWV0ZXJzOlxuICogICBwYXRoOiBPcHRpb25hbCBwYWdlIHBhdGggKGRlZmF1bHRzIHRvIGN1cnJlbnQgVVJMKVxuICogXG4gKiBFeGFtcGxlOlxuICogICB0cmFja1BhZ2VWaWV3KCcvZGlzY292ZXInKTtcbiAqL1xuZXhwb3J0IGNvbnN0IHRyYWNrUGFnZVZpZXcgPSAocGF0aD86IHN0cmluZykgPT4ge1xuICBhbmFseXRpY3MudHJhY2tQYWdlVmlldyhwYXRoKTtcbn07XG5cbi8vIERlZmF1bHQgZXhwb3J0IGZvciBpbXBvcnRpbmcgYXMgc2luZ2xlIG1vZHVsZVxuZXhwb3J0IGRlZmF1bHQgYW5hbHl0aWNzO1xuXG4vLyBFeHBvcnQgYWxsIHB1YmxpYyBpbnRlcmZhY2VzXG4vLyBFeHBvcnRlZDogYW5hbHl0aWNzLCB0cmFja0V2ZW50LCBpZGVudGlmeVVzZXIsIHRyYWNrUGFnZVZpZXcsIEFuYWx5dGljc1NlcnZpY2UiXSwibmFtZXMiOlsiYW5hbHl0aWNzIiwiaWRlbnRpZnlVc2VyIiwidHJhY2tFdmVudCIsInRyYWNrUGFnZVZpZXciLCJBbmFseXRpY3NTZXJ2aWNlIiwiaW5pdCIsIndpbmRvdyIsImluaXRpYWxpemVkIiwiY29uZmlnIiwicG9zdGhvZ0tleSIsInBvc3Rob2dDb25maWciLCJjcmVhdGVQb3N0SG9nQ29uZmlnIiwiY29uc29sZSIsImxvZyIsImtleSIsInN1YnN0cmluZyIsImhvc3QiLCJhcGlfaG9zdCIsImRlYnVnIiwicG9zdGhvZyIsInJldHJ5Q291bnQiLCJ0ZXN0Q29ubmVjdGlvbiIsImVycm9yIiwibWF4UmV0cmllcyIsImRlbGF5TXMiLCJzZXRUaW1lb3V0IiwidHJhY2siLCJnZXRDb21tb25FdmVudFByb3BlcnRpZXMiLCJpbml0aWFsaXphdGlvbl90aW1lIiwiRGF0ZSIsIm5vdyIsInJldHJ5X2NvdW50IiwiZW52aXJvbm1lbnQiLCJpc1Byb2R1Y3Rpb24iLCJ3YXJuIiwiaWRlbnRpZnkiLCJ1c2VySWQiLCJwcm9wZXJ0aWVzIiwiZXZlbnROYW1lIiwidmFsaWRhdGVFdmVudCIsImVucmljaGVkUHJvcGVydGllcyIsImNhcHR1cmUiLCJzZXRVc2VyUHJvcGVydGllcyIsInBlb3BsZSIsInNldCIsInBhdGgiLCJwYWdlVXJsIiwibG9jYXRpb24iLCJocmVmIiwiJGN1cnJlbnRfdXJsIiwicGFnZV90aXRsZSIsImRvY3VtZW50IiwidGl0bGUiLCJyZWZlcnJlciIsInJlc2V0IiwiZ3JvdXAiLCJncm91cFR5cGUiLCJncm91cEtleSIsImlzRmVhdHVyZUVuYWJsZWQiLCJmbGFnIiwiZW5hYmxlZCIsImdldEZlYXR1cmVGbGFnIiwidmFsdWUiLCJ1bmRlZmluZWQiLCJvcHRPdXQiLCJvcHRfb3V0X2NhcHR1cmluZyIsIm9wdEluIiwib3B0X2luX2NhcHR1cmluZyIsImhhc09wdGVkT3V0IiwiaGFzX29wdGVkX291dF9jYXB0dXJpbmciXSwibWFwcGluZ3MiOiJBQUFBOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0NBMkNDOzs7Ozs7Ozs7OztJQTBnQllBLFNBQVM7ZUFBVEE7O0lBdURiLGdEQUFnRDtJQUNoRCxPQUF5QjtlQUF6QixTQUVBLCtCQUErQjtTQUMvQixpRkFBaUY7OztJQXZCcEVDLFlBQVk7ZUFBWkE7O0lBaEJBQyxVQUFVO2VBQVZBOztJQStCQUMsYUFBYTtlQUFiQTs7O2tFQTNqQk87d0JBQ0c7K0JBQ3NEOzs7Ozs7QUFFN0U7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Q0FtQkMsR0FDRCxNQUFNQztJQVFKOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FxQkMsR0FDRCxNQUFNQyxPQUFPO1FBQ1gsaURBQWlEO1FBQ2pELElBQUksT0FBT0MsV0FBVyxlQUFlLElBQUksQ0FBQ0MsV0FBVyxJQUFJLENBQUNDLGNBQU0sQ0FBQ0MsVUFBVSxFQUFFO1lBQzNFO1FBQ0Y7UUFFQSxJQUFJO1lBQ0Ysa0VBQWtFO1lBQ2xFLE1BQU1DLGdCQUFnQkMsSUFBQUEsa0NBQW1CO1lBRXpDQyxRQUFRQyxHQUFHLENBQUMsK0NBQStDO2dCQUN6REMsS0FBS04sY0FBTSxDQUFDQyxVQUFVLEVBQUVNLFVBQVUsR0FBRyxNQUFNO2dCQUMzQ0MsTUFBTU4sY0FBY08sUUFBUTtnQkFDNUJDLE9BQU9SLGNBQWNRLEtBQUs7WUFDNUI7WUFFQSw0Q0FBNEM7WUFDNUNDLGtC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

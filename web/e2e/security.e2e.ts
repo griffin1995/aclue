@@ -1,7 +1,7 @@
 /**
  * Security Testing Suite
  * 
- * Comprehensive security testing for the Aclue platform,
+ * Comprehensive security testing for the aclue platform,
  * focusing on authentication security, data protection, and vulnerability prevention.
  * 
  * Security Test Coverage:

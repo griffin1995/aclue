@@ -49,7 +49,7 @@ export function ProfileHeader({ user, logoutAction }: ProfileHeaderProps) {
               <div className="w-10 h-10 bg-gray-50 rounded-2xl flex items-center justify-center border border-gray-200">
                 <Image
                   src="/aclue_text_clean.png"
-                  alt="Aclue logo"
+                  alt="aclue logo"
                   width={20}
                   height={20}
                   className="rounded-lg"

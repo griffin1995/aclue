@@ -26,13 +26,13 @@ import { WishlistNavigation } from '@/components/wishlists/WishlistNavigation';
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | Wishlists | Aclue',
-    default: 'Wishlists | Aclue'
+    template: '%s | Wishlists | aclue',
+    default: 'Wishlists | aclue'
   },
-  description: 'Create and manage wishlists, share with friends and family, and discover amazing gifts with AI-powered recommendations on Aclue',
-  keywords: ['wishlists', 'gift lists', 'sharing', 'AI recommendations', 'Amazon affiliate', 'Aclue'],
+  description: 'Create and manage wishlists, share with friends and family, and discover amazing gifts with AI-powered recommendations on aclue',
+  keywords: ['wishlists', 'gift lists', 'sharing', 'AI recommendations', 'Amazon affiliate', 'aclue'],
   openGraph: {
-    title: 'Wishlists | Aclue',
+    title: 'Wishlists | aclue',
     description: 'Create and share wishlists with AI-powered gift recommendations',
     type: 'website',
     locale: 'en_GB',

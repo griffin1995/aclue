@@ -1,7 +1,7 @@
 /**
  * Accessibility Testing Suite - WCAG 2.1 AA Compliance
  * 
- * Comprehensive accessibility testing for the Aclue platform,
+ * Comprehensive accessibility testing for the aclue platform,
  * ensuring compliance with WCAG 2.1 AA standards and inclusive design.
  * 
  * Test Coverage:

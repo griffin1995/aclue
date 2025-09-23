@@ -119,7 +119,7 @@ export default function PricingPage() {
   const faqs = [
     {
       question: 'What is the beta program?',
-      answer: 'Our beta program gives you full access to Aclue\'s platform completely free while we refine the service based on user feedback. Beta users get exclusive benefits and help shape the product\'s future.'
+      answer: 'Our beta program gives you full access to aclue\'s platform completely free while we refine the service based on user feedback. Beta users get exclusive benefits and help shape the product\'s future.'
     },
     {
       question: 'How long does the beta program last?',
@@ -158,7 +158,7 @@ export default function PricingPage() {
               <span className="text-primary-600">Free Beta Program</span>
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Get full access to Aclue's AI-powered gift discovery platform completely free.
+              Get full access to aclue's AI-powered gift discovery platform completely free.
               Help us build the future of gift-giving while enjoying premium features at no cost.
             </p>
           </div>
@@ -418,8 +418,8 @@ export default function PricingPage() {
  * SEO Metadata for Pricing Page
  */
 export const metadata: Metadata = {
-  title: 'Pricing - Free Beta Program | Aclue',
-  description: 'Join Aclue\'s free beta program and get full access to AI-powered gift discovery. No payment required, all premium features included. Limited time offer.',
+  title: 'Pricing - Free Beta Program | aclue',
+  description: 'Join aclue\'s free beta program and get full access to AI-powered gift discovery. No payment required, all premium features included. Limited time offer.',
   keywords: [
     'aclue pricing',
     'free beta program',
@@ -430,7 +430,7 @@ export const metadata: Metadata = {
     'pricing plans'
   ],
   openGraph: {
-    title: 'Pricing - Free Beta Program | Aclue',
+    title: 'Pricing - Free Beta Program | aclue',
     description: 'Join our free beta program and experience AI-powered gift discovery at no cost. Full feature access, no payment required.',
     url: 'https://aclue.app/pricing',
     images: [
@@ -438,13 +438,13 @@ export const metadata: Metadata = {
         url: '/aclue_text_clean.png',
         width: 1200,
         height: 630,
-        alt: 'Aclue Pricing - Free Beta Program',
+        alt: 'aclue Pricing - Free Beta Program',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Pricing - Free Beta Program | Aclue',
+    title: 'Pricing - Free Beta Program | aclue',
     description: 'Join our free beta program for AI-powered gift discovery. No payment required.',
     images: ['/aclue_text_clean.png'],
   },

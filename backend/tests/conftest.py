@@ -1,5 +1,5 @@
 """
-Aclue Backend Test Configuration and Fixtures
+aclue Backend Test Configuration and Fixtures
 
 Comprehensive test configuration providing fixtures for database testing,
 API endpoint testing, authentication testing, and performance testing.

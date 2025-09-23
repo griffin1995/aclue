@@ -1,5 +1,5 @@
 /**
- * Aclue Performance Monitoring Service
+ * aclue Performance Monitoring Service
  *
  * Enterprise-grade performance monitoring for Core Web Vitals, application metrics,
  * and user experience tracking. Provides real-time insights into application performance

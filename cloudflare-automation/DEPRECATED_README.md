@@ -3,11 +3,11 @@
 ## ⚠️ DEPRECATED - DO NOT USE ⚠️
 
 **Date Deprecated**: August 6, 2025  
-**Reason**: Aclue project has migrated from Cloudflare Pages to Vercel hosting
+**Reason**: aclue project has migrated from Cloudflare Pages to Vercel hosting
 
 ## Migration Status
 
-The Aclue project has completed migration to Vercel for frontend hosting:
+The aclue project has completed migration to Vercel for frontend hosting:
 
 - **From**: Cloudflare Pages hosting
 - **To**: Vercel hosting  

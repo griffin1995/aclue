@@ -17,7 +17,7 @@ def check_email_template():
     print(f"Template contains logo URL: {'aclue_text_clean.png' in html_template}")
     print(f"Template contains error handling: {'onerror' in html_template}")
     print("\nFallback behavior:")
-    print("- If logo loads: Display Aclue logo image")
+    print("- If logo loads: Display aclue logo image")
     print("- If logo fails: Display 'aclue' text instead")
     print("\nTemplate is ready for testing!")
 

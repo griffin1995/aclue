@@ -1,4 +1,4 @@
-# Aclue Performance Optimization - Implementation Guide
+# aclue Performance Optimization - Implementation Guide
 ## Step-by-Step Instructions for Development Team
 
 ### 🚀 Quick Start - Immediate Fixes (Day 1)

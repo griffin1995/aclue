@@ -1,4 +1,4 @@
-# Aclue - Database Schemas & Application Flows
+# aclue - Database Schemas & Application Flows
 **Comprehensive Database Design & Business Logic Documentation**
 
 > **Last Updated**: July 1, 2025  
@@ -928,4 +928,4 @@ ALTER TABLE recommendations ADD COLUMN IF NOT EXISTS conversion_value DECIMAL(10
 
 **End of Database Schemas & Application Flows Documentation**
 
-*This document provides comprehensive coverage of all database schemas, relationships, flows, and business logic within the Aclue application.*
+*This document provides comprehensive coverage of all database schemas, relationships, flows, and business logic within the aclue application.*

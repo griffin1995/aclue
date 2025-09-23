@@ -1,8 +1,8 @@
 #!/bin/bash
-# Aclue Project - Device Synchronization Validation Script
+# aclue Project - Device Synchronization Validation Script
 # This script validates that the device sync setup is complete and comprehensive
 
-echo "=== Aclue Device Synchronization Validation ==="
+echo "=== aclue Device Synchronization Validation ==="
 echo "This script validates the completeness of the device sync setup"
 echo ""
 
@@ -104,7 +104,7 @@ echo "============================================="
 if [ -f "CLAUDE.md" ]; then
     validate_check "CLAUDE.md contains critical startup instructions" "grep -q 'CRITICAL SESSION STARTUP INSTRUCTIONS' CLAUDE.md" "critical"
     validate_check "CLAUDE.md contains project management activation" "grep -q 'start project management' CLAUDE.md" "critical"
-    validate_check "CLAUDE.md contains rebranding information" "grep -q 'Aclue' CLAUDE.md" "warning"
+    validate_check "CLAUDE.md contains rebranding information" "grep -q 'aclue' CLAUDE.md" "warning"
     validate_check "CLAUDE.md contains authentication system docs" "grep -q 'Authentication System' CLAUDE.md" "warning"
 else
     echo "✗ Cannot validate CLAUDE.md content - file missing"

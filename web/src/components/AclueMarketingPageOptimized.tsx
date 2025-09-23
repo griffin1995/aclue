@@ -24,7 +24,7 @@ import ClientNavigationHeader from '@/components/marketing/ClientNavigationHeade
 import ClientAnimatedHero from '@/components/marketing/ClientAnimatedHero'
 
 /**
- * Aclue Marketing Page - Optimized Hybrid Component
+ * aclue Marketing Page - Optimized Hybrid Component
  *
  * Hybrid server/client component architecture achieving 50% server rendering target.
  * Static content is server-rendered for SEO and performance, while interactive
@@ -44,7 +44,7 @@ import ClientAnimatedHero from '@/components/marketing/ClientAnimatedHero'
  * - Optimal Core Web Vitals
  */
 
-export default function AclueMarketingPageOptimized() {
+export default function aclueMarketingPageOptimized() {
   // Static data for server components
   const stats = [
     { number: '1M+', label: 'Products Curated' },
@@ -153,7 +153,7 @@ export default function AclueMarketingPageOptimized() {
               Available Everywhere
             </h2>
             <p className="text-lg text-primary-100 max-w-2xl mx-auto">
-              Access Aclue on all your devices. Seamless sync across platforms means your preferences travel with you.
+              Access aclue on all your devices. Seamless sync across platforms means your preferences travel with you.
             </p>
           </div>
 
@@ -232,7 +232,7 @@ export default function AclueMarketingPageOptimized() {
               <div className="flex items-center gap-3 mb-4">
                 <Image
                   src="/aclue_text_clean.png"
-                  alt="Aclue Logo"
+                  alt="aclue Logo"
                   width={120}
                   height={32}
                   className="h-8 w-auto object-contain brightness-0 invert"
@@ -286,7 +286,7 @@ export default function AclueMarketingPageOptimized() {
           </div>
 
           <div className="border-t border-gray-800 pt-8 text-center text-gray-400">
-            <p>&copy; 2025 Aclue Ltd. All rights reserved.</p>
+            <p>&copy; 2025 aclue Ltd. All rights reserved.</p>
           </div>
         </div>
       </footer>

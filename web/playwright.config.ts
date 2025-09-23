@@ -1,7 +1,7 @@
 /**
- * Aclue End-to-End Testing Configuration
+ * aclue End-to-End Testing Configuration
  * 
- * Comprehensive Playwright configuration for e2e testing of the Aclue web application.
+ * Comprehensive Playwright configuration for e2e testing of the aclue web application.
  * Configured for cross-browser testing, mobile simulation, and CI/CD integration
  * with proper test isolation and reporting.
  * 

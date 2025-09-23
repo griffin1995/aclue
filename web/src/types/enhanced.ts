@@ -1,5 +1,5 @@
 /**
- * Enhanced TypeScript Type Definitions for Aclue Platform
+ * Enhanced TypeScript Type Definitions for aclue Platform
  *
  * Enterprise-grade type safety enhancements that eliminate 'any' types
  * and provide strict typing for complex data structures and API responses.

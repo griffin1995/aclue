@@ -1,4 +1,4 @@
-# MCP Configuration for Aclue Project
+# MCP Configuration for aclue Project
 
 ## Overview
 This directory contains Model Context Protocol (MCP) configuration for integrating deployment management platforms with AI development tools, specifically Claude Code. Supports both Vercel (frontend) and Railway (backend) deployment management.
@@ -6,7 +6,7 @@ This directory contains Model Context Protocol (MCP) configuration for integrati
 ## Configuration Files
 
 ### mcp.json
-Primary MCP server configuration for the Aclue project:
+Primary MCP server configuration for the aclue project:
 
 **Vercel Configuration (Frontend)**:
 - **Project ID**: `prj_sdJnObPzA8DJNqXyziukom25tqlJ`

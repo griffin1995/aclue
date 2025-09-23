@@ -27,7 +27,7 @@ export default function ServerTestimonialsSection() {
       name: 'Sarah Johnson',
       role: 'Gift Enthusiast',
       avatar: '/images/testimonials/sarah.jpg',
-      content: 'Aclue helped me find the perfect birthday gift for my sister. The AI-powered insights were spot-on!',
+      content: 'aclue helped me find the perfect birthday gift for my sister. The AI-powered insights were spot-on!',
       rating: 5,
     },
     {

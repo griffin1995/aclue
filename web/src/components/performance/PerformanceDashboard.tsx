@@ -1,5 +1,5 @@
 /**
- * Aclue Performance Dashboard Component
+ * aclue Performance Dashboard Component
  *
  * Real-time performance monitoring dashboard displaying Core Web Vitals,
  * application metrics, and system health indicators.

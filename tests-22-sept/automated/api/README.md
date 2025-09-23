@@ -1,7 +1,7 @@
-# Aclue API Automated Testing Suite
+# aclue API Automated Testing Suite
 
 ## Overview
-This comprehensive API testing suite uses multiple tools to validate the Aclue backend API's reliability, performance, and security.
+This comprehensive API testing suite uses multiple tools to validate the aclue backend API's reliability, performance, and security.
 
 ## Tools Deployed
 - Schemathesis: Automatic test generation from OpenAPI spec

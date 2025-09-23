@@ -1,5 +1,5 @@
 """
-Aclue Caching Optimization Module
+aclue Caching Optimization Module
 
 Enterprise-grade caching strategies for optimal performance and scalability.
 Implements multi-layer caching with Redis, in-memory caching, and CDN integration.

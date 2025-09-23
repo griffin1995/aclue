@@ -243,7 +243,7 @@ class TestDashboard {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aclue Test Dashboard - Phase 6 Validation</title>
+    <title>aclue Test Dashboard - Phase 6 Validation</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -385,7 +385,7 @@ class TestDashboard {
 <body>
     <div class="container">
         <div class="header">
-            <h1>🎯 Aclue Test Dashboard</h1>
+            <h1>🎯 aclue Test Dashboard</h1>
             <div class="subtitle">Phase 6: Testing & Validation - App Router Migration Complete</div>
             <div class="subtitle">Generated: ${new Date(data.timestamp).toLocaleString()}</div>
         </div>
@@ -457,7 +457,7 @@ class TestDashboard {
         </div>
 
         <div class="footer">
-            <p>Aclue Platform - Phase 6 Testing Complete</p>
+            <p>aclue Platform - Phase 6 Testing Complete</p>
             <p>App Router Migration: ${data.serverComponents.status === 'pass' ? '✅ Target Achieved' : '⚠️ In Progress'}</p>
         </div>
     </div>
@@ -669,7 +669,7 @@ class TestDashboard {
   }
 
   generateExecutiveSummary(data) {
-    return `# Aclue Platform - Phase 6 Testing & Validation Executive Summary
+    return `# aclue Platform - Phase 6 Testing & Validation Executive Summary
 
 **Generated:** ${new Date(data.timestamp).toLocaleString()}
 

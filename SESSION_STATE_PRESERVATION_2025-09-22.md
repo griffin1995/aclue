@@ -1,4 +1,4 @@
-# Aclue Development Session State Preservation
+# aclue Development Session State Preservation
 ## Complete Context Capture for Session Resumption
 
 ### Document Metadata
@@ -42,7 +42,7 @@ To resume this exact session state:
 ## 2. COMPLETE PROJECT UNDERSTANDING
 
 ### Platform Overview
-- **Platform**: Aclue - AI-powered gifting platform
+- **Platform**: aclue - AI-powered gifting platform
 - **Version**: 2.1.0 (Production)
 - **Architecture**: Next.js 14 with Pages Router (current), migrating to App Router
 - **Stack**: Next.js + FastAPI + Supabase + Vercel + Railway
@@ -336,7 +336,7 @@ git commit -m "feat: initialize App Router migration foundation
 
 ## SESSION PRESERVATION COMPLETE
 
-This document captures the complete state of the Aclue development session as of 22 September 2025, 16:45 GMT. All context, decisions, and next steps are preserved for seamless session resumption.
+This document captures the complete state of the aclue development session as of 22 September 2025, 16:45 GMT. All context, decisions, and next steps are preserved for seamless session resumption.
 
 ### Validation Checklist
 - ✅ Complete project context preserved

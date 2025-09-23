@@ -1,5 +1,5 @@
 /**
- * Enhanced API Integration Type Definitions for Aclue Platform
+ * Enhanced API Integration Type Definitions for aclue Platform
  *
  * Enterprise-grade type definitions for seamless backend integration with
  * strict typing and comprehensive error handling.

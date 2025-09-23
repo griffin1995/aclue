@@ -15,7 +15,7 @@
  * 
  * Business Critical Journeys:
  * These tests validate the core user experience that drives engagement
- * and revenue generation through the Aclue platform.
+ * and revenue generation through the aclue platform.
  * 
  * Performance Validation:
  * Includes performance assertions for critical user interactions
@@ -112,7 +112,7 @@ test.describe('Complete User Journeys', () => {
       await page.goto('/');
       
       // Verify homepage content and branding
-      await expect(page.locator('h1')).toContainText('Aclue');
+      await expect(page.locator('h1')).toContainText('aclue');
       await expect(page.locator('.hero-section')).toBeVisible();
       
       // Step 2: Navigate to application

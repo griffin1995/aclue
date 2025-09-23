@@ -1,7 +1,7 @@
-# Claude Code Agent Ecosystem - Aclue (Aclue)
+# Claude Code Agent Ecosystem - aclue (aclue)
 ## Comprehensive Multi-Agent Development System
 
-This directory contains a complete ecosystem for managing and coordinating all 50+ Claude Code agents through intelligent worktree-based workflows for the Aclue project.
+This directory contains a complete ecosystem for managing and coordinating all 50+ Claude Code agents through intelligent worktree-based workflows for the aclue project.
 
 ## 🚀 Quick Start
 
@@ -19,7 +19,7 @@ This directory contains a complete ecosystem for managing and coordinating all 5
 ./.claude/scripts/agent-manager.sh status
 ```
 
-## 🎯 Aclue Project Context
+## 🎯 aclue Project Context
 
 ### Business Overview
 - **Platform**: AI-powered gifting platform with swipe-based discovery
@@ -75,7 +75,7 @@ This directory contains a complete ecosystem for managing and coordinating all 5
 - **revenue-specialist** - Affiliate integration and monetization
 - **customer-support** - User documentation and support systems
 
-## 🎪 Aclue-Specific Workflows
+## 🎪 aclue-Specific Workflows
 
 ### High-Priority Development Areas
 
@@ -114,7 +114,7 @@ This directory contains a complete ecosystem for managing and coordinating all 5
 - **performance-stack**: performance-engineer + database-optimizer + frontend-developer
 - **full-stack**: frontend-developer + backend-architect + database-admin
 
-## 📊 Aclue Metrics & KPIs
+## 📊 aclue Metrics & KPIs
 
 ### Business Metrics to Track
 - **User Engagement**: Session duration, swipe completion rates, retention
@@ -175,7 +175,7 @@ This directory contains a complete ecosystem for managing and coordinating all 5
 │   ├── create-worktree.sh          # Worktree creation
 │   └── worktree-status.sh          # Status monitoring
 ├── context/                         # Project state
-│   ├── project-state.json          # Aclue context
+│   ├── project-state.json          # aclue context
 │   ├── worktree-map.json           # Worktree organization
 │   └── agent-performance.json      # Performance tracking
 ├── workflows/                       # Example workflows
@@ -222,7 +222,7 @@ curl -I http://localhost:3000
 curl -I https://aclue.app
 ```
 
-## 📞 Aclue Development Context
+## 📞 aclue Development Context
 
 ### Working Environment
 - **Project Root**: `/home/jack/Documents/gift_sync`
@@ -238,6 +238,6 @@ curl -I https://aclue.app
 
 ---
 
-**The Aclue Claude Code Agent Ecosystem is now fully operational and ready to accelerate development across all aspects of the platform - from revenue generation to ML enhancement to mobile expansion.**
+**The aclue Claude Code Agent Ecosystem is now fully operational and ready to accelerate development across all aspects of the platform - from revenue generation to ML enhancement to mobile expansion.**
 
 Transform your gifting platform development with the power of 53+ specialized AI agents working in perfect harmony under intelligent coordination.

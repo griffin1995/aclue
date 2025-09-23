@@ -2,7 +2,7 @@
 """
 Comprehensive Newsletter Testing Suite
 
-This test suite provides comprehensive testing for the Aclue newsletter functionality,
+This test suite provides comprehensive testing for the aclue newsletter functionality,
 covering API endpoints, frontend integration, validation, and edge cases.
 
 Test Categories:
@@ -62,7 +62,7 @@ class NewsletterTestSuite:
         self.results: List[TestResult] = []
         self.session = requests.Session()
         self.session.headers.update({
-            'User-Agent': 'Aclue-Newsletter-Test-Suite/1.0',
+            'User-Agent': 'aclue-Newsletter-Test-Suite/1.0',
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         })

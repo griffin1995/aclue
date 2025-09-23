@@ -1,6 +1,6 @@
-# Aclue Production Deployment Guide
+# aclue Production Deployment Guide
 
-> **REBRANDING NOTE (August 2025)**: This deployment guide has been updated to reflect the complete rebrand from Aclue to Aclue. All service names, URLs, and configurations have been updated.
+> **REBRANDING NOTE (August 2025)**: This deployment guide has been updated to reflect the complete rebrand from aclue to aclue. All service names, URLs, and configurations have been updated.
 
 ## 🚀 Deployment Architecture
 

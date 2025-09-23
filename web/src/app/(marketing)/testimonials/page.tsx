@@ -41,7 +41,7 @@ export default function TestimonialsPage() {
       avatar: 'SJ',
       rating: 5,
       title: 'Perfect Birthday Gift Discovery',
-      content: 'Aclue helped me find the most thoughtful birthday gift for my sister. The AI understood her love for sustainable fashion and suggested an eco-friendly jewellery set that she absolutely adores. No more guessing games!',
+      content: 'aclue helped me find the most thoughtful birthday gift for my sister. The AI understood her love for sustainable fashion and suggested an eco-friendly jewellery set that she absolutely adores. No more guessing games!',
       useCase: 'Birthday Gifts',
       giftSuccess: 'Eco-friendly jewellery set',
       timeToFind: '5 minutes',
@@ -55,7 +55,7 @@ export default function TestimonialsPage() {
       avatar: 'MC',
       rating: 5,
       title: 'Family Christmas Made Easy',
-      content: 'Christmas shopping for my family of six used to be a nightmare. Aclue\'s AI learned each family member\'s preferences and suggested perfect gifts for everyone. My wife was amazed at how well I "knew" what to get our teenage kids!',
+      content: 'Christmas shopping for my family of six used to be a nightmare. aclue\'s AI learned each family member\'s preferences and suggested perfect gifts for everyone. My wife was amazed at how well I "knew" what to get our teenage kids!',
       useCase: 'Family Gifts',
       giftSuccess: 'Complete family Christmas',
       timeToFind: '30 minutes',
@@ -69,7 +69,7 @@ export default function TestimonialsPage() {
       avatar: 'ED',
       rating: 5,
       title: 'Colleague Gift Exchange Success',
-      content: 'Our school\'s secret Santa was stress-free thanks to Aclue. I input my colleague\'s interests and got brilliant suggestions within my £15 budget. She loved the artisan tea set, and I felt like a thoughtful gift-giver for once!',
+      content: 'Our school\'s secret Santa was stress-free thanks to aclue. I input my colleague\'s interests and got brilliant suggestions within my £15 budget. She loved the artisan tea set, and I felt like a thoughtful gift-giver for once!',
       useCase: 'Workplace Gifts',
       giftSuccess: 'Artisan tea set',
       timeToFind: '3 minutes',
@@ -91,7 +91,7 @@ export default function TestimonialsPage() {
       role: 'HR Director',
       avatar: 'LR',
       rating: 5,
-      content: 'Aclue saved me during the company gift-giving season. Found personalised gifts for 20+ team members effortlessly.',
+      content: 'aclue saved me during the company gift-giving season. Found personalised gifts for 20+ team members effortlessly.',
       timeToFind: '2 hours'
     },
     {
@@ -99,7 +99,7 @@ export default function TestimonialsPage() {
       role: 'University Student',
       avatar: 'JW',
       rating: 4,
-      content: 'As a broke student, finding meaningful gifts on a budget was impossible. Aclue found amazing options under £20.',
+      content: 'As a broke student, finding meaningful gifts on a budget was impossible. aclue found amazing options under £20.',
       timeToFind: '6 minutes'
     },
     {
@@ -107,7 +107,7 @@ export default function TestimonialsPage() {
       role: 'Busy Mum of Three',
       avatar: 'RG',
       rating: 5,
-      content: 'With three kids and zero spare time, Aclue is a lifesaver. The AI knows exactly what my children will love.',
+      content: 'With three kids and zero spare time, aclue is a lifesaver. The AI knows exactly what my children will love.',
       timeToFind: '10 minutes'
     },
     {
@@ -115,7 +115,7 @@ export default function TestimonialsPage() {
       role: 'Retired Engineer',
       avatar: 'TA',
       rating: 5,
-      content: 'I was sceptical about AI, but Aclue impressed me. Found a perfect gadget for my tech-loving grandson.',
+      content: 'I was sceptical about AI, but aclue impressed me. Found a perfect gadget for my tech-loving grandson.',
       timeToFind: '8 minutes'
     },
     {
@@ -123,7 +123,7 @@ export default function TestimonialsPage() {
       role: 'Event Planner',
       avatar: 'SM',
       rating: 5,
-      content: 'Professional gift-giving is part of my job. Aclue\'s recommendations are consistently spot-on and impressive.',
+      content: 'Professional gift-giving is part of my job. aclue\'s recommendations are consistently spot-on and impressive.',
       timeToFind: '5 minutes'
     }
   ]
@@ -238,7 +238,7 @@ export default function TestimonialsPage() {
               Featured Success Stories
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Read detailed accounts of how Aclue solved real gift-giving challenges
+              Read detailed accounts of how aclue solved real gift-giving challenges
             </p>
           </div>
 
@@ -334,7 +334,7 @@ export default function TestimonialsPage() {
               Success Across All Occasions
             </h2>
             <p className="text-lg text-gray-600">
-              See how Aclue performs across different gift-giving scenarios
+              See how aclue performs across different gift-giving scenarios
             </p>
           </div>
 
@@ -491,8 +491,8 @@ export default function TestimonialsPage() {
  * SEO Metadata for Testimonials Page
  */
 export const metadata: Metadata = {
-  title: 'Customer Reviews & Success Stories | Aclue',
-  description: 'Read real customer testimonials and success stories from users who\'ve transformed their gift-giving with Aclue\'s AI-powered recommendations. 4.9/5 average rating.',
+  title: 'Customer Reviews & Success Stories | aclue',
+  description: 'Read real customer testimonials and success stories from users who\'ve transformed their gift-giving with aclue\'s AI-powered recommendations. 4.9/5 average rating.',
   keywords: [
     'aclue reviews',
     'customer testimonials',
@@ -503,7 +503,7 @@ export const metadata: Metadata = {
     'aclue ratings'
   ],
   openGraph: {
-    title: 'Customer Reviews & Success Stories | Aclue',
+    title: 'Customer Reviews & Success Stories | aclue',
     description: 'See how 50,000+ users have transformed their gift-giving with AI-powered recommendations. Read real success stories and reviews.',
     url: 'https://aclue.app/testimonials',
     images: [
@@ -511,13 +511,13 @@ export const metadata: Metadata = {
         url: '/aclue_text_clean.png',
         width: 1200,
         height: 630,
-        alt: 'Aclue Customer Testimonials and Reviews',
+        alt: 'aclue Customer Testimonials and Reviews',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Customer Reviews & Success Stories | Aclue',
+    title: 'Customer Reviews & Success Stories | aclue',
     description: 'See how users transformed gift-giving with AI. 4.9/5 rating from 50,000+ users.',
     images: ['/aclue_text_clean.png'],
   },

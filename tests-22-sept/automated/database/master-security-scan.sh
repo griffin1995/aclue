@@ -1,6 +1,6 @@
 #!/bin/bash
 # Master Database Security Automation Script
-# Comprehensive automated security analysis for Aclue Supabase PostgreSQL platform
+# Comprehensive automated security analysis for aclue Supabase PostgreSQL platform
 # Executes all security tools and generates consolidated reports
 
 set -euo pipefail
@@ -25,7 +25,7 @@ echo -e "${PURPLE}===============================================${NC}"
 echo -e "${PURPLE}🛡️  ACLUE DATABASE SECURITY AUTOMATION SUITE${NC}"
 echo -e "${PURPLE}===============================================${NC}"
 echo -e "${CYAN}Timestamp: $(date)${NC}"
-echo -e "${CYAN}Project: Aclue Production Platform${NC}"
+echo -e "${CYAN}Project: aclue Production Platform${NC}"
 echo -e "${CYAN}Database: Supabase PostgreSQL${NC}"
 echo -e "${CYAN}Report Directory: ${REPORTS_DIR}${NC}"
 echo -e "${PURPLE}===============================================${NC}"
@@ -46,7 +46,7 @@ cat > "${MASTER_REPORT}" << 'EOF'
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aclue Database Security Assessment</title>
+    <title>aclue Database Security Assessment</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 40px; background-color: #f5f5f5; }
         .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 10px; text-align: center; margin-bottom: 30px; }
@@ -77,7 +77,7 @@ cat > "${MASTER_REPORT}" << 'EOF'
 </head>
 <body>
     <div class="header">
-        <h1>🛡️ Aclue Database Security Assessment</h1>
+        <h1>🛡️ aclue Database Security Assessment</h1>
         <p>Comprehensive automated security analysis</p>
         <p><strong>Generated:</strong> TIMESTAMP_PLACEHOLDER</p>
     </div>

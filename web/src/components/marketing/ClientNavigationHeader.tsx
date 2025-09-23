@@ -34,7 +34,7 @@ export default function ClientNavigationHeader() {
           <Link href="/" className="flex items-center gap-3">
             <Image
               src="/aclue_text_clean.png"
-              alt="Aclue Logo"
+              alt="aclue Logo"
               width={120}
               height={32}
               className="h-8 w-auto object-contain"

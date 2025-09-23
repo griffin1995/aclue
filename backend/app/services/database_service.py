@@ -1,9 +1,9 @@
 """
-Aclue Database Service - Comprehensive Supabase Operations Layer
+aclue Database Service - Comprehensive Supabase Operations Layer
 
 Database Service Implementation:
 This module provides a unified, well-documented interface for all database operations
-in the Aclue application. It follows enterprise patterns for error handling,
+in the aclue application. It follows enterprise patterns for error handling,
 logging, and type safety whilst maintaining consistency with Supabase best practices.
 
 Architecture Decision:
@@ -98,7 +98,7 @@ class PermissionError(DatabaseServiceError):
 
 class DatabaseService:
     """
-    Comprehensive database service for Aclue application operations.
+    Comprehensive database service for aclue application operations.
     
     This service provides a unified interface for all database operations,
     implementing best practices for error handling, logging, performance,

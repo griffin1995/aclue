@@ -1,6 +1,6 @@
-# Aclue Testing Guide
+# aclue Testing Guide
 
-This comprehensive guide covers all aspects of testing in the Aclue platform, from local development testing to CI/CD automation and quality assurance processes.
+This comprehensive guide covers all aspects of testing in the aclue platform, from local development testing to CI/CD automation and quality assurance processes.
 
 ## 📋 Table of Contents
 
@@ -19,7 +19,7 @@ This comprehensive guide covers all aspects of testing in the Aclue platform, fr
 
 ## 🎯 Overview
 
-The Aclue testing strategy follows a comprehensive pyramid approach ensuring quality, security, and performance at every level:
+The aclue testing strategy follows a comprehensive pyramid approach ensuring quality, security, and performance at every level:
 
 ```
         E2E Tests (Few)
@@ -902,7 +902,7 @@ cd web
 
 ## 🎉 Conclusion
 
-This comprehensive testing guide provides everything needed to maintain high-quality, secure, and performant code in the Aclue platform. Remember that testing is an investment in code quality, user experience, and business success.
+This comprehensive testing guide provides everything needed to maintain high-quality, secure, and performant code in the aclue platform. Remember that testing is an investment in code quality, user experience, and business success.
 
 For questions or improvements to this guide, please reach out to the development team or create an issue in the repository.
 

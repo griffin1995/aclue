@@ -86,7 +86,7 @@ def check_upstash_info():
     print(f"   Data Persistence: Yes")
 
 if __name__ == "__main__":
-    print("🎁 Aclue Upstash Redis Connection Test")
+    print("🎁 aclue Upstash Redis Connection Test")
     print("=" * 45)
     
     if test_upstash_connection():

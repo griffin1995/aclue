@@ -1,0 +1,480 @@
+a5eaa9735beac34384620c669c76d830
+"use strict";
+
+/* istanbul ignore next */
+function cov_cg38p4mu8() {
+  var path = "/home/jack/Documents/aclue-preprod/web/src/components/marketing/ServerHeroSection.tsx";
+  var hash = "f3046ea626176c30ee1bd94da55f6833f3c20865";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/home/jack/Documents/aclue-preprod/web/src/components/marketing/ServerHeroSection.tsx",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 4,
+          column: 3
+        }
+      },
+      "1": {
+        start: {
+          line: 5,
+          column: 0
+        },
+        end: {
+          line: 10,
+          column: 3
+        }
+      },
+      "2": {
+        start: {
+          line: 8,
+          column: 8
+        },
+        end: {
+          line: 8,
+          column: 33
+        }
+      },
+      "3": {
+        start: {
+          line: 11,
+          column: 20
+        },
+        end: {
+          line: 11,
+          column: 48
+        }
+      },
+      "4": {
+        start: {
+          line: 12,
+          column: 28
+        },
+        end: {
+          line: 12,
+          column: 74
+        }
+      },
+      "5": {
+        start: {
+          line: 13,
+          column: 21
+        },
+        end: {
+          line: 13,
+          column: 44
+        }
+      },
+      "6": {
+        start: {
+          line: 15,
+          column: 4
+        },
+        end: {
+          line: 17,
+          column: 6
+        }
+      },
+      "7": {
+        start: {
+          line: 20,
+          column: 4
+        },
+        end: {
+          line: 193,
+          column: 7
+        }
+      },
+      "8": {
+        start: {
+          line: 83,
+          column: 85
+        },
+        end: {
+          line: 95,
+          column: 54
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 7,
+            column: 9
+          },
+          end: {
+            line: 7,
+            column: 10
+          }
+        },
+        loc: {
+          start: {
+            line: 7,
+            column: 20
+          },
+          end: {
+            line: 9,
+            column: 5
+          }
+        },
+        line: 7
+      },
+      "1": {
+        name: "_interop_require_default",
+        decl: {
+          start: {
+            line: 14,
+            column: 9
+          },
+          end: {
+            line: 14,
+            column: 33
+          }
+        },
+        loc: {
+          start: {
+            line: 14,
+            column: 39
+          },
+          end: {
+            line: 18,
+            column: 1
+          }
+        },
+        line: 14
+      },
+      "2": {
+        name: "ServerHeroSection",
+        decl: {
+          start: {
+            line: 19,
+            column: 9
+          },
+          end: {
+            line: 19,
+            column: 26
+          }
+        },
+        loc: {
+          start: {
+            line: 19,
+            column: 38
+          },
+          end: {
+            line: 194,
+            column: 1
+          }
+        },
+        line: 19
+      },
+      "3": {
+        name: "(anonymous_3)",
+        decl: {
+          start: {
+            line: 83,
+            column: 56
+          },
+          end: {
+            line: 83,
+            column: 57
+          }
+        },
+        loc: {
+          start: {
+            line: 83,
+            column: 85
+          },
+          end: {
+            line: 95,
+            column: 54
+          }
+        },
+        line: 83
+      }
+    },
+    branchMap: {
+      "0": {
+        loc: {
+          start: {
+            line: 15,
+            column: 11
+          },
+          end: {
+            line: 17,
+            column: 5
+          }
+        },
+        type: "cond-expr",
+        locations: [{
+          start: {
+            line: 15,
+            column: 35
+          },
+          end: {
+            line: 15,
+            column: 38
+          }
+        }, {
+          start: {
+            line: 15,
+            column: 41
+          },
+          end: {
+            line: 17,
+            column: 5
+          }
+        }],
+        line: 15
+      },
+      "1": {
+        loc: {
+          start: {
+            line: 15,
+            column: 11
+          },
+          end: {
+            line: 15,
+            column: 32
+          }
+        },
+        type: "binary-expr",
+        locations: [{
+          start: {
+            line: 15,
+            column: 11
+          },
+          end: {
+            line: 15,
+            column: 14
+          }
+        }, {
+          start: {
+            line: 15,
+            column: 18
+          },
+          end: {
+            line: 15,
+            column: 32
+          }
+        }],
+        line: 15
+      }
+    },
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0
+    },
+    f: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0
+    },
+    b: {
+      "0": [0, 0],
+      "1": [0, 0]
+    },
+    inputSourceMap: {
+      version: 3,
+      sources: ["/home/jack/Documents/aclue-preprod/web/src/components/marketing/ServerHeroSection.tsx"],
+      sourcesContent: ["import Link from 'next/link'\nimport { Sparkles, ArrowRight, CheckCircle, Gift, Heart } from 'lucide-react'\n\n/**\n * Server Hero Section - Server Component\n *\n * Server-rendered hero section with static content for optimal performance and SEO.\n * Contains the main value proposition and key statistics.\n *\n * Features:\n * - Server-side rendering for SEO optimization\n * - Static content with fast initial load\n * - Structured data for search engines\n * - Performance-optimised images\n */\n\ninterface HeroSectionProps {\n  stats: Array<{\n    number: string\n    label: string\n  }>\n}\n\nexport default function ServerHeroSection({ stats }: HeroSectionProps) {\n  return (\n    <section className=\"relative bg-gradient-to-br from-primary-50 via-white to-secondary-50 overflow-hidden\">\n      <div className=\"max-w-7xl mx-auto px-6 lg:px-8 py-20 lg:py-28\">\n        <div className=\"grid lg:grid-cols-2 gap-12 items-center\">\n          <div>\n            <div className=\"inline-flex items-center gap-2 bg-primary-100 text-primary-800 px-4 py-2 rounded-full text-sm font-medium mb-6\">\n              <Sparkles className=\"w-4 h-4\" />\n              AI-Powered Gift Discovery\n            </div>\n\n            <h1 className=\"text-4xl lg:text-6xl font-bold text-gray-900 mb-6\">\n              Find the{' '}\n              <span className=\"text-primary-600\">perfect gift</span>{' '}\n              with AI\n            </h1>\n\n            <p className=\"text-lg text-gray-600 mb-8 leading-relaxed\">\n              Swipe through products, train our AI to understand your taste, and get personalised\n              gift recommendations that actually make sense. No more guessing, no more gift fails.\n            </p>\n\n            <div className=\"flex flex-col sm:flex-row gap-4 mb-12\">\n              <Link\n                href=\"/auth/register\"\n                className=\"inline-flex items-center justify-center gap-2 bg-primary-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-primary-700 transition-colors\"\n              >\n                Start Discovering\n                <ArrowRight className=\"w-5 h-5\" />\n              </Link>\n\n              <Link\n                href=\"/discover\"\n                className=\"inline-flex items-center justify-center gap-2 bg-white border border-gray-300 text-gray-700 px-8 py-4 rounded-xl font-semibold hover:bg-gray-50 transition-colors\"\n              >\n                Try Demo\n                <ArrowRight className=\"w-5 h-5\" />\n              </Link>\n            </div>\n\n            {/* Stats - Server Rendered */}\n            <div className=\"grid grid-cols-2 lg:grid-cols-4 gap-6\">\n              {stats.map((stat, index) => (\n                <div key={stat.label} className=\"text-center\">\n                  <div className=\"text-2xl font-bold text-gray-900\">{stat.number}</div>\n                  <div className=\"text-sm text-gray-600\">{stat.label}</div>\n                </div>\n              ))}\n            </div>\n          </div>\n\n          <div className=\"relative\">\n            <div className=\"relative z-10\">\n              <div className=\"bg-white rounded-2xl shadow-2xl p-8 transform rotate-3\">\n                <div className=\"bg-gradient-to-r from-primary-500 to-secondary-500 rounded-xl p-6 text-white mb-6\">\n                  <h3 className=\"text-lg font-semibold mb-2\">Your Perfect Match</h3>\n                  <p className=\"text-primary-100\">AI found the perfect gift based on your swipes!</p>\n                </div>\n                <div className=\"space-y-4\">\n                  <div className=\"flex items-center gap-3\">\n                    <CheckCircle className=\"w-5 h-5 text-green-500\" />\n                    <span className=\"text-gray-700\">97% match confidence</span>\n                  </div>\n                  <div className=\"flex items-center gap-3\">\n                    <CheckCircle className=\"w-5 h-5 text-green-500\" />\n                    <span className=\"text-gray-700\">Based on 50+ swipes</span>\n                  </div>\n                  <div className=\"flex items-center gap-3\">\n                    <CheckCircle className=\"w-5 h-5 text-green-500\" />\n                    <span className=\"text-gray-700\">Free shipping included</span>\n                  </div>\n                </div>\n              </div>\n            </div>\n\n            {/* Static decorative elements */}\n            <div className=\"absolute top-10 -left-4 bg-yellow-400 rounded-full p-3\">\n              <Gift className=\"w-6 h-6 text-white\" />\n            </div>\n            <div className=\"absolute bottom-10 -right-4 bg-pink-400 rounded-full p-3\">\n              <Heart className=\"w-6 h-6 text-white\" />\n            </div>\n          </div>\n        </div>\n      </div>\n\n      {/* Background Pattern */}\n      <div className=\"absolute inset-0 -z-10 opacity-10\">\n        <div className=\"absolute top-1/4 left-1/4 w-32 h-32 bg-primary-500 rounded-full blur-3xl\" />\n        <div className=\"absolute bottom-1/4 right-1/4 w-48 h-48 bg-secondary-500 rounded-full blur-3xl\" />\n      </div>\n    </section>\n  )\n}"],
+      names: ["ServerHeroSection", "stats", "section", "className", "div", "Sparkles", "h1", "span", "p", "Link", "href", "ArrowRight", "map", "stat", "index", "number", "label", "h3", "CheckCircle", "Gift", "Heart"],
+      mappings: ";;;;+BAuBA;;;eAAwBA;;;;6DAvBP;6BAC8C;;;;;;AAsBhD,SAASA,kBAAkB,EAAEC,KAAK,EAAoB;IACnE,qBACE,sBAACC;QAAQC,WAAU;;0BACjB,qBAACC;gBAAID,WAAU;0BACb,cAAA,sBAACC;oBAAID,WAAU;;sCACb,sBAACC;;8CACC,sBAACA;oCAAID,WAAU;;sDACb,qBAACE,qBAAQ;4CAACF,WAAU;;wCAAY;;;8CAIlC,sBAACG;oCAAGH,WAAU;;wCAAoD;wCACvD;sDACT,qBAACI;4CAAKJ,WAAU;sDAAmB;;wCAAoB;wCAAI;;;8CAI7D,qBAACK;oCAAEL,WAAU;8CAA6C;;8CAK1D,sBAACC;oCAAID,WAAU;;sDACb,sBAACM,aAAI;4CACHC,MAAK;4CACLP,WAAU;;gDACX;8DAEC,qBAACQ,uBAAU;oDAACR,WAAU;;;;sDAGxB,sBAACM,aAAI;4CACHC,MAAK;4CACLP,WAAU;;gDACX;8DAEC,qBAACQ,uBAAU;oDAACR,WAAU;;;;;;8CAK1B,qBAACC;oCAAID,WAAU;8CACZF,MAAMW,GAAG,CAAC,CAACC,MAAMC,sBAChB,sBAACV;4CAAqBD,WAAU;;8DAC9B,qBAACC;oDAAID,WAAU;8DAAoCU,KAAKE,MAAM;;8DAC9D,qBAACX;oDAAID,WAAU;8DAAyBU,KAAKG,KAAK;;;2CAF1CH,KAAKG,KAAK;;;;sCAQ1B,sBAACZ;4BAAID,WAAU;;8CACb,qBAACC;oCAAID,WAAU;8CACb,cAAA,sBAACC;wCAAID,WAAU;;0DACb,sBAACC;gDAAID,WAAU;;kEACb,qBAACc;wDAAGd,WAAU;kEAA6B;;kEAC3C,qBAACK;wDAAEL,WAAU;kEAAmB;;;;0DAElC,sBAACC;gDAAID,WAAU;;kEACb,sBAACC;wDAAID,WAAU;;0EACb,qBAACe,wBAAW;gEAACf,WAAU;;0EACvB,qBAACI;gEAAKJ,WAAU;0EAAgB;;;;kEAElC,sBAACC;wDAAID,WAAU;;0EACb,qBAACe,wBAAW;gEAACf,WAAU;;0EACvB,qBAACI;gEAAKJ,WAAU;0EAAgB;;;;kEAElC,sBAACC;wDAAID,WAAU;;0EACb,qBAACe,wBAAW;gEAACf,WAAU;;0EACvB,qBAACI;gEAAKJ,WAAU;0EAAgB;;;;;;;;;8CAOxC,qBAACC;oCAAID,WAAU;8CACb,cAAA,qBAACgB,iBAAI;wCAAChB,WAAU;;;8CAElB,qBAACC;oCAAID,WAAU;8CACb,cAAA,qBAACiB,kBAAK;wCAACjB,WAAU;;;;;;;;0BAOzB,sBAACC;gBAAID,WAAU;;kCACb,qBAACC;wBAAID,WAAU;;kCACf,qBAACC;wBAAID,WAAU;;;;;;AAIvB"
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "f3046ea626176c30ee1bd94da55f6833f3c20865"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_cg38p4mu8 = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_cg38p4mu8();
+cov_cg38p4mu8().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/* istanbul ignore next */
+cov_cg38p4mu8().s[1]++;
+Object.defineProperty(exports, "default", {
+  enumerable: true,
+  get: function () {
+    /* istanbul ignore next */
+    cov_cg38p4mu8().f[0]++;
+    cov_cg38p4mu8().s[2]++;
+    return ServerHeroSection;
+  }
+});
+const _jsxruntime =
+/* istanbul ignore next */
+(cov_cg38p4mu8().s[3]++, require("react/jsx-runtime"));
+const _link =
+/* istanbul ignore next */
+(/*#__PURE__*/cov_cg38p4mu8().s[4]++, _interop_require_default(require("next/link")));
+const _lucidereact =
+/* istanbul ignore next */
+(cov_cg38p4mu8().s[5]++, require("lucide-react"));
+function _interop_require_default(obj) {
+  /* istanbul ignore next */
+  cov_cg38p4mu8().f[1]++;
+  cov_cg38p4mu8().s[6]++;
+  return /* istanbul ignore next */(cov_cg38p4mu8().b[1][0]++, obj) &&
+  /* istanbul ignore next */
+  (cov_cg38p4mu8().b[1][1]++, obj.__esModule) ?
+  /* istanbul ignore next */
+  (cov_cg38p4mu8().b[0][0]++, obj) :
+  /* istanbul ignore next */
+  (cov_cg38p4mu8().b[0][1]++, {
+    default: obj
+  });
+}
+function ServerHeroSection({
+  stats
+}) {
+  /* istanbul ignore next */
+  cov_cg38p4mu8().f[2]++;
+  cov_cg38p4mu8().s[7]++;
+  return /*#__PURE__*/(0, _jsxruntime.jsxs)("section", {
+    className: "relative bg-gradient-to-br from-primary-50 via-white to-secondary-50 overflow-hidden",
+    children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+      className: "max-w-7xl mx-auto px-6 lg:px-8 py-20 lg:py-28",
+      children: /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+        className: "grid lg:grid-cols-2 gap-12 items-center",
+        children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+          children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+            className: "inline-flex items-center gap-2 bg-primary-100 text-primary-800 px-4 py-2 rounded-full text-sm font-medium mb-6",
+            children: [/*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.Sparkles, {
+              className: "w-4 h-4"
+            }), "AI-Powered Gift Discovery"]
+          }), /*#__PURE__*/(0, _jsxruntime.jsxs)("h1", {
+            className: "text-4xl lg:text-6xl font-bold text-gray-900 mb-6",
+            children: ["Find the", " ", /*#__PURE__*/(0, _jsxruntime.jsx)("span", {
+              className: "text-primary-600",
+              children: "perfect gift"
+            }), " ", "with AI"]
+          }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+            className: "text-lg text-gray-600 mb-8 leading-relaxed",
+            children: "Swipe through products, train our AI to understand your taste, and get personalised gift recommendations that actually make sense. No more guessing, no more gift fails."
+          }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+            className: "flex flex-col sm:flex-row gap-4 mb-12",
+            children: [/*#__PURE__*/(0, _jsxruntime.jsxs)(_link.default, {
+              href: "/auth/register",
+              className: "inline-flex items-center justify-center gap-2 bg-primary-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-primary-700 transition-colors",
+              children: ["Start Discovering", /*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.ArrowRight, {
+                className: "w-5 h-5"
+              })]
+            }), /*#__PURE__*/(0, _jsxruntime.jsxs)(_link.default, {
+              href: "/discover",
+              className: "inline-flex items-center justify-center gap-2 bg-white border border-gray-300 text-gray-700 px-8 py-4 rounded-xl font-semibold hover:bg-gray-50 transition-colors",
+              children: ["Try Demo", /*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.ArrowRight, {
+                className: "w-5 h-5"
+              })]
+            })]
+          }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+            className: "grid grid-cols-2 lg:grid-cols-4 gap-6",
+            children: stats.map((stat, index) => {
+              /* istanbul ignore next */
+              cov_cg38p4mu8().f[3]++;
+              cov_cg38p4mu8().s[8]++;
+              return /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                className: "text-center",
+                children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                  className: "text-2xl font-bold text-gray-900",
+                  children: stat.number
+                }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                  className: "text-sm text-gray-600",
+                  children: stat.label
+                })]
+              }, stat.label);
+            })
+          })]
+        }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+          className: "relative",
+          children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+            className: "relative z-10",
+            children: /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+              className: "bg-white rounded-2xl shadow-2xl p-8 transform rotate-3",
+              children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                className: "bg-gradient-to-r from-primary-500 to-secondary-500 rounded-xl p-6 text-white mb-6",
+                children: [/*#__PURE__*/(0, _jsxruntime.jsx)("h3", {
+                  className: "text-lg font-semibold mb-2",
+                  children: "Your Perfect Match"
+                }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+                  className: "text-primary-100",
+                  children: "AI found the perfect gift based on your swipes!"
+                })]
+              }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                className: "space-y-4",
+                children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                  className: "flex items-center gap-3",
+                  children: [/*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.CheckCircle, {
+                    className: "w-5 h-5 text-green-500"
+                  }), /*#__PURE__*/(0, _jsxruntime.jsx)("span", {
+                    className: "text-gray-700",
+                    children: "97% match confidence"
+                  })]
+                }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                  className: "flex items-center gap-3",
+                  children: [/*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.CheckCircle, {
+                    className: "w-5 h-5 text-green-500"
+                  }), /*#__PURE__*/(0, _jsxruntime.jsx)("span", {
+                    className: "text-gray-700",
+                    children: "Based on 50+ swipes"
+                  })]
+                }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                  className: "flex items-center gap-3",
+                  children: [/*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.CheckCircle, {
+                    className: "w-5 h-5 text-green-500"
+                  }), /*#__PURE__*/(0, _jsxruntime.jsx)("span", {
+                    className: "text-gray-700",
+                    children: "Free shipping included"
+                  })]
+                })]
+              })]
+            })
+          }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+            className: "absolute top-10 -left-4 bg-yellow-400 rounded-full p-3",
+            children: /*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.Gift, {
+              className: "w-6 h-6 text-white"
+            })
+          }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+            className: "absolute bottom-10 -right-4 bg-pink-400 rounded-full p-3",
+            children: /*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.Heart, {
+              className: "w-6 h-6 text-white"
+            })
+          })]
+        })]
+      })
+    }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+      className: "absolute inset-0 -z-10 opacity-10",
+      children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+        className: "absolute top-1/4 left-1/4 w-32 h-32 bg-primary-500 rounded-full blur-3xl"
+      }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+        className: "absolute bottom-1/4 right-1/4 w-48 h-48 bg-secondary-500 rounded-full blur-3xl"
+      })]
+    })]
+  });
+}
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJTZXJ2ZXJIZXJvU2VjdGlvbiIsInN0YXRzIiwiY292X2NnMzhwNG11OCIsImYiLCJzIiwiX2pzeHJ1bnRpbWUiLCJqc3hzIiwiY2xhc3NOYW1lIiwianN4IiwiX2x1Y2lkZXJlYWN0IiwiU3BhcmtsZXMiLCJfbGluayIsImRlZmF1bHQiLCJocmVmIiwiQXJyb3dSaWdodCIsIm1hcCIsInN0YXQiLCJpbmRleCIsIm51bWJlciIsImxhYmVsIiwiQ2hlY2tDaXJjbGUiLCJHaWZ0IiwiSGVhcnQiXSwic291cmNlcyI6WyIvaG9tZS9qYWNrL0RvY3VtZW50cy9hY2x1ZS1wcmVwcm9kL3dlYi9zcmMvY29tcG9uZW50cy9tYXJrZXRpbmcvU2VydmVySGVyb1NlY3Rpb24udHN4Il0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBMaW5rIGZyb20gJ25leHQvbGluaydcbmltcG9ydCB7IFNwYXJrbGVzLCBBcnJvd1JpZ2h0LCBDaGVja0NpcmNsZSwgR2lmdCwgSGVhcnQgfSBmcm9tICdsdWNpZGUtcmVhY3QnXG5cbi8qKlxuICogU2VydmVyIEhlcm8gU2VjdGlvbiAtIFNlcnZlciBDb21wb25lbnRcbiAqXG4gKiBTZXJ2ZXItcmVuZGVyZWQgaGVybyBzZWN0aW9uIHdpdGggc3RhdGljIGNvbnRlbnQgZm9yIG9wdGltYWwgcGVyZm9ybWFuY2UgYW5kIFNFTy5cbiAqIENvbnRhaW5zIHRoZSBtYWluIHZhbHVlIHByb3Bvc2l0aW9uIGFuZCBrZXkgc3RhdGlzdGljcy5cbiAqXG4gKiBGZWF0dXJlczpcbiAqIC0gU2VydmVyLXNpZGUgcmVuZGVyaW5nIGZvciBTRU8gb3B0aW1pemF0aW9uXG4gKiAtIFN0YXRpYyBjb250ZW50IHdpdGggZmFzdCBpbml0aWFsIGxvYWRcbiAqIC0gU3RydWN0dXJlZCBkYXRhIGZvciBzZWFyY2ggZW5naW5lc1xuICogLSBQZXJmb3JtYW5jZS1vcHRpbWlzZWQgaW1hZ2VzXG4gKi9cblxuaW50ZXJmYWNlIEhlcm9TZWN0aW9uUHJvcHMge1xuICBzdGF0czogQXJyYXk8e1xuICAgIG51bWJlcjogc3RyaW5nXG4gICAgbGFiZWw6IHN0cmluZ1xuICB9PlxufVxuXG5leHBvcnQgZGVmYXVsdCBmdW5jdGlvbiBTZXJ2ZXJIZXJvU2VjdGlvbih7IHN0YXRzIH06IEhlcm9TZWN0aW9uUHJvcHMpIHtcbiAgcmV0dXJuIChcbiAgICA8c2VjdGlvbiBjbGFzc05hbWU9XCJyZWxhdGl2ZSBiZy1ncmFkaWVudC10by1iciBmcm9tLXByaW1hcnktNTAgdmlhLXdoaXRlIHRvLXNlY29uZGFyeS01MCBvdmVyZmxvdy1oaWRkZW5cIj5cbiAgICAgIDxkaXYgY2xhc3NOYW1lPVwibWF4LXctN3hsIG14LWF1dG8gcHgtNiBsZzpweC04IHB5LTIwIGxnOnB5LTI4XCI+XG4gICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZ3JpZCBsZzpncmlkLWNvbHMtMiBnYXAtMTIgaXRlbXMtY2VudGVyXCI+XG4gICAgICAgICAgPGRpdj5cbiAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiaW5saW5lLWZsZXggaXRlbXMtY2VudGVyIGdhcC0yIGJnLXByaW1hcnktMTAwIHRleHQtcHJpbWFyeS04MDAgcHgtNCBweS0yIHJvdW5kZWQtZnVsbCB0ZXh0LXNtIGZvbnQtbWVkaXVtIG1iLTZcIj5cbiAgICAgICAgICAgICAgPFNwYXJrbGVzIGNsYXNzTmFtZT1cInctNCBoLTRcIiAvPlxuICAgICAgICAgICAgICBBSS1Qb3dlcmVkIEdpZnQgRGlzY292ZXJ5XG4gICAgICAgICAgICA8L2Rpdj5cblxuICAgICAgICAgICAgPGgxIGNsYXNzTmFtZT1cInRleHQtNHhsIGxnOnRleHQtNnhsIGZvbnQtYm9sZCB0ZXh0LWdyYXktOTAwIG1iLTZcIj5cbiAgICAgICAgICAgICAgRmluZCB0aGV7JyAnfVxuICAgICAgICAgICAgICA8c3BhbiBjbGFzc05hbWU9XCJ0ZXh0LXByaW1hcnktNjAwXCI+cGVyZmVjdCBnaWZ0PC9zcGFuPnsnICd9XG4gICAgICAgICAgICAgIHdpdGggQUlcbiAgICAgICAgICAgIDwvaDE+XG5cbiAgICAgICAgICAgIDxwIGNsYXNzTmFtZT1cInRleHQtbGcgdGV4dC1ncmF5LTYwMCBtYi04IGxlYWRpbmctcmVsYXhlZFwiPlxuICAgICAgICAgICAgICBTd2lwZSB0aHJvdWdoIHByb2R1Y3RzLCB0cmFpbiBvdXIgQUkgdG8gdW5kZXJzdGFuZCB5b3VyIHRhc3RlLCBhbmQgZ2V0IHBlcnNvbmFsaXNlZFxuICAgICAgICAgICAgICBnaWZ0IHJlY29tbWVuZGF0aW9ucyB0aGF0IGFjdHVhbGx5IG1ha2Ugc2Vuc2UuIE5vIG1vcmUgZ3Vlc3NpbmcsIG5vIG1vcmUgZ2lmdCBmYWlscy5cbiAgICAgICAgICAgIDwvcD5cblxuICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJmbGV4IGZsZXgtY29sIHNtOmZsZXgtcm93IGdhcC00IG1iLTEyXCI+XG4gICAgICAgICAgICAgIDxMaW5rXG4gICAgICAgICAgICAgICAgaHJlZj1cIi9hdXRoL3JlZ2lzdGVyXCJcbiAgICAgICAgICAgICAgICBjbGFzc05hbWU9XCJpbmxpbmUtZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIgZ2FwLTIgYmctcHJpbWFyeS02MDAgdGV4dC13aGl0ZSBweC04IHB5LTQgcm91bmRlZC14bCBmb250LXNlbWlib2xkIGhvdmVyOmJnLXByaW1hcnktNzAwIHRyYW5zaXRpb24tY29sb3JzXCJcbiAgICAgICAgICAgICAgPlxuICAgICAgICAgICAgICAgIFN0YXJ0IERpc2NvdmVyaW5nXG4gICAgICAgICAgICAgICAgPEFycm93UmlnaHQgY2xhc3NOYW1lPVwidy01IGgtNVwiIC8+XG4gICAgICAgICAgICAgIDwvTGluaz5cblxuICAgICAgICAgICAgICA8TGlua1xuICAgICAgICAgICAgICAgIGhyZWY9XCIvZGlzY292ZXJcIlxuICAgICAgICAgICAgICAgIGNsYXNzTmFtZT1cImlubGluZS1mbGV4IGl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNlbnRlciBnYXAtMiBiZy13aGl0ZSBib3JkZXIgYm9yZGVyLWdyYXktMzAwIHRleHQtZ3JheS03MDAgcHgtOCBweS00IHJvdW5kZWQteGwgZm9udC1zZW1pYm9sZCBob3ZlcjpiZy1ncmF5LTUwIHRyYW5zaXRpb24tY29sb3JzXCJcbiAgICAgICAgICAgICAgPlxuICAgICAgICAgICAgICAgIFRyeSBEZW1vXG4gICAgICAgICAgICAgICAgPEFycm93UmlnaHQgY2xhc3NOYW1lPVwidy01IGgtNVwiIC8+XG4gICAgICAgICAgICAgIDwvTGluaz5cbiAgICAgICAgICAgIDwvZGl2PlxuXG4gICAgICAgICAgICB7LyogU3RhdHMgLSBTZXJ2ZXIgUmVuZGVyZWQgKi99XG4gICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImdyaWQgZ3JpZC1jb2xzLTIgbGc6Z3JpZC1jb2xzLTQgZ2FwLTZcIj5cbiAgICAgICAgICAgICAge3N0YXRzLm1hcCgoc3RhdCwgaW5kZXgpID0+IChcbiAgICAgICAgICAgICAgICA8ZGl2IGtleT17c3RhdC5sYWJlbH0gY2xhc3NOYW1lPVwidGV4dC1jZW50ZXJcIj5cbiAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwidGV4dC0yeGwgZm9udC1ib2xkIHRleHQtZ3JheS05MDBcIj57c3RhdC5udW1iZXJ9PC9kaXY+XG4gICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInRleHQtc20gdGV4dC1ncmF5LTYwMFwiPntzdGF0LmxhYmVsfTwvZGl2PlxuICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICApKX1cbiAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgIDwvZGl2PlxuXG4gICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJyZWxhdGl2ZVwiPlxuICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJyZWxhdGl2ZSB6LTEwXCI+XG4gICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiYmctd2hpdGUgcm91bmRlZC0yeGwgc2hhZG93LTJ4bCBwLTggdHJhbnNmb3JtIHJvdGF0ZS0zXCI+XG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJiZy1ncmFkaWVudC10by1yIGZyb20tcHJpbWFyeS01MDAgdG8tc2Vjb25kYXJ5LTUwMCByb3VuZGVkLXhsIHAtNiB0ZXh0LXdoaXRlIG1iLTZcIj5cbiAgICAgICAgICAgICAgICAgIDxoMyBjbGFzc05hbWU9XCJ0ZXh0LWxnIGZvbnQtc2VtaWJvbGQgbWItMlwiPllvdXIgUGVyZmVjdCBNYXRjaDwvaDM+XG4gICAgICAgICAgICAgICAgICA8cCBjbGFzc05hbWU9XCJ0ZXh0LXByaW1hcnktMTAwXCI+QUkgZm91bmQgdGhlIHBlcmZlY3QgZ2lmdCBiYXNlZCBvbiB5b3VyIHN3aXBlcyE8L3A+XG4gICAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJzcGFjZS15LTRcIj5cbiAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZmxleCBpdGVtcy1jZW50ZXIgZ2FwLTNcIj5cbiAgICAgICAgICAgICAgICAgICAgPENoZWNrQ2lyY2xlIGNsYXNzTmFtZT1cInctNSBoLTUgdGV4dC1ncmVlbi01MDBcIiAvPlxuICAgICAgICAgICAgICAgICAgICA8c3BhbiBjbGFzc05hbWU9XCJ0ZXh0LWdyYXktNzAwXCI+OTclIG1hdGNoIGNvbmZpZGVuY2U8L3NwYW4+XG4gICAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZmxleCBpdGVtcy1jZW50ZXIgZ2FwLTNcIj5cbiAgICAgICAgICAgICAgICAgICAgPENoZWNrQ2lyY2xlIGNsYXNzTmFtZT1cInctNSBoLTUgdGV4dC1ncmVlbi01MDBcIiAvPlxuICAgICAgICAgICAgICAgICAgICA8c3BhbiBjbGFzc05hbWU9XCJ0ZXh0LWdyYXktNzAwXCI+QmFzZWQgb24gNTArIHN3aXBlczwvc3Bhbj5cbiAgICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJmbGV4IGl0ZW1zLWNlbnRlciBnYXAtM1wiPlxuICAgICAgICAgICAgICAgICAgICA8Q2hlY2tDaXJjbGUgY2xhc3NOYW1lPVwidy01IGgtNSB0ZXh0LWdyZWVuLTUwMFwiIC8+XG4gICAgICAgICAgICAgICAgICAgIDxzcGFuIGNsYXNzTmFtZT1cInRleHQtZ3JheS03MDBcIj5GcmVlIHNoaXBwaW5nIGluY2x1ZGVkPC9zcGFuPlxuICAgICAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgPC9kaXY+XG5cbiAgICAgICAgICAgIHsvKiBTdGF0aWMgZGVjb3JhdGl2ZSBlbGVtZW50cyAqL31cbiAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiYWJzb2x1dGUgdG9wLTEwIC1sZWZ0LTQgYmcteWVsbG93LTQwMCByb3VuZGVkLWZ1bGwgcC0zXCI+XG4gICAgICAgICAgICAgIDxHaWZ0IGNsYXNzTmFtZT1cInctNiBoLTYgdGV4dC13aGl0ZVwiIC8+XG4gICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiYWJzb2x1dGUgYm90dG9tLTEwIC1yaWdodC00IGJnLXBpbmstNDAwIHJvdW5kZWQtZnVsbCBwLTNcIj5cbiAgICAgICAgICAgICAgPEhlYXJ0IGNsYXNzTmFtZT1cInctNiBoLTYgdGV4dC13aGl0ZVwiIC8+XG4gICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgPC9kaXY+XG4gICAgICA8L2Rpdj5cblxuICAgICAgey8qIEJhY2tncm91bmQgUGF0dGVybiAqL31cbiAgICAgIDxkaXYgY2xhc3NOYW1lPVwiYWJzb2x1dGUgaW5zZXQtMCAtei0xMCBvcGFjaXR5LTEwXCI+XG4gICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiYWJzb2x1dGUgdG9wLTEvNCBsZWZ0LTEvNCB3LTMyIGgtMzIgYmctcHJpbWFyeS01MDAgcm91bmRlZC1mdWxsIGJsdXItM3hsXCIgLz5cbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJhYnNvbHV0ZSBib3R0b20tMS80IHJpZ2h0LTEvNCB3LTQ4IGgtNDggYmctc2Vjb25kYXJ5LTUwMCByb3VuZGVkLWZ1bGwgYmx1ci0zeGxcIiAvPlxuICAgICAgPC9kaXY+XG4gICAgPC9zZWN0aW9uPlxuICApXG59Il0sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OytCQXVCQTs7Ozs7O1dBQXdCQSxpQkFBQTs7Ozs7Ozs7dUVBdkJQOzs7aUNBQzhDOzs7Ozs7Ozs7Ozs7Ozs7QUFzQmhELFNBQVNBLGtCQUFrQjtFQUFFQztBQUFLLENBQW9CO0VBQUE7RUFBQUMsYUFBQSxHQUFBQyxDQUFBO0VBQUFELGFBQUEsR0FBQUUsQ0FBQTtFQUNuRSxvQkFDRSxJQUFBQyxXQUFBLENBQUFDLElBQUEsRUFBQztJQUFRQyxTQUFBLEVBQVU7NEJBQ2pCLElBQUFGLFdBQUEsQ0FBQUcsR0FBQSxFQUFDO01BQUlELFNBQUEsRUFBVTtnQkFDYixpQkFBQUYsV0FBQSxDQUFBQyxJQUFBLEVBQUM7UUFBSUMsU0FBQSxFQUFVO2dDQUNiLElBQUFGLFdBQUEsQ0FBQUMsSUFBQSxFQUFDO2tDQUNDLElBQUFELFdBQUEsQ0FBQUMsSUFBQSxFQUFDO1lBQUlDLFNBQUEsRUFBVTtvQ0FDYixJQUFBRixXQUFBLENB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

@@ -1,4 +1,4 @@
-# Aclue Pages Router to App Router Migration Plan
+# aclue Pages Router to App Router Migration Plan
 ## 10-Week Comprehensive Migration Strategy
 
 **Current State**: Next.js 14 with Pages Router (100% client-side components)
@@ -10,7 +10,7 @@
 
 ## Executive Summary
 
-This migration plan transforms Aclue from a client-heavy Pages Router architecture to a performance-optimised App Router system with strategic server-side rendering. The phased approach ensures production stability while achieving significant performance improvements.
+This migration plan transforms aclue from a client-heavy Pages Router architecture to a performance-optimised App Router system with strategic server-side rendering. The phased approach ensures production stability while achieving significant performance improvements.
 
 ### Performance Targets
 - **Tier 1** (Authentication/Profiles): 85% server components
@@ -499,7 +499,7 @@ export const isRouteAppRouter = (route: string) => {
 
 ## Conclusion
 
-This comprehensive 10-week migration plan transforms Aclue from a client-heavy Pages Router architecture to a performance-optimised App Router system. The phased approach ensures production stability while achieving significant performance improvements across all tiers.
+This comprehensive 10-week migration plan transforms aclue from a client-heavy Pages Router architecture to a performance-optimised App Router system. The phased approach ensures production stability while achieving significant performance improvements across all tiers.
 
 The migration strategy prioritises:
 1. **Zero downtime** through feature flags and gradual rollouts
@@ -514,4 +514,4 @@ The migration strategy prioritises:
 - Enhanced user experience and engagement
 - Modern, maintainable codebase architecture
 
-This migration positions Aclue for future scalability and performance while maintaining the current production stability and user experience that users expect from the platform.
+This migration positions aclue for future scalability and performance while maintaining the current production stability and user experience that users expect from the platform.

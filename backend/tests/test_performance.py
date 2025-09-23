@@ -1,5 +1,5 @@
 """
-Performance Testing Suite for Aclue Backend
+Performance Testing Suite for aclue Backend
 
 Comprehensive performance tests for database operations, API endpoints,
 and critical user journeys to ensure scalability and responsive UX.
@@ -19,7 +19,7 @@ realistic and stress conditions.
 
 Business Context:
 Performance directly impacts user satisfaction, conversion rates,
-and platform scalability. These tests ensure Aclue maintains
+and platform scalability. These tests ensure aclue maintains
 excellent performance as user base grows.
 
 Requirements:

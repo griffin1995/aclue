@@ -1,5 +1,5 @@
 /**
- * Optimized Image Component for Aclue Platform
+ * Optimized Image Component for aclue Platform
  *
  * Provides enterprise-grade image optimization with lazy loading, responsive sizing,
  * and performance monitoring. Extends Next.js Image component with additional features.

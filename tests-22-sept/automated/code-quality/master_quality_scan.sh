@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Master Code Quality Scanner - Comprehensive Automated Analysis
-# Orchestrates all code quality tools for the Aclue platform
+# Orchestrates all code quality tools for the aclue platform
 
 set -e
 
@@ -202,7 +202,7 @@ echo -e "${MAGENTA}${BOLD}  Generating Master Summary Report${NC}"
 echo -e "${MAGENTA}${BOLD}======================================${NC}"
 
 cat > "$REPORTS_DIR/MASTER_QUALITY_REPORT_${TIMESTAMP}.md" << EOF
-# Aclue Platform - Master Code Quality Report
+# aclue Platform - Master Code Quality Report
 
 **Analysis Date:** $(date)
 **Analysis Duration:** Started at ${TIMESTAMP}
@@ -210,7 +210,7 @@ cat > "$REPORTS_DIR/MASTER_QUALITY_REPORT_${TIMESTAMP}.md" << EOF
 
 ## Executive Summary
 
-This comprehensive code quality analysis covers the entire Aclue platform:
+This comprehensive code quality analysis covers the entire aclue platform:
 - **Backend:** FastAPI (Python 3.11) - Located in \`/backend\`
 - **Frontend:** Next.js 14 (TypeScript/React) - Located in \`/web\`
 - **Analysis Tools:** 11+ automated quality tools with maximum rule sets

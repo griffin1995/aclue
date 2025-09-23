@@ -66,7 +66,7 @@ export default {
       robotsTxt: true,
 
       // User agent
-      userAgent: 'Unlighthouse/1.0 (Aclue Automated Testing)',
+      userAgent: 'Unlighthouse/1.0 (aclue Automated Testing)',
 
       // Request headers
       headers: {

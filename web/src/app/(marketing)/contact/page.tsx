@@ -185,7 +185,7 @@ export default function ContactPage() {
                 Our Team
               </h2>
               <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                Aclue is proudly based in the United Kingdom, with a distributed team passionate
+                aclue is proudly based in the United Kingdom, with a distributed team passionate
                 about transforming gift-giving through artificial intelligence. We're building
                 the future of personalised recommendations, one perfect gift at a time.
               </p>
@@ -354,8 +354,8 @@ export default function ContactPage() {
  * SEO Metadata for Contact Page
  */
 export const metadata: Metadata = {
-  title: 'Contact Us - Get Support & Connect | Aclue',
-  description: 'Get in touch with the Aclue team. Email support, beta program enquiries, business partnerships, and technical help. We\'re here to help with your gift discovery needs.',
+  title: 'Contact Us - Get Support & Connect | aclue',
+  description: 'Get in touch with the aclue team. Email support, beta program enquiries, business partnerships, and technical help. We\'re here to help with your gift discovery needs.',
   keywords: [
     'contact aclue',
     'customer support',
@@ -366,7 +366,7 @@ export const metadata: Metadata = {
     'gift platform support'
   ],
   openGraph: {
-    title: 'Contact Us - Get Support & Connect | Aclue',
+    title: 'Contact Us - Get Support & Connect | aclue',
     description: 'Get in touch with our team for support, beta program access, business enquiries, and more. We\'re here to help!',
     url: 'https://aclue.app/contact',
     images: [
@@ -374,13 +374,13 @@ export const metadata: Metadata = {
         url: '/aclue_text_clean.png',
         width: 1200,
         height: 630,
-        alt: 'Contact Aclue - Customer Support',
+        alt: 'Contact aclue - Customer Support',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Contact Us - Get Support & Connect | Aclue',
+    title: 'Contact Us - Get Support & Connect | aclue',
     description: 'Get in touch with our team for support and enquiries. We\'re here to help!',
     images: ['/aclue_text_clean.png'],
   },

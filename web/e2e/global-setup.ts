@@ -1,5 +1,5 @@
 /**
- * Aclue Global Test Setup
+ * aclue Global Test Setup
  * 
  * Comprehensive global setup for Playwright E2E testing.
  * Handles test environment initialization, database seeding,
@@ -18,7 +18,7 @@ import path from 'path';
 import fs from 'fs';
 
 async function globalSetup(config: FullConfig) {
-  console.log('🚀 Starting Aclue E2E Test Suite Global Setup');
+  console.log('🚀 Starting aclue E2E Test Suite Global Setup');
 
   // Test environment configuration
   const baseURL = config.projects[0].use.baseURL || 'http://localhost:3000';

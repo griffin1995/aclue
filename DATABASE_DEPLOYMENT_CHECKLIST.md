@@ -1,4 +1,4 @@
-# Database Deployment Checklist - Aclue Production Implementation
+# Database Deployment Checklist - aclue Production Implementation
 **Date**: 6 August 2025  
 **Version**: 2.0  
 **Environment**: Production Deployment  

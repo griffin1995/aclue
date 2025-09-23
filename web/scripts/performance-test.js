@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Performance Testing Suite for Aclue Platform
+ * Performance Testing Suite for aclue Platform
  *
  * Automated performance testing using Puppeteer and Lighthouse
  * Measures Core Web Vitals, resource usage, and custom metrics
@@ -301,7 +301,7 @@ async function generateHTMLReport(results) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aclue Performance Report</title>
+  <title>aclue Performance Report</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f5; padding: 20px; }
@@ -325,7 +325,7 @@ async function generateHTMLReport(results) {
 </head>
 <body>
   <div class="container">
-    <h1>🚀 Aclue Performance Report</h1>
+    <h1>🚀 aclue Performance Report</h1>
 
     <div class="summary">
       <h2>Test Configuration</h2>

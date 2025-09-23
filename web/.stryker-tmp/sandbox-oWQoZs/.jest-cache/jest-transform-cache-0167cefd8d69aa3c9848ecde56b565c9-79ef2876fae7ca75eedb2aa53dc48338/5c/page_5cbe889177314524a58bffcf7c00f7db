@@ -1,0 +1,1433 @@
+3c72d1c6660642772f09384a06faccf7
+"use strict";
+
+/* istanbul ignore next */
+function cov_44s05q9dl() {
+  var path = "/home/jack/Documents/aclue-preprod/web/src/app/(marketing)/features/page.tsx";
+  var hash = "dba54de839e18ed84ae52879c47498f9bf015498";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/home/jack/Documents/aclue-preprod/web/src/app/(marketing)/features/page.tsx",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 4,
+          column: 3
+        }
+      },
+      "1": {
+        start: {
+          line: 6,
+          column: 4
+        },
+        end: {
+          line: 9,
+          column: 7
+        }
+      },
+      "2": {
+        start: {
+          line: 6,
+          column: 24
+        },
+        end: {
+          line: 9,
+          column: 7
+        }
+      },
+      "3": {
+        start: {
+          line: 11,
+          column: 0
+        },
+        end: {
+          line: 31,
+          column: 3
+        }
+      },
+      "4": {
+        start: {
+          line: 26,
+          column: 8
+        },
+        end: {
+          line: 26,
+          column: 28
+        }
+      },
+      "5": {
+        start: {
+          line: 29,
+          column: 8
+        },
+        end: {
+          line: 29,
+          column: 24
+        }
+      },
+      "6": {
+        start: {
+          line: 32,
+          column: 20
+        },
+        end: {
+          line: 32,
+          column: 48
+        }
+      },
+      "7": {
+        start: {
+          line: 33,
+          column: 28
+        },
+        end: {
+          line: 33,
+          column: 74
+        }
+      },
+      "8": {
+        start: {
+          line: 34,
+          column: 21
+        },
+        end: {
+          line: 34,
+          column: 44
+        }
+      },
+      "9": {
+        start: {
+          line: 36,
+          column: 4
+        },
+        end: {
+          line: 38,
+          column: 6
+        }
+      },
+      "10": {
+        start: {
+          line: 42,
+          column: 25
+        },
+        end: {
+          line: 95,
+          column: 5
+        }
+      },
+      "11": {
+        start: {
+          line: 96,
+          column: 30
+        },
+        end: {
+          line: 145,
+          column: 5
+        }
+      },
+      "12": {
+        start: {
+          line: 146,
+          column: 21
+        },
+        end: {
+          line: 174,
+          column: 5
+        }
+      },
+      "13": {
+        start: {
+          line: 175,
+          column: 31
+        },
+        end: {
+          line: 212,
+          column: 5
+        }
+      },
+      "14": {
+        start: {
+          line: 213,
+          column: 4
+        },
+        end: {
+          line: 706,
+          column: 7
+        }
+      },
+      "15": {
+        start: {
+          line: 261,
+          column: 87
+        },
+        end: {
+          line: 297,
+          column: 49
+        }
+      },
+      "16": {
+        start: {
+          line: 284,
+          column: 122
+        },
+        end: {
+          line: 292,
+          column: 72
+        }
+      },
+      "17": {
+        start: {
+          line: 322,
+          column: 92
+        },
+        end: {
+          line: 342,
+          column: 49
+        }
+      },
+      "18": {
+        start: {
+          line: 367,
+          column: 83
+        },
+        end: {
+          line: 425,
+          column: 49
+        }
+      },
+      "19": {
+        start: {
+          line: 466,
+          column: 84
+        },
+        end: {
+          line: 498,
+          column: 52
+        }
+      },
+      "20": {
+        start: {
+          line: 708,
+          column: 17
+        },
+        end: {
+          line: 744,
+          column: 1
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "_export",
+        decl: {
+          start: {
+            line: 5,
+            column: 9
+          },
+          end: {
+            line: 5,
+            column: 16
+          }
+        },
+        loc: {
+          start: {
+            line: 5,
+            column: 30
+          },
+          end: {
+            line: 10,
+            column: 1
+          }
+        },
+        line: 5
+      },
+      "1": {
+        name: "(anonymous_1)",
+        decl: {
+          start: {
+            line: 25,
+            column: 13
+          },
+          end: {
+            line: 25,
+            column: 14
+          }
+        },
+        loc: {
+          start: {
+            line: 25,
+            column: 24
+          },
+          end: {
+            line: 27,
+            column: 5
+          }
+        },
+        line: 25
+      },
+      "2": {
+        name: "(anonymous_2)",
+        decl: {
+          start: {
+            line: 28,
+            column: 14
+          },
+          end: {
+            line: 28,
+            column: 15
+          }
+        },
+        loc: {
+          start: {
+            line: 28,
+            column: 25
+          },
+          end: {
+            line: 30,
+            column: 5
+          }
+        },
+        line: 28
+      },
+      "3": {
+        name: "_interop_require_default",
+        decl: {
+          start: {
+            line: 35,
+            column: 9
+          },
+          end: {
+            line: 35,
+            column: 33
+          }
+        },
+        loc: {
+          start: {
+            line: 35,
+            column: 39
+          },
+          end: {
+            line: 39,
+            column: 1
+          }
+        },
+        line: 35
+      },
+      "4": {
+        name: "FeaturesPage",
+        decl: {
+          start: {
+            line: 40,
+            column: 9
+          },
+          end: {
+            line: 40,
+            column: 21
+          }
+        },
+        loc: {
+          start: {
+            line: 40,
+            column: 24
+          },
+          end: {
+            line: 707,
+            column: 1
+          }
+        },
+        line: 40
+      },
+      "5": {
+        name: "(anonymous_5)",
+        decl: {
+          start: {
+            line: 261,
+            column: 55
+          },
+          end: {
+            line: 261,
+            column: 56
+          }
+        },
+        loc: {
+          start: {
+            line: 261,
+            column: 87
+          },
+          end: {
+            line: 297,
+            column: 49
+          }
+        },
+        line: 261
+      },
+      "6": {
+        name: "(anonymous_6)",
+        decl: {
+          start: {
+            line: 284,
+            column: 83
+          },
+          end: {
+            line: 284,
+            column: 84
+          }
+        },
+        loc: {
+          start: {
+            line: 284,
+            column: 122
+          },
+          end: {
+            line: 292,
+            column: 72
+          }
+        },
+        line: 284
+      },
+      "7": {
+        name: "(anonymous_7)",
+        decl: {
+          start: {
+            line: 322,
+            column: 60
+          },
+          end: {
+            line: 322,
+            column: 61
+          }
+        },
+        loc: {
+          start: {
+            line: 322,
+            column: 92
+          },
+          end: {
+            line: 342,
+            column: 49
+          }
+        },
+        line: 322
+      },
+      "8": {
+        name: "(anonymous_8)",
+        decl: {
+          start: {
+            line: 367,
+            column: 51
+          },
+          end: {
+            line: 367,
+            column: 52
+          }
+        },
+        loc: {
+          start: {
+            line: 367,
+            column: 83
+          },
+          end: {
+            line: 425,
+            column: 49
+          }
+        },
+        line: 367
+      },
+      "9": {
+        name: "(anonymous_9)",
+        decl: {
+          start: {
+            line: 466,
+            column: 55
+          },
+          end: {
+            line: 466,
+            column: 56
+          }
+        },
+        loc: {
+          start: {
+            line: 466,
+            column: 84
+          },
+          end: {
+            line: 498,
+            column: 52
+          }
+        },
+        line: 466
+      }
+    },
+    branchMap: {
+      "0": {
+        loc: {
+          start: {
+            line: 36,
+            column: 11
+          },
+          end: {
+            line: 38,
+            column: 5
+          }
+        },
+        type: "cond-expr",
+        locations: [{
+          start: {
+            line: 36,
+            column: 35
+          },
+          end: {
+            line: 36,
+            column: 38
+          }
+        }, {
+          start: {
+            line: 36,
+            column: 41
+          },
+          end: {
+            line: 38,
+            column: 5
+          }
+        }],
+        line: 36
+      },
+      "1": {
+        loc: {
+          start: {
+            line: 36,
+            column: 11
+          },
+          end: {
+            line: 36,
+            column: 32
+          }
+        },
+        type: "binary-expr",
+        locations: [{
+          start: {
+            line: 36,
+            column: 11
+          },
+          end: {
+            line: 36,
+            column: 14
+          }
+        }, {
+          start: {
+            line: 36,
+            column: 18
+          },
+          end: {
+            line: 36,
+            column: 32
+          }
+        }],
+        line: 36
+      },
+      "2": {
+        loc: {
+          start: {
+            line: 368,
+            column: 89
+          },
+          end: {
+            line: 368,
+            column: 136
+          }
+        },
+        type: "cond-expr",
+        locations: [{
+          start: {
+            line: 368,
+            column: 107
+          },
+          end: {
+            line: 368,
+            column: 131
+          }
+        }, {
+          start: {
+            line: 368,
+            column: 134
+          },
+          end: {
+            line: 368,
+            column: 136
+          }
+        }],
+        line: 368
+      },
+      "3": {
+        loc: {
+          start: {
+            line: 371,
+            column: 58
+          },
+          end: {
+            line: 371,
+            column: 97
+          }
+        },
+        type: "cond-expr",
+        locations: [{
+          start: {
+            line: 371,
+            column: 76
+          },
+          end: {
+            line: 371,
+            column: 92
+          }
+        }, {
+          start: {
+            line: 371,
+            column: 95
+          },
+          end: {
+            line: 371,
+            column: 97
+          }
+        }],
+        line: 371
+      },
+      "4": {
+        loc: {
+          start: {
+            line: 384,
+            column: 82
+          },
+          end: {
+            line: 384,
+            column: 136
+          }
+        },
+        type: "cond-expr",
+        locations: [{
+          start: {
+            line: 384,
+            column: 100
+          },
+          end: {
+            line: 384,
+            column: 131
+          }
+        }, {
+          start: {
+            line: 384,
+            column: 134
+          },
+          end: {
+            line: 384,
+            column: 136
+          }
+        }],
+        line: 384
+      },
+      "5": {
+        loc: {
+          start: {
+            line: 467,
+            column: 94
+          },
+          end: {
+            line: 467,
+            column: 137
+          }
+        },
+        type: "cond-expr",
+        locations: [{
+          start: {
+            line: 467,
+            column: 112
+          },
+          end: {
+            line: 467,
+            column: 124
+          }
+        }, {
+          start: {
+            line: 467,
+            column: 127
+          },
+          end: {
+            line: 467,
+            column: 137
+          }
+        }],
+        line: 467
+      },
+      "6": {
+        loc: {
+          start: {
+            line: 483,
+            column: 58
+          },
+          end: {
+            line: 487,
+            column: 50
+          }
+        },
+        type: "cond-expr",
+        locations: [{
+          start: {
+            line: 483,
+            column: 85
+          },
+          end: {
+            line: 485,
+            column: 50
+          }
+        }, {
+          start: {
+            line: 485,
+            column: 67
+          },
+          end: {
+            line: 487,
+            column: 50
+          }
+        }],
+        line: 483
+      },
+      "7": {
+        loc: {
+          start: {
+            line: 491,
+            column: 58
+          },
+          end: {
+            line: 495,
+            column: 50
+          }
+        },
+        type: "cond-expr",
+        locations: [{
+          start: {
+            line: 491,
+            column: 91
+          },
+          end: {
+            line: 493,
+            column: 50
+          }
+        }, {
+          start: {
+            line: 493,
+            column: 67
+          },
+          end: {
+            line: 495,
+            column: 50
+          }
+        }],
+        line: 491
+      }
+    },
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0,
+      "10": 0,
+      "11": 0,
+      "12": 0,
+      "13": 0,
+      "14": 0,
+      "15": 0,
+      "16": 0,
+      "17": 0,
+      "18": 0,
+      "19": 0,
+      "20": 0
+    },
+    f: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0
+    },
+    b: {
+      "0": [0, 0],
+      "1": [0, 0],
+      "2": [0, 0],
+      "3": [0, 0],
+      "4": [0, 0],
+      "5": [0, 0],
+      "6": [0, 0],
+      "7": [0, 0]
+    },
+    inputSourceMap: {
+      version: 3,
+      sources: ["/home/jack/Documents/aclue-preprod/web/src/app/(marketing)/features/page.tsx"],
+      sourcesContent: ["import { Metadata } from 'next'\nimport Link from 'next/link'\nimport {\n  Sparkles,\n  Heart,\n  Zap,\n  Users,\n  Brain,\n  Target,\n  Shield,\n  Globe,\n  Clock,\n  TrendingUp,\n  Smartphone,\n  ArrowRight,\n  CheckCircle,\n  Bot,\n  Gift,\n  Search,\n  Share,\n  BarChart3\n} from 'lucide-react'\n\n/**\n * Features Page - App Router Server Component\n *\n * Server-rendered features showcase highlighting aclue's key capabilities and technology.\n * This page demonstrates how AI enhances the gift discovery experience.\n *\n * Features:\n * - Server component for optimal SEO and performance\n * - Comprehensive feature explanations\n * - Technical capability demonstrations\n * - Use case examples and benefits\n * - Static content optimised for search engines\n * - British English throughout\n */\n\nexport default function FeaturesPage() {\n  // Core features data - perfect for server rendering\n  const coreFeatures = [\n    {\n      icon: <Sparkles className=\"w-8 h-8\" />,\n      title: 'AI-Powered Recommendations',\n      description: 'Advanced machine learning algorithms analyse your preferences to suggest perfect gifts every time.',\n      benefits: [\n        '95% accuracy in preference matching',\n        'Learns from every interaction',\n        'Personalised for each user',\n        'Improves over time'\n      ]\n    },\n    {\n      icon: <Heart className=\"w-8 h-8\" />,\n      title: 'Swipe-Based Discovery',\n      description: 'Intuitive Tinder-style interface makes finding gifts as easy as swiping through your favourite social media.',\n      benefits: [\n        'Quick and engaging interaction',\n        'Trains AI with minimal effort',\n        'Mobile-optimised experience',\n        'Fun and addictive interface'\n      ]\n    },\n    {\n      icon: <Zap className=\"w-8 h-8\" />,\n      title: 'Instant Gift Links',\n      description: 'Generate shareable gift links in seconds. Perfect for wishlists, gift exchanges, and special occasions.',\n      benefits: [\n        'One-click sharing',\n        'Works across all platforms',\n        'No registration required for recipients',\n        'Tracks gift preferences'\n      ]\n    },\n    {\n      icon: <Users className=\"w-8 h-8\" />,\n      title: 'Social Gifting',\n      description: 'Collaborate with friends and family. Share preferences, create group wishlists, and never give duplicate gifts.',\n      benefits: [\n        'Group collaboration features',\n        'Shared preference insights',\n        'Duplicate gift prevention',\n        'Family and friend networks'\n      ]\n    }\n  ]\n\n  const technicalFeatures = [\n    {\n      icon: <Brain className=\"w-6 h-6\" />,\n      title: 'Machine Learning Engine',\n      description: 'Neural networks trained on millions of gift preferences and purchasing patterns.',\n      detail: 'Our ML models use collaborative filtering, content-based recommendation, and deep learning to understand complex preference patterns.'\n    },\n    {\n      icon: <Target className=\"w-6 h-6\" />,\n      title: 'Preference Mapping',\n      description: 'Advanced algorithms that map personality traits to product characteristics.',\n      detail: 'Psychological profiling combined with product analysis creates detailed preference maps for accurate matching.'\n    },\n    {\n      icon: <Shield className=\"w-6 h-6\" />,\n      title: 'Privacy Protection',\n      description: 'Enterprise-grade security with privacy-by-design architecture.',\n      detail: 'End-to-end encryption, GDPR compliance, and user-controlled data sharing ensure complete privacy protection.'\n    },\n    {\n      icon: <Globe className=\"w-6 h-6\" />,\n      title: 'Global Product Database',\n      description: 'Curated catalogue of over 1 million products from trusted retailers.',\n      detail: 'Real-time product data, pricing updates, and availability checks across multiple international marketplaces.'\n    },\n    {\n      icon: <Clock className=\"w-6 h-6\" />,\n      title: 'Real-Time Processing',\n      description: 'Lightning-fast recommendations powered by cloud infrastructure.',\n      detail: 'Sub-second response times using distributed computing and edge caching for optimal user experience.'\n    },\n    {\n      icon: <TrendingUp className=\"w-6 h-6\" />,\n      title: 'Trend Analysis',\n      description: 'Seasonal and cultural trend integration for timely suggestions.',\n      detail: 'Real-time trend analysis incorporating social media, market data, and seasonal patterns for relevant recommendations.'\n    }\n  ]\n\n  const useCases = [\n    {\n      icon: <Gift className=\"w-8 h-8\" />,\n      title: 'Birthday Gifts',\n      scenario: 'Your best friend\\'s birthday is next week',\n      solution: 'Swipe through personalised options based on their interests, age, and your relationship history.',\n      outcome: 'Find the perfect gift in under 5 minutes with 95% satisfaction guarantee.'\n    },\n    {\n      icon: <Search className=\"w-8 h-8\" />,\n      title: 'Holiday Shopping',\n      scenario: 'Christmas shopping for the entire family',\n      solution: 'Create individual profiles for each family member and get tailored recommendations for everyone.',\n      outcome: 'Complete your holiday shopping efficiently with gifts everyone will love.'\n    },\n    {\n      icon: <Share className=\"w-8 h-8\" />,\n      title: 'Group Events',\n      scenario: 'Office secret Santa or group wedding gift',\n      solution: 'Collaborate with colleagues or friends to find the perfect group gift within budget.',\n      outcome: 'Seamless group coordination with shared preferences and budget management.'\n    }\n  ]\n\n  const comparisonFeatures = [\n    {\n      feature: 'AI-Powered Recommendations',\n      aclue: true,\n      traditional: false,\n      description: 'Personalised suggestions based on machine learning'\n    },\n    {\n      feature: 'Swipe Interface',\n      aclue: true,\n      traditional: false,\n      description: 'Engaging, mobile-first discovery experience'\n    },\n    {\n      feature: 'Preference Learning',\n      aclue: true,\n      traditional: false,\n      description: 'Continuous improvement through user interaction'\n    },\n    {\n      feature: 'Social Collaboration',\n      aclue: true,\n      traditional: false,\n      description: 'Share and collaborate on gift ideas'\n    },\n    {\n      feature: 'Real-Time Updates',\n      aclue: true,\n      traditional: false,\n      description: 'Live pricing and availability information'\n    },\n    {\n      feature: 'Manual Browsing Required',\n      aclue: false,\n      traditional: true,\n      description: 'Time-consuming manual product search'\n    }\n  ]\n\n  return (\n    <>\n      {/* Hero Section */}\n      <section className=\"relative bg-gradient-to-br from-primary-50 via-white to-secondary-50 py-20\">\n        <div className=\"max-w-7xl mx-auto px-6 lg:px-8\">\n          <div className=\"text-center mb-16\">\n            <h1 className=\"text-4xl lg:text-6xl font-bold text-gray-900 mb-6\">\n              Features That Make{' '}\n              <span className=\"text-primary-600\">Gift-Giving Effortless</span>\n            </h1>\n            <p className=\"text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed\">\n              Discover how artificial intelligence, intuitive design, and powerful features\n              transform the way you find and share perfect gifts.\n            </p>\n          </div>\n        </div>\n      </section>\n\n      {/* Core Features Section */}\n      <section className=\"py-20 bg-white\">\n        <div className=\"max-w-7xl mx-auto px-6 lg:px-8\">\n          <div className=\"text-center mb-16\">\n            <h2 className=\"text-3xl lg:text-4xl font-bold text-gray-900 mb-4\">\n              Core Features\n            </h2>\n            <p className=\"text-lg text-gray-600 max-w-2xl mx-auto\">\n              The essential capabilities that power intelligent gift discovery\n            </p>\n          </div>\n\n          <div className=\"grid lg:grid-cols-2 gap-12\">\n            {coreFeatures.map((feature, index) => (\n              <div key={feature.title} className=\"flex gap-6\">\n                <div className=\"flex-shrink-0\">\n                  <div className=\"w-16 h-16 bg-primary-100 text-primary-600 rounded-2xl flex items-center justify-center\">\n                    {feature.icon}\n                  </div>\n                </div>\n                <div className=\"flex-1\">\n                  <h3 className=\"text-xl font-semibold text-gray-900 mb-3\">\n                    {feature.title}\n                  </h3>\n                  <p className=\"text-gray-600 mb-4 leading-relaxed\">\n                    {feature.description}\n                  </p>\n                  <ul className=\"space-y-2\">\n                    {feature.benefits.map((benefit, benefitIndex) => (\n                      <li key={benefitIndex} className=\"flex items-center gap-2 text-sm text-gray-600\">\n                        <CheckCircle className=\"w-4 h-4 text-green-500 flex-shrink-0\" />\n                        {benefit}\n                      </li>\n                    ))}\n                  </ul>\n                </div>\n              </div>\n            ))}\n          </div>\n        </div>\n      </section>\n\n      {/* Technical Features Section */}\n      <section className=\"py-20 bg-gray-50\">\n        <div className=\"max-w-7xl mx-auto px-6 lg:px-8\">\n          <div className=\"text-center mb-16\">\n            <h2 className=\"text-3xl lg:text-4xl font-bold text-gray-900 mb-4\">\n              Technical Excellence\n            </h2>\n            <p className=\"text-lg text-gray-600 max-w-2xl mx-auto\">\n              Advanced technology and infrastructure powering exceptional user experiences\n            </p>\n          </div>\n\n          <div className=\"grid md:grid-cols-2 lg:grid-cols-3 gap-8\">\n            {technicalFeatures.map((feature, index) => (\n              <div key={feature.title} className=\"bg-white rounded-2xl p-6 hover:shadow-lg transition-shadow\">\n                <div className=\"w-12 h-12 bg-primary-100 text-primary-600 rounded-xl flex items-center justify-center mb-4\">\n                  {feature.icon}\n                </div>\n                <h3 className=\"text-lg font-semibold text-gray-900 mb-3\">\n                  {feature.title}\n                </h3>\n                <p className=\"text-gray-600 mb-4 leading-relaxed\">\n                  {feature.description}\n                </p>\n                <p className=\"text-sm text-gray-500 leading-relaxed\">\n                  {feature.detail}\n                </p>\n              </div>\n            ))}\n          </div>\n        </div>\n      </section>\n\n      {/* Use Cases Section */}\n      <section className=\"py-20 bg-white\">\n        <div className=\"max-w-7xl mx-auto px-6 lg:px-8\">\n          <div className=\"text-center mb-16\">\n            <h2 className=\"text-3xl lg:text-4xl font-bold text-gray-900 mb-4\">\n              Real-World Applications\n            </h2>\n            <p className=\"text-lg text-gray-600 max-w-2xl mx-auto\">\n              See how aclue solves common gift-giving challenges\n            </p>\n          </div>\n\n          <div className=\"space-y-12\">\n            {useCases.map((useCase, index) => (\n              <div key={useCase.title} className={`grid lg:grid-cols-3 gap-8 items-center ${index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''}`}>\n                <div className={`${index % 2 === 1 ? 'lg:col-start-3' : ''}`}>\n                  <div className=\"w-16 h-16 bg-primary-100 text-primary-600 rounded-2xl flex items-center justify-center mb-6\">\n                    {useCase.icon}\n                  </div>\n                  <h3 className=\"text-2xl font-semibold text-gray-900 mb-4\">\n                    {useCase.title}\n                  </h3>\n                </div>\n                <div className={`lg:col-span-2 space-y-6 ${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}>\n                  <div>\n                    <h4 className=\"font-semibold text-gray-900 mb-2\">Scenario:</h4>\n                    <p className=\"text-gray-600\">{useCase.scenario}</p>\n                  </div>\n                  <div>\n                    <h4 className=\"font-semibold text-gray-900 mb-2\">aclue Solution:</h4>\n                    <p className=\"text-gray-600\">{useCase.solution}</p>\n                  </div>\n                  <div>\n                    <h4 className=\"font-semibold text-gray-900 mb-2\">Outcome:</h4>\n                    <p className=\"text-gray-600\">{useCase.outcome}</p>\n                  </div>\n                </div>\n              </div>\n            ))}\n          </div>\n        </div>\n      </section>\n\n      {/* Comparison Section */}\n      <section className=\"py-20 bg-gray-50\">\n        <div className=\"max-w-4xl mx-auto px-6 lg:px-8\">\n          <div className=\"text-center mb-16\">\n            <h2 className=\"text-3xl lg:text-4xl font-bold text-gray-900 mb-4\">\n              aclue vs Traditional Gift Shopping\n            </h2>\n            <p className=\"text-lg text-gray-600\">\n              See how our platform compares to conventional gift discovery methods\n            </p>\n          </div>\n\n          <div className=\"bg-white rounded-2xl overflow-hidden shadow-lg\">\n            <div className=\"grid grid-cols-3 bg-gray-100 text-center py-4 font-semibold text-gray-900\">\n              <div>Feature</div>\n              <div className=\"text-primary-600\">aclue</div>\n              <div>Traditional Shopping</div>\n            </div>\n\n            {comparisonFeatures.map((item, index) => (\n              <div key={item.feature} className={`grid grid-cols-3 items-center py-4 px-6 ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}`}>\n                <div>\n                  <div className=\"font-medium text-gray-900 mb-1\">{item.feature}</div>\n                  <div className=\"text-sm text-gray-600\">{item.description}</div>\n                </div>\n                <div className=\"text-center\">\n                  {item.aclue ? (\n                    <CheckCircle className=\"w-6 h-6 text-green-500 mx-auto\" />\n                  ) : (\n                    <div className=\"w-6 h-6 border-2 border-gray-300 rounded-full mx-auto\"></div>\n                  )}\n                </div>\n                <div className=\"text-center\">\n                  {item.traditional ? (\n                    <CheckCircle className=\"w-6 h-6 text-green-500 mx-auto\" />\n                  ) : (\n                    <div className=\"w-6 h-6 border-2 border-gray-300 rounded-full mx-auto\"></div>\n                  )}\n                </div>\n              </div>\n            ))}\n          </div>\n        </div>\n      </section>\n\n      {/* Mobile Features Section */}\n      <section className=\"py-20 bg-white\">\n        <div className=\"max-w-7xl mx-auto px-6 lg:px-8\">\n          <div className=\"grid lg:grid-cols-2 gap-16 items-center\">\n            <div>\n              <h2 className=\"text-3xl lg:text-4xl font-bold text-gray-900 mb-6\">\n                Mobile-First Experience\n              </h2>\n              <p className=\"text-lg text-gray-600 mb-8 leading-relaxed\">\n                Designed for the way you actually shop - on your phone, on the go, whenever inspiration strikes.\n                Our mobile-optimised interface makes gift discovery as natural as scrolling through social media.\n              </p>\n\n              <div className=\"space-y-6\">\n                <div className=\"flex items-start gap-4\">\n                  <Smartphone className=\"w-6 h-6 text-primary-600 mt-1\" />\n                  <div>\n                    <h3 className=\"font-semibold text-gray-900 mb-1\">Touch-Optimised Interface</h3>\n                    <p className=\"text-gray-600\">Intuitive swipe gestures and thumb-friendly navigation</p>\n                  </div>\n                </div>\n                <div className=\"flex items-start gap-4\">\n                  <Zap className=\"w-6 h-6 text-primary-600 mt-1\" />\n                  <div>\n                    <h3 className=\"font-semibold text-gray-900 mb-1\">Lightning Fast</h3>\n                    <p className=\"text-gray-600\">Optimised loading times and smooth animations</p>\n                  </div>\n                </div>\n                <div className=\"flex items-start gap-4\">\n                  <Globe className=\"w-6 h-6 text-primary-600 mt-1\" />\n                  <div>\n                    <h3 className=\"font-semibold text-gray-900 mb-1\">Works Everywhere</h3>\n                    <p className=\"text-gray-600\">Cross-platform compatibility on any device</p>\n                  </div>\n                </div>\n              </div>\n\n              <div className=\"mt-8\">\n                <Link\n                  href=\"/discover\"\n                  className=\"inline-flex items-center gap-2 bg-primary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-700 transition-colors\"\n                >\n                  Try Mobile Demo\n                  <Smartphone className=\"w-5 h-5\" />\n                </Link>\n              </div>\n            </div>\n\n            <div className=\"relative\">\n              <div className=\"bg-gradient-to-br from-primary-100 to-secondary-100 rounded-2xl p-8\">\n                <div className=\"bg-white rounded-xl p-6 shadow-lg\">\n                  <div className=\"flex items-center gap-3 mb-4\">\n                    <div className=\"w-3 h-3 bg-red-500 rounded-full\"></div>\n                    <div className=\"w-3 h-3 bg-yellow-500 rounded-full\"></div>\n                    <div className=\"w-3 h-3 bg-green-500 rounded-full\"></div>\n                  </div>\n                  <div className=\"space-y-4\">\n                    <div className=\"h-4 bg-gray-200 rounded w-3/4\"></div>\n                    <div className=\"h-4 bg-gray-200 rounded w-full\"></div>\n                    <div className=\"h-4 bg-gray-200 rounded w-5/6\"></div>\n                    <div className=\"bg-primary-100 rounded-lg p-4 mt-6\">\n                      <div className=\"flex items-center gap-2 mb-2\">\n                        <Bot className=\"w-5 h-5 text-primary-600\" />\n                        <span className=\"text-sm font-medium text-primary-800\">AI Recommendation</span>\n                      </div>\n                      <div className=\"h-3 bg-primary-200 rounded w-4/5\"></div>\n                    </div>\n                  </div>\n                </div>\n              </div>\n            </div>\n          </div>\n        </div>\n      </section>\n\n      {/* CTA Section */}\n      <section className=\"py-20 bg-gradient-to-br from-primary-600 to-secondary-600 text-white\">\n        <div className=\"max-w-4xl mx-auto px-6 lg:px-8 text-center\">\n          <h2 className=\"text-3xl lg:text-4xl font-bold mb-6\">\n            Experience the Future of Gift Discovery\n          </h2>\n          <p className=\"text-xl text-primary-100 mb-8 max-w-2xl mx-auto\">\n            Join thousands of users who've discovered how AI can make gift-giving effortless,\n            enjoyable, and extraordinarily effective.\n          </p>\n\n          <div className=\"flex flex-col sm:flex-row gap-4 justify-center\">\n            <Link\n              href=\"/auth/register\"\n              className=\"inline-flex items-center gap-2 bg-white text-primary-600 px-8 py-4 rounded-xl font-semibold hover:bg-gray-100 transition-colors\"\n            >\n              Start Free Trial\n              <ArrowRight className=\"w-5 h-5\" />\n            </Link>\n            <Link\n              href=\"/discover\"\n              className=\"inline-flex items-center gap-2 border-2 border-white text-white px-8 py-4 rounded-xl font-semibold hover:bg-white hover:text-primary-600 transition-colors\"\n            >\n              Try Demo\n              <Sparkles className=\"w-5 h-5\" />\n            </Link>\n          </div>\n        </div>\n      </section>\n    </>\n  )\n}\n\n/**\n * SEO Metadata for Features Page\n */\nexport const metadata: Metadata = {\n  title: 'Features - AI-Powered Gift Discovery Platform',\n  description: 'Explore aclue\\'s powerful features: AI recommendations, swipe discovery, instant gift links, and social gifting. See how technology transforms gift-giving.',\n  keywords: [\n    'ai gift features',\n    'gift discovery platform',\n    'machine learning gifts',\n    'swipe interface gifts',\n    'personalised recommendations',\n    'gift technology features',\n    'social gifting platform'\n  ],\n  openGraph: {\n    title: 'Features - AI-Powered Gift Discovery Platform',\n    description: 'Discover how AI recommendations, swipe discovery, and social gifting transform the way you find perfect gifts.',\n    url: 'https://aclue.app/features',\n    images: [\n      {\n        url: '/aclue_text_clean.png',\n        width: 1200,\n        height: 630,\n        alt: 'aclue Features - AI Gift Discovery',\n      },\n    ],\n  },\n  twitter: {\n    card: 'summary_large_image',\n    title: 'Features - AI-Powered Gift Discovery Platform',\n    description: 'Discover how AI recommendations and swipe discovery transform gift-giving.',\n    images: ['/aclue_text_clean.png'],\n  },\n  alternates: {\n    canonical: 'https://aclue.app/features',\n  },\n}"],
+      names: ["FeaturesPage", "metadata", "coreFeatures", "icon", "Sparkles", "className", "title", "description", "benefits", "Heart", "Zap", "Users", "technicalFeatures", "Brain", "detail", "Target", "Shield", "Globe", "Clock", "TrendingUp", "useCases", "Gift", "scenario", "solution", "outcome", "Search", "Share", "comparisonFeatures", "feature", "aclue", "traditional", "section", "div", "h1", "span", "p", "h2", "map", "index", "h3", "ul", "benefit", "benefitIndex", "li", "CheckCircle", "useCase", "h4", "item", "Smartphone", "Link", "href", "Bot", "ArrowRight", "keywords", "openGraph", "url", "images", "width", "height", "alt", "twitter", "card", "alternates", "canonical"],
+      mappings: "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"
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "dba54de839e18ed84ae52879c47498f9bf015498"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_44s05q9dl = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_44s05q9dl();
+cov_44s05q9dl().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+function _export(target, all) {
+  /* istanbul ignore next */
+  cov_44s05q9dl().f[0]++;
+  cov_44s05q9dl().s[1]++;
+  for (var name in all) {
+    /* istanbul ignore next */
+    cov_44s05q9dl().s[2]++;
+    Object.defineProperty(target, name, {
+      enumerable: true,
+      get: all[name]
+    });
+  }
+}
+/* istanbul ignore next */
+cov_44s05q9dl().s[3]++;
+_export(exports, {
+  /**
+  * Features Page - App Router Server Component
+  *
+  * Server-rendered features showcase highlighting aclue's key capabilities and technology.
+  * This page demonstrates how AI enhances the gift discovery experience.
+  *
+  * Features:
+  * - Server component for optimal SEO and performance
+  * - Comprehensive feature explanations
+  * - Technical capability demonstrations
+  * - Use case examples and benefits
+  * - Static content optimised for search engines
+  * - British English throughout
+  */
+  default: function () {
+    /* istanbul ignore next */
+    cov_44s05q9dl().f[1]++;
+    cov_44s05q9dl().s[4]++;
+    return FeaturesPage;
+  },
+  metadata: function () {
+    /* istanbul ignore next */
+    cov_44s05q9dl().f[2]++;
+    cov_44s05q9dl().s[5]++;
+    return metadata;
+  }
+});
+const _jsxruntime =
+/* istanbul ignore next */
+(cov_44s05q9dl().s[6]++, require("react/jsx-runtime"));
+const _link =
+/* istanbul ignore next */
+(/*#__PURE__*/cov_44s05q9dl().s[7]++, _interop_require_default(require("next/link")));
+const _lucidereact =
+/* istanbul ignore next */
+(cov_44s05q9dl().s[8]++, require("lucide-react"));
+function _interop_require_default(obj) {
+  /* istanbul ignore next */
+  cov_44s05q9dl().f[3]++;
+  cov_44s05q9dl().s[9]++;
+  return /* istanbul ignore next */(cov_44s05q9dl().b[1][0]++, obj) &&
+  /* istanbul ignore next */
+  (cov_44s05q9dl().b[1][1]++, obj.__esModule) ?
+  /* istanbul ignore next */
+  (cov_44s05q9dl().b[0][0]++, obj) :
+  /* istanbul ignore next */
+  (cov_44s05q9dl().b[0][1]++, {
+    default: obj
+  });
+}
+function FeaturesPage() {
+  /* istanbul ignore next */
+  cov_44s05q9dl().f[4]++;
+  // Core features data - perfect for server rendering
+  const coreFeatures =
+  /* istanbul ignore next */
+  (cov_44s05q9dl().s[10]++, [{
+    icon: /*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.Sparkles, {
+      className: "w-8 h-8"
+    }),
+    title: "AI-Powered Recommendations",
+    description: "Advanced machine learning algorithms analyse your preferences to suggest perfect gifts every time.",
+    benefits: ["95% accuracy in preference matching", "Learns from every interaction", "Personalised for each user", "Improves over time"]
+  }, {
+    icon: /*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.Heart, {
+      className: "w-8 h-8"
+    }),
+    title: "Swipe-Based Discovery",
+    description: "Intuitive Tinder-style interface makes finding gifts as easy as swiping through your favourite social media.",
+    benefits: ["Quick and engaging interaction", "Trains AI with minimal effort", "Mobile-optimised experience", "Fun and addictive interface"]
+  }, {
+    icon: /*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.Zap, {
+      className: "w-8 h-8"
+    }),
+    title: "Instant Gift Links",
+    description: "Generate shareable gift links in seconds. Perfect for wishlists, gift exchanges, and special occasions.",
+    benefits: ["One-click sharing", "Works across all platforms", "No registration required for recipients", "Tracks gift preferences"]
+  }, {
+    icon: /*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.Users, {
+      className: "w-8 h-8"
+    }),
+    title: "Social Gifting",
+    description: "Collaborate with friends and family. Share preferences, create group wishlists, and never give duplicate gifts.",
+    benefits: ["Group collaboration features", "Shared preference insights", "Duplicate gift prevention", "Family and friend networks"]
+  }]);
+  const technicalFeatures =
+  /* istanbul ignore next */
+  (cov_44s05q9dl().s[11]++, [{
+    icon: /*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.Brain, {
+      className: "w-6 h-6"
+    }),
+    title: "Machine Learning Engine",
+    description: "Neural networks trained on millions of gift preferences and purchasing patterns.",
+    detail: "Our ML models use collaborative filtering, content-based recommendation, and deep learning to understand complex preference patterns."
+  }, {
+    icon: /*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.Target, {
+      className: "w-6 h-6"
+    }),
+    title: "Preference Mapping",
+    description: "Advanced algorithms that map personality traits to product characteristics.",
+    detail: "Psychological profiling combined with product analysis creates detailed preference maps for accurate matching."
+  }, {
+    icon: /*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.Shield, {
+      className: "w-6 h-6"
+    }),
+    title: "Privacy Protection",
+    description: "Enterprise-grade security with privacy-by-design architecture.",
+    detail: "End-to-end encryption, GDPR compliance, and user-controlled data sharing ensure complete privacy protection."
+  }, {
+    icon: /*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.Globe, {
+      className: "w-6 h-6"
+    }),
+    title: "Global Product Database",
+    description: "Curated catalogue of over 1 million products from trusted retailers.",
+    detail: "Real-time product data, pricing updates, and availability checks across multiple international marketplaces."
+  }, {
+    icon: /*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.Clock, {
+      className: "w-6 h-6"
+    }),
+    title: "Real-Time Processing",
+    description: "Lightning-fast recommendations powered by cloud infrastructure.",
+    detail: "Sub-second response times using distributed computing and edge caching for optimal user experience."
+  }, {
+    icon: /*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.TrendingUp, {
+      className: "w-6 h-6"
+    }),
+    title: "Trend Analysis",
+    description: "Seasonal and cultural trend integration for timely suggestions.",
+    detail: "Real-time trend analysis incorporating social media, market data, and seasonal patterns for relevant recommendations."
+  }]);
+  const useCases =
+  /* istanbul ignore next */
+  (cov_44s05q9dl().s[12]++, [{
+    icon: /*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.Gift, {
+      className: "w-8 h-8"
+    }),
+    title: "Birthday Gifts",
+    scenario: "Your best friend's birthday is next week",
+    solution: "Swipe through personalised options based on their interests, age, and your relationship history.",
+    outcome: "Find the perfect gift in under 5 minutes with 95% satisfaction guarantee."
+  }, {
+    icon: /*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.Search, {
+      className: "w-8 h-8"
+    }),
+    title: "Holiday Shopping",
+    scenario: "Christmas shopping for the entire family",
+    solution: "Create individual profiles for each family member and get tailored recommendations for everyone.",
+    outcome: "Complete your holiday shopping efficiently with gifts everyone will love."
+  }, {
+    icon: /*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.Share, {
+      className: "w-8 h-8"
+    }),
+    title: "Group Events",
+    scenario: "Office secret Santa or group wedding gift",
+    solution: "Collaborate with colleagues or friends to find the perfect group gift within budget.",
+    outcome: "Seamless group coordination with shared preferences and budget management."
+  }]);
+  const comparisonFeatures =
+  /* istanbul ignore next */
+  (cov_44s05q9dl().s[13]++, [{
+    feature: "AI-Powered Recommendations",
+    aclue: true,
+    traditional: false,
+    description: "Personalised suggestions based on machine learning"
+  }, {
+    feature: "Swipe Interface",
+    aclue: true,
+    traditional: false,
+    description: "Engaging, mobile-first discovery experience"
+  }, {
+    feature: "Preference Learning",
+    aclue: true,
+    traditional: false,
+    description: "Continuous improvement through user interaction"
+  }, {
+    feature: "Social Collaboration",
+    aclue: true,
+    traditional: false,
+    description: "Share and collaborate on gift ideas"
+  }, {
+    feature: "Real-Time Updates",
+    aclue: true,
+    traditional: false,
+    description: "Live pricing and availability information"
+  }, {
+    feature: "Manual Browsing Required",
+    aclue: false,
+    traditional: true,
+    description: "Time-consuming manual product search"
+  }]);
+  /* istanbul ignore next */
+  cov_44s05q9dl().s[14]++;
+  return /*#__PURE__*/(0, _jsxruntime.jsxs)(_jsxruntime.Fragment, {
+    children: [/*#__PURE__*/(0, _jsxruntime.jsx)("section", {
+      className: "relative bg-gradient-to-br from-primary-50 via-white to-secondary-50 py-20",
+      children: /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+        className: "max-w-7xl mx-auto px-6 lg:px-8",
+        children: /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+          className: "text-center mb-16",
+          children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("h1", {
+            className: "text-4xl lg:text-6xl font-bold text-gray-900 mb-6",
+            children: ["Features That Make", " ", /*#__PURE__*/(0, _jsxruntime.jsx)("span", {
+              className: "text-primary-600",
+              children: "Gift-Giving Effortless"
+            })]
+          }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+            className: "text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed",
+            children: "Discover how artificial intelligence, intuitive design, and powerful features transform the way you find and share perfect gifts."
+          })]
+        })
+      })
+    }), /*#__PURE__*/(0, _jsxruntime.jsx)("section", {
+      className: "py-20 bg-white",
+      children: /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+        className: "max-w-7xl mx-auto px-6 lg:px-8",
+        children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+          className: "text-center mb-16",
+          children: [/*#__PURE__*/(0, _jsxruntime.jsx)("h2", {
+            className: "text-3xl lg:text-4xl font-bold text-gray-900 mb-4",
+            children: "Core Features"
+          }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+            className: "text-lg text-gray-600 max-w-2xl mx-auto",
+            children: "The essential capabilities that power intelligent gift discovery"
+          })]
+        }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+          className: "grid lg:grid-cols-2 gap-12",
+          children: coreFeatures.map((feature, index) => {
+            /* istanbul ignore next */
+            cov_44s05q9dl().f[5]++;
+            cov_44s05q9dl().s[15]++;
+            return /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+              className: "flex gap-6",
+              children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                className: "flex-shrink-0",
+                children: /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                  className: "w-16 h-16 bg-primary-100 text-primary-600 rounded-2xl flex items-center justify-center",
+                  children: feature.icon
+                })
+              }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                className: "flex-1",
+                children: [/*#__PURE__*/(0, _jsxruntime.jsx)("h3", {
+                  className: "text-xl font-semibold text-gray-900 mb-3",
+                  children: feature.title
+                }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+                  className: "text-gray-600 mb-4 leading-relaxed",
+                  children: feature.description
+                }), /*#__PURE__*/(0, _jsxruntime.jsx)("ul", {
+                  className: "space-y-2",
+                  children: feature.benefits.map((benefit, benefitIndex) => {
+                    /* istanbul ignore next */
+                    cov_44s05q9dl().f[6]++;
+                    cov_44s05q9dl().s[16]++;
+                    return /*#__PURE__*/(0, _jsxruntime.jsxs)("li", {
+                      className: "flex items-center gap-2 text-sm text-gray-600",
+                      children: [/*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.CheckCircle, {
+                        className: "w-4 h-4 text-green-500 flex-shrink-0"
+                      }), benefit]
+                    }, benefitIndex);
+                  })
+                })]
+              })]
+            }, feature.title);
+          })
+        })]
+      })
+    }), /*#__PURE__*/(0, _jsxruntime.jsx)("section", {
+      className: "py-20 bg-gray-50",
+      children: /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+        className: "max-w-7xl mx-auto px-6 lg:px-8",
+        children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+          className: "text-center mb-16",
+          children: [/*#__PURE__*/(0, _jsxruntime.jsx)("h2", {
+            className: "text-3xl lg:text-4xl font-bold text-gray-900 mb-4",
+            children: "Technical Excellence"
+          }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+            className: "text-lg text-gray-600 max-w-2xl mx-auto",
+            children: "Advanced technology and infrastructure powering exceptional user experiences"
+          })]
+        }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+          className: "grid md:grid-cols-2 lg:grid-cols-3 gap-8",
+          children: technicalFeatures.map((feature, index) => {
+            /* istanbul ignore next */
+            cov_44s05q9dl().f[7]++;
+            cov_44s05q9dl().s[17]++;
+            return /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+              className: "bg-white rounded-2xl p-6 hover:shadow-lg transition-shadow",
+              children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                className: "w-12 h-12 bg-primary-100 text-primary-600 rounded-xl flex items-center justify-center mb-4",
+                children: feature.icon
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("h3", {
+                className: "text-lg font-semibold text-gray-900 mb-3",
+                children: feature.title
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+                className: "text-gray-600 mb-4 leading-relaxed",
+                children: feature.description
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+                className: "text-sm text-gray-500 leading-relaxed",
+                children: feature.detail
+              })]
+            }, feature.title);
+          })
+        })]
+      })
+    }), /*#__PURE__*/(0, _jsxruntime.jsx)("section", {
+      className: "py-20 bg-white",
+      children: /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+        className: "max-w-7xl mx-auto px-6 lg:px-8",
+        children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+          className: "text-center mb-16",
+          children: [/*#__PURE__*/(0, _jsxruntime.jsx)("h2", {
+            className: "text-3xl lg:text-4xl font-bold text-gray-900 mb-4",
+            children: "Real-World Applications"
+          }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+            className: "text-lg text-gray-600 max-w-2xl mx-auto",
+            children: "See how aclue solves common gift-giving challenges"
+          })]
+        }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+          className: "space-y-12",
+          children: useCases.map((useCase, index) => {
+            /* istanbul ignore next */
+            cov_44s05q9dl().f[8]++;
+            cov_44s05q9dl().s[18]++;
+            return /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+              className: `grid lg:grid-cols-3 gap-8 items-center ${index % 2 === 1 ?
+              /* istanbul ignore next */
+              (cov_44s05q9dl().b[2][0]++, "lg:grid-flow-col-dense") :
+              /* istanbul ignore next */
+              (cov_44s05q9dl().b[2][1]++, "")}`,
+              children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                className: `${index % 2 === 1 ?
+                /* istanbul ignore next */
+                (cov_44s05q9dl().b[3][0]++, "lg:col-start-3") :
+                /* istanbul ignore next */
+                (cov_44s05q9dl().b[3][1]++, "")}`,
+                children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                  className: "w-16 h-16 bg-primary-100 text-primary-600 rounded-2xl flex items-center justify-center mb-6",
+                  children: useCase.icon
+                }), /*#__PURE__*/(0, _jsxruntime.jsx)("h3", {
+                  className: "text-2xl font-semibold text-gray-900 mb-4",
+                  children: useCase.title
+                })]
+              }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                className: `lg:col-span-2 space-y-6 ${index % 2 === 1 ?
+                /* istanbul ignore next */
+                (cov_44s05q9dl().b[4][0]++, "lg:col-start-1 lg:row-start-1") :
+                /* istanbul ignore next */
+                (cov_44s05q9dl().b[4][1]++, "")}`,
+                children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                  children: [/*#__PURE__*/(0, _jsxruntime.jsx)("h4", {
+                    className: "font-semibold text-gray-900 mb-2",
+                    children: "Scenario:"
+                  }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+                    className: "text-gray-600",
+                    children: useCase.scenario
+                  })]
+                }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                  children: [/*#__PURE__*/(0, _jsxruntime.jsx)("h4", {
+                    className: "font-semibold text-gray-900 mb-2",
+                    children: "aclue Solution:"
+                  }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+                    className: "text-gray-600",
+                    children: useCase.solution
+                  })]
+                }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                  children: [/*#__PURE__*/(0, _jsxruntime.jsx)("h4", {
+                    className: "font-semibold text-gray-900 mb-2",
+                    children: "Outcome:"
+                  }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+                    className: "text-gray-600",
+                    children: useCase.outcome
+                  })]
+                })]
+              })]
+            }, useCase.title);
+          })
+        })]
+      })
+    }), /*#__PURE__*/(0, _jsxruntime.jsx)("section", {
+      className: "py-20 bg-gray-50",
+      children: /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+        className: "max-w-4xl mx-auto px-6 lg:px-8",
+        children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+          className: "text-center mb-16",
+          children: [/*#__PURE__*/(0, _jsxruntime.jsx)("h2", {
+            className: "text-3xl lg:text-4xl font-bold text-gray-900 mb-4",
+            children: "aclue vs Traditional Gift Shopping"
+          }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+            className: "text-lg text-gray-600",
+            children: "See how our platform compares to conventional gift discovery methods"
+          })]
+        }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+          className: "bg-white rounded-2xl overflow-hidden shadow-lg",
+          children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+            className: "grid grid-cols-3 bg-gray-100 text-center py-4 font-semibold text-gray-900",
+            children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+              children: "Feature"
+            }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+              className: "text-primary-600",
+              children: "aclue"
+            }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+              children: "Traditional Shopping"
+            })]
+          }), comparisonFeatures.map((item, index) => {
+            /* istanbul ignore next */
+            cov_44s05q9dl().f[9]++;
+            cov_44s05q9dl().s[19]++;
+            return /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+              className: `grid grid-cols-3 items-center py-4 px-6 ${index % 2 === 0 ?
+              /* istanbul ignore next */
+              (cov_44s05q9dl().b[5][0]++, "bg-gray-50") :
+              /* istanbul ignore next */
+              (cov_44s05q9dl().b[5][1]++, "bg-white")}`,
+              children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                  className: "font-medium text-gray-900 mb-1",
+                  children: item.feature
+                }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                  className: "text-sm text-gray-600",
+                  children: item.description
+                })]
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                className: "text-center",
+                children: item.aclue ?
+                /* istanbul ignore next */
+                (/*#__PURE__*/cov_44s05q9dl().b[6][0]++, (0, _jsxruntime.jsx)(_lucidereact.CheckCircle, {
+                  className: "w-6 h-6 text-green-500 mx-auto"
+                })) :
+                /* istanbul ignore next */
+                (/*#__PURE__*/cov_44s05q9dl().b[6][1]++, (0, _jsxruntime.jsx)("div", {
+                  className: "w-6 h-6 border-2 border-gray-300 rounded-full mx-auto"
+                }))
+              }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                className: "text-center",
+                children: item.traditional ?
+                /* istanbul ignore next */
+                (/*#__PURE__*/cov_44s05q9dl().b[7][0]++, (0, _jsxruntime.jsx)(_lucidereact.CheckCircle, {
+                  className: "w-6 h-6 text-green-500 mx-auto"
+                })) :
+                /* istanbul ignore next */
+                (/*#__PURE__*/cov_44s05q9dl().b[7][1]++, (0, _jsxruntime.jsx)("div", {
+                  className: "w-6 h-6 border-2 border-gray-300 rounded-full mx-auto"
+                }))
+              })]
+            }, item.feature);
+          })]
+        })]
+      })
+    }), /*#__PURE__*/(0, _jsxruntime.jsx)("section", {
+      className: "py-20 bg-white",
+      children: /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+        className: "max-w-7xl mx-auto px-6 lg:px-8",
+        children: /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+          className: "grid lg:grid-cols-2 gap-16 items-center",
+          children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+            children: [/*#__PURE__*/(0, _jsxruntime.jsx)("h2", {
+              className: "text-3xl lg:text-4xl font-bold text-gray-900 mb-6",
+              children: "Mobile-First Experience"
+            }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+              className: "text-lg text-gray-600 mb-8 leading-relaxed",
+              children: "Designed for the way you actually shop - on your phone, on the go, whenever inspiration strikes. Our mobile-optimised interface makes gift discovery as natural as scrolling through social media."
+            }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+              className: "space-y-6",
+              children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                className: "flex items-start gap-4",
+                children: [/*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.Smartphone, {
+                  className: "w-6 h-6 text-primary-600 mt-1"
+                }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                  children: [/*#__PURE__*/(0, _jsxruntime.jsx)("h3", {
+                    className: "font-semibold text-gray-900 mb-1",
+                    children: "Touch-Optimised Interface"
+                  }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+                    className: "text-gray-600",
+                    children: "Intuitive swipe gestures and thumb-friendly navigation"
+                  })]
+                })]
+              }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                className: "flex items-start gap-4",
+                children: [/*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.Zap, {
+                  className: "w-6 h-6 text-primary-600 mt-1"
+                }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                  children: [/*#__PURE__*/(0, _jsxruntime.jsx)("h3", {
+                    className: "font-semibold text-gray-900 mb-1",
+                    children: "Lightning Fast"
+                  }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+                    className: "text-gray-600",
+                    children: "Optimised loading times and smooth animations"
+                  })]
+                })]
+              }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                className: "flex items-start gap-4",
+                children: [/*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.Globe, {
+                  className: "w-6 h-6 text-primary-600 mt-1"
+                }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                  children: [/*#__PURE__*/(0, _jsxruntime.jsx)("h3", {
+                    className: "font-semibold text-gray-900 mb-1",
+                    children: "Works Everywhere"
+                  }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+                    className: "text-gray-600",
+                    children: "Cross-platform compatibility on any device"
+                  })]
+                })]
+              })]
+            }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+              className: "mt-8",
+              children: /*#__PURE__*/(0, _jsxruntime.jsxs)(_link.default, {
+                href: "/discover",
+                className: "inline-flex items-center gap-2 bg-primary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-700 transition-colors",
+                children: ["Try Mobile Demo", /*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.Smartphone, {
+                  className: "w-5 h-5"
+                })]
+              })
+            })]
+          }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+            className: "relative",
+            children: /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+              className: "bg-gradient-to-br from-primary-100 to-secondary-100 rounded-2xl p-8",
+              children: /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                className: "bg-white rounded-xl p-6 shadow-lg",
+                children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                  className: "flex items-center gap-3 mb-4",
+                  children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                    className: "w-3 h-3 bg-red-500 rounded-full"
+                  }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                    className: "w-3 h-3 bg-yellow-500 rounded-full"
+                  }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                    className: "w-3 h-3 bg-green-500 rounded-full"
+                  })]
+                }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                  className: "space-y-4",
+                  children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                    className: "h-4 bg-gray-200 rounded w-3/4"
+                  }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                    className: "h-4 bg-gray-200 rounded w-full"
+                  }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                    className: "h-4 bg-gray-200 rounded w-5/6"
+                  }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                    className: "bg-primary-100 rounded-lg p-4 mt-6",
+                    children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+                      className: "flex items-center gap-2 mb-2",
+                      children: [/*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.Bot, {
+                        className: "w-5 h-5 text-primary-600"
+                      }), /*#__PURE__*/(0, _jsxruntime.jsx)("span", {
+                        className: "text-sm font-medium text-primary-800",
+                        children: "AI Recommendation"
+                      })]
+                    }), /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+                      className: "h-3 bg-primary-200 rounded w-4/5"
+                    })]
+                  })]
+                })]
+              })
+            })
+          })]
+        })
+      })
+    }), /*#__PURE__*/(0, _jsxruntime.jsx)("section", {
+      className: "py-20 bg-gradient-to-br from-primary-600 to-secondary-600 text-white",
+      children: /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+        className: "max-w-4xl mx-auto px-6 lg:px-8 text-center",
+        children: [/*#__PURE__*/(0, _jsxruntime.jsx)("h2", {
+          className: "text-3xl lg:text-4xl font-bold mb-6",
+          children: "Experience the Future of Gift Discovery"
+        }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+          className: "text-xl text-primary-100 mb-8 max-w-2xl mx-auto",
+          children: "Join thousands of users who've discovered how AI can make gift-giving effortless, enjoyable, and extraordinarily effective."
+        }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+          className: "flex flex-col sm:flex-row gap-4 justify-center",
+          children: [/*#__PURE__*/(0, _jsxruntime.jsxs)(_link.default, {
+            href: "/auth/register",
+            className: "inline-flex items-center gap-2 bg-white text-primary-600 px-8 py-4 rounded-xl font-semibold hover:bg-gray-100 transition-colors",
+            children: ["Start Free Trial", /*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.ArrowRight, {
+              className: "w-5 h-5"
+            })]
+          }), /*#__PURE__*/(0, _jsxruntime.jsxs)(_link.default, {
+            href: "/discover",
+            className: "inline-flex items-center gap-2 border-2 border-white text-white px-8 py-4 rounded-xl font-semibold hover:bg-white hover:text-primary-600 transition-colors",
+            children: ["Try Demo", /*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.Sparkles, {
+              className: "w-5 h-5"
+            })]
+          })]
+        })]
+      })
+    })]
+  });
+}
+const metadata =
+/* istanbul ignore next */
+(cov_44s05q9dl().s[20]++, {
+  title: "Features - AI-Powered Gift Discovery Platform",
+  description: "Explore aclue's powerful features: AI recommendations, swipe discovery, instant gift links, and social gifting. See how technology transforms gift-giving.",
+  keywords: ["ai gift features", "gift discovery platform", "machine learning gifts", "swipe interface gifts", "personalised recommendations", "gift technology features", "social gifting platform"],
+  openGraph: {
+    title: "Features - AI-Powered Gift Discovery Platform",
+    description: "Discover how AI recommendations, swipe discovery, and social gifting transform the way you find perfect gifts.",
+    url: "https://aclue.app/features",
+    images: [{
+      url: "/aclue_text_clean.png",
+      width: 1200,
+      height: 630,
+      alt: "aclue Features - AI Gift Discovery"
+    }]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Features - AI-Powered Gift Discovery Platform",
+    description: "Discover how AI recommendations and swipe discovery transform gift-giving.",
+    images: ["/aclue_text_clean.png"]
+  },
+  alternates: {
+    canonical: "https://aclue.app/features"
+  }
+});
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJkZWZhdWx0IiwiY292XzQ0czA1cTlkbCIsImYiLCJzIiwiRmVhdHVyZXNQYWdlIiwibWV0YWRhdGEiLCJjb3JlRmVhdHVyZXMiLCJpY29uIiwiX2pzeHJ1bnRpbWUiLCJqc3giLCJfbHVjaWRlcmVhY3QiLCJTcGFya2xlcyIsImNsYXNzTmFtZSIsInRpdGxlIiwiZGVzY3JpcHRpb24iLCJiZW5lZml0cyIsIkhlYXJ0IiwiWmFwIiwiVXNlcnMiLCJ0ZWNobmljYWxGZWF0dXJlcyIsIkJyYWluIiwiZGV0YWlsIiwiVGFyZ2V0IiwiU2hpZWxkIiwiR2xvYmUiLCJDbG9jayIsIlRyZW5kaW5nVXAiLCJ1c2VDYXNlcyIsIkdpZnQiLCJzY2VuYXJpbyIsInNvbHV0aW9uIiwib3V0Y29tZSIsIlNlYXJjaCIsIlNoYXJlIiwiY29tcGFyaXNvbkZlYXR1cmVzIiwiZmVhdHVyZSIsImFjbHVlIiwidHJhZGl0aW9uYWwiLCJqc3hzIiwiRnJhZ21lbnQiLCJtYXAiLCJpbmRleCIsImJlbmVmaXQiLCJiZW5lZml0SW5kZXgiLCJDaGVja0NpcmNsZSIsInVzZUNhc2UiLCJiIiwiaXRlbSIsIlNtYXJ0cGhvbmUiLCJfbGluayIsImhyZWYiLCJCb3QiLCJBcnJvd1JpZ2h0Iiwia2V5d29yZHMiLCJvcGVuR3JhcGgiLCJ1cmwiLCJpbWFnZXMiLCJ3aWR0aCIsImhlaWdodCIsImFsdCIsInR3aXR0ZXIiLCJjYXJkIiwiYWx0ZXJuYXRlcyIsImNhbm9uaWNhbCJdLCJzb3VyY2VzIjpbIi9ob21lL2phY2svRG9jdW1lbnRzL2FjbHVlLXByZXByb2Qvd2ViL3NyYy9hcHAvKG1hcmtldGluZykvZmVhdHVyZXMvcGFnZS50c3giXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgTWV0YWRhdGEgfSBmcm9tICduZXh0J1xuaW1wb3J0IExpbmsgZnJvbSAnbmV4dC9saW5rJ1xuaW1wb3J0IHtcbiAgU3BhcmtsZXMsXG4gIEhlYXJ0LFxuICBaYXAsXG4gIFVzZXJzLFxuICBCcmFpbixcbiAgVGFyZ2V0LFxuICBTaGllbGQsXG4gIEdsb2JlLFxuICBDbG9jayxcbiAgVHJlbmRpbmdVcCxcbiAgU21hcnRwaG9uZSxcbiAgQXJyb3dSaWdodCxcbiAgQ2hlY2tDaXJjbGUsXG4gIEJvdCxcbiAgR2lmdCxcbiAgU2VhcmNoLFxuICBTaGFyZSxcbiAgQmFyQ2hhcnQzXG59IGZyb20gJ2x1Y2lkZS1yZWFjdCdcblxuLyoqXG4gKiBGZWF0dXJlcyBQYWdlIC0gQXBwIFJvdXRlciBTZXJ2ZXIgQ29tcG9uZW50XG4gKlxuICogU2VydmVyLXJlbmRlcmVkIGZlYXR1cmVzIHNob3djYXNlIGhpZ2hsaWdodGluZyBBY2x1ZSdzIGtleSBjYXBhYmlsaXRpZXMgYW5kIHRlY2hub2xvZ3kuXG4gKiBUaGlzIHBhZ2UgZGVtb25zdHJhdGVzIGhvdyBBSSBlbmhhbmNlcyB0aGUgZ2lmdCBkaXNjb3ZlcnkgZXhwZXJpZW5jZS5cbiAqXG4gKiBGZWF0dXJlczpcbiAqIC0gU2VydmVyIGNvbXBvbmVudCBmb3Igb3B0aW1hbCBTRU8gYW5kIHBlcmZvcm1hbmNlXG4gKiAtIENvbXByZWhlbnNpdmUgZmVhdHVyZSBleHBsYW5hdGlvbnNcbiAqIC0gVGVjaG5pY2FsIGNhcGFiaWxpdHkgZGVtb25zdHJhdGlvbnNcbiAqIC0gVXNlIGNhc2UgZXhhbXBsZXMgYW5kIGJlbmVmaXRzXG4gKiAtIFN0YXRpYyBjb250ZW50IG9wdGltaXNlZCBmb3Igc2VhcmNoIGVuZ2luZXNcbiAqIC0gQnJpdGlzaCBFbmdsaXNoIHRocm91Z2hvdXRcbiAqL1xuXG5leHBvcnQgZGVmYXVsdCBmdW5jdGlvbiBGZWF0dXJlc1BhZ2UoKSB7XG4gIC8vIENvcmUgZmVhdHVyZXMgZGF0YSAtIHBlcmZlY3QgZm9yIHNlcnZlciByZW5kZXJpbmdcbiAgY29uc3QgY29yZUZlYXR1cmVzID0gW1xuICAgIHtcbiAgICAgIGljb246IDxTcGFya2xlcyBjbGFzc05hbWU9XCJ3LTggaC04XCIgLz4sXG4gICAgICB0aXRsZTogJ0FJLVBvd2VyZWQgUmVjb21tZW5kYXRpb25zJyxcbiAgICAgIGRlc2NyaXB0aW9uOiAnQWR2YW5jZWQgbWFjaGluZSBsZWFybmluZyBhbGdvcml0aG1zIGFuYWx5c2UgeW91ciBwcmVmZXJlbmNlcyB0byBzdWdnZXN0IHBlcmZlY3QgZ2lmdHMgZXZlcnkgdGltZS4nLFxuICAgICAgYmVuZWZpdHM6IFtcbiAgICAgICAgJzk1JSBhY2N1cmFjeSBpbiBwcmVmZXJlbmNlIG1hdGNoaW5nJyxcbiAgICAgICAgJ0xlYXJucyBmcm9tIGV2ZXJ5IGludGVyYWN0aW9uJyxcbiAgICAgICAgJ1BlcnNvbmFsaXNlZCBmb3IgZWFjaCB1c2VyJyxcbiAgICAgICAgJ0ltcHJvdmVzIG92ZXIgdGltZSdcbiAgICAgIF1cbiAgICB9LFxuICAgIHtcbiAgICAgIGljb246IDxIZWFydCBjbGFzc05hbWU9XCJ3LTggaC04XCIgLz4sXG4gICAgICB0aXRsZTogJ1N3aXBlLUJhc2VkIERpc2NvdmVyeScsXG4gICAgICBkZXNjcmlwdGlvbjogJ0ludHVpdGl2ZSBUaW5kZXItc3R5bGUgaW50ZXJmYWNlIG1ha2VzIGZpbmRpbmcgZ2lmdHMgYXMgZWFzeSBhcyBzd2lwaW5nIHRocm91Z2ggeW91ciBmYXZvdXJpdGUgc29jaWFsIG1lZGlhLicsXG4gICAgICBiZW5lZml0czogW1xuICAgICAgICAnUXVpY2sgYW5kIGVuZ2FnaW5nIGludGVyYWN0aW9uJyxcbiAgICAgICAgJ1RyYWlucyBBSSB3aXRoIG1pbmltYWwgZWZmb3J0JyxcbiAgICAgICAgJ01vYmlsZS1vcHRpbWlzZWQgZXhwZXJpZW5jZScsXG4gICAgICAgICdGdW4gYW5kIGFkZGljdGl2ZSBpbnRlcmZhY2UnXG4gICAgICBdXG4gICAgfSxcbiAgICB7XG4gICAgICBpY29uOiA8WmFwIGNsYXNzTmFtZT1cInctOCBoLThcIiAvPixcbiAgICAgIHRpdGxlOiAnSW5zdGFudCBHaWZ0IExpbmtzJyxcbiAgICAgIGRlc2NyaXB0aW9uOiAnR2VuZXJhdGUgc2hhcmVhYmxlIGdpZnQgbGlua3MgaW4gc2Vjb25kcy4gUGVyZmVjdCBmb3Igd2lzaGxpc3RzLCBnaWZ0IGV4Y2hhbmdlcywgYW5kIHNwZWNpYWwgb2NjYXNpb25zLicsXG4gICAgICBiZW5lZml0czogW1xuICAgICAgICAnT25lLWNsaWNrIHNoYXJpbmcnLFxuICAgICAgICAnV29ya3MgYWNyb3NzIGFsbCBwbGF0Zm9ybXMnLFxuICAgICAgICAnTm8gcmVnaXN0cmF0aW9uIHJlcXVpcmVkIGZvciByZWNpcGllbnRzJyxcbiAgICAgICAgJ1RyYWNrcyBnaWZ0IHByZWZlcmVuY2VzJ1xuICAgICAgXVxuICAgIH0sXG4gICAge1xuICAgICAgaWNvbjogPFVzZXJzIGNsYXNzTmFtZT1cInctOCBoLThcIiAvPixcbiAgICAgIHRpdGxlOiAnU29jaWFsIEdpZnRpbmcnLFxuICAgICAgZGVzY3JpcHRpb246ICdDb2xsYWJvcmF0ZSB3aXRoIGZyaWVuZHMgYW5kIGZhbWlseS4gU2hhcmUgcHJlZmVyZW5jZXMsIGNyZWF0ZSBncm91cCB3aXNobGlzdHMsIGFuZCBuZXZlciBnaXZlIGR1cGxpY2F0ZSBnaWZ0cy4nLFxuICAgICAgYmVuZWZpdHM6IFtcbiAgICAgICAgJ0dyb3VwIGNvbGxhYm9yYXRpb24gZmVhdHVyZXMnLFxuICAgICAgICAnU2hhcmVkIHByZWZlcmVuY2UgaW5zaWdodHMnLFxuICAgICAgICAnRHVwbGljYXRlIGdpZnQgcHJldmVudGlvbicsXG4gICAgICAgICdGYW1pbHkgYW5kIGZyaWVuZCBuZXR3b3JrcydcbiAgICAgIF1cbiAgICB9XG4gIF1cblxuICBjb25zdCB0ZWNobmljYWxGZWF0dXJlcyA9IFtcbiAgICB7XG4gICAgICBpY29uOiA8QnJhaW4gY2xhc3NOYW1lPVwidy02IGgtNlwiIC8+LFxuICAgICAgdGl0bGU6ICdNYWNoaW5lIExlYXJuaW5nIEVuZ2luZScsXG4gICAgICBkZXNjcmlwdGlvbjogJ05ldXJhbCBuZXR3b3JrcyB0cmFpbmVkIG9uIG1pbGxpb25zIG9mIGdpZnQgcHJlZmVyZW5jZXMgYW5kIHB1cmNoYXNpbmcgcGF0dGVybnMuJyxcbiAgICAgIGRldGFpbDogJ091ciBNTCBtb2RlbHMgdXNlIGNvbGxhYm9yYXRpdmUgZmlsdGVyaW5nLCBjb250ZW50LWJhc2VkIHJlY29tbWVuZGF0aW9uLCBhbmQgZGVlcCBsZWFybmluZyB0byB1bmRlcnN0YW5kIGNvbXBsZXggcHJlZmVyZW5jZSBwYXR0ZXJucy4nXG4gICAgfSxcbiAgICB7XG4gICAgICBpY29uOiA8VGFyZ2V0IGNsYXNzTmFtZT1cInctNiBoLTZcIiAvPixcbiAgICAgIHRpdGxlOiAnUHJlZmVyZW5jZSBNYXBwaW5nJyxcbiAgICAgIGRlc2NyaXB0aW9uOiAnQWR2YW5jZWQgYWxnb3JpdGhtcyB0aGF0IG1hcCBwZXJzb25hbGl0eSB0cmFpdHMgdG8gcHJvZHVjdCBjaGFyYWN0ZXJpc3RpY3MuJyxcbiAgICAgIGRldGFpbDogJ1BzeWNob2xvZ2ljYWwgcHJvZmlsaW5nIGNvbWJpbmVkIHdpdGggcHJvZHVjdCBhbmFseXNpcyBjcmVhdGVzIGRldGFpbGVkIHByZWZlcmVuY2UgbWFwcyBmb3IgYWNjdXJhdGUgbWF0Y2hpbmcuJ1xuICAgIH0sXG4gICAge1xuICAgICAgaWNvbjogPFNoaWVsZCBjbGFzc05hbWU9XCJ3LTYgaC02XCIgLz4sXG4gICAgICB0aXRsZTogJ1ByaXZhY3kgUHJvdGVjdGlvbicsXG4gICAgICBkZXNjcmlwdGlvbjogJ0VudGVycHJpc2UtZ3JhZGUgc2VjdXJpdHkgd2l0aCBwcml2YWN5LWJ5LWRlc2lnbiBhcmNoaXRlY3R1cmUuJyxcbiAgICAgIGRldGFpbDogJ0VuZC10by1lbmQgZW5jcnlwdGlvbiwgR0RQUiBjb21wbGlhbmNlLCBhbmQgdXNlci1jb250cm9sbGVkIGRhdGEgc2hhcmluZyBlbnN1cmUgY29tcGxldGUgcHJpdmFjeSBwcm90ZWN0aW9uLidcbiAgICB9LFxuICAgIHtcbiAgICAgIGljb246IDxHbG9iZSBjbGFzc05hbWU9XCJ3LTYgaC02XCIgLz4sXG4gICAgICB0aXRsZTogJ0dsb2JhbCBQcm9kdWN0IERhdGFiYXNlJyxcbiAgICAgIGRlc2NyaXB0aW9uOiAnQ3VyYXRlZCBjYXRhbG9ndWUgb2Ygb3ZlciAxIG1pbGxpb24gcHJvZHVjdHMgZnJvbSB0cnVzdGVkIHJldGFpbGVycy4nLFxuICAgICAgZGV0YWlsOiAnUmVhbC10aW1lIHByb2R1Y3QgZGF0YSwgcHJpY2luZyB1cGRhdGVzLCBhbmQgYXZhaWxhYmlsaXR5IGNoZWNrcyBhY3Jvc3MgbXVsdGlwbGUgaW50ZXJuYXRpb25hbCBtYXJrZXRwbGFjZXMuJ1xuICAgIH0sXG4gICAge1xuICAgICAgaWNvbjogPENsb2NrIGNsYXNzTmFtZT1cInctNiBoLTZcIiAvPixcbiAgICAgIHRpdGxlOiAnUmVhbC1UaW1lIFByb2Nlc3NpbmcnLFxuICAgICAgZGVzY3JpcHRpb246ICdMaWdodG5pbmctZmFzdCByZWNvbW1lbmRhdGlvbnMgcG93ZXJlZCBieSBjbG91ZCBpbmZyYXN0cnVjdHVyZS4nLFxuICAgICAgZGV0YWlsOiAnU3ViLXNlY29uZCByZXNwb25zZSB0aW1lcyB1c2luZyBkaXN0cmlidXRlZCBjb21wdXRpbmcgYW5kIGVkZ2UgY2FjaGluZyBmb3Igb3B0aW1hbCB1c2VyIGV4cGVyaWVuY2UuJ1xuICAgIH0sXG4gICAge1xuICAgICAgaWNvbjogPFRyZW5kaW5nVXAgY2xhc3NOYW1lPVwidy02IGgtNlwiIC8+LFxuICAgICAgdGl0bGU6ICdUcmVuZCBBbmFseXNpcycsXG4gICAgICBkZXNjcmlwdGlvbjogJ1NlYXNvbmFsIGFuZCBjdWx0dXJhbCB0cmVuZCBpbnRlZ3JhdGlvbiBmb3IgdGltZWx5IHN1Z2dlc3Rpb25zLicsXG4gICAgICBkZXRhaWw6ICdSZWFsLXRpbWUgdHJlbmQgYW5hbHlzaXMgaW5jb3Jwb3JhdGluZyBzb2NpYWwgbWVkaWEsIG1hcmtldCBkYXRhLCBhbmQgc2Vhc29uYWwgcGF0dGVybnMgZm9yIHJlbGV2YW50IHJlY29tbWVuZGF0aW9ucy4nXG4gICAgfVxuICBdXG5cbiAgY29uc3QgdXNlQ2FzZXMgPSBbXG4gICAge1xuICAgICAgaWNvbjogPEdpZnQgY2xhc3NOYW1lPVwidy04IGgtOFwiIC8+LFxuICAgICAgdGl0bGU6ICdCaXJ0aGRheSBHaWZ0cycsXG4gICAgICBzY2VuYXJpbzogJ1lvdXIgYmVzdCBmcmllbmRcXCdzIGJpcnRoZGF5IGlzIG5leHQgd2VlaycsXG4gICAgICBzb2x1dGlvbjogJ1N3aXBlIHRocm91Z2ggcGVyc29uYWxpc2VkIG9wdGlvbnMgYmFzZWQgb24gdGhlaXIgaW50ZXJlc3RzLCBhZ2UsIGFuZCB5b3VyIHJlbGF0aW9uc2hpcCBoaXN0b3J5LicsXG4gICAgICBvdXRjb21lOiAnRmluZCB0aGUgcGVyZmVjdCBnaWZ0IGluIHVuZGVyIDUgbWludXRlcyB3aXRoIDk1JSBzYXRpc2ZhY3Rpb24gZ3VhcmFudGVlLidcbiAgICB9LFxuICAgIHtcbiAgICAgIGljb246IDxTZWFyY2ggY2xhc3NOYW1lPVwidy04IGgtOFwiIC8+LFxuICAgICAgdGl0bGU6ICdIb2xpZGF5IFNob3BwaW5nJyxcbiAgICAgIHNjZW5hcmlvOiAnQ2hyaXN0bWFzIHNob3BwaW5nIGZvciB0aGUgZW50aXJlIGZhbWlseScsXG4gICAgICBzb2x1dGlvbjogJ0NyZWF0ZSBpbmRpdmlkdWFsIHByb2ZpbGVzIGZvciBlYWNoIGZhbWlseSBtZW1iZXIgYW5kIGdldCB0YWlsb3JlZCByZWNvbW1lbmRhdGlvbnMgZm9yIGV2ZXJ5b25lLicsXG4gICAgICBvdXRjb21lOiAnQ29tcGxldGUgeW91ciBob2xpZGF5IHNob3BwaW5nIGVmZmljaWVudGx5IHdpdGggZ2lmdHMgZXZlcnlvbmUgd2lsbCBsb3ZlLidcbiAgICB9LFxuICAgIHtcbiAgICAgIGljb246IDxTaGFyZSBjbGFzc05hbWU9XCJ3LTggaC04XCIgLz4sXG4gICAgICB0aXRsZTogJ0dyb3VwIEV2ZW50cycsXG4gICAgICBzY2VuYXJpbzogJ09mZmljZSBzZWNyZXQgU2FudGEgb3IgZ3JvdXAgd2VkZGluZyBnaWZ0JyxcbiAgICAgIHNvbHV0aW9uOiAnQ29sbGFib3JhdGUgd2l0aCBjb2xsZWFndWVzIG9yIGZyaWVuZHMgdG8gZmluZCB0aGUgcGVyZmVjdCBncm91cCBnaWZ0IHdpdGhpbiBidWRnZXQuJyxcbiAgICAgIG91dGNvbWU6ICdTZWFtbGVzcyBncm91cCBjb29yZGluYXRpb24gd2l0aCBzaGFyZWQgcHJlZmVyZW5jZXMgYW5kIGJ1ZGdldCBtYW5hZ2VtZW50LidcbiAgICB9XG4gIF1cblxuICBjb25zdCBjb21wYXJpc29uRmVhdHVyZXMgPSBbXG4gICAge1xuICAgICAgZmVhdHVyZTogJ0FJLVBvd2VyZWQgUmVjb21tZW5kYXRpb25zJyxcbiAgICAgIGFjbHVlOiB0cnVlLFxuICAgICAgdHJhZGl0aW9uYWw6IGZhbHNlLFxuICAgICAgZGVzY3JpcHRpb246ICdQZXJzb25hbGlzZWQgc3VnZ2VzdGlvbnMgYmFzZWQgb24gbWFjaGluZSBsZWFybmluZydcbiAgICB9LFxuICAgIHtcbiAgICAgIGZlYXR1cmU6ICdTd2lwZSBJbnRlcmZhY2UnLFxuICAgICAgYWNsdWU6IHRydWUsXG4gICAgICB0cmFkaXRpb25hbDogZmFsc2UsXG4gICAgICBkZXNjcmlwdGlvbjogJ0VuZ2FnaW5nLCBtb2JpbGUtZmlyc3QgZGlzY292ZXJ5IGV4cGVyaWVuY2UnXG4gICAgfSxcbiAgICB7XG4gICAgICBmZWF0dXJlOiAnUHJlZmVyZW5jZSBMZWFybmluZycsXG4gICAgICBhY2x1ZTogdHJ1ZSxcbiAgICAgIHRyYWRpdGlvbmFsOiBmYWxzZSxcbiAgICAgIGRlc2NyaXB0aW9uOiAnQ29udGludW91cyBpbXByb3ZlbWVudCB0aHJvdWdoIHVzZXIgaW50ZXJhY3Rpb24nXG4gICAgfSxcbiAgICB7XG4gICAgICBmZWF0dXJlOiAnU29jaWFsIENvbGxhYm9yYXRpb24nLFxuICAgICAgYWNsdWU6IHRydWUsXG4gICAgICB0cmFkaXRpb25hbDogZmFsc2UsXG4gICAgICBkZXNjcmlwdGlvbjogJ1NoYXJlIGFuZCBjb2xsYWJvcmF0ZSBvbiBnaWZ0IGlkZWFzJ1xuICAgIH0sXG4gICAge1xuICAgICAgZmVhdHVyZTogJ1JlYWwtVGltZSBVcGRhdGVzJyxcbiAgICAgIGFjbHVlOiB0cnVlLFxuICAgICAgdHJhZGl0aW9uYWw6IGZhbHNlLFxuICAgICAgZGVzY3JpcHRpb246ICdMaXZlIHByaWNpbmcgYW5kIGF2YWlsYWJpbGl0eSBpbmZvcm1hdGlvbidcbiAgICB9LFxuICAgIHtcbiAgICAgIGZlYXR1cmU6ICdNYW51YWwgQnJvd3NpbmcgUmVxdWlyZWQnLFxuICAgICAgYWNsdWU6IGZhbHNlLFxuICAgICAgdHJhZGl0aW9uYWw6IHRydWUsXG4gICAgICBkZXNjcmlwdGlvbjogJ1RpbWUtY29uc3VtaW5nIG1hbnVhbCBwcm9kdWN0IHNlYXJjaCdcbiAgICB9XG4gIF1cblxuICByZXR1cm4gKFxuICAgIDw+XG4gICAgICB7LyogSGVybyBTZWN0aW9uICovfVxuICAgICAgPHNlY3Rpb24gY2xhc3NOYW1lPVwicmVsYXRpdmUgYmctZ3JhZGllbnQtdG8tYnIgZnJvbS1wcmltYXJ5LTUwIHZpYS13aGl0ZSB0by1zZWNvbmRhcnktNTAgcHktMjBcIj5cbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJtYXgtdy03eGwgbXgtYXV0byBweC02IGxnOnB4LThcIj5cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInRleHQtY2VudGVyIG1iLTE2XCI+XG4gICAgICAgICAgICA8aDEgY2xhc3NOYW1lPVwidGV4dC00eGwgbGc6dGV4dC02eGwgZm9udC1ib2xkIHRleHQtZ3JheS05MDAgbWItNlwiPlxuICAgICAgICAgICAgICBGZWF0dXJlcyBUaGF0IE1ha2V7JyAnfVxuICAgICAgICAgICAgICA8c3BhbiBjbGFzc05hbWU9XCJ0ZXh0LXByaW1hcnktNjAwXCI+R2lmdC1HaXZpbmcgRWZmb3J0bGVzczwvc3Bhbj5cbiAgICAgICAgICAgIDwvaDE+XG4gICAgICAgICAgICA8cCBjbGFzc05hbWU9XCJ0ZXh0LXhsIHRleHQtZ3JheS02MDAgbWF4LXctM3hsIG14LWF1dG8gbGVhZGluZy1yZWxheGVkXCI+XG4gICAgICAgICAgICAgIERpc2NvdmVyIGhvdyBhcnRpZmljaWFsIGludGVsbGlnZW5jZSwgaW50dWl0aXZlIGRlc2lnbiwgYW5kIHBvd2VyZnVsIGZlYXR1cmVzXG4gICAgICAgICAgICAgIHRyYW5zZm9ybSB0aGUgd2F5IHlvdSBmaW5kIGFuZCBzaGFyZSBwZXJmZWN0IGdpZnRzLlxuICAgICAgICAgICAgPC9wPlxuICAgICAgICAgIDwvZGl2PlxuICAgICAgICA8L2Rpdj5cbiAgICAgIDwvc2VjdGlvbj5cblxuICAgICAgey8qIENvcmUgRmVhdHVyZXMgU2VjdGlvbiAqL31cbiAgICAgIDxzZWN0aW9uIGNsYXNzTmFtZT1cInB5LTIwIGJnLXdoaXRlXCI+XG4gICAgICAgIDxkaXYgY2xhc3NOYW1lPVwibWF4LXctN3hsIG14LWF1dG8gcHgtNiBsZzpweC04XCI+XG4gICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJ0ZXh0LWNlbnRlciBtYi0xNlwiPlxuICAgICAgICAgICAgPGgyIGNsYXNzTmFtZT1cInRleHQtM3hsIGxnOnRleHQtNHhsIGZvbnQtYm9sZCB0ZXh0LWdyYXktOTAwIG1iLTRcIj5cbiAgICAgICAgICAgICAgQ29yZSBGZWF0dXJlc1xuICAgICAgICAgICAgPC9oMj5cbiAgICAgICAgICAgIDxwIGNsYXNzTmFtZT1cInRleHQtbGcgdGV4dC1ncmF5LTYwMCBtYXgtdy0yeGwgbXgtYXV0b1wiPlxuICAgICAgICAgICAgICBUaGUgZXNzZW50aWFsIGNhcGFiaWxpdGllcyB0aGF0IHBvd2VyIGludGVsbGlnZW50IGdpZnQgZGlzY292ZXJ5XG4gICAgICAgICAgICA8L3A+XG4gICAgICAgICAgPC9kaXY+XG5cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImdyaWQgbGc6Z3JpZC1jb2xzLTIgZ2FwLTEyXCI+XG4gICAgICAgICAgICB7Y29yZUZlYXR1cmVzLm1hcCgoZmVhdHVyZSwgaW5kZXgpID0+IChcbiAgICAgICAgICAgICAgPGRpdiBrZXk9e2ZlYXR1cmUudGl0bGV9IGNsYXNzTmFtZT1cImZsZXggZ2FwLTZcIj5cbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImZsZXgtc2hyaW5rLTBcIj5cbiAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwidy0xNiBoLTE2IGJnLXByaW1hcnktMTAwIHRleHQtcHJpbWFyeS02MDAgcm91bmRlZC0yeGwgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXJcIj5cbiAgICAgICAgICAgICAgICAgICAge2ZlYXR1cmUuaWNvbn1cbiAgICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZmxleC0xXCI+XG4gICAgICAgICAgICAgICAgICA8aDMgY2xhc3NOYW1lPVwidGV4dC14bCBmb250LXNlbWlib2xkIHRleHQtZ3JheS05MDAgbWItM1wiPlxuICAgICAgICAgICAgICAgICAgICB7ZmVhdHVyZS50aXRsZX1cbiAgICAgICAgICAgICAgICAgIDwvaDM+XG4gICAgICAgICAgICAgICAgICA8cCBjbGFzc05hbWU9XCJ0ZXh0LWdyYXktNjAwIG1iLTQgbGVhZGluZy1yZWxheGVkXCI+XG4gICAgICAgICAgICAgICAgICAgIHtmZWF0dXJlLmRlc2NyaXB0aW9ufVxuICAgICAgICAgICAgICAgICAgPC9wPlxuICAgICAgICAgICAgICAgICAgPHVsIGNsYXNzTmFtZT1cInNwYWNlLXktMlwiPlxuICAgICAgICAgICAgICAgICAgICB7ZmVhdHVyZS5iZW5lZml0cy5tYXAoKGJlbmVmaXQsIGJlbmVmaXRJbmRleCkgPT4gKFxuICAgICAgICAgICAgICAgICAgICAgIDxsaSBrZXk9e2JlbmVmaXRJbmRleH0gY2xhc3NOYW1lPVwiZmxleCBpdGVtcy1jZW50ZXIgZ2FwLTIgdGV4dC1zbSB0ZXh0LWdyYXktNjAwXCI+XG4gICAgICAgICAgICAgICAgICAgICAgICA8Q2hlY2tDaXJjbGUgY2xhc3NOYW1lPVwidy00IGgtNCB0ZXh0LWdyZWVuLTUwMCBmbGV4LXNocmluay0wXCIgLz5cbiAgICAgICAgICAgICAgICAgICAgICAgIHtiZW5lZml0fVxuICAgICAgICAgICAgICAgICAgICAgIDwvbGk+XG4gICAgICAgICAgICAgICAgICAgICkpfVxuICAgICAgICAgICAgICAgICAgPC91bD5cbiAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICApKX1cbiAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgPC9kaXY+XG4gICAgICA8L3NlY3Rpb24+XG5cbiAgICAgIHsvKiBUZWNobmljYWwgRmVhdHVyZXMgU2VjdGlvbiAqL31cbiAgICAgIDxzZWN0aW9uIGNsYXNzTmFtZT1cInB5LTIwIGJnLWdyYXktNTBcIj5cbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJtYXgtdy03eGwgbXgtYXV0byBweC02IGxnOnB4LThcIj5cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInRleHQtY2VudGVyIG1iLTE2XCI+XG4gICAgICAgICAgICA8aDIgY2xhc3NOYW1lPVwidGV4dC0zeGwgbGc6dGV4dC00eGwgZm9udC1ib2xkIHRleHQtZ3JheS05MDAgbWItNFwiPlxuICAgICAgICAgICAgICBUZWNobmljYWwgRXhjZWxsZW5jZVxuICAgICAgICAgICAgPC9oMj5cbiAgICAgICAgICAgIDxwIGNsYXNzTmFtZT1cInRleHQtbGcgdGV4dC1ncmF5LTYwMCBtYXgtdy0yeGwgbXgtYXV0b1wiPlxuICAgICAgICAgICAgICBBZHZhbmNlZCB0ZWNobm9sb2d5IGFuZCBpbmZyYXN0cnVjdHVyZSBwb3dlcmluZyBleGNlcHRpb25hbCB1c2VyIGV4cGVyaWVuY2VzXG4gICAgICAgICAgICA8L3A+XG4gICAgICAgICAgPC9kaXY+XG5cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImdyaWQgbWQ6Z3JpZC1jb2xzLTIgbGc6Z3JpZC1jb2xzLTMgZ2FwLThcIj5cbiAgICAgICAgICAgIHt0ZWNobmljYWxGZWF0dXJlcy5tYXAoKGZlYXR1cmUsIGluZGV4KSA9PiAoXG4gICAgICAgICAgICAgIDxkaXYga2V5PXtmZWF0dXJlLnRpdGxlfSBjbGFzc05hbWU9XCJiZy13aGl0ZSByb3VuZGVkLTJ4bCBwLTYgaG92ZXI6c2hhZG93LWxnIHRyYW5zaXRpb24tc2hhZG93XCI+XG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJ3LTEyIGgtMTIgYmctcHJpbWFyeS0xMDAgdGV4dC1wcmltYXJ5LTYwMCByb3VuZGVkLXhsIGZsZXggaXRlbXMtY2VudGVyIGp1c3RpZnktY2VudGVyIG1iLTRcIj5cbiAgICAgICAgICAgICAgICAgIHtmZWF0dXJlLmljb259XG4gICAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgICAgPGgzIGNsYXNzTmFtZT1cInRleHQtbGcgZm9udC1zZW1pYm9sZCB0ZXh0LWdyYXktOTAwIG1iLTNcIj5cbiAgICAgICAgICAgICAgICAgIHtmZWF0dXJlLnRpdGxlfVxuICAgICAgICAgICAgICAgIDwvaDM+XG4gICAgICAgICAgICAgICAgPHAgY2xhc3NOYW1lPVwidGV4dC1ncmF5LTYwMCBtYi00IGxlYWRpbmctcmVsYXhlZFwiPlxuICAgICAgICAgICAgICAgICAge2ZlYXR1cmUuZGVzY3JpcHRpb259XG4gICAgICAgICAgICAgICAgPC9wPlxuICAgICAgICAgICAgICAgIDxwIGNsYXNzTmFtZT1cInRleHQtc20gdGV4dC1ncmF5LTUwMCBsZWFkaW5nLXJlbGF4ZWRcIj5cbiAgICAgICAgICAgICAgICAgIHtmZWF0dXJlLmRldGFpbH1cbiAgICAgICAgICAgICAgICA8L3A+XG4gICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgKSl9XG4gICAgICAgICAgPC9kaXY+XG4gICAgICAgIDwvZGl2PlxuICAgICAgPC9zZWN0aW9uPlxuXG4gICAgICB7LyogVXNlIENhc2VzIFNlY3Rpb24gKi99XG4gICAgICA8c2VjdGlvbiBjbGFzc05hbWU9XCJweS0yMCBiZy13aGl0ZVwiPlxuICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cIm1heC13LTd4bCBteC1hdXRvIHB4LTYgbGc6cHgtOFwiPlxuICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwidGV4dC1jZW50ZXIgbWItMTZcIj5cbiAgICAgICAgICAgIDxoMiBjbGFzc05hbWU9XCJ0ZXh0LTN4bCBsZzp0ZXh0LTR4bCBmb250LWJvbGQgdGV4dC1ncmF5LTkwMCBtYi00XCI+XG4gICAgICAgICAgICAgIFJlYWwtV29ybGQgQXBwbGljYXRpb25zXG4gICAgICAgICAgICA8L2gyPlxuICAgICAgICAgICAgPHAgY2xhc3NOYW1lPVwidGV4dC1sZyB0ZXh0LWdyYXktNjAwIG1heC13LTJ4bCBteC1hdXRvXCI+XG4gICAgICAgICAgICAgIFNlZSBob3cgQWNsdWUgc29sdmVzIGNvbW1vbiBnaWZ0LWdpdmluZyBjaGFsbGVuZ2VzXG4gICAgICAgICAgICA8L3A+XG4gICAgICAgICAgPC9kaXY+XG5cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInNwYWNlLXktMTJcIj5cbiAgICAgICAgICAgIHt1c2VDYXNlcy5tYXAoKHVzZUNhc2UsIGluZGV4KSA9PiAoXG4gICAgICAgICAgICAgIDxkaXYga2V5PXt1c2VDYXNlLnRpdGxlfSBjbGFzc05hbWU9e2BncmlkIGxnOmdyaWQtY29scy0zIGdhcC04IGl0ZW1zLWNlbnRlciAke2luZGV4ICUgMiA9PT0gMSA/ICdsZzpncmlkLWZsb3ctY29sLWRlbnNlJyA6ICcnfWB9PlxuICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPXtgJHtpbmRleCAlIDIgPT09IDEgPyAnbGc6Y29sLXN0YXJ0LTMnIDogJyd9YH0+XG4gICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInctMTYgaC0xNiBiZy1wcmltYXJ5LTEwMCB0ZXh0LXByaW1hcnktNjAwIHJvdW5kZWQtMnhsIGZsZXggaXRlbXMtY2VudGVyIGp1c3RpZnktY2VudGVyIG1iLTZcIj5cbiAgICAgICAgICAgICAgICAgICAge3VzZUNhc2UuaWNvbn1cbiAgICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICAgICAgPGgzIGNsYXNzTmFtZT1cInRleHQtMnhsIGZvbnQtc2VtaWJvbGQgdGV4dC1ncmF5LTkwMCBtYi00XCI+XG4gICAgICAgICAgICAgICAgICAgIHt1c2VDYXNlLnRpdGxlfVxuICAgICAgICAgICAgICAgICAgPC9oMz5cbiAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT17YGxnOmNvbC1zcGFuLTIgc3BhY2UteS02ICR7aW5kZXggJSAyID09PSAxID8gJ2xnOmNvbC1zdGFydC0xIGxnOnJvdy1zdGFydC0xJyA6ICcnfWB9PlxuICAgICAgICAgICAgICAgICAgPGRpdj5cbiAgICAgICAgICAgICAgICAgICAgPGg0IGNsYXNzTmFtZT1cImZvbnQtc2VtaWJvbGQgdGV4dC1ncmF5LTkwMCBtYi0yXCI+U2NlbmFyaW86PC9oND5cbiAgICAgICAgICAgICAgICAgICAgPHAgY2xhc3NOYW1lPVwidGV4dC1ncmF5LTYwMFwiPnt1c2VDYXNlLnNjZW5hcmlvfTwvcD5cbiAgICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICAgICAgPGRpdj5cbiAgICAgICAgICAgICAgICAgICAgPGg0IGNsYXNzTmFtZT1cImZvbnQtc2VtaWJvbGQgdGV4dC1ncmF5LTkwMCBtYi0yXCI+QWNsdWUgU29sdXRpb246PC9oND5cbiAgICAgICAgICAgICAgICAgICAgPHAgY2xhc3NOYW1lPVwidGV4dC1ncmF5LTYwMFwiPnt1c2VDYXNlLnNvbHV0aW9ufTwvcD5cbiAgICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICAgICAgPGRpdj5cbiAgICAgICAgICAgICAgICAgICAgPGg0IGNsYXNzTmFtZT1cImZvbnQtc2VtaWJvbGQgdGV4dC1ncmF5LTkwMCBtYi0yXCI+T3V0Y29tZTo8L2g0PlxuICAgICAgICAgICAgICAgICAgICA8cCBjbGFzc05hbWU9XCJ0ZXh0LWdyYXktNjAwXCI+e3VzZUNhc2Uub3V0Y29tZX08L3A+XG4gICAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICApKX1cbiAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgPC9kaXY+XG4gICAgICA8L3NlY3Rpb24+XG5cbiAgICAgIHsvKiBDb21wYXJpc29uIFNlY3Rpb24gKi99XG4gICAgICA8c2VjdGlvbiBjbGFzc05hbWU9XCJweS0yMCBiZy1ncmF5LTUwXCI+XG4gICAgICAgIDxkaXYgY2xhc3NOYW1lPVwibWF4LXctNHhsIG14LWF1dG8gcHgtNiBsZzpweC04XCI+XG4gICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJ0ZXh0LWNlbnRlciBtYi0xNlwiPlxuICAgICAgICAgICAgPGgyIGNsYXNzTmFtZT1cInRleHQtM3hsIGxnOnRleHQtNHhsIGZvbnQtYm9sZCB0ZXh0LWdyYXktOTAwIG1iLTRcIj5cbiAgICAgICAgICAgICAgQWNsdWUgdnMgVHJhZGl0aW9uYWwgR2lmdCBTaG9wcGluZ1xuICAgICAgICAgICAgPC9oMj5cbiAgICAgICAgICAgIDxwIGNsYXNzTmFtZT1cInRleHQtbGcgdGV4dC1ncmF5LTYwMFwiPlxuICAgICAgICAgICAgICBTZWUgaG93IG91ciBwbGF0Zm9ybSBjb21wYXJlcyB0byBjb252ZW50aW9uYWwgZ2lmdCBkaXNjb3ZlcnkgbWV0aG9kc1xuICAgICAgICAgICAgPC9wPlxuICAgICAgICAgIDwvZGl2PlxuXG4gICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJiZy13aGl0ZSByb3VuZGVkLTJ4bCBvdmVyZmxvdy1oaWRkZW4gc2hhZG93LWxnXCI+XG4gICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImdyaWQgZ3JpZC1jb2xzLTMgYmctZ3JheS0xMDAgdGV4dC1jZW50ZXIgcHktNCBmb250LXNlbWlib2xkIHRleHQtZ3JheS05MDBcIj5cbiAgICAgICAgICAgICAgPGRpdj5GZWF0dXJlPC9kaXY+XG4gICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwidGV4dC1wcmltYXJ5LTYwMFwiPkFjbHVlPC9kaXY+XG4gICAgICAgICAgICAgIDxkaXY+VHJhZGl0aW9uYWwgU2hvcHBpbmc8L2Rpdj5cbiAgICAgICAgICAgIDwvZGl2PlxuXG4gICAgICAgICAgICB7Y29tcGFyaXNvbkZlYXR1cmVzLm1hcCgoaXRlbSwgaW5kZXgpID0+IChcbiAgICAgICAgICAgICAgPGRpdiBrZXk9e2l0ZW0uZmVhdHVyZX0gY2xhc3NOYW1lPXtgZ3JpZCBncmlkLWNvbHMtMyBpdGVtcy1jZW50ZXIgcHktNCBweC02ICR7aW5kZXggJSAyID09PSAwID8gJ2JnLWdyYXktNTAnIDogJ2JnLXdoaXRlJ31gfT5cbiAgICAgICAgICAgICAgICA8ZGl2PlxuICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJmb250LW1lZGl1bSB0ZXh0LWdyYXktOTAwIG1iLTFcIj57aXRlbS5mZWF0dXJlfTwvZGl2PlxuICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJ0ZXh0LXNtIHRleHQtZ3JheS02MDBcIj57aXRlbS5kZXNjcmlwdGlvbn08L2Rpdj5cbiAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInRleHQtY2VudGVyXCI+XG4gICAgICAgICAgICAgICAgICB7aXRlbS5hY2x1ZSA/IChcbiAgICAgICAgICAgICAgICAgICAgPENoZWNrQ2lyY2xlIGNsYXNzTmFtZT1cInctNiBoLTYgdGV4dC1ncmVlbi01MDAgbXgtYXV0b1wiIC8+XG4gICAgICAgICAgICAgICAgICApIDogKFxuICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInctNiBoLTYgYm9yZGVyLTIgYm9yZGVyLWdyYXktMzAwIHJvdW5kZWQtZnVsbCBteC1hdXRvXCI+PC9kaXY+XG4gICAgICAgICAgICAgICAgICApfVxuICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwidGV4dC1jZW50ZXJcIj5cbiAgICAgICAgICAgICAgICAgIHtpdGVtLnRyYWRpdGlvbmFsID8gKFxuICAgICAgICAgICAgICAgICAgICA8Q2hlY2tDaXJjbGUgY2xhc3NOYW1lPVwidy02IGgtNiB0ZXh0LWdyZWVuLTUwMCBteC1hdXRvXCIgLz5cbiAgICAgICAgICAgICAgICAgICkgOiAoXG4gICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwidy02IGgtNiBib3JkZXItMiBib3JkZXItZ3JheS0zMDAgcm91bmRlZC1mdWxsIG14LWF1dG9cIj48L2Rpdj5cbiAgICAgICAgICAgICAgICAgICl9XG4gICAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgKSl9XG4gICAgICAgICAgPC9kaXY+XG4gICAgICAgIDwvZGl2PlxuICAgICAgPC9zZWN0aW9uPlxuXG4gICAgICB7LyogTW9iaWxlIEZlYXR1cmVzIFNlY3Rpb24gKi99XG4gICAgICA8c2VjdGlvbiBjbGFzc05hbWU9XCJweS0yMCBiZy13aGl0ZVwiPlxuICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cIm1heC13LTd4bCBteC1hdXRvIHB4LTYgbGc6cHgtOFwiPlxuICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZ3JpZCBsZzpncmlkLWNvbHMtMiBnYXAtMTYgaXRlbXMtY2VudGVyXCI+XG4gICAgICAgICAgICA8ZGl2PlxuICAgICAgICAgICAgICA8aDIgY2xhc3NOYW1lPVwidGV4dC0zeGwgbGc6dGV4dC00eGwgZm9udC1ib2xkIHRleHQtZ3JheS05MDAgbWItNlwiPlxuICAgICAgICAgICAgICAgIE1vYmlsZS1GaXJzdCBFeHBlcmllbmNlXG4gICAgICAgICAgICAgIDwvaDI+XG4gICAgICAgICAgICAgIDxwIGNsYXNzTmFtZT1cInRleHQtbGcgdGV4dC1ncmF5LTYwMCBtYi04IGxlYWRpbmctcmVsYXhlZFwiPlxuICAgICAgICAgICAgICAgIERlc2lnbmVkIGZvciB0aGUgd2F5IHlvdSBhY3R1YWxseSBzaG9wIC0gb24geW91ciBwaG9uZSwgb24gdGhlIGdvLCB3aGVuZXZlciBpbnNwaXJhdGlvbiBzdHJpa2VzLlxuICAgICAgICAgICAgICAgIE91ciBtb2JpbGUtb3B0aW1pc2VkIGludGVyZmFjZSBtYWtlcyBnaWZ0IGRpc2NvdmVyeSBhcyBuYXR1cmFsIGFzIHNjcm9sbGluZyB0aHJvdWdoIHNvY2lhbCBtZWRpYS5cbiAgICAgICAgICAgICAgPC9wPlxuXG4gICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwic3BhY2UteS02XCI+XG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJmbGV4IGl0ZW1zLXN0YXJ0IGdhcC00XCI+XG4gICAgICAgICAgICAgICAgICA8U21hcnRwaG9uZSBjbGFzc05hbWU9XCJ3LTYgaC02IHRleHQtcHJpbWFyeS02MDAgbXQtMVwiIC8+XG4gICAgICAgICAgICAgICAgICA8ZGl2PlxuICAgICAgICAgICAgICAgICAgICA8aDMgY2xhc3NOYW1lPVwiZm9udC1zZW1pYm9sZCB0ZXh0LWdyYXktOTAwIG1iLTFcIj5Ub3VjaC1PcHRpbWlzZWQgSW50ZXJmYWNlPC9oMz5cbiAgICAgICAgICAgICAgICAgICAgPHAgY2xhc3NOYW1lPVwidGV4dC1ncmF5LTYwMFwiPkludHVpdGl2ZSBzd2lwZSBnZXN0dXJlcyBhbmQgdGh1bWItZnJpZW5kbHkgbmF2aWdhdGlvbjwvcD5cbiAgICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZmxleCBpdGVtcy1zdGFydCBnYXAtNFwiPlxuICAgICAgICAgICAgICAgICAgPFphcCBjbGFzc05hbWU9XCJ3LTYgaC02IHRleHQtcHJpbWFyeS02MDAgbXQtMVwiIC8+XG4gICAgICAgICAgICAgICAgICA8ZGl2PlxuICAgICAgICAgICAgICAgICAgICA8aDMgY2xhc3NOYW1lPVwiZm9udC1zZW1pYm9sZCB0ZXh0LWdyYXktOTAwIG1iLTFcIj5MaWdodG5pbmcgRmFzdDwvaDM+XG4gICAgICAgICAgICAgICAgICAgIDxwIGNsYXNzTmFtZT1cInRleHQtZ3JheS02MDBcIj5PcHRpbWlzZWQgbG9hZGluZyB0aW1lcyBhbmQgc21vb3RoIGFuaW1hdGlvbnM8L3A+XG4gICAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImZsZXggaXRlbXMtc3RhcnQgZ2FwLTRcIj5cbiAgICAgICAgICAgICAgICAgIDxHbG9iZSBjbGFzc05hbWU9XCJ3LTYgaC02IHRleHQtcHJpbWFyeS02MDAgbXQtMVwiIC8+XG4gICAgICAgICAgICAgICAgICA8ZGl2PlxuICAgICAgICAgICAgICAgICAgICA8aDMgY2xhc3NOYW1lPVwiZm9udC1zZW1pYm9sZCB0ZXh0LWdyYXktOTAwIG1iLTFcIj5Xb3JrcyBFdmVyeXdoZXJlPC9oMz5cbiAgICAgICAgICAgICAgICAgICAgPHAgY2xhc3NOYW1lPVwidGV4dC1ncmF5LTYwMFwiPkNyb3NzLXBsYXRmb3JtIGNvbXBhdGliaWxpdHkgb24gYW55IGRldmljZTwvcD5cbiAgICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICA8L2Rpdj5cblxuICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cIm10LThcIj5cbiAgICAgICAgICAgICAgICA8TGlua1xuICAgICAgICAgICAgICAgICAgaHJlZj1cIi9kaXNjb3ZlclwiXG4gICAgICAgICAgICAgICAgICBjbGFzc05hbWU9XCJpbmxpbmUtZmxleCBpdGVtcy1jZW50ZXIgZ2FwLTIgYmctcHJpbWFyeS02MDAgdGV4dC13aGl0ZSBweC02IHB5LTMgcm91bmRlZC1sZyBmb250LXNlbWlib2xkIGhvdmVyOmJnLXByaW1hcnktNzAwIHRyYW5zaXRpb24tY29sb3JzXCJcbiAgICAgICAgICAgICAgICA+XG4gICAgICAgICAgICAgICAgICBUcnkgTW9iaWxlIERlbW9cbiAgICAgICAgICAgICAgICAgIDxTbWFydHBob25lIGNsYXNzTmFtZT1cInctNSBoLTVcIiAvPlxuICAgICAgICAgICAgICAgIDwvTGluaz5cbiAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICA8L2Rpdj5cblxuICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJyZWxhdGl2ZVwiPlxuICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImJnLWdyYWRpZW50LXRvLWJyIGZyb20tcHJpbWFyeS0xMDAgdG8tc2Vjb25kYXJ5LTEwMCByb3VuZGVkLTJ4bCBwLThcIj5cbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImJnLXdoaXRlIHJvdW5kZWQteGwgcC02IHNoYWRvdy1sZ1wiPlxuICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJmbGV4IGl0ZW1zLWNlbnRlciBnYXAtMyBtYi00XCI+XG4gICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwidy0zIGgtMyBiZy1yZWQtNTAwIHJvdW5kZWQtZnVsbFwiPjwvZGl2PlxuICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInctMyBoLTMgYmcteWVsbG93LTUwMCByb3VuZGVkLWZ1bGxcIj48L2Rpdj5cbiAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJ3LTMgaC0zIGJnLWdyZWVuLTUwMCByb3VuZGVkLWZ1bGxcIj48L2Rpdj5cbiAgICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJzcGFjZS15LTRcIj5cbiAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJoLTQgYmctZ3JheS0yMDAgcm91bmRlZCB3LTMvNFwiPjwvZGl2PlxuICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImgtNCBiZy1ncmF5LTIwMCByb3VuZGVkIHctZnVsbFwiPjwvZGl2PlxuICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImgtNCBiZy1ncmF5LTIwMCByb3VuZGVkIHctNS82XCI+PC9kaXY+XG4gICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiYmctcHJpbWFyeS0xMDAgcm91bmRlZC1sZyBwLTQgbXQtNlwiPlxuICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZmxleCBpdGVtcy1jZW50ZXIgZ2FwLTIgbWItMlwiPlxuICAgICAgICAgICAgICAgICAgICAgICAgPEJvdCBjbGFzc05hbWU9XCJ3LTUgaC01IHRleHQtcHJpbWFyeS02MDBcIiAvPlxuICAgICAgICAgICAgICAgICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPVwidGV4dC1zbSBmb250LW1lZGl1bSB0ZXh0LXByaW1hcnktODAwXCI+QUkgUmVjb21tZW5kYXRpb248L3NwYW4+XG4gICAgICAgICAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJoLTMgYmctcHJpbWFyeS0yMDAgcm91bmRlZCB3LTQvNVwiPjwvZGl2PlxuICAgICAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgIDwvZGl2PlxuICAgICAgICA8L2Rpdj5cbiAgICAgIDwvc2VjdGlvbj5cblxuICAgICAgey8qIENUQSBTZWN0aW9uICovfVxuICAgICAgPHNlY3Rpb24gY2xhc3NOYW1lPVwicHktMjAgYmctZ3JhZGllbnQtdG8tYnIgZnJvbS1wcmltYXJ5LTYwMCB0by1zZWNvbmRhcnktNjAwIHRleHQtd2hpdGVcIj5cbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJtYXgtdy00eGwgbXgtYXV0byBweC02IGxnOnB4LTggdGV4dC1jZW50ZXJcIj5cbiAgICAgICAgICA8aDIgY2xhc3NOYW1lPVwidGV4dC0zeGwgbGc6dGV4dC00eGwgZm9udC1ib2xkIG1iLTZcIj5cbiAgICAgICAgICAgIEV4cGVyaWVuY2UgdGhlIEZ1dHVyZSBvZiBHaWZ0IERpc2NvdmVyeVxuICAgICAgICAgIDwvaDI+XG4gICAgICAgICAgPHAgY2xhc3NOYW1lPVwidGV4dC14bCB0ZXh0LXByaW1hcnktMTAwIG1iLTggbWF4LXctMnhsIG14LWF1dG9cIj5cbiAgICAgICAgICAgIEpvaW4gdGhvdXNhbmRzIG9mIHVzZXJzIHdobyd2ZSBkaXNjb3ZlcmVkIGhvdyBBSSBjYW4gbWFrZSBnaWZ0LWdpdmluZyBlZmZvcnRsZXNzLFxuICAgICAgICAgICAgZW5qb3lhYmxlLCBhbmQgZXh0cmFvcmRpbmFyaWx5IGVmZmVjdGl2ZS5cbiAgICAgICAgICA8L3A+XG5cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImZsZXggZmxleC1jb2wgc206ZmxleC1yb3cgZ2FwLTQganVzdGlmeS1jZW50ZXJcIj5cbiAgICAgICAgICAgIDxMaW5rXG4gICAgICAgICAgICAgIGhyZWY9XCIvYXV0aC9yZWdpc3RlclwiXG4gICAgICAgICAgICAgIGNsYXNzTmFtZT1cImlubGluZS1mbGV4IGl0ZW1zLWNlbnRlciBnYXAtMiBiZy13aGl0ZSB0ZXh0LXByaW1hcnktNjAwIHB4LTggcHktNCByb3VuZGVkLXhsIGZvbnQtc2VtaWJvbGQgaG92ZXI6YmctZ3JheS0xMDAgdHJhbnNpdGlvbi1jb2xvcnNcIlxuICAgICAgICAgICAgPlxuICAgICAgICAgICAgICBTdGFydCBGcmVlIFRyaWFsXG4gICAgICAgICAgICAgIDxBcnJvd1JpZ2h0IGNsYXNzTmFtZT1cInctNSBoLTVcIiAvPlxuICAgICAgICAgICAgPC9MaW5rPlxuICAgICAgICAgICAgPExpbmtcbiAgICAgICAgICAgICAgaHJlZj1cIi9kaXNjb3ZlclwiXG4gICAgICAgICAgICAgIGNsYXNzTmFtZT1cImlubGluZS1mbGV4IGl0ZW1zLWNlbnRlciBnYXAtMiBib3JkZXItMiBib3JkZXItd2hpdGUgdGV4dC13aGl0ZSBweC04IHB5LTQgcm91bmRlZC14bCBmb250LXNlbWlib2xkIGhvdmVyOmJnLXdoaXRlIGhvdmVyOnRleHQtcHJpbWFyeS02MDAgdHJhbnNpdGlvbi1jb2xvcnNcIlxuICAgICAgICAgICAgPlxuICAgICAgICAgICAgICBUcnkgRGVtb1xuICAgICAgICAgICAgICA8U3BhcmtsZXMgY2xhc3NOYW1lPVwidy01IGgtNVwiIC8+XG4gICAgICAgICAgICA8L0xpbms+XG4gICAgICAgICAgPC9kaXY+XG4gICAgICAgIDwvZGl2PlxuICAgICAgPC9zZWN0aW9uPlxuICAgIDwvPlxuICApXG59XG5cbi8qKlxuICogU0VPIE1ldGFkYXRhIGZvciBGZWF0dXJlcyBQYWdlXG4gKi9cbmV4cG9ydCBjb25zdCBtZXRhZGF0YTogTWV0YWRhdGEgPSB7XG4gIHRpdGxlOiAnRmVhdHVyZXMgLSBBSS1Qb3dlcmVkIEdpZnQgRGlzY292ZXJ5IFBsYXRmb3JtJyxcbiAgZGVzY3JpcHRpb246ICdFeHBsb3JlIEFjbHVlXFwncyBwb3dlcmZ1bCBmZWF0dXJlczogQUkgcmVjb21tZW5kYXRpb25zLCBzd2lwZSBkaXNjb3ZlcnksIGluc3RhbnQgZ2lmdCBsaW5rcywgYW5kIHNvY2lhbCBnaWZ0aW5nLiBTZWUgaG93IHRlY2hub2xvZ3kgdHJhbnNmb3JtcyBnaWZ0LWdpdmluZy4nLFxuICBrZXl3b3JkczogW1xuICAgICdhaSBnaWZ0IGZlYXR1cmVzJyxcbiAgICAnZ2lmdCBkaXNjb3ZlcnkgcGxhdGZvcm0nLFxuICAgICdtYWNoaW5lIGxlYXJuaW5nIGdpZnRzJyxcbiAgICAnc3dpcGUgaW50ZXJmYWNlIGdpZnRzJyxcbiAgICAncGVyc29uYWxpc2VkIHJlY29tbWVuZGF0aW9ucycsXG4gICAgJ2dpZnQgdGVjaG5vbG9neSBmZWF0dXJlcycsXG4gICAgJ3NvY2lhbCBnaWZ0aW5nIHBsYXRmb3JtJ1xuICBdLFxuICBvcGVuR3JhcGg6IHtcbiAgICB0aXRsZTogJ0ZlYXR1cmVzIC0gQUktUG93ZXJlZCBHaWZ0IERpc2NvdmVyeSBQbGF0Zm9ybScsXG4gICAgZGVzY3JpcHRpb246ICdEaXNjb3ZlciBob3cgQUkgcmVjb21tZW5kYXRpb25zLCBzd2lwZSBkaXNjb3ZlcnksIGFuZCBzb2NpYWwgZ2lmdGluZyB0cmFuc2Zvcm0gdGhlIHdheSB5b3UgZmluZCBwZXJmZWN0IGdpZnRzLicsXG4gICAgdXJsOiAnaHR0cHM6Ly9hY2x1ZS5hcHAvZmVhdHVyZXMnLFxuICAgIGltYWdlczogW1xuICAgICAge1xuICAgICAgICB1cmw6ICcvYWNsdWVfdGV4dF9jbGVhbi5wbmcnLFxuICAgICAgICB3aWR0aDogMTIwMCxcbiAgICAgICAgaGVpZ2h0OiA2MzAsXG4gICAgICAgIGFsdDogJ0FjbHVlIEZlYXR1cmVzIC0gQUkgR2lmdCBEaXNjb3ZlcnknLFxuICAgICAgfSxcbiAgICBdLFxuICB9LFxuICB0d2l0dGVyOiB7XG4gICAgY2FyZDogJ3N1bW1hcnlfbGFyZ2VfaW1hZ2UnLFxuICAgIHRpdGxlOiAnRmVhdHVyZXMgLSBBSS1Qb3dlcmVkIEdpZnQgRGlzY292ZXJ5IFBsYXRmb3JtJyxcbiAgICBkZXNjcmlwdGlvbjogJ0Rpc2NvdmVyIGhvdyBBSSByZWNvbW1lbmRhdGlvbnMgYW5kIHN3aXBlIGRpc2NvdmVyeSB0cmFuc2Zvcm0gZ2lmdC1naXZpbmcuJyxcbiAgICBpbWFnZXM6IFsnL2FjbHVlX3RleHRfY2xlYW4ucG5nJ10sXG4gIH0sXG4gIGFsdGVybmF0ZXM6IHtcbiAgICBjYW5vbmljYWw6ICdodHRwczovL2FjbHVlLmFwcC9mZWF0dXJlcycsXG4gIH0sXG59Il0sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7RUF1QkE7Ozs7Ozs7Ozs7Ozs7O0VBZUFBLE9Bc2JDLFdBQUFBLENBQUE7SUFBQTtJQUFBQyxhQUFBLEdBQUFDLENBQUE7SUFBQUQsYUFBQSxHQUFBRSxDQUFBO1dBdGJ1QkMsWUFBQTs7RUEyYlhDLFFBQVEsV0FBQUEsQ0FBQTtJQUFBO0lBQUFKLGFBQUEsR0FBQUMsQ0FBQTtJQUFBRCxhQUFBLEdBQUFFLENBQUE7V0FBUkUsUUFBQTs7Ozs7Ozs7dUVBaGVJOzs7aUNBb0JWOzs7Ozs7Ozs7Ozs7Ozs7QUFpQlEsU0FBU0QsYUFBQTtFQUFBO0VBQUFILGFBQUEsR0FBQUMsQ0FBQTtFQUN0QjtFQUNBLE1BQU1JLFlBQUE7RUFBQTtFQUFBLENBQUFMLGFBQUEsR0FBQUUsQ0FBQSxRQUFlLENBQ25CO0lBQ0VJLElBQUEsZUFBTSxJQUFBQyxXQUFBLENBQUFDLEdBQUEsRUFBQ0MsWUFBQSxDQUFBQyxRQUFRO01BQUNDLFNBQUEsRUFBVTs7SUFDMUJDLEtBQUEsRUFBTztJQUNQQyxXQUFBLEVBQWE7SUFDYkMsUUFBQSxFQUFVLENBQ1IsdUNBQ0EsaUNBQ0EsOEJBQ0E7RUFFSixHQUNBO0lBQ0VSLElBQUEsZUFBTSxJQUFBQyxXQUFBLENBQUFDLEdBQUEsRUFBQ0MsWUFBQSxDQUFBTSxLQUFLO01BQUNKLFNBQUEsRUFBVTs7SUFDdkJDLEtBQUEsRUFBTztJQUNQQyxXQUFBLEVBQWE7SUFDYkMsUUFBQSxFQUFVLENBQ1Isa0NBQ0EsaUNBQ0EsK0JBQ0E7RUFFSixHQUNBO0lBQ0VSLElBQUEsZUFBTSxJQUFBQyxXQUFBLENBQUFDLEdBQUEsRUFBQ0MsWUFBQSxDQUFBTyxHQUFHO01BQUNMLFNBQUEsRUFBVTs7SUFDckJDLEtBQUEsRUFBTztJQUNQQyxXQUFBLEVBQWE7SUFDYkMsUUFBQSxFQUFVLENBQ1IscUJBQ0EsOEJBQ0EsMkNBQ0E7RUFFSixHQUNBO0lBQ0VSLElBQUEsZUFBTSxJQUFBQyxXQUFBLENBQUFDLEdBQUEsRUFBQ0MsWUFBQSxDQUFBUSxLQUFLO01BQUNOLFNBQUEsRUFBVTs7SUFDdkJDLEtBQUEsRUFBTztJQUNQQyxXQUFBLEVBQWE7SUFDYkMsUUFBQSxFQUFVLENBQ1IsZ0NBQ0EsOEJBQ0EsNkJBQ0E7RUFFSixFQUNEO0VBRUQsTUFBTUksaUJBQUE7RUFBQTtFQUFBLENBQUFsQixhQUFBLEdBQUFFLENBQUEsUUFBb0IsQ0FDeEI7SUFDRUksSUFBQSxlQUFNLElBQUFDLFdBQUEsQ0FBQUMsR0FBQSxFQUFDQyxZQUFBLENBQUFVLEtBQUs7TUFBQ1IsU0FBQSxFQUFVOztJQUN2QkMsS0FBQSxFQUFPO0lBQ1BDLFdBQUEsRUFBYTtJQUNiTyxNQUFBLEVBQVE7RUFDVixHQUNBO0lBQ0VkLElBQUEsZUFBTSxJQUFBQyxXQUFBLENBQUFDLEdBQUEsRUFBQ0MsWUFBQSxDQUFBWSxNQUFNO01BQUNWLFNBQUEsRUFBVTs7SUFDeEJDLEtBQUEsRUFBTztJQUNQQyxXQUFBLEVBQWE7SUFDYk8sTUFBQSxFQUFRO0VBQ1YsR0FDQTtJQUNFZCxJQUFBLGVBQU0sSUFBQUMsV0FBQSxDQUFBQyxHQUFBLEVBQUNDLFlBQUEsQ0FBQWEsTUFBTTtNQUFDWCxTQUFBLEVBQVU7O0lBQ3hCQyxLQUFBLEVBQU87SUFDUEMsV0FBQSxFQUFhO0lBQ2JPLE1BQUEsRUFBUTtFQUNWLEdBQ0E7SUFDRWQsSUFBQSxlQUFNLElBQUFDLFdBQUEsQ0FBQUMsR0FBQSxFQUFDQyxZQUFBLENBQUFjLEtBQUs7TUFBQ1osU0FBQSxFQUFVOztJQUN2QkMsS0FBQSxFQUFPO0lBQ1BDLFdBQUEsRUFBYTtJQUNiTyxNQUFBLEVBQVE7RUFDVixHQUNBO0lBQ0VkLElBQUEsZUFBTSxJQUFBQyxXQUFBLENBQUFDLEdBQUEsRUFBQ0MsWUFBQSxDQUFBZSxLQUFLO01BQUNiLFNBQUEsRUFBVTs7SUFDdkJDLEtBQUEsRUFBTztJQUNQQyxXQUFBLEVBQWE7SUFDYk8sTUFBQSxFQUFRO0VBQ1YsR0FDQTtJQUNFZCxJQUFBLGVBQU0sSUFBQUMsV0FBQSxDQUFBQyxHQUFBLEVBQUNDLFlBQUEsQ0FBQWdCLFVBQVU7TUFBQ2QsU0FBQSxFQUFVOztJQUM1QkMsS0FBQSxFQUFPO0lBQ1BDLFdBQUEsRUFBYTtJQUNiTyxNQUFBLEVBQVE7RUFDVixFQUNEO0VBRUQsTUFBTU0sUUFBQTtFQUFBO0VBQUEsQ0FBQTFCLGFBQUEsR0FBQUUsQ0FBQSxRQUFXLENBQ2Y7SUFDRUksSUFBQSxlQUFNLElBQUFDLFdBQUEsQ0FBQUMsR0FBQSxFQUFDQyxZQUFBLENBQUFrQixJQUFJO01BQUNoQixTQUFBLEVBQVU7O0lBQ3RCQyxLQUFBLEVBQU87SUFDUGdCLFFBQUEsRUFBVTtJQUNWQyxRQUFBLEVBQVU7SUFDVkMsT0FBQSxFQUFTO0VBQ1gsR0FDQTtJQUNFeEIsSUFBQSxlQUFNLElBQUFDLFdBQUEsQ0FBQUMsR0FBQSxFQUFDQyxZQUFBLENBQUFzQixNQUFNO01BQUNwQixTQUFBLEVBQVU7O0lBQ3hCQyxLQUFBLEVBQU87SUFDUGdCLFFBQUEsRUFBVTtJQUNWQyxRQUFBLEVBQVU7SUFDVkMsT0FBQSxFQUFTO0VBQ1gsR0FDQTtJQUNFeEIsSUFBQSxlQUFNLElBQUFDLFdBQUEsQ0FBQUMsR0FBQSxFQUFDQyxZQUFBLENBQUF1QixLQUFLO01BQUNyQixTQUFBLEVBQVU7O0lBQ3ZCQyxLQUFBLEVBQU87SUFDUGdCLFFBQUEsRUFBVTtJQUNWQyxRQUFBLEVBQVU7SUFDVkMsT0FBQSxFQUFTO0VBQ1gsRUFDRDtFQUVELE1BQU1HLGtCQUFBO0VBQUE7RUFBQSxDQUFBakMsYUFBQSxHQUFBRSxDQUFBLFFBQXFCLENBQ3pCO0lBQ0VnQyxPQUFBLEVBQVM7SUFDVEMsS0FBQSxFQUFPO0lBQ1BDLFdBQUEsRUFBYTtJQUNidkIsV0FBQSxFQUFhO0VBQ2YsR0FDQTtJQUNFcUIsT0FBQSxFQUFTO0lBQ1RDLEtBQUEsRUFBTztJQUNQQyxXQUFBLEVBQWE7SUFDYnZCLFdBQUEsRUFBYTtFQUNmLEdBQ0E7SUFDRXFCLE9BQUEsRUFBUztJQUNUQyxLQUFBLEVBQU87SUFDUEMsV0FBQSxFQUFhO0lBQ2J2QixXQUFBLEVBQWE7RUFDZixHQUNBO0lBQ0VxQixPQUFBLEVBQVM7SUFDVEMsS0FBQSxFQUFPO0lBQ1BDLFdBQUEsRUFBYTtJQUNidkIsV0FBQSxFQUFhO0VBQ2YsR0FDQTtJQUNFcUIsT0FBQSxFQUFTO0lBQ1RDLEtBQUEsRUFBTztJQUNQQyxXQUFBLEVBQWE7SUFDYnZCLFdBQUEsRUFBYTtFQUNmLEdBQ0E7SUFDRXFCLE9BQUEsRUFBUztJQUNUQyxLQUFBLEVBQU87SUFDUEMsV0FBQSxFQUFhO0lBQ2J2QixXQUFBLEVBQWE7RUFDZixFQUNEO0VBQUE7RUFBQWIsYUFBQSxHQUFBRSxDQUFBO0VBRUQsb0JBQ0UsSUFBQUssV0FBQSxDQUFBOEIsSUFBQSxFQUFBOUIsV0FBQSxDQUFBK0IsUUFBQTs0QkFFRSxJQUFBL0IsV0FBQSxDQUFBQyxHQUFBLEVBQUM7TUFBUUcsU0FBQSxFQUFVO2dCQUNqQixpQkFBQUosV0FBQSxDQUFBQyxHQUFBLEVBQUM7UUFBSUcsU0FBQSxFQUFVO2tCQUNiLGlCQUFBSixXQUFBLENBQUE4QixJQUFBLEVBQUM7VUFBSTFCLFNBQUEsRUFBVTtrQ0FDYixJQUFBSixXQUFBLENBQUE4QixJQUFBLEVBQUM7WUFBRzFCLFNBQUEsRUFBVTt1QkFBb0Qsc0JBQzdDLEssYUFDbkIsSUFBQUosV0FBQSxDQUFBQyxHQUFBLEVBQUM7Y0FBS0csU0FBQSxFQUFVO3dCQUFtQjs7MkJBRXJDLElBQUFKLFdBQUEsQ0FBQUMsR0FBQSxFQUFDO1lBQUVHLFNBQUEsRUFBVTtzQkFBMEQ7Ozs7cUJBUzdFLElBQUFKLFdBQUEsQ0FBQUMsR0FBQSxFQUFDO01BQVFHLFNBQUEsRUFBVTtnQkFDakIsaUJBQUFKLFdBQUEsQ0FBQThCLElBQUEsRUFBQztRQUFJMUIsU0FBQSxFQUFVO2dDQUNiLElBQUFKLFdBQUEsQ0FBQThCLElBQUEsRUFBQztVQUFJMUIsU0FBQSxFQUFVO2tDQUNiLElBQUFKLFdBQUEsQ0FBQUMsR0FBQSxFQUFDO1lBQUdHLFNBQUEsRUFBVTtzQkFBb0Q7MkJBR2xFLElBQUFKLFdBQUEsQ0FBQUMsR0FBQSxFQUFDO1lBQUVHLFNBQUEsRUFBVTtzQkFBMEM7O3lCQUt6RCxJQUFBSixXQUFBLENBQUFDLEdBQUEsRUFBQztVQUFJRyxTQUFBLEVBQVU7b0JBQ1pOLFlBQUEsQ0FBYWtDLEdBQUcsQ0FBQyxDQUFDTCxPQUFBLEVBQVNNLEtBQUEsS0FDMUI7WUFBQTtZQUFBeEMsYUFBQSxHQUFBQyxDQUFBO1lBQUFELGFBQUEsR0FBQUUsQ0FBQTtZQUFBLE9BRDBCLGFBQzFCLElBQUFLLFdBQUEsQ0FBQThCLElBQUEsRUFBQztjQUF3QjFCLFNBQUEsRUFBVTtzQ0FDakMsSUFBQUosV0FBQSxDQUFBQyxHQUFBLEVBQUM7Z0JBQUlHLFNBQUEsRUFBVTswQkFDYixpQkFBQUosV0FBQSxDQUFBQyxHQUFBLEVBQUM7a0JBQUlHLFNBQUEsRUFBVTs0QkFDWnVCLE9BQUEsQ0FBUTVCOzsrQkFHYixJQUFBQyxXQUFBLENBQUE4QixJQUFBLEVBQUM7Z0JBQUkxQixTQUFBLEVBQVU7d0NBQ2IsSUFBQUosV0FBQSxDQUFBQyxHQUFBLEVBQUM7a0JBQUdHLFNBQUEsRUFBVTs0QkFDWHVCLE9BQUEsQ0FBUXRCO2lDQUVYLElBQUFMLFdBQUEsQ0FBQUMsR0FBQSxFQUFDO2tCQUFFRyxTQUFBLEVBQVU7NEJBQ1Z1QixPQUFBLENBQVFyQjtpQ0FFWCxJQUFBTixXQUFBLENBQUFDLEdBQUEsRUFBQztrQkFBR0csU0FBQSxFQUFVOzRCQUNYdUIsT0FBQSxDQUFRcEIsUUFBUSxDQUFDeUIsR0FBRyxDQUFDLENBQUNFLE9BQUEsRUFBU0MsWUFBQSxLQUM5QjtvQkFBQTtvQkFBQTFDLGFBQUEsR0FBQUMsQ0FBQTtvQkFBQUQsYUFBQSxHQUFBRSxDQUFBO29CQUFBLE9BRDhCLGFBQzlCLElBQUFLLFdBQUEsQ0FBQThCLElBQUEsRUFBQztzQkFBc0IxQixTQUFBLEVBQVU7OENBQy9CLElBQUFKLFdBQUEsQ0FBQUMsR0FBQSxFQUFDQyxZQUFBLENBQUFrQyxXQUFXO3dCQUFDaEMsU0FBQSxFQUFVOzBCQUN0QjhCLE9BQUE7dUJBRk1DLFlBQUE7a0JBQUE7OztlQWZQUixPQUFBLENBQVF0QixLQUFLO1VBQUE7OztxQkE2Qi9CLElBQUFMLFdBQUEsQ0FBQUMsR0FBQSxFQUFDO01BQVFHLFNBQUEsRUFBVTtnQkFDakIsaUJBQUFKLFdBQUEsQ0FBQThCLElBQUEsRUFBQztRQUFJMUIsU0FBQSxFQUFVO2dDQUNiLElBQUFKLFdBQUEsQ0FBQThCLElBQUEsRUFBQztVQUFJMUIsU0FBQSxFQUFVO2tDQUNiLElBQUFKLFdBQUEsQ0FBQUMsR0FBQSxFQUFDO1lBQUdHLFNBQUEsRUFBVTtzQkFBb0Q7MkJBR2xFLElBQUFKLFdBQUEsQ0FBQUMsR0FBQSxFQUFDO1lBQUVHLFNBQUEsRUFBVTtzQkFBMEM7O3lCQUt6RCxJQUFBSixXQUFBLENBQUFDLEdBQUEsRUFBQztVQUFJRyxTQUFBLEVBQVU7b0JBQ1pPLGlCQUFBLENBQWtCcUIsR0FBRyxDQUFDLENBQUNMLE9BQUEsRUFBU00sS0FBQSxLQUMvQjtZQUFBO1lBQUF4QyxhQUFBLEdBQUFDLENBQUE7WUFBQUQsYUFBQSxHQUFBRSxDQUFBO1lBQUEsT0FEK0IsYUFDL0IsSUFBQUssV0FBQSxDQUFBOEIsSUFBQSxFQUFDO2NBQXdCMUIsU0FBQSxFQUFVO3NDQUNqQyxJQUFBSixXQUFBLENBQUFDLEdBQUEsRUFBQztnQkFBSUcsU0FBQSxFQUFVOzBCQUNadUIsT0FBQSxDQUFRNUI7K0JBRVgsSUFBQUMsV0FBQSxDQUFBQyxHQUFBLEVBQUM7Z0JBQUdHLFNBQUEsRUFBVTswQkFDWHVCLE9BQUEsQ0FBUXRCOytCQUVYLElBQUFMLFdBQUEsQ0FBQUMsR0FBQSxFQUFDO2dCQUFFRyxTQUFBLEVBQVU7MEJBQ1Z1QixPQUFBLENBQVFyQjsrQkFFWCxJQUFBTixXQUFBLENBQUFDLEdBQUEsRUFBQztnQkFBRUcsU0FBQSxFQUFVOzBCQUNWdUIsT0FBQSxDQUFRZDs7ZUFYSGMsT0FBQSxDQUFRdEIsS0FBSztVQUFBOzs7cUJBb0IvQixJQUFBTCxXQUFBLENBQUFDLEdBQUEsRUFBQztNQUFRRyxTQUFBLEVBQVU7Z0JBQ2pCLGlCQUFBSixXQUFBLENBQUE4QixJQUFBLEVBQUM7UUFBSTFCLFNBQUEsRUFBVTtnQ0FDYixJQUFBSixXQUFBLENBQUE4QixJQUFBLEVBQUM7VUFBSTFCLFNBQUEsRUFBVTtrQ0FDYixJQUFBSixXQUFBLENBQUFDLEdBQUEsRUFBQztZQUFHRyxTQUFBLEVBQVU7c0JBQW9EOzJCQUdsRSxJQUFBSixXQUFBLENBQUFDLEdBQUEsRUFBQztZQUFFRyxTQUFBLEVBQVU7c0JBQTBDOzt5QkFLekQsSUFBQUosV0FBQSxDQUFBQyxHQUFBLEVBQUM7VUFBSUcsU0FBQSxFQUFVO29CQUNaZSxRQUFBLENBQVNhLEdBQUcsQ0FBQyxDQUFDSyxPQUFBLEVBQVNKLEtBQUEsS0FDdEI7WUFBQTtZQUFBeEMsYUFBQSxHQUFBQyxDQUFBO1lBQUFELGFBQUEsR0FBQUUsQ0FBQTtZQUFBLE9BRHNCLGFBQ3RCLElBQUFLLFdBQUEsQ0FBQThCLElBQUEsRUFBQztjQUF3QjFCLFNBQUEsRUFBVywwQ0FBMEM2QixLQUFBLEdBQVEsTUFBTTtjQUFBO2NBQUEsQ0FBQXhDLGFBQUEsR0FBQTZDLENBQUEsVUFBSTtjQUFBO2NBQUEsQ0FBQTdDLGFBQUEsR0FBQTZDLENBQUEsVUFBMkIsS0FBSTtzQ0FDN0gsSUFBQXRDLFdBQUEsQ0FBQThCLElBQUEsRUFBQztnQkFBSTFCLFNBQUEsRUFBVyxHQUFHNkIsS0FBQSxHQUFRLE1BQU07Z0JBQUE7Z0JBQUEsQ0FBQXhDLGFBQUEsR0FBQTZDLENBQUEsVUFBSTtnQkFBQTtnQkFBQSxDQUFBN0MsYUFBQSxHQUFBNkMsQ0FBQSxVQUFtQixLQUFJO3dDQUMxRCxJQUFBdEMsV0FBQSxDQUFBQyxHQUFBLEVBQUM7a0JBQUlHLFNBQUEsRUFBVTs0QkFDWmlDLE9BQUEsQ0FBUXRDO2lDQUVYLElBQUFDLFdBQUEsQ0FBQUMsR0FBQSxFQUFDO2tCQUFHRyxTQUFBLEVBQVU7NEJBQ1hpQyxPQUFBLENBQVFoQzs7K0JBR2IsSUFBQUwsV0FBQSxDQUFBOEIsSUFBQSxFQUFDO2dCQUFJMUIsU0FBQSxFQUFXLDJCQUEyQjZCLEtBQUEsR0FBUSxNQUFNO2dCQUFBO2dCQUFBLENBQUF4QyxhQUFBLEdBQUE2QyxDQUFBLFVBQUk7Z0JBQUE7Z0JBQUEsQ0FBQTdDLGFBQUEsR0FBQTZDLENBQUEsVUFBa0MsS0FBSTt3Q0FDakcsSUFBQXRDLFdBQUEsQ0FBQThCLElBQUEsRUFBQzswQ0FDQyxJQUFBOUIsV0FBQSxDQUFBQyxHQUFBLEVBQUM7b0JBQUdHLFNBQUEsRUFBVTs4QkFBbUM7bUNBQ2pELElBQUFKLFdBQUEsQ0FBQUMsR0FBQSxFQUFDO29CQUFFRyxTQUFBLEVBQVU7OEJBQWlCaUMsT0FBQSxDQUFRaEI7O2lDQUV4QyxJQUFBckIsV0FBQSxDQUFBOEIsSUFBQSxFQUFDOzBDQUNDLElBQUE5QixXQUFBLENBQUFDLEdBQUEsRUFBQztvQkFBR0csU0FBQSxFQUFVOzhCQUFtQzttQ0FDakQsSUFBQUosV0FBQSxDQUFBQyxHQUFBLEVBQUM7b0JBQUVHLFNBQUEsRUFBVTs4QkFBaUJpQyxPQUFBLENBQVFmOztpQ0FFeEMsSUFBQXRCLFdBQUEsQ0FBQThCLElBQUEsRUFBQzswQ0FDQyxJQUFBOUIsV0FBQSxDQUFBQyxHQUFBLEVBQUM7b0JBQUdHLFNBQUEsRUFBVTs4QkFBbUM7bUNBQ2pELElBQUFKLFdBQUEsQ0FBQUMsR0FBQSxFQUFDO29CQUFFRyxTQUFBLEVBQVU7OEJBQWlCaUMsT0FBQSxDQUFRZDs7OztlQXBCbENjLE9BQUEsQ0FBUWhDLEtBQUs7VUFBQTs7O3FCQThCL0IsSUFBQUwsV0FBQSxDQUFBQyxHQUFBLEVBQUM7TUFBUUcsU0FBQSxFQUFVO2dCQUNqQixpQkFBQUosV0FBQSxDQUFBOEIsSUFBQSxFQUFDO1FBQUkxQixTQUFBLEVBQVU7Z0NBQ2IsSUFBQUosV0FBQSxDQUFBOEIsSUFBQSxFQUFDO1VBQUkxQixTQUFBLEVBQVU7a0NBQ2IsSUFBQUosV0FBQSxDQUFBQyxHQUFBLEVBQUM7WUFBR0csU0FBQSxFQUFVO3NCQUFvRDsyQkFHbEUsSUFBQUosV0FBQSxDQUFBQyxHQUFBLEVBQUM7WUFBRUcsU0FBQSxFQUFVO3NCQUF3Qjs7eUJBS3ZDLElBQUFKLFdBQUEsQ0FBQThCLElBQUEsRUFBQztVQUFJMUIsU0FBQSxFQUFVO2tDQUNiLElBQUFKLFdBQUEsQ0FBQThCLElBQUEsRUFBQztZQUFJMUIsU0FBQSxFQUFVO29DQUNiLElBQUFKLFdBQUEsQ0FBQUMsR0FBQSxFQUFDO3dCQUFJOzZCQUNMLElBQUFELFdBQUEsQ0FBQUMsR0FBQSxFQUFDO2NBQUlHLFNBQUEsRUFBVTt3QkFBbUI7NkJBQ2xDLElBQUFKLFdBQUEsQ0FBQUMsR0FBQSxFQUFDO3dCQUFJOztjQUdOeUIsa0JBQUEsQ0FBbUJNLEdBQUcsQ0FBQyxDQUFDTyxJQUFBLEVBQU1OLEtBQUEsS0FDN0I7WUFBQTtZQUFBeEMsYUFBQSxHQUFBQyxDQUFBO1lBQUFELGFBQUEsR0FBQUUsQ0FBQTtZQUFBLE9BRDZCLGFBQzdCLElBQUFLLFdBQUEsQ0FBQThCLElBQUEsRUFBQztjQUF1QjFCLFNBQUEsRUFBVywyQ0FBMkM2QixLQUFBLEdBQVEsTUFBTTtjQUFBO2NBQUEsQ0FBQXhDLGFBQUEsR0FBQTZDLENBQUEsVUFBSTtjQUFBO2NBQUEsQ0FBQTdDLGFBQUEsR0FBQTZDLENBQUEsVUFBZSxhQUFZO3NDQUN6SCxJQUFBdEMsV0FBQSxDQUFBOEIsSUFBQSxFQUFDO3dDQUNDLElBQUE5QixXQUFBLENBQUFDLEdBQUEsRUFBQztrQkFBSUcsU0FBQSxFQUFVOzRCQUFrQ21DLElBQUEsQ0FBS1o7aUNBQ3RELElBQUEzQixXQUFBLENBQUFDLEdBQUEsRUFBQztrQkFBSUcsU0FBQSxFQUFVOzRCQUF5Qm1DLElBQUEsQ0FBS2pDOzsrQkFFL0MsSUFBQU4sV0FBQSxDQUFBQyxHQUFBLEVBQUM7Z0JBQUlHLFNBQUEsRUFBVTswQkFDWm1DLElBQUEsQ0FBS1gsS0FBSztnQkFBQTtnQkFBQSxjQUFBbkMsYUFBQSxHQUFBNkMsQ0FBQSxVQUNULElBQUF0QyxXQUFBLENBQUFDLEdBQUEsRUFBQ0MsWUFBQSxDQUFBa0MsV0FBVztrQkFBQ2hDLFNBQUEsRUFBVTs7O3lEQUV2QixJQUFBSixXQUFBLENBQUFDLEdBQUEsRUFBQztrQkFBSUcsU0FBQSxFQUFVOzsrQkFHbkIsSUFBQUosV0FBQSxDQUFBQyxHQUFBLEVBQUM7Z0JBQUlHLFNBQUEsRUFBVTswQkFDWm1DLElBQUEsQ0FBS1YsV0FBVztnQkFBQTtnQkFBQSxjQUFBcEMsYUFBQSxHQUFBNkMsQ0FBQSxVQUNmLElBQUF0QyxXQUFBLENBQUFDLEdBQUEsRUFBQ0MsWUFBQSxDQUFBa0MsV0FBVztrQkFBQ2hDLFNBQUEsRUFBVTs7O3lEQUV2QixJQUFBSixXQUFBLENBQUFDLEdBQUEsRUFBQztrQkFBSUcsU0FBQSxFQUFVOzs7ZUFoQlhtQyxJQUFBLENBQUtaLE9BQU87VUFBQTs7O3FCQTBCOUIsSUFBQTNCLFdBQUEsQ0FBQUMsR0FBQSxFQUFDO01BQVFHLFNBQUEsRUFBVTtnQkFDakIsaUJBQUFKLFdBQUEsQ0FBQUMsR0FBQSxFQUFDO1FBQUlHLFNBQUEsRUFBVTtrQkFDYixpQkFBQUosV0FBQSxDQUFBOEIsSUFBQSxFQUFDO1VBQUkxQixTQUFBLEVBQVU7a0NBQ2IsSUFBQUosV0FBQSxDQUFBOEIsSUFBQSxFQUFDO29DQUNDLElBQUE5QixXQUFBLENBQUFDLEdBQUEsRUFBQztjQUFHRyxTQUFBLEVBQVU7d0JBQW9EOzZCQUdsRSxJQUFBSixXQUFBLENBQUFDLEdBQUEsRUFBQztjQUFFRyxTQUFBLEVBQVU7d0JBQTZDOzZCQUsxRCxJQUFBSixXQUFBLENBQUE4QixJQUFBLEVBQUM7Y0FBSTFCLFNBQUEsRUFBVTtzQ0FDYixJQUFBSixXQUFBLENBQUE4QixJQUFBLEVBQUM7Z0JBQUkxQixTQUFBLEVBQVU7d0NBQ2IsSUFBQUosV0FBQSxDQUFBQyxHQUFBLEVBQUNDLFlBQUEsQ0FBQXNDLFVBQVU7a0JBQUNwQyxTQUFBLEVBQVU7aUNBQ3RCLElBQUFKLFdBQUEsQ0FBQThCLElBQUEsRUFBQzswQ0FDQyxJQUFBOUIsV0FBQSxDQUFBQyxHQUFBLEVBQUM7b0JBQUdHLFNBQUEsRUFBVTs4QkFBbUM7bUNBQ2pELElBQUFKLFdBQUEsQ0FBQUMsR0FBQSxFQUFDO29CQUFFRyxTQUFBLEVBQVU7OEJBQWdCOzs7K0JBR2pDLElBQUFKLFdBQUEsQ0FBQThCLElBQUEsRUFBQztnQkFBSTFCLFNBQUEsRUFBVTt3Q0FDYixJQUFBSixXQUFBLENBQUFDLEdBQUEsRUFBQ0MsWUFBQSxDQUFBTyxHQUFHO2tCQUFDTCxTQUFBLEVBQVU7aUNBQ2YsSUFBQUosV0FBQSxDQUFBOEIsSUFBQSxFQUFDOzBDQUNDLElBQUE5QixXQUFBLENBQUFDLEdBQUEsRUFBQztvQkFBR0csU0FBQSxFQUFVOzhCQUFtQzttQ0FDakQsSUFBQUosV0FBQSxDQUFBQyxHQUFBLEVBQUM7b0JBQUVHLFNBQUEsRUFBVTs4QkFBZ0I7OzsrQkFHakMsSUFBQUosV0FBQSxDQUFBOEIsSUFBQSxFQUFDO2dCQUFJMUIsU0FBQSxFQUFVO3dDQUNiLElBQUFKLFdBQUEsQ0FBQUMsR0FBQSxFQUFDQyxZQUFBLENBQUFjLEtBQUs7a0JBQUNaLFNBQUEsRUFBVTtpQ0FDakIsSUFBQUosV0FBQSxDQUFBOEIsSUFBQSxFQUFDOzBDQUNDLElBQUE5QixXQUFBLENBQUFDLEdBQUEsRUFBQztvQkFBR0csU0FBQSxFQUFVOzhCQUFtQzttQ0FDakQsSUFBQUosV0FBQSxDQUFBQyxHQUFBLEVBQUM7b0JBQUVHLFNBQUEsRUFBVTs4QkFBZ0I7Ozs7NkJBS25DLElBQUFKLFdBQUEsQ0FBQUMsR0FBQSxFQUFDO2NBQUlHLFNBQUEsRUFBVTt3QkFDYixpQkFBQUosV0FBQSxDQUFBOEIsSUFBQSxFQUFDVyxLQUFBLENBQUFqRCxPQUFJO2dCQUNIa0QsSUFBQSxFQUFLO2dCQUNMdEMsU0FBQSxFQUFVOzJCQUNYLG1CLGFBRUMsSUFBQUosV0FBQSxDQUFBQyxHQUFBLEVBQUNDLFlBQUEsQ0FBQXNDLFVBQVU7a0JBQUNwQyxTQUFBLEVBQVU7Ozs7MkJBSzVCLElBQUFKLFdBQUEsQ0FBQUMsR0FBQSxFQUFDO1lBQUlHLFNBQUEsRUFBVTtzQkFDYixpQkFBQUosV0FBQSxDQUFBQyxHQUFBLEVBQUM7Y0FBSUcsU0FBQSxFQUFVO3dCQUNiLGlCQUFBSixXQUFBLENBQUE4QixJQUFBLEVBQUM7Z0JBQUkxQixTQUFBLEVBQVU7d0NBQ2IsSUFBQUosV0FBQSxDQUFBOEIsSUFBQSxFQUFDO2tCQUFJMUIsU0FBQSxFQUFVOzBDQUNiLElBQUFKLFdBQUEsQ0FBQUMsR0FBQSxFQUFDO29CQUFJRyxTQUFBLEVBQVU7bUNBQ2YsSUFBQUosV0FBQSxDQUFBQyxHQUFBLEVBQUM7b0JBQUlHLFNBQUEsRUFBVTttQ0FDZixJQUFBSixXQUFBLENBQUFDLEdBQUEsRUFBQztvQkFBSUcsU0FBQSxFQUFVOztpQ0FFakIsSUFBQUosV0FBQSxDQUFBOEIsSUFBQSxFQUFDO2tCQUFJMUIsU0FBQSxFQUFVOzBDQUNiLElBQUFKLFdBQUEsQ0FBQUMsR0FBQSxFQUFDO29CQUFJRyxTQUFBLEVBQVU7bUNBQ2YsSUFBQUosV0FBQSxDQUFBQyxHQUFBLEVBQUM7b0JBQUlHLFNBQUEsRUFBVTttQ0FDZixJQUFBSixXQUFBLENBQUFDLEdBQUEsRUFBQztvQkFBSUcsU0FBQSxFQUFVO21DQUNmLElBQUFKLFdBQUEsQ0FBQThCLElBQUEsRUFBQztvQkFBSTFCLFNBQUEsRUFBVTs0Q0FDYixJQUFBSixXQUFBLENBQUE4QixJQUFBLEVBQUM7c0JBQUkxQixTQUFBLEVBQVU7OENBQ2IsSUFBQUosV0FBQSxDQUFBQyxHQUFBLEVBQUNDLFlBQUEsQ0FBQXlDLEdBQUc7d0JBQUN2QyxTQUFBLEVBQVU7dUNBQ2YsSUFBQUosV0FBQSxDQUFBQyxHQUFBLEVBQUM7d0JBQUtHLFNBQUEsRUFBVTtrQ0FBdUM7O3FDQUV6RCxJQUFBSixXQUFBLENBQUFDLEdBQUEsRUFBQztzQkFBSUcsU0FBQSxFQUFVOzs7Ozs7Ozs7cUJBVy9CLElBQUFKLFdBQUEsQ0FBQUMsR0FBQSxFQUFDO01BQVFHLFNBQUEsRUFBVTtnQkFDakIsaUJBQUFKLFdBQUEsQ0FBQThCLElBQUEsRUFBQztRQUFJMUIsU0FBQSxFQUFVO2dDQUNiLElBQUFKLFdBQUEsQ0FBQUMsR0FBQSxFQUFDO1VBQUdHLFNBQUEsRUFBVTtvQkFBc0M7eUJBR3BELElBQUFKLFdBQUEsQ0FBQUMsR0FBQSxFQUFDO1VBQUVHLFNBQUEsRUFBVTtvQkFBa0Q7eUJBSy9ELElBQUFKLFdBQUEsQ0FBQThCLElBQUEsRUFBQztVQUFJMUIsU0FBQSxFQUFVO2tDQUNiLElBQUFKLFdBQUEsQ0FBQThCLElBQUEsRUFBQ1csS0FBQSxDQUFBakQsT0FBSTtZQUNIa0QsSUFBQSxFQUFLO1lBQ0x0QyxTQUFBLEVBQVU7dUJBQ1gsb0IsYUFFQyxJQUFBSixXQUFBLENBQUFDLEdBQUEsRUFBQ0MsWUFBQSxDQUFBMEMsVUFBVTtjQUFDeEMsU0FBQSxFQUFVOzsyQkFFeEIsSUFBQUosV0FBQSxDQUFBOEIsSUFBQSxFQUFDVyxLQUFBLENBQUFqRCxPQUFJO1lBQ0hrRCxJQUFBLEVBQUs7WUFDTHRDLFNBQUEsRUFBVTt1QkFDWCxZLGFBRUMsSUFBQUosV0FBQSxDQUFBQyxHQUFBLEVBQUNDLFlBQUEsQ0FBQUMsUUFBUTtjQUFDQyxTQUFBLEVBQVU7Ozs7Ozs7QUFPbEM7QUFLTyxNQUFNUCxRQUFBO0FBQUE7QUFBQSxDQUFBSixhQUFBLEdBQUFFLENBQUEsUUFBcUI7RUFDaENVLEtBQUEsRUFBTztFQUNQQyxXQUFBLEVBQWE7RUFDYnVDLFFBQUEsRUFBVSxDQUNSLG9CQUNBLDJCQUNBLDBCQUNBLHlCQUNBLGdDQUNBLDRCQUNBLDBCQUNEO0VBQ0RDLFNBQUEsRUFBVztJQUNUekMsS0FBQSxFQUFPO0lBQ1BDLFdBQUEsRUFBYTtJQUNieUMsR0FBQSxFQUFLO0lBQ0xDLE1BQUEsRUFBUSxDQUNOO01BQ0VELEdBQUEsRUFBSztNQUNMRSxLQUFBLEVBQU87TUFDUEMsTUFBQSxFQUFRO01BQ1JDLEdBQUEsRUFBSztJQUNQO0VBRUo7RUFDQUMsT0FBQSxFQUFTO0lBQ1BDLElBQUEsRUFBTTtJQUNOaEQsS0FBQSxFQUFPO0lBQ1BDLFdBQUEsRUFBYTtJQUNiMEMsTUFBQSxFQUFRLENBQUM7RUFDWDtFQUNBTSxVQUFBLEVBQVk7SUFDVkMsU0FBQSxFQUFXO0VBQ2I7QUFDRiIsImlnbm9yZUxpc3QiOltdfQ==

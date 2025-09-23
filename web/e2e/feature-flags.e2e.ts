@@ -66,7 +66,7 @@ test.describe('Feature Flag System', () => {
       
       // Note: In actual implementation, you'd check for specific App Router indicators
       // For now, we verify the page loads correctly with feature flags
-      await expect(page).toHaveTitle(/Aclue/);
+      await expect(page).toHaveTitle(/aclue/);
     });
 
     test('should maintain user consistency across sessions', async ({ page, context }) => {
@@ -115,11 +115,11 @@ test.describe('Feature Flag System', () => {
 
       // Test enabled route (auth)
       await page.goto('/auth/login');
-      await expect(page).toHaveTitle(/Aclue/);
+      await expect(page).toHaveTitle(/aclue/);
       
       // Test non-enabled route (should fallback to Pages Router)
       await page.goto('/products');
-      await expect(page).toHaveTitle(/Aclue/);
+      await expect(page).toHaveTitle(/aclue/);
       
       // Verify different behavior or structure if needed
       const authPageStructure = await page.goto('/auth/login').then(() => 
@@ -146,15 +146,15 @@ test.describe('Feature Flag System', () => {
 
       // Test main auth route
       await page.goto('/auth/login');
-      await expect(page).toHaveTitle(/Aclue/);
+      await expect(page).toHaveTitle(/aclue/);
       
       // Test auth sub-route
       await page.goto('/auth/register');
-      await expect(page).toHaveTitle(/Aclue/);
+      await expect(page).toHaveTitle(/aclue/);
       
       // Test nested auth route
       await page.goto('/auth/forgot-password');
-      await expect(page).toHaveTitle(/Aclue/);
+      await expect(page).toHaveTitle(/aclue/);
     });
   });
 
@@ -171,7 +171,7 @@ test.describe('Feature Flag System', () => {
       await page.goto('/');
       
       // Should still load successfully with fallback behavior
-      await expect(page).toHaveTitle(/Aclue/);
+      await expect(page).toHaveTitle(/aclue/);
       
       // Check console for errors (should handle gracefully)
       const consoleErrors = [];
@@ -209,7 +209,7 @@ test.describe('Feature Flag System', () => {
       });
       
       // Should load Pages Router version
-      await expect(page).toHaveTitle(/Aclue/);
+      await expect(page).toHaveTitle(/aclue/);
     });
   });
 
@@ -306,8 +306,8 @@ test.describe('App Router vs Pages Router Comparison', () => {
       const pagesRouterContent = await page.content();
       
       // Both should load successfully
-      expect(appRouterContent).toContain('Aclue');
-      expect(pagesRouterContent).toContain('Aclue');
+      expect(appRouterContent).toContain('aclue');
+      expect(pagesRouterContent).toContain('aclue');
       
       // Should have similar core functionality
       // (Specific assertions would depend on actual implementation)

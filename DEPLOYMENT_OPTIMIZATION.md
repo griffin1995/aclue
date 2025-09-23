@@ -1,7 +1,7 @@
-# Aclue Production Deployment Optimization
+# aclue Production Deployment Optimization
 
 ## Overview
-This document outlines the completed optimization of production deployment configurations for the Aclue platform, addressing security vulnerabilities, performance improvements, and environment variable synchronization across Railway (backend) and Vercel (frontend).
+This document outlines the completed optimization of production deployment configurations for the aclue platform, addressing security vulnerabilities, performance improvements, and environment variable synchronization across Railway (backend) and Vercel (frontend).
 
 ## Railway Backend Optimizations
 

@@ -87,7 +87,7 @@ echo "=============================================="
 cat > "$REPORT_FILE" << EOF
 {
     "timestamp": "$TIMESTAMP",
-    "platform": "Aclue Performance Monitoring Suite",
+    "platform": "aclue Performance Monitoring Suite",
     "test_results": {
         "lighthouse_ci": "${test_results[lighthouse_ci]:-skipped}",
         "unlighthouse": "${test_results[unlighthouse]:-skipped}",

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Aclue Frontend Accessibility and SEO Automation Suite
+# aclue Frontend Accessibility and SEO Automation Suite
 # Comprehensive scanning with Pa11y, axe-core, Lighthouse, broken-link-checker, and webhint
 
 set -e
@@ -215,7 +215,7 @@ run_broken_link_checker() {
                --host-requests 1 \
                --rate-limit 100 \
                --timeout 30000 \
-               --user-agent "BLC-Aclue-Scanner/1.0" > "${output_file}" 2>/dev/null; then
+               --user-agent "BLC-aclue-Scanner/1.0" > "${output_file}" 2>/dev/null; then
             log_success "Broken link check completed for ${url_type}"
         else
             log_error "Broken link check failed for ${url_type}"
@@ -285,7 +285,7 @@ EOF
 
 main() {
     echo "========================================"
-    echo "Aclue Frontend Accessibility & SEO Audit"
+    echo "aclue Frontend Accessibility & SEO Audit"
     echo "========================================"
     echo "Timestamp: ${TIMESTAMP}"
     echo "Tools: Pa11y, axe-core, Lighthouse, broken-link-checker, webhint"

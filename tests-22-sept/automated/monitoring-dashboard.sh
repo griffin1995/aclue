@@ -12,7 +12,7 @@ set -euo pipefail
 
 # Script metadata
 readonly SCRIPT_VERSION="1.0.0"
-readonly SCRIPT_NAME="Aclue Testing Monitoring Dashboard"
+readonly SCRIPT_NAME="aclue Testing Monitoring Dashboard"
 readonly SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 readonly PROJECT_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 readonly TIMESTAMP="$(date +%Y%m%d_%H%M%S)"
@@ -338,13 +338,13 @@ send_alert_notification() {
                 \"attachments\": [
                     {
                         \"color\": \"$color\",
-                        \"title\": \"$emoji Aclue Monitoring Alert\",
+                        \"title\": \"$emoji aclue Monitoring Alert\",
                         \"fields\": [
                             {\"title\": \"Alert Type\", \"value\": \"$alert_type\", \"short\": true},
                             {\"title\": \"Message\", \"value\": \"$alert_message\", \"short\": false},
                             {\"title\": \"Timestamp\", \"value\": \"$(date)\", \"short\": true}
                         ],
-                        \"footer\": \"Aclue Monitoring Dashboard\"
+                        \"footer\": \"aclue Monitoring Dashboard\"
                     }
                 ]
             }" \
@@ -595,7 +595,7 @@ main() {
 
     setup_monitoring
 
-    log "INFO" "Aclue Testing Monitoring Dashboard starting..."
+    log "INFO" "aclue Testing Monitoring Dashboard starting..."
     log "INFO" "Press 'q' to quit, 'r' to refresh, 'h' for health check"
 
     # Initial metrics collection

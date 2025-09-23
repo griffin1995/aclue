@@ -57,7 +57,7 @@ echo -e "${BLUE}================================================================
 cat > "${RESULTS_DIR}/summary.json" << EOF
 {
     "timestamp": "${TIMESTAMP}",
-    "project": "Aclue Platform",
+    "project": "aclue Platform",
     "execution_status": "in_progress",
     "categories": {},
     "total_tools_executed": 0,
@@ -247,7 +247,7 @@ done
 cat > "${RESULTS_DIR}/final-summary.json" << EOF
 {
     "timestamp": "${TIMESTAMP}",
-    "project": "Aclue Platform",
+    "project": "aclue Platform",
     "execution_status": "completed",
     "total_tests_executed": ${total_tests},
     "successful_tests": ${successful_tests},
@@ -262,7 +262,7 @@ cat > "${RESULTS_DIR}/report.html" << EOF
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Aclue Testing Report - ${TIMESTAMP}</title>
+    <title>aclue Testing Report - ${TIMESTAMP}</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; }
         h1 { color: #333; }
@@ -276,7 +276,7 @@ cat > "${RESULTS_DIR}/report.html" << EOF
     </style>
 </head>
 <body>
-    <h1>Aclue Platform Testing Report</h1>
+    <h1>aclue Platform Testing Report</h1>
     <div class="summary">
         <h2>Executive Summary</h2>
         <p>Timestamp: ${TIMESTAMP}</p>

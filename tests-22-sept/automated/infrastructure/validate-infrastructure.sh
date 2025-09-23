@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Aclue Infrastructure Validation Suite
+# aclue Infrastructure Validation Suite
 # Comprehensive automated infrastructure security and compliance analysis
 # 
 # This script orchestrates multiple security tools to provide complete infrastructure validation:
@@ -409,7 +409,7 @@ EOF
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Aclue Infrastructure Validation Report</title>
+    <title>aclue Infrastructure Validation Report</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; }
         .header { background-color: #f0f0f0; padding: 20px; border-radius: 5px; }
@@ -426,7 +426,7 @@ EOF
 </head>
 <body>
     <div class="header">
-        <h1>🛡️ Aclue Infrastructure Validation Report</h1>
+        <h1>🛡️ aclue Infrastructure Validation Report</h1>
         <p><strong>Generated:</strong> $(date)</p>
         <p><strong>Project:</strong> $PROJECT_ROOT</p>
     </div>
@@ -514,7 +514,7 @@ EOF
 
 # Main execution function
 main() {
-    log "🛡️ Starting Aclue Infrastructure Validation Suite"
+    log "🛡️ Starting aclue Infrastructure Validation Suite"
     log "Project root: $PROJECT_ROOT"
     log "Reports directory: $REPORTS_DIR"
     

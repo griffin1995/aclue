@@ -1,8 +1,8 @@
-# Aclue Enterprise Security Configuration
+# aclue Enterprise Security Configuration
 
 ## Overview
 
-This repository contains comprehensive enterprise-grade security configuration scripts for the Aclue platform domains (`aclue.co.uk` and `aclue.app`). The implementation follows OWASP security standards and UK/GDPR compliance requirements.
+This repository contains comprehensive enterprise-grade security configuration scripts for the aclue platform domains (`aclue.co.uk` and `aclue.app`). The implementation follows OWASP security standards and UK/GDPR compliance requirements.
 
 ## 🔐 Security Features Implemented
 
@@ -325,4 +325,4 @@ git pull origin main
 
 ---
 
-*This security implementation provides enterprise-grade protection for the Aclue platform while maintaining optimal performance and user experience. Regular monitoring and maintenance ensure continued security effectiveness.*
+*This security implementation provides enterprise-grade protection for the aclue platform while maintaining optimal performance and user experience. Regular monitoring and maintenance ensure continued security effectiveness.*

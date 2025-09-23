@@ -1,0 +1,486 @@
+da2dd7513f78635a7540882b2135116a
+/**
+ * Shop Layout - Server Component
+ *
+ * Provides the shared layout for all shop-related pages including:
+ * - Product discovery (/discover)
+ * - Product details (/products/[id])
+ * - Search results (/search)
+ *
+ * This is a server component that handles:
+ * - Meta tags and SEO
+ * - Shared navigation structure
+ * - Common styling and branding
+ *
+ * Features:
+ * - Server-side authentication checking
+ * - Responsive design with glassmorphism
+ * - Progressive enhancement approach
+ */"use strict";
+
+/* istanbul ignore next */
+function cov_14mku3yswx() {
+  var path = "/home/jack/Documents/aclue-preprod/web/src/app/(shop)/layout.tsx";
+  var hash = "6ea616046c2deecc7f5d3f782880d7ee0bf140e9";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/home/jack/Documents/aclue-preprod/web/src/app/(shop)/layout.tsx",
+    statementMap: {
+      "0": {
+        start: {
+          line: 19,
+          column: 0
+        },
+        end: {
+          line: 21,
+          column: 3
+        }
+      },
+      "1": {
+        start: {
+          line: 23,
+          column: 4
+        },
+        end: {
+          line: 26,
+          column: 7
+        }
+      },
+      "2": {
+        start: {
+          line: 23,
+          column: 24
+        },
+        end: {
+          line: 26,
+          column: 7
+        }
+      },
+      "3": {
+        start: {
+          line: 28,
+          column: 0
+        },
+        end: {
+          line: 40,
+          column: 3
+        }
+      },
+      "4": {
+        start: {
+          line: 35,
+          column: 8
+        },
+        end: {
+          line: 35,
+          column: 26
+        }
+      },
+      "5": {
+        start: {
+          line: 38,
+          column: 8
+        },
+        end: {
+          line: 38,
+          column: 24
+        }
+      },
+      "6": {
+        start: {
+          line: 41,
+          column: 20
+        },
+        end: {
+          line: 41,
+          column: 48
+        }
+      },
+      "7": {
+        start: {
+          line: 42,
+          column: 29
+        },
+        end: {
+          line: 42,
+          column: 71
+        }
+      },
+      "8": {
+        start: {
+          line: 43,
+          column: 24
+        },
+        end: {
+          line: 43,
+          column: 71
+        }
+      },
+      "9": {
+        start: {
+          line: 45,
+          column: 4
+        },
+        end: {
+          line: 47,
+          column: 6
+        }
+      },
+      "10": {
+        start: {
+          line: 49,
+          column: 17
+        },
+        end: {
+          line: 72,
+          column: 1
+        }
+      },
+      "11": {
+        start: {
+          line: 74,
+          column: 4
+        },
+        end: {
+          line: 83,
+          column: 7
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "_export",
+        decl: {
+          start: {
+            line: 22,
+            column: 9
+          },
+          end: {
+            line: 22,
+            column: 16
+          }
+        },
+        loc: {
+          start: {
+            line: 22,
+            column: 30
+          },
+          end: {
+            line: 27,
+            column: 1
+          }
+        },
+        line: 22
+      },
+      "1": {
+        name: "(anonymous_1)",
+        decl: {
+          start: {
+            line: 34,
+            column: 13
+          },
+          end: {
+            line: 34,
+            column: 14
+          }
+        },
+        loc: {
+          start: {
+            line: 34,
+            column: 24
+          },
+          end: {
+            line: 36,
+            column: 5
+          }
+        },
+        line: 34
+      },
+      "2": {
+        name: "(anonymous_2)",
+        decl: {
+          start: {
+            line: 37,
+            column: 14
+          },
+          end: {
+            line: 37,
+            column: 15
+          }
+        },
+        loc: {
+          start: {
+            line: 37,
+            column: 25
+          },
+          end: {
+            line: 39,
+            column: 5
+          }
+        },
+        line: 37
+      },
+      "3": {
+        name: "_interop_require_default",
+        decl: {
+          start: {
+            line: 44,
+            column: 9
+          },
+          end: {
+            line: 44,
+            column: 33
+          }
+        },
+        loc: {
+          start: {
+            line: 44,
+            column: 39
+          },
+          end: {
+            line: 48,
+            column: 1
+          }
+        },
+        line: 44
+      },
+      "4": {
+        name: "ShopLayout",
+        decl: {
+          start: {
+            line: 73,
+            column: 9
+          },
+          end: {
+            line: 73,
+            column: 19
+          }
+        },
+        loc: {
+          start: {
+            line: 73,
+            column: 34
+          },
+          end: {
+            line: 84,
+            column: 1
+          }
+        },
+        line: 73
+      }
+    },
+    branchMap: {
+      "0": {
+        loc: {
+          start: {
+            line: 45,
+            column: 11
+          },
+          end: {
+            line: 47,
+            column: 5
+          }
+        },
+        type: "cond-expr",
+        locations: [{
+          start: {
+            line: 45,
+            column: 35
+          },
+          end: {
+            line: 45,
+            column: 38
+          }
+        }, {
+          start: {
+            line: 45,
+            column: 41
+          },
+          end: {
+            line: 47,
+            column: 5
+          }
+        }],
+        line: 45
+      },
+      "1": {
+        loc: {
+          start: {
+            line: 45,
+            column: 11
+          },
+          end: {
+            line: 45,
+            column: 32
+          }
+        },
+        type: "binary-expr",
+        locations: [{
+          start: {
+            line: 45,
+            column: 11
+          },
+          end: {
+            line: 45,
+            column: 14
+          }
+        }, {
+          start: {
+            line: 45,
+            column: 18
+          },
+          end: {
+            line: 45,
+            column: 32
+          }
+        }],
+        line: 45
+      }
+    },
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0,
+      "10": 0,
+      "11": 0
+    },
+    f: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0
+    },
+    b: {
+      "0": [0, 0],
+      "1": [0, 0]
+    },
+    inputSourceMap: {
+      version: 3,
+      sources: ["/home/jack/Documents/aclue-preprod/web/src/app/(shop)/layout.tsx"],
+      sourcesContent: ["/**\n * Shop Layout - Server Component\n *\n * Provides the shared layout for all shop-related pages including:\n * - Product discovery (/discover)\n * - Product details (/products/[id])\n * - Search results (/search)\n *\n * This is a server component that handles:\n * - Meta tags and SEO\n * - Shared navigation structure\n * - Common styling and branding\n *\n * Features:\n * - Server-side authentication checking\n * - Responsive design with glassmorphism\n * - Progressive enhancement approach\n */\n\nimport React from 'react';\nimport type { Metadata } from 'next';\nimport { ShopNavigation } from '@/components/shop/ShopNavigation';\n\nexport const metadata: Metadata = {\n  title: {\n    template: '%s | aclue',\n    default: 'Shop | aclue'\n  },\n  description: 'Discover amazing gifts with AI-powered recommendations on aclue',\n  keywords: ['gifts', 'recommendations', 'AI', 'shopping', 'aclue'],\n  openGraph: {\n    title: 'Shop | aclue',\n    description: 'Discover amazing gifts with AI-powered recommendations',\n    type: 'website',\n    locale: 'en_GB',\n  },\n  robots: {\n    index: false, // Keeping consistent with existing pages\n    follow: false,\n  },\n};\n\ninterface ShopLayoutProps {\n  children: React.ReactNode;\n}\n\n/**\n * Shop Layout Server Component\n *\n * Renders the shared layout structure for all shop pages.\n * Uses server components by default for optimal performance.\n */\nexport default function ShopLayout({ children }: ShopLayoutProps) {\n  return (\n    <div className=\"min-h-screen bg-gradient-to-br from-primary-50 to-secondary-50\">\n      {/* Shop Navigation - Client Component for Interactivity */}\n      <ShopNavigation />\n\n      {/* Main Content Area */}\n      <main className=\"flex-1\">\n        {children}\n      </main>\n    </div>\n  );\n}"],
+      names: ["ShopLayout", "metadata", "title", "template", "default", "description", "keywords", "openGraph", "type", "locale", "robots", "index", "follow", "children", "div", "className", "ShopNavigation", "main"],
+      mappings: "AAAA;;;;;;;;;;;;;;;;;CAiBC;;;;;;;;;;;IA6BD;;;;;CAKC,GACD,OAYC;eAZuBA;;IA7BXC,QAAQ;eAARA;;;;8DAJK;gCAEa;;;;;;AAExB,MAAMA,WAAqB;IAChCC,OAAO;QACLC,UAAU;QACVC,SAAS;IACX;IACAC,aAAa;IACbC,UAAU;QAAC;QAAS;QAAmB;QAAM;QAAY;KAAQ;IACjEC,WAAW;QACTL,OAAO;QACPG,aAAa;QACbG,MAAM;QACNC,QAAQ;IACV;IACAC,QAAQ;QACNC,OAAO;QACPC,QAAQ;IACV;AACF;AAYe,SAASZ,WAAW,EAAEa,QAAQ,EAAmB;IAC9D,qBACE,sBAACC;QAAIC,WAAU;;0BAEb,qBAACC,8BAAc;0BAGf,qBAACC;gBAAKF,WAAU;0BACbF;;;;AAIT"
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "6ea616046c2deecc7f5d3f782880d7ee0bf140e9"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_14mku3yswx = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_14mku3yswx();
+cov_14mku3yswx().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+function _export(target, all) {
+  /* istanbul ignore next */
+  cov_14mku3yswx().f[0]++;
+  cov_14mku3yswx().s[1]++;
+  for (var name in all) {
+    /* istanbul ignore next */
+    cov_14mku3yswx().s[2]++;
+    Object.defineProperty(target, name, {
+      enumerable: true,
+      get: all[name]
+    });
+  }
+}
+/* istanbul ignore next */
+cov_14mku3yswx().s[3]++;
+_export(exports, {
+  /**
+  * Shop Layout Server Component
+  *
+  * Renders the shared layout structure for all shop pages.
+  * Uses server components by default for optimal performance.
+  */
+  default: function () {
+    /* istanbul ignore next */
+    cov_14mku3yswx().f[1]++;
+    cov_14mku3yswx().s[4]++;
+    return ShopLayout;
+  },
+  metadata: function () {
+    /* istanbul ignore next */
+    cov_14mku3yswx().f[2]++;
+    cov_14mku3yswx().s[5]++;
+    return metadata;
+  }
+});
+const _jsxruntime =
+/* istanbul ignore next */
+(cov_14mku3yswx().s[6]++, require("react/jsx-runtime"));
+const _react =
+/* istanbul ignore next */
+(/*#__PURE__*/cov_14mku3yswx().s[7]++, _interop_require_default(require("react")));
+const _ShopNavigation =
+/* istanbul ignore next */
+(cov_14mku3yswx().s[8]++, require("../../components/shop/ShopNavigation"));
+function _interop_require_default(obj) {
+  /* istanbul ignore next */
+  cov_14mku3yswx().f[3]++;
+  cov_14mku3yswx().s[9]++;
+  return /* istanbul ignore next */(cov_14mku3yswx().b[1][0]++, obj) &&
+  /* istanbul ignore next */
+  (cov_14mku3yswx().b[1][1]++, obj.__esModule) ?
+  /* istanbul ignore next */
+  (cov_14mku3yswx().b[0][0]++, obj) :
+  /* istanbul ignore next */
+  (cov_14mku3yswx().b[0][1]++, {
+    default: obj
+  });
+}
+const metadata =
+/* istanbul ignore next */
+(cov_14mku3yswx().s[10]++, {
+  title: {
+    template: "%s | aclue",
+    default: "Shop | aclue"
+  },
+  description: "Discover amazing gifts with AI-powered recommendations on aclue",
+  keywords: ["gifts", "recommendations", "AI", "shopping", "aclue"],
+  openGraph: {
+    title: "Shop | aclue",
+    description: "Discover amazing gifts with AI-powered recommendations",
+    type: "website",
+    locale: "en_GB"
+  },
+  robots: {
+    index: false,
+    follow: false
+  }
+});
+function ShopLayout({
+  children
+}) {
+  /* istanbul ignore next */
+  cov_14mku3yswx().f[4]++;
+  cov_14mku3yswx().s[11]++;
+  return /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+    className: "min-h-screen bg-gradient-to-br from-primary-50 to-secondary-50",
+    children: [/*#__PURE__*/(0, _jsxruntime.jsx)(_ShopNavigation.ShopNavigation, {}), /*#__PURE__*/(0, _jsxruntime.jsx)("main", {
+      className: "flex-1",
+      children: children
+    })]
+  });
+}
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJjb3ZfMTRta3UzeXN3eCIsInBhdGgiLCJoYXNoIiwiZ2xvYmFsIiwiRnVuY3Rpb24iLCJnY3YiLCJjb3ZlcmFnZURhdGEiLCJzdGF0ZW1lbnRNYXAiLCJzdGFydCIsImxpbmUiLCJjb2x1bW4iLCJlbmQiLCJmbk1hcCIsIm5hbWUiLCJkZWNsIiwibG9jIiwiYnJhbmNoTWFwIiwidHlwZSIsImxvY2F0aW9ucyIsInMiLCJmIiwiYiIsImlucHV0U291cmNlTWFwIiwidmVyc2lvbiIsInNvdXJjZXMiLCJzb3VyY2VzQ29udGVudCIsIm5hbWVzIiwibWFwcGluZ3MiLCJfY292ZXJhZ2VTY2hlbWEiLCJjb3ZlcmFnZSIsImFjdHVhbENvdmVyYWdlIiwiZGVmYXVsdCIsIlNob3BMYXlvdXQiLCJtZXRhZGF0YSIsInRpdGxlIiwidGVtcGxhdGUiLCJkZXNjcmlwdGlvbiIsImtleXdvcmRzIiwib3BlbkdyYXBoIiwibG9jYWxlIiwicm9ib3RzIiwiaW5kZXgiLCJmb2xsb3ciLCJjaGlsZHJlbiIsIl9qc3hydW50aW1lIiwianN4cyIsImNsYXNzTmFtZSIsImpzeCIsIl9TaG9wTmF2aWdhdGlvbiIsIlNob3BOYXZpZ2F0aW9uIl0sInNvdXJjZXMiOlsiL2hvbWUvamFjay9Eb2N1bWVudHMvYWNsdWUtcHJlcHJvZC93ZWIvc3JjL2FwcC8oc2hvcCkvbGF5b3V0LnRzeCJdLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIFNob3AgTGF5b3V0IC0gU2VydmVyIENvbXBvbmVudFxuICpcbiAqIFByb3ZpZGVzIHRoZSBzaGFyZWQgbGF5b3V0IGZvciBhbGwgc2hvcC1yZWxhdGVkIHBhZ2VzIGluY2x1ZGluZzpcbiAqIC0gUHJvZHVjdCBkaXNjb3ZlcnkgKC9kaXNjb3ZlcilcbiAqIC0gUHJvZHVjdCBkZXRhaWxzICgvcHJvZHVjdHMvW2lkXSlcbiAqIC0gU2VhcmNoIHJlc3VsdHMgKC9zZWFyY2gpXG4gKlxuICogVGhpcyBpcyBhIHNlcnZlciBjb21wb25lbnQgdGhhdCBoYW5kbGVzOlxuICogLSBNZXRhIHRhZ3MgYW5kIFNFT1xuICogLSBTaGFyZWQgbmF2aWdhdGlvbiBzdHJ1Y3R1cmVcbiAqIC0gQ29tbW9uIHN0eWxpbmcgYW5kIGJyYW5kaW5nXG4gKlxuICogRmVhdHVyZXM6XG4gKiAtIFNlcnZlci1zaWRlIGF1dGhlbnRpY2F0aW9uIGNoZWNraW5nXG4gKiAtIFJlc3BvbnNpdmUgZGVzaWduIHdpdGggZ2xhc3Ntb3JwaGlzbVxuICogLSBQcm9ncmVzc2l2ZSBlbmhhbmNlbWVudCBhcHByb2FjaFxuICovXG5cbmltcG9ydCBSZWFjdCBmcm9tICdyZWFjdCc7XG5pbXBvcnQgdHlwZSB7IE1ldGFkYXRhIH0gZnJvbSAnbmV4dCc7XG5pbXBvcnQgeyBTaG9wTmF2aWdhdGlvbiB9IGZyb20gJ0AvY29tcG9uZW50cy9zaG9wL1Nob3BOYXZpZ2F0aW9uJztcblxuZXhwb3J0IGNvbnN0IG1ldGFkYXRhOiBNZXRhZGF0YSA9IHtcbiAgdGl0bGU6IHtcbiAgICB0ZW1wbGF0ZTogJyVzIHwgYWNsdWUnLFxuICAgIGRlZmF1bHQ6ICdTaG9wIHwgYWNsdWUnXG4gIH0sXG4gIGRlc2NyaXB0aW9uOiAnRGlzY292ZXIgYW1hemluZyBnaWZ0cyB3aXRoIEFJLXBvd2VyZWQgcmVjb21tZW5kYXRpb25zIG9uIGFjbHVlJyxcbiAga2V5d29yZHM6IFsnZ2lmdHMnLCAncmVjb21tZW5kYXRpb25zJywgJ0FJJywgJ3Nob3BwaW5nJywgJ2FjbHVlJ10sXG4gIG9wZW5HcmFwaDoge1xuICAgIHRpdGxlOiAnU2hvcCB8IGFjbHVlJyxcbiAgICBkZXNjcmlwdGlvbjogJ0Rpc2NvdmVyIGFtYXppbmcgZ2lmdHMgd2l0aCBBSS1wb3dlcmVkIHJlY29tbWVuZGF0aW9ucycsXG4gICAgdHlwZTogJ3dlYnNpdGUnLFxuICAgIGxvY2FsZTogJ2VuX0dCJyxcbiAgfSxcbiAgcm9ib3RzOiB7XG4gICAgaW5kZXg6IGZhbHNlLCAvLyBLZWVwaW5nIGNvbnNpc3RlbnQgd2l0aCBleGlzdGluZyBwYWdlc1xuICAgIGZvbGxvdzogZmFsc2UsXG4gIH0sXG59O1xuXG5pbnRlcmZhY2UgU2hvcExheW91dFByb3BzIHtcbiAgY2hpbGRyZW46IFJlYWN0LlJlYWN0Tm9kZTtcbn1cblxuLyoqXG4gKiBTaG9wIExheW91dCBTZXJ2ZXIgQ29tcG9uZW50XG4gKlxuICogUmVuZGVycyB0aGUgc2hhcmVkIGxheW91dCBzdHJ1Y3R1cmUgZm9yIGFsbCBzaG9wIHBhZ2VzLlxuICogVXNlcyBzZXJ2ZXIgY29tcG9uZW50cyBieSBkZWZhdWx0IGZvciBvcHRpbWFsIHBlcmZvcm1hbmNlLlxuICovXG5leHBvcnQgZGVmYXVsdCBmdW5jdGlvbiBTaG9wTGF5b3V0KHsgY2hpbGRyZW4gfTogU2hvcExheW91dFByb3BzKSB7XG4gIHJldHVybiAoXG4gICAgPGRpdiBjbGFzc05hbWU9XCJtaW4taC1zY3JlZW4gYmctZ3JhZGllbnQtdG8tYnIgZnJvbS1wcmltYXJ5LTUwIHRvLXNlY29uZGFyeS01MFwiPlxuICAgICAgey8qIFNob3AgTmF2aWdhdGlvbiAtIENsaWVudCBDb21wb25lbnQgZm9yIEludGVyYWN0aXZpdHkgKi99XG4gICAgICA8U2hvcE5hdmlnYXRpb24gLz5cblxuICAgICAgey8qIE1haW4gQ29udGVudCBBcmVhICovfVxuICAgICAgPG1haW4gY2xhc3NOYW1lPVwiZmxleC0xXCI+XG4gICAgICAgIHtjaGlsZHJlbn1cbiAgICAgIDwvbWFpbj5cbiAgICA8L2Rpdj5cbiAgKTtcbn0iXSwibWFwcGluZ3MiOiJBQUFBOzs7Ozs7Ozs7Ozs7Ozs7OztHQWlCQzs7QUFBQTtBQUFBLFNBQUFBLGVBQUE7RUFBQSxJQUFBQyxJQUFBO0VBQUEsSUFBQUMsSUFBQTtFQUFBLElBQUFDLE1BQUEsT0FBQUMsUUFBQTtFQUFBLElBQUFDLEdBQUE7RUFBQSxJQUFBQyxZQUFBO0lBQUFMLElBQUE7SUFBQU0sWUFBQTtNQUFBO1FBQUFDLEtBQUE7VUFBQUMsSUFBQTtVQUFBQyxNQUFBO1FBQUE7UUFBQUMsR0FBQTtVQUFBRixJQUFBO1VBQUFDLE1BQUE7UUFBQTtNQUFBO01BQUE7UUFBQUYsS0FBQTtVQUFBQyxJQUFBO1VBQUFDLE1BQUE7UUFBQTtRQUFBQyxHQUFBO1VBQUFGLElBQUE7VUFBQUMsTUFBQTtRQUFBO01BQUE7TUFBQTtRQUFBRixLQUFBO1VBQUFDLElBQUE7VUFBQUMsTUFBQTtRQUFBO1FBQUFDLEdBQUE7VUFBQUYsSUFBQTtVQUFBQyxNQUFBO1FBQUE7TUFBQTtNQUFBO1FBQUFGLEtBQUE7VUFBQUMsSUFBQTtVQUFBQyxNQUFBO1FBQUE7UUFBQUMsR0FBQTtVQUFBRixJQUFBO1VBQUFDLE1BQUE7UUFBQTtNQUFBO01BQUE7UUFBQUYsS0FBQTtVQUFBQyxJQUFBO1VBQUFDLE1BQUE7UUFBQTtRQUFBQyxHQUFBO1VBQUFGLElBQUE7VUFBQUMsTUFBQTtRQUFBO01BQUE7TUFBQTtRQUFBRixLQUFBO1VBQUFDLElBQUE7VUFBQUMsTUFBQTtRQUFBO1FBQUFDLEdBQUE7VUFBQUYsSUFBQTtVQUFBQyxNQUFBO1FBQUE7TUFBQTtNQUFBO1FBQUFGLEtBQUE7VUFBQUMsSUFBQTtVQUFBQyxNQUFBO1FBQUE7UUFBQUMsR0FBQTtVQUFBRixJQUFBO1VBQUFDLE1BQUE7UUFBQTtNQUFBO01BQUE7UUFBQUYsS0FBQTtVQUFBQyxJQUFBO1VBQUFDLE1BQUE7UUFBQTtRQUFBQyxHQUFBO1VBQUFGLElBQUE7VUFBQUMsTUFBQTtRQUFBO01BQUE7TUFBQTtRQUFBRixLQUFBO1VBQUFDLElBQUE7VUFBQUMsTUFBQTtRQUFBO1FBQUFDLEdBQUE7VUFBQUYsSUFBQTtVQUFBQyxNQUFBO1FBQUE7TUFBQTtNQUFBO1FBQUFGLEtBQUE7VUFBQUMsSUFBQTtVQUFBQyxNQUFBO1FBQUE7UUFBQUMsR0FBQTtVQUFBRixJQUFBO1VBQUFDLE1BQUE7UUFBQTtNQUFBO01BQUE7UUFBQUYsS0FBQTtVQUFBQyxJQUFBO1VBQUFDLE1BQUE7UUFBQTtRQUFBQyxHQUFBO1VBQUFGLElBQUE7VUFBQUMsTUFBQTtRQUFBO01BQUE7TUFBQTtRQUFBRixLQUFBO1VBQUFDLElBQUE7VUFBQUMsTUFBQTtRQUFBO1FBQUFDLEdBQUE7VUFBQUYsSUFBQTtVQUFBQyxNQUFBO1FBQUE7TUFBQTtJQUFBO0lBQUFFLEtBQUE7TUFBQTtRQUFBQyxJQUFBO1FBQUFDLElBQUE7VUFBQU4sS0FBQTtZQUFBQyxJQUFBO1lBQUFDLE1BQUE7VUFBQTtVQUFBQyxHQUFBO1lBQUFGLElBQUE7WUFBQUMsTUFBQTtVQUFBO1FBQUE7UUFBQUssR0FBQTtVQUFBUCxLQUFBO1lBQUFDLElBQUE7WUFBQUMsTUFBQTtVQUFBO1VBQUFDLEdBQUE7WUFBQUYsSUFBQTtZQUFBQyxNQUFBO1VBQUE7UUFBQTtRQUFBRCxJQUFBO01BQUE7TUFBQTtRQUFBSSxJQUFBO1FBQUFDLElBQUE7VUFBQU4sS0FBQTtZQUFBQyxJQUFBO1lBQUFDLE1BQUE7VUFBQTtVQUFBQyxHQUFBO1lBQUFGLElBQUE7WUFBQUMsTUFBQTtVQUFBO1FBQUE7UUFBQUssR0FBQTtVQUFBUCxLQUFBO1lBQUFDLElBQUE7WUFBQUMsTUFBQTtVQUFBO1VBQUFDLEdBQUE7WUFBQUYsSUFBQTtZQUFBQyxNQUFBO1VBQUE7UUFBQTtRQUFBRCxJQUFBO01BQUE7TUFBQTtRQUFBSSxJQUFBO1FBQUFDLElBQUE7VUFBQU4sS0FBQTtZQUFBQyxJQUFBO1lBQUFDLE1BQUE7VUFBQTtVQUFBQyxHQUFBO1lBQUFGLElBQUE7WUFBQUMsTUFBQTtVQUFBO1FBQUE7UUFBQUssR0FBQTtVQUFBUCxLQUFBO1lBQUFDLElBQUE7WUFBQUMsTUFBQTtVQUFBO1VBQUFDLEdBQUE7WUFBQUYsSUFBQTtZQUFBQyxNQUFBO1VBQUE7UUFBQTtRQUFBRCxJQUFBO01BQUE7TUFBQTtRQUFBSSxJQUFBO1FBQUFDLElBQUE7VUFBQU4sS0FBQTtZQUFBQyxJQUFBO1lBQUFDLE1BQUE7VUFBQTtVQUFBQyxHQUFBO1lBQUFGLElBQUE7WUFBQUMsTUFBQTtVQUFBO1FBQUE7UUFBQUssR0FBQTtVQUFBUCxLQUFBO1lBQUFDLElBQUE7WUFBQUMsTUFBQTtVQUFBO1VBQUFDLEdBQUE7WUFBQUYsSUFBQTtZQUFBQyxNQUFBO1VBQUE7UUFBQTtRQUFBRCxJQUFBO01BQUE7TUFBQTtRQUFBSSxJQUFBO1FBQUFDLElBQUE7VUFBQU4sS0FBQTtZQUFBQyxJQUFBO1lBQUFDLE1BQUE7VUFBQTtVQUFBQyxHQUFBO1lBQUFGLElBQUE7WUFBQUMsTUFBQTtVQUFBO1FBQUE7UUFBQUssR0FBQTtVQUFBUCxLQUFBO1lBQUFDLElBQUE7WUFBQUMsTUFBQTtVQUFBO1VBQUFDLEdBQUE7WUFBQUYsSUFBQTtZQUFBQyxNQUFBO1VBQUE7UUFBQTtRQUFBRCxJQUFBO01BQUE7SUFBQTtJQUFBTyxTQUFBO01BQUE7UUFBQUQsR0FBQTtVQUFBUCxLQUFBO1lBQUFDLElBQUE7WUFBQUMsTUFBQTtVQUFBO1VBQUFDLEdBQUE7WUFBQUYsSUFBQTtZQUFBQyxNQUFBO1VBQUE7UUFBQTtRQUFBTyxJQUFBO1FBQUFDLFNBQUE7VUFBQVYsS0FBQTtZQUFBQyxJQUFBO1lBQUFDLE1BQUE7VUFBQTtVQUFBQyxHQUFBO1lBQUFGLElBQUE7WUFBQUMsTUFBQTtVQUFBO1FBQUE7VUFBQUYsS0FBQTtZQUFBQyxJQUFBO1lBQUFDLE1BQUE7VUFBQTtVQUFBQyxHQUFBO1lBQUFGLElBQUE7WUFBQUMsTUFBQTtVQUFBO1FBQUE7UUFBQUQsSUFBQTtNQUFBO01BQUE7UUFBQU0sR0FBQTtVQUFBUCxLQUFBO1lBQUFDLElBQUE7WUFBQUMsTUFBQTtVQUFBO1VBQUFDLEdBQUE7WUFBQUYsSUFBQTtZQUFBQyxNQUFBO1VBQUE7UUFBQTtRQUFBTyxJQUFBO1FBQUFDLFNBQUE7VUFBQVYsS0FBQTtZQUFBQyxJQUFBO1lBQUFDLE1BQUE7VUFBQTtVQUFBQyxHQUFBO1lBQUFGLElBQUE7WUFBQUMsTUFBQTtVQUFBO1FBQUE7VUFBQUYsS0FBQTtZQUFBQyxJQUFBO1lBQUFDLE1BQUE7VUFBQTtVQUFBQyxHQUFBO1lBQUFGLElBQUE7WUFBQUMsTUFBQTtVQUFBO1FBQUE7UUFBQUQsSUFBQTtNQUFBO0lBQUE7SUFBQVUsQ0FBQTtNQUFBO01BQUE7TUFBQTtNQUFBO01BQUE7TUFBQTtNQUFBO01BQUE7TUFBQTtNQUFBO01BQUE7TUFBQTtJQUFBO0lBQUFDLENBQUE7TUFBQTtNQUFBO01BQUE7TUFBQTtNQUFBO0lBQUE7SUFBQUMsQ0FBQTtNQUFBO01BQUE7SUFBQTtJQUFBQyxjQUFBO01BQUFDLE9BQUE7TUFBQUMsT0FBQTtNQUFBQyxjQUFBO01BQUFDLEtBQUE7TUFBQUMsUUFBQTtJQUFBO0lBQUFDLGVBQUE7SUFBQTFCLElBQUE7RUFBQTtFQUFBLElBQUEyQixRQUFBLEdBQUExQixNQUFBLENBQUFFLEdBQUEsTUFBQUYsTUFBQSxDQUFBRSxHQUFBO0VBQUEsS0FBQXdCLFFBQUEsQ0FBQTVCLElBQUEsS0FBQTRCLFFBQUEsQ0FBQTVCLElBQUEsRUFBQUMsSUFBQSxLQUFBQSxJQUFBO0lBQUEyQixRQUFBLENBQUE1QixJQUFBLElBQUFLLFlBQUE7RUFBQTtFQUFBLElBQUF3QixjQUFBLEdBQUFELFFBQUEsQ0FBQTVCLElBQUE7RUFBQTs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7RUE2QkQ7Ozs7OztFQU1BOEIsT0FZQyxXQUFBQSxDQUFBO0lBQUE7SUFBQS9CLGNBQUEsR0FBQW9CLENBQUE7SUFBQXBCLGNBQUEsR0FBQW1CLENBQUE7V0FadUJhLFVBQUE7O0VBN0JYQyxRQUFRLFdBQUFBLENBQUE7SUFBQTtJQUFBakMsY0FBQSxHQUFBb0IsQ0FBQTtJQUFBcEIsY0FBQSxHQUFBbUIsQ0FBQTtXQUFSYyxRQUFBOzs7Ozs7Ozt3RUFKSzs7O2tDQUVhOzs7Ozs7Ozs7Ozs7Ozs7QUFFeEIsTUFBTUEsUUFBQTtBQUFBO0FBQUEsQ0FBQWpDLGNBQUEsR0FBQW1CLENBQUEsUUFBcUI7RUFDaENlLEtBQUEsRUFBTztJQUNMQyxRQUFBLEVBQVU7SUFDVkosT0FBQSxFQUFTO0VBQ1g7RUFDQUssV0FBQSxFQUFhO0VBQ2JDLFFBQUEsRUFBVSxDQUFDLFNBQVMsbUJBQW1CLE1BQU0sWUFBWSxRQUFRO0VBQ2pFQyxTQUFBLEVBQVc7SUFDVEosS0FBQSxFQUFPO0lBQ1BFLFdBQUEsRUFBYTtJQUNibkIsSUFBQSxFQUFNO0lBQ05zQixNQUFBLEVBQVE7RUFDVjtFQUNBQyxNQUFBLEVBQVE7SUFDTkMsS0FBQSxFQUFPO0lBQ1BDLE1BQUEsRUFBUTtFQUNWO0FBQ0Y7QUFZZSxTQUFTVixXQUFXO0VBQUVXO0FBQVEsQ0FBbUI7RUFBQTtFQUFBM0MsY0FBQSxHQUFBb0IsQ0FBQTtFQUFBcEIsY0FBQSxHQUFBbUIsQ0FBQTtFQUM5RCxvQkFDRSxJQUFBeUIsV0FBQSxDQUFBQyxJQUFBLEVBQUM7SUFBSUMsU0FBQSxFQUFVOzRCQUViLElBQUFGLFdBQUEsQ0FBQUcsR0FBQSxFQUFDQyxlQUFBLENBQUFDLGNBQWMsTyxhQUdmLElBQUFMLFdBQUEsQ0FBQUcsR0FBQSxFQUFDO01BQUtELFNBQUEsRUFBVTtnQkFDYkg7OztBQUlUIiwiaWdub3JlTGlzdCI6W119

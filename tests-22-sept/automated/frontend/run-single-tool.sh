@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Aclue Frontend Single Tool Runner
+# aclue Frontend Single Tool Runner
 # Run individual tools for specific URLs
 
 set -e
@@ -134,7 +134,7 @@ run_blc() {
            --host-requests 1 \
            --rate-limit 100 \
            --timeout 30000 \
-           --user-agent "BLC-Aclue-Scanner/1.0" > "${output_file}" 2>/dev/null; then
+           --user-agent "BLC-aclue-Scanner/1.0" > "${output_file}" 2>/dev/null; then
         log_success "Broken link check completed. Results saved to: ${output_file}"
     else
         log_error "Broken link check failed"

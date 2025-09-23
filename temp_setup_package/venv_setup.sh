@@ -1,8 +1,8 @@
 #!/bin/bash
-# Aclue Backend Virtual Environment Setup Script
+# aclue Backend Virtual Environment Setup Script
 # This script recreates the Python virtual environment with all required dependencies
 
-echo "=== Aclue Backend Virtual Environment Setup ==="
+echo "=== aclue Backend Virtual Environment Setup ==="
 
 # Check Python version
 python_version=$(python3 --version 2>&1)

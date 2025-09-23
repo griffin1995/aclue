@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# Aclue Network Testing Suite
+# aclue Network Testing Suite
 # Comprehensive DNS, SSL, and connectivity testing
 
-echo "=== Aclue Network Testing Suite ==="
+echo "=== aclue Network Testing Suite ==="
 echo "Testing both aclue.app and aclue.co.uk"
 echo "====================================="
 

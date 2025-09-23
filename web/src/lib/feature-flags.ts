@@ -143,6 +143,11 @@ export function shouldUseAppRouter(pathname: string, userId?: string): boolean {
   const pathSegments = pathname.split('/').filter(segment => segment !== '')
   const routeCategory = pathSegments[0]
 
+  // Special handling for root route (/) - check if 'root' is in enabled routes
+  if (!routeCategory || routeCategory === '') {
+    return config.enabledRoutes.includes('root')
+  }
+
   // Check if this route category is enabled
   if (!config.enabledRoutes.includes(routeCategory)) {
     return false
@@ -236,11 +241,18 @@ export function evaluateAppRouterForRequest(
   const pathSegments = pathname.split('/').filter(segment => segment !== '')
   const routeCategory = pathSegments[0]
 
-  // Special handling for root route (/) - always use App Router when globally enabled
+  // Special handling for root route (/) - check if 'root' is in enabled routes
   if (!routeCategory || routeCategory === '') {
-    return {
-      shouldUseAppRouter: true,
-      reason: 'Root route always uses App Router when globally enabled'
+    if (config.enabledRoutes.includes('root')) {
+      return {
+        shouldUseAppRouter: true,
+        reason: 'Root route enabled in feature flags'
+      }
+    } else {
+      return {
+        shouldUseAppRouter: false,
+        reason: 'Root route not enabled in feature flags'
+      }
     }
   }
 

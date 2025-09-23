@@ -1,4 +1,4 @@
-# Aclue - Complete Project Documentation
+# aclue - Complete Project Documentation
 **Comprehensive Technical & Business Documentation**
 
 > **CRITICAL DEVELOPMENT PRINCIPLES - READ BEFORE PROCEEDING:**
@@ -19,7 +19,7 @@
 
 ## 🎯 PROJECT OVERVIEW
 
-Aclue is an AI-powered gift recommendation platform using swipe-based preference discovery to generate personalised gift suggestions whilst maintaining the element of surprise. The platform targets the £45B global gift market with a projected £2.5M revenue by Year 3.
+aclue is an AI-powered gift recommendation platform using swipe-based preference discovery to generate personalised gift suggestions whilst maintaining the element of surprise. The platform targets the £45B global gift market with a projected £2.5M revenue by Year 3.
 
 ### Business Context
 - **Target Market**: £45B global gift market, £9.3B UK market
@@ -992,7 +992,7 @@ This is a **production-ready foundation** for the £45B gift market opportunity 
 ✅ **Production Deployment**: Live on Railway and Vercel with auto-deployment  
 
 ### Business Model Validation Ready
-The platform successfully demonstrates the complete Aclue value proposition with:
+The platform successfully demonstrates the complete aclue value proposition with:
 - **Revenue Generation**: Amazon affiliate system ready for immediate monetisation
 - **User Acquisition**: Complete onboarding flow with preference learning
 - **Market Compliance**: Professional legal framework meeting UK/EU standards

@@ -20,9 +20,9 @@ import {
 } from 'lucide-react'
 
 /**
- * Aclue Marketing Page - App Router Client Component
+ * aclue Marketing Page - App Router Client Component
  *
- * Complete marketing site for Aclue with all features, testimonials, and CTAs.
+ * Complete marketing site for aclue with all features, testimonials, and CTAs.
  * This component provides the full application experience when not in maintenance mode.
  *
  * Features:
@@ -41,7 +41,7 @@ import {
  * - Maintains brand consistency with aclue_text_clean.png
  */
 
-export default function AclueMarketingPage() {
+export default function aclueMarketingPage() {
   const features = [
     {
       icon: <Sparkles className="w-6 h-6" />,
@@ -77,7 +77,7 @@ export default function AclueMarketingPage() {
       name: 'Sarah Johnson',
       role: 'Gift Enthusiast',
       avatar: '/images/testimonials/sarah.jpg',
-      content: 'Aclue helped me find the perfect birthday gift for my sister. The AI-powered insights were spot-on!',
+      content: 'aclue helped me find the perfect birthday gift for my sister. The AI-powered insights were spot-on!',
       rating: 5,
     },
     {
@@ -106,7 +106,7 @@ export default function AclueMarketingPage() {
             <Link href="/" className="flex items-center gap-3">
               <img
                 src="/aclue_text_clean.png"
-                alt="Aclue Logo"
+                alt="aclue Logo"
                 className="h-8 w-auto object-contain"
                 onError={(e) => {
                   // Fallback to Gift icon if logo fails to load
@@ -288,7 +288,7 @@ export default function AclueMarketingPage() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-              Why Aclue Works Better
+              Why aclue Works Better
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               We've reinvented gift discovery using cutting-edge AI and intuitive design.
@@ -484,7 +484,7 @@ export default function AclueMarketingPage() {
               Available Everywhere
             </h2>
             <p className="text-lg text-primary-100 max-w-2xl mx-auto">
-              Access Aclue on all your devices. Seamless sync across platforms means your preferences travel with you.
+              Access aclue on all your devices. Seamless sync across platforms means your preferences travel with you.
             </p>
           </motion.div>
 
@@ -579,7 +579,7 @@ export default function AclueMarketingPage() {
               <div className="flex items-center gap-3 mb-4">
                 <img
                   src="/aclue_text_clean.png"
-                  alt="Aclue Logo"
+                  alt="aclue Logo"
                   className="h-8 w-auto object-contain"
                   onError={(e) => {
                     // Fallback to Gift icon if logo fails to load
@@ -641,7 +641,7 @@ export default function AclueMarketingPage() {
           </div>
 
           <div className="border-t border-gray-800 pt-8 text-center text-gray-400">
-            <p>&copy; 2025 Aclue. All rights reserved.</p>
+            <p>&copy; 2025 aclue. All rights reserved.</p>
           </div>
         </div>
       </footer>

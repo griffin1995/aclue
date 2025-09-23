@@ -1,8 +1,8 @@
-# Aclue Database Enhancement Deployment Guide
+# aclue Database Enhancement Deployment Guide
 
 ## 🎯 Deployment Overview
 
-This guide provides step-by-step instructions for deploying the missing database tables required for revenue tracking and ML features on the Aclue platform.
+This guide provides step-by-step instructions for deploying the missing database tables required for revenue tracking and ML features on the aclue platform.
 
 ### 📋 Deployment Summary
 - **5 new tables** for comprehensive platform functionality
@@ -386,7 +386,7 @@ SELECT tableowner FROM pg_tables WHERE tablename = 'affiliate_clicks';
 
 - **Supabase RLS Documentation:** https://supabase.com/docs/guides/auth/row-level-security
 - **PostgreSQL Performance Tuning:** https://www.postgresql.org/docs/current/performance-tips.html
-- **Aclue Platform Architecture:** `/docs/architecture.md`
+- **aclue Platform Architecture:** `/docs/architecture.md`
 
 ### Monitoring and Alerts
 

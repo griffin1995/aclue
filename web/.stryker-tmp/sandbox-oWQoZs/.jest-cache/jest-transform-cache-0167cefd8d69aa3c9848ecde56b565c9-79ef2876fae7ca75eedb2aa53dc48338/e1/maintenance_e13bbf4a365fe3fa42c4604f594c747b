@@ -1,0 +1,362 @@
+fc21640f1313d737a0685e1cfac1e9f9
+"use strict";
+
+/* istanbul ignore next */
+function cov_1gz5ik7e9w() {
+  var path = "/home/jack/Documents/aclue-preprod/web/src/pages/maintenance.tsx";
+  var hash = "cfbf68c53d96f3624e49b186932e3c2b6fa84464";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/home/jack/Documents/aclue-preprod/web/src/pages/maintenance.tsx",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 4,
+          column: 3
+        }
+      },
+      "1": {
+        start: {
+          line: 5,
+          column: 0
+        },
+        end: {
+          line: 10,
+          column: 3
+        }
+      },
+      "2": {
+        start: {
+          line: 8,
+          column: 8
+        },
+        end: {
+          line: 8,
+          column: 24
+        }
+      },
+      "3": {
+        start: {
+          line: 11,
+          column: 20
+        },
+        end: {
+          line: 11,
+          column: 48
+        }
+      },
+      "4": {
+        start: {
+          line: 12,
+          column: 28
+        },
+        end: {
+          line: 12,
+          column: 74
+        }
+      },
+      "5": {
+        start: {
+          line: 13,
+          column: 39
+        },
+        end: {
+          line: 13,
+          column: 105
+        }
+      },
+      "6": {
+        start: {
+          line: 15,
+          column: 4
+        },
+        end: {
+          line: 17,
+          column: 6
+        }
+      },
+      "7": {
+        start: {
+          line: 19,
+          column: 24
+        },
+        end: {
+          line: 40,
+          column: 1
+        }
+      },
+      "8": {
+        start: {
+          line: 20,
+          column: 4
+        },
+        end: {
+          line: 39,
+          column: 7
+        }
+      },
+      "9": {
+        start: {
+          line: 41,
+          column: 17
+        },
+        end: {
+          line: 41,
+          column: 32
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 7,
+            column: 9
+          },
+          end: {
+            line: 7,
+            column: 10
+          }
+        },
+        loc: {
+          start: {
+            line: 7,
+            column: 20
+          },
+          end: {
+            line: 9,
+            column: 5
+          }
+        },
+        line: 7
+      },
+      "1": {
+        name: "_interop_require_default",
+        decl: {
+          start: {
+            line: 14,
+            column: 9
+          },
+          end: {
+            line: 14,
+            column: 33
+          }
+        },
+        loc: {
+          start: {
+            line: 14,
+            column: 39
+          },
+          end: {
+            line: 18,
+            column: 1
+          }
+        },
+        line: 14
+      },
+      "2": {
+        name: "(anonymous_2)",
+        decl: {
+          start: {
+            line: 19,
+            column: 24
+          },
+          end: {
+            line: 19,
+            column: 25
+          }
+        },
+        loc: {
+          start: {
+            line: 19,
+            column: 28
+          },
+          end: {
+            line: 40,
+            column: 1
+          }
+        },
+        line: 19
+      }
+    },
+    branchMap: {
+      "0": {
+        loc: {
+          start: {
+            line: 15,
+            column: 11
+          },
+          end: {
+            line: 17,
+            column: 5
+          }
+        },
+        type: "cond-expr",
+        locations: [{
+          start: {
+            line: 15,
+            column: 35
+          },
+          end: {
+            line: 15,
+            column: 38
+          }
+        }, {
+          start: {
+            line: 15,
+            column: 41
+          },
+          end: {
+            line: 17,
+            column: 5
+          }
+        }],
+        line: 15
+      },
+      "1": {
+        loc: {
+          start: {
+            line: 15,
+            column: 11
+          },
+          end: {
+            line: 15,
+            column: 32
+          }
+        },
+        type: "binary-expr",
+        locations: [{
+          start: {
+            line: 15,
+            column: 11
+          },
+          end: {
+            line: 15,
+            column: 14
+          }
+        }, {
+          start: {
+            line: 15,
+            column: 18
+          },
+          end: {
+            line: 15,
+            column: 32
+          }
+        }],
+        line: 15
+      }
+    },
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0
+    },
+    f: {
+      "0": 0,
+      "1": 0,
+      "2": 0
+    },
+    b: {
+      "0": [0, 0],
+      "1": [0, 0]
+    },
+    inputSourceMap: {
+      version: 3,
+      sources: ["/home/jack/Documents/aclue-preprod/web/src/pages/maintenance.tsx"],
+      sourcesContent: ["import { NextPage } from 'next';\nimport Head from 'next/head';\nimport MaintenanceMode from '@/components/MaintenanceMode';\n\nconst MaintenancePage: NextPage = () => {\n  return (\n    <>\n      <Head>\n        <title>Maintenance - aclue</title>\n        <meta name=\"description\" content=\"aclue is currently undergoing maintenance. We'll be back soon with exciting new features.\" />\n        <meta name=\"robots\" content=\"noindex, nofollow\" />\n      </Head>\n      <MaintenanceMode />\n    </>\n  );\n};\n\nexport default MaintenancePage;"],
+      names: ["MaintenancePage", "Head", "title", "meta", "name", "content", "MaintenanceMode"],
+      mappings: ";;;;+BAiBA;;;eAAA;;;;6DAhBiB;wEACW;;;;;;AAE5B,MAAMA,kBAA4B;IAChC,qBACE;;0BACE,sBAACC,aAAI;;kCACH,qBAACC;kCAAM;;kCACP,qBAACC;wBAAKC,MAAK;wBAAcC,SAAQ;;kCACjC,qBAACF;wBAAKC,MAAK;wBAASC,SAAQ;;;;0BAE9B,qBAACC,wBAAe;;;AAGtB;MAEA,WAAeN"
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "cfbf68c53d96f3624e49b186932e3c2b6fa84464"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_1gz5ik7e9w = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_1gz5ik7e9w();
+cov_1gz5ik7e9w().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/* istanbul ignore next */
+cov_1gz5ik7e9w().s[1]++;
+Object.defineProperty(exports, "default", {
+  enumerable: true,
+  get: function () {
+    /* istanbul ignore next */
+    cov_1gz5ik7e9w().f[0]++;
+    cov_1gz5ik7e9w().s[2]++;
+    return _default;
+  }
+});
+const _jsxruntime =
+/* istanbul ignore next */
+(cov_1gz5ik7e9w().s[3]++, require("react/jsx-runtime"));
+const _head =
+/* istanbul ignore next */
+(/*#__PURE__*/cov_1gz5ik7e9w().s[4]++, _interop_require_default(require("next/head")));
+const _MaintenanceMode =
+/* istanbul ignore next */
+(/*#__PURE__*/cov_1gz5ik7e9w().s[5]++, _interop_require_default(require("../components/MaintenanceMode")));
+function _interop_require_default(obj) {
+  /* istanbul ignore next */
+  cov_1gz5ik7e9w().f[1]++;
+  cov_1gz5ik7e9w().s[6]++;
+  return /* istanbul ignore next */(cov_1gz5ik7e9w().b[1][0]++, obj) &&
+  /* istanbul ignore next */
+  (cov_1gz5ik7e9w().b[1][1]++, obj.__esModule) ?
+  /* istanbul ignore next */
+  (cov_1gz5ik7e9w().b[0][0]++, obj) :
+  /* istanbul ignore next */
+  (cov_1gz5ik7e9w().b[0][1]++, {
+    default: obj
+  });
+}
+/* istanbul ignore next */
+cov_1gz5ik7e9w().s[7]++;
+const MaintenancePage = () => {
+  /* istanbul ignore next */
+  cov_1gz5ik7e9w().f[2]++;
+  cov_1gz5ik7e9w().s[8]++;
+  return /*#__PURE__*/(0, _jsxruntime.jsxs)(_jsxruntime.Fragment, {
+    children: [/*#__PURE__*/(0, _jsxruntime.jsxs)(_head.default, {
+      children: [/*#__PURE__*/(0, _jsxruntime.jsx)("title", {
+        children: "Maintenance - aclue"
+      }), /*#__PURE__*/(0, _jsxruntime.jsx)("meta", {
+        name: "description",
+        content: "aclue is currently undergoing maintenance. We'll be back soon with exciting new features."
+      }), /*#__PURE__*/(0, _jsxruntime.jsx)("meta", {
+        name: "robots",
+        content: "noindex, nofollow"
+      })]
+    }), /*#__PURE__*/(0, _jsxruntime.jsx)(_MaintenanceMode.default, {})]
+  });
+};
+const _default =
+/* istanbul ignore next */
+(cov_1gz5ik7e9w().s[9]++, MaintenancePage);
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJfZGVmYXVsdCIsIk1haW50ZW5hbmNlUGFnZSIsImNvdl8xZ3o1aWs3ZTl3IiwiZiIsInMiLCJfanN4cnVudGltZSIsImpzeHMiLCJGcmFnbWVudCIsIl9oZWFkIiwiZGVmYXVsdCIsImpzeCIsIm5hbWUiLCJjb250ZW50IiwiX01haW50ZW5hbmNlTW9kZSJdLCJzb3VyY2VzIjpbIi9ob21lL2phY2svRG9jdW1lbnRzL2FjbHVlLXByZXByb2Qvd2ViL3NyYy9wYWdlcy9tYWludGVuYW5jZS50c3giXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgTmV4dFBhZ2UgfSBmcm9tICduZXh0JztcbmltcG9ydCBIZWFkIGZyb20gJ25leHQvaGVhZCc7XG5pbXBvcnQgTWFpbnRlbmFuY2VNb2RlIGZyb20gJ0AvY29tcG9uZW50cy9NYWludGVuYW5jZU1vZGUnO1xuXG5jb25zdCBNYWludGVuYW5jZVBhZ2U6IE5leHRQYWdlID0gKCkgPT4ge1xuICByZXR1cm4gKFxuICAgIDw+XG4gICAgICA8SGVhZD5cbiAgICAgICAgPHRpdGxlPk1haW50ZW5hbmNlIC0gYWNsdWU8L3RpdGxlPlxuICAgICAgICA8bWV0YSBuYW1lPVwiZGVzY3JpcHRpb25cIiBjb250ZW50PVwiYWNsdWUgaXMgY3VycmVudGx5IHVuZGVyZ29pbmcgbWFpbnRlbmFuY2UuIFdlJ2xsIGJlIGJhY2sgc29vbiB3aXRoIGV4Y2l0aW5nIG5ldyBmZWF0dXJlcy5cIiAvPlxuICAgICAgICA8bWV0YSBuYW1lPVwicm9ib3RzXCIgY29udGVudD1cIm5vaW5kZXgsIG5vZm9sbG93XCIgLz5cbiAgICAgIDwvSGVhZD5cbiAgICAgIDxNYWludGVuYW5jZU1vZGUgLz5cbiAgICA8Lz5cbiAgKTtcbn07XG5cbmV4cG9ydCBkZWZhdWx0IE1haW50ZW5hbmNlUGFnZTsiXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OytCQWlCQTs7Ozs7O1dBQUFBLFFBQUE7Ozs7Ozs7O3dFQWhCaUI7Ozt3RUFDVzs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFFNUIsTUFBTUMsZUFBQSxHQUE0QkEsQ0FBQTtFQUFBO0VBQUFDLGNBQUEsR0FBQUMsQ0FBQTtFQUFBRCxjQUFBLEdBQUFFLENBQUE7RUFDaEMsb0JBQ0UsSUFBQUMsV0FBQSxDQUFBQyxJQUFBLEVBQUFELFdBQUEsQ0FBQUUsUUFBQTs0QkFDRSxJQUFBRixXQUFBLENBQUFDLElBQUEsRUFBQ0UsS0FBQSxDQUFBQyxPQUFJOzhCQUNILElBQUFKLFdBQUEsQ0FBQUssR0FBQSxFQUFDO2tCQUFNO3VCQUNQLElBQUFMLFdBQUEsQ0FBQUssR0FBQSxFQUFDO1FBQUtDLElBQUEsRUFBSztRQUFjQyxPQUFBLEVBQVE7dUJBQ2pDLElBQUFQLFdBQUEsQ0FBQUssR0FBQSxFQUFDO1FBQUtDLElBQUEsRUFBSztRQUFTQyxPQUFBLEVBQVE7O3FCQUU5QixJQUFBUCxXQUFBLENBQUFLLEdBQUEsRUFBQ0csZ0JBQUEsQ0FBQUosT0FBZTs7QUFHdEI7TUFFQVQsUUFBQTtBQUFBO0FBQUEsQ0FBQUUsY0FBQSxHQUFBRSxDQUFBLE9BQWVILGVBQUEiLCJpZ25vcmVMaXN0IjpbXX0=

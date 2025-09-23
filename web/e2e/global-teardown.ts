@@ -1,5 +1,5 @@
 /**
- * Aclue Global Test Teardown
+ * aclue Global Test Teardown
  * 
  * Comprehensive global teardown for Playwright E2E testing.
  * Handles cleanup, report generation, and test artifact organization.
@@ -16,7 +16,7 @@ import path from 'path';
 import fs from 'fs';
 
 async function globalTeardown(config: FullConfig) {
-  console.log('🧹 Starting Aclue E2E Test Suite Global Teardown');
+  console.log('🧹 Starting aclue E2E Test Suite Global Teardown');
 
   const testResultsDir = path.join(__dirname, '..', 'test-results');
   const performanceDir = path.join(testResultsDir, 'performance');

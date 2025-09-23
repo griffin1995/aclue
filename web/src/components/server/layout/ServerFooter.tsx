@@ -55,7 +55,7 @@ export default function ServerFooter() {
             <Link href="/" className="flex items-center">
               <Image
                 src="/aclue_text_clean.png"
-                alt="Aclue Logo"
+                alt="aclue Logo"
                 width={120}
                 height={40}
                 className="h-8 w-auto"
@@ -90,7 +90,7 @@ export default function ServerFooter() {
         {/* Bottom Bar */}
         <div className="mt-8 pt-8 border-t border-gray-200 flex flex-col sm:flex-row justify-between items-center">
           <p className="text-gray-500 text-sm">
-            © {currentYear} Aclue Ltd. All rights reserved.
+            © {currentYear} aclue Ltd. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 sm:mt-0">
             <Link

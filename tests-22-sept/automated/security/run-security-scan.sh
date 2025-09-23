@@ -1,14 +1,14 @@
 #!/bin/bash
 
 # Quick-start Security Scanning Script
-# Purpose: Easy execution of security scans for Aclue platform
+# Purpose: Easy execution of security scans for aclue platform
 
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 echo "======================================"
-echo "Aclue Platform Security Scanner"
+echo "aclue Platform Security Scanner"
 echo "======================================"
 echo ""
 

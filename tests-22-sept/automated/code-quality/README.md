@@ -1,8 +1,8 @@
-# Aclue Platform - Automated Code Quality Suite
+# aclue Platform - Automated Code Quality Suite
 
 ## Quick Start Guide
 
-This directory contains comprehensive automated code quality tools for the Aclue platform, covering both Python backend and TypeScript/React frontend with maximum analysis depth.
+This directory contains comprehensive automated code quality tools for the aclue platform, covering both Python backend and TypeScript/React frontend with maximum analysis depth.
 
 ## 🚀 Execute Full Analysis
 
@@ -148,4 +148,4 @@ For detailed information, see:
 
 ---
 
-**Ready to maintain enterprise-grade code quality at Aclue! 🚀**
+**Ready to maintain enterprise-grade code quality at aclue! 🚀**

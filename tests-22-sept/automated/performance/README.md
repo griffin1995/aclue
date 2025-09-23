@@ -1,7 +1,7 @@
-# Aclue Platform - Automated Performance Monitoring Suite
+# aclue Platform - Automated Performance Monitoring Suite
 
 ## Overview
-Comprehensive automated performance monitoring system for the Aclue platform, featuring multiple industry-standard tools for exhaustive performance analysis.
+Comprehensive automated performance monitoring system for the aclue platform, featuring multiple industry-standard tools for exhaustive performance analysis.
 
 ## Installed Tools
 

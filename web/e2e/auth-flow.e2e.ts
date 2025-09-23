@@ -15,7 +15,7 @@
  * 
  * Business Critical Workflows:
  * These tests validate the core authentication flows that enable users
- * to access the Aclue platform and maintain secure sessions.
+ * to access the aclue platform and maintain secure sessions.
  * 
  * Cross-Browser Testing:
  * Authentication behaviour is tested across all supported browsers

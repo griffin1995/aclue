@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Aclue Platform - Integration Test Suite
+aclue Platform - Integration Test Suite
 
 Quick integration tests to validate core functionality after configuration changes.
 Tests authentication flow, API connectivity, and basic functionality.
@@ -15,8 +15,8 @@ import argparse
 import sys
 from datetime import datetime
 
-class AclueIntegrationTester:
-    """Integration test suite for Aclue platform"""
+class aclueIntegrationTester:
+    """Integration test suite for aclue platform"""
 
     def __init__(self, verbose: bool = False):
         self.verbose = verbose
@@ -152,7 +152,7 @@ class AclueIntegrationTester:
 
     def run_integration_tests(self):
         """Run all integration tests"""
-        self.log("Starting Aclue platform integration tests...")
+        self.log("Starting aclue platform integration tests...")
 
         tests_passed = 0
         total_tests = 0
@@ -205,7 +205,7 @@ class AclueIntegrationTester:
 def main():
     """Main execution function"""
     parser = argparse.ArgumentParser(
-        description="Aclue Platform Integration Test Suite"
+        description="aclue Platform Integration Test Suite"
     )
     parser.add_argument(
         "--verbose",
@@ -216,7 +216,7 @@ def main():
     args = parser.parse_args()
 
     # Run integration tests
-    tester = AclueIntegrationTester(verbose=args.verbose)
+    tester = aclueIntegrationTester(verbose=args.verbose)
     success = tester.run_integration_tests()
 
     # Exit with appropriate code

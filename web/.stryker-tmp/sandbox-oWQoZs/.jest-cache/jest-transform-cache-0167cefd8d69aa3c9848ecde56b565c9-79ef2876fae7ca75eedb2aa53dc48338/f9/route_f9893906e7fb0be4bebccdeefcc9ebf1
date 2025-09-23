@@ -1,0 +1,1373 @@
+08e61c21e442cb3959b748ca2e6a6b31
+"use strict";
+
+/* istanbul ignore next */
+function cov_w8qxapg25() {
+  var path = "/home/jack/Documents/aclue-preprod/web/src/app/api/newsletter/signup/route.ts";
+  var hash = "866ca9a66c84614aaa15e62803b28ad9f64ffd61";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/home/jack/Documents/aclue-preprod/web/src/app/api/newsletter/signup/route.ts",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 4,
+          column: 3
+        }
+      },
+      "1": {
+        start: {
+          line: 6,
+          column: 4
+        },
+        end: {
+          line: 9,
+          column: 7
+        }
+      },
+      "2": {
+        start: {
+          line: 6,
+          column: 24
+        },
+        end: {
+          line: 9,
+          column: 7
+        }
+      },
+      "3": {
+        start: {
+          line: 11,
+          column: 0
+        },
+        end: {
+          line: 18,
+          column: 3
+        }
+      },
+      "4": {
+        start: {
+          line: 13,
+          column: 8
+        },
+        end: {
+          line: 13,
+          column: 19
+        }
+      },
+      "5": {
+        start: {
+          line: 16,
+          column: 8
+        },
+        end: {
+          line: 16,
+          column: 20
+        }
+      },
+      "6": {
+        start: {
+          line: 19,
+          column: 16
+        },
+        end: {
+          line: 19,
+          column: 38
+        }
+      },
+      "7": {
+        start: {
+          line: 20,
+          column: 16
+        },
+        end: {
+          line: 20,
+          column: 33
+        }
+      },
+      "8": {
+        start: {
+          line: 21,
+          column: 13
+        },
+        end: {
+          line: 21,
+          column: 27
+        }
+      },
+      "9": {
+        start: {
+          line: 22,
+          column: 36
+        },
+        end: {
+          line: 22,
+          column: 115
+        }
+      },
+      "10": {
+        start: {
+          line: 24,
+          column: 4
+        },
+        end: {
+          line: 26,
+          column: 6
+        }
+      },
+      "11": {
+        start: {
+          line: 45,
+          column: 15
+        },
+        end: {
+          line: 45,
+          column: 61
+        }
+      },
+      "12": {
+        start: {
+          line: 47,
+          column: 25
+        },
+        end: {
+          line: 50,
+          column: 2
+        }
+      },
+      "13": {
+        start: {
+          line: 48,
+          column: 156
+        },
+        end: {
+          line: 48,
+          column: 182
+        }
+      },
+      "14": {
+        start: {
+          line: 52,
+          column: 4
+        },
+        end: {
+          line: 198,
+          column: 5
+        }
+      },
+      "15": {
+        start: {
+          line: 53,
+          column: 8
+        },
+        end: {
+          line: 53,
+          column: 71
+        }
+      },
+      "16": {
+        start: {
+          line: 55,
+          column: 8
+        },
+        end: {
+          line: 64,
+          column: 9
+        }
+      },
+      "17": {
+        start: {
+          line: 56,
+          column: 12
+        },
+        end: {
+          line: 56,
+          column: 61
+        }
+      },
+      "18": {
+        start: {
+          line: 57,
+          column: 12
+        },
+        end: {
+          line: 63,
+          column: 15
+        }
+      },
+      "19": {
+        start: {
+          line: 66,
+          column: 21
+        },
+        end: {
+          line: 66,
+          column: 41
+        }
+      },
+      "20": {
+        start: {
+          line: 67,
+          column: 8
+        },
+        end: {
+          line: 70,
+          column: 11
+        }
+      },
+      "21": {
+        start: {
+          line: 71,
+          column: 33
+        },
+        end: {
+          line: 71,
+          column: 65
+        }
+      },
+      "22": {
+        start: {
+          line: 72,
+          column: 8
+        },
+        end: {
+          line: 82,
+          column: 9
+        }
+      },
+      "23": {
+        start: {
+          line: 73,
+          column: 12
+        },
+        end: {
+          line: 73,
+          column: 92
+        }
+      },
+      "24": {
+        start: {
+          line: 74,
+          column: 12
+        },
+        end: {
+          line: 81,
+          column: 15
+        }
+      },
+      "25": {
+        start: {
+          line: 83,
+          column: 34
+        },
+        end: {
+          line: 83,
+          column: 55
+        }
+      },
+      "26": {
+        start: {
+          line: 85,
+          column: 26
+        },
+        end: {
+          line: 85,
+          column: 72
+        }
+      },
+      "27": {
+        start: {
+          line: 86,
+          column: 8
+        },
+        end: {
+          line: 86,
+          column: 80
+        }
+      },
+      "28": {
+        start: {
+          line: 88,
+          column: 55
+        },
+        end: {
+          line: 113,
+          column: 10
+        }
+      },
+      "29": {
+        start: {
+          line: 114,
+          column: 8
+        },
+        end: {
+          line: 124,
+          column: 9
+        }
+      },
+      "30": {
+        start: {
+          line: 115,
+          column: 12
+        },
+        end: {
+          line: 115,
+          column: 72
+        }
+      },
+      "31": {
+        start: {
+          line: 116,
+          column: 12
+        },
+        end: {
+          line: 123,
+          column: 15
+        }
+      },
+      "32": {
+        start: {
+          line: 125,
+          column: 8
+        },
+        end: {
+          line: 125,
+          column: 69
+        }
+      },
+      "33": {
+        start: {
+          line: 130,
+          column: 8
+        },
+        end: {
+          line: 164,
+          column: 9
+        }
+      },
+      "34": {
+        start: {
+          line: 131,
+          column: 47
+        },
+        end: {
+          line: 154,
+          column: 14
+        }
+      },
+      "35": {
+        start: {
+          line: 155,
+          column: 12
+        },
+        end: {
+          line: 160,
+          column: 13
+        }
+      },
+      "36": {
+        start: {
+          line: 156,
+          column: 16
+        },
+        end: {
+          line: 156,
+          column: 79
+        }
+      },
+      "37": {
+        start: {
+          line: 159,
+          column: 16
+        },
+        end: {
+          line: 159,
+          column: 70
+        }
+      },
+      "38": {
+        start: {
+          line: 162,
+          column: 12
+        },
+        end: {
+          line: 162,
+          column: 69
+        }
+      },
+      "39": {
+        start: {
+          line: 166,
+          column: 8
+        },
+        end: {
+          line: 177,
+          column: 11
+        }
+      },
+      "40": {
+        start: {
+          line: 179,
+          column: 8
+        },
+        end: {
+          line: 179,
+          column: 70
+        }
+      },
+      "41": {
+        start: {
+          line: 181,
+          column: 8
+        },
+        end: {
+          line: 189,
+          column: 9
+        }
+      },
+      "42": {
+        start: {
+          line: 182,
+          column: 12
+        },
+        end: {
+          line: 188,
+          column: 15
+        }
+      },
+      "43": {
+        start: {
+          line: 190,
+          column: 8
+        },
+        end: {
+          line: 197,
+          column: 11
+        }
+      },
+      "44": {
+        start: {
+          line: 201,
+          column: 4
+        },
+        end: {
+          line: 217,
+          column: 7
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "_export",
+        decl: {
+          start: {
+            line: 5,
+            column: 9
+          },
+          end: {
+            line: 5,
+            column: 16
+          }
+        },
+        loc: {
+          start: {
+            line: 5,
+            column: 30
+          },
+          end: {
+            line: 10,
+            column: 1
+          }
+        },
+        line: 5
+      },
+      "1": {
+        name: "(anonymous_1)",
+        decl: {
+          start: {
+            line: 12,
+            column: 9
+          },
+          end: {
+            line: 12,
+            column: 10
+          }
+        },
+        loc: {
+          start: {
+            line: 12,
+            column: 20
+          },
+          end: {
+            line: 14,
+            column: 5
+          }
+        },
+        line: 12
+      },
+      "2": {
+        name: "(anonymous_2)",
+        decl: {
+          start: {
+            line: 15,
+            column: 10
+          },
+          end: {
+            line: 15,
+            column: 11
+          }
+        },
+        loc: {
+          start: {
+            line: 15,
+            column: 21
+          },
+          end: {
+            line: 17,
+            column: 5
+          }
+        },
+        line: 15
+      },
+      "3": {
+        name: "_interop_require_default",
+        decl: {
+          start: {
+            line: 23,
+            column: 9
+          },
+          end: {
+            line: 23,
+            column: 33
+          }
+        },
+        loc: {
+          start: {
+            line: 23,
+            column: 39
+          },
+          end: {
+            line: 27,
+            column: 1
+          }
+        },
+        line: 23
+      },
+      "4": {
+        name: "(anonymous_4)",
+        decl: {
+          start: {
+            line: 48,
+            column: 147
+          },
+          end: {
+            line: 48,
+            column: 148
+          }
+        },
+        loc: {
+          start: {
+            line: 48,
+            column: 156
+          },
+          end: {
+            line: 48,
+            column: 182
+          }
+        },
+        line: 48
+      },
+      "5": {
+        name: "POST",
+        decl: {
+          start: {
+            line: 51,
+            column: 15
+          },
+          end: {
+            line: 51,
+            column: 19
+          }
+        },
+        loc: {
+          start: {
+            line: 51,
+            column: 29
+          },
+          end: {
+            line: 199,
+            column: 1
+          }
+        },
+        line: 51
+      },
+      "6": {
+        name: "GET",
+        decl: {
+          start: {
+            line: 200,
+            column: 15
+          },
+          end: {
+            line: 200,
+            column: 18
+          }
+        },
+        loc: {
+          start: {
+            line: 200,
+            column: 21
+          },
+          end: {
+            line: 218,
+            column: 1
+          }
+        },
+        line: 200
+      }
+    },
+    branchMap: {
+      "0": {
+        loc: {
+          start: {
+            line: 24,
+            column: 11
+          },
+          end: {
+            line: 26,
+            column: 5
+          }
+        },
+        type: "cond-expr",
+        locations: [{
+          start: {
+            line: 24,
+            column: 35
+          },
+          end: {
+            line: 24,
+            column: 38
+          }
+        }, {
+          start: {
+            line: 24,
+            column: 41
+          },
+          end: {
+            line: 26,
+            column: 5
+          }
+        }],
+        line: 24
+      },
+      "1": {
+        loc: {
+          start: {
+            line: 24,
+            column: 11
+          },
+          end: {
+            line: 24,
+            column: 32
+          }
+        },
+        type: "binary-expr",
+        locations: [{
+          start: {
+            line: 24,
+            column: 11
+          },
+          end: {
+            line: 24,
+            column: 14
+          }
+        }, {
+          start: {
+            line: 24,
+            column: 18
+          },
+          end: {
+            line: 24,
+            column: 32
+          }
+        }],
+        line: 24
+      },
+      "2": {
+        loc: {
+          start: {
+            line: 55,
+            column: 8
+          },
+          end: {
+            line: 64,
+            column: 9
+          }
+        },
+        type: "if",
+        locations: [{
+          start: {
+            line: 55,
+            column: 8
+          },
+          end: {
+            line: 64,
+            column: 9
+          }
+        }, {
+          start: {
+            line: undefined,
+            column: undefined
+          },
+          end: {
+            line: undefined,
+            column: undefined
+          }
+        }],
+        line: 55
+      },
+      "3": {
+        loc: {
+          start: {
+            line: 72,
+            column: 8
+          },
+          end: {
+            line: 82,
+            column: 9
+          }
+        },
+        type: "if",
+        locations: [{
+          start: {
+            line: 72,
+            column: 8
+          },
+          end: {
+            line: 82,
+            column: 9
+          }
+        }, {
+          start: {
+            line: undefined,
+            column: undefined
+          },
+          end: {
+            line: undefined,
+            column: undefined
+          }
+        }],
+        line: 72
+      },
+      "4": {
+        loc: {
+          start: {
+            line: 85,
+            column: 26
+          },
+          end: {
+            line: 85,
+            column: 72
+          }
+        },
+        type: "binary-expr",
+        locations: [{
+          start: {
+            line: 85,
+            column: 26
+          },
+          end: {
+            line: 85,
+            column: 59
+          }
+        }, {
+          start: {
+            line: 85,
+            column: 63
+          },
+          end: {
+            line: 85,
+            column: 72
+          }
+        }],
+        line: 85
+      },
+      "5": {
+        loc: {
+          start: {
+            line: 114,
+            column: 8
+          },
+          end: {
+            line: 124,
+            column: 9
+          }
+        },
+        type: "if",
+        locations: [{
+          start: {
+            line: 114,
+            column: 8
+          },
+          end: {
+            line: 124,
+            column: 9
+          }
+        }, {
+          start: {
+            line: undefined,
+            column: undefined
+          },
+          end: {
+            line: undefined,
+            column: undefined
+          }
+        }],
+        line: 114
+      },
+      "6": {
+        loc: {
+          start: {
+            line: 155,
+            column: 12
+          },
+          end: {
+            line: 160,
+            column: 13
+          }
+        },
+        type: "if",
+        locations: [{
+          start: {
+            line: 155,
+            column: 12
+          },
+          end: {
+            line: 160,
+            column: 13
+          }
+        }, {
+          start: {
+            line: 158,
+            column: 19
+          },
+          end: {
+            line: 160,
+            column: 13
+          }
+        }],
+        line: 155
+      },
+      "7": {
+        loc: {
+          start: {
+            line: 181,
+            column: 8
+          },
+          end: {
+            line: 189,
+            column: 9
+          }
+        },
+        type: "if",
+        locations: [{
+          start: {
+            line: 181,
+            column: 8
+          },
+          end: {
+            line: 189,
+            column: 9
+          }
+        }, {
+          start: {
+            line: undefined,
+            column: undefined
+          },
+          end: {
+            line: undefined,
+            column: undefined
+          }
+        }],
+        line: 181
+      },
+      "8": {
+        loc: {
+          start: {
+            line: 194,
+            column: 21
+          },
+          end: {
+            line: 194,
+            column: 87
+          }
+        },
+        type: "cond-expr",
+        locations: [{
+          start: {
+            line: 194,
+            column: 62
+          },
+          end: {
+            line: 194,
+            column: 75
+          }
+        }, {
+          start: {
+            line: 194,
+            column: 78
+          },
+          end: {
+            line: 194,
+            column: 87
+          }
+        }],
+        line: 194
+      }
+    },
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0,
+      "10": 0,
+      "11": 0,
+      "12": 0,
+      "13": 0,
+      "14": 0,
+      "15": 0,
+      "16": 0,
+      "17": 0,
+      "18": 0,
+      "19": 0,
+      "20": 0,
+      "21": 0,
+      "22": 0,
+      "23": 0,
+      "24": 0,
+      "25": 0,
+      "26": 0,
+      "27": 0,
+      "28": 0,
+      "29": 0,
+      "30": 0,
+      "31": 0,
+      "32": 0,
+      "33": 0,
+      "34": 0,
+      "35": 0,
+      "36": 0,
+      "37": 0,
+      "38": 0,
+      "39": 0,
+      "40": 0,
+      "41": 0,
+      "42": 0,
+      "43": 0,
+      "44": 0
+    },
+    f: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0
+    },
+    b: {
+      "0": [0, 0],
+      "1": [0, 0],
+      "2": [0, 0],
+      "3": [0, 0],
+      "4": [0, 0],
+      "5": [0, 0],
+      "6": [0, 0],
+      "7": [0, 0],
+      "8": [0, 0]
+    },
+    inputSourceMap: {
+      version: 3,
+      sources: ["/home/jack/Documents/aclue-preprod/web/src/app/api/newsletter/signup/route.ts"],
+      sourcesContent: ["import { NextRequest, NextResponse } from 'next/server'\nimport { Resend } from 'resend'\nimport { z } from 'zod'\nimport WelcomeEmail from '@/components/emails/WelcomeEmail'\n\n/**\n * Newsletter Signup API Route - Direct Resend Integration\n * \n * This API route handles newsletter signups using Resend directly from Next.js,\n * bypassing the FastAPI backend for improved reliability and performance.\n * \n * Features:\n * - Direct Resend SDK integration\n * - React email templates with aclue branding\n * - Input validation with Zod\n * - Comprehensive error handling\n * - Source tracking for analytics\n * - British English content and responses\n * \n * Based on official Resend documentation patterns:\n * https://resend.com/docs/send-with-nextjs\n */\n\n// Initialize Resend client\nconst resend = new Resend(process.env.RESEND_API_KEY)\n\n// Input validation schema\nconst newsletterSchema = z.object({\n  email: z\n    .string()\n    .min(1, 'Email is required')\n    .email('Please enter a valid email address')\n    .max(320, 'Email address is too long')\n    .transform(email => email.toLowerCase().trim()),\n  source: z.string().optional().default('maintenance_page_direct'),\n})\n\n/**\n * POST /api/newsletter/signup\n * \n * Handles newsletter signup requests with direct Resend integration.\n * Sends welcome email using React email template.\n */\nexport async function POST(request: NextRequest) {\n  try {\n    console.log('\uD83D\uDCE7 Newsletter signup API route called')\n\n    // Check if Resend API key is configured\n    if (!process.env.RESEND_API_KEY) {\n      console.error('\u274C RESEND_API_KEY not configured')\n      return NextResponse.json(\n        { \n          success: false, \n          error: 'Email service not configured. Please try again later.',\n          code: 'CONFIGURATION_ERROR'\n        },\n        { status: 500 }\n      )\n    }\n\n    // Parse and validate request body\n    const body = await request.json()\n    console.log('\uD83D\uDCCB Newsletter signup data:', { email: body.email, source: body.source })\n\n    const validationResult = newsletterSchema.safeParse(body)\n\n    if (!validationResult.success) {\n      console.error('\u274C Newsletter validation failed:', validationResult.error.errors)\n      return NextResponse.json(\n        {\n          success: false,\n          error: 'Invalid email address format',\n          code: 'VALIDATION_ERROR',\n          details: validationResult.error.errors,\n        },\n        { status: 400 }\n      )\n    }\n\n    const { email, source } = validationResult.data\n\n    // Get user agent for tracking\n    const userAgent = request.headers.get('user-agent') || 'Unknown'\n    \n    console.log('\uD83C\uDF10 Sending welcome email via Resend to:', email)\n\n    // Send welcome email using Resend\n    const { data: emailData, error: emailError } = await resend.emails.send({\n      from: 'aclue <noreply@aclue.app>',\n      to: [email],\n      subject: 'Welcome to aclue - AI-Powered Gift Discovery! \uD83C\uDF81',\n      react: WelcomeEmail({ email, source }),\n      // Also provide HTML fallback for email clients that don't support React\n      html: `\n        <div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;\">\n          <div style=\"background: linear-gradient(135deg, #3b82f6, #8b5cf6); color: white; padding: 30px; text-align: center;\">\n            <h2>Welcome to aclue! \uD83D\uDE80</h2>\n            <p>AI-Powered Gift Discovery</p>\n          </div>\n          <div style=\"padding: 30px; background: #f8fafc;\">\n            <h3>Thank you for joining our community!</h3>\n            <p>You're among the first to experience how AI can revolutionise gift-giving.</p>\n            <p>We'll keep you updated on our progress and notify you when our AI is ready to transform your gift-giving experience.</p>\n            <p>Excited to have you on board,<br>The aclue Team</p>\n          </div>\n        </div>\n      `,\n    })\n\n    if (emailError) {\n      console.error('\u274C Resend email sending failed:', emailError)\n      return NextResponse.json(\n        {\n          success: false,\n          error: 'Failed to send welcome email. Please try again.',\n          code: 'EMAIL_SEND_ERROR',\n          details: emailError,\n        },\n        { status: 500 }\n      )\n    }\n\n    console.log('\u2705 Welcome email sent successfully:', emailData)\n\n    // Optional: Store subscriber in database\n    // This could be added later if local storage is needed\n    // await storeNewsletterSubscriber(email, source, userAgent)\n\n    // Send admin notification (optional)\n    try {\n      const { error: adminEmailError } = await resend.emails.send({\n        from: 'aclue <noreply@aclue.app>',\n        to: ['contact@aclue.app'],\n        subject: `New Newsletter Signup: ${email}`,\n        html: `\n          <div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;\">\n            <div style=\"background: #1f2937; color: white; padding: 20px; text-align: center;\">\n              <h2>\uD83C\uDF89 New Newsletter Signup - aclue</h2>\n            </div>\n            <div style=\"padding: 20px; background: #f9fafb;\">\n              <p>A new user has signed up for the aclue newsletter!</p>\n              <div style=\"background: white; padding: 15px; border-left: 4px solid #3b82f6; margin: 15px 0;\">\n                <p><strong>Email:</strong> ${email}</p>\n                <p><strong>Source:</strong> ${source}</p>\n                <p><strong>Timestamp:</strong> ${new Date().toISOString()}</p>\n                <p><strong>User Agent:</strong> ${userAgent}</p>\n              </div>\n              <p>The subscriber has been automatically sent a welcome email.</p>\n            </div>\n          </div>\n        `,\n      })\n\n      if (adminEmailError) {\n        console.warn('\u26A0\uFE0F Admin notification failed:', adminEmailError)\n        // Don't fail the main request if admin notification fails\n      } else {\n        console.log('\u2705 Admin notification sent successfully')\n      }\n    } catch (adminError) {\n      console.warn('\u26A0\uFE0F Admin notification error:', adminError)\n      // Don't fail the main request if admin notification fails\n    }\n\n    // Return success response\n    return NextResponse.json(\n      {\n        success: true,\n        message: \"Thank you! You're now on our mailing list and will be among the first to experience our AI-powered gift discovery platform.\",\n        code: 'SIGNUP_SUCCESS',\n        data: {\n          email,\n          source,\n          timestamp: new Date().toISOString(),\n        },\n      },\n      { status: 200 }\n    )\n\n  } catch (error: any) {\n    console.error('\uD83D\uDCA5 Newsletter signup error:', error)\n\n    // Enhanced error classification\n    if (error.name === 'SyntaxError') {\n      return NextResponse.json(\n        {\n          success: false,\n          error: 'Invalid request format',\n          code: 'INVALID_JSON',\n        },\n        { status: 400 }\n      )\n    }\n\n    return NextResponse.json(\n      {\n        success: false,\n        error: 'An unexpected error occurred. Please try again.',\n        code: 'UNKNOWN_ERROR',\n        details: process.env.NODE_ENV === 'development' ? error.message : undefined,\n      },\n      { status: 500 }\n    )\n  }\n}\n\n/**\n * GET /api/newsletter/signup\n * \n * Returns information about the newsletter signup endpoint.\n * Useful for health checks and documentation.\n */\nexport async function GET() {\n  return NextResponse.json(\n    {\n      endpoint: '/api/newsletter/signup',\n      method: 'POST',\n      description: 'Newsletter signup with direct Resend integration',\n      version: '1.0.0',\n      status: 'operational',\n      provider: 'Resend',\n      features: [\n        'Direct Resend SDK integration',\n        'React email templates',\n        'Input validation with Zod',\n        'Admin notifications',\n        'Source tracking',\n      ],\n    },\n    { status: 200 }\n  )\n}"],
+      names: ["GET", "POST", "resend", "Resend", "process", "env", "RESEND_API_KEY", "newsletterSchema", "z", "object", "email", "string", "min", "max", "transform", "toLowerCase", "trim", "source", "optional", "default", "request", "console", "log", "error", "NextResponse", "json", "success", "code", "status", "body", "validationResult", "safeParse", "errors", "details", "data", "userAgent", "headers", "get", "emailData", "emailError", "emails", "send", "from", "to", "subject", "react", "WelcomeEmail", "html", "adminEmailError", "Date", "toISOString", "warn", "adminError", "message", "timestamp", "name", "NODE_ENV", "undefined", "endpoint", "method", "description", "version", "provider", "features"],
+      mappings: "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"
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "866ca9a66c84614aaa15e62803b28ad9f64ffd61"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_w8qxapg25 = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_w8qxapg25();
+cov_w8qxapg25().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+function _export(target, all) {
+  /* istanbul ignore next */
+  cov_w8qxapg25().f[0]++;
+  cov_w8qxapg25().s[1]++;
+  for (var name in all) {
+    /* istanbul ignore next */
+    cov_w8qxapg25().s[2]++;
+    Object.defineProperty(target, name, {
+      enumerable: true,
+      get: all[name]
+    });
+  }
+}
+/* istanbul ignore next */
+cov_w8qxapg25().s[3]++;
+_export(exports, {
+  GET: function () {
+    /* istanbul ignore next */
+    cov_w8qxapg25().f[1]++;
+    cov_w8qxapg25().s[4]++;
+    return GET;
+  },
+  POST: function () {
+    /* istanbul ignore next */
+    cov_w8qxapg25().f[2]++;
+    cov_w8qxapg25().s[5]++;
+    return POST;
+  }
+});
+const _server =
+/* istanbul ignore next */
+(cov_w8qxapg25().s[6]++, require("next/server"));
+const _resend =
+/* istanbul ignore next */
+(cov_w8qxapg25().s[7]++, require("resend"));
+const _zod =
+/* istanbul ignore next */
+(cov_w8qxapg25().s[8]++, require("zod"));
+const _WelcomeEmail =
+/* istanbul ignore next */
+(/*#__PURE__*/cov_w8qxapg25().s[9]++, _interop_require_default(require("../../../../components/emails/WelcomeEmail")));
+function _interop_require_default(obj) {
+  /* istanbul ignore next */
+  cov_w8qxapg25().f[3]++;
+  cov_w8qxapg25().s[10]++;
+  return /* istanbul ignore next */(cov_w8qxapg25().b[1][0]++, obj) &&
+  /* istanbul ignore next */
+  (cov_w8qxapg25().b[1][1]++, obj.__esModule) ?
+  /* istanbul ignore next */
+  (cov_w8qxapg25().b[0][0]++, obj) :
+  /* istanbul ignore next */
+  (cov_w8qxapg25().b[0][1]++, {
+    default: obj
+  });
+}
+/**
+ * Newsletter Signup API Route - Direct Resend Integration
+ * 
+ * This API route handles newsletter signups using Resend directly from Next.js,
+ * bypassing the FastAPI backend for improved reliability and performance.
+ * 
+ * Features:
+ * - Direct Resend SDK integration
+ * - React email templates with aclue branding
+ * - Input validation with Zod
+ * - Comprehensive error handling
+ * - Source tracking for analytics
+ * - British English content and responses
+ * 
+ * Based on official Resend documentation patterns:
+ * https://resend.com/docs/send-with-nextjs
+ */ // Initialize Resend client
+const resend =
+/* istanbul ignore next */
+(cov_w8qxapg25().s[11]++, new _resend.Resend(process.env.RESEND_API_KEY));
+// Input validation schema
+const newsletterSchema =
+/* istanbul ignore next */
+(cov_w8qxapg25().s[12]++, _zod.z.object({
+  email: _zod.z.string().min(1, "Email is required").email("Please enter a valid email address").max(320, "Email address is too long").transform(email => {
+    /* istanbul ignore next */
+    cov_w8qxapg25().f[4]++;
+    cov_w8qxapg25().s[13]++;
+    return email.toLowerCase().trim();
+  }),
+  source: _zod.z.string().optional().default("maintenance_page_direct")
+}));
+async function POST(request) {
+  /* istanbul ignore next */
+  cov_w8qxapg25().f[5]++;
+  cov_w8qxapg25().s[14]++;
+  try {
+    /* istanbul ignore next */
+    cov_w8qxapg25().s[15]++;
+    console.log("\uD83D\uDCE7 Newsletter signup API route called");
+    // Check if Resend API key is configured
+    /* istanbul ignore next */
+    cov_w8qxapg25().s[16]++;
+    if (!process.env.RESEND_API_KEY) {
+      /* istanbul ignore next */
+      cov_w8qxapg25().b[2][0]++;
+      cov_w8qxapg25().s[17]++;
+      console.error("❌ RESEND_API_KEY not configured");
+      /* istanbul ignore next */
+      cov_w8qxapg25().s[18]++;
+      return _server.NextResponse.json({
+        success: false,
+        error: "Email service not configured. Please try again later.",
+        code: "CONFIGURATION_ERROR"
+      }, {
+        status: 500
+      });
+    } else
+    /* istanbul ignore next */
+    {
+      cov_w8qxapg25().b[2][1]++;
+    }
+    // Parse and validate request body
+    const body =
+    /* istanbul ignore next */
+    (cov_w8qxapg25().s[19]++, await request.json());
+    /* istanbul ignore next */
+    cov_w8qxapg25().s[20]++;
+    console.log("\uD83D\uDCCB Newsletter signup data:", {
+      email: body.email,
+      source: body.source
+    });
+    const validationResult =
+    /* istanbul ignore next */
+    (cov_w8qxapg25().s[21]++, newsletterSchema.safeParse(body));
+    /* istanbul ignore next */
+    cov_w8qxapg25().s[22]++;
+    if (!validationResult.success) {
+      /* istanbul ignore next */
+      cov_w8qxapg25().b[3][0]++;
+      cov_w8qxapg25().s[23]++;
+      console.error("❌ Newsletter validation failed:", validationResult.error.errors);
+      /* istanbul ignore next */
+      cov_w8qxapg25().s[24]++;
+      return _server.NextResponse.json({
+        success: false,
+        error: "Invalid email address format",
+        code: "VALIDATION_ERROR",
+        details: validationResult.error.errors
+      }, {
+        status: 400
+      });
+    } else
+    /* istanbul ignore next */
+    {
+      cov_w8qxapg25().b[3][1]++;
+    }
+    const {
+      email,
+      source
+    } =
+    /* istanbul ignore next */
+    (cov_w8qxapg25().s[25]++, validationResult.data);
+    // Get user agent for tracking
+    const userAgent =
+    /* istanbul ignore next */
+    (cov_w8qxapg25().s[26]++,
+    /* istanbul ignore next */
+    (cov_w8qxapg25().b[4][0]++, request.headers.get("user-agent")) ||
+    /* istanbul ignore next */
+    (cov_w8qxapg25().b[4][1]++, "Unknown"));
+    /* istanbul ignore next */
+    cov_w8qxapg25().s[27]++;
+    console.log("\uD83C\uDF10 Sending welcome email via Resend to:", email);
+    // Send welcome email using Resend
+    const {
+      data: emailData,
+      error: emailError
+    } =
+    /* istanbul ignore next */
+    (cov_w8qxapg25().s[28]++, await resend.emails.send({
+      from: "aclue <noreply@aclue.app>",
+      to: [email],
+      subject: "Welcome to aclue - AI-Powered Gift Discovery! \uD83C\uDF81",
+      react: (0, _WelcomeEmail.default)({
+        email,
+        source
+      }),
+      // Also provide HTML fallback for email clients that don't support React
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <div style="background: linear-gradient(135deg, #3b82f6, #8b5cf6); color: white; padding: 30px; text-align: center;">
+            <h2>Welcome to aclue! 🚀</h2>
+            <p>AI-Powered Gift Discovery</p>
+          </div>
+          <div style="padding: 30px; background: #f8fafc;">
+            <h3>Thank you for joining our community!</h3>
+            <p>You're among the first to experience how AI can revolutionise gift-giving.</p>
+            <p>We'll keep you updated on our progress and notify you when our AI is ready to transform your gift-giving experience.</p>
+            <p>Excited to have you on board,<br>The aclue Team</p>
+          </div>
+        </div>
+      `
+    }));
+    /* istanbul ignore next */
+    cov_w8qxapg25().s[29]++;
+    if (emailError) {
+      /* istanbul ignore next */
+      cov_w8qxapg25().b[5][0]++;
+      cov_w8qxapg25().s[30]++;
+      console.error("❌ Resend email sending failed:", emailError);
+      /* istanbul ignore next */
+      cov_w8qxapg25().s[31]++;
+      return _server.NextResponse.json({
+        success: false,
+        error: "Failed to send welcome email. Please try again.",
+        code: "EMAIL_SEND_ERROR",
+        details: emailError
+      }, {
+        status: 500
+      });
+    } else
+    /* istanbul ignore next */
+    {
+      cov_w8qxapg25().b[5][1]++;
+    }
+    cov_w8qxapg25().s[32]++;
+    console.log("✅ Welcome email sent successfully:", emailData);
+    // Optional: Store subscriber in database
+    // This could be added later if local storage is needed
+    // await storeNewsletterSubscriber(email, source, userAgent)
+    // Send admin notification (optional)
+    /* istanbul ignore next */
+    cov_w8qxapg25().s[33]++;
+    try {
+      const {
+        error: adminEmailError
+      } =
+      /* istanbul ignore next */
+      (cov_w8qxapg25().s[34]++, await resend.emails.send({
+        from: "aclue <noreply@aclue.app>",
+        to: ["contact@aclue.app"],
+        subject: `New Newsletter Signup: ${email}`,
+        html: `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+            <div style="background: #1f2937; color: white; padding: 20px; text-align: center;">
+              <h2>🎉 New Newsletter Signup - aclue</h2>
+            </div>
+            <div style="padding: 20px; background: #f9fafb;">
+              <p>A new user has signed up for the aclue newsletter!</p>
+              <div style="background: white; padding: 15px; border-left: 4px solid #3b82f6; margin: 15px 0;">
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Source:</strong> ${source}</p>
+                <p><strong>Timestamp:</strong> ${new Date().toISOString()}</p>
+                <p><strong>User Agent:</strong> ${userAgent}</p>
+              </div>
+              <p>The subscriber has been automatically sent a welcome email.</p>
+            </div>
+          </div>
+        `
+      }));
+      /* istanbul ignore next */
+      cov_w8qxapg25().s[35]++;
+      if (adminEmailError) {
+        /* istanbul ignore next */
+        cov_w8qxapg25().b[6][0]++;
+        cov_w8qxapg25().s[36]++;
+        console.warn("⚠️ Admin notification failed:", adminEmailError);
+        // Don't fail the main request if admin notification fails
+      } else {
+        /* istanbul ignore next */
+        cov_w8qxapg25().b[6][1]++;
+        cov_w8qxapg25().s[37]++;
+        console.log("✅ Admin notification sent successfully");
+      }
+    } catch (adminError) {
+      /* istanbul ignore next */
+      cov_w8qxapg25().s[38]++;
+      console.warn("⚠️ Admin notification error:", adminError);
+      // Don't fail the main request if admin notification fails
+    }
+    // Return success response
+    /* istanbul ignore next */
+    cov_w8qxapg25().s[39]++;
+    return _server.NextResponse.json({
+      success: true,
+      message: "Thank you! You're now on our mailing list and will be among the first to experience our AI-powered gift discovery platform.",
+      code: "SIGNUP_SUCCESS",
+      data: {
+        email,
+        source,
+        timestamp: new Date().toISOString()
+      }
+    }, {
+      status: 200
+    });
+  } catch (error) {
+    /* istanbul ignore next */
+    cov_w8qxapg25().s[40]++;
+    console.error("\uD83D\uDCA5 Newsletter signup error:", error);
+    // Enhanced error classification
+    /* istanbul ignore next */
+    cov_w8qxapg25().s[41]++;
+    if (error.name === "SyntaxError") {
+      /* istanbul ignore next */
+      cov_w8qxapg25().b[7][0]++;
+      cov_w8qxapg25().s[42]++;
+      return _server.NextResponse.json({
+        success: false,
+        error: "Invalid request format",
+        code: "INVALID_JSON"
+      }, {
+        status: 400
+      });
+    } else
+    /* istanbul ignore next */
+    {
+      cov_w8qxapg25().b[7][1]++;
+    }
+    cov_w8qxapg25().s[43]++;
+    return _server.NextResponse.json({
+      success: false,
+      error: "An unexpected error occurred. Please try again.",
+      code: "UNKNOWN_ERROR",
+      details: process.env.NODE_ENV === "development" ?
+      /* istanbul ignore next */
+      (cov_w8qxapg25().b[8][0]++, error.message) :
+      /* istanbul ignore next */
+      (cov_w8qxapg25().b[8][1]++, undefined)
+    }, {
+      status: 500
+    });
+  }
+}
+async function GET() {
+  /* istanbul ignore next */
+  cov_w8qxapg25().f[6]++;
+  cov_w8qxapg25().s[44]++;
+  return _server.NextResponse.json({
+    endpoint: "/api/newsletter/signup",
+    method: "POST",
+    description: "Newsletter signup with direct Resend integration",
+    version: "1.0.0",
+    status: "operational",
+    provider: "Resend",
+    features: ["Direct Resend SDK integration", "React email templates", "Input validation with Zod", "Admin notifications", "Source tracking"]
+  }, {
+    status: 200
+  });
+}
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJHRVQiLCJjb3ZfdzhxeGFwZzI1IiwiZiIsInMiLCJQT1NUIiwicmVzZW5kIiwiX3Jlc2VuZCIsIlJlc2VuZCIsInByb2Nlc3MiLCJlbnYiLCJSRVNFTkRfQVBJX0tFWSIsIm5ld3NsZXR0ZXJTY2hlbWEiLCJfem9kIiwieiIsIm9iamVjdCIsImVtYWlsIiwic3RyaW5nIiwibWluIiwibWF4IiwidHJhbnNmb3JtIiwidG9Mb3dlckNhc2UiLCJ0cmltIiwic291cmNlIiwib3B0aW9uYWwiLCJkZWZhdWx0IiwicmVxdWVzdCIsImNvbnNvbGUiLCJsb2ciLCJiIiwiZXJyb3IiLCJfc2VydmVyIiwiTmV4dFJlc3BvbnNlIiwianNvbiIsInN1Y2Nlc3MiLCJjb2RlIiwic3RhdHVzIiwiYm9keSIsInZhbGlkYXRpb25SZXN1bHQiLCJzYWZlUGFyc2UiLCJlcnJvcnMiLCJkZXRhaWxzIiwiZGF0YSIsInVzZXJBZ2VudCIsImhlYWRlcnMiLCJnZXQiLCJlbWFpbERhdGEiLCJlbWFpbEVycm9yIiwiZW1haWxzIiwic2VuZCIsImZyb20iLCJ0byIsInN1YmplY3QiLCJyZWFjdCIsIl9XZWxjb21lRW1haWwiLCJodG1sIiwiYWRtaW5FbWFpbEVycm9yIiwiRGF0ZSIsInRvSVNPU3RyaW5nIiwid2FybiIsImFkbWluRXJyb3IiLCJtZXNzYWdlIiwidGltZXN0YW1wIiwibmFtZSIsIk5PREVfRU5WIiwidW5kZWZpbmVkIiwiZW5kcG9pbnQiLCJtZXRob2QiLCJkZXNjcmlwdGlvbiIsInZlcnNpb24iLCJwcm92aWRlciIsImZlYXR1cmVzIl0sInNvdXJjZXMiOlsiL2hvbWUvamFjay9Eb2N1bWVudHMvYWNsdWUtcHJlcHJvZC93ZWIvc3JjL2FwcC9hcGkvbmV3c2xldHRlci9zaWdudXAvcm91dGUudHMiXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgTmV4dFJlcXVlc3QsIE5leHRSZXNwb25zZSB9IGZyb20gJ25leHQvc2VydmVyJ1xuaW1wb3J0IHsgUmVzZW5kIH0gZnJvbSAncmVzZW5kJ1xuaW1wb3J0IHsgeiB9IGZyb20gJ3pvZCdcbmltcG9ydCBXZWxjb21lRW1haWwgZnJvbSAnQC9jb21wb25lbnRzL2VtYWlscy9XZWxjb21lRW1haWwnXG5cbi8qKlxuICogTmV3c2xldHRlciBTaWdudXAgQVBJIFJvdXRlIC0gRGlyZWN0IFJlc2VuZCBJbnRlZ3JhdGlvblxuICogXG4gKiBUaGlzIEFQSSByb3V0ZSBoYW5kbGVzIG5ld3NsZXR0ZXIgc2lnbnVwcyB1c2luZyBSZXNlbmQgZGlyZWN0bHkgZnJvbSBOZXh0LmpzLFxuICogYnlwYXNzaW5nIHRoZSBGYXN0QVBJIGJhY2tlbmQgZm9yIGltcHJvdmVkIHJlbGlhYmlsaXR5IGFuZCBwZXJmb3JtYW5jZS5cbiAqIFxuICogRmVhdHVyZXM6XG4gKiAtIERpcmVjdCBSZXNlbmQgU0RLIGludGVncmF0aW9uXG4gKiAtIFJlYWN0IGVtYWlsIHRlbXBsYXRlcyB3aXRoIEFjbHVlIGJyYW5kaW5nXG4gKiAtIElucHV0IHZhbGlkYXRpb24gd2l0aCBab2RcbiAqIC0gQ29tcHJlaGVuc2l2ZSBlcnJvciBoYW5kbGluZ1xuICogLSBTb3VyY2UgdHJhY2tpbmcgZm9yIGFuYWx5dGljc1xuICogLSBCcml0aXNoIEVuZ2xpc2ggY29udGVudCBhbmQgcmVzcG9uc2VzXG4gKiBcbiAqIEJhc2VkIG9uIG9mZmljaWFsIFJlc2VuZCBkb2N1bWVudGF0aW9uIHBhdHRlcm5zOlxuICogaHR0cHM6Ly9yZXNlbmQuY29tL2RvY3Mvc2VuZC13aXRoLW5leHRqc1xuICovXG5cbi8vIEluaXRpYWxpemUgUmVzZW5kIGNsaWVudFxuY29uc3QgcmVzZW5kID0gbmV3IFJlc2VuZChwcm9jZXNzLmVudi5SRVNFTkRfQVBJX0tFWSlcblxuLy8gSW5wdXQgdmFsaWRhdGlvbiBzY2hlbWFcbmNvbnN0IG5ld3NsZXR0ZXJTY2hlbWEgPSB6Lm9iamVjdCh7XG4gIGVtYWlsOiB6XG4gICAgLnN0cmluZygpXG4gICAgLm1pbigxLCAnRW1haWwgaXMgcmVxdWlyZWQnKVxuICAgIC5lbWFpbCgnUGxlYXNlIGVudGVyIGEgdmFsaWQgZW1haWwgYWRkcmVzcycpXG4gICAgLm1heCgzMjAsICdFbWFpbCBhZGRyZXNzIGlzIHRvbyBsb25nJylcbiAgICAudHJhbnNmb3JtKGVtYWlsID0+IGVtYWlsLnRvTG93ZXJDYXNlKCkudHJpbSgpKSxcbiAgc291cmNlOiB6LnN0cmluZygpLm9wdGlvbmFsKCkuZGVmYXVsdCgnbWFpbnRlbmFuY2VfcGFnZV9kaXJlY3QnKSxcbn0pXG5cbi8qKlxuICogUE9TVCAvYXBpL25ld3NsZXR0ZXIvc2lnbnVwXG4gKiBcbiAqIEhhbmRsZXMgbmV3c2xldHRlciBzaWdudXAgcmVxdWVzdHMgd2l0aCBkaXJlY3QgUmVzZW5kIGludGVncmF0aW9uLlxuICogU2VuZHMgd2VsY29tZSBlbWFpbCB1c2luZyBSZWFjdCBlbWFpbCB0ZW1wbGF0ZS5cbiAqL1xuZXhwb3J0IGFzeW5jIGZ1bmN0aW9uIFBPU1QocmVxdWVzdDogTmV4dFJlcXVlc3QpIHtcbiAgdHJ5IHtcbiAgICBjb25zb2xlLmxvZygn8J+TpyBOZXdzbGV0dGVyIHNpZ251cCBBUEkgcm91dGUgY2FsbGVkJylcblxuICAgIC8vIENoZWNrIGlmIFJlc2VuZCBBUEkga2V5IGlzIGNvbmZpZ3VyZWRcbiAgICBpZiAoIXByb2Nlc3MuZW52LlJFU0VORF9BUElfS0VZKSB7XG4gICAgICBjb25zb2xlLmVycm9yKCfinYwgUkVTRU5EX0FQSV9LRVkgbm90IGNvbmZpZ3VyZWQnKVxuICAgICAgcmV0dXJuIE5leHRSZXNwb25zZS5qc29uKFxuICAgICAgICB7IFxuICAgICAgICAgIHN1Y2Nlc3M6IGZhbHNlLCBcbiAgICAgICAgICBlcnJvcjogJ0VtYWlsIHNlcnZpY2Ugbm90IGNvbmZpZ3VyZWQuIFBsZWFzZSB0cnkgYWdhaW4gbGF0ZXIuJyxcbiAgICAgICAgICBjb2RlOiAnQ09ORklHVVJBVElPTl9FUlJPUidcbiAgICAgICAgfSxcbiAgICAgICAgeyBzdGF0dXM6IDUwMCB9XG4gICAgICApXG4gICAgfVxuXG4gICAgLy8gUGFyc2UgYW5kIHZhbGlkYXRlIHJlcXVlc3QgYm9keVxuICAgIGNvbnN0IGJvZHkgPSBhd2FpdCByZXF1ZXN0Lmpzb24oKVxuICAgIGNvbnNvbGUubG9nKCfwn5OLIE5ld3NsZXR0ZXIgc2lnbnVwIGRhdGE6JywgeyBlbWFpbDogYm9keS5lbWFpbCwgc291cmNlOiBib2R5LnNvdXJjZSB9KVxuXG4gICAgY29uc3QgdmFsaWRhdGlvblJlc3VsdCA9IG5ld3NsZXR0ZXJTY2hlbWEuc2FmZVBhcnNlKGJvZHkpXG5cbiAgICBpZiAoIXZhbGlkYXRpb25SZXN1bHQuc3VjY2Vzcykge1xuICAgICAgY29uc29sZS5lcnJvcign4p2MIE5ld3NsZXR0ZXIgdmFsaWRhdGlvbiBmYWlsZWQ6JywgdmFsaWRhdGlvblJlc3VsdC5lcnJvci5lcnJvcnMpXG4gICAgICByZXR1cm4gTmV4dFJlc3BvbnNlLmpzb24oXG4gICAgICAgIHtcbiAgICAgICAgICBzdWNjZXNzOiBmYWxzZSxcbiAgICAgICAgICBlcnJvcjogJ0ludmFsaWQgZW1haWwgYWRkcmVzcyBmb3JtYXQnLFxuICAgICAgICAgIGNvZGU6ICdWQUxJREFUSU9OX0VSUk9SJyxcbiAgICAgICAgICBkZXRhaWxzOiB2YWxpZGF0aW9uUmVzdWx0LmVycm9yLmVycm9ycyxcbiAgICAgICAgfSxcbiAgICAgICAgeyBzdGF0dXM6IDQwMCB9XG4gICAgICApXG4gICAgfVxuXG4gICAgY29uc3QgeyBlbWFpbCwgc291cmNlIH0gPSB2YWxpZGF0aW9uUmVzdWx0LmRhdGFcblxuICAgIC8vIEdldCB1c2VyIGFnZW50IGZvciB0cmFja2luZ1xuICAgIGNvbnN0IHVzZXJBZ2VudCA9IHJlcXVlc3QuaGVhZGVycy5nZXQoJ3VzZXItYWdlbnQnKSB8fCAnVW5rbm93bidcbiAgICBcbiAgICBjb25zb2xlLmxvZygn8J+MkCBTZW5kaW5nIHdlbGNvbWUgZW1haWwgdmlhIFJlc2VuZCB0bzonLCBlbWFpbClcblxuICAgIC8vIFNlbmQgd2VsY29tZSBlbWFpbCB1c2luZyBSZXNlbmRcbiAgICBjb25zdCB7IGRhdGE6IGVtYWlsRGF0YSwgZXJyb3I6IGVtYWlsRXJyb3IgfSA9IGF3YWl0IHJlc2VuZC5lbWFpbHMuc2VuZCh7XG4gICAgICBmcm9tOiAnQWNsdWUgPG5vcmVwbHlAYWNsdWUuYXBwPicsXG4gICAgICB0bzogW2VtYWlsXSxcbiAgICAgIHN1YmplY3Q6ICdXZWxjb21lIHRvIEFjbHVlIC0gQUktUG93ZXJlZCBHaWZ0IERpc2NvdmVyeSEg8J+OgScsXG4gICAgICByZWFjdDogV2VsY29tZUVtYWlsKHsgZW1haWwsIHNvdXJjZSB9KSxcbiAgICAgIC8vIEFsc28gcHJvdmlkZSBIVE1MIGZhbGxiYWNrIGZvciBlbWFpbCBjbGllbnRzIHRoYXQgZG9uJ3Qgc3VwcG9ydCBSZWFjdFxuICAgICAgaHRtbDogYFxuICAgICAgICA8ZGl2IHN0eWxlPVwiZm9udC1mYW1pbHk6IEFyaWFsLCBzYW5zLXNlcmlmOyBtYXgtd2lkdGg6IDYwMHB4OyBtYXJnaW46IDAgYXV0bztcIj5cbiAgICAgICAgICA8ZGl2IHN0eWxlPVwiYmFja2dyb3VuZDogbGluZWFyLWdyYWRpZW50KDEzNWRlZywgIzNiODJmNiwgIzhiNWNmNik7IGNvbG9yOiB3aGl0ZTsgcGFkZGluZzogMzBweDsgdGV4dC1hbGlnbjogY2VudGVyO1wiPlxuICAgICAgICAgICAgPGgyPldlbGNvbWUgdG8gQWNsdWUhIPCfmoA8L2gyPlxuICAgICAgICAgICAgPHA+QUktUG93ZXJlZCBHaWZ0IERpc2NvdmVyeTwvcD5cbiAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICA8ZGl2IHN0eWxlPVwicGFkZGluZzogMzBweDsgYmFja2dyb3VuZDogI2Y4ZmFmYztcIj5cbiAgICAgICAgICAgIDxoMz5UaGFuayB5b3UgZm9yIGpvaW5pbmcgb3VyIGNvbW11bml0eSE8L2gzPlxuICAgICAgICAgICAgPHA+WW91J3JlIGFtb25nIHRoZSBmaXJzdCB0byBleHBlcmllbmNlIGhvdyBBSSBjYW4gcmV2b2x1dGlvbmlzZSBnaWZ0LWdpdmluZy48L3A+XG4gICAgICAgICAgICA8cD5XZSdsbCBrZWVwIHlvdSB1cGRhdGVkIG9uIG91ciBwcm9ncmVzcyBhbmQgbm90aWZ5IHlvdSB3aGVuIG91ciBBSSBpcyByZWFkeSB0byB0cmFuc2Zvcm0geW91ciBnaWZ0LWdpdmluZyBleHBlcmllbmNlLjwvcD5cbiAgICAgICAgICAgIDxwPkV4Y2l0ZWQgdG8gaGF2ZSB5b3Ugb24gYm9hcmQsPGJyPlRoZSBBY2x1ZSBUZWFtPC9wPlxuICAgICAgICAgIDwvZGl2PlxuICAgICAgICA8L2Rpdj5cbiAgICAgIGAsXG4gICAgfSlcblxuICAgIGlmIChlbWFpbEVycm9yKSB7XG4gICAgICBjb25zb2xlLmVycm9yKCfinYwgUmVzZW5kIGVtYWlsIHNlbmRpbmcgZmFpbGVkOicsIGVtYWlsRXJyb3IpXG4gICAgICByZXR1cm4gTmV4dFJlc3BvbnNlLmpzb24oXG4gICAgICAgIHtcbiAgICAgICAgICBzdWNjZXNzOiBmYWxzZSxcbiAgICAgICAgICBlcnJvcjogJ0ZhaWxlZCB0byBzZW5kIHdlbGNvbWUgZW1haWwuIFBsZWFzZSB0cnkgYWdhaW4uJyxcbiAgICAgICAgICBjb2RlOiAnRU1BSUxfU0VORF9FUlJPUicsXG4gICAgICAgICAgZGV0YWlsczogZW1haWxFcnJvcixcbiAgICAgICAgfSxcbiAgICAgICAgeyBzdGF0dXM6IDUwMCB9XG4gICAgICApXG4gICAgfVxuXG4gICAgY29uc29sZS5sb2coJ+KchSBXZWxjb21lIGVtYWlsIHNlbnQgc3VjY2Vzc2Z1bGx5OicsIGVtYWlsRGF0YSlcblxuICAgIC8vIE9wdGlvbmFsOiBTdG9yZSBzdWJzY3JpYmVyIGluIGRhdGFiYXNlXG4gICAgLy8gVGhpcyBjb3VsZCBiZSBhZGRlZCBsYXRlciBpZiBsb2NhbCBzdG9yYWdlIGlzIG5lZWRlZFxuICAgIC8vIGF3YWl0IHN0b3JlTmV3c2xldHRlclN1YnNjcmliZXIoZW1haWwsIHNvdXJjZSwgdXNlckFnZW50KVxuXG4gICAgLy8gU2VuZCBhZG1pbiBub3RpZmljYXRpb24gKG9wdGlvbmFsKVxuICAgIHRyeSB7XG4gICAgICBjb25zdCB7IGVycm9yOiBhZG1pbkVtYWlsRXJyb3IgfSA9IGF3YWl0IHJlc2VuZC5lbWFpbHMuc2VuZCh7XG4gICAgICAgIGZyb206ICdBY2x1ZSA8bm9yZXBseUBhY2x1ZS5hcHA+JyxcbiAgICAgICAgdG86IFsnY29udGFjdEBhY2x1ZS5hcHAnXSxcbiAgICAgICAgc3ViamVjdDogYE5ldyBOZXdzbGV0dGVyIFNpZ251cDogJHtlbWFpbH1gLFxuICAgICAgICBodG1sOiBgXG4gICAgICAgICAgPGRpdiBzdHlsZT1cImZvbnQtZmFtaWx5OiBBcmlhbCwgc2Fucy1zZXJpZjsgbWF4LXdpZHRoOiA2MDBweDsgbWFyZ2luOiAwIGF1dG87XCI+XG4gICAgICAgICAgICA8ZGl2IHN0eWxlPVwiYmFja2dyb3VuZDogIzFmMjkzNzsgY29sb3I6IHdoaXRlOyBwYWRkaW5nOiAyMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7XCI+XG4gICAgICAgICAgICAgIDxoMj7wn46JIE5ldyBOZXdzbGV0dGVyIFNpZ251cCAtIEFjbHVlPC9oMj5cbiAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgPGRpdiBzdHlsZT1cInBhZGRpbmc6IDIwcHg7IGJhY2tncm91bmQ6ICNmOWZhZmI7XCI+XG4gICAgICAgICAgICAgIDxwPkEgbmV3IHVzZXIgaGFzIHNpZ25lZCB1cCBmb3IgdGhlIEFjbHVlIG5ld3NsZXR0ZXIhPC9wPlxuICAgICAgICAgICAgICA8ZGl2IHN0eWxlPVwiYmFja2dyb3VuZDogd2hpdGU7IHBhZGRpbmc6IDE1cHg7IGJvcmRlci1sZWZ0OiA0cHggc29saWQgIzNiODJmNjsgbWFyZ2luOiAxNXB4IDA7XCI+XG4gICAgICAgICAgICAgICAgPHA+PHN0cm9uZz5FbWFpbDo8L3N0cm9uZz4gJHtlbWFpbH08L3A+XG4gICAgICAgICAgICAgICAgPHA+PHN0cm9uZz5Tb3VyY2U6PC9zdHJvbmc+ICR7c291cmNlfTwvcD5cbiAgICAgICAgICAgICAgICA8cD48c3Ryb25nPlRpbWVzdGFtcDo8L3N0cm9uZz4gJHtuZXcgRGF0ZSgpLnRvSVNPU3RyaW5nKCl9PC9wPlxuICAgICAgICAgICAgICAgIDxwPjxzdHJvbmc+VXNlciBBZ2VudDo8L3N0cm9uZz4gJHt1c2VyQWdlbnR9PC9wPlxuICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgPHA+VGhlIHN1YnNjcmliZXIgaGFzIGJlZW4gYXV0b21hdGljYWxseSBzZW50IGEgd2VsY29tZSBlbWFpbC48L3A+XG4gICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgYCxcbiAgICAgIH0pXG5cbiAgICAgIGlmIChhZG1pbkVtYWlsRXJyb3IpIHtcbiAgICAgICAgY29uc29sZS53YXJuKCfimqDvuI8gQWRtaW4gbm90aWZpY2F0aW9uIGZhaWxlZDonLCBhZG1pbkVtYWlsRXJyb3IpXG4gICAgICAgIC8vIERvbid0IGZhaWwgdGhlIG1haW4gcmVxdWVzdCBpZiBhZG1pbiBub3RpZmljYXRpb24gZmFpbHNcbiAgICAgIH0gZWxzZSB7XG4gICAgICAgIGNvbnNvbGUubG9nKCfinIUgQWRtaW4gbm90aWZpY2F0aW9uIHNlbnQgc3VjY2Vzc2Z1bGx5JylcbiAgICAgIH1cbiAgICB9IGNhdGNoIChhZG1pbkVycm9yKSB7XG4gICAgICBjb25zb2xlLndhcm4oJ+KaoO+4jyBBZG1pbiBub3RpZmljYXRpb24gZXJyb3I6JywgYWRtaW5FcnJvcilcbiAgICAgIC8vIERvbid0IGZhaWwgdGhlIG1haW4gcmVxdWVzdCBpZiBhZG1pbiBub3RpZmljYXRpb24gZmFpbHNcbiAgICB9XG5cbiAgICAvLyBSZXR1cm4gc3VjY2VzcyByZXNwb25zZVxuICAgIHJldHVybiBOZXh0UmVzcG9uc2UuanNvbihcbiAgICAgIHtcbiAgICAgICAgc3VjY2VzczogdHJ1ZSxcbiAgICAgICAgbWVzc2FnZTogXCJUaGFuayB5b3UhIFlvdSdyZSBub3cgb24gb3VyIG1haWxpbmcgbGlzdCBhbmQgd2lsbCBiZSBhbW9uZyB0aGUgZmlyc3QgdG8gZXhwZXJpZW5jZSBvdXIgQUktcG93ZXJlZCBnaWZ0IGRpc2NvdmVyeSBwbGF0Zm9ybS5cIixcbiAgICAgICAgY29kZTogJ1NJR05VUF9TVUNDRVNTJyxcbiAgICAgICAgZGF0YToge1xuICAgICAgICAgIGVtYWlsLFxuICAgICAgICAgIHNvdXJjZSxcbiAgICAgICAgICB0aW1lc3RhbXA6IG5ldyBEYXRlKCkudG9JU09TdHJpbmcoKSxcbiAgICAgICAgfSxcbiAgICAgIH0sXG4gICAgICB7IHN0YXR1czogMjAwIH1cbiAgICApXG5cbiAgfSBjYXRjaCAoZXJyb3I6IGFueSkge1xuICAgIGNvbnNvbGUuZXJyb3IoJ/CfkqUgTmV3c2xldHRlciBzaWdudXAgZXJyb3I6JywgZXJyb3IpXG5cbiAgICAvLyBFbmhhbmNlZCBlcnJvciBjbGFzc2lmaWNhdGlvblxuICAgIGlmIChlcnJvci5uYW1lID09PSAnU3ludGF4RXJyb3InKSB7XG4gICAgICByZXR1cm4gTmV4dFJlc3BvbnNlLmpzb24oXG4gICAgICAgIHtcbiAgICAgICAgICBzdWNjZXNzOiBmYWxzZSxcbiAgICAgICAgICBlcnJvcjogJ0ludmFsaWQgcmVxdWVzdCBmb3JtYXQnLFxuICAgICAgICAgIGNvZGU6ICdJTlZBTElEX0pTT04nLFxuICAgICAgICB9LFxuICAgICAgICB7IHN0YXR1czogNDAwIH1cbiAgICAgIClcbiAgICB9XG5cbiAgICByZXR1cm4gTmV4dFJlc3BvbnNlLmpzb24oXG4gICAgICB7XG4gICAgICAgIHN1Y2Nlc3M6IGZhbHNlLFxuICAgICAgICBlcnJvcjogJ0FuIHVuZXhwZWN0ZWQgZXJyb3Igb2NjdXJyZWQuIFBsZWFzZSB0cnkgYWdhaW4uJyxcbiAgICAgICAgY29kZTogJ1VOS05PV05fRVJST1InLFxuICAgICAgICBkZXRhaWxzOiBwcm9jZXNzLmVudi5OT0RFX0VOViA9PT0gJ2RldmVsb3BtZW50JyA/IGVycm9yLm1lc3NhZ2UgOiB1bmRlZmluZWQsXG4gICAgICB9LFxuICAgICAgeyBzdGF0dXM6IDUwMCB9XG4gICAgKVxuICB9XG59XG5cbi8qKlxuICogR0VUIC9hcGkvbmV3c2xldHRlci9zaWdudXBcbiAqIFxuICogUmV0dXJucyBpbmZvcm1hdGlvbiBhYm91dCB0aGUgbmV3c2xldHRlciBzaWdudXAgZW5kcG9pbnQuXG4gKiBVc2VmdWwgZm9yIGhlYWx0aCBjaGVja3MgYW5kIGRvY3VtZW50YXRpb24uXG4gKi9cbmV4cG9ydCBhc3luYyBmdW5jdGlvbiBHRVQoKSB7XG4gIHJldHVybiBOZXh0UmVzcG9uc2UuanNvbihcbiAgICB7XG4gICAgICBlbmRwb2ludDogJy9hcGkvbmV3c2xldHRlci9zaWdudXAnLFxuICAgICAgbWV0aG9kOiAnUE9TVCcsXG4gICAgICBkZXNjcmlwdGlvbjogJ05ld3NsZXR0ZXIgc2lnbnVwIHdpdGggZGlyZWN0IFJlc2VuZCBpbnRlZ3JhdGlvbicsXG4gICAgICB2ZXJzaW9uOiAnMS4wLjAnLFxuICAgICAgc3RhdHVzOiAnb3BlcmF0aW9uYWwnLFxuICAgICAgcHJvdmlkZXI6ICdSZXNlbmQnLFxuICAgICAgZmVhdHVyZXM6IFtcbiAgICAgICAgJ0RpcmVjdCBSZXNlbmQgU0RLIGludGVncmF0aW9uJyxcbiAgICAgICAgJ1JlYWN0IGVtYWlsIHRlbXBsYXRlcycsXG4gICAgICAgICdJbnB1dCB2YWxpZGF0aW9uIHdpdGggWm9kJyxcbiAgICAgICAgJ0FkbWluIG5vdGlmaWNhdGlvbnMnLFxuICAgICAgICAnU291cmNlIHRyYWNraW5nJyxcbiAgICAgIF0sXG4gICAgfSxcbiAgICB7IHN0YXR1czogMjAwIH1cbiAgKVxufSJdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztFQW9Oc0JBLEdBQUcsV0FBQUEsQ0FBQTtJQUFBO0lB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

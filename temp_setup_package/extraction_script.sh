@@ -1,12 +1,12 @@
 #!/bin/bash
-# Aclue Project - Setup Package Extraction Script
+# aclue Project - Setup Package Extraction Script
 # This script automatically extracts and places all configuration files in the correct locations
 
-echo "=== Aclue Project Setup Package Extraction ==="
+echo "=== aclue Project Setup Package Extraction ==="
 
 # Check if we're in the correct directory
 if [ ! -f "CLAUDE.md" ] || [ ! -d "backend" ] || [ ! -d "web" ]; then
-    echo "Error: Please run this script from the Aclue project root directory"
+    echo "Error: Please run this script from the aclue project root directory"
     echo "Expected files: CLAUDE.md, backend/, web/"
     exit 1
 fi

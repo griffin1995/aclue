@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Set up Aclue database schema in Supabase
+Set up aclue database schema in Supabase
 """
 import requests
 import json
@@ -42,9 +42,9 @@ def execute_sql(sql_query, description=""):
         return False
 
 def create_database_schema():
-    """Create the complete Aclue database schema"""
+    """Create the complete aclue database schema"""
     
-    print("🗄️  Creating Aclue Database Schema")
+    print("🗄️  Creating aclue Database Schema")
     print("=" * 40)
     
     # Enable necessary extensions

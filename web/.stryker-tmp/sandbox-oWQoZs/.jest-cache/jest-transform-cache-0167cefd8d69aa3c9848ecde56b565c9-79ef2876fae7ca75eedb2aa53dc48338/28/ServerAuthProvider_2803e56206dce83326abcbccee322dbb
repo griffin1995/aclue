@@ -1,0 +1,229 @@
+d2a86ffe9c13effce66ed25fc47566a4
+"use strict";
+
+/* istanbul ignore next */
+function cov_1ctqwnzhs5() {
+  var path = "/home/jack/Documents/aclue-preprod/web/src/components/server/auth/ServerAuthProvider.tsx";
+  var hash = "ca2b8499b60a5a5e652dfe26589b1ffd6ed630f0";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/home/jack/Documents/aclue-preprod/web/src/components/server/auth/ServerAuthProvider.tsx",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 4,
+          column: 3
+        }
+      },
+      "1": {
+        start: {
+          line: 5,
+          column: 0
+        },
+        end: {
+          line: 24,
+          column: 3
+        }
+      },
+      "2": {
+        start: {
+          line: 22,
+          column: 8
+        },
+        end: {
+          line: 22,
+          column: 34
+        }
+      },
+      "3": {
+        start: {
+          line: 25,
+          column: 20
+        },
+        end: {
+          line: 25,
+          column: 48
+        }
+      },
+      "4": {
+        start: {
+          line: 29,
+          column: 4
+        },
+        end: {
+          line: 33,
+          column: 7
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 21,
+            column: 9
+          },
+          end: {
+            line: 21,
+            column: 10
+          }
+        },
+        loc: {
+          start: {
+            line: 21,
+            column: 20
+          },
+          end: {
+            line: 23,
+            column: 5
+          }
+        },
+        line: 21
+      },
+      "1": {
+        name: "ServerAuthProvider",
+        decl: {
+          start: {
+            line: 26,
+            column: 9
+          },
+          end: {
+            line: 26,
+            column: 27
+          }
+        },
+        loc: {
+          start: {
+            line: 26,
+            column: 55
+          },
+          end: {
+            line: 34,
+            column: 1
+          }
+        },
+        line: 26
+      }
+    },
+    branchMap: {
+      "0": {
+        loc: {
+          start: {
+            line: 26,
+            column: 40
+          },
+          end: {
+            line: 26,
+            column: 51
+          }
+        },
+        type: "default-arg",
+        locations: [{
+          start: {
+            line: 26,
+            column: 47
+          },
+          end: {
+            line: 26,
+            column: 51
+          }
+        }],
+        line: 26
+      }
+    },
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0
+    },
+    f: {
+      "0": 0,
+      "1": 0
+    },
+    b: {
+      "0": [0]
+    },
+    inputSourceMap: {
+      version: 3,
+      sources: ["/home/jack/Documents/aclue-preprod/web/src/components/server/auth/ServerAuthProvider.tsx"],
+      sourcesContent: ["import { type ReactNode } from 'react'\n\ninterface ServerAuthProviderProps {\n  children: ReactNode\n  user?: {\n    id: string\n    email: string\n    name?: string\n  } | null\n}\n\n/**\n * Server Auth Provider Component\n *\n * Provides authentication context at the server level.\n * Handles user session validation and provides auth state to child components.\n *\n * Features:\n * - Server-side authentication validation\n * - User session management\n * - Auth state propagation\n * - Performance optimised\n *\n * @param children - Child components that need auth context\n * @param user - Current user data (pre-validated on server)\n */\nexport default function ServerAuthProvider({\n  children,\n  user = null\n}: ServerAuthProviderProps) {\n  // In a real implementation, this would validate the user session\n  // and provide authentication context to child components\n\n  return (\n    <div data-auth-provider=\"server\" data-user-authenticated={!!user}>\n      {children}\n    </div>\n  )\n}"],
+      names: ["ServerAuthProvider", "children", "user", "div", "data-auth-provider", "data-user-authenticated"],
+      mappings: ";;;;+BAWA;;;;;;;;;;;;;;CAcC,GACD;;;eAAwBA;;;;AAAT,SAASA,mBAAmB,EACzCC,QAAQ,EACRC,OAAO,IAAI,EACa;IACxB,iEAAiE;IACjE,yDAAyD;IAEzD,qBACE,qBAACC;QAAIC,sBAAmB;QAASC,2BAAyB,CAAC,CAACH;kBACzDD;;AAGP"
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "ca2b8499b60a5a5e652dfe26589b1ffd6ed630f0"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_1ctqwnzhs5 = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_1ctqwnzhs5();
+cov_1ctqwnzhs5().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/* istanbul ignore next */
+cov_1ctqwnzhs5().s[1]++;
+Object.defineProperty(exports,
+/**
+* Server Auth Provider Component
+*
+* Provides authentication context at the server level.
+* Handles user session validation and provides auth state to child components.
+*
+* Features:
+* - Server-side authentication validation
+* - User session management
+* - Auth state propagation
+* - Performance optimised
+*
+* @param children - Child components that need auth context
+* @param user - Current user data (pre-validated on server)
+*/
+"default", {
+  enumerable: true,
+  get: function () {
+    /* istanbul ignore next */
+    cov_1ctqwnzhs5().f[0]++;
+    cov_1ctqwnzhs5().s[2]++;
+    return ServerAuthProvider;
+  }
+});
+const _jsxruntime =
+/* istanbul ignore next */
+(cov_1ctqwnzhs5().s[3]++, require("react/jsx-runtime"));
+function ServerAuthProvider({
+  children,
+  user =
+  /* istanbul ignore next */
+  (cov_1ctqwnzhs5().b[0][0]++, null)
+}) {
+  /* istanbul ignore next */
+  cov_1ctqwnzhs5().f[1]++;
+  cov_1ctqwnzhs5().s[4]++;
+  // In a real implementation, this would validate the user session
+  // and provide authentication context to child components
+  return /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+    "data-auth-provider": "server",
+    "data-user-authenticated": !!user,
+    children: children
+  });
+}
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJTZXJ2ZXJBdXRoUHJvdmlkZXIiLCJjaGlsZHJlbiIsInVzZXIiLCJjb3ZfMWN0cXduemhzNSIsImIiLCJmIiwicyIsIl9qc3hydW50aW1lIiwianN4Il0sInNvdXJjZXMiOlsiL2hvbWUvamFjay9Eb2N1bWVudHMvYWNsdWUtcHJlcHJvZC93ZWIvc3JjL2NvbXBvbmVudHMvc2VydmVyL2F1dGgvU2VydmVyQXV0aFByb3ZpZGVyLnRzeCJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyB0eXBlIFJlYWN0Tm9kZSB9IGZyb20gJ3JlYWN0J1xuXG5pbnRlcmZhY2UgU2VydmVyQXV0aFByb3ZpZGVyUHJvcHMge1xuICBjaGlsZHJlbjogUmVhY3ROb2RlXG4gIHVzZXI/OiB7XG4gICAgaWQ6IHN0cmluZ1xuICAgIGVtYWlsOiBzdHJpbmdcbiAgICBuYW1lPzogc3RyaW5nXG4gIH0gfCBudWxsXG59XG5cbi8qKlxuICogU2VydmVyIEF1dGggUHJvdmlkZXIgQ29tcG9uZW50XG4gKlxuICogUHJvdmlkZXMgYXV0aGVudGljYXRpb24gY29udGV4dCBhdCB0aGUgc2VydmVyIGxldmVsLlxuICogSGFuZGxlcyB1c2VyIHNlc3Npb24gdmFsaWRhdGlvbiBhbmQgcHJvdmlkZXMgYXV0aCBzdGF0ZSB0byBjaGlsZCBjb21wb25lbnRzLlxuICpcbiAqIEZlYXR1cmVzOlxuICogLSBTZXJ2ZXItc2lkZSBhdXRoZW50aWNhdGlvbiB2YWxpZGF0aW9uXG4gKiAtIFVzZXIgc2Vzc2lvbiBtYW5hZ2VtZW50XG4gKiAtIEF1dGggc3RhdGUgcHJvcGFnYXRpb25cbiAqIC0gUGVyZm9ybWFuY2Ugb3B0aW1pc2VkXG4gKlxuICogQHBhcmFtIGNoaWxkcmVuIC0gQ2hpbGQgY29tcG9uZW50cyB0aGF0IG5lZWQgYXV0aCBjb250ZXh0XG4gKiBAcGFyYW0gdXNlciAtIEN1cnJlbnQgdXNlciBkYXRhIChwcmUtdmFsaWRhdGVkIG9uIHNlcnZlcilcbiAqL1xuZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24gU2VydmVyQXV0aFByb3ZpZGVyKHtcbiAgY2hpbGRyZW4sXG4gIHVzZXIgPSBudWxsXG59OiBTZXJ2ZXJBdXRoUHJvdmlkZXJQcm9wcykge1xuICAvLyBJbiBhIHJlYWwgaW1wbGVtZW50YXRpb24sIHRoaXMgd291bGQgdmFsaWRhdGUgdGhlIHVzZXIgc2Vzc2lvblxuICAvLyBhbmQgcHJvdmlkZSBhdXRoZW50aWNhdGlvbiBjb250ZXh0IHRvIGNoaWxkIGNvbXBvbmVudHNcblxuICByZXR1cm4gKFxuICAgIDxkaXYgZGF0YS1hdXRoLXByb3ZpZGVyPVwic2VydmVyXCIgZGF0YS11c2VyLWF1dGhlbnRpY2F0ZWQ9eyEhdXNlcn0+XG4gICAgICB7Y2hpbGRyZW59XG4gICAgPC9kaXY+XG4gIClcbn0iXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQVdBOzs7Ozs7Ozs7Ozs7Ozs7QUFlQTs7Ozs7O1dBQXdCQSxrQkFBQTs7Ozs7O0FBQVQsU0FBU0EsbUJBQW1CO0VBQ3pDQyxRQUFRO0VBQ1JDLElBQUE7RUFBQTtFQUFBLENBQUFDLGNBQUEsR0FBQUMsQ0FBQSxVQUFPLElBQUk7QUFBQSxDQUNhO0VBQUE7RUFBQUQsY0FBQSxHQUFBRSxDQUFBO0VBQUFGLGNBQUEsR0FBQUcsQ0FBQTtFQUN4QjtFQUNBO0VBRUEsb0JBQ0UsSUFBQUMsV0FBQSxDQUFBQyxHQUFBLEVBQUM7SUFBSSxzQkFBbUI7SUFBUywyQkFBeUIsQ0FBQyxDQUFDTixJQUFBO2NBQ3pERDs7QUFHUCIsImlnbm9yZUxpc3QiOltdfQ==

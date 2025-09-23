@@ -124,7 +124,7 @@ echo -e "${BLUE}7. Running Complexity Analysis${NC}"
 # TypeScript/JavaScript complexity analysis with plato (if available)
 if command -v plato &> /dev/null; then
     run_tool "Plato Complexity" \
-        "plato -r -d '$REPORTS_DIR/complexity_${TIMESTAMP}' -t 'Aclue Frontend Complexity' ." \
+        "plato -r -d '$REPORTS_DIR/complexity_${TIMESTAMP}' -t 'aclue Frontend Complexity' ." \
         "$REPORTS_DIR/plato_${TIMESTAMP}.txt" \
         "Code complexity and maintainability metrics"
 else

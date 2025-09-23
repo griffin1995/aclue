@@ -61,7 +61,7 @@ class NewsletterE2ETestSuite:
         )
         self.context = await self.browser.new_context(
             viewport={'width': 1280, 'height': 720},
-            user_agent='Aclue-E2E-Test-Suite/1.0'
+            user_agent='aclue-E2E-Test-Suite/1.0'
         )
         self.page = await self.context.new_page()
         

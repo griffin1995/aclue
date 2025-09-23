@@ -18,7 +18,7 @@ import {
  * About Page - App Router Server Component
  *
  * Server-rendered about page showcasing company information, mission, team, and values.
- * This page provides comprehensive information about Aclue's background and vision.
+ * This page provides comprehensive information about aclue's background and vision.
  *
  * Features:
  * - Server component for optimal SEO and performance
@@ -84,7 +84,7 @@ export default function AboutPage() {
   const milestones = [
     {
       year: '2024',
-      title: 'Aclue Founded',
+      title: 'aclue Founded',
       description: 'Born from the frustration of endless gift browsing and the excitement of AI possibilities.'
     },
     {
@@ -156,7 +156,7 @@ export default function AboutPage() {
                 frustration of endless browsing without inspiration.
               </p>
               <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                Aclue combines cutting-edge artificial intelligence with human psychology to understand
+                aclue combines cutting-edge artificial intelligence with human psychology to understand
                 what makes a gift truly special. Our platform learns your unique preferences and those
                 of your loved ones, delivering personalised recommendations that create genuine moments of joy.
               </p>
@@ -312,7 +312,7 @@ export default function AboutPage() {
  */
 export const metadata: Metadata = {
   title: 'About Us - Transforming Gift-Giving with AI',
-  description: 'Learn about Aclue\'s mission to revolutionise gift-giving through artificial intelligence. Discover our values, journey, and vision for the future of personalised gift discovery.',
+  description: 'Learn about aclue\'s mission to revolutionise gift-giving through artificial intelligence. Discover our values, journey, and vision for the future of personalised gift discovery.',
   keywords: [
     'about aclue',
     'ai gift company',
@@ -323,7 +323,7 @@ export const metadata: Metadata = {
     'uk gift startup'
   ],
   openGraph: {
-    title: 'About Aclue - Transforming Gift-Giving with AI',
+    title: 'About aclue - Transforming Gift-Giving with AI',
     description: 'Learn about our mission to revolutionise gift-giving through artificial intelligence and personalised recommendations.',
     url: 'https://aclue.app/about',
     images: [
@@ -331,13 +331,13 @@ export const metadata: Metadata = {
         url: '/aclue_text_clean.png',
         width: 1200,
         height: 630,
-        alt: 'About Aclue - AI-Powered Gift Discovery',
+        alt: 'About aclue - AI-Powered Gift Discovery',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'About Aclue - Transforming Gift-Giving with AI',
+    title: 'About aclue - Transforming Gift-Giving with AI',
     description: 'Learn about our mission to revolutionise gift-giving through artificial intelligence.',
     images: ['/aclue_text_clean.png'],
   },

@@ -1,11 +1,11 @@
-# Rebranding Documentation: Aclue → Aclue
+# Rebranding Documentation: aclue → aclue
 
 ## Overview
-This document comprehensively logs the rebranding process from Aclue/aclue to Aclue, detailing all changes made across the entire codebase. This was a complete brand transformation affecting frontend, backend, configuration, deployment, and documentation.
+This document comprehensively logs the rebranding process from aclue/aclue to aclue, detailing all changes made across the entire codebase. This was a complete brand transformation affecting frontend, backend, configuration, deployment, and documentation.
 
 ## Brand Transformation Summary
-- **Previous Brands**: Aclue (original name), aclue (interim brand)  
-- **New Brand**: Aclue
+- **Previous Brands**: aclue (original name), aclue (interim brand)  
+- **New Brand**: aclue
 - **Scope**: Complete rebrand across all systems and documentation
 - **Implementation**: August 2025
 - **Deployment Status**: ✅ Complete and deployed to production
@@ -18,7 +18,7 @@ This document comprehensively logs the rebranding process from Aclue/aclue to Ac
 ### Domain Selection Rationale
 1. **aclue.app**: Modern .app TLD suggests technology focus and mobile-first approach
 2. **aclue.co.uk**: UK market credibility for local partnerships and trust
-3. **Brand Evolution**: From "Aclue" → "aclue" → "Aclue" representing platform maturity
+3. **Brand Evolution**: From "aclue" → "aclue" → "aclue" representing platform maturity
 4. **SEO Strategy**: Clean, brandable domain without legacy baggage
 
 ## Comprehensive File Changes
@@ -31,7 +31,7 @@ This document comprehensively logs the rebranding process from Aclue/aclue to Ac
 // Before
 {
   "name": "aclue-web", // or "aclue-web"
-  "description": "Aclue Web Application...",
+  "description": "aclue Web Application...",
   
 // After  
 {
@@ -47,7 +47,7 @@ This document comprehensively logs the rebranding process from Aclue/aclue to Ac
 - All page components with meta descriptions
 
 **Changes**:
-- Updated all `<title>` tags from "Aclue" to "Aclue"
+- Updated all `<title>` tags from "aclue" to "aclue"
 - Modified meta descriptions to reflect new brand messaging
 - Updated Open Graph tags for social sharing
 - Changed favicon references and brand assets
@@ -63,12 +63,12 @@ This document comprehensively logs the rebranding process from Aclue/aclue to Ac
 **Key Changes**:
 ```jsx
 // Before
-<h1>Welcome to Aclue</h1>
-<img src="/logo-aclue.png" alt="Aclue" />
+<h1>Welcome to aclue</h1>
+<img src="/logo-aclue.png" alt="aclue" />
 
 // After
-<h1>Welcome to Aclue</h1>
-<img src="/logo.png" alt="Aclue" />
+<h1>Welcome to aclue</h1>
+<img src="/logo.png" alt="aclue" />
 ```
 
 ### Backend Changes (`/backend/` directory)
@@ -77,7 +77,7 @@ This document comprehensively logs the rebranding process from Aclue/aclue to Ac
 **File**: `/backend/app/core/config.py`
 ```python
 # Before
-PROJECT_NAME: str = "Aclue API"  # or "aclue API"
+PROJECT_NAME: str = "aclue API"  # or "aclue API"
 S3_BUCKET_NAME: str = "aclue-assets"
 DYNAMODB_TABLE_PREFIX: str = "aclue"
 SAGEMAKER_ENDPOINT_NAME: str = "aclue-recommendations"
@@ -93,7 +93,7 @@ SAGEMAKER_ENDPOINT_NAME: str = "aclue-recommendations"
 **File**: `/backend/app/services/email_service.py`
 ```python
 # Updated email templates and sender information
-# Modified all email content to use "Aclue" branding
+# Modified all email content to use "aclue" branding
 # Updated domain references in email footers and links
 ```
 
@@ -110,8 +110,8 @@ AMAZON_ASSOCIATE_TAG: str = "aclue-21"
 #### 4. API Documentation
 **Changes**:
 - OpenAPI title and description updated
-- All endpoint descriptions reference "Aclue"
-- Example responses use Aclue branding
+- All endpoint descriptions reference "aclue"
+- Example responses use aclue branding
 - API documentation at `/docs` fully rebranded
 
 ### Configuration Files
@@ -144,7 +144,7 @@ compatibility_date = "2025-01-01"
 
 #### 1. Railway Backend Deployment
 - **Service Name**: Changed from `aclue-backend-production` to `aclue-backend-production`
-- **Environment Variables**: All rebranded to use Aclue references
+- **Environment Variables**: All rebranded to use aclue references
 - **Database Names**: Updated connection strings and table prefixes
 
 #### 2. Vercel Deployment  
@@ -153,7 +153,7 @@ compatibility_date = "2025-01-01"
 - **DNS Configuration**: A/AAAA records pointing to new brand
 
 #### 3. External Services
-- **PostHog Analytics**: Updated project with Aclue branding and event tracking
+- **PostHog Analytics**: Updated project with aclue branding and event tracking
 - **Supabase Database**: Table metadata and descriptions updated
 - **Email Service (Resend)**: Sender names and templates updated
 
@@ -170,12 +170,12 @@ compatibility_date = "2025-01-01"
 #### 2. Code Comments
 **Added Comments Across Codebase**:
 ```python
-# Aclue Configuration: Updated from Aclue branding (August 2025)
+# aclue Configuration: Updated from aclue branding (August 2025)
 # This service handles affiliate tracking for aclue.app domain
 ```
 
 ```typescript  
-// Rebranded from aclue to Aclue - maintains backward compatibility
+// Rebranded from aclue to aclue - maintains backward compatibility
 // Updated analytics tracking for aclue.app deployment
 ```
 
@@ -183,13 +183,13 @@ compatibility_date = "2025-01-01"
 
 #### 1. Logo and Visual Assets
 **Files**:
-- `/web/public/logo.png`: New Aclue logo (replaced Aclue/aclue)
-- `/web/public/favicon.ico`: Updated favicon with Aclue branding
+- `/web/public/logo.png`: New aclue logo (replaced aclue/aclue)
+- `/web/public/favicon.ico`: Updated favicon with aclue branding
 - `/web/Brand/`: All brand assets updated with new design system
 
 #### 2. Email Templates
 **Files**: `/web/Brand/aclue_welcome_email_*`
-- Renamed and updated with Aclue branding
+- Renamed and updated with aclue branding
 - New color scheme and visual identity
 - Updated all text references and links
 
@@ -232,7 +232,7 @@ Every major configuration file now includes comments explaining:
 - Future maintenance considerations
 
 ### Documentation Standards
-- All new code references use "Aclue" consistently
+- All new code references use "aclue" consistently
 - Legacy references are commented for historical context
 - Migration paths documented for future developers
 - API documentation fully updated with examples
@@ -240,14 +240,14 @@ Every major configuration file now includes comments explaining:
 ## Brand Consistency Guidelines
 
 ### 1. Naming Conventions
-- **Correct**: "Aclue" (proper case)
+- **Correct**: "aclue" (proper case)
 - **Incorrect**: "aclue", "ACLUE", "AClue"
 - **Domain**: Always use "aclue.app" as primary reference
-- **API**: "Aclue API" or "aclue backend"
+- **API**: "aclue API" or "aclue backend"
 
 ### 2. Visual Identity
 - **Primary Color**: Maintained existing color scheme for consistency
-- **Logo Usage**: New Aclue logo in all contexts
+- **Logo Usage**: New aclue logo in all contexts
 - **Typography**: Consistent with existing design system
 
 ### 3. Communication Style
@@ -262,13 +262,13 @@ Every major configuration file now includes comments explaining:
 2. **Backend**: https://aclue-backend-production.up.railway.app (Railway)
 3. **Database**: Supabase with updated metadata
 4. **Analytics**: PostHog project updated and tracking correctly
-5. **Email**: Resend service configured with Aclue templates
+5. **Email**: Resend service configured with aclue templates
 
 ### ✅ Testing Results  
 - All API endpoints respond correctly with new branding
 - Frontend loads successfully with updated assets
 - Authentication flow works end-to-end
-- Email notifications use correct Aclue branding
+- Email notifications use correct aclue branding
 - Analytics tracking captures events under new brand
 
 ### ✅ SEO and Domain Status
@@ -282,7 +282,7 @@ Every major configuration file now includes comments explaining:
 ### 1. Developer Onboarding
 - New developers should be aware of the rebranding history
 - Legacy references may exist in git history but are deprecated
-- All new code should use "Aclue" branding exclusively
+- All new code should use "aclue" branding exclusively
 
 ### 2. External Integration Updates
 - Partner API integrations may need notification of domain changes
@@ -317,11 +317,11 @@ While not anticipated, rollback procedures documented:
 ---
 
 ## Conclusion
-This comprehensive rebranding from Aclue/aclue to Aclue represents a complete transformation of the platform's identity while maintaining all technical functionality. The implementation was successful with zero downtime and complete brand consistency across all systems.
+This comprehensive rebranding from aclue/aclue to aclue represents a complete transformation of the platform's identity while maintaining all technical functionality. The implementation was successful with zero downtime and complete brand consistency across all systems.
 
 **Total Files Modified**: 50+ files across frontend, backend, and documentation
 **Implementation Time**: Coordinated deployment completed successfully
 **Business Impact**: Enhanced brand identity supporting growth and partnerships
 **Technical Quality**: Professional implementation meeting enterprise standards
 
-The platform is now fully operational under the Aclue brand at https://aclue.app with all systems properly configured and documented.
+The platform is now fully operational under the aclue brand at https://aclue.app with all systems properly configured and documented.

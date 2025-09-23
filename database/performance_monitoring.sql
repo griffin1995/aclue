@@ -1,12 +1,12 @@
 -- =====================================================================
--- Database Performance Monitoring & Optimisation - Aclue Platform
+-- Database Performance Monitoring & Optimisation - aclue Platform
 -- Date: 2025-08-06
 -- Version: 2.0
 -- =====================================================================
 -- 
 -- Performance Monitoring Implementation:
 -- This script provides comprehensive database performance monitoring
--- and optimisation tools for the Aclue platform. It implements
+-- and optimisation tools for the aclue platform. It implements
 -- enterprise-grade monitoring patterns following PostgreSQL and
 -- Supabase best practices.
 --

@@ -3,7 +3,7 @@
 
 env:
   contexts:
-    - name: "Aclue Production"
+    - name: "aclue Production"
       urls:
         - "https://aclue.app"
         - "https://aclue-backend-production.up.railway.app"
@@ -28,7 +28,7 @@ env:
           loggedInRegex: "access_token"
           loggedOutRegex: "login"
 
-    - name: "Aclue Development"
+    - name: "aclue Development"
       urls:
         - "http://localhost:3000"
         - "http://localhost:8000"
@@ -266,7 +266,7 @@ jobs:
       template: "traditional-json"
       reportDir: "/home/jack/Documents/aclue-preprod/tests-22-sept/automated/reports"
       reportFile: "zap-scan-report"
-      reportTitle: "Aclue OWASP ZAP Security Scan Report"
+      reportTitle: "aclue OWASP ZAP Security Scan Report"
       reportDescription: "Automated penetration testing results"
       displayReport: false
     risks:

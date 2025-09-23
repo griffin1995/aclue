@@ -1,0 +1,513 @@
+62172e1dac3bc3b5869f8b7f040f0e7b
+/**
+ * Welcome Overlay - Client Component
+ *
+ * Modal overlay that introduces new users to the swipe interface.
+ * Provides instructions and encourages engagement with the discovery process.
+ */"use client";
+"use strict";
+
+/* istanbul ignore next */
+function cov_22fsj88trv() {
+  var path = "/home/jack/Documents/aclue-preprod/web/src/components/shop/WelcomeOverlay.tsx";
+  var hash = "2ab23f478097cd55d253219f48beaee4c57d0b88";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/home/jack/Documents/aclue-preprod/web/src/components/shop/WelcomeOverlay.tsx",
+    statementMap: {
+      "0": {
+        start: {
+          line: 8,
+          column: 0
+        },
+        end: {
+          line: 10,
+          column: 3
+        }
+      },
+      "1": {
+        start: {
+          line: 11,
+          column: 0
+        },
+        end: {
+          line: 16,
+          column: 3
+        }
+      },
+      "2": {
+        start: {
+          line: 14,
+          column: 8
+        },
+        end: {
+          line: 14,
+          column: 30
+        }
+      },
+      "3": {
+        start: {
+          line: 17,
+          column: 20
+        },
+        end: {
+          line: 17,
+          column: 48
+        }
+      },
+      "4": {
+        start: {
+          line: 18,
+          column: 29
+        },
+        end: {
+          line: 18,
+          column: 71
+        }
+      },
+      "5": {
+        start: {
+          line: 19,
+          column: 22
+        },
+        end: {
+          line: 19,
+          column: 46
+        }
+      },
+      "6": {
+        start: {
+          line: 20,
+          column: 21
+        },
+        end: {
+          line: 20,
+          column: 44
+        }
+      },
+      "7": {
+        start: {
+          line: 22,
+          column: 4
+        },
+        end: {
+          line: 24,
+          column: 6
+        }
+      },
+      "8": {
+        start: {
+          line: 27,
+          column: 4
+        },
+        end: {
+          line: 139,
+          column: 7
+        }
+      },
+      "9": {
+        start: {
+          line: 56,
+          column: 26
+        },
+        end: {
+          line: 56,
+          column: 45
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 13,
+            column: 9
+          },
+          end: {
+            line: 13,
+            column: 10
+          }
+        },
+        loc: {
+          start: {
+            line: 13,
+            column: 20
+          },
+          end: {
+            line: 15,
+            column: 5
+          }
+        },
+        line: 13
+      },
+      "1": {
+        name: "_interop_require_default",
+        decl: {
+          start: {
+            line: 21,
+            column: 9
+          },
+          end: {
+            line: 21,
+            column: 33
+          }
+        },
+        loc: {
+          start: {
+            line: 21,
+            column: 39
+          },
+          end: {
+            line: 25,
+            column: 1
+          }
+        },
+        line: 21
+      },
+      "2": {
+        name: "WelcomeOverlay",
+        decl: {
+          start: {
+            line: 26,
+            column: 9
+          },
+          end: {
+            line: 26,
+            column: 23
+          }
+        },
+        loc: {
+          start: {
+            line: 26,
+            column: 56
+          },
+          end: {
+            line: 140,
+            column: 1
+          }
+        },
+        line: 26
+      },
+      "3": {
+        name: "(anonymous_3)",
+        decl: {
+          start: {
+            line: 56,
+            column: 21
+          },
+          end: {
+            line: 56,
+            column: 22
+          }
+        },
+        loc: {
+          start: {
+            line: 56,
+            column: 26
+          },
+          end: {
+            line: 56,
+            column: 45
+          }
+        },
+        line: 56
+      }
+    },
+    branchMap: {
+      "0": {
+        loc: {
+          start: {
+            line: 22,
+            column: 11
+          },
+          end: {
+            line: 24,
+            column: 5
+          }
+        },
+        type: "cond-expr",
+        locations: [{
+          start: {
+            line: 22,
+            column: 35
+          },
+          end: {
+            line: 22,
+            column: 38
+          }
+        }, {
+          start: {
+            line: 22,
+            column: 41
+          },
+          end: {
+            line: 24,
+            column: 5
+          }
+        }],
+        line: 22
+      },
+      "1": {
+        loc: {
+          start: {
+            line: 22,
+            column: 11
+          },
+          end: {
+            line: 22,
+            column: 32
+          }
+        },
+        type: "binary-expr",
+        locations: [{
+          start: {
+            line: 22,
+            column: 11
+          },
+          end: {
+            line: 22,
+            column: 14
+          }
+        }, {
+          start: {
+            line: 22,
+            column: 18
+          },
+          end: {
+            line: 22,
+            column: 32
+          }
+        }],
+        line: 22
+      },
+      "2": {
+        loc: {
+          start: {
+            line: 119,
+            column: 16
+          },
+          end: {
+            line: 131,
+            column: 18
+          }
+        },
+        type: "binary-expr",
+        locations: [{
+          start: {
+            line: 119,
+            column: 16
+          },
+          end: {
+            line: 119,
+            column: 32
+          }
+        }, {
+          start: {
+            line: 119,
+            column: 50
+          },
+          end: {
+            line: 131,
+            column: 18
+          }
+        }],
+        line: 119
+      }
+    },
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0
+    },
+    f: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0
+    },
+    b: {
+      "0": [0, 0],
+      "1": [0, 0],
+      "2": [0, 0]
+    },
+    inputSourceMap: {
+      version: 3,
+      sources: ["/home/jack/Documents/aclue-preprod/web/src/components/shop/WelcomeOverlay.tsx"],
+      sourcesContent: ["/**\n * Welcome Overlay - Client Component\n *\n * Modal overlay that introduces new users to the swipe interface.\n * Provides instructions and encourages engagement with the discovery process.\n */\n\n'use client';\n\nimport React from 'react';\nimport { motion } from 'framer-motion';\nimport { Gift, ArrowLeft, ArrowRight, ArrowUp } from 'lucide-react';\n\ninterface WelcomeOverlayProps {\n  onDismiss: () => void;\n  isAuthenticated: boolean;\n}\n\nexport function WelcomeOverlay({ onDismiss, isAuthenticated }: WelcomeOverlayProps) {\n  return (\n    <motion.div\n      initial={{ opacity: 0 }}\n      animate={{ opacity: 1 }}\n      exit={{ opacity: 0 }}\n      className=\"fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-6\"\n      onClick={onDismiss}\n    >\n      <motion.div\n        initial={{ scale: 0.9, opacity: 0 }}\n        animate={{ scale: 1, opacity: 1 }}\n        exit={{ scale: 0.9, opacity: 0 }}\n        transition={{ duration: 0.3 }}\n        className=\"bg-white rounded-2xl p-8 max-w-md w-full text-center shadow-2xl\"\n        onClick={(e) => e.stopPropagation()}\n      >\n        <div className=\"w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-6\">\n          <Gift className=\"w-8 h-8 text-primary-600\" />\n        </div>\n\n        <h2 className=\"text-2xl font-bold text-gray-900 mb-4\">\n          Welcome to Gift Discovery!\n        </h2>\n\n        <p className=\"text-gray-600 mb-6 leading-relaxed\">\n          Swipe through products to help our AI learn your preferences.\n          Like what you see? Swipe right. Not your style? Swipe left.\n        </p>\n\n        <div className=\"space-y-3 text-sm text-gray-500 mb-6\">\n          <div className=\"flex items-center justify-center gap-3\">\n            <div className=\"w-8 h-8 bg-red-100 rounded-full flex items-center justify-center text-red-600\">\n              <ArrowLeft className=\"w-4 h-4\" />\n            </div>\n            <span>Swipe left to dislike</span>\n          </div>\n          <div className=\"flex items-center justify-center gap-3\">\n            <div className=\"w-8 h-8 bg-green-100 rounded-full flex items-center justify-center text-green-600\">\n              <ArrowRight className=\"w-4 h-4\" />\n            </div>\n            <span>Swipe right to like</span>\n          </div>\n          <div className=\"flex items-center justify-center gap-3\">\n            <div className=\"w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center text-blue-600\">\n              <ArrowUp className=\"w-4 h-4\" />\n            </div>\n            <span>Swipe up to super like</span>\n          </div>\n        </div>\n\n        {!isAuthenticated && (\n          <div className=\"bg-amber-50 border border-amber-200 rounded-lg p-3 mb-6\">\n            <p className=\"text-sm text-amber-800\">\n              \uD83D\uDCA1 <strong>Tip:</strong> Sign up to save your preferences and get personalised recommendations!\n            </p>\n          </div>\n        )}\n\n        <button\n          onClick={onDismiss}\n          className=\"w-full bg-primary-600 text-white py-3 rounded-lg font-medium hover:bg-primary-700 transition-colors\"\n        >\n          Start Discovering\n        </button>\n      </motion.div>\n    </motion.div>\n  );\n}"],
+      names: ["WelcomeOverlay", "onDismiss", "isAuthenticated", "motion", "div", "initial", "opacity", "animate", "exit", "className", "onClick", "scale", "transition", "duration", "e", "stopPropagation", "Gift", "h2", "p", "ArrowLeft", "span", "ArrowRight", "ArrowUp", "strong", "button"],
+      mappings: "AAAA;;;;;CAKC,GAED;;;;;+BAWgBA;;;eAAAA;;;;8DATE;8BACK;6BAC8B;;;;;;AAO9C,SAASA,eAAe,EAAEC,SAAS,EAAEC,eAAe,EAAuB;IAChF,qBACE,qBAACC,oBAAM,CAACC,GAAG;QACTC,SAAS;YAAEC,SAAS;QAAE;QACtBC,SAAS;YAAED,SAAS;QAAE;QACtBE,MAAM;YAAEF,SAAS;QAAE;QACnBG,WAAU;QACVC,SAAST;kBAET,cAAA,sBAACE,oBAAM,CAACC,GAAG;YACTC,SAAS;gBAAEM,OAAO;gBAAKL,SAAS;YAAE;YAClCC,SAAS;gBAAEI,OAAO;gBAAGL,SAAS;YAAE;YAChCE,MAAM;gBAAEG,OAAO;gBAAKL,SAAS;YAAE;YAC/BM,YAAY;gBAAEC,UAAU;YAAI;YAC5BJ,WAAU;YACVC,SAAS,CAACI,IAAMA,EAAEC,eAAe;;8BAEjC,qBAACX;oBAAIK,WAAU;8BACb,cAAA,qBAACO,iBAAI;wBAACP,WAAU;;;8BAGlB,qBAACQ;oBAAGR,WAAU;8BAAwC;;8BAItD,qBAACS;oBAAET,WAAU;8BAAqC;;8BAKlD,sBAACL;oBAAIK,WAAU;;sCACb,sBAACL;4BAAIK,WAAU;;8CACb,qBAACL;oCAAIK,WAAU;8CACb,cAAA,qBAACU,sBAAS;wCAACV,WAAU;;;8CAEvB,qBAACW;8CAAK;;;;sCAER,sBAAChB;4BAAIK,WAAU;;8CACb,qBAACL;oCAAIK,WAAU;8CACb,cAAA,qBAACY,uBAAU;wCAACZ,WAAU;;;8CAExB,qBAACW;8CAAK;;;;sCAER,sBAAChB;4BAAIK,WAAU;;8CACb,qBAACL;oCAAIK,WAAU;8CACb,cAAA,qBAACa,oBAAO;wCAACb,WAAU;;;8CAErB,qBAACW;8CAAK;;;;;;gBAIT,CAAClB,iCACA,qBAACE;oBAAIK,WAAU;8BACb,cAAA,sBAACS;wBAAET,WAAU;;4BAAyB;0CACjC,qBAACc;0CAAO;;4BAAa;;;;8BAK9B,qBAACC;oBACCd,SAAST;oBACTQ,WAAU;8BACX;;;;;AAMT"
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "2ab23f478097cd55d253219f48beaee4c57d0b88"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_22fsj88trv = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_22fsj88trv();
+cov_22fsj88trv().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/* istanbul ignore next */
+cov_22fsj88trv().s[1]++;
+Object.defineProperty(exports, "WelcomeOverlay", {
+  enumerable: true,
+  get: function () {
+    /* istanbul ignore next */
+    cov_22fsj88trv().f[0]++;
+    cov_22fsj88trv().s[2]++;
+    return WelcomeOverlay;
+  }
+});
+const _jsxruntime =
+/* istanbul ignore next */
+(cov_22fsj88trv().s[3]++, require("react/jsx-runtime"));
+const _react =
+/* istanbul ignore next */
+(/*#__PURE__*/cov_22fsj88trv().s[4]++, _interop_require_default(require("react")));
+const _framermotion =
+/* istanbul ignore next */
+(cov_22fsj88trv().s[5]++, require("framer-motion"));
+const _lucidereact =
+/* istanbul ignore next */
+(cov_22fsj88trv().s[6]++, require("lucide-react"));
+function _interop_require_default(obj) {
+  /* istanbul ignore next */
+  cov_22fsj88trv().f[1]++;
+  cov_22fsj88trv().s[7]++;
+  return /* istanbul ignore next */(cov_22fsj88trv().b[1][0]++, obj) &&
+  /* istanbul ignore next */
+  (cov_22fsj88trv().b[1][1]++, obj.__esModule) ?
+  /* istanbul ignore next */
+  (cov_22fsj88trv().b[0][0]++, obj) :
+  /* istanbul ignore next */
+  (cov_22fsj88trv().b[0][1]++, {
+    default: obj
+  });
+}
+function WelcomeOverlay({
+  onDismiss,
+  isAuthenticated
+}) {
+  /* istanbul ignore next */
+  cov_22fsj88trv().f[2]++;
+  cov_22fsj88trv().s[8]++;
+  return /*#__PURE__*/(0, _jsxruntime.jsx)(_framermotion.motion.div, {
+    initial: {
+      opacity: 0
+    },
+    animate: {
+      opacity: 1
+    },
+    exit: {
+      opacity: 0
+    },
+    className: "fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-6",
+    onClick: onDismiss,
+    children: /*#__PURE__*/(0, _jsxruntime.jsxs)(_framermotion.motion.div, {
+      initial: {
+        scale: 0.9,
+        opacity: 0
+      },
+      animate: {
+        scale: 1,
+        opacity: 1
+      },
+      exit: {
+        scale: 0.9,
+        opacity: 0
+      },
+      transition: {
+        duration: 0.3
+      },
+      className: "bg-white rounded-2xl p-8 max-w-md w-full text-center shadow-2xl",
+      onClick: e => {
+        /* istanbul ignore next */
+        cov_22fsj88trv().f[3]++;
+        cov_22fsj88trv().s[9]++;
+        return e.stopPropagation();
+      },
+      children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+        className: "w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-6",
+        children: /*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.Gift, {
+          className: "w-8 h-8 text-primary-600"
+        })
+      }), /*#__PURE__*/(0, _jsxruntime.jsx)("h2", {
+        className: "text-2xl font-bold text-gray-900 mb-4",
+        children: "Welcome to Gift Discovery!"
+      }), /*#__PURE__*/(0, _jsxruntime.jsx)("p", {
+        className: "text-gray-600 mb-6 leading-relaxed",
+        children: "Swipe through products to help our AI learn your preferences. Like what you see? Swipe right. Not your style? Swipe left."
+      }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+        className: "space-y-3 text-sm text-gray-500 mb-6",
+        children: [/*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+          className: "flex items-center justify-center gap-3",
+          children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+            className: "w-8 h-8 bg-red-100 rounded-full flex items-center justify-center text-red-600",
+            children: /*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.ArrowLeft, {
+              className: "w-4 h-4"
+            })
+          }), /*#__PURE__*/(0, _jsxruntime.jsx)("span", {
+            children: "Swipe left to dislike"
+          })]
+        }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+          className: "flex items-center justify-center gap-3",
+          children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+            className: "w-8 h-8 bg-green-100 rounded-full flex items-center justify-center text-green-600",
+            children: /*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.ArrowRight, {
+              className: "w-4 h-4"
+            })
+          }), /*#__PURE__*/(0, _jsxruntime.jsx)("span", {
+            children: "Swipe right to like"
+          })]
+        }), /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+          className: "flex items-center justify-center gap-3",
+          children: [/*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+            className: "w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center text-blue-600",
+            children: /*#__PURE__*/(0, _jsxruntime.jsx)(_lucidereact.ArrowUp, {
+              className: "w-4 h-4"
+            })
+          }), /*#__PURE__*/(0, _jsxruntime.jsx)("span", {
+            children: "Swipe up to super like"
+          })]
+        })]
+      }),
+      /* istanbul ignore next */
+      (cov_22fsj88trv().b[2][0]++, !isAuthenticated) &&
+      /* istanbul ignore next */
+      (cov_22fsj88trv().b[2][1]++, /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+        className: "bg-amber-50 border border-amber-200 rounded-lg p-3 mb-6",
+        children: /*#__PURE__*/(0, _jsxruntime.jsxs)("p", {
+          className: "text-sm text-amber-800",
+          children: ["\uD83D\uDCA1 ", /*#__PURE__*/(0, _jsxruntime.jsx)("strong", {
+            children: "Tip:"
+          }), " Sign up to save your preferences and get personalised recommendations!"]
+        })
+      })), /*#__PURE__*/(0, _jsxruntime.jsx)("button", {
+        onClick: onDismiss,
+        className: "w-full bg-primary-600 text-white py-3 rounded-lg font-medium hover:bg-primary-700 transition-colors",
+        children: "Start Discovering"
+      })]
+    })
+  });
+}
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJXZWxjb21lT3ZlcmxheSIsIm9uRGlzbWlzcyIsImlzQXV0aGVudGljYXRlZCIsImNvdl8yMmZzajg4dHJ2IiwiZiIsInMiLCJfanN4cnVudGltZSIsImpzeCIsIl9mcmFtZXJtb3Rpb24iLCJtb3Rpb24iLCJkaXYiLCJpbml0aWFsIiwib3BhY2l0eSIsImFuaW1hdGUiLCJleGl0IiwiY2xhc3NOYW1lIiwib25DbGljayIsImpzeHMiLCJzY2FsZSIsInRyYW5zaXRpb24iLCJkdXJhdGlvbiIsImUiLCJzdG9wUHJvcGFnYXRpb24iLCJfbHVjaWRlcmVhY3QiLCJHaWZ0IiwiQXJyb3dMZWZ0IiwiQXJyb3dSaWdodCIsIkFycm93VXAiLCJiIl0sInNvdXJjZXMiOlsiL2hvbWUvamFjay9Eb2N1bWVudHMvYWNsdWUtcHJlcHJvZC93ZWIvc3JjL2NvbXBvbmVudHMvc2hvcC9XZWxjb21lT3ZlcmxheS50c3giXSwic291cmNlc0NvbnRlbnQiOlsiLyoqXG4gKiBXZWxjb21lIE92ZXJsYXkgLSBDbGllbnQgQ29tcG9uZW50XG4gKlxuICogTW9kYWwgb3ZlcmxheSB0aGF0IGludHJvZHVjZXMgbmV3IHVzZXJzIHRvIHRoZSBzd2lwZSBpbnRlcmZhY2UuXG4gKiBQcm92aWRlcyBpbnN0cnVjdGlvbnMgYW5kIGVuY291cmFnZXMgZW5nYWdlbWVudCB3aXRoIHRoZSBkaXNjb3ZlcnkgcHJvY2Vzcy5cbiAqL1xuXG4ndXNlIGNsaWVudCc7XG5cbmltcG9ydCBSZWFjdCBmcm9tICdyZWFjdCc7XG5pbXBvcnQgeyBtb3Rpb24gfSBmcm9tICdmcmFtZXItbW90aW9uJztcbmltcG9ydCB7IEdpZnQsIEFycm93TGVmdCwgQXJyb3dSaWdodCwgQXJyb3dVcCB9IGZyb20gJ2x1Y2lkZS1yZWFjdCc7XG5cbmludGVyZmFjZSBXZWxjb21lT3ZlcmxheVByb3BzIHtcbiAgb25EaXNtaXNzOiAoKSA9PiB2b2lkO1xuICBpc0F1dGhlbnRpY2F0ZWQ6IGJvb2xlYW47XG59XG5cbmV4cG9ydCBmdW5jdGlvbiBXZWxjb21lT3ZlcmxheSh7IG9uRGlzbWlzcywgaXNBdXRoZW50aWNhdGVkIH06IFdlbGNvbWVPdmVybGF5UHJvcHMpIHtcbiAgcmV0dXJuIChcbiAgICA8bW90aW9uLmRpdlxuICAgICAgaW5pdGlhbD17eyBvcGFjaXR5OiAwIH19XG4gICAgICBhbmltYXRlPXt7IG9wYWNpdHk6IDEgfX1cbiAgICAgIGV4aXQ9e3sgb3BhY2l0eTogMCB9fVxuICAgICAgY2xhc3NOYW1lPVwiZml4ZWQgaW5zZXQtMCBiZy1ibGFjay81MCBiYWNrZHJvcC1ibHVyLXNtIHotNTAgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIgcC02XCJcbiAgICAgIG9uQ2xpY2s9e29uRGlzbWlzc31cbiAgICA+XG4gICAgICA8bW90aW9uLmRpdlxuICAgICAgICBpbml0aWFsPXt7IHNjYWxlOiAwLjksIG9wYWNpdHk6IDAgfX1cbiAgICAgICAgYW5pbWF0ZT17eyBzY2FsZTogMSwgb3BhY2l0eTogMSB9fVxuICAgICAgICBleGl0PXt7IHNjYWxlOiAwLjksIG9wYWNpdHk6IDAgfX1cbiAgICAgICAgdHJhbnNpdGlvbj17eyBkdXJhdGlvbjogMC4zIH19XG4gICAgICAgIGNsYXNzTmFtZT1cImJnLXdoaXRlIHJvdW5kZWQtMnhsIHAtOCBtYXgtdy1tZCB3LWZ1bGwgdGV4dC1jZW50ZXIgc2hhZG93LTJ4bFwiXG4gICAgICAgIG9uQ2xpY2s9eyhlKSA9PiBlLnN0b3BQcm9wYWdhdGlvbigpfVxuICAgICAgPlxuICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInctMTYgaC0xNiBiZy1wcmltYXJ5LTEwMCByb3VuZGVkLWZ1bGwgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIgbXgtYXV0byBtYi02XCI+XG4gICAgICAgICAgPEdpZnQgY2xhc3NOYW1lPVwidy04IGgtOCB0ZXh0LXByaW1hcnktNjAwXCIgLz5cbiAgICAgICAgPC9kaXY+XG5cbiAgICAgICAgPGgyIGNsYXNzTmFtZT1cInRleHQtMnhsIGZvbnQtYm9sZCB0ZXh0LWdyYXktOTAwIG1iLTRcIj5cbiAgICAgICAgICBXZWxjb21lIHRvIEdpZnQgRGlzY292ZXJ5IVxuICAgICAgICA8L2gyPlxuXG4gICAgICAgIDxwIGNsYXNzTmFtZT1cInRleHQtZ3JheS02MDAgbWItNiBsZWFkaW5nLXJlbGF4ZWRcIj5cbiAgICAgICAgICBTd2lwZSB0aHJvdWdoIHByb2R1Y3RzIHRvIGhlbHAgb3VyIEFJIGxlYXJuIHlvdXIgcHJlZmVyZW5jZXMuXG4gICAgICAgICAgTGlrZSB3aGF0IHlvdSBzZWU/IFN3aXBlIHJpZ2h0LiBOb3QgeW91ciBzdHlsZT8gU3dpcGUgbGVmdC5cbiAgICAgICAgPC9wPlxuXG4gICAgICAgIDxkaXYgY2xhc3NOYW1lPVwic3BhY2UteS0zIHRleHQtc20gdGV4dC1ncmF5LTUwMCBtYi02XCI+XG4gICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJmbGV4IGl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNlbnRlciBnYXAtM1wiPlxuICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJ3LTggaC04IGJnLXJlZC0xMDAgcm91bmRlZC1mdWxsIGZsZXggaXRlbXMtY2VudGVyIGp1c3RpZnktY2VudGVyIHRleHQtcmVkLTYwMFwiPlxuICAgICAgICAgICAgICA8QXJyb3dMZWZ0IGNsYXNzTmFtZT1cInctNCBoLTRcIiAvPlxuICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICA8c3Bhbj5Td2lwZSBsZWZ0IHRvIGRpc2xpa2U8L3NwYW4+XG4gICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJmbGV4IGl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNlbnRlciBnYXAtM1wiPlxuICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJ3LTggaC04IGJnLWdyZWVuLTEwMCByb3VuZGVkLWZ1bGwgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIgdGV4dC1ncmVlbi02MDBcIj5cbiAgICAgICAgICAgICAgPEFycm93UmlnaHQgY2xhc3NOYW1lPVwidy00IGgtNFwiIC8+XG4gICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgIDxzcGFuPlN3aXBlIHJpZ2h0IHRvIGxpa2U8L3NwYW4+XG4gICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJmbGV4IGl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNlbnRlciBnYXAtM1wiPlxuICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJ3LTggaC04IGJnLWJsdWUtMTAwIHJvdW5kZWQtZnVsbCBmbGV4IGl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNlbnRlciB0ZXh0LWJsdWUtNjAwXCI+XG4gICAgICAgICAgICAgIDxBcnJvd1VwIGNsYXNzTmFtZT1cInctNCBoLTRcIiAvPlxuICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICA8c3Bhbj5Td2lwZSB1cCB0byBzdXBlciBsaWtlPC9zcGFuPlxuICAgICAgICAgIDwvZGl2PlxuICAgICAgICA8L2Rpdj5cblxuICAgICAgICB7IWlzQXV0aGVudGljYXRlZCAmJiAoXG4gICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJiZy1hbWJlci01MCBib3JkZXIgYm9yZGVyLWFtYmVyLTIwMCByb3VuZGVkLWxnIHAtMyBtYi02XCI+XG4gICAgICAgICAgICA8cCBjbGFzc05hbWU9XCJ0ZXh0LXNtIHRleHQtYW1iZXItODAwXCI+XG4gICAgICAgICAgICAgIPCfkqEgPHN0cm9uZz5UaXA6PC9zdHJvbmc+IFNpZ24gdXAgdG8gc2F2ZSB5b3VyIHByZWZlcmVuY2VzIGFuZCBnZXQgcGVyc29uYWxpc2VkIHJlY29tbWVuZGF0aW9ucyFcbiAgICAgICAgICAgIDwvcD5cbiAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgKX1cblxuICAgICAgICA8YnV0dG9uXG4gICAgICAgICAgb25DbGljaz17b25EaXNtaXNzfVxuICAgICAgICAgIGNsYXNzTmFtZT1cInctZnVsbCBiZy1wcmltYXJ5LTYwMCB0ZXh0LXdoaXRlIHB5LTMgcm91bmRlZC1sZyBmb250LW1lZGl1bSBob3ZlcjpiZy1wcmltYXJ5LTcwMCB0cmFuc2l0aW9uLWNvbG9yc1wiXG4gICAgICAgID5cbiAgICAgICAgICBTdGFydCBEaXNjb3ZlcmluZ1xuICAgICAgICA8L2J1dHRvbj5cbiAgICAgIDwvbW90aW9uLmRpdj5cbiAgICA8L21vdGlvbi5kaXY+XG4gICk7XG59Il0sIm1hcHBpbmdzIjoiQUFBQTs7Ozs7R0FPQTs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7K0JBV2dCOzs7Ozs7V0FBQUEsY0FBQTs7Ozs7Ozs7d0VBVEU7OztrQ0FDSzs7O2tDQUM4Qjs7Ozs7Ozs7Ozs7Ozs7O0FBTzlDLFNBQVNBLGVBQWU7RUFBRUMsU0FBUztFQUFFQztBQUFlLENBQXVCO0VBQUE7RUFBQUMsY0FBQSxHQUFBQyxDQUFBO0VBQUFELGNBQUEsR0FBQUUsQ0FBQTtFQUNoRixvQkFDRSxJQUFBQyxXQUFBLENBQUFDLEdBQUEsRUFBQ0MsYUFBQSxDQUFBQyxNQUFNLENBQUNDLEdBQUc7SUFDVEMsT0FBQSxFQUFTO01BQUVDLE9BQUEsRUFBUztJQUFFO0lBQ3RCQyxPQUFBLEVBQVM7TUFBRUQsT0FBQSxFQUFTO0lBQUU7SUFDdEJFLElBQUEsRUFBTTtNQUFFRixPQUFBLEVBQVM7SUFBRTtJ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

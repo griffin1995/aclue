@@ -1,4 +1,4 @@
-# Cloudflare Optimization Settings for Aclue
+# Cloudflare Optimization Settings for aclue
 
 ## Speed Optimization
 - **Auto Minify**: Enable HTML, CSS, JS

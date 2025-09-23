@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Test the complete Aclue database setup in Supabase
+Test the complete aclue database setup in Supabase
 """
 import requests
 import json
@@ -246,7 +246,7 @@ def show_next_steps():
     print("• Local API: http://localhost:8000/docs")
 
 if __name__ == "__main__":
-    print("🎁 Aclue Database Complete Test")
+    print("🎁 aclue Database Complete Test")
     print("=" * 40)
     
     # Test database structure

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Aclue Test Execution Script
+# aclue Test Execution Script
 #
 # Comprehensive test runner for local development and CI/CD environments.
 # Supports running different test suites with proper environment setup
@@ -93,7 +93,7 @@ print_step() {
 
 show_help() {
     cat << EOF
-Aclue Test Runner
+aclue Test Runner
 
 Usage: $0 [test-type] [options]
 
@@ -461,7 +461,7 @@ run_frontend_tests() {
 # ==============================================================================
 
 main() {
-    print_header "Aclue Test Runner"
+    print_header "aclue Test Runner"
     print_info "Test Type: $TEST_TYPE"
     print_info "Backend Only: $BACKEND_ONLY"
     print_info "Frontend Only: $FRONTEND_ONLY"

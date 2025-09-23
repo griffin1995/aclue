@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'User-Agent': 'Aclue-Web-Server/1.0',
+        'User-Agent': 'aclue-Web-Server/1.0',
       },
       body: JSON.stringify(payload),
       signal: AbortSignal.timeout(10000),

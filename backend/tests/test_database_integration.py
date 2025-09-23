@@ -1,5 +1,5 @@
 """
-Aclue Database Integration Test Suite
+aclue Database Integration Test Suite
 
 Comprehensive integration tests for database functionality including
 Supabase operations, RLS policies, data integrity, and performance.

@@ -1,4 +1,4 @@
-import AclueMarketingPageOptimized from '@/components/AclueMarketingPageOptimized'
+import aclueMarketingPageOptimized from '@/components/aclueMarketingPageOptimized'
 
 /**
  * App Router Landing Page - Optimized Hybrid Implementation
@@ -25,7 +25,7 @@ export default function LandingPageAppRouter() {
 
   return (
     <main className="min-h-screen">
-      <AclueMarketingPageOptimized />
+      <aclueMarketingPageOptimized />
     </main>
   )
 }
@@ -34,18 +34,18 @@ export default function LandingPageAppRouter() {
  * Metadata for the landing page
  */
 export const metadata = {
-  title: 'Aclue - A Data-Led Insight Layer That Transforms How Gifts Are Chosen',
+  title: 'aclue - A Data-Led Insight Layer That Transforms How Gifts Are Chosen',
   description: 'Swipe through products, train our AI to understand your taste, and get personalised gift recommendations that actually make sense. No more guessing, no more gift fails.',
   keywords: 'gifts, AI recommendations, gift ideas, personalised gifts, gift finder, machine learning, swipe interface',
   openGraph: {
-    title: 'Aclue - A Data-Led Insight Layer That Transforms How Gifts Are Chosen',
+    title: 'aclue - A Data-Led Insight Layer That Transforms How Gifts Are Chosen',
     description: 'Discover perfect gifts with AI. Swipe through products, get personalised recommendations, and create shareable gift links.',
     images: ['/aclue_text_clean.png'],
     url: 'https://aclue.app/landingpage',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Aclue - A Data-Led Insight Layer That Transforms How Gifts Are Chosen',
+    title: 'aclue - A Data-Led Insight Layer That Transforms How Gifts Are Chosen',
     description: 'Discover perfect gifts with AI. Swipe through products, get personalised recommendations, and create shareable gift links.',
     images: ['/aclue_text_clean.png'],
   },

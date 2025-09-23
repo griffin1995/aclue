@@ -1,9 +1,9 @@
-# Aclue Maintenance Page - Performance Optimization Review
+# aclue Maintenance Page - Performance Optimization Review
 ## Comprehensive Technical Analysis & Recommendations
 
 ### Executive Summary
 **Date**: 21st September 2025
-**Platform**: Aclue Maintenance Page (https://aclue.app)
+**Platform**: aclue Maintenance Page (https://aclue.app)
 **Current Performance Score**: **6.2/10** ⚠️
 **Priority**: **HIGH** - First user touchpoint affecting brand perception
 
@@ -210,7 +210,7 @@ self.addEventListener('fetch', (event) => {
 // Use native img with loading="lazy" for maintenance page
 <img
   src="/logo.png"
-  alt="Aclue"
+  alt="aclue"
   width={64}
   height={64}
   loading="lazy"
@@ -221,7 +221,7 @@ self.addEventListener('fetch', (event) => {
 <picture>
   <source srcSet="/logo.webp" type="image/webp" />
   <source srcSet="/logo.png" type="image/png" />
-  <img src="/logo.png" alt="Aclue" />
+  <img src="/logo.png" alt="aclue" />
 </picture>
 ```
 
@@ -481,7 +481,7 @@ module.exports = {
 
 ## 🏁 Conclusion
 
-The Aclue maintenance page currently operates at **62% of its performance potential**. The primary bottleneck is the CPU-intensive neural network animation consuming 35-40% CPU continuously. Combined with unoptimized bundle sizes and lack of caching strategies, this creates a suboptimal first impression for users.
+The aclue maintenance page currently operates at **62% of its performance potential**. The primary bottleneck is the CPU-intensive neural network animation consuming 35-40% CPU continuously. Combined with unoptimized bundle sizes and lack of caching strategies, this creates a suboptimal first impression for users.
 
 **Implementing the immediate optimizations will deliver:**
 - 60% CPU usage reduction

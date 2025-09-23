@@ -1,6 +1,6 @@
 # Database Security Automation Suite
 
-Comprehensive automated database security tools deployment for the Aclue Supabase PostgreSQL platform. This suite provides exhaustive security analysis using industry-standard tools with automated reporting and enterprise-grade monitoring capabilities.
+Comprehensive automated database security tools deployment for the aclue Supabase PostgreSQL platform. This suite provides exhaustive security analysis using industry-standard tools with automated reporting and enterprise-grade monitoring capabilities.
 
 ## 🛡️ Security Tools Deployed
 

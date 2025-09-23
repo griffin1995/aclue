@@ -1,5 +1,5 @@
 """
-Aclue Database Service Unit Test Suite
+aclue Database Service Unit Test Suite
 
 Comprehensive unit tests for the DatabaseService class, validating all
 business logic, error handling, data processing, and integration patterns

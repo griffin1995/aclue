@@ -1,7 +1,7 @@
-# Aclue Performance Optimization Guide
+# aclue Performance Optimization Guide
 
 ## Overview
-This document provides comprehensive performance optimization strategies for the Aclue platform, covering both Railway backend and Vercel frontend deployments, along with monitoring recommendations and scaling strategies.
+This document provides comprehensive performance optimization strategies for the aclue platform, covering both Railway backend and Vercel frontend deployments, along with monitoring recommendations and scaling strategies.
 
 ## Railway Backend Optimizations
 
@@ -351,4 +351,4 @@ watch -n 5 'curl -s https://aclue-backend-production.up.railway.app/health'
    - Edge computing for global performance
    - Advanced caching strategies
 
-This performance optimization guide provides a comprehensive foundation for maintaining and improving the Aclue platform's performance as it scales.
+This performance optimization guide provides a comprehensive foundation for maintaining and improving the aclue platform's performance as it scales.

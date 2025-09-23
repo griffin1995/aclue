@@ -1,5 +1,5 @@
 """
-Aclue Locust Performance Testing Configuration
+aclue Locust Performance Testing Configuration
 
 Python-based load testing using Locust for comprehensive performance validation.
 Provides real-time web UI for monitoring and dynamic load adjustment.
@@ -305,9 +305,9 @@ class UserBehavior(TaskSet):
                 response.failure(f"Failed to fetch profile: {response.status_code}")
 
 
-class AclueUser(FastHttpUser):
+class aclueUser(FastHttpUser):
     """
-    Simulated Aclue user with realistic behavior patterns
+    Simulated aclue user with realistic behavior patterns
     """
     tasks = [UserBehavior]
     wait_time = between(1, 5)  # Wait 1-5 seconds between tasks

@@ -1,7 +1,7 @@
 /**
  * Amazon Affiliate Model & Wishlist Functionality E2E Tests
  * 
- * Comprehensive testing of the Aclue business model focusing on:
+ * Comprehensive testing of the aclue business model focusing on:
  * - Wishlist creation and management
  * - Amazon affiliate link generation
  * - Social sharing functionality
@@ -11,7 +11,7 @@
  * Business Model Validation:
  * - Users create and share wishlists
  * - Friends/family purchase via Amazon affiliate links
- * - Aclue earns commission from successful purchases
+ * - aclue earns commission from successful purchases
  * - Newsletter integration drives engagement
  */
 
@@ -525,7 +525,7 @@ test.describe('Amazon Affiliate Model & Wishlist Functionality', () => {
       }
       
       // This completes the business model flow:
-      // User creates wishlist → Shares with friends → Friends purchase via affiliate links → Aclue earns commission
+      // User creates wishlist → Shares with friends → Friends purchase via affiliate links → aclue earns commission
     });
   });
 });

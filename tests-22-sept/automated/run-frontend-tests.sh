@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Frontend Testing Suite for Aclue
+# Frontend Testing Suite for aclue
 set -uo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"

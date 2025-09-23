@@ -1,5 +1,5 @@
 """
-Security Testing Suite for Aclue Backend
+Security Testing Suite for aclue Backend
 
 Comprehensive security tests for authentication, authorisation,
 data protection, and security policy enforcement.
@@ -20,7 +20,7 @@ to validate security controls and data protection.
 
 Business Context:
 Security is paramount for user trust and regulatory compliance.
-These tests ensure Aclue maintains enterprise-grade security
+These tests ensure aclue maintains enterprise-grade security
 standards and protects user data and platform integrity.
 
 Requirements:

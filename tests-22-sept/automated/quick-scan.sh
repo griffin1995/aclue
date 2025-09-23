@@ -11,7 +11,7 @@ set -euo pipefail
 
 # Script metadata
 readonly SCRIPT_VERSION="1.0.0"
-readonly SCRIPT_NAME="Aclue Quick Scan"
+readonly SCRIPT_NAME="aclue Quick Scan"
 readonly SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 readonly PROJECT_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 readonly TIMESTAMP="$(date +%Y%m%d_%H%M%S)"

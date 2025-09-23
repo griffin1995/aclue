@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   description: 'Manage your wishlists, create new ones, and share with friends and family. Discover amazing gifts with AI-powered recommendations.',
   keywords: ['my wishlists', 'gift lists', 'wishlist management', 'share wishlists', 'AI recommendations'],
   openGraph: {
-    title: 'My Wishlists | Aclue',
+    title: 'My Wishlists | aclue',
     description: 'Manage and share your wishlists with AI-powered gift recommendations',
     type: 'website',
     locale: 'en_GB',

@@ -1,6 +1,6 @@
 # GitHub Secrets Configuration Guide
 
-This guide provides step-by-step instructions for setting up the required GitHub secrets for the Aclue deployment pipeline.
+This guide provides step-by-step instructions for setting up the required GitHub secrets for the aclue deployment pipeline.
 
 ## Overview
 

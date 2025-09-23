@@ -1,25 +1,26 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useTransition } from 'react'
 import { motion } from 'framer-motion'
 import { Mail, CheckCircle, Zap } from 'lucide-react'
+import { newsletterSignupAction } from '@/app/actions/newsletter'
 
 /**
- * Newsletter Signup Form - Direct Resend Integration
+ * Newsletter Signup Form - Server Actions Integration
  *
- * Interactive client component for newsletter signup using direct Resend API integration.
- * Provides optimal user experience with reliable email delivery.
+ * Interactive client component for newsletter signup using App Router server actions.
+ * Provides optimal user experience with backend API integration.
  *
  * Features:
- * - Direct Resend API integration via fetch
- * - React email templates with Aclue branding
+ * - Server actions for reliable backend communication
+ * - FastAPI backend integration via server actions
  * - Real-time validation feedback
  * - Accessibility compliant
  * - Success/error state management
  * - Loading states with proper UX
  *
  * Integration:
- * - Uses /api/newsletter/signup endpoint with Resend SDK
+ * - Uses server actions that call FastAPI backend
  * - Handles all form states client-side
  * - Provides immediate user feedback
  * - GDPR-compliant signup process
@@ -29,42 +30,34 @@ export default function NewsletterSignupForm() {
   const [email, setEmail] = useState('')
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const [isLoading, setIsLoading] = useState(false)
+  const [isPending, startTransition] = useTransition()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setError(null)
-    setIsLoading(true)
 
-    try {
-      console.log('📧 Submitting newsletter signup for:', email)
+    console.log('📧 Submitting newsletter signup for:', email)
 
-      const response = await fetch('/api/newsletter/signup/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email,
-          source: 'maintenance_page_direct_api',
-        }),
-      })
+    startTransition(async () => {
+      try {
+        const formData = new FormData()
+        formData.append('email', email)
+        formData.append('source', 'maintenance_page_server_actions')
 
-      const result = await response.json()
+        const result = await newsletterSignupAction(formData)
 
-      if (response.ok && result.success) {
-        setIsSubmitted(true)
-        console.log('✅ Newsletter signup successful:', result.message)
-      } else {
-        console.error('❌ Newsletter signup failed:', result)
-        setError(result.error || 'An unexpected error occurred. Please try again.')
+        if (result.success) {
+          setIsSubmitted(true)
+          console.log('✅ Newsletter signup successful:', result.message)
+        } else {
+          console.error('❌ Newsletter signup failed:', result)
+          setError(result.error || 'An unexpected error occurred. Please try again.')
+        }
+      } catch (error) {
+        console.error('💥 Form submission error:', error)
+        setError('Unable to connect to our service. Please check your connection and try again.')
       }
-    } catch (error) {
-      console.error('💥 Form submission error:', error)
-      setError('Unable to connect to our service. Please check your connection and try again.')
-    } finally {
-      setIsLoading(false)
-    }
+    })
   }
 
   if (isSubmitted) {
@@ -158,7 +151,7 @@ export default function NewsletterSignupForm() {
             placeholder="Enter your email address"
             className="w-full pl-12 sm:pl-14 pr-4 py-4 sm:py-5 bg-white/10 border-2 border-white/20 rounded-xl focus:border-blue-400 focus:outline-none text-white placeholder-blue-200 backdrop-blur-sm text-base sm:text-lg min-h-[48px] sm:min-h-[56px]"
             required
-            disabled={isLoading}
+            disabled={isPending}
             aria-label="Email address for beta signup"
             aria-describedby="email-description"
             autoComplete="email"
@@ -167,13 +160,13 @@ export default function NewsletterSignupForm() {
 
         <motion.button
           type="submit"
-          disabled={isLoading || !email.trim()}
-          whileHover={{ scale: isLoading ? 1 : 1.02 }}
-          whileTap={{ scale: isLoading ? 1 : 0.98 }}
+          disabled={isPending || !email.trim()}
+          whileHover={{ scale: isPending ? 1 : 1.02 }}
+          whileTap={{ scale: isPending ? 1 : 0.98 }}
           className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-4 sm:py-5 px-6 rounded-xl font-semibold hover:from-blue-600 hover:to-purple-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 shadow-lg text-base sm:text-lg min-h-[48px] sm:min-h-[56px]"
-          aria-label={isLoading ? "Joining beta program, please wait" : "Join beta program"}
+          aria-label={isPending ? "Joining beta program, please wait" : "Join beta program"}
         >
-          {isLoading ? (
+          {isPending ? (
             <>
               <div className="w-5 h-5 sm:w-6 sm:h-6 border-2 border-white border-t-transparent rounded-full animate-spin" aria-hidden="true" />
               <span>Joining Beta...</span>

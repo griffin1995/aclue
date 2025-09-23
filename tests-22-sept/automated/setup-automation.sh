@@ -12,7 +12,7 @@ set -euo pipefail
 
 # Script metadata
 readonly SCRIPT_VERSION="1.0.0"
-readonly SCRIPT_NAME="Aclue Testing Automation Setup"
+readonly SCRIPT_NAME="aclue Testing Automation Setup"
 readonly SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 readonly PROJECT_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 readonly TIMESTAMP="$(date +%Y%m%d_%H%M%S)"
@@ -197,7 +197,7 @@ create_environment_configs() {
 
     # Development environment config
     cat > "${CONFIG_DIR}/environments/development.env" << EOF
-# Aclue Testing - Development Environment
+# aclue Testing - Development Environment
 ENVIRONMENT=development
 DEBUG=true
 
@@ -223,7 +223,7 @@ EOF
 
     # Production environment config
     cat > "${CONFIG_DIR}/environments/production.env" << EOF
-# Aclue Testing - Production Environment
+# aclue Testing - Production Environment
 ENVIRONMENT=production
 DEBUG=false
 
@@ -249,7 +249,7 @@ EOF
 
     # CI/CD environment config
     cat > "${CONFIG_DIR}/environments/ci.env" << EOF
-# Aclue Testing - CI/CD Environment
+# aclue Testing - CI/CD Environment
 ENVIRONMENT=ci
 DEBUG=false
 
@@ -427,7 +427,7 @@ install_node_dependencies() {
 {
     "name": "aclue-testing-tools",
     "version": "1.0.0",
-    "description": "Testing tools and dependencies for Aclue platform",
+    "description": "Testing tools and dependencies for aclue platform",
     "private": true,
     "dependencies": {
         "@lighthouse-ci/cli": "^0.12.0",
@@ -562,7 +562,7 @@ create_convenience_links() {
     # Create main runner script
     cat > "${PROJECT_ROOT}/run-tests.sh" << EOF
 #!/bin/bash
-# Convenience script to run Aclue testing suite
+# Convenience script to run aclue testing suite
 cd "\$(dirname "\$0")"
 exec tests-22-sept/automated/run-all-automated-tests.sh "\$@"
 EOF

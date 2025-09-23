@@ -1,8 +1,8 @@
-# Aclue Testing Automation Suite
+# aclue Testing Automation Suite
 
 ## 🚀 Overview
 
-The Aclue Testing Automation Suite is a comprehensive, production-ready testing infrastructure that unifies 100+ testing tools into a seamless, enterprise-grade testing platform. This suite provides automated security scanning, performance monitoring, code quality analysis, and deployment gates for the Aclue platform.
+The aclue Testing Automation Suite is a comprehensive, production-ready testing infrastructure that unifies 100+ testing tools into a seamless, enterprise-grade testing platform. This suite provides automated security scanning, performance monitoring, code quality analysis, and deployment gates for the aclue platform.
 
 ## 📋 Table of Contents
 
@@ -94,7 +94,7 @@ The Aclue Testing Automation Suite is a comprehensive, production-ready testing 
 ## 🏗️ Architecture
 
 ```
-Aclue Testing Automation Suite
+aclue Testing Automation Suite
 ├── Master Orchestrator (run-all-automated-tests.sh)
 ├── Quick Scan (quick-scan.sh)
 ├── Health Check (health-check.sh)
@@ -710,7 +710,7 @@ fi
 ## 📚 Additional Resources
 
 ### Related Documentation
-- [Aclue Platform Documentation](../../CLAUDE.md)
+- [aclue Platform Documentation](../../CLAUDE.md)
 - [Security Testing Best Practices](security/README.md)
 - [Performance Optimization Guide](performance/README.md)
 - [CI/CD Integration Guide](../../.github/workflows/README.md)
@@ -730,10 +730,10 @@ fi
 
 ## 📄 License
 
-This testing automation suite is part of the Aclue platform and follows the same licensing terms.
+This testing automation suite is part of the aclue platform and follows the same licensing terms.
 
 ---
 
 **Version**: 1.0.0
 **Last Updated**: September 2025
-**Maintainer**: Aclue Development Team
+**Maintainer**: aclue Development Team

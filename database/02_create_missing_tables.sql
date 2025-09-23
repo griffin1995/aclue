@@ -1,5 +1,5 @@
 -- =====================================================================
--- Aclue Database Migration: Create Missing Critical Tables
+-- aclue Database Migration: Create Missing Critical Tables
 -- Date: 2025-08-06
 -- Version: 2.0
 -- =====================================================================

@@ -11,7 +11,7 @@ import ServerNavigation from './ServerNavigation'
  * Features:
  * - Server-side rendering for SEO
  * - Responsive design
- * - Aclue branding
+ * - aclue branding
  * - Main navigation
  *
  * Performance Benefits:
@@ -31,7 +31,7 @@ export default function ServerHeader() {
           >
             <Image
               src="/aclue_text_clean.png"
-              alt="Aclue Logo"
+              alt="aclue Logo"
               width={120}
               height={40}
               priority

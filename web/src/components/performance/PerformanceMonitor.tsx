@@ -1,5 +1,5 @@
 /**
- * Performance Monitor Component for Aclue Platform
+ * Performance Monitor Component for aclue Platform
  *
  * Provides comprehensive performance monitoring and optimization for React components.
  * Tracks Core Web Vitals, component render times, and user interaction metrics.

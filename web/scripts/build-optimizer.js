@@ -1,5 +1,5 @@
 /**
- * Build Optimizer Script for Aclue Platform
+ * Build Optimizer Script for aclue Platform
  *
  * Provides comprehensive build-time optimizations for the Next.js application.
  * Implements bundle analysis, asset optimization, and performance monitoring.

@@ -24,7 +24,7 @@ import {
 /**
  * Features Page - App Router Server Component
  *
- * Server-rendered features showcase highlighting Aclue's key capabilities and technology.
+ * Server-rendered features showcase highlighting aclue's key capabilities and technology.
  * This page demonstrates how AI enhances the gift discovery experience.
  *
  * Features:
@@ -288,7 +288,7 @@ export default function FeaturesPage() {
               Real-World Applications
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              See how Aclue solves common gift-giving challenges
+              See how aclue solves common gift-giving challenges
             </p>
           </div>
 
@@ -309,7 +309,7 @@ export default function FeaturesPage() {
                     <p className="text-gray-600">{useCase.scenario}</p>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-900 mb-2">Aclue Solution:</h4>
+                    <h4 className="font-semibold text-gray-900 mb-2">aclue Solution:</h4>
                     <p className="text-gray-600">{useCase.solution}</p>
                   </div>
                   <div>
@@ -328,7 +328,7 @@ export default function FeaturesPage() {
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-              Aclue vs Traditional Gift Shopping
+              aclue vs Traditional Gift Shopping
             </h2>
             <p className="text-lg text-gray-600">
               See how our platform compares to conventional gift discovery methods
@@ -338,7 +338,7 @@ export default function FeaturesPage() {
           <div className="bg-white rounded-2xl overflow-hidden shadow-lg">
             <div className="grid grid-cols-3 bg-gray-100 text-center py-4 font-semibold text-gray-900">
               <div>Feature</div>
-              <div className="text-primary-600">Aclue</div>
+              <div className="text-primary-600">aclue</div>
               <div>Traditional Shopping</div>
             </div>
 
@@ -481,7 +481,7 @@ export default function FeaturesPage() {
  */
 export const metadata: Metadata = {
   title: 'Features - AI-Powered Gift Discovery Platform',
-  description: 'Explore Aclue\'s powerful features: AI recommendations, swipe discovery, instant gift links, and social gifting. See how technology transforms gift-giving.',
+  description: 'Explore aclue\'s powerful features: AI recommendations, swipe discovery, instant gift links, and social gifting. See how technology transforms gift-giving.',
   keywords: [
     'ai gift features',
     'gift discovery platform',
@@ -500,7 +500,7 @@ export const metadata: Metadata = {
         url: '/aclue_text_clean.png',
         width: 1200,
         height: 630,
-        alt: 'Aclue Features - AI Gift Discovery',
+        alt: 'aclue Features - AI Gift Discovery',
       },
     ],
   },

@@ -253,7 +253,7 @@ export function ProfileSettings({ user }: ProfileSettingsProps) {
             <div>
               <h3 className="text-lg font-medium text-gray-900 mb-4">Notification Preferences</h3>
               <p className="text-gray-600 mb-6">
-                Control how and when you receive notifications from Aclue.
+                Control how and when you receive notifications from aclue.
               </p>
             </div>
 

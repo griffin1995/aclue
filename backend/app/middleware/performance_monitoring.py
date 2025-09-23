@@ -1,5 +1,5 @@
 """
-Aclue Backend Performance Monitoring Middleware
+aclue Backend Performance Monitoring Middleware
 
 Enterprise-grade performance monitoring for FastAPI applications with comprehensive
 metrics tracking, database query monitoring, and resource utilization analysis.

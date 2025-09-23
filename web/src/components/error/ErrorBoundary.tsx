@@ -1,5 +1,5 @@
 /**
- * Enterprise Error Boundary Component for Aclue Platform
+ * Enterprise Error Boundary Component for aclue Platform
  *
  * Provides comprehensive error handling and recovery mechanisms for React components.
  * Implements fallback UI, error reporting, and graceful degradation patterns.

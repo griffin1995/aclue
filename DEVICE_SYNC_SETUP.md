@@ -1,7 +1,7 @@
-# Aclue Project - Complete Device Synchronization Setup Guide
+# aclue Project - Complete Device Synchronization Setup Guide
 
 ## Overview
-This guide enables you to recreate the complete Aclue project state on any new device, including:
+This guide enables you to recreate the complete aclue project state on any new device, including:
 - Context-manager as PROJECT LEAD coordination system
 - All specialist agents coordination capabilities  
 - Complete development environment
@@ -399,7 +399,7 @@ After completing all steps, run this comprehensive validation:
 
 ```bash
 #!/bin/bash
-echo "=== Aclue Project Setup Validation ==="
+echo "=== aclue Project Setup Validation ==="
 
 # 1. Check git repository
 echo "✓ Git repository status:"

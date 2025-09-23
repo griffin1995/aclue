@@ -17,7 +17,7 @@ Phase 5 implementation has successfully achieved the target of 50% server compon
 - `ServerHeroSection.tsx` - Hero content and statistics
 - `ServerFeaturesSection.tsx` - Feature descriptions and benefits
 - `ServerTestimonialsSection.tsx` - Customer testimonials and reviews
-- Static "How It Works" section in `AclueMarketingPageOptimized.tsx`
+- Static "How It Works" section in `aclueMarketingPageOptimized.tsx`
 - Static platform availability section
 - Static CTA sections
 - Server-rendered footer with navigation
@@ -201,7 +201,7 @@ export default function ContactPage() {
 ```typescript
 export const metadata: Metadata = {
   title: 'Features - AI-Powered Gift Discovery Platform',
-  description: 'Explore Aclue\'s powerful features: AI recommendations, swipe discovery, instant gift links.',
+  description: 'Explore aclue\'s powerful features: AI recommendations, swipe discovery, instant gift links.',
   openGraph: {
     title: 'Features - AI-Powered Gift Discovery Platform',
     url: 'https://aclue.app/features',

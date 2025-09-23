@@ -1,5 +1,5 @@
 """
-Aclue Backend API Endpoint Test Suite
+aclue Backend API Endpoint Test Suite
 
 Comprehensive testing of all FastAPI endpoints including authentication,
 authorisation, data validation, error handling, and integration with

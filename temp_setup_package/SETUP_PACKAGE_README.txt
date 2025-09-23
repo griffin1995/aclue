@@ -1,4 +1,4 @@
-Aclue Project Setup Package - Configuration Files
+aclue Project Setup Package - Configuration Files
 ================================================
 
 This package contains all the configuration files that are NOT stored in the git repository

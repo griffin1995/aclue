@@ -1,8 +1,8 @@
-# Aclue Backend API
+# aclue Backend API
 
 **Version**: 2.0.0 | **Status**: Production Ready ✅ | **Last Updated**: 21st September 2025
 
-A high-performance, enterprise-grade FastAPI backend service for the Aclue AI-powered gifting platform, providing intelligent recommendations, secure authentication, and comprehensive analytics.
+A high-performance, enterprise-grade FastAPI backend service for the aclue AI-powered gifting platform, providing intelligent recommendations, secure authentication, and comprehensive analytics.
 
 ## Features
 
@@ -75,7 +75,7 @@ Edit `.env` with your configuration:
 
 ```bash
 # Core Configuration
-PROJECT_NAME="Aclue API"
+PROJECT_NAME="aclue API"
 VERSION="1.0.0"
 ENVIRONMENT=development
 DEBUG=true
@@ -290,7 +290,7 @@ Create `/etc/systemd/system/aclue-backend.service`:
 
 ```ini
 [Unit]
-Description=Aclue Backend API
+Description=aclue Backend API
 After=network.target
 
 [Service]

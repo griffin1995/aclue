@@ -29,8 +29,8 @@ export const dynamic = 'force-dynamic'
  */
 
 export const metadata = {
-  title: 'Profile - Aclue',
-  description: 'Manage your Aclue account settings and preferences',
+  title: 'Profile - aclue',
+  description: 'Manage your aclue account settings and preferences',
 }
 
 export default async function ProfilePage() {

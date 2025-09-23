@@ -194,7 +194,7 @@ export async function loginAction(formData: FormData): Promise<AuthResult> {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'User-Agent': 'Aclue-Web-Server/1.0',
+        'User-Agent': 'aclue-Web-Server/1.0',
       },
       body: JSON.stringify(loginPayload),
       signal: AbortSignal.timeout(AUTH_CONFIG.api.timeout),
@@ -332,7 +332,7 @@ export async function registerAction(formData: FormData): Promise<AuthResult> {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'User-Agent': 'Aclue-Web-Server/1.0',
+        'User-Agent': 'aclue-Web-Server/1.0',
       },
       body: JSON.stringify(registerPayload),
       signal: AbortSignal.timeout(AUTH_CONFIG.api.timeout),

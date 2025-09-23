@@ -1,8 +1,8 @@
-# Aclue Frontend Accessibility & SEO Automation Suite
+# aclue Frontend Accessibility & SEO Automation Suite
 
 ## Overview
 
-This directory contains comprehensive automated frontend accessibility and SEO tools for the Aclue platform. The suite includes 6 industry-standard tools configured for maximum scanning depth and WCAG compliance.
+This directory contains comprehensive automated frontend accessibility and SEO tools for the aclue platform. The suite includes 6 industry-standard tools configured for maximum scanning depth and WCAG compliance.
 
 ## Installed Tools
 

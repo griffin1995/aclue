@@ -1,5 +1,5 @@
 -- =====================================================================
--- Post-Deployment Verification Suite - Aclue Database Enhancement
+-- Post-Deployment Verification Suite - aclue Database Enhancement
 -- Date: 2025-09-21
 -- Version: 1.0
 -- =====================================================================

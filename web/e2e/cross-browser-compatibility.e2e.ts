@@ -22,7 +22,7 @@ const CORE_FUNCTIONALITY_TESTS = [
     name: 'Homepage loads successfully',
     url: '/',
     action: async (page) => {
-      await expect(page).toHaveTitle(/Aclue/);
+      await expect(page).toHaveTitle(/aclue/);
       await expect(page.locator('main')).toBeVisible();
     }
   },

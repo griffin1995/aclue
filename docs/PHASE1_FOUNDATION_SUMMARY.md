@@ -2,7 +2,7 @@
 
 ## Overview
 
-Phase 1 Foundation setup for the Aclue App Router migration has been successfully completed. This establishes the infrastructure for gradual migration from 100% Pages Router to 70% App Router server components while maintaining zero production downtime.
+Phase 1 Foundation setup for the aclue App Router migration has been successfully completed. This establishes the infrastructure for gradual migration from 100% Pages Router to 70% App Router server components while maintaining zero production downtime.
 
 ## Completed Tasks ✅
 

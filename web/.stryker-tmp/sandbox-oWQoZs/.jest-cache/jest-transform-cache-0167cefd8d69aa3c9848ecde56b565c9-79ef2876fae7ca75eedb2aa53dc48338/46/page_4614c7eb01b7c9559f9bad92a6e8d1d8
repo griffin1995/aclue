@@ -1,0 +1,636 @@
+43c5ae40749c78b2ae0496797856cb2d
+"use strict";
+
+/* istanbul ignore next */
+function cov_1oa9m412no() {
+  var path = "/home/jack/Documents/aclue-preprod/web/src/app/(dashboard)/profile/page.tsx";
+  var hash = "2a9e17d01a3cfa52a52ff7562fdb31947f378141";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/home/jack/Documents/aclue-preprod/web/src/app/(dashboard)/profile/page.tsx",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 4,
+          column: 3
+        }
+      },
+      "1": {
+        start: {
+          line: 6,
+          column: 4
+        },
+        end: {
+          line: 9,
+          column: 7
+        }
+      },
+      "2": {
+        start: {
+          line: 6,
+          column: 24
+        },
+        end: {
+          line: 9,
+          column: 7
+        }
+      },
+      "3": {
+        start: {
+          line: 11,
+          column: 0
+        },
+        end: {
+          line: 21,
+          column: 3
+        }
+      },
+      "4": {
+        start: {
+          line: 13,
+          column: 8
+        },
+        end: {
+          line: 13,
+          column: 27
+        }
+      },
+      "5": {
+        start: {
+          line: 16,
+          column: 8
+        },
+        end: {
+          line: 16,
+          column: 23
+        }
+      },
+      "6": {
+        start: {
+          line: 19,
+          column: 8
+        },
+        end: {
+          line: 19,
+          column: 24
+        }
+      },
+      "7": {
+        start: {
+          line: 22,
+          column: 20
+        },
+        end: {
+          line: 22,
+          column: 48
+        }
+      },
+      "8": {
+        start: {
+          line: 23,
+          column: 29
+        },
+        end: {
+          line: 23,
+          column: 71
+        }
+      },
+      "9": {
+        start: {
+          line: 24,
+          column: 20
+        },
+        end: {
+          line: 24,
+          column: 46
+        }
+      },
+      "10": {
+        start: {
+          line: 25,
+          column: 14
+        },
+        end: {
+          line: 25,
+          column: 43
+        }
+      },
+      "11": {
+        start: {
+          line: 26,
+          column: 23
+        },
+        end: {
+          line: 26,
+          column: 75
+        }
+      },
+      "12": {
+        start: {
+          line: 27,
+          column: 25
+        },
+        end: {
+          line: 27,
+          column: 79
+        }
+      },
+      "13": {
+        start: {
+          line: 29,
+          column: 4
+        },
+        end: {
+          line: 31,
+          column: 6
+        }
+      },
+      "14": {
+        start: {
+          line: 33,
+          column: 16
+        },
+        end: {
+          line: 33,
+          column: 31
+        }
+      },
+      "15": {
+        start: {
+          line: 34,
+          column: 17
+        },
+        end: {
+          line: 37,
+          column: 1
+        }
+      },
+      "16": {
+        start: {
+          line: 40,
+          column: 24
+        },
+        end: {
+          line: 40,
+          column: 57
+        }
+      },
+      "17": {
+        start: {
+          line: 41,
+          column: 4
+        },
+        end: {
+          line: 43,
+          column: 5
+        }
+      },
+      "18": {
+        start: {
+          line: 42,
+          column: 8
+        },
+        end: {
+          line: 42,
+          column: 67
+        }
+      },
+      "19": {
+        start: {
+          line: 44,
+          column: 4
+        },
+        end: {
+          line: 61,
+          column: 7
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "_export",
+        decl: {
+          start: {
+            line: 5,
+            column: 9
+          },
+          end: {
+            line: 5,
+            column: 16
+          }
+        },
+        loc: {
+          start: {
+            line: 5,
+            column: 30
+          },
+          end: {
+            line: 10,
+            column: 1
+          }
+        },
+        line: 5
+      },
+      "1": {
+        name: "(anonymous_1)",
+        decl: {
+          start: {
+            line: 12,
+            column: 13
+          },
+          end: {
+            line: 12,
+            column: 14
+          }
+        },
+        loc: {
+          start: {
+            line: 12,
+            column: 24
+          },
+          end: {
+            line: 14,
+            column: 5
+          }
+        },
+        line: 12
+      },
+      "2": {
+        name: "(anonymous_2)",
+        decl: {
+          start: {
+            line: 15,
+            column: 13
+          },
+          end: {
+            line: 15,
+            column: 14
+          }
+        },
+        loc: {
+          start: {
+            line: 15,
+            column: 24
+          },
+          end: {
+            line: 17,
+            column: 5
+          }
+        },
+        line: 15
+      },
+      "3": {
+        name: "(anonymous_3)",
+        decl: {
+          start: {
+            line: 18,
+            column: 14
+          },
+          end: {
+            line: 18,
+            column: 15
+          }
+        },
+        loc: {
+          start: {
+            line: 18,
+            column: 25
+          },
+          end: {
+            line: 20,
+            column: 5
+          }
+        },
+        line: 18
+      },
+      "4": {
+        name: "_interop_require_default",
+        decl: {
+          start: {
+            line: 28,
+            column: 9
+          },
+          end: {
+            line: 28,
+            column: 33
+          }
+        },
+        loc: {
+          start: {
+            line: 28,
+            column: 39
+          },
+          end: {
+            line: 32,
+            column: 1
+          }
+        },
+        line: 28
+      },
+      "5": {
+        name: "ProfilePage",
+        decl: {
+          start: {
+            line: 38,
+            column: 15
+          },
+          end: {
+            line: 38,
+            column: 26
+          }
+        },
+        loc: {
+          start: {
+            line: 38,
+            column: 29
+          },
+          end: {
+            line: 62,
+            column: 1
+          }
+        },
+        line: 38
+      }
+    },
+    branchMap: {
+      "0": {
+        loc: {
+          start: {
+            line: 29,
+            column: 11
+          },
+          end: {
+            line: 31,
+            column: 5
+          }
+        },
+        type: "cond-expr",
+        locations: [{
+          start: {
+            line: 29,
+            column: 35
+          },
+          end: {
+            line: 29,
+            column: 38
+          }
+        }, {
+          start: {
+            line: 29,
+            column: 41
+          },
+          end: {
+            line: 31,
+            column: 5
+          }
+        }],
+        line: 29
+      },
+      "1": {
+        loc: {
+          start: {
+            line: 29,
+            column: 11
+          },
+          end: {
+            line: 29,
+            column: 32
+          }
+        },
+        type: "binary-expr",
+        locations: [{
+          start: {
+            line: 29,
+            column: 11
+          },
+          end: {
+            line: 29,
+            column: 14
+          }
+        }, {
+          start: {
+            line: 29,
+            column: 18
+          },
+          end: {
+            line: 29,
+            column: 32
+          }
+        }],
+        line: 29
+      },
+      "2": {
+        loc: {
+          start: {
+            line: 41,
+            column: 4
+          },
+          end: {
+            line: 43,
+            column: 5
+          }
+        },
+        type: "if",
+        locations: [{
+          start: {
+            line: 41,
+            column: 4
+          },
+          end: {
+            line: 43,
+            column: 5
+          }
+        }, {
+          start: {
+            line: undefined,
+            column: undefined
+          },
+          end: {
+            line: undefined,
+            column: undefined
+          }
+        }],
+        line: 41
+      }
+    },
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0,
+      "10": 0,
+      "11": 0,
+      "12": 0,
+      "13": 0,
+      "14": 0,
+      "15": 0,
+      "16": 0,
+      "17": 0,
+      "18": 0,
+      "19": 0
+    },
+    f: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0
+    },
+    b: {
+      "0": [0, 0],
+      "1": [0, 0],
+      "2": [0, 0]
+    },
+    inputSourceMap: {
+      version: 3,
+      sources: ["/home/jack/Documents/aclue-preprod/web/src/app/(dashboard)/profile/page.tsx"],
+      sourcesContent: ["import React from 'react'\nimport { redirect } from 'next/navigation'\nimport { getCurrentUser, logoutAction } from '@/app/actions/auth'\nimport { ProfileHeader } from '@/components/profile/ProfileHeader'\nimport { ProfileSettings } from '@/components/profile/ProfileSettings'\n\n// Force dynamic rendering for authentication check\nexport const dynamic = 'force-dynamic'\n\n/**\n * Enhanced Profile Page - App Router Implementation\n *\n * Server-rendered user profile page with comprehensive user management.\n * Part of Phase 3: Tier 1 Migration (85% server components).\n *\n * Features:\n * - Server-side rendering for optimal performance\n * - Server-side authentication validation\n * - Automatic redirect for unauthenticated users\n * - Server actions for profile updates\n * - Enhanced security with minimal client-side JavaScript\n * - Full compatibility with existing Supabase auth system\n *\n * Security Improvements:\n * - Server-side user data fetching\n * - HTTP-only cookie authentication\n * - Protected route enforcement\n * - Automatic session validation\n */\n\nexport const metadata = {\n  title: 'Profile - aclue',\n  description: 'Manage your aclue account settings and preferences',\n}\n\nexport default async function ProfilePage() {\n  // Server-side authentication check - redirect if not authenticated\n  const currentUser = await getCurrentUser()\n\n  if (!currentUser) {\n    redirect('/auth/login?redirect=/profile')\n  }\n\n  return (\n    <div className=\"min-h-screen bg-gray-50\">\n      {/* Header */}\n      <ProfileHeader user={currentUser} logoutAction={logoutAction} />\n\n      {/* Main Content */}\n      <main className=\"max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8\">\n        <div className=\"max-w-3xl mx-auto\">\n          {/* Profile Settings */}\n          <ProfileSettings user={currentUser} />\n        </div>\n      </main>\n    </div>\n  )\n}"],
+      names: ["ProfilePage", "dynamic", "metadata", "title", "description", "currentUser", "getCurrentUser", "redirect", "div", "className", "ProfileHeader", "user", "logoutAction", "main", "ProfileSettings"],
+      mappings: ";;;;;;;;;;;IAmCA,OAsBC;eAtB6BA;;IA5BjBC,OAAO;eAAPA;;IAuBAC,QAAQ;eAARA;;;;8DA9BK;4BACO;sBACoB;+BACf;iCACE;;;;;;AAGzB,MAAMD,UAAU;AAuBhB,MAAMC,WAAW;IACtBC,OAAO;IACPC,aAAa;AACf;AAEe,eAAeJ;IAC5B,mEAAmE;IACnE,MAAMK,cAAc,MAAMC,IAAAA,oBAAc;IAExC,IAAI,CAACD,aAAa;QAChBE,IAAAA,oBAAQ,EAAC;IACX;IAEA,qBACE,sBAACC;QAAIC,WAAU;;0BAEb,qBAACC,4BAAa;gBAACC,MAAMN;gBAAaO,cAAcA,kBAAY;;0BAG5D,qBAACC;gBAAKJ,WAAU;0BACd,cAAA,qBAACD;oBAAIC,WAAU;8BAEb,cAAA,qBAACK,gCAAe;wBAACH,MAAMN;;;;;;AAKjC"
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "2a9e17d01a3cfa52a52ff7562fdb31947f378141"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_1oa9m412no = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_1oa9m412no();
+cov_1oa9m412no().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+function _export(target, all) {
+  /* istanbul ignore next */
+  cov_1oa9m412no().f[0]++;
+  cov_1oa9m412no().s[1]++;
+  for (var name in all) {
+    /* istanbul ignore next */
+    cov_1oa9m412no().s[2]++;
+    Object.defineProperty(target, name, {
+      enumerable: true,
+      get: all[name]
+    });
+  }
+}
+/* istanbul ignore next */
+cov_1oa9m412no().s[3]++;
+_export(exports, {
+  default: function () {
+    /* istanbul ignore next */
+    cov_1oa9m412no().f[1]++;
+    cov_1oa9m412no().s[4]++;
+    return ProfilePage;
+  },
+  dynamic: function () {
+    /* istanbul ignore next */
+    cov_1oa9m412no().f[2]++;
+    cov_1oa9m412no().s[5]++;
+    return dynamic;
+  },
+  metadata: function () {
+    /* istanbul ignore next */
+    cov_1oa9m412no().f[3]++;
+    cov_1oa9m412no().s[6]++;
+    return metadata;
+  }
+});
+const _jsxruntime =
+/* istanbul ignore next */
+(cov_1oa9m412no().s[7]++, require("react/jsx-runtime"));
+const _react =
+/* istanbul ignore next */
+(/*#__PURE__*/cov_1oa9m412no().s[8]++, _interop_require_default(require("react")));
+const _navigation =
+/* istanbul ignore next */
+(cov_1oa9m412no().s[9]++, require("next/navigation"));
+const _auth =
+/* istanbul ignore next */
+(cov_1oa9m412no().s[10]++, require("../../actions/auth"));
+const _ProfileHeader =
+/* istanbul ignore next */
+(cov_1oa9m412no().s[11]++, require("../../../components/profile/ProfileHeader"));
+const _ProfileSettings =
+/* istanbul ignore next */
+(cov_1oa9m412no().s[12]++, require("../../../components/profile/ProfileSettings"));
+function _interop_require_default(obj) {
+  /* istanbul ignore next */
+  cov_1oa9m412no().f[4]++;
+  cov_1oa9m412no().s[13]++;
+  return /* istanbul ignore next */(cov_1oa9m412no().b[1][0]++, obj) &&
+  /* istanbul ignore next */
+  (cov_1oa9m412no().b[1][1]++, obj.__esModule) ?
+  /* istanbul ignore next */
+  (cov_1oa9m412no().b[0][0]++, obj) :
+  /* istanbul ignore next */
+  (cov_1oa9m412no().b[0][1]++, {
+    default: obj
+  });
+}
+const dynamic =
+/* istanbul ignore next */
+(cov_1oa9m412no().s[14]++, "force-dynamic");
+const metadata =
+/* istanbul ignore next */
+(cov_1oa9m412no().s[15]++, {
+  title: "Profile - aclue",
+  description: "Manage your aclue account settings and preferences"
+});
+async function ProfilePage() {
+  /* istanbul ignore next */
+  cov_1oa9m412no().f[5]++;
+  // Server-side authentication check - redirect if not authenticated
+  const currentUser =
+  /* istanbul ignore next */
+  (cov_1oa9m412no().s[16]++, await (0, _auth.getCurrentUser)());
+  /* istanbul ignore next */
+  cov_1oa9m412no().s[17]++;
+  if (!currentUser) {
+    /* istanbul ignore next */
+    cov_1oa9m412no().b[2][0]++;
+    cov_1oa9m412no().s[18]++;
+    (0, _navigation.redirect)("/auth/login?redirect=/profile");
+  } else
+  /* istanbul ignore next */
+  {
+    cov_1oa9m412no().b[2][1]++;
+  }
+  cov_1oa9m412no().s[19]++;
+  return /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+    className: "min-h-screen bg-gray-50",
+    children: [/*#__PURE__*/(0, _jsxruntime.jsx)(_ProfileHeader.ProfileHeader, {
+      user: currentUser,
+      logoutAction: _auth.logoutAction
+    }), /*#__PURE__*/(0, _jsxruntime.jsx)("main", {
+      className: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8",
+      children: /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+        className: "max-w-3xl mx-auto",
+        children: /*#__PURE__*/(0, _jsxruntime.jsx)(_ProfileSettings.ProfileSettings, {
+          user: currentUser
+        })
+      })
+    })]
+  });
+}
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJkZWZhdWx0IiwiY292XzFvYTltNDEybm8iLCJmIiwicyIsIlByb2ZpbGVQYWdlIiwiZHluYW1pYyIsIm1ldGFkYXRhIiwidGl0bGUiLCJkZXNjcmlwdGlvbiIsImN1cnJlbnRVc2VyIiwiX2F1dGgiLCJnZXRDdXJyZW50VXNlciIsImIiLCJfbmF2aWdhdGlvbiIsInJlZGlyZWN0IiwiX2pzeHJ1bnRpbWUiLCJqc3hzIiwiY2xhc3NOYW1lIiwianN4IiwiX1Byb2ZpbGVIZWFkZXIiLCJQcm9maWxlSGVhZGVyIiwidXNlciIsImxvZ291dEFjdGlvbiIsIl9Qcm9maWxlU2V0dGluZ3MiLCJQcm9maWxlU2V0dGluZ3MiXSwic291cmNlcyI6WyIvaG9tZS9qYWNrL0RvY3VtZW50cy9hY2x1ZS1wcmVwcm9kL3dlYi9zcmMvYXBwLyhkYXNoYm9hcmQpL3Byb2ZpbGUvcGFnZS50c3giXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IFJlYWN0IGZyb20gJ3JlYWN0J1xuaW1wb3J0IHsgcmVkaXJlY3QgfSBmcm9tICduZXh0L25hdmlnYXRpb24nXG5pbXBvcnQgeyBnZXRDdXJyZW50VXNlciwgbG9nb3V0QWN0aW9uIH0gZnJvbSAnQC9hcHAvYWN0aW9ucy9hdXRoJ1xuaW1wb3J0IHsgUHJvZmlsZUhlYWRlciB9IGZyb20gJ0AvY29tcG9uZW50cy9wcm9maWxlL1Byb2ZpbGVIZWFkZXInXG5pbXBvcnQgeyBQcm9maWxlU2V0dGluZ3MgfSBmcm9tICdAL2NvbXBvbmVudHMvcHJvZmlsZS9Qcm9maWxlU2V0dGluZ3MnXG5cbi8vIEZvcmNlIGR5bmFtaWMgcmVuZGVyaW5nIGZvciBhdXRoZW50aWNhdGlvbiBjaGVja1xuZXhwb3J0IGNvbnN0IGR5bmFtaWMgPSAnZm9yY2UtZHluYW1pYydcblxuLyoqXG4gKiBFbmhhbmNlZCBQcm9maWxlIFBhZ2UgLSBBcHAgUm91dGVyIEltcGxlbWVudGF0aW9uXG4gKlxuICogU2VydmVyLXJlbmRlcmVkIHVzZXIgcHJvZmlsZSBwYWdlIHdpdGggY29tcHJlaGVuc2l2ZSB1c2VyIG1hbmFnZW1lbnQuXG4gKiBQYXJ0IG9mIFBoYXNlIDM6IFRpZXIgMSBNaWdyYXRpb24gKDg1JSBzZXJ2ZXIgY29tcG9uZW50cykuXG4gKlxuICogRmVhdHVyZXM6XG4gKiAtIFNlcnZlci1zaWRlIHJlbmRlcmluZyBmb3Igb3B0aW1hbCBwZXJmb3JtYW5jZVxuICogLSBTZXJ2ZXItc2lkZSBhdXRoZW50aWNhdGlvbiB2YWxpZGF0aW9uXG4gKiAtIEF1dG9tYXRpYyByZWRpcmVjdCBmb3IgdW5hdXRoZW50aWNhdGVkIHVzZXJzXG4gKiAtIFNlcnZlciBhY3Rpb25zIGZvciBwcm9maWxlIHVwZGF0ZXNcbiAqIC0gRW5oYW5jZWQgc2VjdXJpdHkgd2l0aCBtaW5pbWFsIGNsaWVudC1zaWRlIEphdmFTY3JpcHRcbiAqIC0gRnVsbCBjb21wYXRpYmlsaXR5IHdpdGggZXhpc3RpbmcgU3VwYWJhc2UgYXV0aCBzeXN0ZW1cbiAqXG4gKiBTZWN1cml0eSBJbXByb3ZlbWVudHM6XG4gKiAtIFNlcnZlci1zaWRlIHVzZXIgZGF0YSBmZXRjaGluZ1xuICogLSBIVFRQLW9ubHkgY29va2llIGF1dGhlbnRpY2F0aW9uXG4gKiAtIFByb3RlY3RlZCByb3V0ZSBlbmZvcmNlbWVudFxuICogLSBBdXRvbWF0aWMgc2Vzc2lvbiB2YWxpZGF0aW9uXG4gKi9cblxuZXhwb3J0IGNvbnN0IG1ldGFkYXRhID0ge1xuICB0aXRsZTogJ1Byb2ZpbGUgLSBBY2x1ZScsXG4gIGRlc2NyaXB0aW9uOiAnTWFuYWdlIHlvdXIgQWNsdWUgYWNjb3VudCBzZXR0aW5ncyBhbmQgcHJlZmVyZW5jZXMnLFxufVxuXG5leHBvcnQgZGVmYXVsdCBhc3luYyBmdW5jdGlvbiBQcm9maWxlUGFnZSgpIHtcbiAgLy8gU2VydmVyLXNpZGUgYXV0aGVudGljYXRpb24gY2hlY2sgLSByZWRpcmVjdCBpZiBub3QgYXV0aGVudGljYXRlZFxuICBjb25zdCBjdXJyZW50VXNlciA9IGF3YWl0IGdldEN1cnJlbnRVc2VyKClcblxuICBpZiAoIWN1cnJlbnRVc2VyKSB7XG4gICAgcmVkaXJlY3QoJy9hdXRoL2xvZ2luP3JlZGlyZWN0PS9wcm9maWxlJylcbiAgfVxuXG4gIHJldHVybiAoXG4gICAgPGRpdiBjbGFzc05hbWU9XCJtaW4taC1zY3JlZW4gYmctZ3JheS01MFwiPlxuICAgICAgey8qIEhlYWRlciAqL31cbiAgICAgIDxQcm9maWxlSGVhZGVyIHVzZXI9e2N1cnJlbnRVc2VyfSBsb2dvdXRBY3Rpb249e2xvZ291dEFjdGlvbn0gLz5cblxuICAgICAgey8qIE1haW4gQ29udGVudCAqL31cbiAgICAgIDxtYWluIGNsYXNzTmFtZT1cIm1heC13LTd4bCBteC1hdXRvIHB4LTQgc206cHgtNiBsZzpweC04IHB5LThcIj5cbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJtYXgtdy0zeGwgbXgtYXV0b1wiPlxuICAgICAgICAgIHsvKiBQcm9maWxlIFNldHRpbmdzICovfVxuICAgICAgICAgIDxQcm9maWxlU2V0dGluZ3MgdXNlcj17Y3VycmVudFVzZXJ9IC8+XG4gICAgICAgIDwvZGl2PlxuICAgICAgPC9tYWluPlxuICAgIDwvZGl2PlxuICApXG59Il0sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0VBbUNBQSxPQXNCQyxXQUFBQSxDQUFBO0lBQUE7SUFBQUMsY0FBQSxHQUFBQyxDQUFBO0lBQUFELGNBQUEsR0FBQUUsQ0FBQTtXQXRCNkJDLFdBQUE7O0VBNUJqQkMsT0FBTyxXQUFBQSxDQUFBO0lBQUE7SUFBQUosY0FBQSxHQUFBQyxDQUFBO0lBQUFELGNBQUEsR0FBQUUsQ0FBQTtXQUFQRSxPQUFBOztFQXVCQUMsUUFBUSxXQUFBQSxDQUFBO0lBQUE7SUFBQUwsY0FBQSxHQUFBQyxDQUFBO0lBQUFELGNBQUEsR0FBQUUsQ0FBQTtXQUFSRyxRQUFBOzs7Ozs7Ozt3RUE5Qks7OztrQ0FDTzs7O21DQUNvQjs7O21DQUNmOzs7bUNBQ0U7Ozs7Ozs7Ozs7Ozs7OztBQUd6QixNQUFNRCxPQUFBO0FBQUE7QUFBQSxDQUFBSixjQUFBLEdBQUFFLENBQUEsUUFBVTtBQXVCaEIsTUFBTUcsUUFBQTtBQUFBO0FBQUEsQ0FBQUwsY0FBQSxHQUFBRSxDQUFBLFFBQVc7RUFDdEJJLEtBQUEsRUFBTztFQUNQQyxXQUFBLEVBQWE7QUFDZjtBQUVlLGVBQWVKLFlBQUE7RUFBQTtFQUFBSCxjQUFBLEdBQUFDLENBQUE7RUFDNUI7RUFDQSxNQUFNTyxXQUFBO0VBQUE7RUFBQSxDQUFBUixjQUFBLEdBQUFFLENBQUEsUUFBYyxNQUFNLElBQUFPLEtBQUEsQ0FBQUMsY0FBYztFQUFBO0VBQUFWLGNBQUEsR0FBQUUsQ0FBQTtFQUV4QyxJQUFJLENBQUNNLFdBQUEsRUFBYTtJQUFBO0lBQUFSLGNBQUEsR0FBQVcsQ0FBQTtJQUFBWCxjQUFBLEdBQUFFLENBQUE7SUFDaEIsSUFBQVUsV0FBQSxDQUFBQyxRQUFRLEVBQUM7RUFDWDtFQUFBO0VBQUE7SUFBQWIsY0FBQSxHQUFBVyxDQUFBO0VBQUE7RUFBQVgsY0FBQSxHQUFBRSxDQUFBO0VBRUEsb0JBQ0UsSUFBQVksV0FBQSxDQUFBQyxJQUFBLEVBQUM7SUFBSUMsU0FBQSxFQUFVOzRCQUViLElBQUFGLFdBQUEsQ0FBQUcsR0FBQSxFQUFDQyxjQUFBLENBQUFDLGFBQWE7TUFBQ0MsSUFBQSxFQUFNWixXQUFBO01BQWFhLFlBQUEsRUFBY1osS0FBQSxDQUFBWTtxQkFHaEQsSUFBQVAsV0FBQSxDQUFBRyxHQUFBLEVBQUM7TUFBS0QsU0FBQSxFQUFVO2dCQUNkLGlCQUFBRixXQUFBLENBQUFHLEdBQUEsRUFBQztRQUFJRCxTQUFBLEVBQVU7a0JBRWIsaUJBQUFGLFdBQUEsQ0FBQUcsR0FBQSxFQUFDSyxnQkFBQSxDQUFBQyxlQUFlO1VBQUNILElBQUEsRUFBTVo7Ozs7O0FBS2pDIiwiaWdub3JlTGlzdCI6W119

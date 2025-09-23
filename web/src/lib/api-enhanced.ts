@@ -1,5 +1,5 @@
 /**
- * Enhanced Type-Safe API Client for Aclue Platform
+ * Enhanced Type-Safe API Client for aclue Platform
  *
  * Enterprise-grade HTTP client with strict TypeScript typing and advanced features.
  * Eliminates all `any` types with proper type definitions and type safety.

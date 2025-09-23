@@ -1,11 +1,11 @@
 -- =====================================================================
--- Aclue Database Migration: Deploy Missing Critical Tables (Production Ready)
+-- aclue Database Migration: Deploy Missing Critical Tables (Production Ready)
 -- Date: 2025-09-21
 -- Version: 3.0 (Corrected for Supabase Production Deployment)
 -- =====================================================================
 --
 -- DEPLOYMENT OVERVIEW:
--- This script deploys critical missing tables for the Aclue platform
+-- This script deploys critical missing tables for the aclue platform
 -- following Supabase best practices for production environments.
 --
 -- CORRECTED DEPENDENCIES:

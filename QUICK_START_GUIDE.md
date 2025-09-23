@@ -1,8 +1,8 @@
-# Aclue Quick Start Guide
+# aclue Quick Start Guide
 
 **Version 2.0.0** | **Time to Launch: 5 minutes** ⚡
 
-A streamlined guide to get the Aclue platform running on your local machine in under 5 minutes.
+A streamlined guide to get the aclue platform running on your local machine in under 5 minutes.
 
 ## 🚀 TL;DR - Fastest Setup
 
@@ -68,7 +68,7 @@ Create `.env` file with minimal configuration:
 ```bash
 cat > .env << 'EOF'
 # Minimal Configuration for Development
-PROJECT_NAME="Aclue API"
+PROJECT_NAME="aclue API"
 ENVIRONMENT=development
 DEBUG=true
 
@@ -120,7 +120,7 @@ EOF
 npm run dev
 ```
 
-✅ **Verify**: Visit http://localhost:3000 - you should see the Aclue homepage
+✅ **Verify**: Visit http://localhost:3000 - you should see the aclue homepage
 
 ## 🧪 Test Your Setup
 
@@ -305,4 +305,4 @@ You know setup is complete when:
 
 **Need help?** Check the [troubleshooting guide](SETUP_VERIFICATION_CHECKLIST.md#-troubleshooting-guide) or review the [full documentation](README.md).
 
-**Ready to code!** 🎉 Your Aclue development environment is now fully operational.
+**Ready to code!** 🎉 Your aclue development environment is now fully operational.

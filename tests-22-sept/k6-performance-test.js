@@ -28,7 +28,7 @@ export const options = {
   ext: {
     loadimpact: {
       projectID: 'aclue-performance',
-      name: 'Aclue Platform Load Test',
+      name: 'aclue Platform Load Test',
     },
   },
 }

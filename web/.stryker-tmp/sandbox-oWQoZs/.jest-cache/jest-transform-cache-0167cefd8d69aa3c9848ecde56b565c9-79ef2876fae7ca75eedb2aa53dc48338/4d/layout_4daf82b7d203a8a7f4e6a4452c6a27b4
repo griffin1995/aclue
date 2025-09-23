@@ -1,0 +1,489 @@
+96cf5c8a2e905692ebc36f59cf04037d
+/**
+ * Wishlists Layout - Server Component
+ *
+ * Provides the shared layout for all wishlist-related pages including:
+ * - Wishlist collection (/wishlists)
+ * - Individual wishlist views (/wishlists/[id])
+ * - Wishlist creation and editing
+ * - Shared wishlist pages
+ *
+ * This is a server component that handles:
+ * - Meta tags and SEO optimisation
+ * - Shared navigation structure for wishlist features
+ * - Common styling and branding
+ * - Authentication-aware rendering
+ *
+ * Features:
+ * - Server-side authentication checking
+ * - Responsive design with glassmorphism
+ * - Progressive enhancement approach
+ * - Amazon affiliate integration ready
+ */"use strict";
+
+/* istanbul ignore next */
+function cov_18h79wjh1r() {
+  var path = "/home/jack/Documents/aclue-preprod/web/src/app/(wishlists)/layout.tsx";
+  var hash = "388266dd4fd05f1e14886bfea85607ad22ec900c";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/home/jack/Documents/aclue-preprod/web/src/app/(wishlists)/layout.tsx",
+    statementMap: {
+      "0": {
+        start: {
+          line: 22,
+          column: 0
+        },
+        end: {
+          line: 24,
+          column: 3
+        }
+      },
+      "1": {
+        start: {
+          line: 26,
+          column: 4
+        },
+        end: {
+          line: 29,
+          column: 7
+        }
+      },
+      "2": {
+        start: {
+          line: 26,
+          column: 24
+        },
+        end: {
+          line: 29,
+          column: 7
+        }
+      },
+      "3": {
+        start: {
+          line: 31,
+          column: 0
+        },
+        end: {
+          line: 43,
+          column: 3
+        }
+      },
+      "4": {
+        start: {
+          line: 38,
+          column: 8
+        },
+        end: {
+          line: 38,
+          column: 30
+        }
+      },
+      "5": {
+        start: {
+          line: 41,
+          column: 8
+        },
+        end: {
+          line: 41,
+          column: 24
+        }
+      },
+      "6": {
+        start: {
+          line: 44,
+          column: 20
+        },
+        end: {
+          line: 44,
+          column: 48
+        }
+      },
+      "7": {
+        start: {
+          line: 45,
+          column: 29
+        },
+        end: {
+          line: 45,
+          column: 71
+        }
+      },
+      "8": {
+        start: {
+          line: 46,
+          column: 28
+        },
+        end: {
+          line: 46,
+          column: 84
+        }
+      },
+      "9": {
+        start: {
+          line: 48,
+          column: 4
+        },
+        end: {
+          line: 50,
+          column: 6
+        }
+      },
+      "10": {
+        start: {
+          line: 52,
+          column: 17
+        },
+        end: {
+          line: 76,
+          column: 1
+        }
+      },
+      "11": {
+        start: {
+          line: 78,
+          column: 4
+        },
+        end: {
+          line: 87,
+          column: 7
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "_export",
+        decl: {
+          start: {
+            line: 25,
+            column: 9
+          },
+          end: {
+            line: 25,
+            column: 16
+          }
+        },
+        loc: {
+          start: {
+            line: 25,
+            column: 30
+          },
+          end: {
+            line: 30,
+            column: 1
+          }
+        },
+        line: 25
+      },
+      "1": {
+        name: "(anonymous_1)",
+        decl: {
+          start: {
+            line: 37,
+            column: 13
+          },
+          end: {
+            line: 37,
+            column: 14
+          }
+        },
+        loc: {
+          start: {
+            line: 37,
+            column: 24
+          },
+          end: {
+            line: 39,
+            column: 5
+          }
+        },
+        line: 37
+      },
+      "2": {
+        name: "(anonymous_2)",
+        decl: {
+          start: {
+            line: 40,
+            column: 14
+          },
+          end: {
+            line: 40,
+            column: 15
+          }
+        },
+        loc: {
+          start: {
+            line: 40,
+            column: 25
+          },
+          end: {
+            line: 42,
+            column: 5
+          }
+        },
+        line: 40
+      },
+      "3": {
+        name: "_interop_require_default",
+        decl: {
+          start: {
+            line: 47,
+            column: 9
+          },
+          end: {
+            line: 47,
+            column: 33
+          }
+        },
+        loc: {
+          start: {
+            line: 47,
+            column: 39
+          },
+          end: {
+            line: 51,
+            column: 1
+          }
+        },
+        line: 47
+      },
+      "4": {
+        name: "WishlistLayout",
+        decl: {
+          start: {
+            line: 77,
+            column: 9
+          },
+          end: {
+            line: 77,
+            column: 23
+          }
+        },
+        loc: {
+          start: {
+            line: 77,
+            column: 38
+          },
+          end: {
+            line: 88,
+            column: 1
+          }
+        },
+        line: 77
+      }
+    },
+    branchMap: {
+      "0": {
+        loc: {
+          start: {
+            line: 48,
+            column: 11
+          },
+          end: {
+            line: 50,
+            column: 5
+          }
+        },
+        type: "cond-expr",
+        locations: [{
+          start: {
+            line: 48,
+            column: 35
+          },
+          end: {
+            line: 48,
+            column: 38
+          }
+        }, {
+          start: {
+            line: 48,
+            column: 41
+          },
+          end: {
+            line: 50,
+            column: 5
+          }
+        }],
+        line: 48
+      },
+      "1": {
+        loc: {
+          start: {
+            line: 48,
+            column: 11
+          },
+          end: {
+            line: 48,
+            column: 32
+          }
+        },
+        type: "binary-expr",
+        locations: [{
+          start: {
+            line: 48,
+            column: 11
+          },
+          end: {
+            line: 48,
+            column: 14
+          }
+        }, {
+          start: {
+            line: 48,
+            column: 18
+          },
+          end: {
+            line: 48,
+            column: 32
+          }
+        }],
+        line: 48
+      }
+    },
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0,
+      "10": 0,
+      "11": 0
+    },
+    f: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0
+    },
+    b: {
+      "0": [0, 0],
+      "1": [0, 0]
+    },
+    inputSourceMap: {
+      version: 3,
+      sources: ["/home/jack/Documents/aclue-preprod/web/src/app/(wishlists)/layout.tsx"],
+      sourcesContent: ["/**\n * Wishlists Layout - Server Component\n *\n * Provides the shared layout for all wishlist-related pages including:\n * - Wishlist collection (/wishlists)\n * - Individual wishlist views (/wishlists/[id])\n * - Wishlist creation and editing\n * - Shared wishlist pages\n *\n * This is a server component that handles:\n * - Meta tags and SEO optimisation\n * - Shared navigation structure for wishlist features\n * - Common styling and branding\n * - Authentication-aware rendering\n *\n * Features:\n * - Server-side authentication checking\n * - Responsive design with glassmorphism\n * - Progressive enhancement approach\n * - Amazon affiliate integration ready\n */\n\nimport React from 'react';\nimport type { Metadata } from 'next';\nimport { WishlistNavigation } from '@/components/wishlists/WishlistNavigation';\n\nexport const metadata: Metadata = {\n  title: {\n    template: '%s | Wishlists | aclue',\n    default: 'Wishlists | aclue'\n  },\n  description: 'Create and manage wishlists, share with friends and family, and discover amazing gifts with AI-powered recommendations on aclue',\n  keywords: ['wishlists', 'gift lists', 'sharing', 'AI recommendations', 'Amazon affiliate', 'aclue'],\n  openGraph: {\n    title: 'Wishlists | aclue',\n    description: 'Create and share wishlists with AI-powered gift recommendations',\n    type: 'website',\n    locale: 'en_GB',\n  },\n  robots: {\n    index: false, // Keeping consistent with existing pages during alpha\n    follow: false,\n  },\n};\n\ninterface WishlistLayoutProps {\n  children: React.ReactNode;\n}\n\n/**\n * Wishlist Layout Server Component\n *\n * Renders the shared layout structure for all wishlist pages.\n * Uses server components by default for optimal performance.\n */\nexport default function WishlistLayout({ children }: WishlistLayoutProps) {\n  return (\n    <div className=\"min-h-screen bg-gradient-to-br from-primary-50 to-secondary-50\">\n      {/* Wishlist Navigation - Client Component for Interactivity */}\n      <WishlistNavigation />\n\n      {/* Main Content Area */}\n      <main className=\"flex-1\">\n        {children}\n      </main>\n    </div>\n  );\n}"],
+      names: ["WishlistLayout", "metadata", "title", "template", "default", "description", "keywords", "openGraph", "type", "locale", "robots", "index", "follow", "children", "div", "className", "WishlistNavigation", "main"],
+      mappings: "AAAA;;;;;;;;;;;;;;;;;;;;CAoBC;;;;;;;;;;;IA6BD;;;;;CAKC,GACD,OAYC;eAZuBA;;IA7BXC,QAAQ;eAARA;;;;8DAJK;oCAEiB;;;;;;AAE5B,MAAMA,WAAqB;IAChCC,OAAO;QACLC,UAAU;QACVC,SAAS;IACX;IACAC,aAAa;IACbC,UAAU;QAAC;QAAa;QAAc;QAAW;QAAsB;QAAoB;KAAQ;IACnGC,WAAW;QACTL,OAAO;QACPG,aAAa;QACbG,MAAM;QACNC,QAAQ;IACV;IACAC,QAAQ;QACNC,OAAO;QACPC,QAAQ;IACV;AACF;AAYe,SAASZ,eAAe,EAAEa,QAAQ,EAAuB;IACtE,qBACE,sBAACC;QAAIC,WAAU;;0BAEb,qBAACC,sCAAkB;0BAGnB,qBAACC;gBAAKF,WAAU;0BACbF;;;;AAIT"
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "388266dd4fd05f1e14886bfea85607ad22ec900c"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_18h79wjh1r = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_18h79wjh1r();
+cov_18h79wjh1r().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+function _export(target, all) {
+  /* istanbul ignore next */
+  cov_18h79wjh1r().f[0]++;
+  cov_18h79wjh1r().s[1]++;
+  for (var name in all) {
+    /* istanbul ignore next */
+    cov_18h79wjh1r().s[2]++;
+    Object.defineProperty(target, name, {
+      enumerable: true,
+      get: all[name]
+    });
+  }
+}
+/* istanbul ignore next */
+cov_18h79wjh1r().s[3]++;
+_export(exports, {
+  /**
+  * Wishlist Layout Server Component
+  *
+  * Renders the shared layout structure for all wishlist pages.
+  * Uses server components by default for optimal performance.
+  */
+  default: function () {
+    /* istanbul ignore next */
+    cov_18h79wjh1r().f[1]++;
+    cov_18h79wjh1r().s[4]++;
+    return WishlistLayout;
+  },
+  metadata: function () {
+    /* istanbul ignore next */
+    cov_18h79wjh1r().f[2]++;
+    cov_18h79wjh1r().s[5]++;
+    return metadata;
+  }
+});
+const _jsxruntime =
+/* istanbul ignore next */
+(cov_18h79wjh1r().s[6]++, require("react/jsx-runtime"));
+const _react =
+/* istanbul ignore next */
+(/*#__PURE__*/cov_18h79wjh1r().s[7]++, _interop_require_default(require("react")));
+const _WishlistNavigation =
+/* istanbul ignore next */
+(cov_18h79wjh1r().s[8]++, require("../../components/wishlists/WishlistNavigation"));
+function _interop_require_default(obj) {
+  /* istanbul ignore next */
+  cov_18h79wjh1r().f[3]++;
+  cov_18h79wjh1r().s[9]++;
+  return /* istanbul ignore next */(cov_18h79wjh1r().b[1][0]++, obj) &&
+  /* istanbul ignore next */
+  (cov_18h79wjh1r().b[1][1]++, obj.__esModule) ?
+  /* istanbul ignore next */
+  (cov_18h79wjh1r().b[0][0]++, obj) :
+  /* istanbul ignore next */
+  (cov_18h79wjh1r().b[0][1]++, {
+    default: obj
+  });
+}
+const metadata =
+/* istanbul ignore next */
+(cov_18h79wjh1r().s[10]++, {
+  title: {
+    template: "%s | Wishlists | aclue",
+    default: "Wishlists | aclue"
+  },
+  description: "Create and manage wishlists, share with friends and family, and discover amazing gifts with AI-powered recommendations on aclue",
+  keywords: ["wishlists", "gift lists", "sharing", "AI recommendations", "Amazon affiliate", "aclue"],
+  openGraph: {
+    title: "Wishlists | aclue",
+    description: "Create and share wishlists with AI-powered gift recommendations",
+    type: "website",
+    locale: "en_GB"
+  },
+  robots: {
+    index: false,
+    follow: false
+  }
+});
+function WishlistLayout({
+  children
+}) {
+  /* istanbul ignore next */
+  cov_18h79wjh1r().f[4]++;
+  cov_18h79wjh1r().s[11]++;
+  return /*#__PURE__*/(0, _jsxruntime.jsxs)("div", {
+    className: "min-h-screen bg-gradient-to-br from-primary-50 to-secondary-50",
+    children: [/*#__PURE__*/(0, _jsxruntime.jsx)(_WishlistNavigation.WishlistNavigation, {}), /*#__PURE__*/(0, _jsxruntime.jsx)("main", {
+      className: "flex-1",
+      children: children
+    })]
+  });
+}
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJjb3ZfMThoNzl3amgxciIsInBhdGgiLCJoYXNoIiwiZ2xvYmFsIiwiRnVuY3Rpb24iLCJnY3YiLCJjb3ZlcmFnZURhdGEiLCJzdGF0ZW1lbnRNYXAiLCJzdGFydCIsImxpbmUiLCJjb2x1bW4iLCJlbmQiLCJmbk1hcCIsIm5hbWUiLCJkZWNsIiwibG9jIiwiYnJhbmNoTWFwIiwidHlwZSIsImxvY2F0aW9ucyIsInMiLCJmIiwiYiIsImlucHV0U291cmNlTWFwIiwidmVyc2lvbiIsInNvdXJjZXMiLCJzb3VyY2VzQ29udGVudCIsIm5hbWVzIiwibWFwcGluZ3MiLCJfY292ZXJhZ2VTY2hlbWEiLCJjb3ZlcmFnZSIsImFjdHVhbENvdmVyYWdlIiwiZGVmYXVsdCIsIldpc2hsaXN0TGF5b3V0IiwibWV0YWRhdGEiLCJ0aXRsZSIsInRlbXBsYXRlIiwiZGVzY3JpcHRpb24iLCJrZXl3b3JkcyIsIm9wZW5HcmFwaCIsImxvY2FsZSIsInJvYm90cyIsImluZGV4IiwiZm9sbG93IiwiY2hpbGRyZW4iLCJfanN4cnVudGltZSIsImpzeHMiLCJjbGFzc05hbWUiLCJqc3giLCJfV2lzaGxpc3ROYXZpZ2F0aW9uIiwiV2lzaGxpc3ROYXZpZ2F0aW9uIl0sInNvdXJjZXMiOlsiL2hvbWUvamFjay9Eb2N1bWVudHMvYWNsdWUtcHJlcHJvZC93ZWIvc3JjL2FwcC8od2lzaGxpc3RzKS9sYXlvdXQudHN4Il0sInNvdXJjZXNDb250ZW50IjpbIi8qKlxuICogV2lzaGxpc3RzIExheW91dCAtIFNlcnZlciBDb21wb25lbnRcbiAqXG4gKiBQcm92aWRlcyB0aGUgc2hhcmVkIGxheW91dCBmb3IgYWxsIHdpc2hsaXN0LXJlbGF0ZWQgcGFnZXMgaW5jbHVkaW5nOlxuICogLSBXaXNobGlzdCBjb2xsZWN0aW9uICgvd2lzaGxpc3RzKVxuICogLSBJbmRpdmlkdWFsIHdpc2hsaXN0IHZpZXdzICgvd2lzaGxpc3RzL1tpZF0pXG4gKiAtIFdpc2hsaXN0IGNyZWF0aW9uIGFuZCBlZGl0aW5nXG4gKiAtIFNoYXJlZCB3aXNobGlzdCBwYWdlc1xuICpcbiAqIFRoaXMgaXMgYSBzZXJ2ZXIgY29tcG9uZW50IHRoYXQgaGFuZGxlczpcbiAqIC0gTWV0YSB0YWdzIGFuZCBTRU8gb3B0aW1pc2F0aW9uXG4gKiAtIFNoYXJlZCBuYXZpZ2F0aW9uIHN0cnVjdHVyZSBmb3Igd2lzaGxpc3QgZmVhdHVyZXNcbiAqIC0gQ29tbW9uIHN0eWxpbmcgYW5kIGJyYW5kaW5nXG4gKiAtIEF1dGhlbnRpY2F0aW9uLWF3YXJlIHJlbmRlcmluZ1xuICpcbiAqIEZlYXR1cmVzOlxuICogLSBTZXJ2ZXItc2lkZSBhdXRoZW50aWNhdGlvbiBjaGVja2luZ1xuICogLSBSZXNwb25zaXZlIGRlc2lnbiB3aXRoIGdsYXNzbW9ycGhpc21cbiAqIC0gUHJvZ3Jlc3NpdmUgZW5oYW5jZW1lbnQgYXBwcm9hY2hcbiAqIC0gQW1hem9uIGFmZmlsaWF0ZSBpbnRlZ3JhdGlvbiByZWFkeVxuICovXG5cbmltcG9ydCBSZWFjdCBmcm9tICdyZWFjdCc7XG5pbXBvcnQgdHlwZSB7IE1ldGFkYXRhIH0gZnJvbSAnbmV4dCc7XG5pbXBvcnQgeyBXaXNobGlzdE5hdmlnYXRpb24gfSBmcm9tICdAL2NvbXBvbmVudHMvd2lzaGxpc3RzL1dpc2hsaXN0TmF2aWdhdGlvbic7XG5cbmV4cG9ydCBjb25zdCBtZXRhZGF0YTogTWV0YWRhdGEgPSB7XG4gIHRpdGxlOiB7XG4gICAgdGVtcGxhdGU6ICclcyB8IFdpc2hsaXN0cyB8IEFjbHVlJyxcbiAgICBkZWZhdWx0OiAnV2lzaGxpc3RzIHwgQWNsdWUnXG4gIH0sXG4gIGRlc2NyaXB0aW9uOiAnQ3JlYXRlIGFuZCBtYW5hZ2Ugd2lzaGxpc3RzLCBzaGFyZSB3aXRoIGZyaWVuZHMgYW5kIGZhbWlseSwgYW5kIGRpc2NvdmVyIGFtYXppbmcgZ2lmdHMgd2l0aCBBSS1wb3dlcmVkIHJlY29tbWVuZGF0aW9ucyBvbiBBY2x1ZScsXG4gIGtleXdvcmRzOiBbJ3dpc2hsaXN0cycsICdnaWZ0IGxpc3RzJywgJ3NoYXJpbmcnLCAnQUkgcmVjb21tZW5kYXRpb25zJywgJ0FtYXpvbiBhZmZpbGlhdGUnLCAnQWNsdWUnXSxcbiAgb3BlbkdyYXBoOiB7XG4gICAgdGl0bGU6ICdXaXNobGlzdHMgfCBBY2x1ZScsXG4gICAgZGVzY3JpcHRpb246ICdDcmVhdGUgYW5kIHNoYXJlIHdpc2hsaXN0cyB3aXRoIEFJLXBvd2VyZWQgZ2lmdCByZWNvbW1lbmRhdGlvbnMnLFxuICAgIHR5cGU6ICd3ZWJzaXRlJyxcbiAgICBsb2NhbGU6ICdlbl9HQicsXG4gIH0sXG4gIHJvYm90czoge1xuICAgIGluZGV4OiBmYWxzZSwgLy8gS2VlcGluZyBjb25zaXN0ZW50IHdpdGggZXhpc3RpbmcgcGFnZXMgZHVyaW5nIGFscGhhXG4gICAgZm9sbG93OiBmYWxzZSxcbiAgfSxcbn07XG5cbmludGVyZmFjZSBXaXNobGlzdExheW91dFByb3BzIHtcbiAgY2hpbGRyZW46IFJlYWN0LlJlYWN0Tm9kZTtcbn1cblxuLyoqXG4gKiBXaXNobGlzdCBMYXlvdXQgU2VydmVyIENvbXBvbmVudFxuICpcbiAqIFJlbmRlcnMgdGhlIHNoYXJlZCBsYXlvdXQgc3RydWN0dXJlIGZvciBhbGwgd2lzaGxpc3QgcGFnZXMuXG4gKiBVc2VzIHNlcnZlciBjb21wb25lbnRzIGJ5IGRlZmF1bHQgZm9yIG9wdGltYWwgcGVyZm9ybWFuY2UuXG4gKi9cbmV4cG9ydCBkZWZhdWx0IGZ1bmN0aW9uIFdpc2hsaXN0TGF5b3V0KHsgY2hpbGRyZW4gfTogV2lzaGxpc3RMYXlvdXRQcm9wcykge1xuICByZXR1cm4gKFxuICAgIDxkaXYgY2xhc3NOYW1lPVwibWluLWgtc2NyZWVuIGJnLWdyYWRpZW50LXRvLWJyIGZyb20tcHJpbWFyeS01MCB0by1zZWNvbmRhcnktNTBcIj5cbiAgICAgIHsvKiBXaXNobGlzdCBOYXZpZ2F0aW9uIC0gQ2xpZW50IENvbXBvbmVudCBmb3IgSW50ZXJhY3Rpdml0eSAqL31cbiAgICAgIDxXaXNobGlzdE5hdmlnYXRpb24gLz5cblxuICAgICAgey8qIE1haW4gQ29udGVudCBBcmVhICovfVxuICAgICAgPG1haW4gY2xhc3NOYW1lPVwiZmxleC0xXCI+XG4gICAgICAgIHtjaGlsZHJlbn1cbiAgICAgIDwvbWFpbj5cbiAgICA8L2Rpdj5cbiAgKTtcbn0iXSwibWFwcGluZ3MiOiJBQUFBOzs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQW9CQzs7QUFBQTtBQUFBLFNBQUFBLGVBQUE7RUFBQSxJQUFBQyxJQUFBO0VBQUEsSUFBQUMsSUFBQTtFQUFBLElBQUFDLE1BQUEsT0FBQUMsUUFBQTtFQUFBLElBQUFDLEdBQUE7RUFBQSxJQUFBQyxZQUFBO0lBQUFMLElBQUE7SUFBQU0sWUFBQTtNQUFBO1FBQUFDLEtBQUE7VUFBQUMsSUFBQTtVQUFBQyxNQUFBO1FBQUE7UUFBQUMsR0FBQTtVQUFBRixJQUFBO1VBQUFDLE1BQUE7UUFBQTtNQUFBO01BQUE7UUFBQUYsS0FBQTtVQUFBQyxJQUFBO1VBQUFDLE1BQUE7UUFBQTtRQUFBQyxHQUFBO1VBQUFGLElBQUE7VUFBQUMsTUFBQTtRQUFBO01BQUE7TUFBQTtRQUFBRixLQUFBO1VBQUFDLElBQUE7VUFBQUMsTUFBQTtRQUFBO1FBQUFDLEdBQUE7VUFBQUYsSUFBQTtVQUFBQyxNQUFBO1FBQUE7TUFBQTtNQUFBO1FBQUFGLEtBQUE7VUFBQUMsSUFBQTtVQUFBQyxNQUFBO1FBQUE7UUFBQUMsR0FBQTtVQUFBRixJQUFBO1VBQUFDLE1BQUE7UUFBQTtNQUFBO01BQUE7UUFBQUYsS0FBQTtVQUFBQyxJQUFBO1VBQUFDLE1BQUE7UUFBQTtRQUFBQyxHQUFBO1VBQUFGLElBQUE7VUFBQUMsTUFBQTtRQUFBO01BQUE7TUFBQTtRQUFBRixLQUFBO1VBQUFDLElBQUE7VUFBQUMsTUFBQTtRQUFBO1FBQUFDLEdBQUE7VUFBQUYsSUFBQTtVQUFBQyxNQUFBO1FBQUE7TUFBQTtNQUFBO1FBQUFGLEtBQUE7VUFBQUMsSUFBQTtVQUFBQyxNQUFBO1FBQUE7UUFBQUMsR0FBQTtVQUFBRixJQUFBO1VBQUFDLE1BQUE7UUFBQTtNQUFBO01BQUE7UUFBQUYsS0FBQTtVQUFBQyxJQUFBO1VBQUFDLE1BQUE7UUFBQTtRQUFBQyxHQUFBO1VBQUFGLElBQUE7VUFBQUMsTUFBQTtRQUFBO01BQUE7TUFBQTtRQUFBRixLQUFBO1VBQUFDLElBQUE7VUFBQUMsTUFBQTtRQUFBO1FBQUFDLEdBQUE7VUFBQUYsSUFBQTtVQUFBQyxNQUFBO1FBQUE7TUFBQTtNQUFBO1FBQUFGLEtBQUE7VUFBQUMsSUFBQTtVQUFBQyxNQUFBO1FBQUE7UUFBQUMsR0FBQTtVQUFBRixJQUFBO1VBQUFDLE1BQUE7UUFBQTtNQUFBO01BQUE7UUFBQUYsS0FBQTtVQUFBQyxJQUFBO1VBQUFDLE1BQUE7UUFBQTtRQUFBQyxHQUFBO1VBQUFGLElBQUE7VUFBQUMsTUFBQTtRQUFBO01BQUE7TUFBQTtRQUFBRixLQUFBO1VBQUFDLElBQUE7VUFBQUMsTUFBQTtRQUFBO1FBQUFDLEdBQUE7VUFBQUYsSUFBQTtVQUFBQyxNQUFBO1FBQUE7TUFBQTtJQUFBO0lBQUFFLEtBQUE7TUFBQTtRQUFBQyxJQUFBO1FBQUFDLElBQUE7VUFBQU4sS0FBQTtZQUFBQyxJQUFBO1lBQUFDLE1BQUE7VUFBQTtVQUFBQyxHQUFBO1lBQUFGLElBQUE7WUFBQUMsTUFBQTtVQUFBO1FBQUE7UUFBQUssR0FBQTtVQUFBUCxLQUFBO1lBQUFDLElBQUE7WUFBQUMsTUFBQTtVQUFBO1VBQUFDLEdBQUE7WUFBQUYsSUFBQTtZQUFBQyxNQUFBO1VBQUE7UUFBQTtRQUFBRCxJQUFBO01BQUE7TUFBQTtRQUFBSSxJQUFBO1FBQUFDLElBQUE7VUFBQU4sS0FBQTtZQUFBQyxJQUFBO1lBQUFDLE1BQUE7VUFBQTtVQUFBQyxHQUFBO1lBQUFGLElBQUE7WUFBQUMsTUFBQTtVQUFBO1FBQUE7UUFBQUssR0FBQTtVQUFBUCxLQUFBO1lBQUFDLElBQUE7WUFBQUMsTUFBQTtVQUFBO1VBQUFDLEdBQUE7WUFBQUYsSUFBQTtZQUFBQyxNQUFBO1VBQUE7UUFBQTtRQUFBRCxJQUFBO01BQUE7TUFBQTtRQUFBSSxJQUFBO1FBQUFDLElBQUE7VUFBQU4sS0FBQTtZQUFBQyxJQUFBO1lBQUFDLE1BQUE7VUFBQTtVQUFBQyxHQUFBO1lBQUFGLElBQUE7WUFBQUMsTUFBQTtVQUFBO1FBQUE7UUFBQUssR0FBQTtVQUFBUCxLQUFBO1lBQUFDLElBQUE7WUFBQUMsTUFBQTtVQUFBO1VBQUFDLEdBQUE7WUFBQUYsSUFBQTtZQUFBQyxNQUFBO1VBQUE7UUFBQTtRQUFBRCxJQUFBO01BQUE7TUFBQTtRQUFBSSxJQUFBO1FBQUFDLElBQUE7VUFBQU4sS0FBQTtZQUFBQyxJQUFBO1lBQUFDLE1BQUE7VUFBQTtVQUFBQyxHQUFBO1lBQUFGLElBQUE7WUFBQUMsTUFBQTtVQUFBO1FBQUE7UUFBQUssR0FBQTtVQUFBUCxLQUFBO1lBQUFDLElBQUE7WUFBQUMsTUFBQTtVQUFBO1VBQUFDLEdBQUE7WUFBQUYsSUFBQTtZQUFBQyxNQUFBO1VBQUE7UUFBQTtRQUFBRCxJQUFBO01BQUE7TUFBQTtRQUFBSSxJQUFBO1FBQUFDLElBQUE7VUFBQU4sS0FBQTtZQUFBQyxJQUFBO1lBQUFDLE1BQUE7VUFBQTtVQUFBQyxHQUFBO1lBQUFGLElBQUE7WUFBQUMsTUFBQTtVQUFBO1FBQUE7UUFBQUssR0FBQTtVQUFBUCxLQUFBO1lBQUFDLElBQUE7WUFBQUMsTUFBQTtVQUFBO1VBQUFDLEdBQUE7WUFBQUYsSUFBQTtZQUFBQyxNQUFBO1VBQUE7UUFBQTtRQUFBRCxJQUFBO01BQUE7SUFBQTtJQUFBTyxTQUFBO01BQUE7UUFBQUQsR0FBQTtVQUFBUCxLQUFBO1lBQUFDLElBQUE7WUFBQUMsTUFBQTtVQUFBO1VBQUFDLEdBQUE7WUFBQUYsSUFBQTtZQUFBQyxNQUFBO1VBQUE7UUFBQTtRQUFBTyxJQUFBO1FBQUFDLFNBQUE7VUFBQVYsS0FBQTtZQUFBQyxJQUFBO1lBQUFDLE1BQUE7VUFBQTtVQUFBQyxHQUFBO1lBQUFGLElBQUE7WUFBQUMsTUFBQTtVQUFBO1FBQUE7VUFBQUYsS0FBQTtZQUFBQyxJQUFBO1lBQUFDLE1BQUE7VUFBQTtVQUFBQyxHQUFBO1lBQUFGLElBQUE7WUFBQUMsTUFBQTtVQUFBO1FBQUE7UUFBQUQsSUFBQTtNQUFBO01BQUE7UUFBQU0sR0FBQTtVQUFBUCxLQUFBO1lBQUFDLElBQUE7WUFBQUMsTUFBQTtVQUFBO1VBQUFDLEdBQUE7WUFBQUYsSUFBQTtZQUFBQyxNQUFBO1VBQUE7UUFBQTtRQUFBTyxJQUFBO1FBQUFDLFNBQUE7VUFBQVYsS0FBQTtZQUFBQyxJQUFBO1lBQUFDLE1BQUE7VUFBQTtVQUFBQyxHQUFBO1lBQUFGLElBQUE7WUFBQUMsTUFBQTtVQUFBO1FBQUE7VUFBQUYsS0FBQTtZQUFBQyxJQUFBO1lBQUFDLE1BQUE7VUFBQTtVQUFBQyxHQUFBO1lBQUFGLElBQUE7WUFBQUMsTUFBQTtVQUFBO1FBQUE7UUFBQUQsSUFBQTtNQUFBO0lBQUE7SUFBQVUsQ0FBQTtNQUFBO01BQUE7TUFBQTtNQUFBO01BQUE7TUFBQTtNQUFBO01BQUE7TUFBQTtNQUFBO01BQUE7TUFBQTtJQUFBO0lBQUFDLENBQUE7TUFBQTtNQUFBO01BQUE7TUFBQTtNQUFBO0lBQUE7SUFBQUMsQ0FBQTtNQUFBO01BQUE7SUFBQTtJQUFBQyxjQUFBO01BQUFDLE9BQUE7TUFBQUMsT0FBQTtNQUFBQyxjQUFBO01BQUFDLEtBQUE7TUFBQUMsUUFBQTtJQUFBO0lBQUFDLGVBQUE7SUFBQTFCLElBQUE7RUFBQTtFQUFBLElBQUEyQixRQUFBLEdBQUExQixNQUFBLENBQUFFLEdBQUEsTUFBQUYsTUFBQSxDQUFBRSxHQUFBO0VBQUEsS0FBQXdCLFFBQUEsQ0FBQTVCLElBQUEsS0FBQTRCLFFBQUEsQ0FBQTVCLElBQUEsRUFBQUMsSUFBQSxLQUFBQSxJQUFBO0lBQUEyQixRQUFBLENBQUE1QixJQUFBLElBQUFLLFlBQUE7RUFBQTtFQUFBLElBQUF3QixjQUFBLEdBQUFELFFBQUEsQ0FBQTVCLElBQUE7RUFBQTs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7RUE2QkQ7Ozs7OztFQU1BOEIsT0FZQyxXQUFBQSxDQUFBO0lBQUE7SUFBQS9CLGNBQUEsR0FBQW9CLENBQUE7SUFBQXBCLGNBQUEsR0FBQW1CLENBQUE7V0FadUJhLGNBQUE7O0VBN0JYQyxRQUFRLFdBQUFBLENBQUE7SUFBQTtJQUFBakMsY0FBQSxHQUFBb0IsQ0FBQTtJQUFBcEIsY0FBQSxHQUFBbUIsQ0FBQTtXQUFSYyxRQUFBOzs7Ozs7Ozt3RUFKSzs7O2tDQUVpQjs7Ozs7Ozs7Ozs7Ozs7O0FBRTVCLE1BQU1BLFFBQUE7QUFBQTtBQUFBLENBQUFqQyxjQUFBLEdBQUFtQixDQUFBLFFBQXFCO0VBQ2hDZSxLQUFBLEVBQU87SUFDTEMsUUFBQSxFQUFVO0lBQ1ZKLE9BQUEsRUFBUztFQUNYO0VBQ0FLLFdBQUEsRUFBYTtFQUNiQyxRQUFBLEVBQVUsQ0FBQyxhQUFhLGNBQWMsV0FBVyxzQkFBc0Isb0JBQW9CLFFBQVE7RUFDbkdDLFNBQUEsRUFBVztJQUNUSixLQUFBLEVBQU87SUFDUEUsV0FBQSxFQUFhO0lBQ2JuQixJQUFBLEVBQU07SUFDTnNCLE1BQUEsRUFBUTtFQUNWO0VBQ0FDLE1BQUEsRUFBUTtJQUNOQyxLQUFBLEVBQU87SUFDUEMsTUFBQSxFQUFRO0VBQ1Y7QUFDRjtBQVllLFNBQVNWLGVBQWU7RUFBRVc7QUFBUSxDQUF1QjtFQUFBO0VBQUEzQyxjQUFBLEdBQUFvQixDQUFBO0VBQUFwQixjQUFBLEdBQUFtQixDQUFBO0VBQ3RFLG9CQUNFLElBQUF5QixXQUFBLENBQUFDLElBQUEsRUFBQztJQUFJQyxTQUFBLEVBQVU7NEJBRWIsSUFBQUYsV0FBQSxDQUFBRyxHQUFBLEVBQUNDLG1CQUFBLENBQUFDLGtCQUFrQixPLGFBR25CLElBQUFMLFdBQUEsQ0FBQUcsR0FBQSxFQUFDO01BQUtELFNBQUEsRUFBVTtnQkFDYkg7OztBQUlUIiwiaWdub3JlTGlzdCI6W119

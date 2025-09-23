@@ -1,0 +1,427 @@
+4d580ff79d51a599b10207353957505d
+"use strict";
+
+/* istanbul ignore next */
+function cov_ovlrv9kda() {
+  var path = "/home/jack/Documents/aclue-preprod/web/src/app/layout.tsx";
+  var hash = "e5b7d7d95e686244800dc1cd9e578d6584627878";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/home/jack/Documents/aclue-preprod/web/src/app/layout.tsx",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 4,
+          column: 3
+        }
+      },
+      "1": {
+        start: {
+          line: 6,
+          column: 4
+        },
+        end: {
+          line: 9,
+          column: 7
+        }
+      },
+      "2": {
+        start: {
+          line: 6,
+          column: 24
+        },
+        end: {
+          line: 9,
+          column: 7
+        }
+      },
+      "3": {
+        start: {
+          line: 11,
+          column: 0
+        },
+        end: {
+          line: 18,
+          column: 3
+        }
+      },
+      "4": {
+        start: {
+          line: 13,
+          column: 8
+        },
+        end: {
+          line: 13,
+          column: 26
+        }
+      },
+      "5": {
+        start: {
+          line: 16,
+          column: 8
+        },
+        end: {
+          line: 16,
+          column: 24
+        }
+      },
+      "6": {
+        start: {
+          line: 19,
+          column: 20
+        },
+        end: {
+          line: 19,
+          column: 48
+        }
+      },
+      "7": {
+        start: {
+          line: 20,
+          column: 16
+        },
+        end: {
+          line: 20,
+          column: 43
+        }
+      },
+      "8": {
+        start: {
+          line: 21,
+          column: 0
+        },
+        end: {
+          line: 21,
+          column: 33
+        }
+      },
+      "9": {
+        start: {
+          line: 22,
+          column: 14
+        },
+        end: {
+          line: 26,
+          column: 2
+        }
+      },
+      "10": {
+        start: {
+          line: 27,
+          column: 17
+        },
+        end: {
+          line: 82,
+          column: 1
+        }
+      },
+      "11": {
+        start: {
+          line: 84,
+          column: 4
+        },
+        end: {
+          line: 91,
+          column: 7
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "_export",
+        decl: {
+          start: {
+            line: 5,
+            column: 9
+          },
+          end: {
+            line: 5,
+            column: 16
+          }
+        },
+        loc: {
+          start: {
+            line: 5,
+            column: 30
+          },
+          end: {
+            line: 10,
+            column: 1
+          }
+        },
+        line: 5
+      },
+      "1": {
+        name: "(anonymous_1)",
+        decl: {
+          start: {
+            line: 12,
+            column: 13
+          },
+          end: {
+            line: 12,
+            column: 14
+          }
+        },
+        loc: {
+          start: {
+            line: 12,
+            column: 24
+          },
+          end: {
+            line: 14,
+            column: 5
+          }
+        },
+        line: 12
+      },
+      "2": {
+        name: "(anonymous_2)",
+        decl: {
+          start: {
+            line: 15,
+            column: 14
+          },
+          end: {
+            line: 15,
+            column: 15
+          }
+        },
+        loc: {
+          start: {
+            line: 15,
+            column: 25
+          },
+          end: {
+            line: 17,
+            column: 5
+          }
+        },
+        line: 15
+      },
+      "3": {
+        name: "RootLayout",
+        decl: {
+          start: {
+            line: 83,
+            column: 9
+          },
+          end: {
+            line: 83,
+            column: 19
+          }
+        },
+        loc: {
+          start: {
+            line: 83,
+            column: 34
+          },
+          end: {
+            line: 92,
+            column: 1
+          }
+        },
+        line: 83
+      }
+    },
+    branchMap: {
+      "0": {
+        loc: {
+          start: {
+            line: 43,
+            column: 26
+          },
+          end: {
+            line: 43,
+            column: 80
+          }
+        },
+        type: "binary-expr",
+        locations: [{
+          start: {
+            line: 43,
+            column: 26
+          },
+          end: {
+            line: 43,
+            column: 57
+          }
+        }, {
+          start: {
+            line: 43,
+            column: 61
+          },
+          end: {
+            line: 43,
+            column: 80
+          }
+        }],
+        line: 43
+      }
+    },
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0,
+      "10": 0,
+      "11": 0
+    },
+    f: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0
+    },
+    b: {
+      "0": [0, 0]
+    },
+    inputSourceMap: {
+      version: 3,
+      sources: ["/home/jack/Documents/aclue-preprod/web/src/app/layout.tsx"],
+      sourcesContent: ["import type { Metadata } from 'next'\nimport { Inter } from 'next/font/google'\nimport '@/styles/globals.css'\n\nconst inter = Inter({ subsets: ['latin'] })\n\nexport const metadata: Metadata = {\n  title: 'aclue - AI-Powered Gifting Platform',\n  description: 'Discover perfect gifts with AI-powered recommendations',\n  keywords: ['gifts', 'AI', 'recommendations', 'personalised shopping'],\n  authors: [{ name: 'aclue Team' }],\n  creator: 'aclue Ltd',\n  publisher: 'aclue Ltd',\n  metadataBase: new URL(process.env.NEXT_PUBLIC_WEB_URL || 'https://aclue.app'),\n  alternates: {\n    canonical: '/',\n  },\n  openGraph: {\n    title: 'aclue - AI-Powered Gifting Platform',\n    description: 'Discover perfect gifts with AI-powered recommendations',\n    url: '/',\n    siteName: 'aclue',\n    images: [\n      {\n        url: '/aclue_text_clean.png',\n        width: 1200,\n        height: 630,\n        alt: 'aclue Logo',\n      },\n    ],\n    locale: 'en_GB',\n    type: 'website',\n  },\n  twitter: {\n    card: 'summary_large_image',\n    title: 'aclue - AI-Powered Gifting Platform',\n    description: 'Discover perfect gifts with AI-powered recommendations',\n    images: ['/aclue_text_clean.png'],\n  },\n  robots: {\n    index: true,\n    follow: true,\n    googleBot: {\n      index: true,\n      follow: true,\n      'max-video-preview': -1,\n      'max-image-preview': 'large',\n      'max-snippet': -1,\n    },\n  },\n}\n\nexport default function RootLayout({\n  children,\n}: {\n  children: React.ReactNode\n}) {\n  return (\n    <html lang=\"en-GB\" className={inter.className}>\n      <body className=\"antialiased\">\n        {children}\n      </body>\n    </html>\n  )\n}"],
+      names: ["RootLayout", "metadata", "inter", "Inter", "subsets", "title", "description", "keywords", "authors", "name", "creator", "publisher", "metadataBase", "URL", "process", "env", "NEXT_PUBLIC_WEB_URL", "alternates", "canonical", "openGraph", "url", "siteName", "images", "width", "height", "alt", "locale", "type", "twitter", "card", "robots", "index", "follow", "googleBot", "children", "html", "lang", "className", "body"],
+      mappings: ";;;;;;;;;;;IAoDA,OAYC;eAZuBA;;IA9CXC,QAAQ;eAARA;;;;wBALS;QACf;AAEP,MAAMC,QAAQC,IAAAA,aAAK,EAAC;IAAEC,SAAS;QAAC;KAAQ;AAAC;AAElC,MAAMH,WAAqB;IAChCI,OAAO;IACPC,aAAa;IACbC,UAAU;QAAC;QAAS;QAAM;QAAmB;KAAwB;IACrEC,SAAS;QAAC;YAAEC,MAAM;QAAa;KAAE;IACjCC,SAAS;IACTC,WAAW;IACXC,cAAc,IAAIC,IAAIC,QAAQC,GAAG,CAACC,mBAAmB,IAAI;IACzDC,YAAY;QACVC,WAAW;IACb;IACAC,WAAW;QACTd,OAAO;QACPC,aAAa;QACbc,KAAK;QACLC,UAAU;QACVC,QAAQ;YACN;gBACEF,KAAK;gBACLG,OAAO;gBACPC,QAAQ;gBACRC,KAAK;YACP;SACD;QACDC,QAAQ;QACRC,MAAM;IACR;IACAC,SAAS;QACPC,MAAM;QACNxB,OAAO;QACPC,aAAa;QACbgB,QAAQ;YAAC;SAAwB;IACnC;IACAQ,QAAQ;QACNC,OAAO;QACPC,QAAQ;QACRC,WAAW;YACTF,OAAO;YACPC,QAAQ;YACR,qBAAqB,CAAC;YACtB,qBAAqB;YACrB,eAAe,CAAC;QAClB;IACF;AACF;AAEe,SAAShC,WAAW,EACjCkC,QAAQ,EAGT;IACC,qBACE,qBAACC;QAAKC,MAAK;QAAQC,WAAWnC,MAAMmC,SAAS;kBAC3C,cAAA,qBAACC;YAAKD,WAAU;sBACbH;;;AAIT"
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "e5b7d7d95e686244800dc1cd9e578d6584627878"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_ovlrv9kda = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_ovlrv9kda();
+cov_ovlrv9kda().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+function _export(target, all) {
+  /* istanbul ignore next */
+  cov_ovlrv9kda().f[0]++;
+  cov_ovlrv9kda().s[1]++;
+  for (var name in all) {
+    /* istanbul ignore next */
+    cov_ovlrv9kda().s[2]++;
+    Object.defineProperty(target, name, {
+      enumerable: true,
+      get: all[name]
+    });
+  }
+}
+/* istanbul ignore next */
+cov_ovlrv9kda().s[3]++;
+_export(exports, {
+  default: function () {
+    /* istanbul ignore next */
+    cov_ovlrv9kda().f[1]++;
+    cov_ovlrv9kda().s[4]++;
+    return RootLayout;
+  },
+  metadata: function () {
+    /* istanbul ignore next */
+    cov_ovlrv9kda().f[2]++;
+    cov_ovlrv9kda().s[5]++;
+    return metadata;
+  }
+});
+const _jsxruntime =
+/* istanbul ignore next */
+(cov_ovlrv9kda().s[6]++, require("react/jsx-runtime"));
+const _google =
+/* istanbul ignore next */
+(cov_ovlrv9kda().s[7]++, require("next/font/google"));
+/* istanbul ignore next */
+cov_ovlrv9kda().s[8]++;
+require("../styles/globals.css");
+const inter =
+/* istanbul ignore next */
+(cov_ovlrv9kda().s[9]++, (0, _google.Inter)({
+  subsets: ["latin"]
+}));
+const metadata =
+/* istanbul ignore next */
+(cov_ovlrv9kda().s[10]++, {
+  title: "aclue - AI-Powered Gifting Platform",
+  description: "Discover perfect gifts with AI-powered recommendations",
+  keywords: ["gifts", "AI", "recommendations", "personalised shopping"],
+  authors: [{
+    name: "aclue Team"
+  }],
+  creator: "aclue Ltd",
+  publisher: "aclue Ltd",
+  metadataBase: new URL(
+  /* istanbul ignore next */
+  (cov_ovlrv9kda().b[0][0]++, process.env.NEXT_PUBLIC_WEB_URL) ||
+  /* istanbul ignore next */
+  (cov_ovlrv9kda().b[0][1]++, "https://aclue.app")),
+  alternates: {
+    canonical: "/"
+  },
+  openGraph: {
+    title: "aclue - AI-Powered Gifting Platform",
+    description: "Discover perfect gifts with AI-powered recommendations",
+    url: "/",
+    siteName: "aclue",
+    images: [{
+      url: "/aclue_text_clean.png",
+      width: 1200,
+      height: 630,
+      alt: "aclue Logo"
+    }],
+    locale: "en_GB",
+    type: "website"
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "aclue - AI-Powered Gifting Platform",
+    description: "Discover perfect gifts with AI-powered recommendations",
+    images: ["/aclue_text_clean.png"]
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1
+    }
+  }
+});
+function RootLayout({
+  children
+}) {
+  /* istanbul ignore next */
+  cov_ovlrv9kda().f[3]++;
+  cov_ovlrv9kda().s[11]++;
+  return /*#__PURE__*/(0, _jsxruntime.jsx)("html", {
+    lang: "en-GB",
+    className: inter.className,
+    children: /*#__PURE__*/(0, _jsxruntime.jsx)("body", {
+      className: "antialiased",
+      children: children
+    })
+  });
+}
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJkZWZhdWx0IiwiY292X292bHJ2OWtkYSIsImYiLCJzIiwiUm9vdExheW91dCIsIm1ldGFkYXRhIiwiaW50ZXIiLCJfZ29vZ2xlIiwiSW50ZXIiLCJzdWJzZXRzIiwidGl0bGUiLCJkZXNjcmlwdGlvbiIsImtleXdvcmRzIiwiYXV0aG9ycyIsIm5hbWUiLCJjcmVhdG9yIiwicHVibGlzaGVyIiwibWV0YWRhdGFCYXNlIiwiVVJMIiwiYiIsInByb2Nlc3MiLCJlbnYiLCJORVhUX1BVQkxJQ19XRUJfVVJMIiwiYWx0ZXJuYXRlcyIsImNhbm9uaWNhbCIsIm9wZW5HcmFwaCIsInVybCIsInNpdGVOYW1lIiwiaW1hZ2VzIiwid2lkdGgiLCJoZWlnaHQiLCJhbHQiLCJsb2NhbGUiLCJ0eXBlIiwidHdpdHRlciIsImNhcmQiLCJyb2JvdHMiLCJpbmRleCIsImZvbGxvdyIsImdvb2dsZUJvdCIsImNoaWxkcmVuIiwiX2pzeHJ1bnRpbWUiLCJqc3giLCJsYW5nIiwiY2xhc3NOYW1lIl0sInNvdXJjZXMiOlsiL2hvbWUvamFjay9Eb2N1bWVudHMvYWNsdWUtcHJlcHJvZC93ZWIvc3JjL2FwcC9sYXlvdXQudHN4Il0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB0eXBlIHsgTWV0YWRhdGEgfSBmcm9tICduZXh0J1xuaW1wb3J0IHsgSW50ZXIgfSBmcm9tICduZXh0L2ZvbnQvZ29vZ2xlJ1xuaW1wb3J0ICdAL3N0eWxlcy9nbG9iYWxzLmNzcydcblxuY29uc3QgaW50ZXIgPSBJbnRlcih7IHN1YnNldHM6IFsnbGF0aW4nXSB9KVxuXG5leHBvcnQgY29uc3QgbWV0YWRhdGE6IE1ldGFkYXRhID0ge1xuICB0aXRsZTogJ0FjbHVlIC0gQUktUG93ZXJlZCBHaWZ0aW5nIFBsYXRmb3JtJyxcbiAgZGVzY3JpcHRpb246ICdEaXNjb3ZlciBwZXJmZWN0IGdpZnRzIHdpdGggQUktcG93ZXJlZCByZWNvbW1lbmRhdGlvbnMnLFxuICBrZXl3b3JkczogWydnaWZ0cycsICdBSScsICdyZWNvbW1lbmRhdGlvbnMnLCAncGVyc29uYWxpc2VkIHNob3BwaW5nJ10sXG4gIGF1dGhvcnM6IFt7IG5hbWU6ICdBY2x1ZSBUZWFtJyB9XSxcbiAgY3JlYXRvcjogJ0FjbHVlIEx0ZCcsXG4gIHB1Ymxpc2hlcjogJ0FjbHVlIEx0ZCcsXG4gIG1ldGFkYXRhQmFzZTogbmV3IFVSTChwcm9jZXNzLmVudi5ORVhUX1BVQkxJQ19XRUJfVVJMIHx8ICdodHRwczovL2FjbHVlLmFwcCcpLFxuICBhbHRlcm5hdGVzOiB7XG4gICAgY2Fub25pY2FsOiAnLycsXG4gIH0sXG4gIG9wZW5HcmFwaDoge1xuICAgIHRpdGxlOiAnQWNsdWUgLSBBSS1Qb3dlcmVkIEdpZnRpbmcgUGxhdGZvcm0nLFxuICAgIGRlc2NyaXB0aW9uOiAnRGlzY292ZXIgcGVyZmVjdCBnaWZ0cyB3aXRoIEFJLXBvd2VyZWQgcmVjb21tZW5kYXRpb25zJyxcbiAgICB1cmw6ICcvJyxcbiAgICBzaXRlTmFtZTogJ0FjbHVlJyxcbiAgICBpbWFnZXM6IFtcbiAgICAgIHtcbiAgICAgICAgdXJsOiAnL2FjbHVlX3RleHRfY2xlYW4ucG5nJyxcbiAgICAgICAgd2lkdGg6IDEyMDAsXG4gICAgICAgIGhlaWdodDogNjMwLFxuICAgICAgICBhbHQ6ICdBY2x1ZSBMb2dvJyxcbiAgICAgIH0sXG4gICAgXSxcbiAgICBsb2NhbGU6ICdlbl9HQicsXG4gICAgdHlwZTogJ3dlYnNpdGUnLFxuICB9LFxuICB0d2l0dGVyOiB7XG4gICAgY2FyZDogJ3N1bW1hcnlfbGFyZ2VfaW1hZ2UnLFxuICAgIHRpdGxlOiAnQWNsdWUgLSBBSS1Qb3dlcmVkIEdpZnRpbmcgUGxhdGZvcm0nLFxuICAgIGRlc2NyaXB0aW9uOiAnRGlzY292ZXIgcGVyZmVjdCBnaWZ0cyB3aXRoIEFJLXBvd2VyZWQgcmVjb21tZW5kYXRpb25zJyxcbiAgICBpbWFnZXM6IFsnL2FjbHVlX3RleHRfY2xlYW4ucG5nJ10sXG4gIH0sXG4gIHJvYm90czoge1xuICAgIGluZGV4OiB0cnVlLFxuICAgIGZvbGxvdzogdHJ1ZSxcbiAgICBnb29nbGVCb3Q6IHtcbiAgICAgIGluZGV4OiB0cnVlLFxuICAgICAgZm9sbG93OiB0cnVlLFxuICAgICAgJ21heC12aWRlby1wcmV2aWV3JzogLTEsXG4gICAgICAnbWF4LWltYWdlLXByZXZpZXcnOiAnbGFyZ2UnLFxuICAgICAgJ21heC1zbmlwcGV0JzogLTEsXG4gICAgfSxcbiAgfSxcbn1cblxuZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24gUm9vdExheW91dCh7XG4gIGNoaWxkcmVuLFxufToge1xuICBjaGlsZHJlbjogUmVhY3QuUmVhY3ROb2RlXG59KSB7XG4gIHJldHVybiAoXG4gICAgPGh0bWwgbGFuZz1cImVuLUdCXCIgY2xhc3NOYW1lPXtpbnRlci5jbGFzc05hbWV9PlxuICAgICAgPGJvZHkgY2xhc3NOYW1lPVwiYW50aWFsaWFzZWRcIj5cbiAgICAgICAge2NoaWxkcmVufVxuICAgICAgPC9ib2R5PlxuICAgIDwvaHRtbD5cbiAgKVxufSJdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7RUFvREFBLE9BWUMsV0FBQUEsQ0FBQTtJQUFBO0lBQUFDLGFBQUEsR0FBQUMsQ0FBQTtJQUFBRCxhQUFBLEdBQUFFLENBQUE7V0FadUJDLFVBQUE7O0VBOUNYQyxRQUFRLFdBQUFBLENBQUE7SUFBQTtJQUFBSixhQUFBLEdBQUFDLENBQUE7SUFBQUQsYUFBQSxHQUFBRSxDQUFBO1dBQVJFLFFBQUE7Ozs7Ozs7O2lDQUxTO0FBQUE7QUFBQUosYUFBQSxHQUFBRSxDQUFBO1FBQ2Y7QUFFUCxNQUFNRyxLQUFBO0FBQUE7QUFBQSxDQUFBTCxhQUFBLEdBQUFFLENBQUEsT0FBUSxJQUFBSSxPQUFBLENBQUFDLEtBQUssRUFBQztFQUFFQyxPQUFBLEVBQVMsQ0FBQztBQUFTO0FBRWxDLE1BQU1KLFFBQUE7QUFBQTtBQUFBLENBQUFKLGFBQUEsR0FBQUUsQ0FBQSxRQUFxQjtFQUNoQ08sS0FBQSxFQUFPO0VBQ1BDLFdBQUEsRUFBYTtFQUNiQyxRQUFBLEVBQVUsQ0FBQyxTQUFTLE1BQU0sbUJBQW1CLHdCQUF3QjtFQUNyRUMsT0FBQSxFQUFTLENBQUM7SUFBRUMsSUFBQSxFQUFNO0VBQWEsRUFBRTtFQUNqQ0MsT0FBQSxFQUFTO0VBQ1RDLFNBQUEsRUFBVztFQUNYQyxZQUFBLEVBQWMsSUFBSUMsR0FBQTtFQUFJO0VBQUEsQ0FBQWpCLGFBQUEsR0FBQWtCLENBQUEsVUFBQUMsT0FBQSxDQUFRQyxHQUFHLENBQUNDLG1CQUFtQjtFQUFBO0VBQUEsQ0FBQXJCLGFBQUEsR0FBQWtCLENBQUEsVUFBSTtFQUN6REksVUFBQSxFQUFZO0lBQ1ZDLFNBQUEsRUFBVztFQUNiO0VBQ0FDLFNBQUEsRUFBVztJQUNUZixLQUFBLEVBQU87SUFDUEMsV0FBQSxFQUFhO0lBQ2JlLEdBQUEsRUFBSztJQUNMQyxRQUFBLEVBQVU7SUFDVkMsTUFBQSxFQUFRLENBQ047TUFDRUYsR0FBQSxFQUFLO01BQ0xHLEtBQUEsRUFBTztNQUNQQyxNQUFBLEVBQVE7TUFDUkMsR0FBQSxFQUFLO0lBQ1AsRUFDRDtJQUNEQyxNQUFBLEVBQVE7SUFDUkMsSUFBQSxFQUFNO0VBQ1I7RUFDQUMsT0FBQSxFQUFTO0lBQ1BDLElBQUEsRUFBTTtJQUNOekIsS0FBQSxFQUFPO0lBQ1BDLFdBQUEsRUFBYTtJQUNiaUIsTUFBQSxFQUFRLENBQUM7RUFDWDtFQUNBUSxNQUFBLEVBQVE7SUFDTkMsS0FBQSxFQUFPO0lBQ1BDLE1BQUEsRUFBUTtJQUNSQyxTQUFBLEVBQVc7TUFDVEYsS0FBQSxFQUFPO01BQ1BDLE1BQUEsRUFBUTtNQUNSLHFCQUFxQixDQUFDO01BQ3RCLHFCQUFxQjtNQUNyQixlQUFlLENBQUM7SUFDbEI7RUFDRjtBQUNGO0FBRWUsU0FBU2xDLFdBQVc7RUFDakNvQztBQUFRLENBR1Q7RUFBQTtFQUFBdkMsYUFBQSxHQUFBQyxDQUFBO0VBQUFELGFBQUEsR0FBQUUsQ0FBQTtFQUNDLG9CQUNFLElBQUFzQyxXQUFBLENBQUFDLEdBQUEsRUFBQztJQUFLQyxJQUFBLEVBQUs7SUFBUUMsU0FBQSxFQUFXdEMsS0FBQSxDQUFNc0MsU0FBUztjQUMzQyxpQkFBQUgsV0FBQSxDQUFBQyxHQUFBLEVBQUM7TUFBS0UsU0FBQSxFQUFVO2dCQUNiSjs7O0FBSVQiLCJpZ25vcmVMaXN0IjpbXX0=

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# API Testing Master Script for Aclue Backend
+# API Testing Master Script for aclue Backend
 # Comprehensive automated testing across multiple tools
 
 # Ensure exit on any error

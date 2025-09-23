@@ -2,7 +2,7 @@
 
 ## Business Model Alignment
 
-### **Aclue's Actual Model:**
+### **aclue's Actual Model:**
 - **Amazon affiliate platform** using referral links for revenue
 - **Wishlist creation and sharing** between friends/family
 - **AI recommendations** from Amazon's product catalog
@@ -93,7 +93,7 @@ interface AmazonProductLink {
   amazon_asin?: string;           // Amazon product identifier
   affiliate_url: string;          // Generated affiliate link
   base_amazon_url: string;        // Original Amazon URL
-  affiliate_tag: string;          // Aclue's affiliate tag
+  affiliate_tag: string;          // aclue's affiliate tag
   last_updated: Date;
   price_history?: PricePoint[];   // Price tracking
 }
@@ -269,4 +269,4 @@ export function generateAmazonAffiliateLink(
 4. **Medium Priority** - Wishlist sharing and social features
 5. **Low Priority** - Advanced features (price tracking, wishlist analytics)
 
-This redesign aligns Phase 4 with Aclue's actual business model as an Amazon affiliate platform while maintaining the 75% server components architecture target.
+This redesign aligns Phase 4 with aclue's actual business model as an Amazon affiliate platform while maintaining the 75% server components architecture target.

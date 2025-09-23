@@ -12,7 +12,7 @@ set -euo pipefail
 
 # Script metadata
 readonly SCRIPT_VERSION="1.0.0"
-readonly SCRIPT_NAME="Aclue Master Testing Orchestrator"
+readonly SCRIPT_NAME="aclue Master Testing Orchestrator"
 readonly SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 readonly PROJECT_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 readonly TIMESTAMP="$(date +%Y%m%d_%H%M%S)"
@@ -463,7 +463,7 @@ generate_html_report() {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aclue Testing Report</title>
+    <title>aclue Testing Report</title>
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 20px; background: #f5f7fa; }
         .container { max-width: 1200px; margin: 0 auto; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
@@ -489,7 +489,7 @@ generate_html_report() {
 <body>
     <div class="container">
         <div class="header">
-            <h1>Aclue Testing Report</h1>
+            <h1>aclue Testing Report</h1>
             <div class="meta">
 EOF
 
@@ -592,14 +592,14 @@ send_slack_notification() {
     "attachments": [
         {
             "color": "$color",
-            "title": "Aclue Testing Report - $EXECUTION_MODE Mode",
+            "title": "aclue Testing Report - $EXECUTION_MODE Mode",
             "fields": [
                 {"title": "Total Tests", "value": "$TOTAL_TESTS", "short": true},
                 {"title": "Passed", "value": "$PASSED_TESTS", "short": true},
                 {"title": "Failed", "value": "$FAILED_TESTS", "short": true},
                 {"title": "Success Rate", "value": "${success_rate}%", "short": true}
             ],
-            "footer": "Aclue Testing Orchestrator",
+            "footer": "aclue Testing Orchestrator",
             "ts": $(date +%s)
         }
     ]

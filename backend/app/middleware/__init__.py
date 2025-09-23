@@ -1,5 +1,5 @@
 """
-Aclue Backend Middleware Package
+aclue Backend Middleware Package
 
 Collection of middleware components for FastAPI application enhancement.
 """

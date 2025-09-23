@@ -1,10 +1,10 @@
-# Aclue Deployment Guide
+# aclue Deployment Guide
 
 **Version**: 2.0.0 | **Status**: Production Ready ✅ | **Last Updated**: 21st September 2025
 
 ## Overview
 
-This comprehensive guide covers all deployment scenarios for the Aclue platform, from local development to production environments. Aclue consists of a FastAPI backend and Next.js frontend, designed for scalable deployment across multiple platforms with enterprise-grade security and performance.
+This comprehensive guide covers all deployment scenarios for the aclue platform, from local development to production environments. aclue consists of a FastAPI backend and Next.js frontend, designed for scalable deployment across multiple platforms with enterprise-grade security and performance.
 
 ## Prerequisites
 

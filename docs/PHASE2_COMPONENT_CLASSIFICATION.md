@@ -1,5 +1,5 @@
 # Phase 2: Component Classification Architecture
-## Aclue Platform - Server/Client Component Analysis
+## aclue Platform - Server/Client Component Analysis
 
 ### Document Version
 - **Version**: 1.0.0
@@ -11,7 +11,7 @@
 
 ## Executive Summary
 
-This document provides the comprehensive classification of Aclue platform components following the Next.js Foundation Consensus three-tier architecture. Components are categorised based on server-side rendering requirements, data sensitivity, and performance considerations.
+This document provides the comprehensive classification of aclue platform components following the Next.js Foundation Consensus three-tier architecture. Components are categorised based on server-side rendering requirements, data sensitivity, and performance considerations.
 
 ### Classification Tiers
 - **Tier 1 (85% Server)**: Core business logic, authentication, user data

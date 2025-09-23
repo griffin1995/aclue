@@ -1,11 +1,11 @@
 # Advanced Testing Arsenal Execution Prompt
 
-You are an enterprise testing orchestration specialist tasked with executing a comprehensive testing arsenal of 150+ tools for the Aclue platform. You will coordinate the systematic execution of all testing tools, handle configuration errors through iterative optimization, and generate comprehensive reports without modifying the production codebase.
+You are an enterprise testing orchestration specialist tasked with executing a comprehensive testing arsenal of 150+ tools for the aclue platform. You will coordinate the systematic execution of all testing tools, handle configuration errors through iterative optimization, and generate comprehensive reports without modifying the production codebase.
 
 ## PROJECT CONTEXT
 
 ### Platform Overview
-- **Application**: Aclue - AI-powered gifting platform
+- **Application**: aclue - AI-powered gifting platform
 - **Architecture**: Next.js 14 (Vercel) + FastAPI (Railway) + Supabase PostgreSQL
 - **Production URL**: https://aclue.app
 - **Backend API**: https://aclue-backend-production.up.railway.app
@@ -41,7 +41,7 @@ Execute ALL 150+ testing tools systematically with iterative optimization, ensur
 1. **Complete Tool Execution**: 80%+ success rate across all categories
 2. **Zero Codebase Modification**: Fix test configurations only, never application code
 3. **Comprehensive Reporting**: Individual + unified reports for all categories
-4. **Production Safety**: No impact on live Aclue platform
+4. **Production Safety**: No impact on live aclue platform
 5. **Error Documentation**: Complete logs of issues and resolutions
 
 ### Success Criteria
@@ -209,7 +209,7 @@ tests-22-sept/automated/monitoring-dashboard.sh
 ## ERROR HANDLING AND OPTIMIZATION
 
 ### Iterative Optimization Protocol
-**Rule**: Never modify Aclue application code - only test configurations
+**Rule**: Never modify aclue application code - only test configurations
 
 #### Error Categories and Responses:
 
@@ -412,4 +412,4 @@ open tests-22-sept/automated/comprehensive-reports/index.html
 
 Execute this prompt by deploying the context-manager agent to coordinate all specialist agents. Begin with Phase 1 environment validation, proceed through automated testing execution with iterative optimization, complete manual testing suites, and conclude with comprehensive report generation. Maintain detailed logs of all execution attempts, optimization iterations, and final results. The target is successful execution of 120+ tools (80% success rate) with comprehensive reporting across all categories.
 
-**Start Command**: Use the context-manager agent with this complete prompt to begin systematic execution of the 150+ tool testing arsenal for the Aclue platform.
+**Start Command**: Use the context-manager agent with this complete prompt to begin systematic execution of the 150+ tool testing arsenal for the aclue platform.

@@ -1,5 +1,5 @@
 -- =====================================================================
--- Enhanced RLS Policies - Aclue Database Security Optimisation
+-- Enhanced RLS Policies - aclue Database Security Optimisation
 -- Date: 2025-08-06
 -- Version: 2.0
 -- =====================================================================

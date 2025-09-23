@@ -1,8 +1,8 @@
-# Aclue Platform Automated Security Scanning Suite
+# aclue Platform Automated Security Scanning Suite
 
 ## Overview
 
-This directory contains a comprehensive automated security scanning suite for the Aclue platform, configured for **maximum scan depth** to identify all potential security vulnerabilities.
+This directory contains a comprehensive automated security scanning suite for the aclue platform, configured for **maximum scan depth** to identify all potential security vulnerabilities.
 
 ## Security Tools Deployed
 
@@ -269,7 +269,7 @@ For security issues or questions about these scans:
 
 ## License
 
-This security scanning suite is configured specifically for the Aclue platform.
+This security scanning suite is configured specifically for the aclue platform.
 All tools used are open-source or freely available for security testing.
 
 ---

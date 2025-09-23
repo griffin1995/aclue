@@ -1,7 +1,7 @@
 /**
  * Server Components Library - Export Index
  *
- * This file exports all server components for the Aclue platform.
+ * This file exports all server components for the aclue platform.
  * Server components are rendered on the server and provide performance
  * benefits through reduced client-side JavaScript and faster initial page loads.
  *

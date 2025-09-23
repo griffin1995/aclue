@@ -1,8 +1,8 @@
-# Aclue Deployment Pipeline Documentation
+# aclue Deployment Pipeline Documentation
 
 ## Overview
 
-This document provides comprehensive guidance for the Aclue automated deployment pipeline, including CI/CD integration, Cloudflare automation, and operational procedures.
+This document provides comprehensive guidance for the aclue automated deployment pipeline, including CI/CD integration, Cloudflare automation, and operational procedures.
 
 ## Architecture
 
@@ -423,4 +423,4 @@ cat /tmp/aclue-rollback-*.log
 
 ---
 
-*This documentation is maintained by the Aclue DevOps team. Last updated: $(date -u +%Y-%m-%d)*
+*This documentation is maintained by the aclue DevOps team. Last updated: $(date -u +%Y-%m-%d)*

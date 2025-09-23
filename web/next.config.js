@@ -263,12 +263,12 @@ const nextConfig = {
     if (process.env.NODE_ENV === 'development') {
       return [
         {
-          source: '/api/:path*',                                        // Frontend API calls
-          destination: `${process.env.NEXT_PUBLIC_API_URL}/api/:path*`   // Proxy to backend server
+          source: '/api/v1/:path*',                                     // Only proxy /api/v1/* to backend
+          destination: `${process.env.NEXT_PUBLIC_API_URL}/api/v1/:path*`   // Proxy to backend server
         }
       ];
     }
-    
+
     // No rewrites in production (API calls go directly to backend)
     return [];
   },
@@ -361,8 +361,8 @@ const nextConfig = {
   // STATIC EXPORT CONFIGURATION
   // ===========================================================================
   // Configuration for static deployment (S3, CDN)
-  
-  trailingSlash: true,            // Add trailing slashes for S3 compatibility
+
+  trailingSlash: false,           // Disable trailing slashes for App Router compatibility
   
   
   // ===========================================================================

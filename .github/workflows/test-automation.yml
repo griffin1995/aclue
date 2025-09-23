@@ -1,4 +1,4 @@
-# Aclue Test Automation CI/CD Pipeline - SIMPLIFIED FOR DEPLOYMENT PIPELINE RESTORATION
+# aclue Test Automation CI/CD Pipeline - SIMPLIFIED FOR DEPLOYMENT PIPELINE RESTORATION
 #
 # Streamlined GitHub Actions workflow for automated testing with focus on
 # getting the deployment pipeline working again. This version includes
@@ -18,7 +18,7 @@
 # Business Context:
 # Emergency CI/CD pipeline restoration with essential quality checks.
 
-name: Aclue Test Automation Pipeline (Simplified)
+name: aclue Test Automation Pipeline (Simplified)
 
 on:
   # Trigger on pull requests to main branch
@@ -466,7 +466,7 @@ jobs:
           cat > locustfile.py << EOF
           from locust import HttpUser, task, between
           
-          class AclueUser(HttpUser):
+          class aclueUser(HttpUser):
               wait_time = between(1, 3)
               
               @task(3)
@@ -595,7 +595,7 @@ jobs:
           # Create comprehensive test report
           mkdir -p combined-report
           
-          echo "# Aclue Test Automation Report" > combined-report/README.md
+          echo "# aclue Test Automation Report" > combined-report/README.md
           echo "Generated: $(date)" >> combined-report/README.md
           echo "" >> combined-report/README.md
           

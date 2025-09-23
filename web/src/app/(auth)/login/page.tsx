@@ -34,8 +34,8 @@ interface LoginPageProps {
 }
 
 export const metadata = {
-  title: 'Sign in - Aclue',
-  description: 'Sign in to your Aclue account to access personalised gift recommendations',
+  title: 'Sign in - aclue',
+  description: 'Sign in to your aclue account to access personalised gift recommendations',
 }
 
 export default async function LoginPage({ searchParams }: LoginPageProps) {

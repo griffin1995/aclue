@@ -1,5 +1,5 @@
 /**
- * Enhanced Hook Type Definitions for Aclue Platform
+ * Enhanced Hook Type Definitions for aclue Platform
  *
  * Enterprise-grade type definitions for React hooks that eliminate 'any' types
  * and provide strict typing for state management and side effects.

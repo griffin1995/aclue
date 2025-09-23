@@ -35,8 +35,8 @@ interface RegisterPageProps {
 }
 
 export const metadata = {
-  title: 'Create account - Aclue',
-  description: 'Create your Aclue account to start discovering perfect gifts with AI-powered recommendations',
+  title: 'Create account - aclue',
+  description: 'Create your aclue account to start discovering perfect gifts with AI-powered recommendations',
 }
 
 export default async function RegisterPage({ searchParams }: RegisterPageProps) {

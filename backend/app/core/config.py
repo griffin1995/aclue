@@ -1,14 +1,14 @@
 """
-Aclue Backend Configuration
+aclue Backend Configuration
 
-Centralised configuration management for the Aclue API backend.
+Centralised configuration management for the aclue API backend.
 Handles environment variables, feature flags, and application settings
 for all backend services including authentication, recommendations,
 affiliate tracking, and external integrations.
 
 REBRANDING NOTE (August 2025):
 This configuration file was updated during the comprehensive rebranding
-from Aclue/aclue to Aclue. All service names, bucket names, and
+from aclue/aclue to aclue. All service names, bucket names, and
 project identifiers have been updated to reflect the new brand identity.
 
 Key Features:
@@ -30,7 +30,7 @@ Security:
 
 Branding Consistency:
   - All service names use "aclue" prefix (lowercase for technical identifiers)
-  - API documentation uses "Aclue API" (proper case for user-facing content)
+  - API documentation uses "aclue API" (proper case for user-facing content)
   - Domain references point to aclue.app (primary) and aclue.co.uk (secondary)
 
 Usage:
@@ -79,7 +79,7 @@ class Settings(BaseSettings):
     # ===========================================================================
     # Core application metadata and environment settings
     
-    PROJECT_NAME: str = "aclue API"           # Application name for logging/docs (rebranded from Aclue/aclue)
+    PROJECT_NAME: str = "aclue API"           # Application name for logging/docs (rebranded from aclue/aclue)
     VERSION: str = "1.0.0"                       # API version for client compatibility
     ENVIRONMENT: str = "development"              # Runtime environment (dev/staging/prod)
     # SECURITY CRITICAL: MUST be False in production to prevent information leakage

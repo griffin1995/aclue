@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-Aclue Platform - Comprehensive Configuration Verification Suite
+aclue Platform - Comprehensive Configuration Verification Suite
 
 This test suite provides comprehensive verification of all environment variable
-configurations across the Aclue platform stack. It validates configuration
+configurations across the aclue platform stack. It validates configuration
 completeness, synchronisation, security settings, and integration readiness.
 
 Features:
@@ -159,7 +159,7 @@ class ConfigurationVerifier:
             with open(config_file, 'r') as f:
                 content = f.read()
 
-            # Check for Aclue branding consistency
+            # Check for aclue branding consistency
             aclue_references = content.count('aclue')
             giftsync_references = content.count('giftsync') + content.count('GiftSync')
             prznt_references = content.count('prznt')
@@ -176,7 +176,7 @@ class ConfigurationVerifier:
                 self.add_result(
                     "backend_config_branding",
                     "PASS",
-                    f"Proper Aclue branding found: {aclue_references} references"
+                    f"Proper aclue branding found: {aclue_references} references"
                 )
 
             # Check security configuration
@@ -243,7 +243,7 @@ class ConfigurationVerifier:
                         "All essential security headers configured"
                     )
 
-                # Check for Aclue domain configuration
+                # Check for aclue domain configuration
                 if 'aclue.app' in content:
                     self.add_result(
                         "frontend_domain_config",
@@ -793,7 +793,7 @@ class ConfigurationVerifier:
 def main():
     """Main execution function"""
     parser = argparse.ArgumentParser(
-        description="Aclue Platform Configuration Verification Suite"
+        description="aclue Platform Configuration Verification Suite"
     )
     parser.add_argument(
         "--environment",

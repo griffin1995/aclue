@@ -35,7 +35,7 @@ export default function MarketingLayout({ children }: MarketingLayoutProps) {
             <Link href="/" className="flex items-center gap-3">
               <Image
                 src="/aclue_text_clean.png"
-                alt="Aclue - AI-powered gifting platform"
+                alt="aclue - AI-powered gifting platform"
                 width={120}
                 height={32}
                 className="h-8 w-auto object-contain"
@@ -110,7 +110,7 @@ export default function MarketingLayout({ children }: MarketingLayoutProps) {
               <div className="flex items-center gap-3 mb-4">
                 <Image
                   src="/aclue_text_clean.png"
-                  alt="Aclue Logo"
+                  alt="aclue Logo"
                   width={120}
                   height={32}
                   className="h-8 w-auto object-contain brightness-0 invert"
@@ -216,7 +216,7 @@ export default function MarketingLayout({ children }: MarketingLayoutProps) {
 
           {/* Copyright */}
           <div className="border-t border-gray-800 pt-8 text-center text-gray-400">
-            <p>&copy; 2025 Aclue Ltd. All rights reserved.</p>
+            <p>&copy; 2025 aclue Ltd. All rights reserved.</p>
           </div>
         </div>
       </footer>
@@ -228,7 +228,7 @@ export default function MarketingLayout({ children }: MarketingLayoutProps) {
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'Organization',
-            name: 'Aclue',
+            name: 'aclue',
             description: 'AI-powered gifting platform that transforms how gifts are chosen',
             url: 'https://aclue.app',
             logo: 'https://aclue.app/aclue_text_clean.png',
@@ -254,8 +254,8 @@ export default function MarketingLayout({ children }: MarketingLayoutProps) {
  */
 export const metadata: Metadata = {
   title: {
-    template: '%s | Aclue - AI-Powered Gifting Platform',
-    default: 'Aclue - AI-Powered Gifting Platform'
+    template: '%s | aclue - AI-Powered Gifting Platform',
+    default: 'aclue - AI-Powered Gifting Platform'
   },
   description: 'Transform how gifts are chosen with AI-powered recommendations. Swipe through products, train our AI, and discover perfect gifts every time.',
   keywords: [
@@ -267,9 +267,9 @@ export const metadata: Metadata = {
     'intelligent gift discovery',
     'gift ideas AI'
   ],
-  authors: [{ name: 'Aclue Ltd' }],
-  creator: 'Aclue Ltd',
-  publisher: 'Aclue Ltd',
+  authors: [{ name: 'aclue Ltd' }],
+  creator: 'aclue Ltd',
+  publisher: 'aclue Ltd',
   robots: {
     index: true,
     follow: true,
@@ -285,21 +285,21 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_GB',
     url: 'https://aclue.app',
-    siteName: 'Aclue',
-    title: 'Aclue - AI-Powered Gifting Platform',
+    siteName: 'aclue',
+    title: 'aclue - AI-Powered Gifting Platform',
     description: 'Transform how gifts are chosen with AI-powered recommendations',
     images: [
       {
         url: '/aclue_text_clean.png',
         width: 1200,
         height: 630,
-        alt: 'Aclue - AI-Powered Gifting Platform',
+        alt: 'aclue - AI-Powered Gifting Platform',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Aclue - AI-Powered Gifting Platform',
+    title: 'aclue - AI-Powered Gifting Platform',
     description: 'Transform how gifts are chosen with AI-powered recommendations',
     images: ['/aclue_text_clean.png'],
     creator: '@aclue',

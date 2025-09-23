@@ -1,8 +1,8 @@
 /**
- * Aclue Frontend Jest Configuration
+ * aclue Frontend Jest Configuration
  * 
  * Comprehensive Jest configuration for React component testing, integration testing,
- * and unit testing of the Aclue web application. Configured for Next.js with TypeScript,
+ * and unit testing of the aclue web application. Configured for Next.js with TypeScript,
  * React Testing Library, and proper mock handling.
  * 
  * Testing Architecture:

@@ -1,4 +1,4 @@
-# 📚 Aclue - Master Documentation Index
+# 📚 aclue - Master Documentation Index
 **Enterprise Documentation Directory**
 
 > **Version**: 2.0.0
@@ -210,8 +210,8 @@ Documentation Hierarchy:
 
 ---
 
-**This documentation represents the complete technical knowledge base for the Aclue platform (v2.0.0). The platform is PRODUCTION READY with enterprise-grade security (98% score), comprehensive features, and 94.8% compliance rating. All systems are operational and optimised for immediate deployment.**
+**This documentation represents the complete technical knowledge base for the aclue platform (v2.0.0). The platform is PRODUCTION READY with enterprise-grade security (98% score), comprehensive features, and 94.8% compliance rating. All systems are operational and optimised for immediate deployment.**
 
 ---
 
-**Copyright © 2025 Aclue. All rights reserved.**
+**Copyright © 2025 aclue. All rights reserved.**

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Aclue Production Deployment Verification Script
+# aclue Production Deployment Verification Script
 # Validates that all deployment components are functioning correctly
 
 set -e
@@ -17,7 +17,7 @@ BACKEND_URL="https://aclue-backend-production.up.railway.app"
 FRONTEND_URL="https://aclue.app"
 TIMEOUT=30
 
-echo -e "${BLUE}🚀 Aclue Production Deployment Verification${NC}"
+echo -e "${BLUE}🚀 aclue Production Deployment Verification${NC}"
 echo "=================================================="
 echo ""
 

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { z } from 'zod'
-import WelcomeEmail from '@/components/emails/WelcomeEmail'
+// import WelcomeEmail from '@/components/emails/WelcomeEmail'
 
 /**
  * Newsletter Signup API Route - Direct Resend Integration
@@ -11,7 +11,7 @@ import WelcomeEmail from '@/components/emails/WelcomeEmail'
  * 
  * Features:
  * - Direct Resend SDK integration
- * - React email templates with Aclue branding
+ * - React email templates with aclue branding
  * - Input validation with Zod
  * - Comprehensive error handling
  * - Source tracking for analytics
@@ -86,22 +86,22 @@ export async function POST(request: NextRequest) {
 
     // Send welcome email using Resend
     const { data: emailData, error: emailError } = await resend.emails.send({
-      from: 'Aclue <noreply@aclue.app>',
+      from: 'aclue <noreply@aclue.app>',
       to: [email],
-      subject: 'Welcome to Aclue - AI-Powered Gift Discovery! 🎁',
-      react: WelcomeEmail({ email, source }),
+      subject: 'Welcome to aclue - AI-Powered Gift Discovery! 🎁',
+      // react: WelcomeEmail({ email, source }),
       // Also provide HTML fallback for email clients that don't support React
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <div style="background: linear-gradient(135deg, #3b82f6, #8b5cf6); color: white; padding: 30px; text-align: center;">
-            <h2>Welcome to Aclue! 🚀</h2>
+            <h2>Welcome to aclue! 🚀</h2>
             <p>AI-Powered Gift Discovery</p>
           </div>
           <div style="padding: 30px; background: #f8fafc;">
             <h3>Thank you for joining our community!</h3>
             <p>You're among the first to experience how AI can revolutionise gift-giving.</p>
             <p>We'll keep you updated on our progress and notify you when our AI is ready to transform your gift-giving experience.</p>
-            <p>Excited to have you on board,<br>The Aclue Team</p>
+            <p>Excited to have you on board,<br>The aclue Team</p>
           </div>
         </div>
       `,
@@ -129,16 +129,16 @@ export async function POST(request: NextRequest) {
     // Send admin notification (optional)
     try {
       const { error: adminEmailError } = await resend.emails.send({
-        from: 'Aclue <noreply@aclue.app>',
+        from: 'aclue <noreply@aclue.app>',
         to: ['contact@aclue.app'],
         subject: `New Newsletter Signup: ${email}`,
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
             <div style="background: #1f2937; color: white; padding: 20px; text-align: center;">
-              <h2>🎉 New Newsletter Signup - Aclue</h2>
+              <h2>🎉 New Newsletter Signup - aclue</h2>
             </div>
             <div style="padding: 20px; background: #f9fafb;">
-              <p>A new user has signed up for the Aclue newsletter!</p>
+              <p>A new user has signed up for the aclue newsletter!</p>
               <div style="background: white; padding: 15px; border-left: 4px solid #3b82f6; margin: 15px 0;">
                 <p><strong>Email:</strong> ${email}</p>
                 <p><strong>Source:</strong> ${source}</p>

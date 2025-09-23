@@ -1,5 +1,5 @@
 /**
- * Aclue Load Testing Configuration
+ * aclue Load Testing Configuration
  *
  * Comprehensive k6 load testing script for performance validation and stress testing.
  * Includes scenarios for authentication, API endpoints, and user journey simulation.

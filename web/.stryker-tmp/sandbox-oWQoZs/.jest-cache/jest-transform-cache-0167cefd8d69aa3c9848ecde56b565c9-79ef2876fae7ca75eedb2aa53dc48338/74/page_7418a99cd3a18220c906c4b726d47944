@@ -1,0 +1,670 @@
+2c5e7aa7d5e2a258e3f0972f9ddc174d
+"use strict";
+
+/* istanbul ignore next */
+function cov_1qmhklb610() {
+  var path = "/home/jack/Documents/aclue-preprod/web/src/app/(auth)/register/page.tsx";
+  var hash = "212089e187a7ddf752e52e8587cc448e937370db";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/home/jack/Documents/aclue-preprod/web/src/app/(auth)/register/page.tsx",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 4,
+          column: 3
+        }
+      },
+      "1": {
+        start: {
+          line: 6,
+          column: 4
+        },
+        end: {
+          line: 9,
+          column: 7
+        }
+      },
+      "2": {
+        start: {
+          line: 6,
+          column: 24
+        },
+        end: {
+          line: 9,
+          column: 7
+        }
+      },
+      "3": {
+        start: {
+          line: 11,
+          column: 0
+        },
+        end: {
+          line: 21,
+          column: 3
+        }
+      },
+      "4": {
+        start: {
+          line: 13,
+          column: 8
+        },
+        end: {
+          line: 13,
+          column: 28
+        }
+      },
+      "5": {
+        start: {
+          line: 16,
+          column: 8
+        },
+        end: {
+          line: 16,
+          column: 23
+        }
+      },
+      "6": {
+        start: {
+          line: 19,
+          column: 8
+        },
+        end: {
+          line: 19,
+          column: 24
+        }
+      },
+      "7": {
+        start: {
+          line: 22,
+          column: 20
+        },
+        end: {
+          line: 22,
+          column: 48
+        }
+      },
+      "8": {
+        start: {
+          line: 23,
+          column: 29
+        },
+        end: {
+          line: 23,
+          column: 71
+        }
+      },
+      "9": {
+        start: {
+          line: 24,
+          column: 20
+        },
+        end: {
+          line: 24,
+          column: 46
+        }
+      },
+      "10": {
+        start: {
+          line: 25,
+          column: 14
+        },
+        end: {
+          line: 25,
+          column: 43
+        }
+      },
+      "11": {
+        start: {
+          line: 26,
+          column: 22
+        },
+        end: {
+          line: 26,
+          column: 70
+        }
+      },
+      "12": {
+        start: {
+          line: 28,
+          column: 4
+        },
+        end: {
+          line: 30,
+          column: 6
+        }
+      },
+      "13": {
+        start: {
+          line: 32,
+          column: 16
+        },
+        end: {
+          line: 32,
+          column: 31
+        }
+      },
+      "14": {
+        start: {
+          line: 33,
+          column: 17
+        },
+        end: {
+          line: 36,
+          column: 1
+        }
+      },
+      "15": {
+        start: {
+          line: 39,
+          column: 24
+        },
+        end: {
+          line: 39,
+          column: 57
+        }
+      },
+      "16": {
+        start: {
+          line: 40,
+          column: 4
+        },
+        end: {
+          line: 43,
+          column: 5
+        }
+      },
+      "17": {
+        start: {
+          line: 41,
+          column: 27
+        },
+        end: {
+          line: 41,
+          column: 64
+        }
+      },
+      "18": {
+        start: {
+          line: 42,
+          column: 8
+        },
+        end: {
+          line: 42,
+          column: 46
+        }
+      },
+      "19": {
+        start: {
+          line: 44,
+          column: 4
+        },
+        end: {
+          line: 51,
+          column: 7
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "_export",
+        decl: {
+          start: {
+            line: 5,
+            column: 9
+          },
+          end: {
+            line: 5,
+            column: 16
+          }
+        },
+        loc: {
+          start: {
+            line: 5,
+            column: 30
+          },
+          end: {
+            line: 10,
+            column: 1
+          }
+        },
+        line: 5
+      },
+      "1": {
+        name: "(anonymous_1)",
+        decl: {
+          start: {
+            line: 12,
+            column: 13
+          },
+          end: {
+            line: 12,
+            column: 14
+          }
+        },
+        loc: {
+          start: {
+            line: 12,
+            column: 24
+          },
+          end: {
+            line: 14,
+            column: 5
+          }
+        },
+        line: 12
+      },
+      "2": {
+        name: "(anonymous_2)",
+        decl: {
+          start: {
+            line: 15,
+            column: 13
+          },
+          end: {
+            line: 15,
+            column: 14
+          }
+        },
+        loc: {
+          start: {
+            line: 15,
+            column: 24
+          },
+          end: {
+            line: 17,
+            column: 5
+          }
+        },
+        line: 15
+      },
+      "3": {
+        name: "(anonymous_3)",
+        decl: {
+          start: {
+            line: 18,
+            column: 14
+          },
+          end: {
+            line: 18,
+            column: 15
+          }
+        },
+        loc: {
+          start: {
+            line: 18,
+            column: 25
+          },
+          end: {
+            line: 20,
+            column: 5
+          }
+        },
+        line: 18
+      },
+      "4": {
+        name: "_interop_require_default",
+        decl: {
+          start: {
+            line: 27,
+            column: 9
+          },
+          end: {
+            line: 27,
+            column: 33
+          }
+        },
+        loc: {
+          start: {
+            line: 27,
+            column: 39
+          },
+          end: {
+            line: 31,
+            column: 1
+          }
+        },
+        line: 27
+      },
+      "5": {
+        name: "RegisterPage",
+        decl: {
+          start: {
+            line: 37,
+            column: 15
+          },
+          end: {
+            line: 37,
+            column: 27
+          }
+        },
+        loc: {
+          start: {
+            line: 37,
+            column: 46
+          },
+          end: {
+            line: 52,
+            column: 1
+          }
+        },
+        line: 37
+      }
+    },
+    branchMap: {
+      "0": {
+        loc: {
+          start: {
+            line: 28,
+            column: 11
+          },
+          end: {
+            line: 30,
+            column: 5
+          }
+        },
+        type: "cond-expr",
+        locations: [{
+          start: {
+            line: 28,
+            column: 35
+          },
+          end: {
+            line: 28,
+            column: 38
+          }
+        }, {
+          start: {
+            line: 28,
+            column: 41
+          },
+          end: {
+            line: 30,
+            column: 5
+          }
+        }],
+        line: 28
+      },
+      "1": {
+        loc: {
+          start: {
+            line: 28,
+            column: 11
+          },
+          end: {
+            line: 28,
+            column: 32
+          }
+        },
+        type: "binary-expr",
+        locations: [{
+          start: {
+            line: 28,
+            column: 11
+          },
+          end: {
+            line: 28,
+            column: 14
+          }
+        }, {
+          start: {
+            line: 28,
+            column: 18
+          },
+          end: {
+            line: 28,
+            column: 32
+          }
+        }],
+        line: 28
+      },
+      "2": {
+        loc: {
+          start: {
+            line: 40,
+            column: 4
+          },
+          end: {
+            line: 43,
+            column: 5
+          }
+        },
+        type: "if",
+        locations: [{
+          start: {
+            line: 40,
+            column: 4
+          },
+          end: {
+            line: 43,
+            column: 5
+          }
+        }, {
+          start: {
+            line: undefined,
+            column: undefined
+          },
+          end: {
+            line: undefined,
+            column: undefined
+          }
+        }],
+        line: 40
+      },
+      "3": {
+        loc: {
+          start: {
+            line: 41,
+            column: 27
+          },
+          end: {
+            line: 41,
+            column: 64
+          }
+        },
+        type: "binary-expr",
+        locations: [{
+          start: {
+            line: 41,
+            column: 27
+          },
+          end: {
+            line: 41,
+            column: 48
+          }
+        }, {
+          start: {
+            line: 41,
+            column: 52
+          },
+          end: {
+            line: 41,
+            column: 64
+          }
+        }],
+        line: 41
+      }
+    },
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0,
+      "10": 0,
+      "11": 0,
+      "12": 0,
+      "13": 0,
+      "14": 0,
+      "15": 0,
+      "16": 0,
+      "17": 0,
+      "18": 0,
+      "19": 0
+    },
+    f: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0
+    },
+    b: {
+      "0": [0, 0],
+      "1": [0, 0],
+      "2": [0, 0],
+      "3": [0, 0]
+    },
+    inputSourceMap: {
+      version: 3,
+      sources: ["/home/jack/Documents/aclue-preprod/web/src/app/(auth)/register/page.tsx"],
+      sourcesContent: ["import React from 'react'\nimport { redirect } from 'next/navigation'\nimport { registerAction, getCurrentUser } from '@/app/actions/auth'\nimport { RegisterForm } from '@/components/auth/RegisterForm'\n\n// Force dynamic rendering for authentication check\nexport const dynamic = 'force-dynamic'\n\n/**\n * Enhanced Registration Page - App Router Implementation\n *\n * Server-rendered registration page with comprehensive validation and security.\n * Part of Phase 3: Tier 1 Migration (85% server components).\n *\n * Features:\n * - Server-side rendering for optimal performance\n * - Multi-step form with server actions\n * - Comprehensive validation and error handling\n * - Enhanced security with minimal client-side JavaScript\n * - Full compatibility with existing Supabase auth system\n *\n * Security Improvements:\n * - Server-side form validation with Zod schemas\n * - Password strength validation\n * - HTTP-only cookie authentication\n * - CSRF protection\n * - Automatic session validation\n */\n\ninterface RegisterPageProps {\n  searchParams: {\n    redirect?: string\n    error?: string\n  }\n}\n\nexport const metadata = {\n  title: 'Create account - aclue',\n  description: 'Create your aclue account to start discovering perfect gifts with AI-powered recommendations',\n}\n\nexport default async function RegisterPage({ searchParams }: RegisterPageProps) {\n  // Server-side authentication check - redirect if already authenticated\n  const currentUser = await getCurrentUser()\n\n  if (currentUser) {\n    const redirectTo = searchParams.redirect || '/dashboard'\n    redirect(redirectTo)\n  }\n\n  return (\n    <div className=\"min-h-screen bg-gradient-to-br from-primary-50 via-white to-secondary-50 flex flex-col\">\n      <RegisterForm\n        registerAction={registerAction}\n        redirectUrl={searchParams.redirect}\n        error={searchParams.error}\n      />\n    </div>\n  )\n}"],
+      names: ["RegisterPage", "dynamic", "metadata", "title", "description", "searchParams", "currentUser", "getCurrentUser", "redirectTo", "redirect", "div", "className", "RegisterForm", "registerAction", "redirectUrl", "error"],
+      mappings: ";;;;;;;;;;;IAyCA,OAkBC;eAlB6BA;;IAnCjBC,OAAO;eAAPA;;IA8BAC,QAAQ;eAARA;;;;8DApCK;4BACO;sBACsB;8BAClB;;;;;;AAGtB,MAAMD,UAAU;AA8BhB,MAAMC,WAAW;IACtBC,OAAO;IACPC,aAAa;AACf;AAEe,eAAeJ,aAAa,EAAEK,YAAY,EAAqB;IAC5E,uEAAuE;IACvE,MAAMC,cAAc,MAAMC,IAAAA,oBAAc;IAExC,IAAID,aAAa;QACf,MAAME,aAAaH,aAAaI,QAAQ,IAAI;QAC5CA,IAAAA,oBAAQ,EAACD;IACX;IAEA,qBACE,qBAACE;QAAIC,WAAU;kBACb,cAAA,qBAACC,0BAAY;YACXC,gBAAgBA,oBAAc;YAC9BC,aAAaT,aAAaI,QAAQ;YAClCM,OAAOV,aAAaU,KAAK;;;AAIjC"
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "212089e187a7ddf752e52e8587cc448e937370db"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_1qmhklb610 = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_1qmhklb610();
+cov_1qmhklb610().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+function _export(target, all) {
+  /* istanbul ignore next */
+  cov_1qmhklb610().f[0]++;
+  cov_1qmhklb610().s[1]++;
+  for (var name in all) {
+    /* istanbul ignore next */
+    cov_1qmhklb610().s[2]++;
+    Object.defineProperty(target, name, {
+      enumerable: true,
+      get: all[name]
+    });
+  }
+}
+/* istanbul ignore next */
+cov_1qmhklb610().s[3]++;
+_export(exports, {
+  default: function () {
+    /* istanbul ignore next */
+    cov_1qmhklb610().f[1]++;
+    cov_1qmhklb610().s[4]++;
+    return RegisterPage;
+  },
+  dynamic: function () {
+    /* istanbul ignore next */
+    cov_1qmhklb610().f[2]++;
+    cov_1qmhklb610().s[5]++;
+    return dynamic;
+  },
+  metadata: function () {
+    /* istanbul ignore next */
+    cov_1qmhklb610().f[3]++;
+    cov_1qmhklb610().s[6]++;
+    return metadata;
+  }
+});
+const _jsxruntime =
+/* istanbul ignore next */
+(cov_1qmhklb610().s[7]++, require("react/jsx-runtime"));
+const _react =
+/* istanbul ignore next */
+(/*#__PURE__*/cov_1qmhklb610().s[8]++, _interop_require_default(require("react")));
+const _navigation =
+/* istanbul ignore next */
+(cov_1qmhklb610().s[9]++, require("next/navigation"));
+const _auth =
+/* istanbul ignore next */
+(cov_1qmhklb610().s[10]++, require("../../actions/auth"));
+const _RegisterForm =
+/* istanbul ignore next */
+(cov_1qmhklb610().s[11]++, require("../../../components/auth/RegisterForm"));
+function _interop_require_default(obj) {
+  /* istanbul ignore next */
+  cov_1qmhklb610().f[4]++;
+  cov_1qmhklb610().s[12]++;
+  return /* istanbul ignore next */(cov_1qmhklb610().b[1][0]++, obj) &&
+  /* istanbul ignore next */
+  (cov_1qmhklb610().b[1][1]++, obj.__esModule) ?
+  /* istanbul ignore next */
+  (cov_1qmhklb610().b[0][0]++, obj) :
+  /* istanbul ignore next */
+  (cov_1qmhklb610().b[0][1]++, {
+    default: obj
+  });
+}
+const dynamic =
+/* istanbul ignore next */
+(cov_1qmhklb610().s[13]++, "force-dynamic");
+const metadata =
+/* istanbul ignore next */
+(cov_1qmhklb610().s[14]++, {
+  title: "Create account - aclue",
+  description: "Create your aclue account to start discovering perfect gifts with AI-powered recommendations"
+});
+async function RegisterPage({
+  searchParams
+}) {
+  /* istanbul ignore next */
+  cov_1qmhklb610().f[5]++;
+  // Server-side authentication check - redirect if already authenticated
+  const currentUser =
+  /* istanbul ignore next */
+  (cov_1qmhklb610().s[15]++, await (0, _auth.getCurrentUser)());
+  /* istanbul ignore next */
+  cov_1qmhklb610().s[16]++;
+  if (currentUser) {
+    /* istanbul ignore next */
+    cov_1qmhklb610().b[2][0]++;
+    const redirectTo =
+    /* istanbul ignore next */
+    (cov_1qmhklb610().s[17]++,
+    /* istanbul ignore next */
+    (cov_1qmhklb610().b[3][0]++, searchParams.redirect) ||
+    /* istanbul ignore next */
+    (cov_1qmhklb610().b[3][1]++, "/dashboard"));
+    /* istanbul ignore next */
+    cov_1qmhklb610().s[18]++;
+    (0, _navigation.redirect)(redirectTo);
+  } else
+  /* istanbul ignore next */
+  {
+    cov_1qmhklb610().b[2][1]++;
+  }
+  cov_1qmhklb610().s[19]++;
+  return /*#__PURE__*/(0, _jsxruntime.jsx)("div", {
+    className: "min-h-screen bg-gradient-to-br from-primary-50 via-white to-secondary-50 flex flex-col",
+    children: /*#__PURE__*/(0, _jsxruntime.jsx)(_RegisterForm.RegisterForm, {
+      registerAction: _auth.registerAction,
+      redirectUrl: searchParams.redirect,
+      error: searchParams.error
+    })
+  });
+}
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJkZWZhdWx0IiwiY292XzFxbWhrbGI2MTAiLCJmIiwicyIsIlJlZ2lzdGVyUGFnZSIsImR5bmFtaWMiLCJtZXRhZGF0YSIsInRpdGxlIiwiZGVzY3JpcHRpb24iLCJzZWFyY2hQYXJhbXMiLCJjdXJyZW50VXNlciIsIl9hdXRoIiwiZ2V0Q3VycmVudFVzZXIiLCJiIiwicmVkaXJlY3RUbyIsInJlZGlyZWN0IiwiX25hdmlnYXRpb24iLCJfanN4cnVudGltZSIsImpzeCIsImNsYXNzTmFtZSIsIl9SZWdpc3RlckZvcm0iLCJSZWdpc3RlckZvcm0iLCJyZWdpc3RlckFjdGlvbiIsInJlZGlyZWN0VXJsIiwiZXJyb3IiXSwic291cmNlcyI6WyIvaG9tZS9qYWNrL0RvY3VtZW50cy9hY2x1ZS1wcmVwcm9kL3dlYi9zcmMvYXBwLyhhdXRoKS9yZWdpc3Rlci9wYWdlLnRzeCJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgUmVhY3QgZnJvbSAncmVhY3QnXG5pbXBvcnQgeyByZWRpcmVjdCB9IGZyb20gJ25leHQvbmF2aWdhdGlvbidcbmltcG9ydCB7IHJlZ2lzdGVyQWN0aW9uLCBnZXRDdXJyZW50VXNlciB9IGZyb20gJ0AvYXBwL2FjdGlvbnMvYXV0aCdcbmltcG9ydCB7IFJlZ2lzdGVyRm9ybSB9IGZyb20gJ0AvY29tcG9uZW50cy9hdXRoL1JlZ2lzdGVyRm9ybSdcblxuLy8gRm9yY2UgZHluYW1pYyByZW5kZXJpbmcgZm9yIGF1dGhlbnRpY2F0aW9uIGNoZWNrXG5leHBvcnQgY29uc3QgZHluYW1pYyA9ICdmb3JjZS1keW5hbWljJ1xuXG4vKipcbiAqIEVuaGFuY2VkIFJlZ2lzdHJhdGlvbiBQYWdlIC0gQXBwIFJvdXRlciBJbXBsZW1lbnRhdGlvblxuICpcbiAqIFNlcnZlci1yZW5kZXJlZCByZWdpc3RyYXRpb24gcGFnZSB3aXRoIGNvbXByZWhlbnNpdmUgdmFsaWRhdGlvbiBhbmQgc2VjdXJpdHkuXG4gKiBQYXJ0IG9mIFBoYXNlIDM6IFRpZXIgMSBNaWdyYXRpb24gKDg1JSBzZXJ2ZXIgY29tcG9uZW50cykuXG4gKlxuICogRmVhdHVyZXM6XG4gKiAtIFNlcnZlci1zaWRlIHJlbmRlcmluZyBmb3Igb3B0aW1hbCBwZXJmb3JtYW5jZVxuICogLSBNdWx0aS1zdGVwIGZvcm0gd2l0aCBzZXJ2ZXIgYWN0aW9uc1xuICogLSBDb21wcmVoZW5zaXZlIHZhbGlkYXRpb24gYW5kIGVycm9yIGhhbmRsaW5nXG4gKiAtIEVuaGFuY2VkIHNlY3VyaXR5IHdpdGggbWluaW1hbCBjbGllbnQtc2lkZSBKYXZhU2NyaXB0XG4gKiAtIEZ1bGwgY29tcGF0aWJpbGl0eSB3aXRoIGV4aXN0aW5nIFN1cGFiYXNlIGF1dGggc3lzdGVtXG4gKlxuICogU2VjdXJpdHkgSW1wcm92ZW1lbnRzOlxuICogLSBTZXJ2ZXItc2lkZSBmb3JtIHZhbGlkYXRpb24gd2l0aCBab2Qgc2NoZW1hc1xuICogLSBQYXNzd29yZCBzdHJlbmd0aCB2YWxpZGF0aW9uXG4gKiAtIEhUVFAtb25seSBjb29raWUgYXV0aGVudGljYXRpb25cbiAqIC0gQ1NSRiBwcm90ZWN0aW9uXG4gKiAtIEF1dG9tYXRpYyBzZXNzaW9uIHZhbGlkYXRpb25cbiAqL1xuXG5pbnRlcmZhY2UgUmVnaXN0ZXJQYWdlUHJvcHMge1xuICBzZWFyY2hQYXJhbXM6IHtcbiAgICByZWRpcmVjdD86IHN0cmluZ1xuICAgIGVycm9yPzogc3RyaW5nXG4gIH1cbn1cblxuZXhwb3J0IGNvbnN0IG1ldGFkYXRhID0ge1xuICB0aXRsZTogJ0NyZWF0ZSBhY2NvdW50IC0gQWNsdWUnLFxuICBkZXNjcmlwdGlvbjogJ0NyZWF0ZSB5b3VyIEFjbHVlIGFjY291bnQgdG8gc3RhcnQgZGlzY292ZXJpbmcgcGVyZmVjdCBnaWZ0cyB3aXRoIEFJLXBvd2VyZWQgcmVjb21tZW5kYXRpb25zJyxcbn1cblxuZXhwb3J0IGRlZmF1bHQgYXN5bmMgZnVuY3Rpb24gUmVnaXN0ZXJQYWdlKHsgc2VhcmNoUGFyYW1zIH06IFJlZ2lzdGVyUGFnZVByb3BzKSB7XG4gIC8vIFNlcnZlci1zaWRlIGF1dGhlbnRpY2F0aW9uIGNoZWNrIC0gcmVkaXJlY3QgaWYgYWxyZWFkeSBhdXRoZW50aWNhdGVkXG4gIGNvbnN0IGN1cnJlbnRVc2VyID0gYXdhaXQgZ2V0Q3VycmVudFVzZXIoKVxuXG4gIGlmIChjdXJyZW50VXNlcikge1xuICAgIGNvbnN0IHJlZGlyZWN0VG8gPSBzZWFyY2hQYXJhbXMucmVkaXJlY3QgfHwgJy9kYXNoYm9hcmQnXG4gICAgcmVkaXJlY3QocmVkaXJlY3RUbylcbiAgfVxuXG4gIHJldHVybiAoXG4gICAgPGRpdiBjbGFzc05hbWU9XCJtaW4taC1zY3JlZW4gYmctZ3JhZGllbnQtdG8tYnIgZnJvbS1wcmltYXJ5LTUwIHZpYS13aGl0ZSB0by1zZWNvbmRhcnktNTAgZmxleCBmbGV4LWNvbFwiPlxuICAgICAgPFJlZ2lzdGVyRm9ybVxuICAgICAgICByZWdpc3RlckFjdGlvbj17cmVnaXN0ZXJBY3Rpb259XG4gICAgICAgIHJlZGlyZWN0VXJsPXtzZWFyY2hQYXJhbXMucmVkaXJlY3R9XG4gICAgICAgIGVycm9yPXtzZWFyY2hQYXJhbXMuZXJyb3J9XG4gICAgICAvPlxuICAgIDwvZGl2PlxuICApXG59Il0sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztFQXlDQUEsT0FrQkMsV0FBQUEsQ0FBQTtJQUFBO0lBQUFDLGNBQUEsR0FBQUMsQ0FBQTtJQUFBRCxjQUFBLEdBQUFFLENBQUE7V0FsQjZCQyxZQUFBOztFQW5DakJDLE9BQU8sV0FBQUEsQ0FBQTtJQUFBO0lBQUFKLGNBQUEsR0FBQUMsQ0FBQTtJQUFBRCxjQUFBLEdBQUFFLENBQUE7V0FBUEUsT0FBQTs7RUE4QkFDLFFBQVEsV0FBQUEsQ0FBQTtJQUFBO0lBQUFMLGNBQUEsR0FBQUMsQ0FBQTtJQUFBRCxjQUFBLEdBQUFFLENBQUE7V0FBUkcsUUFBQTs7Ozs7Ozs7d0VBcENLOzs7a0NBQ087OzttQ0FDc0I7OzttQ0FDbEI7Ozs7Ozs7Ozs7Ozs7OztBQUd0QixNQUFNRCxPQUFBO0FBQUE7QUFBQSxDQUFBSixjQUFBLEdBQUFFLENBQUEsUUFBVTtBQThCaEIsTUFBTUcsUUFBQTtBQUFBO0FBQUEsQ0FBQUwsY0FBQSxHQUFBRSxDQUFBLFFBQVc7RUFDdEJJLEtBQUEsRUFBTztFQUNQQyxXQUFBLEVBQWE7QUFDZjtBQUVlLGVBQWVKLGFBQWE7RUFBRUs7QUFBWSxDQUFxQjtFQUFBO0VBQUFSLGNBQUEsR0FBQUMsQ0FBQTtFQUM1RTtFQUNBLE1BQU1RLFdBQUE7RUFBQTtFQUFBLENBQUFULGNBQUEsR0FBQUUsQ0FBQSxRQUFjLE1BQU0sSUFBQVEsS0FBQSxDQUFBQyxjQUFjO0VBQUE7RUFBQVgsY0FBQSxHQUFBRSxDQUFBO0VBRXhDLElBQUlPLFdBQUEsRUFBYTtJQUFBO0lBQUFULGNBQUEsR0FBQVksQ0FBQTtJQUNmLE1BQU1DLFVBQUE7SUFBQTtJQUFBLENBQUFiLGNBQUEsR0FBQUUsQ0FBQTtJQUFhO0lBQUEsQ0FBQUYsY0FBQSxHQUFBWSxDQUFBLFVBQUFKLFlBQUEsQ0FBYU0sUUFBUTtJQUFBO0lBQUEsQ0FBQWQsY0FBQSxHQUFBWSxDQUFBLFVBQUk7SUFBQTtJQUFBWixjQUFBLEdBQUFFLENBQUE7SUFDNUMsSUFBQWEsV0FBQSxDQUFBRCxRQUFRLEVBQUNELFVBQUE7RUFDWDtFQUFBO0VBQUE7SUFBQWIsY0FBQSxHQUFBWSxDQUFBO0VBQUE7RUFBQVosY0FBQSxHQUFBRSxDQUFBO0VBRUEsb0JBQ0UsSUFBQWMsV0FBQSxDQUFBQyxHQUFBLEVBQUM7SUFBSUMsU0FBQSxFQUFVO2NBQ2IsaUJBQUFGLFdBQUEsQ0FBQUMsR0FBQSxFQUFDRSxhQUFBLENBQUFDLFlBQVk7TUFDWEMsY0FBQSxFQUFnQlgsS0FBQSxDQUFBVyxjQUFjO01BQzlCQyxXQUFBLEVBQWFkLFlBQUEsQ0FBYU0sUUFBUTtNQUNsQ1MsS0FBQSxFQUFPZixZQUFBLENBQWFlOzs7QUFJNUIiLCJpZ25vcmVMaXN0IjpbXX0=

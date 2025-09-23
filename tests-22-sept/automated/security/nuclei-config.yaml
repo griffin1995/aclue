@@ -1,4 +1,4 @@
-# Nuclei Configuration for Aclue Security Testing
+# Nuclei Configuration for aclue Security Testing
 # 9000+ vulnerability templates for automatic CVE discovery
 
 # Rate limiting to avoid overwhelming the target
@@ -8,7 +8,7 @@ concurrency: 25
 
 # Headers configuration
 header:
-  - "User-Agent: Aclue-Security-Scanner/1.0"
+  - "User-Agent: aclue-Security-Scanner/1.0"
 
 # Scan configuration
 templates:

@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-Aclue Platform - Branding Consistency Fix Script
+aclue Platform - Branding Consistency Fix Script
 
 This script identifies and fixes remaining legacy branding references
-in the codebase after the comprehensive rebranding from GiftSync/prznt to Aclue.
+in the codebase after the comprehensive rebranding from GiftSync/prznt to aclue.
 
 Usage:
     python fix_branding_issues.py [--dry-run] [--verbose]
@@ -26,12 +26,12 @@ class BrandingFixer:
         # Branding replacement patterns
         self.replacements = {
             # Case-sensitive replacements
-            'GiftSync': 'Aclue',
+            'GiftSync': 'aclue',
             'GIFTSYNC': 'ACLUE',
             'giftsync': 'aclue',
             'prznt': 'aclue',
             'PRZNT': 'ACLUE',
-            'Prznt': 'Aclue',
+            'Prznt': 'aclue',
 
             # URL and domain replacements
             'prznt.app': 'aclue.app',
@@ -271,7 +271,7 @@ class BrandingFixer:
 def main():
     """Main execution function"""
     parser = argparse.ArgumentParser(
-        description="Fix legacy branding references in Aclue codebase"
+        description="Fix legacy branding references in aclue codebase"
     )
     parser.add_argument(
         "--dry-run",
