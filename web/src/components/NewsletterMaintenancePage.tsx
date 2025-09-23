@@ -107,18 +107,6 @@ export default function NewsletterMaintenancePage() {
               </div>
             </div>
 
-            {/* Status Badge */}
-            <div className="inline-flex items-center gap-3 bg-blue-500/20 backdrop-blur-sm border border-blue-400/30 text-blue-200 px-6 py-3 rounded-full text-sm font-medium mb-6 max-w-fit">
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-                <span>System Training</span>
-              </div>
-              <div className="flex space-x-1">
-                <div className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-pulse" />
-                <div className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }} />
-                <div className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }} />
-              </div>
-            </div>
           </section>
 
           {/* Right Column - Newsletter Signup Form */}
