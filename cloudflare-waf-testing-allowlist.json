@@ -1,0 +1,45 @@
+{
+  "name": "aclue Testing Infrastructure Allowlist",
+  "description": "Allow legitimate security testing tools for aclue platform",
+  "kind": "customer",
+  "phase": "http_request_firewall_custom",
+  "rules": [
+    {
+      "action": "skip",
+      "action_parameters": {
+        "ruleset": "efb7b8c949ac4650a09736fc376e9aee"
+      },
+      "expression": "(http.user_agent contains \"Nuclei\" and ip.src in {YOUR_TESTING_IP}) or (http.user_agent contains \"ZAP\" and ip.src in {YOUR_TESTING_IP}) or (http.user_agent contains \"Burp\" and ip.src in {YOUR_TESTING_IP}) or (http.user_agent contains \"k6\" and ip.src in {YOUR_TESTING_IP})",
+      "description": "Skip WAF for authorised security testing tools",
+      "enabled": false
+    },
+    {
+      "action": "skip",
+      "action_parameters": {
+        "products": ["waf", "rateLimit"]
+      },
+      "expression": "http.request.uri.path contains \"/api/v1/test\" and ip.src in {YOUR_TESTING_IP}",
+      "description": "Skip WAF for test endpoints from authorised IPs",
+      "enabled": false
+    },
+    {
+      "action": "log",
+      "expression": "(http.user_agent contains \"pytest\" or http.user_agent contains \"jest\" or http.user_agent contains \"cypress\") and ip.src in {YOUR_TESTING_IP}",
+      "description": "Log testing framework requests",
+      "enabled": true
+    }
+  ],
+  "testing_ips": {
+    "comment": "Replace with your actual testing IP addresses",
+    "development": ["127.0.0.1", "::1"],
+    "ci_cd": ["GITHUB_ACTIONS_IP_RANGE"],
+    "monitoring": ["UPTIME_MONITORING_IPS"]
+  },
+  "implementation_notes": [
+    "1. Replace {YOUR_TESTING_IP} with actual testing infrastructure IPs",
+    "2. Enable rules only during active testing periods",
+    "3. Use Cloudflare API tokens with minimal permissions",
+    "4. Implement rate limiting even for allowed IPs",
+    "5. Monitor logs for any abuse of testing allowlist"
+  ]
+}

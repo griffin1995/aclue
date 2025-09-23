@@ -1,0 +1,113 @@
+groups:
+  - name: aclue_alerts
+    interval: 30s
+    rules:
+      # Service Availability
+      - alert: ServiceDown
+        expr: up == 0
+        for: 2m
+        labels:
+          severity: critical
+          service: aclue
+        annotations:
+          summary: "Service {{ $labels.job }} is down"
+          description: "{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 2 minutes."
+
+      # High CPU Usage
+      - alert: HighCPUUsage
+        expr: (100 - (avg by (instance) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100)) > 80
+        for: 5m
+        labels:
+          severity: warning
+          service: aclue
+        annotations:
+          summary: "High CPU usage on {{ $labels.instance }}"
+          description: "CPU usage is above 80% (current value: {{ $value }}%)"
+
+      # High Memory Usage
+      - alert: HighMemoryUsage
+        expr: (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100 > 85
+        for: 5m
+        labels:
+          severity: warning
+          service: aclue
+        annotations:
+          summary: "High memory usage on {{ $labels.instance }}"
+          description: "Memory usage is above 85% (current value: {{ $value }}%)"
+
+      # API Response Time
+      - alert: HighAPIResponseTime
+        expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m])) > 2
+        for: 5m
+        labels:
+          severity: warning
+          service: aclue-api
+        annotations:
+          summary: "High API response time"
+          description: "95th percentile response time is above 2 seconds (current value: {{ $value }}s)"
+
+      # Error Rate
+      - alert: HighErrorRate
+        expr: rate(http_requests_total{status=~"5.."}[5m]) > 0.05
+        for: 5m
+        labels:
+          severity: critical
+          service: aclue
+        annotations:
+          summary: "High error rate detected"
+          description: "Error rate is above 5% (current value: {{ $value }})"
+
+      # Database Connection Pool
+      - alert: DatabaseConnectionPoolExhausted
+        expr: pg_stat_database_numbackends / pg_settings_max_connections > 0.8
+        for: 5m
+        labels:
+          severity: warning
+          service: postgresql
+        annotations:
+          summary: "Database connection pool near exhaustion"
+          description: "Database connection usage is above 80% (current value: {{ $value }}%)"
+
+      # SSL Certificate Expiry
+      - alert: SSLCertificateExpiringSoon
+        expr: probe_ssl_earliest_cert_expiry - time() < 86400 * 7
+        for: 1h
+        labels:
+          severity: warning
+          service: aclue
+        annotations:
+          summary: "SSL certificate expiring soon for {{ $labels.instance }}"
+          description: "SSL certificate will expire in less than 7 days"
+
+      # Disk Space
+      - alert: LowDiskSpace
+        expr: (node_filesystem_avail_bytes{mountpoint="/"} / node_filesystem_size_bytes{mountpoint="/"}) * 100 < 15
+        for: 5m
+        labels:
+          severity: warning
+          service: aclue
+        annotations:
+          summary: "Low disk space on {{ $labels.instance }}"
+          description: "Disk space is below 15% (current value: {{ $value }}%)"
+
+      # Container Restart
+      - alert: ContainerRestarting
+        expr: rate(container_restart_count[15m]) > 0
+        for: 5m
+        labels:
+          severity: warning
+          service: aclue
+        annotations:
+          summary: "Container {{ $labels.name }} is restarting"
+          description: "Container has restarted {{ $value }} times in the last 15 minutes"
+
+      # Newsletter Service
+      - alert: NewsletterServiceFailure
+        expr: increase(newsletter_send_failures_total[1h]) > 5
+        for: 5m
+        labels:
+          severity: warning
+          service: newsletter
+        annotations:
+          summary: "Newsletter service experiencing failures"
+          description: "More than 5 newsletter send failures in the last hour"

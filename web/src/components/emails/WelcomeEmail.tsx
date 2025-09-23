@@ -75,7 +75,7 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
     @media only screen and (max-width: 480px) {
       .container { padding: 16px !important; margin: 8px !important; border-radius: 12px !important; }
       .logo svg { width: 160px !important; height: auto !important; }
-      .glassmorphism-card { padding: 16px !important; margin: 12px 0 !important; border-radius: 12px !important; }
+      .glassmorphism-card { padding-top: 28px !important; padding-bottom: 28px !important; padding-left: 78px !important; padding-right: 78px !important; margin: 12px 0 !important; border-radius: 12px !important; }
       .cta-button { padding: 14px 28px !important; font-size: 16px !important; }
       .heading-main { font-size: 24px !important; line-height: 1.2 !important; }
       .section-spacing { margin: 20px 0 !important; }
@@ -84,7 +84,7 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
     @media only screen and (max-width: 600px) {
       .container { padding: 20px !important; margin: 10px !important; }
       .logo svg { width: 180px !important; height: auto !important; }
-      .glassmorphism-card { padding: 20px !important; margin: 15px 0 !important; }
+      .glassmorphism-card { padding-top: 36px !important; padding-bottom: 36px !important; padding-left: 86px !important; padding-right: 86px !important; margin: 15px 0 !important; }
       .cta-button { padding: 16px 32px !important; }
       .two-column { display: block !important; }
       .column { width: 100% !important; margin-bottom: 20px !important; }
@@ -97,9 +97,12 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
       backdrop-filter: blur(12px);
       border: 1px solid rgba(255, 255, 255, 0.18);
       border-radius: 20px;
-      padding: 32px;
+      padding-top: 40px;
+      padding-bottom: 40px;
+      padding-left: 90px;
+      padding-right: 90px;
       margin: 28px 0;
-      box-shadow: 0 12px 40px 0 rgba(240, 61, 255, 0.15);
+      box-shadow: none;
     }
 
     /* aclue brand color integration */
@@ -172,7 +175,7 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
       <Body style={main}>
         <Container className="container" style={container}>
           {/* Logo Section with Enhanced Spacing */}
-          <Section style={{ textAlign: 'center', marginBottom: '40px' }}>
+          <Section style={{ textAlign: 'center', marginBottom: '0px' }}>
             <div dangerouslySetInnerHTML={{ __html: aclueLogoSvg }} />
           </Section>
 
@@ -203,8 +206,6 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
             </Text>
           </Section>
 
-          <Hr style={divider} />
-
           {/* Introduction Text with Better Hierarchy */}
           <Section className="section-spacing" style={{ margin: '32px 0' }}>
             <Text className="text-body text" style={text}>
@@ -223,7 +224,7 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
 
             {/* Two-column feature layout for desktop */}
             <div className="two-column" style={{ display: 'table', width: '100%', marginTop: '24px' }}>
-              <div className="column" style={{ display: 'table-cell', width: '50%', paddingRight: '16px', verticalAlign: 'top' }}>
+              <div className="column" style={{ display: 'table-cell', width: '50%', paddingRight: '24px', verticalAlign: 'top' }}>
                 <Text className="text-body" style={featureText}>
                   <span className="brand-accent" style={{ color: '#f03dff', fontWeight: '600' }}>🧠 AI-Powered Intelligence</span><br />
                   Our advanced algorithms learn your preferences and suggest perfect gifts with uncanny accuracy.
@@ -233,7 +234,7 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
                   Browse, save, and organise gift ideas with our intuitive, mobile-optimised interface.
                 </Text>
               </div>
-              <div className="column" style={{ display: 'table-cell', width: '50%', paddingLeft: '16px', verticalAlign: 'top' }}>
+              <div className="column" style={{ display: 'table-cell', width: '50%', paddingLeft: '24px', verticalAlign: 'top' }}>
                 <Text className="text-body" style={featureText}>
                   <span className="brand-accent" style={{ color: '#f03dff', fontWeight: '600' }}>🎯 Personalised Matching</span><br />
                   Every recommendation is tailored specifically to you and your gift recipients.
@@ -255,8 +256,6 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
               Stay tuned for exclusive previews and be the first to experience aclue when we launch.
             </Text>
           </Section>
-
-          <Hr style={divider} />
 
           {/* Footer with Enhanced British English */}
           <Section style={{ textAlign: 'center', marginTop: '32px' }}>
@@ -334,9 +333,12 @@ const glassmorphismCard = {
   backdropFilter: 'blur(12px)',
   border: '1px solid rgba(255, 255, 255, 0.18)',
   borderRadius: '20px',
-  padding: '32px',
+  paddingTop: '40px',
+  paddingBottom: '40px',
+  paddingLeft: '90px',
+  paddingRight: '90px',
   margin: '28px 0',
-  boxShadow: '0 12px 40px 0 rgba(240, 61, 255, 0.15)',
+  boxShadow: 'none',
 }
 
 const cardHeading = {

@@ -1,206 +1,66 @@
-<!DOCTYPE html>
-<html lang="en-GB">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Welcome Email - Light Theme (alex.chen@demo.aclue.app) - aclue Email Preview</title>
-  <style>
-    /* Preview container styles */
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-      background: #f8fafc;
-      color: #1f2937;
-      line-height: 1.6;
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="format-detection" content="date=no" />
+  <meta name="format-detection" content="address=no" />
+  <meta name="format-detection" content="email=no" />
+  <meta name="x-apple-disable-message-reformatting" />
+  <meta name="color-scheme" content="light" />
+  <meta name="supported-color-schemes" content="light dark" />
+  <title>Welcome to aclue - AI-Powered Gift Discovery Awaits!</title>
+  <!--[if mso]>
+  <noscript>
+    <xml>
+      <o:OfficeDocumentSettings>
+        <o:AllowPNG/>
+        <o:PixelsPerInch>96</o:PixelsPerInch>
+      </o:OfficeDocumentSettings>
+    </xml>
+  </noscript>
+  <![endif]-->
+  <style type="text/css">
+    /* Email client resets */
+    #outlook a { padding: 0; }
+    .ReadMsgBody { width: 100%; }
+    .ExternalClass { width: 100%; }
+    .ExternalClass * { line-height: 100%; }
+    body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+    table, td { border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+    img { border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; }
+
+    /* Dark mode support */
+    @media (prefers-color-scheme: dark) {
+      .dark-mode-bg { background-color: #1a1a1a !important; }
+      .dark-mode-text { color: #ffffff !important; }
+      .dark-mode-container { background-color: #2d2d2d !important; }
     }
 
-    .preview-header {
-      text-align: center;
-      margin-bottom: 30px;
-      background: #ffffff;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    /* Mobile responsive */
+    @media only screen and (max-width: 600px) {
+      .container { width: 100% !important; max-width: 100% !important; }
+      .mobile-padding { padding: 10px !important; }
+      .mobile-font-size { font-size: 16px !important; }
+      .mobile-center { text-align: center !important; }
     }
 
-    .preview-container {
-      max-width: 700px;
-      margin: 0 auto;
-      background: #ffffff;
-      border-radius: 12px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-    }
-
-    .mobile-preview {
-      max-width: 375px;
-    }
-
-    .desktop-preview {
-      max-width: 700px;
-    }
-
-    .email-frame {
-      background: white;
-      min-height: 500px;
-    }
-
-    .preview-controls {
-      padding: 20px;
-      background: rgba(59, 130, 246, 0.05);
-      border-bottom: 1px solid rgba(59, 130, 246, 0.1);
-      text-align: center;
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .control-button {
-      background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 14px;
-      font-weight: 600;
-      transition: all 0.2s ease;
-      box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
-    }
-
-    .control-button:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
-    }
-
-    .control-button:active {
-      transform: translateY(0);
-    }
-
-    .preview-info {
-      background: rgba(240, 61, 255, 0.05);
-      border: 1px solid rgba(240, 61, 255, 0.2);
-      padding: 16px 20px;
-      margin: 20px;
-      border-radius: 8px;
-      font-size: 14px;
-    }
-
-    .template-metadata {
-      background: rgba(59, 130, 246, 0.05);
-      border-left: 4px solid #3b82f6;
-      padding: 16px 20px;
-      margin: 20px;
-      border-radius: 0 8px 8px 0;
-      font-size: 14px;
-    }
-
-    .footer {
-      background: rgba(107, 114, 128, 0.05);
-      padding: 20px;
-      text-align: center;
-      color: #6b7280;
-      font-size: 13px;
-      border-top: 1px solid rgba(107, 114, 128, 0.1);
-    }
-
-    /* Dark theme adjustments */
-    .dark-theme body {
-      background: #0f172a;
-      color: #e2e8f0;
-    }
-
-    .dark-theme .preview-header,
-    .dark-theme .preview-container {
-      background: #1e293b;
-      border-color: #334155;
-    }
-
-    .dark-theme .preview-controls {
-      background: rgba(59, 130, 246, 0.1);
-      border-color: rgba(59, 130, 246, 0.2);
-    }
-
-    .dark-theme .footer {
-      background: rgba(71, 85, 105, 0.1);
-      border-color: rgba(71, 85, 105, 0.2);
-      color: #94a3b8;
-    }
-
-    /* Mobile responsive adjustments */
-    @media (max-width: 480px) {
-      body {
-        padding: 12px;
-      }
-
-      .preview-container {
-        margin: 0;
-      }
-
-      .preview-controls {
-        padding: 16px;
-        gap: 8px;
-      }
-
-      .control-button {
-        padding: 10px 16px;
-        font-size: 13px;
-      }
-    }
-
-    /* Print styles */
-    @media print {
-      .preview-controls,
-      .footer {
-        display: none;
-      }
-
-      body {
-        background: white;
-        color: black;
-      }
+    /* High DPI displays */
+    @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi) {
+      /* Add high DPI styles if needed */
     }
   </style>
 </head>
-<body class="">
-  <div class="preview-header">
-    <h1>📧 Welcome Email - Light Theme (alex.chen@demo.aclue.app)</h1>
-    <p>Generated on 23 September 2025 at 18:12</p>
-  </div>
+<body style="margin: 0; padding: 0; width: 100%; min-width: 100%; background-color: #f8fafc;" class="">
+  <!--[if mso | IE]>
+  <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #f8fafc;">
+    <tr>
+      <td>
+  <![endif]-->
 
-  <div class="preview-container desktop-preview">
-    <div class="preview-controls">
-      <button class="control-button" onclick="toggleTheme()">
-        🌓 Toggle Dark Mode
-      </button>
-      <button class="control-button" onclick="toggleMobile()">
-        📱 Toggle Mobile View
-      </button>
-      <button class="control-button" onclick="showTextVersion()">
-        📝 Show Text Version
-      </button>
-      <button class="control-button" onclick="window.print()">
-        🖨️ Print Preview
-      </button>
-    </div>
-
-    <div class="template-metadata">
-      <strong>Template:</strong> Welcome Email<br>
-      <strong>Subject:</strong> Welcome to aclue - AI-Powered Gift Discovery Awaits!<br>
-      <strong>Theme:</strong> Light<br>
-      <strong>Layout:</strong> Desktop<br>
-      <strong>Generated:</strong> 2025-09-23T17-12-50
-    </div>
-
-    <div class="preview-info">
-      💡 <strong>Preview Features:</strong> This preview includes theme switching, mobile/desktop toggle,
-      and text version viewing. Use the controls above to test different viewing modes.
-    </div>
-
-    <div class="email-frame" id="email-content">
-      <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <!-- Email content starts here -->
+  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!--$-->
 <html dir="ltr" lang="en">
   <head>
@@ -226,7 +86,7 @@
       @media only screen and (max-width: 480px) {
         .container { padding: 16px !important; margin: 8px !important; border-radius: 12px !important; }
         .logo svg { width: 160px !important; height: auto !important; }
-        .glassmorphism-card { padding: 16px !important; margin: 12px 0 !important; border-radius: 12px !important; }
+        .glassmorphism-card { padding-top: 28px !important; padding-bottom: 28px !important; padding-left: 78px !important; padding-right: 78px !important; margin: 12px 0 !important; border-radius: 12px !important; }
         .cta-button { padding: 14px 28px !important; font-size: 16px !important; }
         .heading-main { font-size: 24px !important; line-height: 1.2 !important; }
         .section-spacing { margin: 20px 0 !important; }
@@ -235,7 +95,7 @@
       @media only screen and (max-width: 600px) {
         .container { padding: 20px !important; margin: 10px !important; }
         .logo svg { width: 180px !important; height: auto !important; }
-        .glassmorphism-card { padding: 20px !important; margin: 15px 0 !important; }
+        .glassmorphism-card { padding-top: 36px !important; padding-bottom: 36px !important; padding-left: 86px !important; padding-right: 86px !important; margin: 15px 0 !important; }
         .cta-button { padding: 16px 32px !important; }
         .two-column { display: block !important; }
         .column { width: 100% !important; margin-bottom: 20px !important; }
@@ -248,9 +108,12 @@
         backdrop-filter: blur(12px);
         border: 1px solid rgba(255, 255, 255, 0.18);
         border-radius: 20px;
-        padding: 32px;
+        padding-top: 40px;
+        padding-bottom: 40px;
+        padding-left: 90px;
+        padding-right: 90px;
         margin: 28px 0;
-        box-shadow: 0 12px 40px 0 rgba(240, 61, 255, 0.15);
+        box-shadow: none;
       }
 
       /* aclue brand color integration */
@@ -344,7 +207,7 @@
                       cellpadding="0"
                       cellspacing="0"
                       role="presentation"
-                      style="text-align:center;margin-bottom:40px">
+                      style="text-align:center;margin-bottom:0px">
                       <tbody>
                         <tr>
                           <td>
@@ -478,8 +341,6 @@
                         </tr>
                       </tbody>
                     </table>
-                    <hr
-                      style="width:100%;border:none;border-top:1px solid rgba(240, 61, 255, 0.1);margin:32px 0" />
                     <table
                       align="center"
                       width="100%"
@@ -520,7 +381,7 @@
                       cellspacing="0"
                       role="presentation"
                       class="glassmorphism-card"
-                      style="background:rgba(255, 255, 255, 0.08);backdrop-filter:blur(12px);border:1px solid rgba(255, 255, 255, 0.18);border-radius:20px;padding:32px;margin:28px 0;box-shadow:0 12px 40px 0 rgba(240, 61, 255, 0.15)">
+                      style="background:rgba(255, 255, 255, 0.08);backdrop-filter:blur(12px);border:1px solid rgba(255, 255, 255, 0.18);border-radius:20px;padding-top:40px;padding-bottom:40px;padding-left:90px;padding-right:90px;margin:28px 0;box-shadow:none">
                       <tbody>
                         <tr>
                           <td>
@@ -534,7 +395,7 @@
                               style="display:table;width:100%;margin-top:24px">
                               <div
                                 class="column"
-                                style="display:table-cell;width:50%;padding-right:16px;vertical-align:top">
+                                style="display:table-cell;width:50%;padding-right:24px;vertical-align:top">
                                 <p
                                   class="text-body"
                                   style="font-size:15px;line-height:1.6;color:#374151;margin:0 0 20px 0;margin-top:0;margin-right:0;margin-bottom:20px;margin-left:0">
@@ -560,7 +421,7 @@
                               </div>
                               <div
                                 class="column"
-                                style="display:table-cell;width:50%;padding-left:16px;vertical-align:top">
+                                style="display:table-cell;width:50%;padding-left:24px;vertical-align:top">
                                 <p
                                   class="text-body"
                                   style="font-size:15px;line-height:1.6;color:#374151;margin:0 0 20px 0;margin-top:0;margin-right:0;margin-bottom:20px;margin-left:0">
@@ -617,8 +478,6 @@
                         </tr>
                       </tbody>
                     </table>
-                    <hr
-                      style="width:100%;border:none;border-top:1px solid rgba(240, 61, 255, 0.1);margin:32px 0" />
                     <table
                       align="center"
                       width="100%"
@@ -661,143 +520,14 @@
 </html>
 <!--/$-->
 
-    </div>
 
-    <div class="footer">
-      <p><strong>aclue Email Preview System</strong> • Generated with React Email • 2025</p>
-      <p>British English • Production-ready templates • Cross-client compatibility</p>
-    </div>
-  </div>
+  <!--[if mso | IE]>
+      </td>
+    </tr>
+  </table>
+  <![endif]-->
 
-  <!-- Hidden text version -->
-  <div id="text-version" style="display: none; background: #f8fafc; padding: 20px; margin: 20px; border-radius: 8px; font-family: monospace; white-space: pre-wrap; line-height: 1.5; border-left: 4px solid #10b981;">
-    WELCOME TO ACLUE!
-
-You're now part of Britain's most intelligent gifting community
-
-🎉 Join over 10,000+ early adopters who've discovered the future of thoughtful
-gifting
-
-🚀 You're now on our priority early access list
-
-We'll notify you the moment aclue launches
-
---------------------------------------------------------------------------------
-
-Thank you for subscribing to our newsletter, alex.chen! You're now part of the
-aclue community, where AI-powered gifting meets personalised discovery.
-
-We'll keep you updated with development progress, exclusive behind-the-scenes
-insights, and priority access when we're ready to launch.
-
-
-🎁 WHAT MAKES ACLUE BRILLIANTLY DIFFERENT?
-
-🧠 AI-Powered Intelligence
-Our advanced algorithms learn your preferences and suggest perfect gifts with
-uncanny accuracy.
-
-📱 Seamless Discovery
-Browse, save, and organise gift ideas with our intuitive, mobile-optimised
-interface.
-
-🎯 Personalised Matching
-Every recommendation is tailored specifically to you and your gift recipients.
-
-🔔 Smart Notifications
-Never miss the perfect gift with our intelligent alert system and timely
-reminders.
-
-We're working tirelessly to create something truly special. The future of
-thoughtful gifting starts here, and we're thrilled to have you with us on this
-journey.
-
-Stay tuned for exclusive previews and be the first to experience aclue when we
-launch.
-
---------------------------------------------------------------------------------
-
-Brilliant to have you aboard!
-The aclue Team
-Britain's AI-powered gifting platform
-
-Questions? Simply reply to this email - we'd love to hear from you!
-  </div>
-
-  <script>
-    let currentTheme = 'light';
-    let currentLayout = 'desktop';
-
-    function toggleTheme() {
-      const body = document.body;
-      const button = event.target;
-
-      if (currentTheme === 'light') {
-        body.classList.add('dark-theme');
-        button.textContent = '🌞 Toggle Light Mode';
-        currentTheme = 'dark';
-      } else {
-        body.classList.remove('dark-theme');
-        button.textContent = '🌓 Toggle Dark Mode';
-        currentTheme = 'light';
-      }
-    }
-
-    function toggleMobile() {
-      const container = document.querySelector('.preview-container');
-      const button = event.target;
-
-      if (currentLayout === 'desktop') {
-        container.classList.remove('desktop-preview');
-        container.classList.add('mobile-preview');
-        button.textContent = '🖥️ Toggle Desktop View';
-        currentLayout = 'mobile';
-      } else {
-        container.classList.remove('mobile-preview');
-        container.classList.add('desktop-preview');
-        button.textContent = '📱 Toggle Mobile View';
-        currentLayout = 'desktop';
-      }
-    }
-
-    function showTextVersion() {
-      const emailContent = document.getElementById('email-content');
-      const textVersion = document.getElementById('text-version');
-      const button = event.target;
-
-      if (textVersion.style.display === 'none') {
-        emailContent.style.display = 'none';
-        textVersion.style.display = 'block';
-        button.textContent = '📧 Show HTML Version';
-      } else {
-        emailContent.style.display = 'block';
-        textVersion.style.display = 'none';
-        button.textContent = '📝 Show Text Version';
-      }
-    }
-
-    // Keyboard shortcuts
-    document.addEventListener('keydown', function(e) {
-      if (e.ctrlKey || e.metaKey) {
-        switch(e.key) {
-          case 'd':
-            e.preventDefault();
-            toggleTheme();
-            break;
-          case 'm':
-            e.preventDefault();
-            toggleMobile();
-            break;
-          case 't':
-            e.preventDefault();
-            showTextVersion();
-            break;
-        }
-      }
-    });
-
-    console.log('📧 aclue Email Preview System');
-    console.log('Keyboard shortcuts: Ctrl/Cmd + D (theme), Ctrl/Cmd + M (mobile), Ctrl/Cmd + T (text)');
-  </script>
+  <!-- Email client tracking pixel (optional - remove if not needed) -->
+  <!-- <img src="https://your-tracking-domain.com/track.png" width="1" height="1" style="display: none;" alt="" /> -->
 </body>
 </html>

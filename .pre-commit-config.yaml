@@ -1,0 +1,82 @@
+repos:
+  # Security - Secret Detection
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.4.0
+    hooks:
+      - id: detect-secrets
+        args: ['--baseline', '.secrets.baseline']
+        exclude: package-lock.json
+
+  # Security - GitLeaks
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.18.0
+    hooks:
+      - id: gitleaks
+
+  # Code Quality - Black (Python)
+  - repo: https://github.com/psf/black
+    rev: 23.12.0
+    hooks:
+      - id: black
+        language_version: python3.11
+        files: ^backend/
+
+  # Code Quality - Ruff (Python)
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.1.9
+    hooks:
+      - id: ruff
+        args: [--fix]
+        files: ^backend/
+
+  # Code Quality - ESLint (JavaScript/TypeScript)
+  - repo: https://github.com/pre-commit/mirrors-eslint
+    rev: v8.56.0
+    hooks:
+      - id: eslint
+        files: \.(js|jsx|ts|tsx)$
+        types: [file]
+        additional_dependencies:
+          - eslint@8.56.0
+          - eslint-config-next@14.0.4
+          - '@typescript-eslint/parser@6.17.0'
+          - '@typescript-eslint/eslint-plugin@6.17.0'
+
+  # Security - Bandit (Python)
+  - repo: https://github.com/PyCQA/bandit
+    rev: '1.7.6'
+    hooks:
+      - id: bandit
+        args: ['-r', 'backend/', '-ll']
+        files: ^backend/.*\.py$
+
+  # Security - Safety (Python Dependencies)
+  - repo: https://github.com/Lucas-C/pre-commit-hooks-safety
+    rev: v1.3.3
+    hooks:
+      - id: python-safety-dependencies-check
+        files: requirements.txt
+
+  # General - Trailing Whitespace
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+        args: ['--maxkb=1000']
+      - id: check-case-conflict
+      - id: check-merge-conflict
+      - id: check-json
+      - id: check-toml
+      - id: detect-private-key
+      - id: mixed-line-ending
+        args: ['--fix=lf']
+
+  # Commit Message
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: v3.13.0
+    hooks:
+      - id: commitizen
+        stages: [commit-msg]
