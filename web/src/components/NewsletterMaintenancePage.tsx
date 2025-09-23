@@ -15,7 +15,7 @@ import NewsletterSignupForm from '@/components/NewsletterSignupForm'
  * - Neural network background with glassmorphism design
  * - Newsletter signup form with server actions
  * - Responsive design with accessibility features
- * - Consistent Aclue branding with aclue_text_clean.png
+ * - Consistent aclue branding with aclue_text_clean.png
  *
  * Structure:
  * - Server component for static content
@@ -55,7 +55,7 @@ export default function NewsletterMaintenancePage() {
                 <div className="w-20 h-20 sm:w-24 sm:h-24 bg-white/10 backdrop-blur-sm rounded-2xl flex items-center justify-center shadow-2xl border border-white/20">
                   <img
                     src="/aclue_text_clean.png"
-                    alt="Aclue Logo"
+                    alt="aclue Logo"
                     className="w-14 h-14 sm:w-20 sm:h-20 object-contain"
                   />
                 </div>
@@ -141,7 +141,7 @@ export default function NewsletterMaintenancePage() {
         {/* Legal Statement - Bottom Right */}
         <div className="absolute bottom-2 sm:bottom-4 right-2 sm:right-4 z-20">
           <div className="text-xs text-white/60 text-right leading-tight">
-            <div>© 2025 ACLUE LTD</div>
+            <div>© 2025 ACLUE LIMITED</div>
             <div className="text-white/40">Company No. 14659276</div>
           </div>
         </div>
