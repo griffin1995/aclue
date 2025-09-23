@@ -1,5 +1,4 @@
 import { Suspense } from 'react'
-import Head from 'next/head'
 import { Gift, Brain, Sparkles, Users, Star } from 'lucide-react'
 import NeuralNetworkBackgroundOptimized from '@/components/ui/NeuralNetworkBackgroundOptimized'
 import NewsletterSignupForm from '@/components/NewsletterSignupForm'
@@ -26,8 +25,7 @@ import NewsletterSignupForm from '@/components/NewsletterSignupForm'
 
 export default function NewsletterMaintenancePage() {
   return (
-    <>
-      <div className="min-h-screen w-full bg-gradient-to-br from-slate-900 via-blue-900 to-purple-900 flex relative overflow-hidden">
+    <div className="min-h-screen w-full bg-gradient-to-br from-slate-900 via-blue-900 to-purple-900 flex relative overflow-hidden">
         {/* Optimised Neural Network Background */}
         <NeuralNetworkBackgroundOptimized
           nodeCount={60}
@@ -133,7 +131,6 @@ export default function NewsletterMaintenancePage() {
             <div className="text-white/40">Company No. 14659276</div>
           </div>
         </div>
-      </div>
-    </>
+    </div>
   )
 }

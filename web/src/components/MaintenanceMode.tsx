@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Head from 'next/head';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Gift, Mail, CheckCircle, Sparkles, Brain, Zap, ArrowRight, Users, Star } from 'lucide-react';
@@ -55,24 +54,7 @@ export default function MaintenanceMode() {
   };
 
   return (
-    <>
-      <Head>
-        <title>aclue - AI-Powered Gift Discovery</title>
-        <meta
-          name="description"
-          content="aclue is getting ready to launch! Sign up for early access to our AI-powered gift recommendation platform."
-        />
-        <meta name="keywords" content="gifts, AI recommendations, gift ideas, coming soon, beta signup, neural network" />
-        <meta property="og:title" content="aclue - AI-Powered Gift Discovery" />
-        <meta
-          property="og:description"
-          content="aclue is getting ready to launch! Sign up for early access to our AI-powered gift recommendation platform."
-        />
-        <meta property="og:image" content="/logo.png" />
-        <meta name="robots" content="noindex, nofollow" />
-      </Head>
-
-      <div className="min-h-screen w-full bg-gradient-to-br from-slate-900 via-blue-900 to-purple-900 flex relative overflow-hidden">
+    <div className="min-h-screen w-full bg-gradient-to-br from-slate-900 via-blue-900 to-purple-900 flex relative overflow-hidden">
         {/* Optimized Neural Network Background */}
         <NeuralNetworkBackgroundOptimized
           nodeCount={60}
@@ -105,7 +87,7 @@ export default function MaintenanceMode() {
                 <div className="w-20 h-20 sm:w-24 sm:h-24 bg-white/10 backdrop-blur-sm rounded-2xl flex items-center justify-center shadow-2xl border border-white/20">
                   <img
                     src="/aclue_text_clean.png"
-                    alt="Aclue Logo"
+                    alt="aclue Logo"
                     className="w-14 h-14 sm:w-20 sm:h-20 object-contain"
                     onError={(e) => {
                       console.error('Logo failed to load, showing fallback');
@@ -319,6 +301,5 @@ export default function MaintenanceMode() {
           </div>
         </div>
       </div>
-    </>
   );
 }
