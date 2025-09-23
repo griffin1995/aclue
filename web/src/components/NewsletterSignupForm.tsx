@@ -6,21 +6,22 @@ import { Mail, CheckCircle, Zap } from 'lucide-react'
 import { newsletterSignupAction } from '@/app/actions/newsletter'
 
 /**
- * Newsletter Signup Form - Server Actions Integration
+ * Newsletter Signup Form - Frontend-Only Implementation
  *
- * Interactive client component for newsletter signup using App Router server actions.
- * Provides optimal user experience with backend API integration.
+ * Interactive client component for newsletter signup using App Router server actions
+ * with frontend-only Resend integration for improved reliability.
  *
  * Features:
- * - Server actions for reliable backend communication
- * - FastAPI backend integration via server actions
+ * - Server actions with frontend API route integration
+ * - Direct Resend integration following official patterns
  * - Real-time validation feedback
  * - Accessibility compliant
  * - Success/error state management
  * - Loading states with proper UX
  *
  * Integration:
- * - Uses server actions that call FastAPI backend
+ * - Uses server actions that call frontend /api/send route
+ * - Frontend API route uses direct Resend SDK integration
  * - Handles all form states client-side
  * - Provides immediate user feedback
  * - GDPR-compliant signup process
@@ -42,7 +43,7 @@ export default function NewsletterSignupForm() {
       try {
         const formData = new FormData()
         formData.append('email', email)
-        formData.append('source', 'maintenance_page_server_actions')
+        formData.append('source', 'maintenance_page_frontend_api')
 
         const result = await newsletterSignupAction(formData)
 
