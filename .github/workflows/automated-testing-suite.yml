@@ -575,7 +575,7 @@ jobs:
               \"attachments\": [
                 {
                   \"color\": \"$color\",
-                  \"title\": \"$emoji Aclue Testing Report - ${{ needs.prepare.outputs.execution_mode }} Mode\",
+                  \"title\": \"$emoji aclue Testing Report - ${{ needs.prepare.outputs.execution_mode }} Mode\",
                   \"fields\": [
                     {\"title\": \"Total Tests\", \"value\": \"$total_tests\", \"short\": true},
                     {\"title\": \"Passed\", \"value\": \"$passed_tests\", \"short\": true},
@@ -584,7 +584,7 @@ jobs:
                     {\"title\": \"Branch\", \"value\": \"${{ github.ref_name }}\", \"short\": true},
                     {\"title\": \"Commit\", \"value\": \"${{ github.sha }}\", \"short\": true}
                   ],
-                  \"footer\": \"GitHub Actions • Aclue Testing Suite\",
+                  \"footer\": \"GitHub Actions • aclue Testing Suite\",
                   \"ts\": $(date +%s),
                   \"actions\": [
                     {

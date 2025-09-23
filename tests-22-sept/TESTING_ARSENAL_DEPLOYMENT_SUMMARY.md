@@ -252,7 +252,7 @@ tests-22-sept/
 
 ## 🏆 DEPLOYMENT SUCCESS
 
-**The Aclue platform now has one of the most comprehensive testing infrastructures available:**
+**The aclue platform now has one of the most comprehensive testing infrastructures available:**
 
 - **50+ testing tools** installed and configured
 - **All major testing categories** covered

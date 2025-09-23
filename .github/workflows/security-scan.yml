@@ -500,7 +500,7 @@ jobs:
               \"attachments\": [
                 {
                   \"color\": \"$color\",
-                  \"title\": \"$emoji Aclue Security Scan Report\",
+                  \"title\": \"$emoji aclue Security Scan Report\",
                   \"fields\": [
                     {\"title\": \"Scan Intensity\", \"value\": \"${{ needs.security-prepare.outputs.scan_intensity }}\", \"short\": true},
                     {\"title\": \"Overall Status\", \"value\": \"$SECURITY_STATUS\", \"short\": true},
@@ -509,7 +509,7 @@ jobs:
                     {\"title\": \"Branch\", \"value\": \"${{ github.ref_name }}\", \"short\": true},
                     {\"title\": \"Actor\", \"value\": \"${{ github.actor }}\", \"short\": true}
                   ],
-                  \"footer\": \"GitHub Actions • Aclue Security Scanner\",
+                  \"footer\": \"GitHub Actions • aclue Security Scanner\",
                   \"ts\": $(date +%s),
                   \"actions\": [
                     {
