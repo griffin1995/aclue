@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { onCLS, onFCP, onFID, onINP, onLCP, onTTFB } from 'web-vitals';
+import { onCLS, onFCP, onINP, onLCP, onTTFB } from 'web-vitals';
 
 const reportWebVitals = (metric: any) => {
   // Log to console in development
@@ -39,10 +39,9 @@ const reportWebVitals = (metric: any) => {
 
 export default function WebVitalsReporter() {
   useEffect(() => {
-    // Core Web Vitals
+    // Core Web Vitals (2024)
     onCLS(reportWebVitals); // Cumulative Layout Shift
-    onFID(reportWebVitals); // First Input Delay (deprecated)
-    onINP(reportWebVitals); // Interaction to Next Paint (replaces FID)
+    onINP(reportWebVitals); // Interaction to Next Paint (replaced deprecated FID)
     onLCP(reportWebVitals); // Largest Contentful Paint
 
     // Other Web Vitals
