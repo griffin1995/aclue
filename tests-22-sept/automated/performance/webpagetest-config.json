@@ -1,0 +1,72 @@
+{
+  "tests": [
+    {
+      "url": "https://aclue.app/",
+      "label": "Homepage",
+      "runs": 3,
+      "location": "London_EC2",
+      "connectivity": "4G",
+      "browser": "Chrome",
+      "firstViewOnly": false,
+      "video": true,
+      "lighthouse": true,
+      "timeline": true,
+      "chromeTrace": true,
+      "netLog": true,
+      "keepUA": false,
+      "mobile": false,
+      "device": "Desktop",
+      "pollResults": 5,
+      "timeout": 300,
+      "breakDown": true,
+      "domains": true,
+      "saveResponseBodies": true,
+      "tcpDump": false,
+      "fullResolutionScreenshot": true,
+      "jpegQuality": 100,
+      "medianMetric": "SpeedIndex"
+    },
+    {
+      "url": "https://aclue.app/landingpage",
+      "label": "Landing Page",
+      "runs": 3,
+      "location": "London_EC2",
+      "connectivity": "Cable"
+    },
+    {
+      "url": "https://aclue.app/discover",
+      "label": "Discover Page",
+      "runs": 3,
+      "location": "London_EC2",
+      "connectivity": "Cable"
+    }
+  ],
+  "metrics": [
+    "TTFB",
+    "render",
+    "fullyLoaded",
+    "SpeedIndex",
+    "firstPaint",
+    "firstContentfulPaint",
+    "firstMeaningfulPaint",
+    "domInteractive",
+    "domComplete",
+    "loadEventStart",
+    "loadEventEnd",
+    "lastVisualChange",
+    "TotalBlockingTime",
+    "TimeToInteractive",
+    "LargestContentfulPaint",
+    "CumulativeLayoutShift",
+    "bytesIn",
+    "bytesOut",
+    "requests",
+    "responses_200",
+    "responses_404",
+    "responses_other"
+  ],
+  "output": {
+    "format": "json",
+    "path": "/home/jack/Documents/aclue-preprod/tests-22-sept/automated/performance/webpagetest/"
+  }
+}

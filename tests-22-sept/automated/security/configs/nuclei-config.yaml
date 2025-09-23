@@ -1,0 +1,125 @@
+# Nuclei Configuration - Maximum Scan Depth
+# Version: 3.3.5
+# Purpose: Comprehensive vulnerability scanning for Aclue platform
+
+# Template filters - Use ALL available templates
+templates:
+  - nuclei-templates/
+
+# Severity levels to scan (all enabled for maximum depth)
+severity:
+  - critical
+  - high
+  - medium
+  - low
+  - info
+  - unknown
+
+# Protocol templates to include
+protocols:
+  - dns
+  - file
+  - headless
+  - http
+  - network
+  - ssl
+  - websocket
+  - whois
+  - code
+  - javascript
+
+# Rate limiting for production scanning
+rate-limit: 150
+bulk-size: 25
+concurrency: 25
+
+# Advanced scanning options
+options:
+  # Enable all matchers
+  enable-all-matchers: true
+
+  # Follow redirects
+  follow-redirects: true
+  max-redirects: 10
+
+  # Headers
+  header:
+    - "User-Agent: Nuclei Security Scanner"
+    - "X-Scanner: Aclue-Security-Audit"
+
+  # Timeout settings
+  timeout: 30
+
+  # Retries
+  retries: 3
+
+  # Output settings
+  output-format: json
+
+  # Enable passive mode for safe scanning
+  passive: false
+
+  # Template updates
+  update-templates: true
+
+  # Interactsh server for OOB testing
+  interactsh-url: "https://oast.pro"
+
+  # Debug mode for detailed logs
+  debug: true
+
+  # Verbose output
+  verbose: true
+
+# Scan targets
+targets:
+  production:
+    - https://aclue.app
+    - https://aclue.co.uk
+    - https://aclue-backend-production.up.railway.app
+  development:
+    - http://localhost:3000
+    - http://localhost:8000
+
+# Exclusions (none - scan everything)
+exclude: []
+
+# Custom templates directory
+custom-templates: "./custom-nuclei-templates/"
+
+# Reporting
+reporting:
+  format:
+    - json
+    - markdown
+    - sarif
+  directory: "../reports/"
+
+# Authentication (if needed)
+authentication:
+  # JWT tokens for API testing
+  headers:
+    - "Authorization: Bearer ${JWT_TOKEN}"
+
+# WAF detection and bypass
+waf:
+  detect: true
+  bypass: true
+
+# Crawler settings for deep scanning
+crawler:
+  enabled: true
+  depth: 10
+  max-duration: 60m
+  strategy: "depth-first"
+
+# Advanced fuzzing
+fuzzing:
+  enabled: true
+  mode: "multiple"
+
+# Tech detection
+tech-detect: true
+
+# Cloud metadata detection
+cloud-metadata: true

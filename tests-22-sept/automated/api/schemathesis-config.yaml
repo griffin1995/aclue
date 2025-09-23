@@ -1,0 +1,427 @@
+# Schemathesis Configuration - OpenAPI-based automatic test generation
+# Generates thousands of test cases from API specification
+
+# Base configuration
+base_url: https://aclue-backend-production.up.railway.app
+schema: /api/v1/openapi.json
+
+# Alternative schemas
+schemas:
+  production:
+    location: https://aclue-backend-production.up.railway.app/api/v1/openapi.json
+    base_url: https://aclue-backend-production.up.railway.app
+  development:
+    location: http://localhost:8000/api/v1/openapi.json
+    base_url: http://localhost:8000
+  local_file:
+    location: /home/jack/Documents/aclue-preprod/backend/openapi.json
+    base_url: http://localhost:8000
+
+# Authentication
+auth:
+  type: bearer
+  token: ${SCHEMATHESIS_AUTH_TOKEN}
+  header: Authorization
+  prefix: Bearer
+
+# Test user credentials for dynamic auth
+test_credentials:
+  email: john.doe@example.com
+  password: password123
+  login_endpoint: /api/v1/auth/login
+
+# Check configurations
+checks:
+  # Response validation
+  - not_a_server_error
+  - status_code_conformance
+  - content_type_conformance
+  - response_headers_conformance
+  - response_schema_conformance
+  - negative_data_rejection
+
+  # Security checks
+  - unauthorized_access
+  - forbidden_access
+  - method_not_allowed
+  - unsupported_media_type
+  - unprocessable_entity
+  - too_many_requests
+  - request_timeout
+  - payload_too_large
+
+  # Data validation
+  - required_fields
+  - optional_fields
+  - field_types
+  - field_formats
+  - field_patterns
+  - field_constraints
+  - enum_values
+  - array_items
+  - object_properties
+
+  # Business logic
+  - unique_constraints
+  - referential_integrity
+  - business_rules
+  - state_transitions
+  - idempotency
+  - pagination
+  - filtering
+  - sorting
+  - search
+
+# Generation strategies
+generation:
+  # Hypothesis strategies
+  strategies:
+    # String generation
+    strings:
+      - empty
+      - single_char
+      - ascii
+      - unicode
+      - very_long
+      - sql_injection
+      - xss_payload
+      - command_injection
+      - path_traversal
+      - null_bytes
+      - control_characters
+      - whitespace_variations
+      - case_variations
+
+    # Number generation
+    numbers:
+      - zero
+      - negative
+      - positive
+      - min_value
+      - max_value
+      - overflow
+      - underflow
+      - infinity
+      - nan
+      - scientific_notation
+      - decimal_precision
+
+    # Boolean generation
+    booleans:
+      - true
+      - false
+      - truthy_values
+      - falsy_values
+      - string_booleans
+      - numeric_booleans
+
+    # Array generation
+    arrays:
+      - empty
+      - single_item
+      - duplicates
+      - nested
+      - very_large
+      - mixed_types
+      - null_items
+
+    # Object generation
+    objects:
+      - empty
+      - minimal
+      - maximal
+      - additional_properties
+      - missing_required
+      - null_values
+      - nested_objects
+      - circular_references
+
+    # Date/Time generation
+    datetime:
+      - past
+      - future
+      - invalid_format
+      - timezone_variations
+      - leap_years
+      - dst_transitions
+      - unix_timestamps
+      - iso8601
+
+# Fuzzing configuration
+fuzzing:
+  enabled: true
+  iterations: 10000
+
+  # Mutation strategies
+  mutations:
+    - bit_flip
+    - byte_flip
+    - arithmetic
+    - known_integers
+    - dictionary
+    - havoc
+    - splice
+
+  # Seed corpus
+  corpus_dir: /home/jack/Documents/aclue-preprod/tests-22-sept/automated/api/corpus/
+
+  # Coverage guidance
+  coverage_guided: true
+
+  # Crash detection
+  detect_crashes: true
+  save_crashes: /home/jack/Documents/aclue-preprod/tests-22-sept/automated/api/crashes/
+
+# Stateful testing
+stateful:
+  enabled: true
+
+  # State machine configuration
+  state_machine:
+    # Initial state
+    initial: unauthenticated
+
+    # States
+    states:
+      - unauthenticated
+      - authenticated
+      - admin
+      - product_created
+      - order_placed
+      - payment_processed
+
+    # Transitions
+    transitions:
+      - from: unauthenticated
+        to: authenticated
+        via: login
+      - from: authenticated
+        to: product_created
+        via: create_product
+      - from: authenticated
+        to: order_placed
+        via: place_order
+      - from: order_placed
+        to: payment_processed
+        via: process_payment
+
+  # Link rules
+  links:
+    - source_operation: create_product
+      target_operation: get_product
+      parameter_mapping:
+        product_id: $.id
+
+    - source_operation: place_order
+      target_operation: get_order
+      parameter_mapping:
+        order_id: $.order_id
+
+  # Invariants
+  invariants:
+    - name: authentication_required
+      description: Protected endpoints require authentication
+      check: response.status_code != 401 if authenticated else response.status_code == 401
+
+    - name: data_consistency
+      description: Created data should be retrievable
+      check: created_item in list_items()
+
+# Performance testing
+performance:
+  enabled: true
+
+  # Load testing
+  load_test:
+    users: 100
+    spawn_rate: 10
+    duration: 300
+
+  # Stress testing
+  stress_test:
+    max_users: 1000
+    increment: 100
+    duration: 60
+
+  # Spike testing
+  spike_test:
+    base_users: 50
+    spike_users: 500
+    spike_duration: 10
+
+  # Soak testing
+  soak_test:
+    users: 200
+    duration: 3600
+
+# Reporting
+reporting:
+  # Output formats
+  formats:
+    - json
+    - html
+    - junit
+    - tap
+    - markdown
+
+  # Output directory
+  output_dir: /home/jack/Documents/aclue-preprod/tests-22-sept/automated/reports/
+
+  # Report details
+  include:
+    - summary
+    - failures
+    - errors
+    - statistics
+    - coverage
+    - performance_metrics
+    - security_findings
+
+  # Screenshots on failure
+  screenshots: true
+
+  # HAR file generation
+  har_file: true
+
+# Execution configuration
+execution:
+  # Parallelization
+  workers: 4
+
+  # Timeout
+  timeout: 30
+
+  # Retries
+  max_retries: 3
+
+  # Fail fast
+  fail_fast: false
+
+  # Dry run
+  dry_run: false
+
+  # Verbosity
+  verbosity: 2
+
+  # Random seed
+  seed: 12345
+
+  # Max examples
+  max_examples: 1000
+
+  # Phases
+  phases:
+    - explicit  # Use examples from the schema
+    - generate  # Generate examples
+    - stateful  # Stateful testing
+
+# Hooks
+hooks:
+  # Before all tests
+  before_all: |
+    import requests
+    response = requests.post(
+      "${base_url}/api/v1/auth/login",
+      json={"email": "john.doe@example.com", "password": "password123"}
+    )
+    context.token = response.json()["access_token"]
+
+  # Before each test
+  before_each: |
+    headers.update({"Authorization": f"Bearer {context.token}"})
+
+  # After each test
+  after_each: |
+    if response.status_code >= 500:
+      log_error(f"Server error: {response.text}")
+
+  # After all tests
+  after_all: |
+    generate_report()
+    cleanup_test_data()
+
+# Custom checks
+custom_checks:
+  - name: response_time
+    description: Check response time is under threshold
+    code: |
+      def check_response_time(response, threshold=1000):
+          return response.elapsed.total_seconds() * 1000 < threshold
+
+  - name: rate_limiting
+    description: Check rate limiting headers
+    code: |
+      def check_rate_limiting(response):
+          return "X-RateLimit-Limit" in response.headers
+
+  - name: cors_headers
+    description: Check CORS headers
+    code: |
+      def check_cors_headers(response):
+          required = ["Access-Control-Allow-Origin", "Access-Control-Allow-Methods"]
+          return all(h in response.headers for h in required)
+
+# Target endpoints (can override or filter)
+endpoints:
+  include:
+    - /api/v1/auth/*
+    - /api/v1/products/*
+    - /api/v1/recommendations/*
+    - /api/v1/newsletter/*
+
+  exclude:
+    - /api/v1/admin/*
+    - /api/v1/internal/*
+
+  # Specific endpoint configurations
+  overrides:
+    /api/v1/auth/login:
+      max_examples: 500
+      checks:
+        - not_a_server_error
+        - response_schema_conformance
+
+    /api/v1/products:
+      max_examples: 1000
+      generation:
+        strategies:
+          - boundary_values
+          - edge_cases
+
+# Database state management
+database:
+  # Snapshot before tests
+  snapshot: true
+
+  # Restore after tests
+  restore: true
+
+  # Transaction rollback
+  use_transactions: true
+
+  # Test data cleanup
+  cleanup_query: |
+    DELETE FROM products WHERE name LIKE 'test_%';
+    DELETE FROM users WHERE email LIKE 'test_%';
+
+# Integration with other tools
+integrations:
+  # Export to Postman
+  postman:
+    enabled: true
+    output: /home/jack/Documents/aclue-preprod/tests-22-sept/automated/api/postman_collection.json
+
+  # Export to OpenAPI
+  openapi:
+    enabled: true
+    output: /home/jack/Documents/aclue-preprod/tests-22-sept/automated/api/tested_openapi.json
+
+  # Export to GraphQL
+  graphql:
+    enabled: false
+
+  # Slack notifications
+  slack:
+    enabled: false
+    webhook_url: ${SLACK_WEBHOOK_URL}
+    notify_on: [failure, success]

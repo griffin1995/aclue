@@ -1,0 +1,207 @@
+# Trivy Configuration for Comprehensive Vulnerability Scanning
+# Container, filesystem, and Git repository scanning
+
+# Scan targets
+scan:
+  # Security checks
+  security-checks:
+    - vuln
+    - config
+    - secret
+    - license
+
+  # Scanners
+  scanners:
+    - vuln
+    - misconfig
+    - secret
+    - license
+
+# Vulnerability settings
+vulnerability:
+  # Types to scan
+  type:
+    - os
+    - library
+
+  # Ignore unfixed vulnerabilities
+  ignore-unfixed: false
+
+  # Severity levels
+  severity:
+    - CRITICAL
+    - HIGH
+    - MEDIUM
+    - LOW
+    - UNKNOWN
+
+# Misconfiguration settings
+misconfiguration:
+  # Scan file patterns
+  file-patterns:
+    - dockerfile:Dockerfile*
+    - yaml:*.yaml
+    - yaml:*.yml
+    - json:*.json
+    - toml:*.toml
+
+  # Include non-failures in output
+  include-non-failures: true
+
+  # Policies
+  policy:
+    - /home/jack/Documents/aclue-preprod/tests-22-sept/automated/security/policies/
+
+# Secret detection
+secret:
+  # Config file
+  config: /home/jack/Documents/aclue-preprod/tests-22-sept/automated/security/trivy-secret-config.yaml
+
+# License detection
+license:
+  # Full scan including dev dependencies
+  full: true
+
+  # Confidence level
+  confidence-level: 0.9
+
+  # Forbidden licenses
+  forbidden:
+    - GPL-2.0
+    - GPL-3.0
+    - AGPL-3.0
+
+  # Allowed licenses
+  allowed:
+    - MIT
+    - Apache-2.0
+    - BSD-3-Clause
+    - ISC
+
+# Output settings
+output:
+  # Format
+  format: json
+
+  # Template
+  template: "@/home/jack/Documents/aclue-preprod/tests-22-sept/automated/security/trivy-template.tpl"
+
+  # Report file
+  report: /home/jack/Documents/aclue-preprod/tests-22-sept/automated/reports/trivy-scan.json
+
+# Cache settings
+cache:
+  # Backend
+  backend: fs
+
+  # Cache directory
+  dir: /home/jack/Documents/aclue-preprod/.trivy-cache/
+
+  # TTL
+  ttl: 24h
+
+# Database settings
+db:
+  # Auto update
+  download-db-only: false
+  skip-db-update: false
+
+  # Light mode (smaller DB)
+  light: false
+
+  # Java DB
+  download-java-db-only: false
+  skip-java-db-update: false
+
+# Registry settings
+registry:
+  # Insecure
+  insecure: false
+
+  # Credentials
+  username: ""
+  password: ""
+
+# Rego policy
+rego:
+  # Skip policy checks
+  skip-policy-update: false
+
+  # Policy namespaces
+  policy:
+    - /home/jack/Documents/aclue-preprod/tests-22-sept/automated/security/policies/trivy/
+    - /home/jack/Documents/aclue-preprod/tests-22-sept/automated/security/policies/custom/
+
+  # Data for policies
+  data:
+    - /home/jack/Documents/aclue-preprod/tests-22-sept/automated/security/data/
+
+  # Trace
+  trace: false
+
+# Kubernetes specific
+kubernetes:
+  # Cluster context
+  context: ""
+
+  # Kubeconfig
+  kubeconfig: ""
+
+  # Namespace
+  namespace: ""
+
+# Module settings
+module:
+  # Directory
+  dir: /home/jack/Documents/aclue-preprod/
+
+  # Enable module scanning
+  enable-modules: true
+
+# Timeout
+timeout: 30m
+
+# Exit code
+exit-code: 1
+
+# Quiet mode
+quiet: false
+
+# Debug mode
+debug: false
+
+# List all packages
+list-all-pkgs: true
+
+# By default
+dependency-tree: false
+
+# Scan file paths
+file-patterns:
+  - "**/*.js"
+  - "**/*.ts"
+  - "**/*.tsx"
+  - "**/*.py"
+  - "**/*.yaml"
+  - "**/*.yml"
+  - "**/*.json"
+  - "**/Dockerfile*"
+  - "**/docker-compose*.yml"
+  - "**/.env*"
+  - "**/requirements*.txt"
+  - "**/package*.json"
+  - "**/yarn.lock"
+  - "**/pnpm-lock.yaml"
+  - "**/Pipfile*"
+  - "**/poetry.lock"
+
+# Ignore paths
+skip-dirs:
+  - node_modules
+  - .next
+  - __pycache__
+  - venv
+  - .git
+  - .github
+  - dist
+  - build

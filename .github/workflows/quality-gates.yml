@@ -1,0 +1,745 @@
+name: 🚪 Quality Gates
+
+on:
+  pull_request:
+    branches: [main, develop]
+    types: [opened, synchronize, reopened]
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      gate_level:
+        description: 'Quality gate enforcement level'
+        required: true
+        default: 'standard'
+        type: choice
+        options:
+          - strict
+          - standard
+          - lenient
+
+env:
+  # Quality thresholds
+  MIN_CODE_COVERAGE: 80
+  MAX_DUPLICATION_RATIO: 3.0
+  MIN_MAINTAINABILITY_RATING: 'B'
+  MAX_CRITICAL_ISSUES: 0
+  MAX_MAJOR_ISSUES: 5
+
+  # Security thresholds
+  MAX_CRITICAL_VULNERABILITIES: 0
+  MAX_HIGH_VULNERABILITIES: 2
+
+  # Performance thresholds
+  MIN_LIGHTHOUSE_SCORE: 85
+  MAX_API_RESPONSE_TIME: 2000
+
+permissions:
+  contents: read
+  pull-requests: write
+  statuses: write
+  checks: write
+
+jobs:
+  # ================================================================
+  # QUALITY GATE CONFIGURATION
+  # ================================================================
+
+  gate-setup:
+    name: 🔧 Quality Gate Setup
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    outputs:
+      gate_level: ${{ steps.config.outputs.gate_level }}
+      quality_thresholds: ${{ steps.config.outputs.quality_thresholds }}
+      security_thresholds: ${{ steps.config.outputs.security_thresholds }}
+      performance_thresholds: ${{ steps.config.outputs.performance_thresholds }}
+
+    steps:
+      - name: ⚙️ Configure Quality Gate Level
+        id: config
+        run: |
+          # Determine gate level
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            gate_level="${{ github.event.inputs.gate_level }}"
+          elif [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+            gate_level="strict"
+          elif [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            gate_level="standard"
+          else
+            gate_level="lenient"
+          fi
+
+          echo "gate_level=$gate_level" >> $GITHUB_OUTPUT
+
+          # Configure thresholds based on gate level
+          case "$gate_level" in
+            "strict")
+              quality_thresholds='{"min_coverage":90,"max_duplication":2.0,"min_maintainability":"A","max_critical":0,"max_major":2}'
+              security_thresholds='{"max_critical_vulns":0,"max_high_vulns":0,"max_medium_vulns":5}'
+              performance_thresholds='{"min_lighthouse":90,"max_api_response":1500}'
+              ;;
+            "standard")
+              quality_thresholds='{"min_coverage":80,"max_duplication":3.0,"min_maintainability":"B","max_critical":0,"max_major":5}'
+              security_thresholds='{"max_critical_vulns":0,"max_high_vulns":2,"max_medium_vulns":10}'
+              performance_thresholds='{"min_lighthouse":85,"max_api_response":2000}'
+              ;;
+            "lenient")
+              quality_thresholds='{"min_coverage":70,"max_duplication":5.0,"min_maintainability":"C","max_critical":1,"max_major":10}'
+              security_thresholds='{"max_critical_vulns":1,"max_high_vulns":5,"max_medium_vulns":20}'
+              performance_thresholds='{"min_lighthouse":75,"max_api_response":3000}'
+              ;;
+          esac
+
+          echo "quality_thresholds=$quality_thresholds" >> $GITHUB_OUTPUT
+          echo "security_thresholds=$security_thresholds" >> $GITHUB_OUTPUT
+          echo "performance_thresholds=$performance_thresholds" >> $GITHUB_OUTPUT
+
+      - name: 📊 Display Gate Configuration
+        run: |
+          echo "### 🚪 Quality Gate Configuration" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Gate Level**: ${{ steps.config.outputs.gate_level }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Trigger**: ${{ github.event_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Branch**: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          echo "#### Quality Thresholds" >> $GITHUB_STEP_SUMMARY
+          echo '```json' >> $GITHUB_STEP_SUMMARY
+          echo '${{ steps.config.outputs.quality_thresholds }}' | jq . >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+
+          echo "#### Security Thresholds" >> $GITHUB_STEP_SUMMARY
+          echo '```json' >> $GITHUB_STEP_SUMMARY
+          echo '${{ steps.config.outputs.security_thresholds }}' | jq . >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+
+          echo "#### Performance Thresholds" >> $GITHUB_STEP_SUMMARY
+          echo '```json' >> $GITHUB_STEP_SUMMARY
+          echo '${{ steps.config.outputs.performance_thresholds }}' | jq . >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+
+  # ================================================================
+  # CODE QUALITY GATE
+  # ================================================================
+
+  code-quality-gate:
+    name: 📝 Code Quality Gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    needs: gate-setup
+
+    steps:
+      - name: 🔍 Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18.20.8'
+          cache: 'npm'
+          cache-dependency-path: web/package-lock.json
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: 📦 Install Dependencies
+        run: |
+          # Install frontend dependencies
+          cd web && npm ci --prefer-offline --no-audit
+
+          # Install backend dependencies
+          cd ../backend && pip install -r requirements.txt
+
+          # Install quality tools
+          npm install -g eslint prettier
+          pip install pylint mypy coverage pytest
+
+      - name: 🔍 Run ESLint (Frontend)
+        id: eslint
+        run: |
+          cd web
+          mkdir -p ../quality-results
+
+          # Run ESLint with JSON output
+          if npx eslint . --ext .js,.jsx,.ts,.tsx --format json --output-file ../quality-results/eslint-report.json; then
+            eslint_errors=0
+            eslint_warnings=0
+            echo "eslint_status=PASS" >> $GITHUB_OUTPUT
+          else
+            eslint_errors=$(jq '[.[] | .messages[] | select(.severity == 2)] | length' ../quality-results/eslint-report.json 2>/dev/null || echo "0")
+            eslint_warnings=$(jq '[.[] | .messages[] | select(.severity == 1)] | length' ../quality-results/eslint-report.json 2>/dev/null || echo "0")
+
+            echo "eslint_status=FAIL" >> $GITHUB_OUTPUT
+          fi
+
+          echo "eslint_errors=$eslint_errors" >> $GITHUB_OUTPUT
+          echo "eslint_warnings=$eslint_warnings" >> $GITHUB_OUTPUT
+
+          # Check against thresholds
+          max_critical=$(echo '${{ needs.gate-setup.outputs.quality_thresholds }}' | jq -r '.max_critical')
+          max_major=$(echo '${{ needs.gate-setup.outputs.quality_thresholds }}' | jq -r '.max_major')
+
+          if [[ $eslint_errors -le $max_critical && $eslint_warnings -le $max_major ]]; then
+            echo "eslint_gate_status=PASS" >> $GITHUB_OUTPUT
+          else
+            echo "eslint_gate_status=FAIL" >> $GITHUB_OUTPUT
+          fi
+
+      - name: 🔍 Run Pylint (Backend)
+        id: pylint
+        run: |
+          cd backend
+
+          # Run Pylint with JSON output
+          if pylint app/ --output-format=json --reports=no > ../quality-results/pylint-report.json 2>/dev/null; then
+            pylint_score=10.0
+            echo "pylint_status=PASS" >> $GITHUB_OUTPUT
+          else
+            # Extract score from pylint output
+            pylint_score=$(pylint app/ --reports=yes | grep "Your code has been rated" | awk '{print $7}' | cut -d'/' -f1 || echo "0")
+            echo "pylint_status=FAIL" >> $GITHUB_OUTPUT
+          fi
+
+          echo "pylint_score=$pylint_score" >> $GITHUB_OUTPUT
+
+          # Check against maintainability threshold
+          min_score=$(echo '${{ needs.gate-setup.outputs.quality_thresholds }}' | jq -r '.min_maintainability')
+          case "$min_score" in
+            "A") threshold=9.0 ;;
+            "B") threshold=8.0 ;;
+            "C") threshold=6.0 ;;
+            *) threshold=5.0 ;;
+          esac
+
+          if (( $(echo "$pylint_score >= $threshold" | bc -l) )); then
+            echo "pylint_gate_status=PASS" >> $GITHUB_OUTPUT
+          else
+            echo "pylint_gate_status=FAIL" >> $GITHUB_OUTPUT
+          fi
+
+      - name: 🧪 Run Test Coverage
+        id: coverage
+        run: |
+          cd backend
+
+          # Run tests with coverage
+          if coverage run -m pytest tests/ && coverage report --format=json > ../quality-results/coverage-report.json; then
+            coverage_percentage=$(jq '.totals.percent_covered' ../quality-results/coverage-report.json)
+            echo "coverage_percentage=$coverage_percentage" >> $GITHUB_OUTPUT
+            echo "coverage_status=PASS" >> $GITHUB_OUTPUT
+          else
+            echo "coverage_percentage=0" >> $GITHUB_OUTPUT
+            echo "coverage_status=FAIL" >> $GITHUB_OUTPUT
+          fi
+
+          # Check against coverage threshold
+          min_coverage=$(echo '${{ needs.gate-setup.outputs.quality_thresholds }}' | jq -r '.min_coverage')
+
+          if (( $(echo "$coverage_percentage >= $min_coverage" | bc -l) )); then
+            echo "coverage_gate_status=PASS" >> $GITHUB_OUTPUT
+          else
+            echo "coverage_gate_status=FAIL" >> $GITHUB_OUTPUT
+          fi
+
+      - name: 📊 Code Quality Gate Assessment
+        id: quality_assessment
+        run: |
+          # Aggregate quality gate results
+          local gates_passed=0
+          local total_gates=3
+
+          [[ "${{ steps.eslint.outputs.eslint_gate_status }}" == "PASS" ]] && ((gates_passed++))
+          [[ "${{ steps.pylint.outputs.pylint_gate_status }}" == "PASS" ]] && ((gates_passed++))
+          [[ "${{ steps.coverage.outputs.coverage_gate_status }}" == "PASS" ]] && ((gates_passed++))
+
+          if [[ $gates_passed -eq $total_gates ]]; then
+            echo "code_quality_gate=PASS" >> $GITHUB_OUTPUT
+            gate_status="✅"
+          elif [[ $gates_passed -ge $((total_gates / 2)) ]]; then
+            echo "code_quality_gate=WARNING" >> $GITHUB_OUTPUT
+            gate_status="⚠️"
+          else
+            echo "code_quality_gate=FAIL" >> $GITHUB_OUTPUT
+            gate_status="❌"
+          fi
+
+          # Update step summary
+          echo "### 📝 Code Quality Gate Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Overall Status**: $gate_status" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Check | Status | Value | Threshold | Result |" >> $GITHUB_STEP_SUMMARY
+          echo "|-------|--------|-------|-----------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| ESLint | ${{ steps.eslint.outputs.eslint_status }} | ${{ steps.eslint.outputs.eslint_errors }} errors | ≤ $(echo '${{ needs.gate-setup.outputs.quality_thresholds }}' | jq -r '.max_critical') | ${{ steps.eslint.outputs.eslint_gate_status == 'PASS' && '✅' || '❌' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Pylint | ${{ steps.pylint.outputs.pylint_status }} | ${{ steps.pylint.outputs.pylint_score }}/10 | ≥ Rating $(echo '${{ needs.gate-setup.outputs.quality_thresholds }}' | jq -r '.min_maintainability') | ${{ steps.pylint.outputs.pylint_gate_status == 'PASS' && '✅' || '❌' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Coverage | ${{ steps.coverage.outputs.coverage_status }} | ${{ steps.coverage.outputs.coverage_percentage }}% | ≥ $(echo '${{ needs.gate-setup.outputs.quality_thresholds }}' | jq -r '.min_coverage')% | ${{ steps.coverage.outputs.coverage_gate_status == 'PASS' && '✅' || '❌' }} |" >> $GITHUB_STEP_SUMMARY
+
+      - name: 📋 Upload Quality Results
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: code-quality-gate-results
+          path: quality-results/
+          retention-days: 30
+
+  # ================================================================
+  # SECURITY GATE
+  # ================================================================
+
+  security-gate:
+    name: 🔒 Security Gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: gate-setup
+
+    steps:
+      - name: 🔍 Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18.20.8'
+
+      - name: 🔒 Install Security Tools
+        run: |
+          pip install bandit safety
+          npm install -g audit-ci
+
+      - name: 🔍 Run Bandit Security Scan
+        id: bandit
+        run: |
+          mkdir -p security-gate-results
+
+          # Run Bandit security scan
+          if bandit -r backend/ -f json -o security-gate-results/bandit-report.json; then
+            critical_issues=0
+            high_issues=0
+            medium_issues=0
+            echo "bandit_status=PASS" >> $GITHUB_OUTPUT
+          else
+            critical_issues=$(jq '[.results[] | select(.issue_severity == "HIGH" and .issue_confidence == "HIGH")] | length' security-gate-results/bandit-report.json 2>/dev/null || echo "0")
+            high_issues=$(jq '[.results[] | select(.issue_severity == "HIGH")] | length' security-gate-results/bandit-report.json 2>/dev/null || echo "0")
+            medium_issues=$(jq '[.results[] | select(.issue_severity == "MEDIUM")] | length' security-gate-results/bandit-report.json 2>/dev/null || echo "0")
+            echo "bandit_status=FAIL" >> $GITHUB_OUTPUT
+          fi
+
+          echo "bandit_critical=$critical_issues" >> $GITHUB_OUTPUT
+          echo "bandit_high=$high_issues" >> $GITHUB_OUTPUT
+          echo "bandit_medium=$medium_issues" >> $GITHUB_OUTPUT
+
+          # Check against security thresholds
+          max_critical=$(echo '${{ needs.gate-setup.outputs.security_thresholds }}' | jq -r '.max_critical_vulns')
+          max_high=$(echo '${{ needs.gate-setup.outputs.security_thresholds }}' | jq -r '.max_high_vulns')
+
+          if [[ $critical_issues -le $max_critical && $high_issues -le $max_high ]]; then
+            echo "bandit_gate_status=PASS" >> $GITHUB_OUTPUT
+          else
+            echo "bandit_gate_status=FAIL" >> $GITHUB_OUTPUT
+          fi
+
+      - name: 🔍 Run Dependency Vulnerability Scan
+        id: dependencies
+        run: |
+          cd web
+
+          # Run npm audit
+          if npm audit --audit-level=moderate --json > ../security-gate-results/npm-audit.json 2>/dev/null; then
+            dep_critical=0
+            dep_high=0
+            dep_moderate=0
+            echo "dependencies_status=PASS" >> $GITHUB_OUTPUT
+          else
+            dep_critical=$(jq '.vulnerabilities | map(select(.severity == "critical")) | length' ../security-gate-results/npm-audit.json 2>/dev/null || echo "0")
+            dep_high=$(jq '.vulnerabilities | map(select(.severity == "high")) | length' ../security-gate-results/npm-audit.json 2>/dev/null || echo "0")
+            dep_moderate=$(jq '.vulnerabilities | map(select(.severity == "moderate")) | length' ../security-gate-results/npm-audit.json 2>/dev/null || echo "0")
+            echo "dependencies_status=FAIL" >> $GITHUB_OUTPUT
+          fi
+
+          echo "dependencies_critical=$dep_critical" >> $GITHUB_OUTPUT
+          echo "dependencies_high=$dep_high" >> $GITHUB_OUTPUT
+          echo "dependencies_moderate=$dep_moderate" >> $GITHUB_OUTPUT
+
+          # Check against security thresholds
+          max_critical=$(echo '${{ needs.gate-setup.outputs.security_thresholds }}' | jq -r '.max_critical_vulns')
+          max_high=$(echo '${{ needs.gate-setup.outputs.security_thresholds }}' | jq -r '.max_high_vulns')
+
+          if [[ $dep_critical -le $max_critical && $dep_high -le $max_high ]]; then
+            echo "dependencies_gate_status=PASS" >> $GITHUB_OUTPUT
+          else
+            echo "dependencies_gate_status=FAIL" >> $GITHUB_OUTPUT
+          fi
+
+      - name: 🔐 Run Secret Scan
+        id: secrets
+        run: |
+          # Quick secret detection
+          secret_count=0
+
+          # Check for common secret patterns
+          secret_patterns=(
+            "api[_-]?key[[:space:]]*[=:][[:space:]]*['\"][0-9a-zA-Z]{20,}['\"]"
+            "password[[:space:]]*[=:][[:space:]]*['\"][^'\"]+['\"]"
+            "secret[[:space:]]*[=:][[:space:]]*['\"][^'\"]+['\"]"
+          )
+
+          for pattern in "${secret_patterns[@]}"; do
+            if grep -r -E "$pattern" . --exclude-dir=node_modules --exclude-dir=.git --exclude-dir=venv; then
+              ((secret_count++))
+            fi
+          done
+
+          echo "secrets_found=$secret_count" >> $GITHUB_OUTPUT
+
+          if [[ $secret_count -eq 0 ]]; then
+            echo "secrets_gate_status=PASS" >> $GITHUB_OUTPUT
+          else
+            echo "secrets_gate_status=FAIL" >> $GITHUB_OUTPUT
+          fi
+
+      - name: 🔒 Security Gate Assessment
+        id: security_assessment
+        run: |
+          # Aggregate security gate results
+          gates_passed=0
+          total_gates=3
+
+          [[ "${{ steps.bandit.outputs.bandit_gate_status }}" == "PASS" ]] && ((gates_passed++))
+          [[ "${{ steps.dependencies.outputs.dependencies_gate_status }}" == "PASS" ]] && ((gates_passed++))
+          [[ "${{ steps.secrets.outputs.secrets_gate_status }}" == "PASS" ]] && ((gates_passed++))
+
+          if [[ $gates_passed -eq $total_gates ]]; then
+            echo "security_gate=PASS" >> $GITHUB_OUTPUT
+            gate_status="✅"
+          elif [[ $gates_passed -ge $((total_gates / 2)) ]]; then
+            echo "security_gate=WARNING" >> $GITHUB_OUTPUT
+            gate_status="⚠️"
+          else
+            echo "security_gate=FAIL" >> $GITHUB_OUTPUT
+            gate_status="❌"
+          fi
+
+          # Update step summary
+          echo "### 🔒 Security Gate Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Overall Status**: $gate_status" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Check | Critical | High | Medium | Threshold | Result |" >> $GITHUB_STEP_SUMMARY
+          echo "|-------|----------|------|--------|-----------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Code Security (Bandit) | ${{ steps.bandit.outputs.bandit_critical }} | ${{ steps.bandit.outputs.bandit_high }} | ${{ steps.bandit.outputs.bandit_medium }} | ≤$(echo '${{ needs.gate-setup.outputs.security_thresholds }}' | jq -r '.max_critical_vulns')/≤$(echo '${{ needs.gate-setup.outputs.security_thresholds }}' | jq -r '.max_high_vulns') | ${{ steps.bandit.outputs.bandit_gate_status == 'PASS' && '✅' || '❌' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Dependencies | ${{ steps.dependencies.outputs.dependencies_critical }} | ${{ steps.dependencies.outputs.dependencies_high }} | ${{ steps.dependencies.outputs.dependencies_moderate }} | ≤$(echo '${{ needs.gate-setup.outputs.security_thresholds }}' | jq -r '.max_critical_vulns')/≤$(echo '${{ needs.gate-setup.outputs.security_thresholds }}' | jq -r '.max_high_vulns') | ${{ steps.dependencies.outputs.dependencies_gate_status == 'PASS' && '✅' || '❌' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Secrets | ${{ steps.secrets.outputs.secrets_found }} | - | - | 0 | ${{ steps.secrets.outputs.secrets_gate_status == 'PASS' && '✅' || '❌' }} |" >> $GITHUB_STEP_SUMMARY
+
+      - name: 📋 Upload Security Gate Results
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: security-gate-results
+          path: security-gate-results/
+          retention-days: 30
+
+  # ================================================================
+  # PERFORMANCE GATE
+  # ================================================================
+
+  performance-gate:
+    name: ⚡ Performance Gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: gate-setup
+
+    steps:
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18.20.8'
+
+      - name: 🏗️ Install Lighthouse
+        run: npm install -g lighthouse
+
+      - name: 🏗️ Quick Lighthouse Audit
+        id: lighthouse
+        run: |
+          mkdir -p performance-gate-results
+
+          # Run lightweight Lighthouse audit
+          if lighthouse https://aclue.app \
+               --output=json \
+               --output-path=performance-gate-results/lighthouse-gate.json \
+               --chrome-flags="--headless --no-sandbox" \
+               --only-categories=performance \
+               --throttling-method=simulate \
+               --preset=desktop; then
+
+            performance_score=$(jq '.categories.performance.score * 100' performance-gate-results/lighthouse-gate.json)
+            echo "lighthouse_score=$performance_score" >> $GITHUB_OUTPUT
+            echo "lighthouse_status=PASS" >> $GITHUB_OUTPUT
+          else
+            echo "lighthouse_score=0" >> $GITHUB_OUTPUT
+            echo "lighthouse_status=FAIL" >> $GITHUB_OUTPUT
+          fi
+
+          # Check against performance threshold
+          min_score=$(echo '${{ needs.gate-setup.outputs.performance_thresholds }}' | jq -r '.min_lighthouse')
+
+          if (( $(echo "$performance_score >= $min_score" | bc -l) )); then
+            echo "lighthouse_gate_status=PASS" >> $GITHUB_OUTPUT
+          else
+            echo "lighthouse_gate_status=FAIL" >> $GITHUB_OUTPUT
+          fi
+
+      - name: ⚡ API Response Time Check
+        id: api_performance
+        run: |
+          # Test API response times
+          backend_url="https://aclue-backend-production.up.railway.app"
+
+          total_time=0
+          endpoint_count=0
+
+          endpoints=("/health" "/api/v1/products/" "/api/v1/categories/")
+
+          for endpoint in "${endpoints[@]}"; do
+            response_time=$(curl -w "%{time_total}" -s -o /dev/null --max-time 10 "$backend_url$endpoint")
+            response_time_ms=$(echo "$response_time * 1000" | bc)
+            total_time=$(echo "$total_time + $response_time_ms" | bc)
+            ((endpoint_count++))
+          done
+
+          if [[ $endpoint_count -gt 0 ]]; then
+            avg_response_time=$(echo "scale=0; $total_time / $endpoint_count" | bc)
+          else
+            avg_response_time=9999
+          fi
+
+          echo "api_response_time=$avg_response_time" >> $GITHUB_OUTPUT
+
+          # Check against API performance threshold
+          max_response_time=$(echo '${{ needs.gate-setup.outputs.performance_thresholds }}' | jq -r '.max_api_response')
+
+          if [[ $avg_response_time -le $max_response_time ]]; then
+            echo "api_gate_status=PASS" >> $GITHUB_OUTPUT
+          else
+            echo "api_gate_status=FAIL" >> $GITHUB_OUTPUT
+          fi
+
+      - name: ⚡ Performance Gate Assessment
+        id: performance_assessment
+        run: |
+          # Aggregate performance gate results
+          gates_passed=0
+          total_gates=2
+
+          [[ "${{ steps.lighthouse.outputs.lighthouse_gate_status }}" == "PASS" ]] && ((gates_passed++))
+          [[ "${{ steps.api_performance.outputs.api_gate_status }}" == "PASS" ]] && ((gates_passed++))
+
+          if [[ $gates_passed -eq $total_gates ]]; then
+            echo "performance_gate=PASS" >> $GITHUB_OUTPUT
+            gate_status="✅"
+          elif [[ $gates_passed -ge $((total_gates / 2)) ]]; then
+            echo "performance_gate=WARNING" >> $GITHUB_OUTPUT
+            gate_status="⚠️"
+          else
+            echo "performance_gate=FAIL" >> $GITHUB_OUTPUT
+            gate_status="❌"
+          fi
+
+          # Update step summary
+          echo "### ⚡ Performance Gate Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Overall Status**: $gate_status" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Check | Value | Threshold | Result |" >> $GITHUB_STEP_SUMMARY
+          echo "|-------|-------|-----------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Lighthouse Performance | ${{ steps.lighthouse.outputs.lighthouse_score }}% | ≥$(echo '${{ needs.gate-setup.outputs.performance_thresholds }}' | jq -r '.min_lighthouse')% | ${{ steps.lighthouse.outputs.lighthouse_gate_status == 'PASS' && '✅' || '❌' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| API Response Time | ${{ steps.api_performance.outputs.api_response_time }}ms | ≤$(echo '${{ needs.gate-setup.outputs.performance_thresholds }}' | jq -r '.max_api_response')ms | ${{ steps.api_performance.outputs.api_gate_status == 'PASS' && '✅' || '❌' }} |" >> $GITHUB_STEP_SUMMARY
+
+      - name: 📋 Upload Performance Gate Results
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: performance-gate-results
+          path: performance-gate-results/
+          retention-days: 30
+
+  # ================================================================
+  # OVERALL QUALITY GATE DECISION
+  # ================================================================
+
+  quality-gate-decision:
+    name: 🚪 Quality Gate Decision
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs: [gate-setup, code-quality-gate, security-gate, performance-gate]
+    if: always()
+
+    steps:
+      - name: 📊 Aggregate Gate Results
+        id: aggregate
+        run: |
+          # Count gate results
+          gates_passed=0
+          gates_warning=0
+          gates_failed=0
+          total_gates=3
+
+          # Process each gate result
+          quality_result="${{ needs.code-quality-gate.outputs.code_quality_gate || 'FAIL' }}"
+          security_result="${{ needs.security-gate.outputs.security_gate || 'FAIL' }}"
+          performance_result="${{ needs.performance-gate.outputs.performance_gate || 'FAIL' }}"
+
+          for result in "$quality_result" "$security_result" "$performance_result"; do
+            case "$result" in
+              "PASS") ((gates_passed++)) ;;
+              "WARNING") ((gates_warning++)) ;;
+              *) ((gates_failed++)) ;;
+            esac
+          done
+
+          echo "gates_passed=$gates_passed" >> $GITHUB_OUTPUT
+          echo "gates_warning=$gates_warning" >> $GITHUB_OUTPUT
+          echo "gates_failed=$gates_failed" >> $GITHUB_OUTPUT
+
+          # Determine overall gate status based on gate level
+          gate_level="${{ needs.gate-setup.outputs.gate_level }}"
+
+          case "$gate_level" in
+            "strict")
+              # All gates must pass
+              if [[ $gates_passed -eq $total_gates ]]; then
+                overall_status="PASS"
+              else
+                overall_status="FAIL"
+              fi
+              ;;
+            "standard")
+              # No critical failures allowed, warnings acceptable
+              if [[ $gates_failed -eq 0 ]]; then
+                overall_status="PASS"
+              else
+                overall_status="FAIL"
+              fi
+              ;;
+            "lenient")
+              # Majority must pass or have warnings
+              if [[ $((gates_passed + gates_warning)) -ge $((total_gates / 2 + 1)) ]]; then
+                overall_status="PASS"
+              else
+                overall_status="FAIL"
+              fi
+              ;;
+          esac
+
+          echo "overall_status=$overall_status" >> $GITHUB_OUTPUT
+
+          # Determine status emoji and color
+          case "$overall_status" in
+            "PASS")
+              status_emoji="✅"
+              status_color="green"
+              ;;
+            *)
+              status_emoji="❌"
+              status_color="red"
+              ;;
+          esac
+
+          echo "status_emoji=$status_emoji" >> $GITHUB_OUTPUT
+          echo "status_color=$status_color" >> $GITHUB_OUTPUT
+
+      - name: 📊 Generate Quality Gate Summary
+        run: |
+          echo "### 🚪 Quality Gate Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Overall Result**: ${{ steps.aggregate.outputs.status_emoji }} ${{ steps.aggregate.outputs.overall_status }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Gate Level**: ${{ needs.gate-setup.outputs.gate_level }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          echo "| Gate Category | Result | Details |" >> $GITHUB_STEP_SUMMARY
+          echo "|---------------|--------|---------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Code Quality | ${{ needs.code-quality-gate.outputs.code_quality_gate || 'FAIL' }} | ESLint, Pylint, Coverage |" >> $GITHUB_STEP_SUMMARY
+          echo "| Security | ${{ needs.security-gate.outputs.security_gate || 'FAIL' }} | Bandit, Dependencies, Secrets |" >> $GITHUB_STEP_SUMMARY
+          echo "| Performance | ${{ needs.performance-gate.outputs.performance_gate || 'FAIL' }} | Lighthouse, API Response |" >> $GITHUB_STEP_SUMMARY
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Gate Statistics**:" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Passed: ${{ steps.aggregate.outputs.gates_passed }}" >> $GITHUB_STEP_SUMMARY
+          echo "- ⚠️ Warning: ${{ steps.aggregate.outputs.gates_warning }}" >> $GITHUB_STEP_SUMMARY
+          echo "- ❌ Failed: ${{ steps.aggregate.outputs.gates_failed }}" >> $GITHUB_STEP_SUMMARY
+
+      - name: 🚪 Set Quality Gate Status
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const status = '${{ steps.aggregate.outputs.overall_status }}';
+            const statusColor = '${{ steps.aggregate.outputs.status_color }}';
+            const context = 'Quality Gate';
+
+            await github.rest.repos.createCommitStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: context.sha,
+              state: status === 'PASS' ? 'success' : 'failure',
+              target_url: `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+              description: `Quality gate ${status.toLowerCase()}ed`,
+              context: context
+            });
+
+      - name: 💬 Comment on Pull Request
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const status = '${{ steps.aggregate.outputs.overall_status }}';
+            const emoji = '${{ steps.aggregate.outputs.status_emoji }}';
+            const gateLevel = '${{ needs.gate-setup.outputs.gate_level }}';
+
+            const comment = `## ${emoji} Quality Gate Results
+
+            **Overall Status**: ${status}
+            **Gate Level**: ${gateLevel}
+
+            | Gate Category | Result | Details |
+            |---------------|--------|---------|
+            | Code Quality | ${{ needs.code-quality-gate.outputs.code_quality_gate || 'FAIL' }} | ESLint, Pylint, Coverage |
+            | Security | ${{ needs.security-gate.outputs.security_gate || 'FAIL' }} | Bandit, Dependencies, Secrets |
+            | Performance | ${{ needs.performance-gate.outputs.performance_gate || 'FAIL' }} | Lighthouse, API Response |
+
+            **Statistics**:
+            - ✅ Passed: ${{ steps.aggregate.outputs.gates_passed }}
+            - ⚠️ Warning: ${{ steps.aggregate.outputs.gates_warning }}
+            - ❌ Failed: ${{ steps.aggregate.outputs.gates_failed }}
+
+            ${status === 'FAIL' ? '**❌ This pull request does not meet quality standards and should not be merged.**' : '**✅ This pull request meets quality standards and is ready for review.**'}`;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+
+      - name: 🚪 Quality Gate Decision
+        run: |
+          if [[ "${{ steps.aggregate.outputs.overall_status }}" == "PASS" ]]; then
+            echo "✅ Quality gate PASSED - Ready for deployment"
+            exit 0
+          else
+            echo "❌ Quality gate FAILED - Deployment blocked"
+            echo "Please address the quality issues before proceeding"
+            exit 1
+          fi

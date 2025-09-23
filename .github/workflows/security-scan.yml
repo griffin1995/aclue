@@ -1,0 +1,540 @@
+name: 🔒 Security Scan Pipeline
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+  schedule:
+    # Run security scans every 6 hours
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+    inputs:
+      scan_intensity:
+        description: 'Security scan intensity'
+        required: true
+        default: 'standard'
+        type: choice
+        options:
+          - quick
+          - standard
+          - comprehensive
+
+env:
+  # Security scan configuration
+  SECURITY_SCAN_TIMEOUT: 1800  # 30 minutes
+  ENABLE_SAST: true
+  ENABLE_DEPENDENCY_SCAN: true
+  ENABLE_CONTAINER_SCAN: true
+  ENABLE_SECRET_SCAN: true
+
+  # Notification settings
+  SLACK_SECURITY_WEBHOOK: ${{ secrets.SLACK_SECURITY_WEBHOOK }}
+
+permissions:
+  contents: read
+  security-events: write
+  actions: read
+
+jobs:
+  # ================================================================
+  # SECURITY SCAN PREPARATION
+  # ================================================================
+
+  security-prepare:
+    name: 🔍 Prepare Security Scan
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    outputs:
+      scan_intensity: ${{ steps.config.outputs.scan_intensity }}
+      enable_advanced_scans: ${{ steps.config.outputs.enable_advanced_scans }}
+
+    steps:
+      - name: ⚙️ Configure Scan Parameters
+        id: config
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            echo "scan_intensity=${{ github.event.inputs.scan_intensity }}" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.event_name }}" == "schedule" ]]; then
+            echo "scan_intensity=comprehensive" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.event_name }}" == "push" && "${{ github.ref }}" == "refs/heads/main" ]]; then
+            echo "scan_intensity=standard" >> $GITHUB_OUTPUT
+          else
+            echo "scan_intensity=quick" >> $GITHUB_OUTPUT
+          fi
+
+          # Enable advanced scans for comprehensive mode
+          if [[ "${{ steps.config.outputs.scan_intensity }}" == "comprehensive" ]]; then
+            echo "enable_advanced_scans=true" >> $GITHUB_OUTPUT
+          else
+            echo "enable_advanced_scans=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: 📊 Display Security Configuration
+        run: |
+          echo "### 🔒 Security Scan Configuration" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Parameter | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "|-----------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Scan Intensity | ${{ steps.config.outputs.scan_intensity }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Advanced Scans | ${{ steps.config.outputs.enable_advanced_scans }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Trigger | ${{ github.event_name }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Branch | ${{ github.ref_name }} |" >> $GITHUB_STEP_SUMMARY
+
+  # ================================================================
+  # STATIC APPLICATION SECURITY TESTING (SAST)
+  # ================================================================
+
+  sast-scan:
+    name: 🔎 SAST Security Scan
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    needs: security-prepare
+
+    steps:
+      - name: 🔍 Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18.20.8'
+
+      - name: 🔒 Run Bandit Security Scan (Python)
+        run: |
+          pip install bandit[toml]
+
+          mkdir -p security-results/sast
+
+          echo "Running Bandit security scan on Python code..."
+          if bandit -r backend/ -f json -o security-results/sast/bandit-report.json; then
+            echo "### ✅ Bandit Security Scan - PASSED" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "### ⚠️ Bandit Security Scan - ISSUES FOUND" >> $GITHUB_STEP_SUMMARY
+
+            # Extract and display critical issues
+            if [[ -f "security-results/sast/bandit-report.json" ]]; then
+              echo "" >> $GITHUB_STEP_SUMMARY
+              echo "#### Critical Security Issues:" >> $GITHUB_STEP_SUMMARY
+              echo '```json' >> $GITHUB_STEP_SUMMARY
+              jq '.results[] | select(.issue_severity == "HIGH" or .issue_severity == "MEDIUM") | {severity: .issue_severity, confidence: .issue_confidence, test_name: .test_name, filename: .filename, line_number: .line_number, issue_text: .issue_text}' security-results/sast/bandit-report.json | head -20 >> $GITHUB_STEP_SUMMARY
+              echo '```' >> $GITHUB_STEP_SUMMARY
+            fi
+          fi
+
+      - name: 🔒 Run ESLint Security Scan (JavaScript/TypeScript)
+        working-directory: web
+        run: |
+          npm install --no-save eslint @eslint/js eslint-plugin-security
+
+          echo "Running ESLint security scan on frontend code..."
+          npx eslint . --ext .js,.jsx,.ts,.tsx --format json --output-file ../security-results/sast/eslint-security-report.json --no-eslintrc --config '{"extends": ["@eslint/js/configs/recommended"], "plugins": ["security"], "rules": {"security/detect-object-injection": "error", "security/detect-non-literal-fs-filename": "error", "security/detect-unsafe-regex": "error", "security/detect-buffer-noassert": "error", "security/detect-child-process": "error", "security/detect-disable-mustache-escape": "error", "security/detect-eval-with-expression": "error", "security/detect-no-csrf-before-method-override": "error", "security/detect-non-literal-regexp": "error", "security/detect-non-literal-require": "error", "security/detect-possible-timing-attacks": "error", "security/detect-pseudoRandomBytes": "error"}}' || true
+
+      - name: 🔒 Run CodeQL Analysis
+        uses: github/codeql-action/init@v2
+        with:
+          languages: javascript, python
+
+      - name: 🔍 Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v2
+        with:
+          category: "/language:javascript,python"
+
+      - name: 📋 Upload SAST Results
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: sast-security-results
+          path: security-results/sast/
+          retention-days: 30
+
+  # ================================================================
+  # DEPENDENCY VULNERABILITY SCANNING
+  # ================================================================
+
+  dependency-scan:
+    name: 📦 Dependency Vulnerability Scan
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    needs: security-prepare
+
+    steps:
+      - name: 🔍 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18.20.8'
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: 🔍 Run npm audit (Frontend)
+        working-directory: web
+        run: |
+          mkdir -p ../security-results/dependencies
+
+          echo "Running npm audit on frontend dependencies..."
+          npm audit --audit-level=moderate --json > ../security-results/dependencies/npm-audit.json || true
+
+          # Generate human-readable report
+          npm audit --audit-level=moderate > ../security-results/dependencies/npm-audit.txt || true
+
+      - name: 🔍 Run pip-audit (Backend)
+        run: |
+          pip install pip-audit
+
+          echo "Running pip-audit on backend dependencies..."
+          pip-audit --format=json --output=security-results/dependencies/pip-audit.json backend/ || true
+
+      - name: 🔍 Run Snyk Security Scan
+        if: needs.security-prepare.outputs.enable_advanced_scans == 'true'
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --json-file-output=security-results/dependencies/snyk-report.json
+        continue-on-error: true
+
+      - name: 📊 Analyze Dependency Vulnerabilities
+        run: |
+          echo "### 📦 Dependency Vulnerability Analysis" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          # Analyze npm audit results
+          if [[ -f "security-results/dependencies/npm-audit.json" ]]; then
+            high_vuln=$(jq '.vulnerabilities | map(select(.severity == "high")) | length' security-results/dependencies/npm-audit.json 2>/dev/null || echo "0")
+            critical_vuln=$(jq '.vulnerabilities | map(select(.severity == "critical")) | length' security-results/dependencies/npm-audit.json 2>/dev/null || echo "0")
+
+            echo "| Source | Critical | High | Status |" >> $GITHUB_STEP_SUMMARY
+            echo "|--------|----------|------|--------|" >> $GITHUB_STEP_SUMMARY
+            echo "| npm audit | $critical_vuln | $high_vuln | $([ "$critical_vuln" -eq 0 ] && [ "$high_vuln" -eq 0 ] && echo "✅" || echo "⚠️") |" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          # Analyze pip-audit results
+          if [[ -f "security-results/dependencies/pip-audit.json" ]]; then
+            pip_vulns=$(jq '. | length' security-results/dependencies/pip-audit.json 2>/dev/null || echo "0")
+            echo "| pip-audit | - | $pip_vulns | $([ "$pip_vulns" -eq 0 ] && echo "✅" || echo "⚠️") |" >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: 📋 Upload Dependency Scan Results
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: dependency-security-results
+          path: security-results/dependencies/
+          retention-days: 30
+
+  # ================================================================
+  # SECRET SCANNING
+  # ================================================================
+
+  secret-scan:
+    name: 🔐 Secret Scanning
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: security-prepare
+
+    steps:
+      - name: 🔍 Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🔧 Install Security Tools
+        run: |
+          # Install gitleaks for secret scanning
+          wget -O gitleaks.tar.gz https://github.com/zricethezav/gitleaks/releases/latest/download/gitleaks_*_linux_x64.tar.gz
+          tar -xzf gitleaks.tar.gz
+          sudo mv gitleaks /usr/local/bin/
+
+          # Install truffleHog for additional secret detection
+          pip install truffleHog3
+
+      - name: 🔍 Run Gitleaks Secret Scan
+        run: |
+          mkdir -p security-results/secrets
+
+          echo "Running gitleaks secret scan..."
+          if gitleaks detect --source . --report-format json --report-path security-results/secrets/gitleaks-report.json; then
+            echo "### ✅ Gitleaks Secret Scan - NO SECRETS FOUND" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "### 🚨 Gitleaks Secret Scan - SECRETS DETECTED" >> $GITHUB_STEP_SUMMARY
+
+            if [[ -f "security-results/secrets/gitleaks-report.json" ]]; then
+              secret_count=$(jq '. | length' security-results/secrets/gitleaks-report.json)
+              echo "" >> $GITHUB_STEP_SUMMARY
+              echo "**⚠️ WARNING: $secret_count potential secrets detected!**" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+              echo "Please review the detailed results and remove any exposed secrets." >> $GITHUB_STEP_SUMMARY
+            fi
+          fi
+
+      - name: 🔍 Run TruffleHog Secret Scan
+        if: needs.security-prepare.outputs.enable_advanced_scans == 'true'
+        run: |
+          echo "Running TruffleHog secret scan..."
+          trufflehog3 --format json --output security-results/secrets/trufflehog-report.json . || true
+
+      - name: 📋 Upload Secret Scan Results
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: secret-scan-results
+          path: security-results/secrets/
+          retention-days: 30
+
+  # ================================================================
+  # CONTAINER SECURITY SCANNING
+  # ================================================================
+
+  container-scan:
+    name: 🐳 Container Security Scan
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    needs: security-prepare
+    if: needs.security-prepare.outputs.enable_advanced_scans == 'true'
+
+    steps:
+      - name: 🔍 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🐳 Build Docker Images
+        run: |
+          # Build backend container
+          if [[ -f "backend/Dockerfile" ]]; then
+            docker build -t aclue-backend:security-scan backend/
+          fi
+
+      - name: 🔍 Run Trivy Container Scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'aclue-backend:security-scan'
+          format: 'json'
+          output: 'security-results/container/trivy-report.json'
+
+      - name: 📋 Upload Container Scan Results
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: container-security-results
+          path: security-results/container/
+          retention-days: 30
+
+  # ================================================================
+  # SECURITY REPORT AGGREGATION
+  # ================================================================
+
+  security-report:
+    name: 📊 Security Report Aggregation
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: [security-prepare, sast-scan, dependency-scan, secret-scan]
+    if: always()
+
+    steps:
+      - name: 📥 Download All Security Results
+        uses: actions/download-artifact@v3
+        with:
+          path: all-security-results/
+
+      - name: 📊 Aggregate Security Results
+        run: |
+          mkdir -p aggregated-security-report
+
+          echo "### 🔒 Comprehensive Security Report" > aggregated-security-report/security-summary.md
+          echo "" >> aggregated-security-report/security-summary.md
+          echo "**Scan Date**: $(date)" >> aggregated-security-report/security-summary.md
+          echo "**Scan Intensity**: ${{ needs.security-prepare.outputs.scan_intensity }}" >> aggregated-security-report/security-summary.md
+          echo "**Branch**: ${{ github.ref_name }}" >> aggregated-security-report/security-summary.md
+          echo "**Commit**: ${{ github.sha }}" >> aggregated-security-report/security-summary.md
+          echo "" >> aggregated-security-report/security-summary.md
+
+          # Initialize counters
+          total_issues=0
+          critical_issues=0
+          high_issues=0
+          medium_issues=0
+
+          echo "| Scan Type | Critical | High | Medium | Low | Status |" >> aggregated-security-report/security-summary.md
+          echo "|-----------|----------|------|--------|-----|--------|" >> aggregated-security-report/security-summary.md
+
+          # Process SAST results
+          if [[ -f "all-security-results/sast-security-results/bandit-report.json" ]]; then
+            sast_high=$(jq '[.results[] | select(.issue_severity == "HIGH")] | length' all-security-results/sast-security-results/bandit-report.json 2>/dev/null || echo "0")
+            sast_medium=$(jq '[.results[] | select(.issue_severity == "MEDIUM")] | length' all-security-results/sast-security-results/bandit-report.json 2>/dev/null || echo "0")
+            sast_low=$(jq '[.results[] | select(.issue_severity == "LOW")] | length' all-security-results/sast-security-results/bandit-report.json 2>/dev/null || echo "0")
+
+            high_issues=$((high_issues + sast_high))
+            medium_issues=$((medium_issues + sast_medium))
+
+            status="✅"
+            [[ $sast_high -gt 0 ]] && status="🚨"
+            [[ $sast_medium -gt 5 ]] && status="⚠️"
+
+            echo "| SAST (Bandit) | 0 | $sast_high | $sast_medium | $sast_low | $status |" >> aggregated-security-report/security-summary.md
+          fi
+
+          # Process dependency scan results
+          if [[ -f "all-security-results/dependency-security-results/npm-audit.json" ]]; then
+            dep_critical=$(jq '.vulnerabilities | map(select(.severity == "critical")) | length' all-security-results/dependency-security-results/npm-audit.json 2>/dev/null || echo "0")
+            dep_high=$(jq '.vulnerabilities | map(select(.severity == "high")) | length' all-security-results/dependency-security-results/npm-audit.json 2>/dev/null || echo "0")
+            dep_medium=$(jq '.vulnerabilities | map(select(.severity == "moderate")) | length' all-security-results/dependency-security-results/npm-audit.json 2>/dev/null || echo "0")
+
+            critical_issues=$((critical_issues + dep_critical))
+            high_issues=$((high_issues + dep_high))
+            medium_issues=$((medium_issues + dep_medium))
+
+            status="✅"
+            [[ $dep_critical -gt 0 ]] && status="🚨"
+            [[ $dep_high -gt 0 ]] && status="⚠️"
+
+            echo "| Dependencies | $dep_critical | $dep_high | $dep_medium | - | $status |" >> aggregated-security-report/security-summary.md
+          fi
+
+          # Process secret scan results
+          if [[ -f "all-security-results/secret-scan-results/gitleaks-report.json" ]]; then
+            secret_count=$(jq '. | length' all-security-results/secret-scan-results/gitleaks-report.json 2>/dev/null || echo "0")
+
+            status="✅"
+            [[ $secret_count -gt 0 ]] && status="🚨" && critical_issues=$((critical_issues + secret_count))
+
+            echo "| Secret Scan | $secret_count | 0 | 0 | 0 | $status |" >> aggregated-security-report/security-summary.md
+          fi
+
+          # Calculate total issues
+          total_issues=$((critical_issues + high_issues + medium_issues))
+
+          echo "" >> aggregated-security-report/security-summary.md
+          echo "### 📈 Summary Statistics" >> aggregated-security-report/security-summary.md
+          echo "" >> aggregated-security-report/security-summary.md
+          echo "- **Total Issues**: $total_issues" >> aggregated-security-report/security-summary.md
+          echo "- **Critical**: $critical_issues" >> aggregated-security-report/security-summary.md
+          echo "- **High**: $high_issues" >> aggregated-security-report/security-summary.md
+          echo "- **Medium**: $medium_issues" >> aggregated-security-report/security-summary.md
+
+          # Determine overall security status
+          if [[ $critical_issues -gt 0 ]]; then
+            echo "- **Overall Status**: 🚨 **CRITICAL ISSUES FOUND**" >> aggregated-security-report/security-summary.md
+            echo "SECURITY_STATUS=CRITICAL" >> $GITHUB_ENV
+          elif [[ $high_issues -gt 5 ]]; then
+            echo "- **Overall Status**: ⚠️ **HIGH RISK**" >> aggregated-security-report/security-summary.md
+            echo "SECURITY_STATUS=HIGH_RISK" >> $GITHUB_ENV
+          elif [[ $high_issues -gt 0 || $medium_issues -gt 10 ]]; then
+            echo "- **Overall Status**: ⚠️ **MEDIUM RISK**" >> aggregated-security-report/security-summary.md
+            echo "SECURITY_STATUS=MEDIUM_RISK" >> $GITHUB_ENV
+          else
+            echo "- **Overall Status**: ✅ **SECURE**" >> aggregated-security-report/security-summary.md
+            echo "SECURITY_STATUS=SECURE" >> $GITHUB_ENV
+          fi
+
+          # Create JSON summary
+          cat > aggregated-security-report/security-summary.json << EOF
+          {
+            "scan_intensity": "${{ needs.security-prepare.outputs.scan_intensity }}",
+            "timestamp": "$(date -Iseconds)",
+            "statistics": {
+              "total_issues": $total_issues,
+              "critical_issues": $critical_issues,
+              "high_issues": $high_issues,
+              "medium_issues": $medium_issues
+            },
+            "status": "$SECURITY_STATUS",
+            "github": {
+              "run_id": "${{ github.run_id }}",
+              "sha": "${{ github.sha }}",
+              "ref": "${{ github.ref }}",
+              "actor": "${{ github.actor }}"
+            }
+          }
+          EOF
+
+      - name: 📊 Update Job Summary
+        run: |
+          cat aggregated-security-report/security-summary.md >> $GITHUB_STEP_SUMMARY
+
+      - name: 📋 Upload Aggregated Security Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: aggregated-security-report
+          path: aggregated-security-report/
+          retention-days: 90
+
+      - name: 🔔 Send Security Notification
+        if: env.SLACK_SECURITY_WEBHOOK != ''
+        run: |
+          # Determine notification parameters
+          case "$SECURITY_STATUS" in
+            "CRITICAL")
+              color="danger"
+              emoji="🚨"
+              ;;
+            "HIGH_RISK")
+              color="warning"
+              emoji="⚠️"
+              ;;
+            "MEDIUM_RISK")
+              color="warning"
+              emoji="⚠️"
+              ;;
+            "SECURE")
+              color="good"
+              emoji="✅"
+              ;;
+          esac
+
+          # Send Slack notification
+          curl -X POST -H 'Content-type: application/json' \
+            --data "{
+              \"attachments\": [
+                {
+                  \"color\": \"$color\",
+                  \"title\": \"$emoji Aclue Security Scan Report\",
+                  \"fields\": [
+                    {\"title\": \"Scan Intensity\", \"value\": \"${{ needs.security-prepare.outputs.scan_intensity }}\", \"short\": true},
+                    {\"title\": \"Overall Status\", \"value\": \"$SECURITY_STATUS\", \"short\": true},
+                    {\"title\": \"Critical Issues\", \"value\": \"$critical_issues\", \"short\": true},
+                    {\"title\": \"High Issues\", \"value\": \"$high_issues\", \"short\": true},
+                    {\"title\": \"Branch\", \"value\": \"${{ github.ref_name }}\", \"short\": true},
+                    {\"title\": \"Actor\", \"value\": \"${{ github.actor }}\", \"short\": true}
+                  ],
+                  \"footer\": \"GitHub Actions • Aclue Security Scanner\",
+                  \"ts\": $(date +%s),
+                  \"actions\": [
+                    {
+                      \"type\": \"button\",
+                      \"text\": \"View Details\",
+                      \"url\": \"${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\"
+                    }
+                  ]
+                }
+              ]
+            }" \
+            $SLACK_SECURITY_WEBHOOK || echo "Failed to send security notification"
+
+      - name: 🚪 Security Gate Check
+        run: |
+          case "$SECURITY_STATUS" in
+            "CRITICAL")
+              echo "❌ SECURITY GATE FAILED: Critical security issues found"
+              exit 1
+              ;;
+            "HIGH_RISK")
+              echo "⚠️ SECURITY GATE WARNING: High risk issues found"
+              # Allow to continue but with warning
+              ;;
+            *)
+              echo "✅ SECURITY GATE PASSED: No critical issues found"
+              ;;
+          esac

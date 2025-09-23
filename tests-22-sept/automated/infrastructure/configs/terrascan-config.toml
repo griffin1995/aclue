@@ -1,0 +1,75 @@
+# Terrascan Configuration for Aclue Infrastructure Security Scanning
+# Multi-cloud Infrastructure as Code security analysis
+
+[scan]
+# Scan configurations
+policy-type = ["all"]
+iac-type = ["all"]
+iac-version = ["all"]
+
+# Cloud providers to scan
+cloud-provider = ["aws", "azure", "gcp", "github", "k8s"]
+
+# Policy configurations
+policy-path = []
+skip-rules = []
+severity = ["HIGH", "MEDIUM", "LOW"]
+
+# Scan settings
+scan-rules = []
+skip-rules = []
+categories = ["all"]
+
+# Input/Output configuration
+[output]
+format = "json"
+output-file = "../reports/terrascan-report.json"
+
+# Logging configuration
+[logging]
+level = "info"
+
+# Rules configuration
+[rules]
+# Include all policy packs for comprehensive scanning
+include-policy-packs = ["all"]
+
+# Compliance frameworks
+[compliance]
+# Enable multiple compliance frameworks
+frameworks = [
+    "pci",
+    "nist",
+    "gdpr",
+    "aws-foundational-security-standard",
+    "aws-well-architected-framework",
+    "cis",
+    "k8s-nsa-cisa"
+]
+
+# Notification configuration
+[notifications]
+webhook = ""
+smb = ""
+s3 = ""
+
+# Repository scan settings
+[repo]
+# Git repository settings
+branch = "main"
+commit-id = ""
+
+# Remote repository settings
+[remote]
+remote-type = ""
+remote-url = ""
+
+# Server settings (if using server mode)
+[server]
+port = 9010
+cert-path = ""
+private-key-path = ""
+
+# K8s specific settings
+[k8s]
+namespace = []

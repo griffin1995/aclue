@@ -1,0 +1,104 @@
+# npm audit report
+
+axios  <=1.11.0
+Severity: high
+Axios Cross-Site Request Forgery Vulnerability - https://github.com/advisories/GHSA-wf5p-g6vw-rhxx
+axios Requests Vulnerable To Possible SSRF and Credential Leakage via Absolute URL - https://github.com/advisories/GHSA-jr5f-v2jv-69x6
+Axios is vulnerable to DoS attack through lack of data size check - https://github.com/advisories/GHSA-4hjh-wcwx-xvwj
+fix available via `npm audit fix`
+node_modules/axios
+node_modules/posthog-node/node_modules/axios
+  posthog-node  <=1.3.0 || 2.1.0 - 3.1.2
+  Depends on vulnerable versions of axios
+  node_modules/posthog-node
+    artillery  1.3.8 - 2.0.24
+    Depends on vulnerable versions of posthog-node
+    Depends on vulnerable versions of tmp
+    node_modules/artillery
+
+cookie  <0.7.0
+cookie accepts cookie name, path, and domain with out of bounds characters - https://github.com/advisories/GHSA-pxg6-pf52-xh8x
+fix available via `npm audit fix --force`
+Will install lighthouse-ci@1.10.0, which is a breaking change
+node_modules/cookie
+  raven  >=0.6.1
+  Depends on vulnerable versions of cookie
+  node_modules/raven
+    lighthouse  1.6.5 - 9.4.0
+    Depends on vulnerable versions of lodash.set
+    Depends on vulnerable versions of raven
+    Depends on vulnerable versions of update-notifier
+    node_modules/lighthouse-ci/node_modules/lighthouse
+      lighthouse-ci  >=1.7.0
+      Depends on vulnerable versions of lighthouse
+      Depends on vulnerable versions of update-notifier
+      node_modules/lighthouse-ci
+
+faker  =6.6.6
+Severity: high
+Removal of functional code in faker.js - https://github.com/advisories/GHSA-5w9c-rv96-fr7g
+fix available via `npm audit fix --force`
+Will install faker@5.5.3, which is a breaking change
+node_modules/faker
+
+got  <11.8.5
+Severity: moderate
+Got allows a redirect to a UNIX socket - https://github.com/advisories/GHSA-pfrx-2q88-qq97
+fix available via `npm audit fix --force`
+Will install lighthouse-ci@1.10.0, which is a breaking change
+node_modules/got
+  package-json  <=6.5.0
+  Depends on vulnerable versions of got
+  node_modules/package-json
+    latest-version  0.2.0 - 5.1.0
+    Depends on vulnerable versions of package-json
+    node_modules/latest-version
+      update-notifier  0.2.0 - 5.1.0
+      Depends on vulnerable versions of latest-version
+      node_modules/lighthouse-ci/node_modules/lighthouse/node_modules/update-notifier
+      node_modules/update-notifier
+
+lodash.set  *
+Severity: high
+Prototype Pollution in lodash - https://github.com/advisories/GHSA-p6mc-m468-83gw
+fix available via `npm audit fix --force`
+Will install lighthouse-ci@1.10.0, which is a breaking change
+node_modules/lodash.set
+
+next  0.9.9 - 14.2.31
+Severity: moderate
+Next.js Affected by Cache Key Confusion for Image Optimization API Routes - https://github.com/advisories/GHSA-g5qg-72qw-gw5v
+Next.js Improper Middleware Redirect Handling Leads to SSRF - https://github.com/advisories/GHSA-4342-x723-ch2f
+Next.js Content Injection Vulnerability for Image Optimization - https://github.com/advisories/GHSA-xv57-4mr9-wg8v
+fix available via `npm audit fix`
+node_modules/next
+
+tmp  <=0.2.3
+tmp allows arbitrary temporary file / directory write via symbolic link `dir` parameter - https://github.com/advisories/GHSA-52f5-9888-hmc6
+fix available via `npm audit fix --force`
+Will install @lhci/cli@0.1.0, which is a breaking change
+node_modules/@lhci/cli/node_modules/tmp
+node_modules/external-editor/node_modules/tmp
+node_modules/testcafe/node_modules/tmp
+node_modules/tmp
+  @lhci/cli  *
+  Depends on vulnerable versions of inquirer
+  Depends on vulnerable versions of tmp
+  node_modules/@lhci/cli
+  external-editor  >=1.1.1
+  Depends on vulnerable versions of tmp
+  node_modules/external-editor
+    inquirer  3.0.0 - 8.2.6 || 9.0.0 - 9.3.7
+    Depends on vulnerable versions of external-editor
+    node_modules/inquirer
+  testcafe  0.16.1 - 3.7.2
+  Depends on vulnerable versions of tmp
+  node_modules/testcafe
+
+19 vulnerabilities (7 low, 5 moderate, 7 high)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force

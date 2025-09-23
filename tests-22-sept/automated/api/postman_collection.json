@@ -1,0 +1,26 @@
+{
+    "info": {
+        "_postman_id": "aclue-api-test-collection",
+        "name": "Aclue API Test Collection",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Auth Register",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\"email\":\"test@aclue.app\",\"password\":\"testpassword\"}"
+                },
+                "url": {
+                    "raw": "https://aclue-backend-production.up.railway.app/api/v1/auth/register",
+                    "protocol": "https",
+                    "host": ["aclue-backend-production", "up", "railway", "app"],
+                    "path": ["api", "v1", "auth", "register"]
+                }
+            }
+        }
+    ]
+}
