@@ -1,5 +1,5 @@
 """
-Comprehensive backend testing suite for Aclue platform
+Comprehensive backend testing suite for aclue platform
 Using pytest with all extensions
 """
 

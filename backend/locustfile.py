@@ -1,5 +1,5 @@
 """
-Comprehensive Locust load testing suite for Aclue backend
+Comprehensive Locust load testing suite for aclue backend
 """
 
 from locust import HttpUser, task, between, events
@@ -14,8 +14,8 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-class AclueUser(HttpUser):
-    """Simulates a typical Aclue platform user"""
+class aclueUser(HttpUser):
+    """Simulates a typical aclue platform user"""
 
     wait_time = between(1, 5)
     host = "https://aclue-backend-production.up.railway.app"
@@ -138,7 +138,7 @@ class AclueUser(HttpUser):
         logger.info(f"User stopping: {self.email}")
 
 
-class PowerUser(AclueUser):
+class PowerUser(aclueUser):
     """Simulates a power user with more intensive usage patterns"""
 
     wait_time = between(0.5, 2)
@@ -191,7 +191,7 @@ class AdminUser(HttpUser):
             time.sleep(0.5)
 
 
-class MobileUser(AclueUser):
+class MobileUser(aclueUser):
     """Simulates mobile app user behavior"""
 
     wait_time = between(2, 8)
@@ -201,7 +201,7 @@ class MobileUser(AclueUser):
         super().on_start()
         # Mobile-specific headers
         self.client.headers.update({
-            "User-Agent": "Aclue-Mobile/1.0.0 (iOS)",
+            "User-Agent": "aclue-Mobile/1.0.0 (iOS)",
             "X-Device-Type": "mobile",
         })
 

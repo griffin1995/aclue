@@ -1,4 +1,4 @@
-# Aclue App Router Migration - Session State Preservation
+# aclue App Router Migration - Session State Preservation
 **Date**: 22 September 2025
 **Time**: Session End
 **Migration Week**: 8 of 10
@@ -370,7 +370,7 @@ Week 10:  Final Migration & Rollout      ⏳ PENDING
 ### Quick Resume Command
 When returning, start with:
 ```
-"Continue Aclue App Router migration from Phase 6 Testing & Validation.
+"Continue aclue App Router migration from Phase 6 Testing & Validation.
 Reference: /docs/MIGRATION_STATE_2025_09_22.md
 Current week: 8 of 10, 80% complete."
 ```
@@ -379,4 +379,4 @@ Current week: 8 of 10, 80% complete."
 
 **END OF SESSION STATE DOCUMENT**
 
-*This document preserves the complete state of the Aclue App Router migration as of September 22, 2025. Use this for seamless session resumption.*
+*This document preserves the complete state of the aclue App Router migration as of September 22, 2025. Use this for seamless session resumption.*

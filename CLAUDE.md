@@ -11,7 +11,7 @@ Use Read tool to read: /home/jack/Documents/aclue-preprod/CLAUDE.md
 
 **STEP 2: EXTRACT ALL SESSION CONTEXT**
 - Parse all project context, current status, and development notes
-- Understand the complete Aclue project scope and current state
+- Understand the complete aclue project scope and current state
 - Identify current priorities and any blockers
 - Review authentication status, deployment status, and technical architecture
 
@@ -20,17 +20,17 @@ Use Read tool to read: /home/jack/Documents/aclue-preprod/CLAUDE.md
 Use Task tool with these exact parameters:
 Tool: Task
 Agent: context-manager
-Description: "Activate context-manager for Aclue project session leadership"
+Description: "Activate context-manager for aclue project session leadership"
 ```
 
 **MANDATORY Context-manager prompt template:**
 ```
 CONTEXT-MANAGER ACTIVATION - ACLUE PROJECT SESSION
 
-I have successfully read the complete CLAUDE.md file and extracted all project context. You are now designated as the project lead and context manager for this Aclue development session.
+I have successfully read the complete CLAUDE.md file and extracted all project context. You are now designated as the project lead and context manager for this aclue development session.
 
 CURRENT PROJECT STATE SUMMARY:
-• Platform: Aclue - AI-powered gifting platform
+• Platform: aclue - AI-powered gifting platform
 • Domains: aclue.app (primary), aclue.co.uk (secondary)
 • Stack: Next.js 14 frontend (Vercel) + FastAPI backend (Railway) + Supabase PostgreSQL
 • Authentication: ✅ FULLY OPERATIONAL - JWT-based auth using user_metadata
@@ -50,11 +50,11 @@ CRITICAL DEVELOPMENT RULES IN EFFECT:
 CONTEXT-MANAGER RESPONSIBILITIES:
 1. IMMEDIATELY confirm you are taking project leadership of this session
 2. Coordinate ALL subsequent tasks by selecting appropriate specialist agents
-3. Maintain awareness of complete Aclue project scope and current state
+3. Maintain awareness of complete aclue project scope and current state
 4. Ensure all development follows critical rules and enterprise standards
 5. Manage task delegation and progress tracking for all user requests
 
-Please confirm your activation and readiness to manage this Aclue development session.
+Please confirm your activation and readiness to manage this aclue development session.
 ```
 
 **STEP 4: VERIFY CONTEXT-MANAGER ACTIVATION**
@@ -108,7 +108,7 @@ Please confirm your activation and readiness to manage this Aclue development se
 ### 🎯 SUCCESS INDICATORS:
 **Context-manager activation is successful when:**
 - ✅ Context-manager explicitly confirms taking project leadership
-- ✅ Context-manager acknowledges complete Aclue project state summary
+- ✅ Context-manager acknowledges complete aclue project state summary
 - ✅ Context-manager confirms readiness to coordinate all tasks
 - ✅ Context-manager mentions understanding of critical development rules
 - ✅ Context-manager provides clear indication they are now in control
@@ -147,7 +147,7 @@ Please confirm your activation and readiness to manage this Aclue development se
 
 ---
 
-# Aclue Platform Status - September 2025
+# aclue Platform Status - September 2025
 
 ## 🎉 PLATFORM STATUS: PRODUCTION OPERATIONAL ✅
 
@@ -291,22 +291,22 @@ NEXT_PUBLIC_WEB_URL=https://aclue.app
 
 ### Page Structure
 - `/` - Maintenance page with email signup
-- `/landingpage` - Full Aclue application (alpha)
+- `/landingpage` - Full aclue application (alpha)
 - `/discover` - Product discovery interface
 
 ---
 
 ## Rebranding Documentation ✅
 
-### Brand Evolution: GiftSync → prznt → Aclue
+### Brand Evolution: GiftSync → prznt → aclue
 **Completed**: August 2025
-**Current Brand**: Aclue
+**Current Brand**: aclue
 **Domains**:
 - Primary: aclue.app
 - Secondary: aclue.co.uk (for UK market)
 
 ### Brand Guidelines
-- **Name**: Always use "Aclue" (proper case)
+- **Name**: Always use "aclue" (proper case)
 - **Tagline**: "AI-powered gifting platform"
 - **Colour Scheme**: Modern glassmorphism design
 - **Typography**: Clean, professional fonts
@@ -407,7 +407,7 @@ chore: maintenance tasks
 
 ## Session Notes
 
-This CLAUDE.md file serves as the single source of truth for the Aclue project. It contains:
+This CLAUDE.md file serves as the single source of truth for the aclue project. It contains:
 - Current production status and URLs
 - Technical architecture and configuration
 - Development guidelines and standards

@@ -2,7 +2,7 @@
 #
 # Newsletter Testing Runner Script
 #
-# This script provides an easy way to run all newsletter tests for the Aclue platform.
+# This script provides an easy way to run all newsletter tests for the aclue platform.
 # It supports different testing modes and environments.
 #
 # Usage:
@@ -153,7 +153,7 @@ run_quick_test() {
 
 # Main execution
 main() {
-    print_header "Aclue Newsletter Testing Suite"
+    print_header "aclue Newsletter Testing Suite"
     echo "Mode: $MODE"
     echo "Backend: $BACKEND_URL"
     echo "Frontend: $FRONTEND_URL"

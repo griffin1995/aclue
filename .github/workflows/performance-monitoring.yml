@@ -568,14 +568,14 @@ jobs:
               \"attachments\": [
                 {
                   \"color\": \"$STATUS_COLOR\",
-                  \"title\": \"$STATUS_EMOJI Aclue Performance Monitoring Report\",
+                  \"title\": \"$STATUS_EMOJI aclue Performance Monitoring Report\",
                   \"fields\": [
                     {\"title\": \"Overall Status\", \"value\": \"$OVERALL_STATUS\", \"short\": true},
                     {\"title\": \"Environment\", \"value\": \"$(echo '${{ needs.performance-setup.outputs.target_urls }}' | jq -r '.environment')\", \"short\": true},
                     {\"title\": \"Lighthouse Score\", \"value\": \"${{ needs.lighthouse-audit.outputs.performance_score || 'N/A' }}%\", \"short\": true},
                     {\"title\": \"API Response Time\", \"value\": \"${{ needs.api-performance.outputs.avg_response_time || 'N/A' }}ms\", \"short\": true}
                   ],
-                  \"footer\": \"GitHub Actions • Aclue Performance Monitor\",
+                  \"footer\": \"GitHub Actions • aclue Performance Monitor\",
                   \"ts\": $(date +%s),
                   \"actions\": [
                     {
