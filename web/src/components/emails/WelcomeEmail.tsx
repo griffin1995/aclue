@@ -193,17 +193,13 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
             </Text>
           </Section>
 
-          {/* Primary CTA Button */}
+          {/* Early Access Status */}
           <Section style={{ textAlign: 'center', margin: '32px 0' }}>
-            <Button
-              className="cta-button"
-              style={ctaButton}
-              href="https://aclue.app"
-            >
-              Get Started with aclue
-            </Button>
+            <Text className="text-body" style={{ ...text, textAlign: 'center', fontSize: '18px', fontWeight: '600', color: '#f03dff' }}>
+              🚀 You're now on our priority early access list
+            </Text>
             <Text className="text-small" style={{ ...text, fontSize: '14px', margin: '12px 0 0 0', textAlign: 'center' }}>
-              Start discovering personalised gift recommendations in seconds
+              We'll notify you the moment aclue launches
             </Text>
           </Section>
 
@@ -215,7 +211,7 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
               Thank you for subscribing to our newsletter, {email.split('@')[0]}! You're now part of the aclue community, where AI-powered gifting meets personalised discovery.
             </Text>
             <Text className="text-body text" style={text}>
-              We'll keep you updated with the latest features, intelligent gift recommendations, and exclusive early access to new capabilities before anyone else.
+              We'll keep you updated with development progress, exclusive behind-the-scenes insights, and priority access when we're ready to launch.
             </Text>
           </Section>
 
@@ -250,18 +246,14 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
             </div>
           </Section>
 
-          {/* Call to Action Section */}
+          {/* Pre-Launch Excitement Section */}
           <Section className="section-spacing" style={{ textAlign: 'center', margin: '36px 0' }}>
             <Text className="text-body text" style={text}>
-              Ready to transform how you discover and give gifts? The future of thoughtful gifting starts here, and we're thrilled to have you with us.
+              We're working tirelessly to create something truly special. The future of thoughtful gifting starts here, and we're thrilled to have you with us on this journey.
             </Text>
-            <Button
-              className="cta-button"
-              style={ctaButtonSecondary}
-              href="https://aclue.app/discover"
-            >
-              Explore Gift Recommendations
-            </Button>
+            <Text className="text-body" style={{ ...text, fontStyle: 'italic', color: '#6b7280' }}>
+              Stay tuned for exclusive previews and be the first to experience aclue when we launch.
+            </Text>
           </Section>
 
           <Hr style={divider} />
