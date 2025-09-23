@@ -1,0 +1,60 @@
+{
+  "budgets": [
+    {
+      "path": "/*",
+      "timings": {
+        "firstContentfulPaint": 1800,
+        "largestContentfulPaint": 2500,
+        "totalBlockingTime": 300,
+        "cumulativeLayoutShift": 0.1,
+        "speedIndex": 3400,
+        "timeToInteractive": 3800,
+        "maxPotentialFid": 100
+      },
+      "requests": {
+        "total": 50,
+        "javascript": 10,
+        "css": 5,
+        "image": 20,
+        "font": 5
+      },
+      "transferSize": {
+        "total": 2097152,
+        "javascript": 524288,
+        "css": 131072,
+        "image": 1048576,
+        "font": 262144
+      },
+      "score": {
+        "performance": 85,
+        "accessibility": 95,
+        "bestPractices": 90,
+        "seo": 90
+      }
+    },
+    {
+      "path": "/",
+      "timings": {
+        "firstContentfulPaint": 1500,
+        "largestContentfulPaint": 2000,
+        "totalBlockingTime": 200
+      }
+    },
+    {
+      "path": "/landingpage",
+      "timings": {
+        "firstContentfulPaint": 2000,
+        "largestContentfulPaint": 2800,
+        "totalBlockingTime": 400
+      }
+    },
+    {
+      "path": "/discover",
+      "timings": {
+        "firstContentfulPaint": 1800,
+        "largestContentfulPaint": 2500,
+        "totalBlockingTime": 350
+      }
+    }
+  ]
+}

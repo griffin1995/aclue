@@ -1,0 +1,272 @@
+# OWASP ZAP Configuration - Maximum Scan Depth
+# Version: Latest Stable
+# Purpose: Deep penetration testing for Aclue platform
+
+context:
+  name: "Aclue Security Audit"
+  description: "Comprehensive security testing for Aclue platform"
+
+  # Include all URLs in scope
+  include_regexes:
+    - "https://aclue\\.app.*"
+    - "https://aclue\\.co\\.uk.*"
+    - "https://aclue-backend-production\\.up\\.railway\\.app.*"
+    - "http://localhost:3000.*"
+    - "http://localhost:8000.*"
+
+  # No exclusions - scan everything
+  exclude_regexes: []
+
+scanning:
+  # Attack strength (INSANE for maximum depth)
+  attack_strength: "INSANE"
+
+  # Alert threshold (LOW to catch everything)
+  alert_threshold: "LOW"
+
+  # Scan policy
+  policy: "Maximum Strength"
+
+  # Number of threads
+  thread_count: 10
+
+  # Delay between requests (ms)
+  delay: 100
+
+  # Maximum scan duration (minutes)
+  max_duration: 240
+
+  # Max depth of crawling
+  max_depth: 10
+
+  # Max children to crawl
+  max_children: 0  # Unlimited
+
+spider:
+  # Spider settings for deep crawling
+  max_depth: 10
+  thread_count: 10
+  max_duration: 60  # minutes
+  max_children: 0  # Unlimited
+
+  # Parse options
+  parse_comments: true
+  parse_git: true
+  parse_robots_txt: true
+  parse_sitemap_xml: true
+  parse_svn: true
+
+  # Post form processing
+  process_forms: true
+  post_form: true
+
+  # Handle OData
+  handle_odata: true
+
+ajax_spider:
+  # AJAX Spider for JavaScript-heavy apps
+  enabled: true
+  max_duration: 60  # minutes
+  browser: "chrome-headless"
+  max_crawl_depth: 10
+  max_crawl_states: 0  # Unlimited
+
+  # Event wait time (ms)
+  event_wait: 1000
+  reload_wait: 1000
+
+active_scan:
+  # Active scan rules - ALL enabled
+  scan_rules:
+    - id: 0     # Directory Browsing
+    - id: 2     # Private IP Disclosure
+    - id: 3     # Session ID in URL Rewrite
+    - id: 6     # Path Traversal
+    - id: 7     # Remote File Include
+    - id: 30001 # Buffer Overflow
+    - id: 30002 # Format String
+    - id: 40003 # CRLF Injection
+    - id: 40008 # Parameter Tampering
+    - id: 40009 # Server Side Include
+    - id: 40012 # Cross Site Scripting (Reflected)
+    - id: 40014 # Cross Site Scripting (Persistent)
+    - id: 40016 # Cross Site Scripting (DOM)
+    - id: 40017 # Cross Site Scripting (Persistent) - Prime
+    - id: 40018 # SQL Injection
+    - id: 40019 # SQL Injection (MySQL)
+    - id: 40020 # SQL Injection (Hypersonic)
+    - id: 40021 # SQL Injection (Oracle)
+    - id: 40022 # SQL Injection (PostgreSQL)
+    - id: 40023 # XML Injection
+    - id: 40024 # Command Injection
+    - id: 40025 # Proxy Disclosure
+    - id: 40026 # Cross Site Scripting (DOM Based)
+    - id: 40027 # SQL Injection (MsSQL)
+    - id: 40028 # LDAP Injection
+    - id: 40029 # XPath Injection
+    - id: 40032 # XXE
+    - id: 40034 # .env Information Leak
+    - id: 40035 # Hidden Files
+    - id: 41     # Source Code Disclosure
+    - id: 42     # External Redirect
+    - id: 43     # Code Injection
+    - id: 90001 # Insecure JSF ViewState
+    - id: 90011 # Charset Mismatch
+    - id: 90018 # Advanced SQL Injection
+    - id: 90019 # Server Side Code Injection
+    - id: 90020 # Remote OS Command Injection
+    - id: 90021 # XPath Injection
+    - id: 90022 # Application Error
+    - id: 90023 # XML External Entity Attack
+    - id: 90024 # Generic Padding Oracle
+    - id: 90025 # Expression Language Injection
+    - id: 90026 # SOAP Action Spoofing
+    - id: 90027 # Cookie Slack Detector
+    - id: 90028 # Insecure HTTP Method
+    - id: 90029 # SOAP XML Injection
+    - id: 90030 # WSDL File Detection
+    - id: 90033 # Loosely Scoped Cookie
+    - id: 90034 # Cloud Metadata Attack
+
+  # Technology specific scans
+  technology_specific:
+    - javascript
+    - python
+    - nodejs
+    - react
+    - nextjs
+    - fastapi
+
+passive_scan:
+  # Enable all passive scan rules
+  enable_all: true
+
+  # Scan response headers
+  scan_headers: true
+
+  # Scan cookies
+  scan_cookies: true
+
+  # Information disclosure
+  info_disclosure: true
+
+authentication:
+  # Authentication configuration
+  method: "json"
+
+  login_url: "https://aclue-backend-production.up.railway.app/api/v1/auth/login"
+
+  # Test credentials
+  username: "john.doe@example.com"
+  password: "password123"
+
+  # Session management
+  session_tokens:
+    - "access_token"
+    - "refresh_token"
+
+api:
+  # API scanning configuration
+  openapi:
+    - "https://aclue-backend-production.up.railway.app/openapi.json"
+
+  # GraphQL endpoint
+  graphql: []
+
+  # Import format
+  import_format: "openapi"
+
+reporting:
+  # Report generation
+  formats:
+    - html
+    - xml
+    - json
+    - md
+    - sarif
+
+  # Include in reports
+  include_confidence:
+    - high
+    - medium
+    - low
+    - false_positive
+
+  include_risk:
+    - high
+    - medium
+    - low
+    - informational
+
+alerts:
+  # Alert filters - Report everything
+  min_confidence: "FALSE_POSITIVE"
+  min_risk: "INFORMATIONAL"
+
+addons:
+  # Enable all addons for comprehensive testing
+  enabled:
+    - accessControl
+    - alertFilters
+    - alertReport
+    - allinonenotes
+    - ascanrules
+    - ascanrulesAlpha
+    - ascanrulesBeta
+    - authhelper
+    - automation
+    - bruteforce
+    - bugtracker
+    - callhome
+    - commonlib
+    - database
+    - diff
+    - directorylistv1
+    - domxss
+    - encoder
+    - exportreport
+    - formhandler
+    - fuzz
+    - gettingStarted
+    - graaljs
+    - graphql
+    - help
+    - highlighter
+    - httpsessions
+    - importLogFiles
+    - invoke
+    - jsonview
+    - network
+    - oast
+    - onlineMenu
+    - openapi
+    - paramdigger
+    - pscanrules
+    - pscanrulesAlpha
+    - pscanrulesBeta
+    - quickstart
+    - replacer
+    - reports
+    - requester
+    - retire
+    - reveal
+    - revisit
+    - saml
+    - scripts
+    - selenium
+    - sequence
+    - simpleexample
+    - soap
+    - spider
+    - spiderAjax
+    - sqliplugin
+    - sse
+    - tips
+    - todo
+    - tokengen
+    - treetools
+    - viewstate
+    - wappalyzer
+    - webdrivers
+    - websocket
+    - zest

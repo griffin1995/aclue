@@ -1,0 +1,20 @@
+{
+    "lighthouse": {
+        "enabled": true,
+        "chrome_flags": ["--headless", "--no-sandbox"],
+        "throttling": "simulated3G",
+        "form_factor": "desktop"
+    },
+    "artillery": {
+        "enabled": true,
+        "arrival_rate": 10,
+        "duration": 60,
+        "target": "https://aclue-backend-production.up.railway.app"
+    },
+    "wrk": {
+        "enabled": false,
+        "threads": 4,
+        "connections": 100,
+        "duration": "30s"
+    }
+}

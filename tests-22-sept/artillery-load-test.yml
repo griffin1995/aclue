@@ -1,0 +1,160 @@
+config:
+  target: "https://aclue-backend-production.up.railway.app"
+  phases:
+    - duration: 60
+      arrivalRate: 5
+      name: "Warm up"
+    - duration: 120
+      arrivalRate: 10
+      name: "Ramp up"
+    - duration: 300
+      arrivalRate: 25
+      name: "Sustained load"
+    - duration: 120
+      arrivalRate: 50
+      name: "Spike test"
+    - duration: 60
+      arrivalRate: 5
+      name: "Cool down"
+
+  payload:
+    - path: "./test-users.csv"
+      fields:
+        - "email"
+        - "password"
+      order: sequence
+
+  variables:
+    frontend_url: "https://aclue.app"
+    api_base: "https://aclue-backend-production.up.railway.app"
+    test_email: "john.doe@example.com"
+    test_password: "password123"
+
+  processor: "./artillery-processors.js"
+
+  ensure:
+    p95: 500
+    p99: 1000
+    maxErrorRate: 1
+
+  plugins:
+    expect: {}
+    metrics-by-endpoint: {}
+    publish-metrics:
+      - type: "statsd"
+        host: "localhost"
+        port: 8125
+        prefix: "artillery.aclue"
+
+before:
+  flow:
+    - log: "Starting Artillery performance test for Aclue platform"
+    - think: 1
+
+scenarios:
+  - name: "Complete User Journey"
+    weight: 40
+    flow:
+      - get:
+          url: "/"
+          capture:
+            - json: "$.csrfToken"
+              as: "csrfToken"
+
+      - think: 2
+
+      - post:
+          url: "/api/v1/auth/login"
+          json:
+            email: "{{ test_email }}"
+            password: "{{ test_password }}"
+          capture:
+            - json: "$.access_token"
+              as: "authToken"
+            - json: "$.refresh_token"
+              as: "refreshToken"
+          expect:
+            - statusCode: 200
+            - hasProperty: "access_token"
+
+      - think: 1
+
+      - get:
+          url: "/api/v1/auth/me"
+          headers:
+            Authorization: "Bearer {{ authToken }}"
+          expect:
+            - statusCode: 200
+            - hasProperty: "email"
+
+      - think: 2
+
+      - get:
+          url: "/api/v1/products/"
+          headers:
+            Authorization: "Bearer {{ authToken }}"
+          expect:
+            - statusCode: 200
+            - contentType: "application/json"
+
+      - think: 1
+
+      - get:
+          url: "/api/v1/recommendations/"
+          headers:
+            Authorization: "Bearer {{ authToken }}"
+          expect:
+            - statusCode: 200
+
+  - name: "API Stress Test"
+    weight: 30
+    flow:
+      - loop:
+        - get:
+            url: "/health"
+            expect:
+              - statusCode: 200
+              - responseTime: 100
+
+        - get:
+            url: "/api/v1/products/"
+            expect:
+              - statusCode: 200
+
+        - think: 0.5
+
+        count: 10
+
+  - name: "Newsletter Subscription Flow"
+    weight: 15
+    flow:
+      - post:
+          url: "/api/v1/newsletter/subscribe"
+          json:
+            email: "test_{{ $randomNumber() }}@example.com"
+          expect:
+            - statusCode:
+                - 200
+                - 201
+
+  - name: "Static Assets Loading"
+    weight: 15
+    flow:
+      - get:
+          url: "{{ frontend_url }}"
+          expect:
+            - statusCode: 200
+
+      - get:
+          url: "{{ frontend_url }}/favicon.ico"
+          expect:
+            - statusCode: 200
+
+      - get:
+          url: "{{ frontend_url }}/manifest.json"
+          expect:
+            - statusCode: 200
+
+after:
+  flow:
+    - log: "Artillery test completed"

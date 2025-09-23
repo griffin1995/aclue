@@ -1,0 +1,199 @@
+{
+  "defaults": {
+    "timeout": 120000,
+    "wait": 2000,
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "concurrency": 4,
+    "standard": "WCAG2AA",
+    "runners": [
+      "htmlcs",
+      "axe"
+    ],
+    "chromeLaunchConfig": {
+      "headless": true,
+      "args": [
+        "--no-sandbox",
+        "--disable-setuid-sandbox",
+        "--disable-dev-shm-usage",
+        "--disable-accelerated-2d-canvas",
+        "--no-first-run",
+        "--no-zygote",
+        "--disable-gpu"
+      ]
+    },
+    "headers": {
+      "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+      "Accept-Language": "en-GB,en;q=0.5",
+      "Cache-Control": "no-cache",
+      "Connection": "keep-alive",
+      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+    },
+    "includeNotices": true,
+    "includeWarnings": true,
+    "reporter": "json",
+    "reporterOptions": {
+      "fileName": "/home/jack/Documents/aclue-preprod/tests-22-sept/automated/reports/pa11y-accessibility-report.json"
+    },
+    "ignore": [
+      "WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail",
+      "WCAG2AA.Principle1.Guideline1_4.1_4_3.G145.Fail"
+    ],
+    "actions": [
+      "wait for element .content to be visible",
+      "set field #email to john.doe@example.com",
+      "set field #password to password123",
+      "click element #login-button",
+      "wait for url to not contain /login"
+    ],
+    "screenCapture": "/home/jack/Documents/aclue-preprod/tests-22-sept/automated/reports/pa11y-screenshots/"
+  },
+  "urls": [
+    {
+      "url": "https://aclue.app",
+      "label": "Homepage",
+      "actions": [],
+      "screenCapture": "/home/jack/Documents/aclue-preprod/tests-22-sept/automated/reports/screenshots/homepage.png"
+    },
+    {
+      "url": "https://aclue.app/landingpage",
+      "label": "Landing Page",
+      "actions": [],
+      "screenCapture": "/home/jack/Documents/aclue-preprod/tests-22-sept/automated/reports/screenshots/landingpage.png"
+    },
+    {
+      "url": "https://aclue.app/discover",
+      "label": "Discover Page",
+      "actions": [],
+      "screenCapture": "/home/jack/Documents/aclue-preprod/tests-22-sept/automated/reports/screenshots/discover.png"
+    },
+    {
+      "url": "http://localhost:3000",
+      "label": "Development Homepage",
+      "actions": []
+    },
+    {
+      "url": "http://localhost:3000/landingpage",
+      "label": "Development Landing Page",
+      "actions": []
+    },
+    {
+      "url": "http://localhost:3000/discover",
+      "label": "Development Discover Page",
+      "actions": []
+    }
+  ],
+  "sitemap": {
+    "url": "https://aclue.app/sitemap.xml",
+    "exclude": [
+      "https://aclue.app/admin/*",
+      "https://aclue.app/api/*"
+    ],
+    "find": "https://aclue.app",
+    "replace": "https://aclue.app",
+    "timeout": 30000
+  },
+  "scenarios": [
+    {
+      "name": "Mobile View",
+      "viewport": {
+        "width": 375,
+        "height": 667
+      }
+    },
+    {
+      "name": "Tablet View",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      }
+    },
+    {
+      "name": "Desktop View",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      }
+    },
+    {
+      "name": "High Contrast Mode",
+      "actions": [
+        "emulate media (prefers-contrast: high)"
+      ]
+    },
+    {
+      "name": "Dark Mode",
+      "actions": [
+        "emulate media (prefers-color-scheme: dark)"
+      ]
+    },
+    {
+      "name": "Reduced Motion",
+      "actions": [
+        "emulate media (prefers-reduced-motion: reduce)"
+      ]
+    }
+  ],
+  "rules": {
+    "color-contrast": {
+      "enabled": true,
+      "level": "AA"
+    },
+    "valid-lang": {
+      "enabled": true
+    },
+    "meta-viewport": {
+      "enabled": true
+    },
+    "image-alt": {
+      "enabled": true
+    },
+    "link-name": {
+      "enabled": true
+    },
+    "button-name": {
+      "enabled": true
+    },
+    "label": {
+      "enabled": true
+    },
+    "aria-valid-attr": {
+      "enabled": true
+    },
+    "aria-valid-attr-value": {
+      "enabled": true
+    },
+    "aria-roles": {
+      "enabled": true
+    },
+    "focus-order-semantics": {
+      "enabled": true
+    },
+    "heading-order": {
+      "enabled": true
+    },
+    "landmark-one-main": {
+      "enabled": true
+    },
+    "page-has-heading-one": {
+      "enabled": true
+    },
+    "region": {
+      "enabled": true
+    },
+    "skip-link": {
+      "enabled": true
+    },
+    "bypass": {
+      "enabled": true
+    }
+  },
+  "output": {
+    "json": "/home/jack/Documents/aclue-preprod/tests-22-sept/automated/reports/pa11y-full-report.json",
+    "csv": "/home/jack/Documents/aclue-preprod/tests-22-sept/automated/reports/pa11y-full-report.csv",
+    "html": "/home/jack/Documents/aclue-preprod/tests-22-sept/automated/reports/pa11y-full-report.html",
+    "markdown": "/home/jack/Documents/aclue-preprod/tests-22-sept/automated/reports/pa11y-full-report.md"
+  }
+}

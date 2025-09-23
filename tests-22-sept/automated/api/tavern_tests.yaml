@@ -1,0 +1,30 @@
+test_name: Test Aclue API Endpoints
+
+includes:
+  - !include common.yaml
+
+stages:
+  - name: Test Authentication Endpoints
+    request:
+      url: https://aclue-backend-production.up.railway.app/api/v1/auth/login
+      method: POST
+      json:
+        email: test@aclue.app
+        password: testpassword
+    response:
+      status_code: 200
+      json:
+        access_token:
+          type: string
+        refresh_token:
+          type: string
+
+  - name: Test Products Endpoint
+    request:
+      url: https://aclue-backend-production.up.railway.app/api/v1/products/
+      method: GET
+    response:
+      status_code: 200
+      json:
+        products:
+          type: array

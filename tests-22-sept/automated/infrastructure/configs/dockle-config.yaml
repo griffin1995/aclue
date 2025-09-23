@@ -1,0 +1,50 @@
+# Dockle Configuration for Aclue Infrastructure Docker Security Analysis
+# CIS Docker Benchmark compliance and security best practices
+
+# Output configuration
+format: json
+output: ../reports/dockle-report.json
+
+# Ignore rules (empty for comprehensive analysis)
+ignore: []
+
+# Accept keys for allowed practices
+accept-key:
+  - MAINTAINER  # Allow MAINTAINER instruction
+  - HEALTHCHECK  # Allow missing HEALTHCHECK
+
+# Accept file paths that are allowed to exist
+accept-file-path:
+  - /tmp  # Allow temporary files
+  - /var/tmp  # Allow temporary files
+
+# Timeout configuration
+timeout: 600s
+
+# Debug mode
+debug: false
+
+# Exit code configuration
+exit-code: 0  # Don't fail CI on findings, just report
+
+# Severity levels to check
+checkpoints:
+  - CIS-DI-0001  # Create a user for the container
+  - CIS-DI-0002  # Use trusted base images for containers
+  - CIS-DI-0003  # Do not install unnecessary packages in the container
+  - CIS-DI-0004  # Scan and rebuild the images to include security patches
+  - CIS-DI-0005  # Enable Content trust for Docker
+  - CIS-DI-0006  # Add HEALTHCHECK instruction to the container image
+  - CIS-DI-0007  # Do not use update instructions alone in the Dockerfile
+  - CIS-DI-0008  # Remove setuid and setgid permissions in the images
+  - CIS-DI-0009  # Use COPY instead of ADD in Dockerfile
+  - CIS-DI-0010  # Do not store secrets in Dockerfiles
+  - DKL-DI-0001  # Avoid sudo command
+  - DKL-DI-0002  # Avoid sensitive directory mounting
+  - DKL-DI-0003  # Avoid clear text credentials
+  - DKL-DI-0004  # Avoid secret files
+  - DKL-DI-0005  # Avoid package managers cache
+  - DKL-DI-0006  # Avoid latest tag
+
+# Custom ignore patterns (if needed)
+ignore-unfixed: false

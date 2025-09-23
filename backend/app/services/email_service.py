@@ -53,7 +53,7 @@ class EmailService:
         self.resend_api_key = settings.RESEND_API_KEY
         # Rebranded email addresses (August 2025) - updated from aclue/aclue domains
         self.from_email = "aclue <noreply@aclue.app>"        # Primary sender for all notifications
-        self.admin_email = "contact@aclue.app"               # Admin notifications recipient
+        self.admin_email = "jtgriffin95@gmail.com"               # Admin notifications recipient
         self.base_url = "https://api.resend.com"
         
     async def send_welcome_email(self, email: str, source: str) -> bool:

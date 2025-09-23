@@ -1,0 +1,24 @@
+{
+    "bandit": {
+        "enabled": true,
+        "config_file": ".bandit",
+        "severity_level": "medium",
+        "confidence_level": "medium",
+        "exclude_paths": ["*/tests/*", "*/test_*", "*/venv/*", "*/__pycache__/*"]
+    },
+    "safety": {
+        "enabled": true,
+        "check_dependencies": true,
+        "ignore_ids": []
+    },
+    "gitleaks": {
+        "enabled": true,
+        "config_file": ".gitleaks.toml",
+        "scan_history": false
+    },
+    "semgrep": {
+        "enabled": false,
+        "rules": ["auto"],
+        "exclude_paths": ["*/node_modules/*", "*/venv/*"]
+    }
+}

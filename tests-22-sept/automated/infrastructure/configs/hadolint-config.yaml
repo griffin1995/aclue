@@ -1,0 +1,68 @@
+# Hadolint Configuration for Aclue Infrastructure Dockerfile Analysis
+# Comprehensive Dockerfile best practices enforcement
+
+# Ignore rules (empty for comprehensive analysis)
+ignored: []
+
+# Trusted registries for base images
+trustedRegistries:
+  - docker.io
+  - registry.hub.docker.com
+  - quay.io
+  - gcr.io
+  - registry.gitlab.com
+  - ghcr.io
+
+# Allow specific labels (for metadata)
+allowedLabels:
+  - maintainer
+  - version
+  - description
+  - org.opencontainers.image.*
+  - com.github.*
+
+# Strict mode settings
+strict-labels: true
+
+# Enable all available rules for comprehensive analysis
+rules:
+  # Require explicit base image tags
+  DL3006: error
+  # Pin versions in pip install
+  DL3013: error
+  # Pin versions in npm install
+  DL3016: error
+  # Pin versions in gem install
+  DL3028: error
+  # Use COPY instead of ADD for files
+  DL3020: error
+  # Use HTTPS for source URLs
+  DL3003: error
+  # Avoid using latest tag
+  DL3007: error
+  # Confirm deletion of the package cache
+  DL3009: error
+  # Use absolute WORKDIR
+  DL3000: error
+  # Avoid sudo in containers
+  DL3004: error
+  # Use multi-stage builds
+  DL3042: warning
+  # Avoid unnecessary packages
+  DL3015: warning
+  # Clean package cache
+  DL3027: error
+
+# Custom rule overrides (if needed)
+override:
+  error: []
+  warning: []
+  info: []
+  style: []
+
+# Format configuration
+format: json
+output: ../reports/hadolint-report.json
+
+# Failure threshold
+failure-threshold: error

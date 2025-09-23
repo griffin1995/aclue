@@ -1,0 +1,185 @@
+# Semgrep Configuration for Aclue Code Analysis
+# Framework-aware scanning for Next.js and FastAPI
+
+rules:
+  # Next.js Security Rules
+  - id: nextjs-xss-dangerouslysetinnerhtml
+    pattern: dangerouslySetInnerHTML={...}
+    message: Potential XSS vulnerability with dangerouslySetInnerHTML
+    severity: ERROR
+    languages: [tsx, jsx, typescript, javascript]
+
+  - id: nextjs-api-auth-check
+    patterns:
+      - pattern: |
+          export $METHOD = async (...) => {
+            ...
+          }
+      - pattern-not: |
+          export $METHOD = async (...) => {
+            ...
+            $AUTH_CHECK
+            ...
+          }
+      - metavariable-regex:
+          metavariable: $METHOD
+          regex: (GET|POST|PUT|DELETE|PATCH)
+      - metavariable-pattern:
+          metavariable: $AUTH_CHECK
+          patterns:
+            - pattern: verifyToken(...)
+            - pattern: authenticate(...)
+            - pattern: requireAuth(...)
+    message: API route without authentication check
+    severity: WARNING
+    languages: [typescript, javascript]
+    paths:
+      include:
+        - web/app/api/**
+
+  # FastAPI Security Rules
+  - id: fastapi-sql-injection
+    patterns:
+      - pattern: |
+          db.execute(f"...")
+      - pattern: |
+          db.execute("..." % ...)
+      - pattern: |
+          db.execute("...".format(...))
+    message: Potential SQL injection vulnerability
+    severity: ERROR
+    languages: [python]
+
+  - id: fastapi-missing-validation
+    patterns:
+      - pattern: |
+          @app.$METHOD("...")
+          async def $FUNC(...):
+              ...
+      - pattern-not: |
+          @app.$METHOD("...")
+          async def $FUNC(...: $PYDANTIC_MODEL):
+              ...
+      - metavariable-regex:
+          metavariable: $METHOD
+          regex: (post|put|patch)
+    message: FastAPI endpoint without Pydantic validation
+    severity: WARNING
+    languages: [python]
+
+  # JWT Security
+  - id: jwt-hardcoded-secret
+    patterns:
+      - pattern: |
+          SECRET_KEY = "..."
+      - pattern: |
+          JWT_SECRET = "..."
+    message: Hardcoded JWT secret detected
+    severity: ERROR
+    languages: [python, javascript, typescript]
+
+  # Supabase Security
+  - id: supabase-exposed-keys
+    patterns:
+      - pattern-regex: 'SUPABASE_SERVICE_ROLE_KEY\s*=\s*["\']eyJ[^"\']+["\']'
+      - pattern-regex: 'supabase_service_role_key\s*=\s*["\']eyJ[^"\']+["\']'
+    message: Exposed Supabase service role key
+    severity: ERROR
+
+  # CORS Issues
+  - id: cors-wildcard-origin
+    patterns:
+      - pattern: |
+          Access-Control-Allow-Origin: "*"
+      - pattern: |
+          cors_origins = ["*"]
+      - pattern: |
+          allow_origins=["*"]
+    message: CORS wildcard origin allows any domain
+    severity: WARNING
+
+  # Authentication Bypass
+  - id: auth-bypass-detection
+    patterns:
+      - pattern: |
+          if $CONDITION:
+              return True
+          ...
+          verify_token(...)
+      - pattern: |
+          return {..., authenticated: true}
+    message: Potential authentication bypass
+    severity: ERROR
+
+  # Data Exposure
+  - id: sensitive-data-logging
+    patterns:
+      - pattern: |
+          console.log($PASSWORD)
+      - pattern: |
+          logger.info(f"...{password}...")
+      - pattern: |
+          print($TOKEN)
+    message: Sensitive data in logs
+    severity: ERROR
+    metavariable-regex:
+      metavariable: $PASSWORD
+      regex: .*(password|token|secret|key|credential).*
+
+  # Input Validation
+  - id: unvalidated-redirect
+    patterns:
+      - pattern: |
+          redirect($USER_INPUT)
+      - pattern: |
+          router.push($USER_INPUT)
+    message: Unvalidated redirect vulnerability
+    severity: ERROR
+
+# Configuration
+config:
+  # Scan paths
+  paths:
+    include:
+      - /home/jack/Documents/aclue-preprod/web/
+      - /home/jack/Documents/aclue-preprod/backend/
+    exclude:
+      - node_modules/
+      - .next/
+      - __pycache__/
+      - venv/
+
+  # Output
+  output_format: json
+  output_file: /home/jack/Documents/aclue-preprod/tests-22-sept/automated/reports/semgrep-scan.json
+
+  # Metrics
+  metrics: on
+
+  # Auto-fix
+  autofix: false
+
+  # CI mode
+  ci: true
+
+  # Max target size
+  max_target_bytes: 10000000
+
+  # Timeout
+  timeout: 300
+
+# Custom rule sets
+rulesets:
+  - nextjs-security
+  - fastapi-security
+  - owasp-top-10
+  - cwe-top-25
+  - security-audit
+  - crypto
+  - jwt
+  - sql-injection
+  - xss
+  - xxe
+  - cors
+  - authentication
+  - authorization

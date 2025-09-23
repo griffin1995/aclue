@@ -1,0 +1,345 @@
+# Semgrep Configuration - Maximum Security Depth
+# Version: Latest
+# Purpose: Source code security analysis for Aclue platform
+
+# Rule sources - Use ALL available rulesets
+rules:
+  # Core security rulesets
+  - r/security
+  - r/security-audit
+  - r/secrets
+  - r/owasp
+  - r/cwe-top-25
+
+  # Language-specific security rules
+  - r/python
+  - r/javascript
+  - r/typescript
+  - r/react
+  - r/nodejs
+  - r/nextjs
+  - r/docker
+
+  # Framework-specific rules
+  - r/fastapi
+  - r/express
+  - r/jwt
+
+  # Cloud and infrastructure
+  - r/terraform
+  - r/kubernetes
+  - r/aws
+  - r/gcp
+  - r/azure
+
+  # Best practices and anti-patterns
+  - r/best-practices
+  - r/correctness
+  - r/performance
+  - r/maintainability
+  - r/portability
+
+  # Compliance
+  - r/pci-dss
+  - r/hipaa
+  - r/gdpr
+  - r/sox
+
+  # Supply chain
+  - r/supply-chain
+  - r/dependency-check
+
+  # Custom rules
+  - p/default
+  - p/security-audit
+  - p/secrets
+  - p/owasp-top-ten
+  - p/r2c-security-audit
+  - p/r2c-best-practices
+  - p/r2c-bug-scan
+  - p/supply-chain
+  - p/semgrep-rule-board-block
+  - p/semgrep-rule-board-audit
+
+  # Auto-download community rules
+  - auto
+
+# Severity levels to report
+severity:
+  - ERROR
+  - WARNING
+  - INFO
+  - INVENTORY
+
+# Confidence levels
+confidence:
+  - HIGH
+  - MEDIUM
+  - LOW
+  - INVENTORY
+
+# Maximum analysis settings
+max_analysis:
+  # Deep analysis
+  deep: true
+
+  # Follow all imports
+  resolve_imports: true
+
+  # Scan test files too
+  include_tests: true
+
+  # Maximum file size (MB)
+  max_file_size: 100
+
+  # Maximum memory (GB)
+  max_memory: 8
+
+  # Timeout per file (seconds)
+  timeout: 300
+
+  # Dataflow analysis
+  dataflow:
+    enabled: true
+    depth: 10
+
+  # Taint analysis
+  taint:
+    enabled: true
+    sources: all
+    sinks: all
+
+  # Pattern matching
+  pattern:
+    deep_matching: true
+    fuzzy_matching: true
+
+# Scan paths
+paths:
+  include:
+    - .
+
+  exclude:
+    - node_modules/
+    - venv/
+    - security-venv/
+    - .git/
+    - __pycache__/
+    - .next/
+    - build/
+    - dist/
+
+# File extensions to scan
+extensions:
+  # Frontend
+  - .js
+  - .jsx
+  - .ts
+  - .tsx
+  - .mjs
+  - .cjs
+
+  # Backend
+  - .py
+  - .pyi
+
+  # Configuration
+  - .json
+  - .yaml
+  - .yml
+  - .toml
+  - .ini
+  - .env
+  - .env.example
+  - .env.local
+  - .env.production
+
+  # Infrastructure
+  - .tf
+  - .tfvars
+  - Dockerfile
+  - docker-compose.yml
+  - docker-compose.yaml
+  - .dockerignore
+
+  # Shell scripts
+  - .sh
+  - .bash
+
+  # SQL
+  - .sql
+
+  # HTML/CSS
+  - .html
+  - .htm
+  - .css
+  - .scss
+  - .sass
+
+  # Markdown
+  - .md
+  - .mdx
+
+  # Config files
+  - .gitignore
+  - .npmrc
+  - .yarnrc
+  - package.json
+  - package-lock.json
+  - yarn.lock
+  - requirements.txt
+  - Pipfile
+  - Pipfile.lock
+  - pyproject.toml
+
+# Output configuration
+output:
+  format:
+    - json
+    - sarif
+    - junit-xml
+    - text
+    - vim
+    - emacs
+
+  # Verbose output
+  verbose: true
+
+  # Include dataflow traces
+  dataflow_traces: true
+
+  # Include file content
+  include_snippets: true
+
+  # Max lines of context
+  max_lines_per_finding: 10
+
+  # Group by rule
+  group_by_rule: true
+
+# Metrics and telemetry
+metrics:
+  enabled: true
+
+  # Performance metrics
+  performance: true
+
+  # Rule metrics
+  rule_stats: true
+
+  # File metrics
+  file_stats: true
+
+# Auto-fix dangerous patterns
+autofix:
+  enabled: false  # Set to false for audit, true for fixing
+
+  # Only fix high-confidence issues
+  confidence_threshold: HIGH
+
+# Custom patterns to detect
+custom_patterns:
+  # Hardcoded secrets
+  - pattern: |
+      $KEY = "..."
+      ...
+      password = $KEY
+  - pattern: |
+      api_key = "..."
+  - pattern: |
+      secret = "..."
+
+  # SQL injection
+  - pattern: |
+      query = f"SELECT * FROM {$USER_INPUT}"
+  - pattern: |
+      db.execute($USER_INPUT)
+
+  # XSS vulnerabilities
+  - pattern: |
+      dangerouslySetInnerHTML={{__html: $USER_INPUT}}
+  - pattern: |
+      innerHTML = $USER_INPUT
+
+  # Command injection
+  - pattern: |
+      os.system($USER_INPUT)
+  - pattern: |
+      subprocess.call($USER_INPUT, shell=True)
+
+  # Path traversal
+  - pattern: |
+      open(f"/path/{$USER_INPUT}")
+  - pattern: |
+      fs.readFile($USER_INPUT)
+
+# Experimental features
+experimental:
+  # Use all experimental features
+  enable_all: true
+
+  # Specific experimental features
+  constant_propagation: true
+  type_inference: true
+  interprocedural: true
+  field_sensitivity: true
+  index_sensitivity: true
+
+# API configuration for Semgrep App
+api:
+  # Enable cloud features
+  enabled: false  # Set to true if using Semgrep App
+
+  # Upload findings
+  upload_findings: false
+
+  # Policy management
+  policy: "maximum-security"
+
+# CI/CD integration
+ci:
+  # Fail on findings
+  fail_on_error: false  # Set to true in CI
+  fail_on_warning: false
+
+  # Baseline
+  baseline_commit: HEAD~1
+
+  # Diff-aware scanning
+  diff_aware: true
+
+# Parallelization
+parallel:
+  # Number of jobs
+  jobs: 8
+
+  # Use all available cores
+  use_max_cores: true
+
+# Caching
+cache:
+  # Enable caching
+  enabled: true
+
+  # Cache directory
+  directory: /tmp/semgrep-cache
+
+  # Cache TTL (hours)
+  ttl: 24
+
+# Debugging
+debug:
+  # Enable debug output
+  enabled: true
+
+  # Debug level
+  level: DEBUG
+
+  # Show AST
+  show_ast: false
+
+  # Show dataflow graph
+  show_dataflow: false
+
+  # Profile performance
+  profile: true

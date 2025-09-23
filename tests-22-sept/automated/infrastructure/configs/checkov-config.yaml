@@ -1,0 +1,74 @@
+# Checkov Configuration for Aclue Infrastructure Security Scanning
+# Comprehensive Infrastructure as Code security analysis
+
+# Basic configuration
+quiet: false
+compact: true
+output: ["cli", "json"]
+output-file-path: "../reports/checkov-report.json"
+
+# Framework configuration - enable all supported IaC frameworks
+framework: 
+  - terraform
+  - terraform_plan
+  - cloudformation
+  - kubernetes
+  - helm
+  - dockerfile
+  - secrets
+  - arm
+  - bicep
+  - github_configuration
+  - gitlab_configuration
+  - azure_pipelines
+  - circleci_pipelines
+  - serverless
+
+# Directory scanning
+directory: "../../"
+exclude-paths:
+  - "node_modules"
+  - ".git"
+  - "venv"
+  - ".next"
+  - "dist"
+  - "build"
+  - ".vercel"
+  - ".railway"
+
+# Check configuration
+skip-check: []  # Don't skip any checks for comprehensive analysis
+include-all-checkov-policies: true
+
+# Severity filtering - include all levels for comprehensive analysis
+check-type: ["all"]
+
+# Secrets scanning configuration
+secrets-scan-file-type: ["all"]
+
+# Repository configuration
+repo-id: "aclue-preprod"
+branch: "main"
+
+# Performance configuration
+parallel: true
+external-checks-dir: []
+
+# Reporting configuration
+create-baseline: false
+baseline: null
+
+# Policy configuration
+policy-metadata-filter: ""
+policy-metadata-filter-exception: ""
+
+# Compliance frameworks
+compliance-framework: ["pci", "nist", "iso27001", "gdpr", "soc2"]
+
+# Custom configurations for cloud providers
+aws-access-keys-id: null
+aws-secret-access-key: null
+aws-session-token: null
+
+# Logging
+log-level: "INFO"

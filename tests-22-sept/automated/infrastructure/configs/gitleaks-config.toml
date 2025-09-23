@@ -1,0 +1,116 @@
+# Gitleaks Configuration for Aclue Infrastructure Secret Detection
+# Comprehensive secret scanning configuration
+
+title = "Aclue Infrastructure Secret Detection"
+
+# Global configuration
+[extend]
+# Use default Gitleaks rules plus custom rules
+useDefault = true
+
+# Custom rules for additional secret detection
+[[rules]]
+id = "aws-access-key"
+description = "AWS Access Key ID"
+regex = '''(?i)(aws_access_key_id|aws_access_key|access_key)\s*[:=]\s*[A-Z0-9]{20}'''
+tags = ["aws", "access-key"]
+
+[[rules]]
+id = "aws-secret-key"
+description = "AWS Secret Access Key"
+regex = '''(?i)(aws_secret_access_key|aws_secret_key|secret_key)\s*[:=]\s*[A-Za-z0-9+/]{40}'''
+tags = ["aws", "secret-key"]
+
+[[rules]]
+id = "vercel-token"
+description = "Vercel Token"
+regex = '''(?i)(vercel_token|vercel-token)\s*[:=]\s*[A-Za-z0-9]{24,}'''
+tags = ["vercel", "token"]
+
+[[rules]]
+id = "railway-token"
+description = "Railway Token"
+regex = '''(?i)(railway_token|railway-token)\s*[:=]\s*[A-Za-z0-9]{32,}'''
+tags = ["railway", "token"]
+
+[[rules]]
+id = "supabase-key"
+description = "Supabase Key"
+regex = '''(?i)(supabase_key|supabase-key|supabase_anon_key)\s*[:=]\s*[A-Za-z0-9.\-_]{100,}'''
+tags = ["supabase", "key"]
+
+[[rules]]
+id = "jwt-secret"
+description = "JWT Secret"
+regex = '''(?i)(jwt_secret|jwt-secret|jwt_key)\s*[:=]\s*[A-Za-z0-9+/=]{32,}'''
+tags = ["jwt", "secret"]
+
+[[rules]]
+id = "database-url"
+description = "Database URL with credentials"
+regex = '''(?i)(database_url|db_url)\s*[:=]\s*[a-z]+://[^:\s]+:[^@\s]+@[^\s]+'''
+tags = ["database", "url", "credentials"]
+
+[[rules]]
+id = "api-key-generic"
+description = "Generic API Key"
+regex = '''(?i)(api_key|apikey|api-key)\s*[:=]\s*[A-Za-z0-9\-_]{20,}'''
+tags = ["api", "key"]
+
+[[rules]]
+id = "github-token"
+description = "GitHub Token"
+regex = '''(?i)(github_token|gh_token|github-token)\s*[:=]\s*gh[a-z]_[A-Za-z0-9]{36}'''
+tags = ["github", "token"]
+
+[[rules]]
+id = "private-key"
+description = "Private Key"
+regex = '''-----BEGIN [A-Z ]*PRIVATE KEY-----'''
+tags = ["private", "key"]
+
+[[rules]]
+id = "slack-webhook"
+description = "Slack Webhook URL"
+regex = '''https://hooks\.slack\.com/services/[A-Z0-9]{9}/[A-Z0-9]{11}/[A-Za-z0-9]{24}'''
+tags = ["slack", "webhook"]
+
+# Path configurations
+[allowlist]
+# Allow certain test files and documentation
+paths = [
+    '''.*\.md$''',
+    '''.*\.txt$''',
+    '''package-lock\.json$''',
+]
+
+# Regular expressions to ignore
+regexes = [
+    '''example\.com''',
+    '''localhost''',
+    '''127\.0\.0\.1''',
+    '''dummy.*key''',
+    '''test.*password''',
+    '''fake.*token''',
+]
+
+# Commits to ignore (if any)
+commits = []
+
+# Stop words - words that when found will ignore the secret
+stopwords = [
+    "example",
+    "test",
+    "dummy",
+    "fake",
+    "placeholder",
+    "template",
+    "sample",
+]
+
+# Entropy detection configuration
+[entropy]
+# Enable entropy detection for additional secret discovery
+enable = true
+group = 3  # Group size for entropy calculation
+threshold = 3.5  # Entropy threshold

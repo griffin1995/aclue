@@ -1,0 +1,316 @@
+# Trivy Configuration - Maximum Scan Depth
+# Version: Latest
+# Purpose: Container and filesystem vulnerability scanning for Aclue
+
+# Global settings
+global:
+  # Timeout for DB update
+  timeout: 10m
+
+  # Cache directory
+  cache-dir: /tmp/trivy-cache
+
+  # Debug mode
+  debug: true
+
+# Database settings
+db:
+  # Update database before scan
+  update: true
+
+  # Auto-update database
+  auto-update: true
+
+  # Download database only
+  download-only: false
+
+  # Skip database update
+  skip-update: false
+
+  # Light mode (faster, less comprehensive)
+  light: false
+
+# Scan settings
+scan:
+  # Scan types - ALL enabled
+  security-checks:
+    - vuln
+    - misconfig
+    - secret
+    - license
+
+  # Severity levels to detect
+  severity:
+    - CRITICAL
+    - HIGH
+    - MEDIUM
+    - LOW
+    - UNKNOWN
+
+  # Vulnerability types
+  vuln-type:
+    - os
+    - library
+    - language-specific
+
+  # Scan file systems
+  scan-type:
+    - fs
+    - repo
+    - image
+    - vm
+    - sbom
+    - kubernetes
+
+  # Include non-failures
+  include-non-failures: true
+
+  # Include dev dependencies
+  include-dev-deps: true
+
+# Scanner configurations
+scanners:
+  # Enable all scanners
+  - vuln
+  - misconfig
+  - secret
+  - license
+  - config
+
+# Compliance scanning
+compliance:
+  # Compliance specs to check
+  specs:
+    - docker-cis
+    - k8s-cis
+    - aws-cis-1.2
+    - aws-cis-1.4
+    - pci-dss
+    - hipaa
+    - nist
+
+# Misconfiguration scanning
+misconfig:
+  # Policy namespaces
+  policy-namespaces:
+    - appshield
+    - defsec
+    - builtin
+
+  # Include non-failures
+  include-non-failures: true
+
+  # Helm values file
+  helm-values: []
+
+  # Terraform variables
+  terraform-vars: []
+
+  # CloudFormation parameters
+  cf-params: []
+
+# Secret scanning
+secret:
+  # Secret config
+  config: default
+
+  # Enable secret scanning
+  enabled: true
+
+# License scanning
+license:
+  # Full license scan
+  full: true
+
+  # License confidence level
+  confidence-level: 0.9
+
+  # Prohibited licenses
+  prohibited:
+    - GPL-2.0
+    - GPL-3.0
+    - AGPL-3.0
+
+  # Reciprocal licenses
+  reciprocal:
+    - MPL-2.0
+
+  # Restricted licenses
+  restricted:
+    - OSL-3.0
+
+  # Allowed licenses
+  allowed: []
+
+# SBOM (Software Bill of Materials)
+sbom:
+  # SBOM format
+  format: cyclonedx
+
+  # Include VEX
+  vex: true
+
+# Kubernetes scanning
+kubernetes:
+  # Cluster context
+  context: ""
+
+  # Namespace
+  namespace: ""
+
+  # Kube config
+  kubeconfig: ""
+
+  # All namespaces
+  all-namespaces: true
+
+# Report settings
+report:
+  # Output format
+  format:
+    - json
+    - table
+    - sarif
+    - cyclonedx
+    - spdx
+    - github
+
+  # Template
+  template: "@/usr/local/share/trivy/templates/html.tpl"
+
+  # Output file
+  output: "../reports/trivy-report"
+
+  # List all packages
+  list-all-pkgs: true
+
+  # Exit code
+  exit-code: 0
+
+  # Exit on EOL
+  exit-on-eol: true
+
+# Cache settings
+cache:
+  # Cache backend
+  backend: fs
+
+  # TTL
+  ttl: 24h
+
+  # Clear cache
+  clear: false
+
+# Registry settings
+registry:
+  # Insecure registries
+  insecure: false
+
+  # Registry credentials
+  username: ""
+  password: ""
+
+  # Registry token
+  token: ""
+
+# File patterns
+file-patterns:
+  # Dockerfile patterns
+  dockerfile:
+    - Dockerfile*
+    - dockerfile*
+    - *.dockerfile
+
+  # Lock files
+  lock:
+    - package-lock.json
+    - yarn.lock
+    - Gemfile.lock
+    - Cargo.lock
+    - composer.lock
+    - Pipfile.lock
+    - poetry.lock
+    - pnpm-lock.yaml
+
+  # Configuration files
+  config:
+    - "*.yaml"
+    - "*.yml"
+    - "*.json"
+    - "*.toml"
+    - "*.ini"
+    - "*.conf"
+    - "*.config"
+
+# Ignore settings
+ignore:
+  # Ignore file
+  file: .trivyignore
+
+  # Ignore unfixed vulnerabilities
+  unfixed: false
+
+  # Ignore policy
+  policy: ""
+
+# Timeout settings
+timeout:
+  # Scan timeout
+  scan: 10m
+
+  # Update timeout
+  update: 10m
+
+# Parallel scanning
+parallel: 5
+
+# Quiet mode
+quiet: false
+
+# No progress bar
+no-progress: false
+
+# Skip files
+skip-files: []
+
+# Skip dirs
+skip-dirs:
+  - node_modules
+  - .git
+  - .github
+  - .vscode
+
+# Specific scan configurations
+image:
+  # Image scan settings
+  removed-pkgs: true
+  input: ""
+  platform: ""
+
+filesystem:
+  # File system scan settings
+  skip-files: []
+  skip-dirs: []
+
+repository:
+  # Repository scan settings
+  branch: ""
+  commit: ""
+  tag: ""
+
+# Custom policies directory
+policy-dir: ./policies
+
+# Rego policies
+rego:
+  # Skip policy update
+  skip-update: false
+
+  # Trace
+  trace: false
+
+  # Config data
+  data: []
+
+  # Namespaces
+  namespaces: []

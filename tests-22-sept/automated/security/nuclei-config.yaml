@@ -1,0 +1,69 @@
+# Nuclei Configuration for Aclue Security Testing
+# 9000+ vulnerability templates for automatic CVE discovery
+
+# Rate limiting to avoid overwhelming the target
+rate-limit: 150
+bulk-size: 25
+concurrency: 25
+
+# Headers configuration
+header:
+  - "User-Agent: Aclue-Security-Scanner/1.0"
+
+# Scan configuration
+templates:
+  - cves/
+  - vulnerabilities/
+  - exposed-panels/
+  - technologies/
+  - misconfiguration/
+  - default-logins/
+  - exposed-apis/
+  - takeovers/
+  - file/
+  - dns/
+  - ssl/
+
+# Output configuration
+output: /home/jack/Documents/aclue-preprod/tests-22-sept/automated/reports/nuclei-scan.json
+json: true
+markdown-export: /home/jack/Documents/aclue-preprod/tests-22-sept/automated/reports/
+
+# Severity filtering
+severity:
+  - critical
+  - high
+  - medium
+  - low
+  - info
+
+# Custom templates directory
+custom-templates: /home/jack/Documents/aclue-preprod/tests-22-sept/automated/security/nuclei-templates/
+
+# Reporting
+report-config:
+  - allowlist:
+      severity: critical,high
+  - denylist:
+      tags: dos,intrusive
+
+# Metrics
+metrics: true
+metrics-port: 9092
+
+# Silent mode for CI/CD
+silent: false
+
+# Store HTTP request/response
+store-resp: true
+store-resp-dir: /home/jack/Documents/aclue-preprod/tests-22-sept/automated/security/nuclei-responses/
+
+# Update templates before scan
+update-templates: true
+
+# Scan targets
+targets:
+  - https://aclue.app
+  - https://aclue-backend-production.up.railway.app
+  - http://localhost:3000
+  - http://localhost:8000

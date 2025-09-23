@@ -1,0 +1,26 @@
+{
+    "eslint": {
+        "enabled": true,
+        "config_file": ".eslintrc.json",
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+    },
+    "prettier": {
+        "enabled": true,
+        "config_file": ".prettierrc"
+    },
+    "pylint": {
+        "enabled": true,
+        "rcfile": ".pylintrc",
+        "min_rating": 8.0
+    },
+    "mypy": {
+        "enabled": true,
+        "config_file": "mypy.ini",
+        "strict": true
+    },
+    "sonarqube": {
+        "enabled": false,
+        "server_url": "",
+        "project_key": "aclue"
+    }
+}
