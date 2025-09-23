@@ -1,0 +1,36 @@
+{
+  "standard": "WCAG2AA",
+  "level": "error",
+  "reporter": "json",
+  "chromeLaunchConfig": {
+    "ignoreHTTPSErrors": false,
+    "args": [
+      "--no-sandbox",
+      "--disable-setuid-sandbox",
+      "--disable-dev-shm-usage",
+      "--disable-background-timer-throttling",
+      "--disable-backgrounding-occluded-windows",
+      "--disable-renderer-backgrounding",
+      "--disable-web-security",
+      "--disable-features=VizDisplayCompositor"
+    ]
+  },
+  "timeout": 30000,
+  "wait": 3000,
+  "ignore": [
+    "notice",
+    "warning"
+  ],
+  "includeNotices": false,
+  "includeWarnings": false,
+  "runners": [
+    "axe",
+    "htmlcs"
+  ],
+  "actions": [
+    "wait for element body to be visible"
+  ],
+  "headers": {
+    "User-Agent": "Pa11y-Aclue-Scanner/1.0"
+  }
+}
