@@ -1,0 +1,60 @@
+{
+  "urls": [
+    "https://aclue.app/",
+    "https://aclue.app/landingpage",
+    "https://aclue.app/discover"
+  ],
+  "browsertime": {
+    "iterations": 3,
+    "browser": "chrome",
+    "headless": false,
+    "connectivity": {
+      "profile": "native",
+      "downstreamKbps": 40000,
+      "upstreamKbps": 10000,
+      "latency": 20
+    },
+    "viewPort": "1920x1080",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+  },
+  "plugins": {
+    "add": [
+      "lighthouse"
+    ],
+    "lighthouse": {
+      "enabled": true
+    }
+  },
+  "metrics": {
+    "list": [
+      "firstPaint",
+      "fullyLoaded",
+      "rumSpeedIndex",
+      "pageTimings",
+      "userTimings",
+      "resourceTimings",
+      "paintTimings",
+      "largestContentfulPaint",
+      "cumulativeLayoutShift",
+      "totalBlockingTime",
+      "maxPotentialFid"
+    ]
+  },
+  "budget": {
+    "configPath": "/home/jack/Documents/aclue-preprod/tests-22-sept/automated/performance/performance.budget.json"
+  },
+  "html": {
+    "showAllWaterfallSummary": true,
+    "fetchHARFiles": true,
+    "showScript": true
+  },
+  "summary": true,
+  "summaryDetail": true,
+  "sustainable": {
+    "enable": true,
+    "pageViews": 1000000
+  },
+  "coach": {
+    "enabled": true
+  }
+}

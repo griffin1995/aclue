@@ -1,0 +1,40 @@
+{
+  "honorRobotExclusions": false,
+  "excludeExternalLinks": false,
+  "excludeInternalLinks": false,
+  "excludeLinksToSamePage": false,
+  "filterLevel": 1,
+  "maxSockets": 2,
+  "maxSocketsPerHost": 1,
+  "rateLimit": 100,
+  "requestMethod": "head",
+  "retry405Head": true,
+  "retry": 1,
+  "timeout": 30000,
+  "userAgent": "BLC-Aclue-Scanner/1.0",
+  "customFilter": null,
+  "acceptedSchemes": ["http", "https"],
+  "excludedKeywords": [
+    "#",
+    "mailto:",
+    "tel:",
+    "javascript:",
+    "data:"
+  ],
+  "includedKeywords": [],
+  "tags": {
+    "a": true,
+    "area": true,
+    "base": true,
+    "form": true,
+    "iframe": true,
+    "img": true,
+    "input": true,
+    "link": true,
+    "meta": true,
+    "object": true,
+    "script": true,
+    "source": true,
+    "video": true
+  }
+}
