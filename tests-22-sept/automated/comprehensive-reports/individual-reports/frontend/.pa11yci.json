@@ -1,0 +1,40 @@
+{
+  "defaults": {
+    "standard": "WCAG2AA",
+    "level": "error",
+    "reporter": "json",
+    "timeout": 30000,
+    "wait": 3000,
+    "chromeLaunchConfig": {
+      "ignoreHTTPSErrors": false,
+      "args": [
+        "--no-sandbox",
+        "--disable-dev-shm-usage",
+        "--disable-background-timer-throttling",
+        "--disable-backgrounding-occluded-windows",
+        "--disable-renderer-backgrounding"
+      ]
+    },
+    "ignore": [
+      "notice",
+      "warning"
+    ],
+    "includeNotices": false,
+    "includeWarnings": false,
+    "runners": [
+      "axe",
+      "htmlcs"
+    ]
+  },
+  "urls": [
+    "https://aclue.app",
+    "https://aclue.app/landingpage",
+    "https://aclue.app/discover",
+    "http://localhost:3000",
+    "http://localhost:3000/landingpage",
+    "http://localhost:3000/discover"
+  ],
+  "sitemap": "https://aclue.app/sitemap.xml",
+  "outputPath": "./reports",
+  "outputFilename": "pa11y-ci-report.json"
+}
