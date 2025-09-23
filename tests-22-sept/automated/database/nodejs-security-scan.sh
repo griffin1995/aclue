@@ -6,8 +6,8 @@ set -euo pipefail
 
 # Configuration
 BASE_DIR="/home/jack/Documents/aclue-preprod"
-TOOLS_DIR="/home/jack/Documents/aclue-preprod/tests-22-sept/automated/database/tools"
-REPORTS_DIR="/home/jack/Documents/aclue-preprod/tests-22-sept/automated/database/reports"
+TOOLS_DIR="/home/jack/Documents/aclue/tests-22-sept/automated/database/tools"
+REPORTS_DIR="/home/jack/Documents/aclue/tests-22-sept/automated/database/reports"
 TIMESTAMP=$(date '+%Y%m%d_%H%M%S')
 
 echo "==============================================="
@@ -128,7 +128,7 @@ import glob
 import os
 from datetime import datetime
 
-reports_dir = "/home/jack/Documents/aclue-preprod/tests-22-sept/automated/database/reports"
+reports_dir = "/home/jack/Documents/aclue/tests-22-sept/automated/database/reports"
 timestamp = os.environ.get('TIMESTAMP', datetime.now().strftime('%Y%m%d_%H%M%S'))
 
 print("=" * 60)

@@ -1,0 +1,325 @@
+{
+  "api_testing_results": {
+    "metadata": {
+      "test_date": "2025-09-23",
+      "platform": "Aclue - AI-powered gifting platform",
+      "api_base_url": "https://aclue-backend-production.up.railway.app",
+      "total_endpoints_tested": 34,
+      "testing_duration_minutes": 45,
+      "tools_used": [
+        "Schemathesis v4.1.4",
+        "Newman v6.2.1",
+        "Dredd v14.1.0",
+        "cURL",
+        "Custom Security Tests"
+      ]
+    },
+    "executive_summary": {
+      "overall_status": "CRITICAL ISSUES FOUND",
+      "success_rate": "24%",
+      "critical_issues": 4,
+      "medium_issues": 2,
+      "total_test_cases": 1135,
+      "unique_failures": 50,
+      "authentication_status": "PARTIALLY WORKING",
+      "performance_status": "ACCEPTABLE"
+    },
+    "schemathesis_results": {
+      "tool_version": "4.1.4",
+      "total_operations": 34,
+      "operations_tested": 34,
+      "test_cases_generated": 1135,
+      "execution_time_seconds": 80.01,
+      "phases": {
+        "examples": "skipped",
+        "coverage": "failed",
+        "fuzzing": "failed",
+        "stateful": "not_applicable"
+      },
+      "results": {
+        "passed": 12,
+        "failed": 22,
+        "unique_failures": 50,
+        "warnings": 4
+      },
+      "critical_findings": [
+        {
+          "category": "Authentication Bypass",
+          "count": 3,
+          "description": "API accepts requests without authentication",
+          "severity": "CRITICAL",
+          "affected_endpoints": [
+            "GET /api/v1/auth/me",
+            "POST /api/v1/auth/logout"
+          ]
+        },
+        {
+          "category": "Server Errors",
+          "count": 5,
+          "description": "Internal server errors exposed",
+          "severity": "HIGH",
+          "examples": [
+            "Newsletter unsubscribe failures",
+            "Invalid limit parameter handling"
+          ]
+        },
+        {
+          "category": "Schema Violations",
+          "count": 7,
+          "description": "API accepts invalid data",
+          "severity": "MEDIUM",
+          "impact": "Data integrity and validation issues"
+        },
+        {
+          "category": "Undocumented Status Codes",
+          "count": 21,
+          "description": "HTTP status codes not in OpenAPI spec",
+          "severity": "MEDIUM",
+          "missing_codes": ["401", "400", "403", "500", "429"]
+        }
+      ],
+      "authentication_issues": {
+        "failed_operations": 4,
+        "status_codes": ["401", "403"],
+        "recommendation": "Ensure valid authentication credentials via headers"
+      }
+    },
+    "newman_results": {
+      "tool_version": "6.2.1",
+      "collection_name": "Aclue API Comprehensive Test Collection",
+      "total_requests": 14,
+      "execution_time_seconds": 2.6,
+      "data_transferred_kb": 11.68,
+      "average_response_time_ms": 172,
+      "response_time_stats": {
+        "min_ms": 11,
+        "max_ms": 624,
+        "std_dev_ms": 196
+      },
+      "results": {
+        "iterations": 1,
+        "requests_executed": 14,
+        "requests_failed": 0,
+        "assertions_total": 26,
+        "assertions_failed": 3,
+        "success_rate": "88%"
+      },
+      "failed_tests": [
+        {
+          "test_name": "Get Recommendations (Unauthenticated)",
+          "expected_status": 401,
+          "actual_status": 200,
+          "issue": "Authentication bypass - endpoint should require authentication"
+        },
+        {
+          "test_name": "Record Swipe",
+          "expected_status": 200,
+          "actual_status": 500,
+          "issue": "Server error during swipe recording"
+        }
+      ],
+      "successful_test_categories": [
+        "Authentication login flow",
+        "Product search and retrieval",
+        "Health checks",
+        "Error handling (404, malformed JSON)"
+      ]
+    },
+    "dredd_results": {
+      "tool_version": "14.1.0",
+      "status": "FAILED",
+      "primary_issues": [
+        {
+          "category": "URI Parameter Validation",
+          "description": "Required URI parameters missing examples",
+          "count": 28,
+          "affected_parameters": [
+            "user_id",
+            "product_id",
+            "link_token",
+            "link_id",
+            "authorization",
+            "asin",
+            "email"
+          ]
+        },
+        {
+          "category": "OpenAPI Compliance",
+          "description": "API description validation errors",
+          "severity": "CRITICAL",
+          "impact": "Contract testing failures, integration issues"
+        }
+      ],
+      "warnings": {
+        "uri_template_expansion": 12,
+        "ambiguous_parameters": "Multiple endpoints affected"
+      }
+    },
+    "authentication_security_analysis": {
+      "jwt_token_validation": {
+        "status": "WORKING",
+        "login_response_time_ms": 617,
+        "token_format": "Bearer JWT",
+        "token_validation": "Proper 401 for invalid tokens"
+      },
+      "protected_endpoints_test": {
+        "valid_auth_status": 200,
+        "no_auth_status": 403,
+        "invalid_auth_status": 401,
+        "issue": "Inconsistent auth status codes (403 vs 401)"
+      },
+      "authentication_bypass_found": {
+        "endpoint": "/api/v1/recommendations/",
+        "expected_behavior": "401 Unauthorized",
+        "actual_behavior": "200 OK with empty array",
+        "risk_level": "HIGH"
+      }
+    },
+    "rate_limiting_analysis": {
+      "newsletter_signup_test": {
+        "documented_limit": "5 per minute",
+        "actual_behavior": "7+ requests allowed",
+        "status": "FAILING",
+        "risk": "Potential abuse and DoS vulnerability"
+      },
+      "rate_limit_headers": {
+        "present": false,
+        "recommendation": "Implement X-RateLimit-* headers"
+      }
+    },
+    "security_headers_analysis": {
+      "tested_endpoints": [
+        "/api/v1/auth/login",
+        "/health"
+      ],
+      "security_headers_found": [],
+      "missing_headers": [
+        "X-Content-Type-Options",
+        "X-Frame-Options",
+        "X-XSS-Protection",
+        "Strict-Transport-Security",
+        "Content-Security-Policy"
+      ],
+      "server_info": {
+        "server": "railway-edge",
+        "edge_location": "europe-west4"
+      }
+    },
+    "performance_metrics": {
+      "overall_assessment": "ACCEPTABLE",
+      "average_response_time_ms": 172,
+      "fastest_endpoint_ms": 11,
+      "slowest_endpoint_ms": 624,
+      "data_transfer_efficiency": "Good",
+      "timeout_issues": 0
+    },
+    "api_endpoints_status": {
+      "working_correctly": [
+        "POST /api/v1/auth/login",
+        "GET /api/v1/auth/me (with auth)",
+        "GET /api/v1/products/",
+        "GET /api/v1/products/trending/",
+        "POST /api/v1/swipes/sessions",
+        "GET /health"
+      ],
+      "issues_found": [
+        {
+          "endpoint": "GET /api/v1/recommendations/",
+          "issue": "Authentication bypass",
+          "severity": "HIGH"
+        },
+        {
+          "endpoint": "POST /api/v1/swipes/",
+          "issue": "Server error (500)",
+          "severity": "HIGH"
+        },
+        {
+          "endpoint": "POST /api/v1/newsletter/signup",
+          "issue": "Rate limiting not enforced",
+          "severity": "MEDIUM"
+        }
+      ]
+    },
+    "recommendations": {
+      "immediate_actions": [
+        {
+          "priority": 1,
+          "action": "Fix authentication bypass on recommendations endpoint",
+          "effort": "1-2 hours",
+          "risk_if_ignored": "Security vulnerability"
+        },
+        {
+          "priority": 2,
+          "action": "Update OpenAPI specification with missing parameters",
+          "effort": "4-6 hours",
+          "risk_if_ignored": "Integration and contract testing failures"
+        },
+        {
+          "priority": 3,
+          "action": "Implement proper rate limiting",
+          "effort": "1-2 days",
+          "risk_if_ignored": "DoS vulnerability and abuse"
+        },
+        {
+          "priority": 4,
+          "action": "Fix server errors in swipe recording",
+          "effort": "2-4 hours",
+          "risk_if_ignored": "User experience degradation"
+        }
+      ],
+      "medium_term_actions": [
+        {
+          "action": "Standardize authentication error responses",
+          "timeline": "1 week",
+          "benefit": "Consistent client integration"
+        },
+        {
+          "action": "Implement comprehensive input validation",
+          "timeline": "2 weeks",
+          "benefit": "Data integrity and security"
+        },
+        {
+          "action": "Add security headers",
+          "timeline": "1 week",
+          "benefit": "Enhanced security posture"
+        }
+      ],
+      "monitoring_and_testing": [
+        {
+          "recommendation": "Integrate Schemathesis into CI/CD pipeline",
+          "frequency": "Every deployment"
+        },
+        {
+          "recommendation": "Set up Newman regression testing",
+          "frequency": "Nightly"
+        },
+        {
+          "recommendation": "Regular Dredd contract validation",
+          "frequency": "Weekly"
+        }
+      ]
+    },
+    "test_artifacts": {
+      "schemathesis_report": "reports/schemathesis_junit.xml",
+      "newman_report": "reports/newman_report.json",
+      "dredd_report": "reports/dredd_report.json",
+      "auth_flow_test": "reports/auth_flow_test.txt",
+      "rate_limiting_test": "reports/rate_limiting_test.txt",
+      "security_headers": "reports/security_headers.txt"
+    },
+    "conclusion": {
+      "overall_api_health": "NEEDS ATTENTION",
+      "core_functionality": "WORKING",
+      "security_posture": "VULNERABILITIES PRESENT",
+      "documentation_quality": "NEEDS IMPROVEMENT",
+      "estimated_fix_time": "2-3 sprint cycles",
+      "business_risk": "MEDIUM-HIGH",
+      "recommended_next_steps": [
+        "Address authentication bypass immediately",
+        "Fix OpenAPI specification compliance",
+        "Implement proper rate limiting and validation",
+        "Set up automated API testing in CI/CD"
+      ]
+    }
+  }
+}

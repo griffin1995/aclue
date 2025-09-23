@@ -1,0 +1,21 @@
+=== Authentication Flow Security Test ===
+1. Testing login endpoint...
+{"access_token":"eyJhbGciOiJIUzI1NiIsImtpZCI6InVPY1EwQVdEdFU0bTAvWEEiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3hjaHNhcnZhbXBwd2VwaHVseWx0LnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiIxOGUxODI3My03OGMzLTQ0NDMtOWRhZC1mM2NhMTQ4ZjU5OWMiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzU4NjY0MjA2LCJpYXQiOjE3NTg2NjA2MDYsImVtYWlsIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJwaG9uZSI6IiIsImFwcF9tZXRhZGF0YSI6eyJwcm92aWRlciI6ImVtYWlsIiwicHJvdmlkZXJzIjpbImVtYWlsIl19LCJ1c2VyX21ldGFkYXRhIjp7ImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJmaXJzdF9uYW1lIjoiSm9obiIsImZ1bGxfbmFtZSI6IkpvaG4gRG9lIiwibGFzdF9uYW1lIjoiRG9lIiwibWFya2V0aW5nX2NvbnNlbnQiOmZhbHNlfSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJwYXNzd29yZCIsInRpbWVzdGFtcCI6MTc1ODY2MDYwNn1dLCJzZXNzaW9uX2lkIjoiOTY1MWRiNWEtYWFkYy00YjkwLWI0YzItMjAyZGMxMjY0NDFiIiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.v9qqQVfkGm8Jgc6sjufEBZWDsZ5aMi8dSUQyMmnFyaw","refresh_token":"rccznqndu7y2","user":{"id":"18e18273-78c3-4443-9dad-f3ca148f599c","email":"john.doe@example.com","first_name":"John","last_name":"Doe","subscription_tier":"free","created_at":"2025-06-30T09:51:40.772355+00:00","last_login":"2025-09-23T20:50:06.605173+00:00"}}
+Status: 200
+Time: 0.617871s
+Size: 1141 bytes
+
+2. Testing protected endpoint without auth...
+{"detail":"Not authenticated"}
+Status: 403
+Time: 0.090254s
+
+3. Testing protected endpoint with valid auth...
+{"id":"18e18273-78c3-4443-9dad-f3ca148f599c","email":"john.doe@example.com","first_name":"John","last_name":"Doe","subscription_tier":"free","created_at":"2025-06-30T09:51:40.772355+00:00","last_login":"2025-09-23T20:50:06.605173+00:00"}
+Status: 200
+Time: 0.243959s
+
+4. Testing invalid JWT token...
+{"detail":"Token validation failed: invalid JWT: unable to parse or verify signature, token is malformed: could not JSON decode header: invalid character '\\u008a' looking for beginning of value"}
+Status: 401
+Time: 0.252744s

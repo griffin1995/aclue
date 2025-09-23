@@ -188,7 +188,7 @@ import html
 from datetime import datetime
 from collections import defaultdict
 
-reports_dir = "/home/jack/Documents/aclue-preprod/tests-22-sept/automated/database/reports"
+reports_dir = "/home/jack/Documents/aclue/tests-22-sept/automated/database/reports"
 timestamp = os.environ.get('TIMESTAMP', datetime.now().strftime('%Y%m%d_%H%M%S'))
 
 print("Generating consolidated security assessment report...")
@@ -487,12 +487,12 @@ html_content += """
 """
 
 # Update master report
-master_report_path = f"/home/jack/Documents/aclue-preprod/tests-22-sept/automated/database/reports/master_security_report_{timestamp}.html"
+master_report_path = f"/home/jack/Documents/aclue/tests-22-sept/automated/database/reports/master_security_report_{timestamp}.html"
 with open(master_report_path, 'w') as f:
     f.write(html_content)
 
 # Save JSON summary
-summary_json_path = f"/home/jack/Documents/aclue-preprod/tests-22-sept/automated/database/reports/security_summary_{timestamp}.json"
+summary_json_path = f"/home/jack/Documents/aclue/tests-22-sept/automated/database/reports/security_summary_{timestamp}.json"
 with open(summary_json_path, 'w') as f:
     json.dump(summary, f, indent=2)
 

@@ -19,10 +19,10 @@ BASE_DIR="$(dirname "$SCRIPT_DIR")"
 CONFIG_DIR="$BASE_DIR/configs"
 REPORTS_DIR="$BASE_DIR/reports"
 LOGS_DIR="$BASE_DIR/logs"
-VENV_DIR="/home/jack/Documents/aclue-preprod/security-venv"
+VENV_DIR="/home/jack/Documents/aclue/tests-22-sept/automated/security/venv"
 
 # Project directories
-PROJECT_ROOT="/home/jack/Documents/aclue-preprod"
+PROJECT_ROOT="/home/jack/Documents/aclue"
 WEB_DIR="$PROJECT_ROOT/web"
 BACKEND_DIR="$PROJECT_ROOT/backend"
 
@@ -77,7 +77,7 @@ run_semgrep() {
     # Run comprehensive scan
     info "Running Semgrep security scan on entire codebase..."
     semgrep \
-        --config="$CONFIG_DIR/semgrep-config.yaml" \
+        --config="$BASE_DIR/semgrep.yaml" \
         --config=auto \
         --config=p/security-audit \
         --config=p/secrets \

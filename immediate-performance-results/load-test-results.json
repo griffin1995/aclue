@@ -1,0 +1,97 @@
+{
+  "timestamp": "2025-09-23T20:27:52.431Z",
+  "tests": [
+    {
+      "name": "Homepage",
+      "url": "https://aclue.app/",
+      "iterations": 5,
+      "response_times": [
+        256,
+        177,
+        99,
+        116,
+        104
+      ],
+      "status_codes": [
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "success_rate": 100,
+      "average_response_time": 150.4
+    },
+    {
+      "name": "API Health",
+      "url": "https://aclue-backend-production.up.railway.app/health",
+      "iterations": 5,
+      "response_times": [
+        458,
+        233,
+        85,
+        91,
+        100
+      ],
+      "status_codes": [
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "success_rate": 100,
+      "average_response_time": 193.4
+    },
+    {
+      "name": "API Docs",
+      "url": "https://aclue-backend-production.up.railway.app/docs",
+      "iterations": 5,
+      "response_times": [
+        94,
+        226,
+        85,
+        89,
+        229
+      ],
+      "status_codes": [
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "success_rate": 100,
+      "average_response_time": 144.6
+    },
+    {
+      "name": "API Products",
+      "url": "https://aclue-backend-production.up.railway.app/api/v1/products/",
+      "iterations": 5,
+      "response_times": [
+        87,
+        93,
+        236,
+        90,
+        87
+      ],
+      "status_codes": [
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "success_rate": 100,
+      "average_response_time": 118.6
+    }
+  ],
+  "summary": {
+    "total_requests": 20,
+    "successful_requests": 20,
+    "failed_requests": 0,
+    "average_response_time": 151.75,
+    "max_response_time": 458,
+    "min_response_time": 85
+  }
+}

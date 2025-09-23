@@ -1,0 +1,954 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuites disabled="0" errors="0" failures="25" tests="34" time="223.75679016001232">
+	<testsuite disabled="0" errors="0" failures="25" name="schemathesis" skipped="34" tests="34" time="223.75679016001232" hostname="jack-XPS-13-9305">
+		<testcase name="GET /" time="2.595401">
+			<skipped type="skipped">No examples in schema</skipped>
+		</testcase>
+		<testcase name="POST /api/v1/auth/register" time="2.271119">
+			<failure type="failure" message="1. Test Case ID: vgQXLQ
+
+- API accepted schema-violating request
+
+    Invalid data should have been rejected
+    Expected: 400, 401, 403, 404, 406, 422, 428, 5xx
+
+[201] Created:
+
+    `{&quot;access_token&quot;:&quot;eyJhbGciOiJIUzI1NiIsImtpZCI6InVPY1EwQVdEdFU0bTAvWEEiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3hjaHNhcnZhbXBwd2VwaHVseWx0LnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiIzYjYwNmU4Ny05MzE4LTQ3ZTYtODI3Ny1iNWE1ZGExMTMwM2YiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzU4NjYzOTc1LCJpYXQiOjE3NTg2NjAzNzUsImVtYWlsIjoiMEBhLmNvbSIsInBob25lIjoiIiwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiZW1haWwiLCJwcm92aWRlcnMiOlsiZW1haWwiXX0sInVzZXJfbWV0YWRhdGEiOnsiZW1haWxfdmVyaWZpZWQiOnRydWUsImZpcnN0X25hbWUiOiIwMCIsImZ1bGxfbmFtZSI6IjAw // Output truncated...`
+
+Reproduce with: 
+
+    curl -X POST -H 'Authorization: [Filtered]' -H 'Content-Type: application/json' -d '{&quot;email&quot;: &quot;0@A.COM&quot;, &quot;first_name&quot;: &quot;00&quot;, &quot;last_name&quot;: &quot;00&quot;, &quot;marketing_consent&quot;: 0, &quot;password&quot;: &quot;00000000&quot;}' https://aclue-backend-production.up.railway.app/api/v1/auth/register"/>
+			<failure type="failure" message="1. Test Case ID: vgQXLQ
+
+- API accepted schema-violating request
+
+    Invalid data should have been rejected
+    Expected: 400, 401, 403, 404, 406, 422, 428, 5xx
+
+[201] Created:
+
+    `{&quot;access_token&quot;:&quot;eyJhbGciOiJIUzI1NiIsImtpZCI6InVPY1EwQVdEdFU0bTAvWEEiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3hjaHNhcnZhbXBwd2VwaHVseWx0LnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiIzYjYwNmU4Ny05MzE4LTQ3ZTYtODI3Ny1iNWE1ZGExMTMwM2YiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzU4NjYzOTc1LCJpYXQiOjE3NTg2NjAzNzUsImVtYWlsIjoiMEBhLmNvbSIsInBob25lIjoiIiwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiZW1haWwiLCJwcm92aWRlcnMiOlsiZW1haWwiXX0sInVzZXJfbWV0YWRhdGEiOnsiZW1haWxfdmVyaWZpZWQiOnRydWUsImZpcnN0X25hbWUiOiIwMCIsImZ1bGxfbmFtZSI6IjAw // Output truncated...`
+
+Reproduce with: 
+
+    curl -X POST -H 'Authorization: [Filtered]' -H 'Content-Type: application/json' -d '{&quot;email&quot;: &quot;0@A.COM&quot;, &quot;first_name&quot;: &quot;00&quot;, &quot;last_name&quot;: &quot;00&quot;, &quot;marketing_consent&quot;: 0, &quot;password&quot;: &quot;00000000&quot;}' https://aclue-backend-production.up.railway.app/api/v1/auth/register
+
+2. Test Case ID: kjlodq
+
+- API rejected schema-compliant request
+
+    Valid data should have been accepted
+    Expected: 2xx, 401, 403, 404, 5xx
+
+- Undocumented HTTP status code
+
+    Received: 400
+    Documented: 201, 422
+
+[400] Bad Request:
+
+    `{&quot;detail&quot;:&quot;Email address is already registered&quot;}`
+
+Reproduce with: 
+
+    curl -X POST -H 'Authorization: [Filtered]' -H 'Content-Type: application/json' -d '{&quot;email&quot;: &quot;0@A.COM&quot;, &quot;first_name&quot;: &quot;00&quot;, &quot;last_name&quot;: &quot;00&quot;, &quot;password&quot;: &quot;00000000&quot;}' https://aclue-backend-production.up.railway.app/api/v1/auth/register"/>
+			<skipped type="skipped">No examples in schema</skipped>
+		</testcase>
+		<testcase name="GET /api/v1/auth/me" time="1.040118">
+			<failure type="failure" message="1. Test Case ID: Zu9Fzo
+
+- Missing header not rejected
+
+    Missing header not rejected (got 403, expected 401)
+
+- Undocumented HTTP status code
+
+    Received: 403
+    Documented: 200
+
+[403] Forbidden:
+
+    `{&quot;detail&quot;:&quot;Not authenticated&quot;}`
+
+Reproduce with: 
+
+    curl -X GET https://aclue-backend-production.up.railway.app/api/v1/auth/me"/>
+			<failure type="failure" message="1. Test Case ID: Zu9Fzo
+
+- Missing header not rejected
+
+    Missing header not rejected (got 403, expected 401)
+
+- Undocumented HTTP status code
+
+    Received: 403
+    Documented: 200
+
+[403] Forbidden:
+
+    `{&quot;detail&quot;:&quot;Not authenticated&quot;}`
+
+Reproduce with: 
+
+    curl -X GET https://aclue-backend-production.up.railway.app/api/v1/auth/me
+
+2. Test Case ID: JmdER2
+
+- API accepts requests without authentication
+
+    Expected 401, got `403 Forbidden` for `GET /api/v1/auth/me`
+
+[403] Forbidden:
+
+    `{&quot;detail&quot;:&quot;Not authenticated&quot;}`
+
+Reproduce with: 
+
+    curl -X GET https://aclue-backend-production.up.railway.app/api/v1/auth/me"/>
+			<skipped type="skipped">No examples in schema</skipped>
+		</testcase>
+		<testcase name="POST /api/v1/auth/refresh" time="1.331591">
+			<failure type="failure" message="1. Test Case ID: jFoX0w
+
+- Undocumented HTTP status code
+
+    Received: 401
+    Documented: 200, 422
+
+[401] Unauthorized:
+
+    `{&quot;detail&quot;:&quot;Token refresh failed: Invalid Refresh Token: Refresh Token Not Found&quot;}`
+
+Reproduce with: 
+
+    curl -X POST -H 'Authorization: [Filtered]' -H 'Content-Type: application/json' -d '{&quot;refresh_token&quot;: &quot;00&quot;}' https://aclue-backend-production.up.railway.app/api/v1/auth/refresh"/>
+			<failure type="failure" message="1. Test Case ID: jFoX0w
+
+- Undocumented HTTP status code
+
+    Received: 401
+    Documented: 200, 422
+
+[401] Unauthorized:
+
+    `{&quot;detail&quot;:&quot;Token refresh failed: Invalid Refresh Token: Refresh Token Not Found&quot;}`
+
+Reproduce with: 
+
+    curl -X POST -H 'Authorization: [Filtered]' -H 'Content-Type: application/json' -d '{&quot;refresh_token&quot;: &quot;00&quot;}' https://aclue-backend-production.up.railway.app/api/v1/auth/refresh"/>
+			<skipped type="skipped">No examples in schema</skipped>
+		</testcase>
+		<testcase name="POST /api/v1/auth/logout" time="0.935365">
+			<failure type="failure" message="1. Test Case ID: ZZ0EnT
+
+- Missing header not rejected
+
+    Missing header not rejected (got 403, expected 401)
+
+- Undocumented HTTP status code
+
+    Received: 403
+    Documented: 200
+
+[403] Forbidden:
+
+    `{&quot;detail&quot;:&quot;Not authenticated&quot;}`
+
+Reproduce with: 
+
+    curl -X POST https://aclue-backend-production.up.railway.app/api/v1/auth/logout"/>
+			<failure type="failure" message="1. Test Case ID: ZZ0EnT
+
+- Missing header not rejected
+
+    Missing header not rejected (got 403, expected 401)
+
+- Undocumented HTTP status code
+
+    Received: 403
+    Documented: 200
+
+[403] Forbidden:
+
+    `{&quot;detail&quot;:&quot;Not authenticated&quot;}`
+
+Reproduce with: 
+
+    curl -X POST https://aclue-backend-production.up.railway.app/api/v1/auth/logout
+
+2. Test Case ID: dARf5k
+
+- API accepts requests without authentication
+
+    Expected 401, got `403 Forbidden` for `POST /api/v1/auth/logout`
+
+[403] Forbidden:
+
+    `{&quot;detail&quot;:&quot;Not authenticated&quot;}`
+
+Reproduce with: 
+
+    curl -X POST https://aclue-backend-production.up.railway.app/api/v1/auth/logout"/>
+			<skipped type="skipped">No examples in schema</skipped>
+		</testcase>
+		<testcase name="GET /health" time="2.490861">
+			<skipped type="skipped">No examples in schema</skipped>
+		</testcase>
+		<testcase name="GET /api/v1/users/me" time="0.937606">
+			<failure type="failure" message="1. Test Case ID: jpGfN9
+
+- Missing header not rejected
+
+    Missing header not rejected (got 403, expected 401)
+
+- Undocumented HTTP status code
+
+    Received: 403
+    Documented: 200
+
+[403] Forbidden:
+
+    `{&quot;detail&quot;:&quot;Not authenticated&quot;}`
+
+Reproduce with: 
+
+    curl -X GET https://aclue-backend-production.up.railway.app/api/v1/users/me"/>
+			<failure type="failure" message="1. Test Case ID: jpGfN9
+
+- Missing header not rejected
+
+    Missing header not rejected (got 403, expected 401)
+
+- Undocumented HTTP status code
+
+    Received: 403
+    Documented: 200
+
+[403] Forbidden:
+
+    `{&quot;detail&quot;:&quot;Not authenticated&quot;}`
+
+Reproduce with: 
+
+    curl -X GET https://aclue-backend-production.up.railway.app/api/v1/users/me
+
+2. Test Case ID: LXme5E
+
+- Server error
+
+- Undocumented HTTP status code
+
+    Received: 500
+    Documented: 200
+
+[500] Internal Server Error:
+
+    `{&quot;detail&quot;:&quot;Authentication error: [Errno 101] Network is unreachable&quot;}`
+
+Reproduce with: 
+
+    curl -X GET -H 'Authorization: [Filtered]' https://aclue-backend-production.up.railway.app/api/v1/users/me"/>
+			<skipped type="skipped">No examples in schema</skipped>
+		</testcase>
+		<testcase name="DELETE /api/v1/users/me" time="0.596915">
+			<failure type="failure" message="1. Test Case ID: xkhMpY
+
+- Missing header not rejected
+
+    Missing header not rejected (got 403, expected 401)
+
+- Undocumented HTTP status code
+
+    Received: 403
+    Documented: 200
+
+[403] Forbidden:
+
+    `{&quot;detail&quot;:&quot;Not authenticated&quot;}`
+
+Reproduce with: 
+
+    curl -X DELETE https://aclue-backend-production.up.railway.app/api/v1/users/me"/>
+			<failure type="failure" message="1. Test Case ID: xkhMpY
+
+- Missing header not rejected
+
+    Missing header not rejected (got 403, expected 401)
+
+- Undocumented HTTP status code
+
+    Received: 403
+    Documented: 200
+
+[403] Forbidden:
+
+    `{&quot;detail&quot;:&quot;Not authenticated&quot;}`
+
+Reproduce with: 
+
+    curl -X DELETE https://aclue-backend-production.up.railway.app/api/v1/users/me
+
+2. Test Case ID: 4puBPB
+
+- Server error
+
+- Undocumented HTTP status code
+
+    Received: 500
+    Documented: 200
+
+[500] Internal Server Error:
+
+    `{&quot;detail&quot;:&quot;Authentication error: [Errno 101] Network is unreachable&quot;}`
+
+Reproduce with: 
+
+    curl -X DELETE -H 'Authorization: [Filtered]' https://aclue-backend-production.up.railway.app/api/v1/users/me"/>
+			<skipped type="skipped">No examples in schema</skipped>
+		</testcase>
+		<testcase name="GET /api/v1/users/{user_id}" time="0.448235">
+			<failure type="failure" message="1. Test Case ID: mVzo02
+
+- API rejected schema-compliant request
+
+    Valid data should have been accepted
+    Expected: 2xx, 401, 403, 404, 5xx
+
+- Undocumented HTTP status code
+
+    Received: 400
+    Documented: 200, 422
+
+[400] Bad Request:
+
+    `{&quot;detail&quot;:&quot;Invalid user ID format. Must be a valid UUID.&quot;}`
+
+Reproduce with: 
+
+    curl -X GET -H 'Authorization: [Filtered]' https://aclue-backend-production.up.railway.app/api/v1/users/0"/>
+			<failure type="failure" message="1. Test Case ID: mVzo02
+
+- API rejected schema-compliant request
+
+    Valid data should have been accepted
+    Expected: 2xx, 401, 403, 404, 5xx
+
+- Undocumented HTTP status code
+
+    Received: 400
+    Documented: 200, 422
+
+[400] Bad Request:
+
+    `{&quot;detail&quot;:&quot;Invalid user ID format. Must be a valid UUID.&quot;}`
+
+Reproduce with: 
+
+    curl -X GET -H 'Authorization: [Filtered]' https://aclue-backend-production.up.railway.app/api/v1/users/0"/>
+			<skipped type="skipped">No examples in schema</skipped>
+		</testcase>
+		<testcase name="GET /api/v1/users/me/statistics" time="0.555491">
+			<failure type="failure" message="1. Test Case ID: yFOLFN
+
+- Missing header not rejected
+
+    Missing header not rejected (got 403, expected 401)
+
+- Undocumented HTTP status code
+
+    Received: 403
+    Documented: 200
+
+[403] Forbidden:
+
+    `{&quot;detail&quot;:&quot;Not authenticated&quot;}`
+
+Reproduce with: 
+
+    curl -X GET https://aclue-backend-production.up.railway.app/api/v1/users/me/statistics"/>
+			<failure type="failure" message="1. Test Case ID: yFOLFN
+
+- Missing header not rejected
+
+    Missing header not rejected (got 403, expected 401)
+
+- Undocumented HTTP status code
+
+    Received: 403
+    Documented: 200
+
+[403] Forbidden:
+
+    `{&quot;detail&quot;:&quot;Not authenticated&quot;}`
+
+Reproduce with: 
+
+    curl -X GET https://aclue-backend-production.up.railway.app/api/v1/users/me/statistics
+
+2. Test Case ID: 4Cm91x
+
+- API accepts requests without authentication
+
+    Expected 401, got `403 Forbidden` for `GET /api/v1/users/me/statistics`
+
+[403] Forbidden:
+
+    `{&quot;detail&quot;:&quot;Not authenticated&quot;}`
+
+Reproduce with: 
+
+    curl -X GET https://aclue-backend-production.up.railway.app/api/v1/users/me/statistics"/>
+			<skipped type="skipped">No examples in schema</skipped>
+		</testcase>
+		<testcase name="GET /api/v1/products/{product_id}" time="0.334669">
+			<failure type="failure" message="1. Test Case ID: WgdWAF
+
+- Undocumented HTTP status code
+
+    Received: 404
+    Documented: 200, 422
+
+[404] Not Found:
+
+    `{&quot;detail&quot;:&quot;Product not found: 0. Please check the product ID or ASIN.&quot;}`
+
+Reproduce with: 
+
+    curl -X GET -H 'Authorization: [Filtered]' https://aclue-backend-production.up.railway.app/api/v1/products/0"/>
+			<failure type="failure" message="1. Test Case ID: WgdWAF
+
+- Undocumented HTTP status code
+
+    Received: 404
+    Documented: 200, 422
+
+[404] Not Found:
+
+    `{&quot;detail&quot;:&quot;Product not found: 0. Please check the product ID or ASIN.&quot;}`
+
+Reproduce with: 
+
+    curl -X GET -H 'Authorization: [Filtered]' https://aclue-backend-production.up.railway.app/api/v1/products/0"/>
+			<skipped type="skipped">No examples in schema</skipped>
+		</testcase>
+		<testcase name="GET /api/v1/products/trending/" time="3.573517">
+			<failure type="failure" message="1. Test Case ID: XKMGiq
+
+- API accepted schema-violating request
+
+    Invalid data should have been rejected
+    Expected: 400, 401, 403, 404, 406, 422, 428, 5xx
+
+[200] OK:
+
+    `[{&quot;id&quot;:&quot;bffbed11-06db-4c34-8ad7-bdacead62a5d&quot;,&quot;title&quot;:&quot;Ninja Foodi 7.5L Multi-Cooker&quot;,&quot;description&quot;:&quot;The pressure cooker that crisps. TenderCrisp Technology allows you to quickly cook ingredients, then the Crisping Lid gives your meals a crispy, golden finish.&quot;,&quot;price&quot;:199.99,&quot;currency&quot;:&quot;GBP&quot;,&quot;category&quot;:&quot;Kitchen &amp; Home&quot;,&quot;brand&quot;:&quot;Ninja&quot;,&quot;retailer&quot;:&quot;Amazon&quot;,&quot;image_url&quot;:&quot;https://m.media-amazon.com/images/I/81WhVWsOK1L._AC_SL1500_.jpg&quot;,&quot;affiliate_url&quot;:&quot;https://www.amazon.co.uk/dp/B07HGJQJZ6/?tag=aclue-20&amp;linkCo // Output truncated...`
+
+Reproduce with: 
+
+    curl -X GET -H 'Authorization: [Filtered]' 'https://aclue-backend-production.up.railway.app/api/v1/products/trending/?limit=0'"/>
+			<skipped type="skipped">No examples in schema</skipped>
+		</testcase>
+		<testcase name="POST /api/v1/swipes/" time="1.131307">
+			<failure type="failure" message="1. Test Case ID: rRwZk2
+
+- API rejected schema-compliant request
+
+    Valid data should have been accepted
+    Expected: 2xx, 401, 403, 404, 5xx
+
+- Undocumented HTTP status code
+
+    Received: 400
+    Documented: 200, 422
+
+[400] Bad Request:
+
+    `{&quot;detail&quot;:&quot;Invalid swipe direction. Must be one of: ['like', 'dislike', 'super_like']&quot;}`
+
+Reproduce with: 
+
+    curl -X POST -H 'Authorization: [Filtered]' -H 'Content-Type: application/json' -d '{&quot;direction&quot;: &quot;&quot;, &quot;product_id&quot;: &quot;&quot;, &quot;session_id&quot;: &quot;&quot;}' https://aclue-backend-production.up.railway.app/api/v1/swipes/"/>
+			<failure type="failure" message="1. Test Case ID: rRwZk2
+
+- API rejected schema-compliant request
+
+    Valid data should have been accepted
+    Expected: 2xx, 401, 403, 404, 5xx
+
+- Undocumented HTTP status code
+
+    Received: 400
+    Documented: 200, 422
+
+[400] Bad Request:
+
+    `{&quot;detail&quot;:&quot;Invalid swipe direction. Must be one of: ['like', 'dislike', 'super_like']&quot;}`
+
+Reproduce with: 
+
+    curl -X POST -H 'Authorization: [Filtered]' -H 'Content-Type: application/json' -d '{&quot;direction&quot;: &quot;&quot;, &quot;product_id&quot;: &quot;&quot;, &quot;session_id&quot;: &quot;&quot;}' https://aclue-backend-production.up.railway.app/api/v1/swipes/"/>
+			<skipped type="skipped">No examples in schema</skipped>
+		</testcase>
+		<testcase name="GET /api/v1/swipes/sessions" time="1.033366">
+			<skipped type="skipped">No examples in schema</skipped>
+		</testcase>
+		<testcase name="GET /api/v1/products/" time="2.911387">
+			<failure type="failure" message="1. Test Case ID: rhj3xz
+
+- API accepted schema-violating request
+
+    Invalid data should have been rejected
+    Expected: 400, 401, 403, 404, 406, 422, 428, 5xx
+
+[200] OK:
+
+    `[]`
+
+Reproduce with: 
+
+    curl -X GET -H 'Authorization: [Filtered]' 'https://aclue-backend-production.up.railway.app/api/v1/products/?q=null&amp;q=null'"/>
+			<failure type="failure" message="1. Test Case ID: rhj3xz
+
+- API accepted schema-violating request
+
+    Invalid data should have been rejected
+    Expected: 400, 401, 403, 404, 406, 422, 428, 5xx
+
+[200] OK:
+
+    `[]`
+
+Reproduce with: 
+
+    curl -X GET -H 'Authorization: [Filtered]' 'https://aclue-backend-production.up.railway.app/api/v1/products/?q=null&amp;q=null'"/>
+			<skipped type="skipped">No examples in schema</skipped>
+		</testcase>
+		<testcase name="GET /api/v1/recommendations/" time="48.535447">
+			<failure type="failure" message="1. Test Case ID: qlXWOB
+
+- API accepted schema-violating request
+
+    Invalid data should have been rejected
+    Expected: 400, 401, 403, 404, 406, 422, 428, 5xx
+
+[200] OK:
+
+    `[]`
+
+Reproduce with: 
+
+    curl -X GET -H 'Authorization: [Filtered]' 'https://aclue-backend-production.up.railway.app/api/v1/recommendations/?recommendation_type=null&amp;recommendation_type=null'"/>
+			<failure type="failure" message="1. Test Case ID: qlXWOB
+
+- API accepted schema-violating request
+
+    Invalid data should have been rejected
+    Expected: 400, 401, 403, 404, 406, 422, 428, 5xx
+
+[200] OK:
+
+    `[]`
+
+Reproduce with: 
+
+    curl -X GET -H 'Authorization: [Filtered]' 'https://aclue-backend-production.up.railway.app/api/v1/recommendations/?recommendation_type=null&amp;recommendation_type=null'"/>
+			<skipped type="skipped">No examples in schema</skipped>
+		</testcase>
+		<testcase name="POST /api/v1/recommendations/interactions" time="18.356468">
+			<skipped type="skipped">No examples in schema</skipped>
+		</testcase>
+		<testcase name="POST /api/v1/auth/login" time="1.877639">
+			<failure type="failure" message="1. Test Case ID: 2IuVf2
+
+- Undocumented HTTP status code
+
+    Received: 401
+    Documented: 200, 422
+
+[401] Unauthorized:
+
+    `{&quot;detail&quot;:&quot;Invalid email or password&quot;}`
+
+Reproduce with: 
+
+    curl -X POST -H 'Authorization: [Filtered]' -H 'Content-Type: application/json' -d '{&quot;email&quot;: &quot;0@A.COM&quot;, &quot;password&quot;: &quot;00&quot;}' https://aclue-backend-production.up.railway.app/api/v1/auth/login"/>
+			<failure type="failure" message="1. Test Case ID: 2IuVf2
+
+- Undocumented HTTP status code
+
+    Received: 401
+    Documented: 200, 422
+
+[401] Unauthorized:
+
+    `{&quot;detail&quot;:&quot;Invalid email or password&quot;}`
+
+Reproduce with: 
+
+    curl -X POST -H 'Authorization: [Filtered]' -H 'Content-Type: application/json' -d '{&quot;email&quot;: &quot;0@A.COM&quot;, &quot;password&quot;: &quot;00&quot;}' https://aclue-backend-production.up.railway.app/api/v1/auth/login"/>
+			<skipped type="skipped">No examples in schema</skipped>
+		</testcase>
+		<testcase name="GET /api/v1/recommendations/analytics" time="5.751920">
+			<skipped type="skipped">No examples in schema</skipped>
+		</testcase>
+		<testcase name="POST /api/v1/gift-links/" time="31.418397">
+			<failure type="failure" message="1. Test Case ID: UsU6DN
+
+- API accepted schema-violating request
+
+    Invalid data should have been rejected
+    Expected: 400, 401, 403, 404, 406, 422, 428, 5xx
+
+[200] OK:
+
+    `{&quot;id&quot;:&quot;559e7a58-fc76-47da-9b2b-e8aa9409dc37&quot;,&quot;title&quot;:&quot;&quot;,&quot;description&quot;:null,&quot;link_token&quot;:&quot;wZhjssHsEplD6AstPr2J8w&quot;,&quot;share_url&quot;:&quot;https://aclue.app/gifts/wZhjssHsEplD6AstPr2J8w&quot;,&quot;user_id&quot;:&quot;18e18273-78c3-4443-9dad-f3ca148f599c&quot;,&quot;products&quot;:[],&quot;product_count&quot;:0,&quot;view_count&quot;:0,&quot;click_count&quot;:0,&quot;is_public&quot;:false,&quot;expires_at&quot;:null,&quot;created_at&quot;:&quot;2025-09-23T20:46:19.464373&quot;,&quot;last_accessed&quot;:null}`
+
+Reproduce with: 
+
+    curl -X POST -H 'Authorization: [Filtered]' -H 'Content-Type: application/json' -d '{&quot;description&quot;: null, &quot;expires_at&quot;: null, &quot;is_public&quot;: 0, &quot;product_ids&quot;: [], &quot;title&quot;: &quot;&quot;}' https://aclue-backend-production.up.railway.app/api/v1/gift-links/"/>
+			<skipped type="skipped">No examples in schema</skipped>
+		</testcase>
+		<testcase name="GET /api/v1/gift-links/" time="5.508039">
+			<failure type="failure" message="1. Test Case ID: RyaqG6
+
+- API accepted schema-violating request
+
+    Invalid data should have been rejected
+    Expected: 400, 401, 403, 404, 406, 422, 428, 5xx
+
+[200] OK:
+
+    `[{&quot;id&quot;:&quot;link_1&quot;,&quot;title&quot;:&quot;Tech Essentials Collection&quot;,&quot;description&quot;:&quot;Perfect gadgets for the tech enthusiast&quot;,&quot;link_token&quot;:&quot;abc123def456&quot;,&quot;share_url&quot;:&quot;https://aclue.app/gifts/abc123def456&quot;,&quot;user_id&quot;:&quot;18e18273-78c3-4443-9dad-f3ca148f599c&quot;,&quot;products&quot;:[{&quot;id&quot;:&quot;1&quot;,&quot;title&quot;:&quot;Wireless Headphones&quot;,&quot;price&quot;:199.99,&quot;currency&quot;:&quot;GBP&quot;,&quot;image_url&quot;:&quot;https://picsum.photos/300/200?random=1&quot;},{&quot;id&quot;:&quot;3&quot;,&quot;title&quot;:&quot;Smart Watch&quot;,&quot;price&quot;:299.99,&quot;currency&quot;:&quot;GBP&quot;,&quot;image_url&quot;:&quot;https://picsum.photos/300/200?random=3&quot;},{&quot;id&quot;:&quot;4&quot;,&quot;title&quot;:&quot; // Output truncated...`
+
+Reproduce with: 
+
+    curl -X GET -H 'Authorization: [Filtered]' 'https://aclue-backend-production.up.railway.app/api/v1/gift-links/?offset=0&amp;x-schemathesis-unknown-property=42'"/>
+			<failure type="failure" message="1. Test Case ID: RyaqG6
+
+- API accepted schema-violating request
+
+    Invalid data should have been rejected
+    Expected: 400, 401, 403, 404, 406, 422, 428, 5xx
+
+[200] OK:
+
+    `[{&quot;id&quot;:&quot;link_1&quot;,&quot;title&quot;:&quot;Tech Essentials Collection&quot;,&quot;description&quot;:&quot;Perfect gadgets for the tech enthusiast&quot;,&quot;link_token&quot;:&quot;abc123def456&quot;,&quot;share_url&quot;:&quot;https://aclue.app/gifts/abc123def456&quot;,&quot;user_id&quot;:&quot;18e18273-78c3-4443-9dad-f3ca148f599c&quot;,&quot;products&quot;:[{&quot;id&quot;:&quot;1&quot;,&quot;title&quot;:&quot;Wireless Headphones&quot;,&quot;price&quot;:199.99,&quot;currency&quot;:&quot;GBP&quot;,&quot;image_url&quot;:&quot;https://picsum.photos/300/200?random=1&quot;},{&quot;id&quot;:&quot;3&quot;,&quot;title&quot;:&quot;Smart Watch&quot;,&quot;price&quot;:299.99,&quot;currency&quot;:&quot;GBP&quot;,&quot;image_url&quot;:&quot;https://picsum.photos/300/200?random=3&quot;},{&quot;id&quot;:&quot;4&quot;,&quot;title&quot;:&quot; // Output truncated...`
+
+Reproduce with: 
+
+    curl -X GET -H 'Authorization: [Filtered]' 'https://aclue-backend-production.up.railway.app/api/v1/gift-links/?offset=0&amp;x-schemathesis-unknown-property=42'
+
+2. Test Case ID: OSYDDD
+
+- API rejected schema-compliant request
+
+    Valid data should have been accepted
+    Expected: 2xx, 401, 403, 404, 5xx
+
+[422] Unprocessable Entity:
+
+    `{&quot;detail&quot;:[{&quot;type&quot;:&quot;bool_parsing&quot;,&quot;loc&quot;:[&quot;query&quot;,&quot;is_active&quot;],&quot;msg&quot;:&quot;Input should be a valid boolean, unable to interpret input&quot;,&quot;input&quot;:&quot;null&quot;,&quot;url&quot;:&quot;https://errors.pydantic.dev/2.5/v/bool_parsing&quot;}]}`
+
+Reproduce with: 
+
+    curl -X GET -H 'Authorization: [Filtered]' 'https://aclue-backend-production.up.railway.app/api/v1/gift-links/?is_active=null'"/>
+			<skipped type="skipped">No examples in schema</skipped>
+		</testcase>
+		<testcase name="POST /api/v1/swipes/sessions" time="1.076658">
+			<skipped type="skipped">No examples in schema</skipped>
+		</testcase>
+		<testcase name="POST /api/v1/gift-links/interactions" time="29.631014">
+			<failure type="failure" message="1. Test Case ID: BSRLi8
+
+- Unsupported method incorrect response
+
+    Wrong status for unsupported method GET (got 404, expected 405)
+
+[404] Not Found:
+
+    `{&quot;detail&quot;:&quot;Gift link not found&quot;}`
+
+Reproduce with: 
+
+    curl -X GET -H 'Authorization: [Filtered]' -H 'Content-Type: application/json' -d '{&quot;interaction_type&quot;: &quot;&quot;, &quot;link_token&quot;: &quot;&quot;, &quot;product_id&quot;: null}' https://aclue-backend-production.up.railway.app/api/v1/gift-links/interactions"/>
+			<skipped type="skipped">No examples in schema</skipped>
+		</testcase>
+		<testcase name="GET /api/v1/gift-links/{link_id}/analytics" time="23.426466">
+			<skipped type="skipped">No examples in schema</skipped>
+		</testcase>
+		<testcase name="DELETE /api/v1/gift-links/{link_id}" time="22.445249">
+			<failure type="failure" message="1. Test Case ID: 0RTmFs
+
+- Unsupported method incorrect response
+
+    Wrong status for unsupported method GET (got 404, expected 405)
+
+[404] Not Found:
+
+    `{&quot;detail&quot;:&quot;Gift link not found&quot;}`
+
+Reproduce with: 
+
+    curl -X GET -H 'Authorization: [Filtered]' https://aclue-backend-production.up.railway.app/api/v1/gift-links/0"/>
+			<skipped type="skipped">No examples in schema</skipped>
+		</testcase>
+		<testcase name="POST /api/v1/affiliate/clicks/" time="0.223277">
+			<failure type="failure" message="1. Test Case ID: xSYwyg
+
+- Undocumented HTTP status code
+
+    Received: 401
+    Documented: 200, 422
+
+[401] Unauthorized:
+
+    `{&quot;detail&quot;:&quot;Invalid authorization header&quot;}`
+
+Reproduce with: 
+
+    curl -X POST -H 'Authorization: [Filtered]' -H 'Content-Type: application/json' -d '{&quot;campaign&quot;: null, &quot;source&quot;: &quot;recommendation&quot;}' 'https://aclue-backend-production.up.railway.app/api/v1/affiliate/clicks/?authorization=%5BFiltered%5D'"/>
+			<failure type="failure" message="1. Test Case ID: xSYwyg
+
+- Undocumented HTTP status code
+
+    Received: 401
+    Documented: 200, 422
+
+[401] Unauthorized:
+
+    `{&quot;detail&quot;:&quot;Invalid authorization header&quot;}`
+
+Reproduce with: 
+
+    curl -X POST -H 'Authorization: [Filtered]' -H 'Content-Type: application/json' -d '{&quot;campaign&quot;: null, &quot;source&quot;: &quot;recommendation&quot;}' 'https://aclue-backend-production.up.railway.app/api/v1/affiliate/clicks/?authorization=%5BFiltered%5D'"/>
+			<skipped type="skipped">No examples in schema</skipped>
+		</testcase>
+		<testcase name="PUT /api/v1/users/me" time="0.439201">
+			<failure type="failure" message="1. Test Case ID: BFpMKK
+
+- Missing header not rejected
+
+    Missing header not rejected (got 403, expected 401)
+
+- Undocumented HTTP status code
+
+    Received: 403
+    Documented: 200, 422
+
+[403] Forbidden:
+
+    `{&quot;detail&quot;:&quot;Not authenticated&quot;}`
+
+Reproduce with: 
+
+    curl -X PUT -H 'Content-Type: application/json' -d '{&quot;date_of_birth&quot;: null, &quot;first_name&quot;: null, &quot;gender&quot;: null, &quot;last_name&quot;: null, &quot;location&quot;: null, &quot;notification_settings&quot;: null, &quot;phone_number&quot;: null, &quot;preferences&quot;: null}' https://aclue-backend-production.up.railway.app/api/v1/users/me"/>
+			<failure type="failure" message="1. Test Case ID: BFpMKK
+
+- Missing header not rejected
+
+    Missing header not rejected (got 403, expected 401)
+
+- Undocumented HTTP status code
+
+    Received: 403
+    Documented: 200, 422
+
+[403] Forbidden:
+
+    `{&quot;detail&quot;:&quot;Not authenticated&quot;}`
+
+Reproduce with: 
+
+    curl -X PUT -H 'Content-Type: application/json' -d '{&quot;date_of_birth&quot;: null, &quot;first_name&quot;: null, &quot;gender&quot;: null, &quot;last_name&quot;: null, &quot;location&quot;: null, &quot;notification_settings&quot;: null, &quot;phone_number&quot;: null, &quot;preferences&quot;: null}' https://aclue-backend-production.up.railway.app/api/v1/users/me
+
+2. Test Case ID: j0wOAa
+
+- Server error
+
+- Undocumented HTTP status code
+
+    Received: 500
+    Documented: 200, 422
+
+[500] Internal Server Error:
+
+    `{&quot;detail&quot;:&quot;Authentication error: [Errno 101] Network is unreachable&quot;}`
+
+Reproduce with: 
+
+    curl -X PUT -H 'Authorization: [Filtered]' -H 'Content-Type: application/json' -d '{}' https://aclue-backend-production.up.railway.app/api/v1/users/me"/>
+			<skipped type="skipped">No examples in schema</skipped>
+		</testcase>
+		<testcase name="GET /api/v1/gift-links/{link_token}" time="0.639035">
+			<failure type="failure" message="1. Test Case ID: tp0Xwo
+
+- Unsupported method incorrect response
+
+    Wrong status for unsupported method DELETE (got 200, expected 405)
+
+[200] OK:
+
+    `{&quot;link_id&quot;:&quot;0&quot;,&quot;user_id&quot;:&quot;18e18273-78c3-4443-9dad-f3ca148f599c&quot;,&quot;deleted&quot;:true,&quot;timestamp&quot;:&quot;2025-09-23T20:46:20.083944&quot;}`
+
+Reproduce with: 
+
+    curl -X DELETE -H 'Authorization: [Filtered]' https://aclue-backend-production.up.railway.app/api/v1/gift-links/0"/>
+			<failure type="failure" message="1. Test Case ID: tp0Xwo
+
+- Unsupported method incorrect response
+
+    Wrong status for unsupported method DELETE (got 200, expected 405)
+
+[200] OK:
+
+    `{&quot;link_id&quot;:&quot;0&quot;,&quot;user_id&quot;:&quot;18e18273-78c3-4443-9dad-f3ca148f599c&quot;,&quot;deleted&quot;:true,&quot;timestamp&quot;:&quot;2025-09-23T20:46:20.083944&quot;}`
+
+Reproduce with: 
+
+    curl -X DELETE -H 'Authorization: [Filtered]' https://aclue-backend-production.up.railway.app/api/v1/gift-links/0
+
+2. Test Case ID: DEERO4
+
+- Undocumented HTTP status code
+
+    Received: 404
+    Documented: 200, 422
+
+[404] Not Found:
+
+    `{&quot;detail&quot;:&quot;Gift link not found&quot;}`
+
+Reproduce with: 
+
+    curl -X GET -H 'Authorization: [Filtered]' https://aclue-backend-production.up.railway.app/api/v1/gift-links/0"/>
+			<skipped type="skipped">No examples in schema</skipped>
+		</testcase>
+		<testcase name="POST /api/v1/newsletter/signup" time="4.714543">
+			<failure type="failure" message="1. Test Case ID: TudNeq
+
+- API rejected schema-compliant request
+
+    Valid data should have been accepted
+    Expected: 2xx, 401, 403, 404, 5xx
+
+- Undocumented HTTP status code
+
+    Received: 429
+    Documented: 200, 422
+
+[429] Too Many Requests:
+
+    `{&quot;detail&quot;:&quot;5 per 1 minute&quot;}`
+
+Reproduce with: 
+
+    curl -X POST -H 'Authorization: [Filtered]' -H 'Content-Type: application/json' -d '{&quot;email&quot;: &quot;wr%Hy{~v6niIUO6`SR|U@mcyON.D.y.phiLIPs&quot;, &quot;\ud934\udd4a\ud86f\ude90\u0016|&quot;: {&quot;\ud899\udef2&quot;: [96]}, &quot;source&quot;: &quot;\u00f8\ud8e2\udd9a\u00f3&quot;}' https://aclue-backend-production.up.railway.app/api/v1/newsletter/signup"/>
+			<skipped type="skipped">No examples in schema</skipped>
+		</testcase>
+		<testcase name="GET /api/v1/affiliate/products/{asin}/affiliate-url" time="3.219566">
+			<skipped type="skipped">No examples in schema</skipped>
+		</testcase>
+		<testcase name="POST /api/v1/recommendations/refresh" time="1.284649">
+			<skipped type="skipped">No examples in schema</skipped>
+		</testcase>
+		<testcase name="GET /api/v1/newsletter/subscribers" time="1.803132">
+			<failure type="failure" message="1. Test Case ID: 797KWE
+
+- API accepted schema-violating request
+
+    Invalid data should have been rejected
+    Expected: 400, 401, 403, 404, 406, 422, 428, 5xx
+
+[200] OK:
+
+    `[{&quot;id&quot;:&quot;b50f27ca-56a2-49c5-a60f-b8f0adc45dec&quot;,&quot;email&quot;:&quot;0@a.com&quot;,&quot;source&quot;:&quot;maintenance_page&quot;,&quot;signup_timestamp&quot;:&quot;2025-09-23T20:46:23.328166Z&quot;,&quot;is_active&quot;:true,&quot;created_at&quot;:&quot;2025-09-23T20:46:23.622141Z&quot;},{&quot;id&quot;:&quot;1318e42b-e384-4b66-a8fc-ceec0b7bdabe&quot;,&quot;email&quot;:&quot;jtgriffin95@gmail.com&quot;,&quot;source&quot;:&quot;maintenance_page_server_actions&quot;,&quot;signup_timestamp&quot;:&quot;2025-09-23T15:01:11.293055Z&quot;,&quot;is_active&quot;:true,&quot;created_at&quot;:&quot;2025-09-23T15:01:11.680036Z&quot;}]`
+
+Reproduce with: 
+
+    curl -X GET -H 'Authorization: [Filtered]' 'https://aclue-backend-production.up.railway.app/api/v1/newsletter/subscribers?offset=0&amp;x-schemathesis-unknown-property=42'"/>
+			<failure type="failure" message="1. Test Case ID: 797KWE
+
+- API accepted schema-violating request
+
+    Invalid data should have been rejected
+    Expected: 400, 401, 403, 404, 406, 422, 428, 5xx
+
+[200] OK:
+
+    `[{&quot;id&quot;:&quot;b50f27ca-56a2-49c5-a60f-b8f0adc45dec&quot;,&quot;email&quot;:&quot;0@a.com&quot;,&quot;source&quot;:&quot;maintenance_page&quot;,&quot;signup_timestamp&quot;:&quot;2025-09-23T20:46:23.328166Z&quot;,&quot;is_active&quot;:true,&quot;created_at&quot;:&quot;2025-09-23T20:46:23.622141Z&quot;},{&quot;id&quot;:&quot;1318e42b-e384-4b66-a8fc-ceec0b7bdabe&quot;,&quot;email&quot;:&quot;jtgriffin95@gmail.com&quot;,&quot;source&quot;:&quot;maintenance_page_server_actions&quot;,&quot;signup_timestamp&quot;:&quot;2025-09-23T15:01:11.293055Z&quot;,&quot;is_active&quot;:true,&quot;created_at&quot;:&quot;2025-09-23T15:01:11.680036Z&quot;}]`
+
+Reproduce with: 
+
+    curl -X GET -H 'Authorization: [Filtered]' 'https://aclue-backend-production.up.railway.app/api/v1/newsletter/subscribers?offset=0&amp;x-schemathesis-unknown-property=42'
+
+2. Test Case ID: lkIHDX
+
+- Server error
+
+- Undocumented HTTP status code
+
+    Received: 500
+    Documented: 200, 422
+
+[500] Internal Server Error:
+
+    `{&quot;detail&quot;:&quot;Debug info: APIError: {'message': 'Requested range not satisfiable', 'code': 'PGRST103', 'hint': None, 'details': 'Limit should be greater than or equal to zero.'}&quot;}`
+
+Reproduce with: 
+
+    curl -X GET -H 'Authorization: [Filtered]' 'https://aclue-backend-production.up.railway.app/api/v1/newsletter/subscribers?active_only=true&amp;limit=-617452956&amp;offset=27226145227759591739886471816635022113'"/>
+			<skipped type="skipped">No examples in schema</skipped>
+		</testcase>
+		<testcase name="DELETE /api/v1/newsletter/unsubscribe/{email}" time="0.847023">
+			<failure type="failure" message="1. Test Case ID: 5iGx1X
+
+- Server error
+
+- Undocumented HTTP status code
+
+    Received: 500
+    Documented: 200, 422
+
+[500] Internal Server Error:
+
+    `{&quot;detail&quot;:&quot;Failed to unsubscribe from newsletter&quot;}`
+
+Reproduce with: 
+
+    curl -X DELETE -H 'Authorization: [Filtered]' https://aclue-backend-production.up.railway.app/api/v1/newsletter/unsubscribe/C%40A.COM"/>
+			<skipped type="skipped">No examples in schema</skipped>
+		</testcase>
+		<testcase name="GET /api/v1/affiliate/stats/" time="0.372121">
+			<failure type="failure" message="1. Test Case ID: xIcqED
+
+- Undocumented HTTP status code
+
+    Received: 401
+    Documented: 200, 422
+
+[401] Unauthorized:
+
+    `{&quot;detail&quot;:&quot;Invalid authorization header&quot;}`
+
+Reproduce with: 
+
+    curl -X GET -H 'Authorization: [Filtered]' 'https://aclue-backend-production.up.railway.app/api/v1/affiliate/stats/?authorization=%5BFiltered%5D'"/>
+			<failure type="failure" message="1. Test Case ID: xIcqED
+
+- Undocumented HTTP status code
+
+    Received: 401
+    Documented: 200, 422
+
+[401] Unauthorized:
+
+    `{&quot;detail&quot;:&quot;Invalid authorization header&quot;}`
+
+Reproduce with: 
+
+    curl -X GET -H 'Authorization: [Filtered]' 'https://aclue-backend-production.up.railway.app/api/v1/affiliate/stats/?authorization=%5BFiltered%5D'"/>
+			<skipped type="skipped">No examples in schema</skipped>
+		</testcase>
+	</testsuite>
+</testsuites>
