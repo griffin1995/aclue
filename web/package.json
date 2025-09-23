@@ -34,7 +34,10 @@
     "perf:report": "npm run optimize && npm run perf:test --runs 5",
     "performance:baseline": "node scripts/performance-baseline.js",
     "app-router:test": "jest --config jest.app-router.config.js",
-    "app-router:build": "NEXT_PUBLIC_APP_ROUTER_ENABLED=true next build"
+    "app-router:build": "NEXT_PUBLIC_APP_ROUTER_ENABLED=true next build",
+    "email:preview": "npx tsx scripts/generate-email-previews.ts",
+    "email:send-test": "npx tsx scripts/send-test-email.ts",
+    "email:dev": "npm run email:preview && echo 'Preview generated! Open email-previews/combined-preview.html in your browser'"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.0",
@@ -126,6 +129,7 @@
     "prettier": "^3.0.0",
     "puppeteer": "^24.22.0",
     "testcafe": "^3.7.2",
+    "tsx": "^4.20.5",
     "typescript": "5.8.3",
     "vitest": "^3.2.4",
     "web-vitals": "^5.1.0",
