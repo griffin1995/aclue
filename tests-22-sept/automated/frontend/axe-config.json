@@ -1,0 +1,48 @@
+{
+  "rules": {},
+  "tags": [
+    "wcag2a",
+    "wcag2aa",
+    "wcag21a",
+    "wcag21aa",
+    "wcag22a",
+    "wcag22aa",
+    "best-practice"
+  ],
+  "locale": "en-GB",
+  "reporter": "json",
+  "timeout": 30000,
+  "chromeOptions": {
+    "args": [
+      "--no-sandbox",
+      "--disable-dev-shm-usage",
+      "--disable-background-timer-throttling",
+      "--disable-backgrounding-occluded-windows",
+      "--disable-renderer-backgrounding",
+      "--disable-web-security",
+      "--disable-features=VizDisplayCompositor"
+    ]
+  },
+  "include": [
+    "html"
+  ],
+  "exclude": [],
+  "resultTypes": [
+    "violations",
+    "incomplete",
+    "passes",
+    "inapplicable"
+  ],
+  "runOnly": {
+    "type": "tag",
+    "values": [
+      "wcag2a",
+      "wcag2aa",
+      "wcag21a",
+      "wcag21aa",
+      "wcag22a",
+      "wcag22aa",
+      "best-practice"
+    ]
+  }
+}
