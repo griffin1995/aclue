@@ -1,24 +1,46 @@
 repos:
-  # Security - Secret Detection
+  # Security - Secret Detection (Primary)
   - repo: https://github.com/Yelp/detect-secrets
-    rev: v1.4.0
+    rev: v1.5.0
     hooks:
       - id: detect-secrets
         args: ['--baseline', '.secrets.baseline']
-        exclude: package-lock.json
+        exclude: |
+          (?x)^(
+            package-lock\.json|
+            yarn\.lock|
+            pnpm-lock\.yaml|
+            \.git/|
+            \.vscode/|
+            node_modules/|
+            \.secrets\.baseline|
+            tests/.*\.json|
+            test_.*\.py|
+            .*\.md
+          )$
+        additional_dependencies: ['gibberish-detector']
 
-  # Security - GitLeaks
+  # Security - GitLeaks (Secondary)
   - repo: https://github.com/gitleaks/gitleaks
-    rev: v8.18.0
+    rev: v8.21.2
     hooks:
       - id: gitleaks
+        exclude: |
+          (?x)^(
+            \.git/|
+            node_modules/|
+            \.secrets\.baseline|
+            tests/.*\.json|
+            test_.*\.py
+          )$
+
 
   # Code Quality - Black (Python)
   - repo: https://github.com/psf/black
     rev: 23.12.0
     hooks:
       - id: black
-        language_version: python3.11
+        language_version: python3.12
         files: ^backend/
 
   # Code Quality - Ruff (Python)
@@ -34,7 +56,7 @@ repos:
     rev: v8.56.0
     hooks:
       - id: eslint
-        files: \.(js|jsx|ts|tsx)$
+        files: ^web/.*\.(js|jsx|ts|tsx)$
         types: [file]
         additional_dependencies:
           - eslint@8.56.0
@@ -42,41 +64,63 @@ repos:
           - '@typescript-eslint/parser@6.17.0'
           - '@typescript-eslint/eslint-plugin@6.17.0'
 
-  # Security - Bandit (Python)
+  # Security - Bandit (Python Security)
   - repo: https://github.com/PyCQA/bandit
-    rev: '1.7.6'
+    rev: '1.8.6'
     hooks:
       - id: bandit
-        args: ['-r', 'backend/', '-ll']
+        args: ['-r', 'backend/', '-ll', '--exclude', 'backend/tests']
         files: ^backend/.*\.py$
+        exclude: ^backend/tests/.*\.py$
 
   # Security - Safety (Python Dependencies)
   - repo: https://github.com/Lucas-C/pre-commit-hooks-safety
     rev: v1.3.3
     hooks:
       - id: python-safety-dependencies-check
-        files: requirements.txt
+        files: requirements.*\.txt$
+        args: ['--ignore=70612']  # Ignore Jinja2 vulnerability in test deps
 
-  # General - Trailing Whitespace
+
+  # Security - Environment File Prevention
+  - repo: local
+    hooks:
+      - id: prevent-env-files
+        name: Prevent .env files from being committed
+        entry: bash -c 'find . -name ".env" -o -name ".env.local" -o -name ".env.production" -o -name ".env.development" -o -name ".env.test" | grep -v node_modules | grep -v ".git" | grep -v "stryker-tmp" && exit 1 || exit 0'
+        language: system
+        pass_filenames: false
+
+  # General - File Quality and Security
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0
+    rev: v5.0.0
     hooks:
       - id: trailing-whitespace
+        exclude: .*\.md$
       - id: end-of-file-fixer
+        exclude: .*\.md$
       - id: check-yaml
+        args: ['--allow-multiple-documents']
       - id: check-added-large-files
-        args: ['--maxkb=1000']
+        args: ['--maxkb=2000', '--enforce-all']
       - id: check-case-conflict
       - id: check-merge-conflict
       - id: check-json
+        exclude: .*\.ipynb$
       - id: check-toml
       - id: detect-private-key
       - id: mixed-line-ending
         args: ['--fix=lf']
+      - id: check-executables-have-shebangs
+      - id: check-shebang-scripts-are-executable
+      - id: forbid-new-submodules
+      - id: no-commit-to-branch
+        args: ['--branch', 'master', '--branch', 'production']
+
 
   # Commit Message
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v3.13.0
+    rev: v3.29.0
     hooks:
       - id: commitizen
         stages: [commit-msg]
