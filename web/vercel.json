@@ -2,6 +2,8 @@
   "version": 2,
   "framework": "nextjs",
   "regions": ["iad1"],
+  "buildCommand": "npm run build:secure",
+  "ignoreCommand": "bash -c 'if [[ \"$VERCEL_GIT_COMMIT_REF\" == \"main\" ]] ; then exit 1; else exit 0; fi'",
   "headers": [
     {
       "source": "/(.*)",
@@ -43,6 +45,25 @@
     "NEXT_PUBLIC_APP_ROUTER_ENABLED": "true",
     "NEXT_PUBLIC_APP_ROUTER_ROUTES": "auth,profile",
     "NEXT_PUBLIC_APP_ROUTER_ROLLOUT_PERCENTAGE": "25",
-    "NODE_VERSION": "18"
+    "NODE_VERSION": "18",
+    "SECURITY_SCAN_ENABLED": "true",
+    "BUILD_SECURITY_CHECK": "true"
+  },
+  "functions": {
+    "app/api/**/*.js": {
+      "maxDuration": 10
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/.well-known/security.txt",
+      "destination": "/api/security-txt"
+    }
+  ],
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "github": {
+    "enabled": false,
+    "autoJobCancelation": true
   }
 }

@@ -1,0 +1,162 @@
+# Nuclei Configuration for aclue Production Security Scanning
+# Configured for WAF allowlist compatibility (Tier 3: Limited Access)
+
+# Basic configuration
+version: "2.9.4"
+author: "aclue-security-team"
+tags: ["production", "security", "waf-allowlist"]
+
+# WAF-compliant settings
+nuclei-version: "v2.9.4"
+update-directory: "/tmp/nuclei-templates"
+templates-directory: "./nuclei-templates"
+
+# Rate limiting (WAF Tier 3: 10 requests/minute)
+rate-limit: 10
+rate-limit-minute: 1
+bulk-size: 10
+c: 5  # Concurrent threads (low to respect WAF)
+
+# Request configuration
+timeout: 30
+retries: 1
+max-redirects: 3
+
+# WAF-friendly headers
+header:
+  - "User-Agent: Nuclei/v2.9.4 (+https://projectdiscovery.io/nuclei)"
+  - "X-Test-Purpose: security-assessment"
+  - "X-Monitoring-Tool: nuclei"
+  - "X-Request-Source: aclue-security-team"
+  - "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+
+# Output configuration
+json: true
+json-export: "./nuclei-reports/nuclei-results-{{date}}.json"
+report-config: "./nuclei-report-config.yaml"
+markdown-export: "./nuclei-reports/nuclei-summary-{{date}}.md"
+
+# Severity filtering (production-appropriate)
+severity:
+  - critical
+  - high
+  - medium
+
+# Template exclusions (avoid admin/auth endpoints per WAF rules)
+exclude-templates:
+  - "technologies/wordpress/"
+  - "vulnerabilities/wordpress/"
+  - "exposures/configs/database/"
+  - "exposures/configs/ftp/"
+  - "exposures/configs/ssh/"
+  - "vulnerabilities/auth/"
+  - "vulnerabilities/generic/admin/"
+  - "misconfiguration/admin/"
+  - "takeovers/"
+  - "dns/"
+  - "ssl/"  # Avoid SSL deep scanning in production
+
+# Template inclusions (public endpoint scanning only)
+include-templates:
+  - "exposures/apis/"
+  - "exposures/configs/web/"
+  - "exposures/files/"
+  - "http/exposures/"
+  - "http/misconfiguration/"
+  - "http/technologies/"
+  - "http/vulnerabilities/generic/"
+  - "misconfiguration/http/"
+  - "vulnerabilities/generic/xss/"
+  - "vulnerabilities/generic/sqli/"
+
+# Tags to include (security-focused)
+include-tags:
+  - "exposure"
+  - "misconfig"
+  - "tech"
+  - "xss"
+  - "sqli"
+  - "rce"
+  - "lfi"
+  - "ssrf"
+
+# Tags to exclude (avoid aggressive scanning)
+exclude-tags:
+  - "dos"
+  - "intrusive"
+  - "bruteforce"
+  - "flood"
+  - "fuzz"
+  - "admin"
+  - "auth"
+  - "login"
+
+# Target configuration
+target:
+  - "https://aclue.app"
+  - "https://aclue.app/newsletter"
+  - "https://aclue.app/robots.txt"
+  - "https://aclue.app/sitemap.xml"
+  - "https://aclue.app/.well-known/"
+
+# Exclude paths that might trigger WAF blocking
+exclude-paths:
+  - "/admin"
+  - "/administrator"
+  - "/login"
+  - "/signin"
+  - "/register"
+  - "/signup"
+  - "/auth"
+  - "/dashboard"
+  - "/panel"
+  - "/wp-admin"
+  - "/wp-login"
+  - "/api/auth"
+  - "/api/admin"
+
+# Custom variables for aclue platform
+vars:
+  - "domain=aclue.app"
+  - "protocol=https"
+  - "environment=production"
+  - "waf_tier=tier3-security"
+
+# Interactsh configuration (disabled for production)
+disable-interactsh: true
+
+# Update configuration
+update-templates: false  # Use stable templates only
+automatic-scan: false
+
+# Reporting configuration
+verbose: true
+silent: false
+no-color: false
+stats: true
+
+# Debug configuration (minimal for production)
+debug: false
+debug-req: false
+debug-resp: false
+
+# Custom matchers configuration
+matchers-condition: "and"  # Reduce false positives
+
+# WAF evasion settings (minimal to avoid detection)
+disable-clustering: true
+no-httpx: false
+
+# Custom payloads directory
+payloads-directory: "./nuclei-payloads"
+
+# System configuration
+system-resolvers: true
+disable-max-request-size-check: false
+
+# Workflow configuration
+workflows: "./nuclei-workflows/"
+
+# Custom error handling
+max-host-error: 3
+track-error: "./nuclei-errors.log"

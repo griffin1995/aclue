@@ -1,0 +1,44 @@
+{
+  "extends": [
+    "./.eslintrc.json",
+    "plugin:security/recommended",
+    "plugin:no-secrets/recommended"
+  ],
+  "plugins": [
+    "security",
+    "no-secrets"
+  ],
+  "rules": {
+    "security/detect-unsafe-regex": "error",
+    "security/detect-non-literal-regexp": "error",
+    "security/detect-non-literal-require": "error",
+    "security/detect-non-literal-fs-filename": "error",
+    "security/detect-eval-with-expression": "error",
+    "security/detect-pseudoRandomBytes": "error",
+    "security/detect-possible-timing-attacks": "error",
+    "security/detect-new-buffer": "error",
+    "security/detect-buffer-noassert": "error",
+    "security/detect-child-process": "error",
+    "security/detect-disable-mustache-escape": "error",
+    "security/detect-object-injection": "error",
+    "security/detect-bidi-characters": "error",
+    "no-secrets/no-secrets": "error"
+  },
+  "overrides": [
+    {
+      "files": ["**/*.test.{js,jsx,ts,tsx}", "**/*.spec.{js,jsx,ts,tsx}"],
+      "rules": {
+        "security/detect-non-literal-require": "off",
+        "security/detect-object-injection": "off",
+        "no-secrets/no-secrets": "off"
+      }
+    },
+    {
+      "files": ["scripts/**/*.js", "*.config.js"],
+      "rules": {
+        "security/detect-non-literal-require": "off",
+        "security/detect-child-process": "off"
+      }
+    }
+  ]
+}

@@ -1,3 +1,6 @@
+# Prometheus Configuration for aclue Platform
+# Production-ready metrics collection with service discovery
+
 global:
   scrape_interval: 15s
   evaluation_interval: 15s
@@ -12,78 +15,70 @@ alerting:
         - targets:
             - alertmanager:9093
 
-# Load rules once and periodically evaluate them
+# Load alerting rules
 rule_files:
-  - "rules/*.yml"
+  - '/etc/prometheus/rules/*.yml'
 
 # Scrape configurations
 scrape_configs:
-  # Prometheus itself
+  # Prometheus self-monitoring
   - job_name: 'prometheus'
     static_configs:
       - targets: ['localhost:9090']
         labels:
           service: 'prometheus'
+          tier: 'monitoring'
 
-  # Node Exporter - System metrics
-  - job_name: 'node'
+  # FastAPI Backend Monitoring
+  - job_name: 'aclue-backend'
+    metrics_path: '/metrics'
+    scheme: 'https'
+    static_configs:
+      - targets: ['aclue-backend-production.up.railway.app']
+        labels:
+          service: 'aclue-backend'
+          tier: 'backend'
+          environment: 'production'
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: instance
+        replacement: 'aclue-backend-production'
+    metric_relabel_configs:
+      # Drop unnecessary metrics to reduce cardinality
+      - source_labels: [__name__]
+        regex: 'python_gc_.*'
+        action: drop
+
+  # Node Exporter for Infrastructure Metrics
+  - job_name: 'node-exporter'
     static_configs:
       - targets: ['node-exporter:9100']
         labels:
           service: 'node-exporter'
+          tier: 'infrastructure'
 
-  # Docker containers metrics
-  - job_name: 'cadvisor'
-    static_configs:
-      - targets: ['cadvisor:8080']
-        labels:
-          service: 'cadvisor'
-
-  # Frontend (Next.js) metrics
-  - job_name: 'frontend'
-    metrics_path: '/api/metrics'
-    static_configs:
-      - targets: ['aclue.app']
-        labels:
-          service: 'nextjs'
-          environment: 'production'
-
-  # Backend (FastAPI) metrics
-  - job_name: 'backend'
-    metrics_path: '/metrics'
-    static_configs:
-      - targets: ['aclue-backend-production.up.railway.app']
-        labels:
-          service: 'fastapi'
-          environment: 'production'
-
-  # PostgreSQL metrics (via postgres_exporter)
+  # PostgreSQL Exporter for Database Metrics
   - job_name: 'postgresql'
     static_configs:
       - targets: ['postgres-exporter:9187']
         labels:
           service: 'postgresql'
-          database: 'aclue'
+          tier: 'database'
+          provider: 'supabase'
 
-  # Redis metrics (if using Redis)
-  - job_name: 'redis'
-    static_configs:
-      - targets: ['redis-exporter:9121']
-        labels:
-          service: 'redis'
-
-  # Blackbox Exporter - Endpoint monitoring
+  # Blackbox Exporter for Endpoint Monitoring
   - job_name: 'blackbox-http'
-    metrics_path: /probe
+    metrics_path: '/probe'
     params:
       module: [http_2xx]
     static_configs:
       - targets:
-          - https://aclue.app
-          - https://aclue.co.uk
-          - https://aclue-backend-production.up.railway.app/health
+          - 'https://aclue.app'
+          - 'https://aclue-backend-production.up.railway.app/health'
+          - 'https://aclue-backend-production.up.railway.app/api/v1/auth/health'
+          - 'https://aclue-backend-production.up.railway.app/api/v1/products/'
         labels:
-          type: 'endpoint'
+          tier: 'external'
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
@@ -91,3 +86,49 @@ scrape_configs:
         target_label: instance
       - target_label: __address__
         replacement: blackbox-exporter:9115
+
+  # Custom Metrics from Application
+  - job_name: 'aclue-custom-metrics'
+    metrics_path: '/api/metrics'
+    scheme: 'https'
+    static_configs:
+      - targets: ['aclue.app']
+        labels:
+          service: 'aclue-frontend'
+          tier: 'frontend'
+          environment: 'production'
+
+  # Grafana Metrics
+  - job_name: 'grafana'
+    static_configs:
+      - targets: ['grafana:3000']
+        labels:
+          service: 'grafana'
+          tier: 'monitoring'
+
+  # Container Metrics via cAdvisor
+  - job_name: 'cadvisor'
+    static_configs:
+      - targets: ['cadvisor:8080']
+        labels:
+          service: 'cadvisor'
+          tier: 'infrastructure'
+
+# Remote write configuration for long-term storage
+remote_write:
+  - url: 'http://victoria-metrics:8428/api/v1/write'
+    queue_config:
+      max_samples_per_send: 10000
+      batch_send_deadline: 5s
+      max_retries: 3
+    metadata_config:
+      send: true
+      send_interval: 1m
+
+# Service Discovery for dynamic environments
+# Uncomment when using Kubernetes or Docker Swarm
+# kubernetes_sd_configs:
+#   - role: pod
+#     namespaces:
+#       names:
+#         - aclue-production

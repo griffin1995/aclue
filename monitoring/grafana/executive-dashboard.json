@@ -1,0 +1,283 @@
+{
+  "dashboard": {
+    "id": null,
+    "uid": "aclue-executive",
+    "title": "aclue Executive Dashboard",
+    "tags": ["aclue", "executive", "business"],
+    "timezone": "browser",
+    "schemaVersion": 16,
+    "version": 0,
+    "refresh": "30s",
+    "panels": [
+      {
+        "id": 1,
+        "gridPos": {"h": 4, "w": 6, "x": 0, "y": 0},
+        "type": "stat",
+        "title": "Current Active Users",
+        "targets": [
+          {
+            "expr": "sum(rate(http_requests_total{service=\"aclue-backend\",status=~\"2..\"}[5m])) * 60",
+            "legendFormat": "Active Users/min"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {"mode": "thresholds"},
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"value": 0, "color": "red"},
+                {"value": 50, "color": "yellow"},
+                {"value": 100, "color": "green"}
+              ]
+            },
+            "unit": "short"
+          }
+        }
+      },
+      {
+        "id": 2,
+        "gridPos": {"h": 4, "w": 6, "x": 6, "y": 0},
+        "type": "stat",
+        "title": "Newsletter Subscription Rate",
+        "targets": [
+          {
+            "expr": "sum(increase(newsletter_subscriptions_total[24h]))",
+            "legendFormat": "Subscriptions (24h)"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {"mode": "thresholds"},
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"value": 0, "color": "red"},
+                {"value": 10, "color": "yellow"},
+                {"value": 50, "color": "green"}
+              ]
+            },
+            "unit": "short",
+            "decimals": 0
+          }
+        }
+      },
+      {
+        "id": 3,
+        "gridPos": {"h": 4, "w": 6, "x": 12, "y": 0},
+        "type": "stat",
+        "title": "API Success Rate",
+        "targets": [
+          {
+            "expr": "(sum(rate(http_requests_total{service=\"aclue-backend\",status=~\"2..\"}[5m])) / sum(rate(http_requests_total{service=\"aclue-backend\"}[5m]))) * 100",
+            "legendFormat": "Success Rate %"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {"mode": "thresholds"},
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"value": 0, "color": "red"},
+                {"value": 95, "color": "yellow"},
+                {"value": 99, "color": "green"}
+              ]
+            },
+            "unit": "percent",
+            "decimals": 2
+          }
+        }
+      },
+      {
+        "id": 4,
+        "gridPos": {"h": 4, "w": 6, "x": 18, "y": 0},
+        "type": "stat",
+        "title": "System Uptime",
+        "targets": [
+          {
+            "expr": "(1 - (sum(increase(http_requests_total{service=\"aclue-backend\",status=~\"5..\"}[24h])) / sum(increase(http_requests_total{service=\"aclue-backend\"}[24h])))) * 100",
+            "legendFormat": "Uptime %"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {"mode": "thresholds"},
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"value": 0, "color": "red"},
+                {"value": 99, "color": "yellow"},
+                {"value": 99.9, "color": "green"}
+              ]
+            },
+            "unit": "percent",
+            "decimals": 2
+          }
+        }
+      },
+      {
+        "id": 5,
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 4},
+        "type": "graph",
+        "title": "User Activity Trend",
+        "targets": [
+          {
+            "expr": "sum(rate(http_requests_total{service=\"aclue-backend\",endpoint=~\"/api/v1/auth/.*\"}[5m])) by (endpoint) * 60",
+            "legendFormat": "{{ endpoint }}"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "reqpm"
+          }
+        },
+        "options": {
+          "legend": {
+            "calcs": ["mean", "lastNotNull"],
+            "displayMode": "list",
+            "placement": "bottom"
+          }
+        }
+      },
+      {
+        "id": 6,
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 4},
+        "type": "graph",
+        "title": "Revenue Impact Metrics",
+        "targets": [
+          {
+            "expr": "sum(rate(product_recommendations_viewed_total[5m])) * 60",
+            "legendFormat": "Product Views/min"
+          },
+          {
+            "expr": "sum(rate(product_recommendations_clicked_total[5m])) * 60",
+            "legendFormat": "Product Clicks/min"
+          },
+          {
+            "expr": "(sum(rate(product_recommendations_clicked_total[5m])) / sum(rate(product_recommendations_viewed_total[5m]))) * 100",
+            "legendFormat": "CTR %"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short"
+          }
+        }
+      },
+      {
+        "id": 7,
+        "gridPos": {"h": 6, "w": 8, "x": 0, "y": 12},
+        "type": "piechart",
+        "title": "Traffic by Endpoint",
+        "targets": [
+          {
+            "expr": "sum(increase(http_requests_total{service=\"aclue-backend\"}[1h])) by (endpoint)",
+            "legendFormat": "{{ endpoint }}"
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "gridPos": {"h": 6, "w": 8, "x": 8, "y": 12},
+        "type": "gauge",
+        "title": "API Response Time (P95)",
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket{service=\"aclue-backend\"}[5m])) by (le)) * 1000",
+            "legendFormat": "P95 Response Time"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {"mode": "thresholds"},
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"value": 0, "color": "green"},
+                {"value": 200, "color": "yellow"},
+                {"value": 500, "color": "red"}
+              ]
+            },
+            "unit": "ms",
+            "min": 0,
+            "max": 1000
+          }
+        }
+      },
+      {
+        "id": 9,
+        "gridPos": {"h": 6, "w": 8, "x": 16, "y": 12},
+        "type": "bargauge",
+        "title": "Error Rate by Service",
+        "targets": [
+          {
+            "expr": "sum(rate(http_requests_total{status=~\"5..\"}[5m])) by (service) * 100",
+            "legendFormat": "{{ service }}"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {"mode": "thresholds"},
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"value": 0, "color": "green"},
+                {"value": 1, "color": "yellow"},
+                {"value": 5, "color": "red"}
+              ]
+            },
+            "unit": "percent"
+          }
+        }
+      },
+      {
+        "id": 10,
+        "gridPos": {"h": 6, "w": 24, "x": 0, "y": 18},
+        "type": "table",
+        "title": "Critical Business Metrics Summary",
+        "targets": [
+          {
+            "expr": "topk(10, sum by (endpoint) (increase(http_requests_total{service=\"aclue-backend\"}[1h])))",
+            "format": "table",
+            "instant": true
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "custom": {
+              "align": "auto",
+              "displayMode": "auto"
+            }
+          }
+        }
+      }
+    ],
+    "templating": {
+      "list": [
+        {
+          "name": "interval",
+          "type": "interval",
+          "query": "1m,5m,10m,30m,1h",
+          "current": {
+            "text": "5m",
+            "value": "5m"
+          }
+        },
+        {
+          "name": "environment",
+          "type": "query",
+          "query": "label_values(environment)",
+          "current": {
+            "text": "production",
+            "value": "production"
+          }
+        }
+      ]
+    },
+    "time": {
+      "from": "now-6h",
+      "to": "now"
+    }
+  }
+}

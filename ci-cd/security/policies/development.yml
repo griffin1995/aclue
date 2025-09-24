@@ -1,0 +1,402 @@
+# =============================================================================
+# aclue Platform Development Security Policy
+# =============================================================================
+#
+# Education-focused security policy for development environment
+# Emphasises learning and awareness while maintaining baseline security
+#
+# =============================================================================
+
+policy:
+  name: "Development Security Policy"
+  environment: "development"
+  enforcement: "educational"
+  created: "2025-09-24"
+  owner: "security-team"
+
+# =============================================================================
+# DEVELOPMENT SECURITY REQUIREMENTS
+# =============================================================================
+
+enforcement_mode:
+  level: "educational"
+  fail_fast: false
+  auto_rollback: false
+  require_security_review: false
+  learning_mode: true
+
+# =============================================================================
+# VULNERABILITY POLICY
+# =============================================================================
+
+vulnerabilities:
+  # Educational approach with higher tolerance
+  critical:
+    max_allowed: 0
+    action: "block"
+    notification: "immediate"
+    education: "mandatory_training"
+    auto_fix_suggestions: true
+
+  high:
+    max_allowed: 3
+    action: "warn"
+    notification: "4_hours"
+    education: "recommended_reading"
+    provide_examples: true
+
+  medium:
+    max_allowed: 10
+    action: "inform"
+    notification: "daily"
+    education: "weekly_tips"
+    track_improvements: true
+
+  low:
+    max_allowed: 50
+    action: "log"
+    notification: "weekly"
+    education: "monthly_newsletter"
+    gamification: true
+
+  # Learning features
+  learning:
+    show_vulnerability_details: true
+    explain_impact: true
+    provide_fix_guidance: true
+    link_to_documentation: true
+    track_developer_progress: true
+
+# =============================================================================
+# SECRET DETECTION POLICY
+# =============================================================================
+
+secrets:
+  # Educational with prevention focus
+  detection:
+    confirmed:
+      max_allowed: 0
+      action: "block"
+      education: "immediate_training"
+      prevent_commit: true
+
+    high_confidence:
+      max_allowed: 0
+      action: "warn"
+      education: "best_practices_guide"
+      suggest_alternatives: true
+
+    medium_confidence:
+      max_allowed: 2
+      action: "inform"
+      education: "tips_and_tricks"
+
+    low_confidence:
+      max_allowed: 10
+      action: "log"
+      education: "weekly_review"
+
+  # Developer education
+  education:
+    on_detection: true
+    show_secure_alternatives: true
+    provide_vault_tutorial: true
+    regular_workshops: "monthly"
+    gamify_compliance: true
+
+# =============================================================================
+# DEPENDENCY SECURITY POLICY
+# =============================================================================
+
+dependencies:
+  # Flexible for experimentation
+  direct:
+    critical_vulnerabilities: 0
+    high_vulnerabilities: 5
+    outdated_threshold_days: 180
+    suggest_updates: true
+    explain_risks: true
+
+  # Very flexible for development
+  transitive:
+    track_only: true
+    provide_visibility: true
+    suggest_alternatives: true
+    weekly_report: true
+
+  # Learning features
+  education:
+    dependency_risk_scoring: true
+    alternative_suggestions: true
+    update_impact_analysis: true
+    security_release_notes: true
+
+# =============================================================================
+# CONTAINER SECURITY POLICY
+# =============================================================================
+
+containers:
+  # Minimal restrictions
+  images:
+    require_signature: false
+    suggest_best_practices: true
+    provide_secure_templates: true
+
+  # Educational scanning
+  scanning:
+    on_build: true
+    provide_recommendations: true
+    explain_vulnerabilities: true
+    suggest_fixes: true
+
+# =============================================================================
+# API SECURITY POLICY
+# =============================================================================
+
+api_security:
+  # Development flexibility
+  authentication:
+    require_mfa: false
+    session_timeout_minutes: 480  # 8 hours
+    allow_mock_auth: true
+    allow_http: true
+
+  # Generous rate limits
+  rate_limits:
+    public_endpoints: 10000
+    authenticated_endpoints: 50000
+    admin_endpoints: 100000
+    no_limit_localhost: true
+
+  # Educational headers
+  security_headers:
+    suggest_headers: true
+    explain_purpose: true
+    provide_examples: true
+    measure_adoption: true
+
+# =============================================================================
+# CODE QUALITY EDUCATION
+# =============================================================================
+
+code_quality:
+  # Linting as education
+  linting:
+    auto_fix: true
+    explain_rules: true
+    provide_examples: true
+    track_improvements: true
+
+  # Security patterns
+  patterns:
+    detect_antipatterns: true
+    suggest_improvements: true
+    provide_secure_snippets: true
+    create_learning_reports: true
+
+  # Peer learning
+  peer_learning:
+    code_review_insights: true
+    share_best_practices: true
+    security_champions: true
+    knowledge_sharing_sessions: "weekly"
+
+# =============================================================================
+# DEVELOPER TOOLS
+# =============================================================================
+
+developer_tools:
+  # IDE integration
+  ide_plugins:
+    real_time_feedback: true
+    inline_education: true
+    secure_code_snippets: true
+    quick_fixes: true
+
+  # CLI tools
+  cli_tools:
+    security_checks: "optional"
+    explain_findings: true
+    provide_fixes: true
+    learning_mode: true
+
+  # Development aids
+  aids:
+    security_checklist: true
+    threat_modeling_templates: true
+    secure_coding_guidelines: true
+    vulnerability_playground: true
+
+# =============================================================================
+# TESTING FEATURES
+# =============================================================================
+
+testing:
+  # Security testing education
+  security_testing:
+    provide_test_cases: true
+    explain_test_purpose: true
+    measure_coverage: true
+    suggest_improvements: true
+
+  # Sandbox environment
+  sandbox:
+    vulnerability_sandbox: true
+    exploitation_demos: true
+    fix_tutorials: true
+    capture_the_flag: true
+
+  # Test data
+  test_data:
+    generate_safe_test_data: true
+    provide_data_generators: true
+    mock_services_available: true
+
+# =============================================================================
+# MONITORING & METRICS
+# =============================================================================
+
+monitoring:
+  # Learning metrics
+  metrics:
+    track_vulnerability_trends: true
+    measure_fix_time: true
+    security_score_progression: true
+    developer_skill_matrix: true
+
+  # Feedback loops
+  feedback:
+    weekly_security_digest: true
+    personal_improvement_reports: true
+    team_leaderboards: true
+    achievement_badges: true
+
+  # Alerting (non-intrusive)
+  alerting:
+    in_ide_notifications: true
+    daily_summary_email: true
+    slack_tips_channel: true
+    no_pager_alerts: true
+
+# =============================================================================
+# GAMIFICATION
+# =============================================================================
+
+gamification:
+  # Achievement system
+  achievements:
+    first_vulnerability_fixed: true
+    week_without_secrets: true
+    dependency_updater: true
+    security_champion: true
+
+  # Leaderboards
+  leaderboards:
+    individual_scores: true
+    team_scores: true
+    improvement_rate: true
+    knowledge_sharing: true
+
+  # Rewards
+  rewards:
+    badges: true
+    certificates: true
+    recognition: true
+    learning_credits: true
+
+# =============================================================================
+# LEARNING RESOURCES
+# =============================================================================
+
+learning_resources:
+  # Documentation
+  documentation:
+    security_wiki: true
+    best_practices_guide: true
+    vulnerability_database: true
+    fix_playbooks: true
+
+  # Training
+  training:
+    onboarding_security_course: true
+    monthly_workshops: true
+    lunch_and_learns: true
+    external_courses: true
+
+  # Mentorship
+  mentorship:
+    security_champions: true
+    pair_programming: true
+    code_review_feedback: true
+    office_hours: "weekly"
+
+# =============================================================================
+# DEPLOYMENT REQUIREMENTS
+# =============================================================================
+
+deployment:
+  # Minimal requirements
+  pre_deployment:
+    basic_security_check: "required"
+    educational_report: true
+    no_blocking_issues: false
+
+  # Self-service
+  approval:
+    self_service: true
+    no_approval_required: true
+    track_deployments: true
+
+  # Learning from failures
+  post_deployment:
+    analyse_issues: true
+    create_learning_moments: true
+    share_experiences: true
+
+# =============================================================================
+# EXCEPTION HANDLING
+# =============================================================================
+
+exceptions:
+  # Very flexible
+  self_service: true
+  no_approval_required: true
+  track_for_learning: true
+  share_exception_reasons: true
+
+  # Learning from exceptions
+  exception_learning:
+    analyse_patterns: true
+    identify_knowledge_gaps: true
+    create_training_content: true
+
+# =============================================================================
+# SUPPORT
+# =============================================================================
+
+support:
+  # Help channels
+  channels:
+    slack_security_help: true
+    security_office_hours: true
+    pair_debugging: true
+    documentation: true
+
+  # Response times
+  response_sla:
+    critical_help: "1_hour"
+    general_questions: "4_hours"
+    learning_requests: "1_day"
+
+# =============================================================================
+# NOTES
+# =============================================================================
+
+notes:
+  - "Development environment prioritises learning"
+  - "Security education is embedded in workflows"
+  - "Failures are learning opportunities"
+  - "Gamification encourages security adoption"
+  - "No production data allowed in development"
+  - "Regular security champions rotation"
+  - "Monthly security hackathons encouraged"

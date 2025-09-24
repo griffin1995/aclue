@@ -1,0 +1,296 @@
+{
+  "dashboard": {
+    "id": null,
+    "uid": "aclue-technical",
+    "title": "aclue Technical Infrastructure Dashboard",
+    "tags": ["aclue", "technical", "infrastructure"],
+    "timezone": "browser",
+    "schemaVersion": 16,
+    "version": 0,
+    "refresh": "10s",
+    "panels": [
+      {
+        "id": 1,
+        "gridPos": {"h": 3, "w": 4, "x": 0, "y": 0},
+        "type": "stat",
+        "title": "CPU Usage",
+        "targets": [
+          {
+            "expr": "100 - (avg(rate(node_cpu_seconds_total{mode=\"idle\"}[5m])) * 100)",
+            "legendFormat": "CPU %"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {"mode": "thresholds"},
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"value": 0, "color": "green"},
+                {"value": 70, "color": "yellow"},
+                {"value": 90, "color": "red"}
+              ]
+            },
+            "unit": "percent",
+            "decimals": 1
+          }
+        }
+      },
+      {
+        "id": 2,
+        "gridPos": {"h": 3, "w": 4, "x": 4, "y": 0},
+        "type": "stat",
+        "title": "Memory Usage",
+        "targets": [
+          {
+            "expr": "(1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100",
+            "legendFormat": "Memory %"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {"mode": "thresholds"},
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"value": 0, "color": "green"},
+                {"value": 80, "color": "yellow"},
+                {"value": 95, "color": "red"}
+              ]
+            },
+            "unit": "percent",
+            "decimals": 1
+          }
+        }
+      },
+      {
+        "id": 3,
+        "gridPos": {"h": 3, "w": 4, "x": 8, "y": 0},
+        "type": "stat",
+        "title": "Disk I/O",
+        "targets": [
+          {
+            "expr": "sum(rate(node_disk_read_bytes_total[5m]) + rate(node_disk_written_bytes_total[5m]))",
+            "legendFormat": "I/O"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "Bps",
+            "decimals": 2
+          }
+        }
+      },
+      {
+        "id": 4,
+        "gridPos": {"h": 3, "w": 4, "x": 12, "y": 0},
+        "type": "stat",
+        "title": "Network Traffic",
+        "targets": [
+          {
+            "expr": "sum(rate(node_network_receive_bytes_total[5m]) + rate(node_network_transmit_bytes_total[5m]))",
+            "legendFormat": "Network"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "Bps",
+            "decimals": 2
+          }
+        }
+      },
+      {
+        "id": 5,
+        "gridPos": {"h": 3, "w": 4, "x": 16, "y": 0},
+        "type": "stat",
+        "title": "Active Connections",
+        "targets": [
+          {
+            "expr": "sum(pg_stat_activity_count)",
+            "legendFormat": "DB Connections"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short"
+          }
+        }
+      },
+      {
+        "id": 6,
+        "gridPos": {"h": 3, "w": 4, "x": 20, "y": 0},
+        "type": "stat",
+        "title": "Container Count",
+        "targets": [
+          {
+            "expr": "count(container_last_seen{name!=\"\"})",
+            "legendFormat": "Containers"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short"
+          }
+        }
+      },
+      {
+        "id": 7,
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 3},
+        "type": "graph",
+        "title": "System Resources",
+        "targets": [
+          {
+            "expr": "100 - (avg(rate(node_cpu_seconds_total{mode=\"idle\"}[5m])) * 100)",
+            "legendFormat": "CPU Usage %"
+          },
+          {
+            "expr": "(1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100",
+            "legendFormat": "Memory Usage %"
+          }
+        ],
+        "yaxes": [
+          {"format": "percent", "min": 0, "max": 100},
+          {"format": "short"}
+        ]
+      },
+      {
+        "id": 8,
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 3},
+        "type": "graph",
+        "title": "Network I/O",
+        "targets": [
+          {
+            "expr": "sum(rate(node_network_receive_bytes_total[5m])) by (device)",
+            "legendFormat": "RX {{ device }}"
+          },
+          {
+            "expr": "-sum(rate(node_network_transmit_bytes_total[5m])) by (device)",
+            "legendFormat": "TX {{ device }}"
+          }
+        ],
+        "yaxes": [
+          {"format": "Bps"},
+          {"format": "short"}
+        ]
+      },
+      {
+        "id": 9,
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 11},
+        "type": "graph",
+        "title": "Database Performance",
+        "targets": [
+          {
+            "expr": "rate(pg_stat_database_xact_commit{datname=\"aclue\"}[5m])",
+            "legendFormat": "Commits/s"
+          },
+          {
+            "expr": "rate(pg_stat_database_xact_rollback{datname=\"aclue\"}[5m])",
+            "legendFormat": "Rollbacks/s"
+          },
+          {
+            "expr": "pg_stat_database_blks_hit{datname=\"aclue\"} / (pg_stat_database_blks_hit{datname=\"aclue\"} + pg_stat_database_blks_read{datname=\"aclue\"})",
+            "legendFormat": "Cache Hit Ratio"
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 11},
+        "type": "graph",
+        "title": "Container Performance",
+        "targets": [
+          {
+            "expr": "sum(rate(container_cpu_usage_seconds_total{name=~\"aclue.*\"}[5m])) by (name) * 100",
+            "legendFormat": "{{ name }} CPU"
+          },
+          {
+            "expr": "sum(container_memory_usage_bytes{name=~\"aclue.*\"}) by (name)",
+            "legendFormat": "{{ name }} Memory"
+          }
+        ]
+      },
+      {
+        "id": 11,
+        "gridPos": {"h": 6, "w": 8, "x": 0, "y": 19},
+        "type": "heatmap",
+        "title": "Request Latency Heatmap",
+        "targets": [
+          {
+            "expr": "sum(increase(http_request_duration_seconds_bucket{service=\"aclue-backend\"}[1m])) by (le)",
+            "format": "heatmap",
+            "legendFormat": "{{ le }}"
+          }
+        ],
+        "dataFormat": "tsbuckets",
+        "options": {
+          "calculate": false,
+          "calculation": {
+            "xBuckets": {
+              "mode": "size",
+              "value": "1min"
+            }
+          }
+        }
+      },
+      {
+        "id": 12,
+        "gridPos": {"h": 6, "w": 8, "x": 8, "y": 19},
+        "type": "table",
+        "title": "Slow Queries",
+        "targets": [
+          {
+            "expr": "topk(10, pg_stat_statements_mean_time_ms{datname=\"aclue\"})",
+            "format": "table",
+            "instant": true
+          }
+        ]
+      },
+      {
+        "id": 13,
+        "gridPos": {"h": 6, "w": 8, "x": 16, "y": 19},
+        "type": "alertlist",
+        "title": "Active Alerts",
+        "options": {
+          "showOptions": "current",
+          "maxItems": 10,
+          "sortOrder": 1,
+          "dashboardTags": [],
+          "alertName": "",
+          "folderId": null,
+          "stateFilter": {
+            "ok": false,
+            "paused": false,
+            "no_data": false,
+            "execution_error": false,
+            "alerting": true,
+            "pending": true
+          }
+        }
+      }
+    ],
+    "templating": {
+      "list": [
+        {
+          "name": "node",
+          "type": "query",
+          "query": "label_values(node_exporter_build_info, instance)",
+          "multi": false,
+          "includeAll": false,
+          "refresh": 1
+        },
+        {
+          "name": "container",
+          "type": "query",
+          "query": "label_values(container_cpu_usage_seconds_total, name)",
+          "multi": true,
+          "includeAll": true,
+          "refresh": 1
+        }
+      ]
+    },
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    }
+  }
+}

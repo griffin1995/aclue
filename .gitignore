@@ -174,12 +174,69 @@ coverage-reports/
 local/
 local-data/
 
-# Secrets
+# Secrets and Credentials - Enhanced Protection
 secrets/
 *.key
 *.pem
 *.p12
 *.cert
+*.crt
+*.pfx
+*.keystore
+*.jks
+*.p8
+id_rsa*
+id_dsa*
+id_ecdsa*
+id_ed25519*
+.ssh/
+credentials/
+auth/
+tokens/
+keys/
+
+# API Keys and Configuration Files
+*apikey*
+*api_key*
+*api-key*
+*secret*
+*password*
+*passwd*
+config.json
+auth.json
+credentials.json
+service-account*.json
+gcp-credentials*.json
+aws-credentials*
+azure-credentials*
+
+# Cloud Provider Specific
+# AWS
+.aws/credentials
+.aws/config
+*aws*key*
+*ACCESS_KEY*
+*SECRET_ACCESS_KEY*
+
+# Google Cloud
+*service-account*.json
+gcloud/
+.gcp/
+
+# Azure
+.azure/
+*azure*key*
+
+# Firebase
+firebase-adminsdk*.json
+google-services.json
+GoogleService-Info.plist
+
+# Database Connection Strings
+database.conf
+db.conf
+database.json
+connection.json
 
 # MCP Configuration - Keep structure but exclude sensitive auth
 .claude/auth.json
@@ -199,9 +256,48 @@ tests-22-sept/k6
 security-venv/
 security-hooks-env/
 
-# Environment files
+# Environment files - Comprehensive Protection
 .env
 .env.local
 .env.production
 .env.development
 .env.test
+.env.staging
+.env.*.local
+*.env
+env.json
+environment.json
+
+# Configuration Templates (ALLOW these)
+!.env.example
+!.env.template
+!.env.sample
+!env.example.json
+!environment.template.json
+
+# Testing and Security Tools
+security-venv/
+security-hooks-env/
+.secrets.baseline
+security-scan-results/
+vulnerability-reports/
+penetration-test-results/
+
+# Monitoring and Logging - Sensitive Data Only
+*.log.gz
+*.log.bz2
+application.log
+error.log
+access.log
+auth.log
+security.log
+audit.log
+
+# Backup Files with Potential Secrets
+*.bak
+*.backup
+*.old
+*.orig
+dump.sql
+backup.sql
+*.sql.gz

@@ -1,0 +1,385 @@
+# =============================================================================
+# ESLint Security Configuration for aclue Platform
+# =============================================================================
+#
+# Security-focused ESLint configuration with threshold management
+# Integrates with security pipeline for JavaScript/TypeScript code
+#
+# =============================================================================
+
+metadata:
+  tool: "ESLint"
+  version: "8.56.0"
+  purpose: "JavaScript/TypeScript security analysis"
+  created: "2025-09-24"
+
+# =============================================================================
+# SEVERITY THRESHOLDS
+# =============================================================================
+
+thresholds:
+  # Environment-specific error thresholds
+  by_environment:
+    production:
+      errors: 0              # No errors allowed
+      warnings: 0            # No warnings allowed
+      action: "block"
+      notification: "immediate"
+
+    staging:
+      errors: 0              # No errors allowed
+      warnings: 5            # Up to 5 warnings
+      action: "review"
+      notification: "pr_comment"
+
+    development:
+      errors: 0              # No errors (auto-fixed)
+      warnings: 10           # Up to 10 warnings
+      action: "inform"
+      notification: "ide"
+
+# =============================================================================
+# SECURITY RULES CONFIGURATION
+# =============================================================================
+
+security_rules:
+  # Critical security rules - ALWAYS ERROR
+  critical_rules:
+    # Code injection prevention
+    "no-eval":
+      level: "error"
+      message: "eval() allows code injection attacks"
+      cwe: "CWE-95"
+
+    "no-implied-eval":
+      level: "error"
+      message: "Implied eval through setTimeout/setInterval with strings"
+      cwe: "CWE-95"
+
+    "no-new-func":
+      level: "error"
+      message: "Function constructor is a form of eval"
+      cwe: "CWE-95"
+
+    "no-script-url":
+      level: "error"
+      message: "javascript: URLs are a form of eval"
+      cwe: "CWE-95"
+
+    # SQL injection prevention
+    "security/detect-sql-injection":
+      level: "error"
+      message: "Potential SQL injection vulnerability"
+      cwe: "CWE-89"
+
+    # Command injection prevention
+    "security/detect-child-process":
+      level: "error"
+      message: "Child process execution detected"
+      cwe: "CWE-78"
+
+    # Path traversal prevention
+    "security/detect-non-literal-fs-filename":
+      level: "error"
+      message: "Dynamic file paths may allow path traversal"
+      cwe: "CWE-22"
+
+  # High severity rules - ERROR in production, WARN in development
+  high_severity_rules:
+    # XSS prevention
+    "react/no-danger":
+      level: "error"
+      message: "dangerouslySetInnerHTML can cause XSS"
+      cwe: "CWE-79"
+
+    "react/no-danger-with-children":
+      level: "error"
+      message: "dangerouslySetInnerHTML with children is dangerous"
+      cwe: "CWE-79"
+
+    # CSRF prevention
+    "security/detect-no-csrf-before-method-override":
+      level: "error"
+      message: "CSRF protection must come before method override"
+      cwe: "CWE-352"
+
+    # Regex DoS prevention
+    "security/detect-unsafe-regex":
+      level: "error"
+      message: "Unsafe regex can cause ReDoS"
+      cwe: "CWE-1333"
+
+    # Object injection
+    "security/detect-object-injection":
+      level: "error"
+      message: "Object injection vulnerability"
+      cwe: "CWE-915"
+
+  # Medium severity rules - WARN in all environments
+  medium_severity_rules:
+    # Timing attacks
+    "security/detect-possible-timing-attacks":
+      level: "warn"
+      message: "Possible timing attack in comparison"
+      cwe: "CWE-208"
+
+    # Weak crypto
+    "security/detect-pseudoRandomBytes":
+      level: "warn"
+      message: "pseudoRandomBytes is not cryptographically secure"
+      cwe: "CWE-338"
+
+    # Buffer issues
+    "security/detect-buffer-noassert":
+      level: "warn"
+      message: "Buffer without assertion can cause issues"
+      cwe: "CWE-120"
+
+    # Non-literal require
+    "security/detect-non-literal-require":
+      level: "warn"
+      message: "Dynamic require may load untrusted code"
+      cwe: "CWE-829"
+
+  # Low severity rules - INFO level
+  low_severity_rules:
+    # Code quality that impacts security
+    "no-unused-vars":
+      level: "warn"
+      message: "Unused variables may contain sensitive data"
+
+    "no-console":
+      level: "warn"
+      message: "Console logs may expose sensitive information"
+
+    "no-debugger":
+      level: "error"
+      message: "Debugger statements must not be in production"
+
+# =============================================================================
+# PLUGIN CONFIGURATIONS
+# =============================================================================
+
+plugins:
+  # Security plugin for Node.js
+  "eslint-plugin-security":
+    enabled: true
+    rules:
+      - "detect-buffer-noassert"
+      - "detect-child-process"
+      - "detect-disable-mustache-escape"
+      - "detect-eval-with-expression"
+      - "detect-no-csrf-before-method-override"
+      - "detect-non-literal-fs-filename"
+      - "detect-non-literal-regexp"
+      - "detect-non-literal-require"
+      - "detect-object-injection"
+      - "detect-possible-timing-attacks"
+      - "detect-pseudoRandomBytes"
+      - "detect-sql-injection"
+      - "detect-unsafe-regex"
+
+  # No secrets in code
+  "eslint-plugin-no-secrets":
+    enabled: true
+    options:
+      tolerance: 4.5         # Entropy threshold
+      additionalRegexes:
+        - "aclue_[a-zA-Z0-9]{20,}"
+        - "supabase_[a-zA-Z0-9]{40,}"
+        - "resend_[a-zA-Z0-9]{20,}"
+        - "railway_[a-fA-F0-9-]{36}"
+
+  # React security
+  "eslint-plugin-react":
+    enabled: true
+    security_rules:
+      - "no-danger"
+      - "no-danger-with-children"
+      - "no-find-dom-node"
+      - "no-string-refs"
+      - "jsx-no-target-blank"
+      - "jsx-no-script-url"
+
+  # Import security
+  "eslint-plugin-import":
+    enabled: true
+    rules:
+      - "no-nodejs-modules"   # In browser code
+      - "no-dynamic-require"
+      - "no-unresolved"
+      - "no-absolute-path"
+
+# =============================================================================
+# SCANNING CONFIGURATION
+# =============================================================================
+
+scanning:
+  # File patterns to scan
+  include_patterns:
+    - "**/*.js"
+    - "**/*.jsx"
+    - "**/*.ts"
+    - "**/*.tsx"
+    - "**/*.mjs"
+    - "**/*.cjs"
+
+  # Exclusions
+  exclude_patterns:
+    - "**/node_modules/**"
+    - "**/dist/**"
+    - "**/build/**"
+    - "**/*.min.js"
+    - "**/vendor/**"
+    - "**/.next/**"
+    - "**/coverage/**"
+
+  # Performance settings
+  performance:
+    max_warnings: 50
+    cache: true
+    cache_location: ".eslintcache"
+    parallel: true
+    max_workers: 4
+
+# =============================================================================
+# AUTO-FIX CONFIGURATION
+# =============================================================================
+
+autofix:
+  # What can be auto-fixed
+  enabled_for:
+    development: true
+    staging: false           # Manual review required
+    production: false        # Never auto-fix in production
+
+  # Rules that can be auto-fixed
+  fixable_rules:
+    - "quotes"
+    - "semi"
+    - "indent"
+    - "no-trailing-spaces"
+    - "no-multiple-empty-lines"
+    - "eol-last"
+    - "no-unused-vars"      # Remove them
+
+  # Rules that must NOT be auto-fixed (security sensitive)
+  never_fix:
+    - "no-eval"
+    - "security/detect-sql-injection"
+    - "security/detect-child-process"
+    - "security/detect-object-injection"
+    - "react/no-danger"
+
+# =============================================================================
+# REPORTING CONFIGURATION
+# =============================================================================
+
+reporting:
+  # Output formats
+  formats:
+    cli: "stylish"           # Human-readable
+    ci: "json"              # Machine-readable
+    html: true              # HTML report
+    junit: true             # JUnit format for CI
+
+  # Report destinations
+  outputs:
+    json: "security-reports/eslint-security.json"
+    html: "security-reports/eslint-security.html"
+    junit: "security-reports/eslint-junit.xml"
+
+  # Metrics to track
+  metrics:
+    - "total_errors"
+    - "total_warnings"
+    - "errors_by_rule"
+    - "warnings_by_rule"
+    - "files_with_errors"
+    - "security_score"
+
+  # Integration with other tools
+  integrations:
+    sonarqube: true
+    github_annotations: true
+    pr_comments: true
+    ide_problems: true
+
+# =============================================================================
+# CUSTOM RULES
+# =============================================================================
+
+custom_rules:
+  # aclue-specific patterns
+  aclue_patterns:
+    - rule: "no-hardcoded-urls"
+      pattern: "https?://[localhost|127.0.0.1]"
+      message: "No hardcoded development URLs"
+      severity: "error"
+
+    - rule: "no-test-credentials"
+      pattern: "(test|demo|example)@aclue"
+      message: "No test credentials in code"
+      severity: "error"
+
+    - rule: "secure-api-calls"
+      pattern: "fetch.*http://"
+      message: "API calls must use HTTPS"
+      severity: "error"
+
+    - rule: "no-console-in-production"
+      pattern: "console\\.(log|debug|info)"
+      message: "Remove console statements"
+      severity: "warn"
+
+# =============================================================================
+# OVERRIDE CONFIGURATION
+# =============================================================================
+
+overrides:
+  # Test files - relaxed rules
+  - files: ["**/*.test.js", "**/*.spec.js", "**/*.test.ts", "**/*.spec.ts"]
+    rules:
+      "security/detect-non-literal-fs-filename": "off"
+      "security/detect-child-process": "off"
+      "no-console": "off"
+
+  # Configuration files
+  - files: ["*.config.js", "*.config.ts"]
+    rules:
+      "security/detect-non-literal-require": "off"
+      "import/no-nodejs-modules": "off"
+
+  # Scripts
+  - files: ["scripts/**/*.js"]
+    rules:
+      "no-console": "off"
+      "security/detect-child-process": "warn"
+
+# =============================================================================
+# BASELINE MANAGEMENT
+# =============================================================================
+
+baseline:
+  # Existing issues management
+  management:
+    track_existing: true
+    allow_new: false        # No new violations
+    require_improvement: true
+    improvement_rate: "10_percent_monthly"
+
+  # Baseline file
+  file: ".eslintbaseline.json"
+  update_frequency: "weekly"
+  review_required: true
+
+# =============================================================================
+# NOTES
+# =============================================================================
+
+notes:
+  - "Security rules are non-negotiable in production"
+  - "Auto-fix is disabled for security-sensitive rules"
+  - "All security violations are tracked and reported"
+  - "Custom rules for aclue-specific patterns"
+  - "Baseline must show continuous improvement"

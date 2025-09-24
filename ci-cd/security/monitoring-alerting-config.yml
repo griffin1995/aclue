@@ -1,0 +1,593 @@
+# =============================================================================
+# aclue Platform Security Monitoring and Alerting Configuration
+# =============================================================================
+#
+# Defines security monitoring thresholds, alert routing, and notification rules
+# for the aclue platform's security operations
+#
+# =============================================================================
+
+metadata:
+  version: "1.0.0"
+  platform: "aclue"
+  description: "Security monitoring and alerting configuration"
+  created: "2025-09-24"
+  owner: "security-team"
+
+# =============================================================================
+# MONITORING THRESHOLDS
+# =============================================================================
+
+monitoring_thresholds:
+  # Security event thresholds
+  security_events:
+    authentication_failures:
+      critical:
+        threshold: 50
+        window_minutes: 5
+        consecutive: true
+        action: "block_source"
+
+      high:
+        threshold: 20
+        window_minutes: 10
+        action: "alert_security"
+
+      medium:
+        threshold: 10
+        window_minutes: 30
+        action: "log_monitor"
+
+    privilege_escalation:
+      any_attempt:
+        threshold: 1
+        action: "immediate_alert"
+        capture: "full_context"
+
+    data_exfiltration:
+      large_transfer:
+        threshold_gb: 1
+        window_minutes: 10
+        action: "investigate"
+
+      unusual_pattern:
+        baseline_multiplier: 3
+        action: "alert"
+
+    api_abuse:
+      rate_limit_violations:
+        threshold: 100
+        window_minutes: 5
+        action: "temporary_block"
+
+      suspicious_patterns:
+        enumeration_attempts: 10
+        injection_attempts: 5
+        action: "security_review"
+
+  # Vulnerability detection
+  vulnerability_monitoring:
+    new_vulnerabilities:
+      critical:
+        action: "immediate_alert"
+        auto_create_ticket: true
+        notify: ["security_team", "on_call"]
+
+      high:
+        action: "alert"
+        create_ticket: true
+        notify: ["security_team"]
+
+      medium:
+        action: "notify"
+        batch: "daily"
+        notify: ["dev_team"]
+
+      low:
+        action: "log"
+        batch: "weekly"
+        report: true
+
+    exploitation_attempts:
+      any_attempt:
+        action: "immediate_block"
+        notify: ["security_team", "ops_team"]
+        initiate_ir: true
+
+  # Compliance monitoring
+  compliance_monitoring:
+    policy_violations:
+      critical_policy:
+        action: "block_and_alert"
+        notify: ["compliance_team", "security_team"]
+
+      standard_policy:
+        action: "alert"
+        notify: ["team_lead"]
+
+    regulatory_requirements:
+      gdpr_violation:
+        action: "immediate_alert"
+        notify: ["legal", "compliance", "executive"]
+
+      pci_violation:
+        action: "immediate_alert"
+        notify: ["compliance", "security"]
+
+# =============================================================================
+# ALERT ROUTING
+# =============================================================================
+
+alert_routing:
+  # Priority-based routing
+  by_priority:
+    p0_critical:
+      channels:
+        - type: "pagerduty"
+          immediate: true
+        - type: "phone"
+          numbers: ["security_oncall", "cto"]
+        - type: "slack"
+          channels: ["#security-critical", "#incidents"]
+        - type: "email"
+          recipients: ["security@aclue.app", "executives@aclue.app"]
+
+      escalation:
+        - after_minutes: 15
+          notify: ["security_lead"]
+        - after_minutes: 30
+          notify: ["engineering_manager"]
+        - after_minutes: 60
+          notify: ["cto", "ceo"]
+
+      sla:
+        acknowledge: 5         # 5 minutes
+        respond: 15           # 15 minutes
+        resolve: 60           # 1 hour
+
+    p1_high:
+      channels:
+        - type: "slack"
+          channels: ["#security-alerts", "#engineering"]
+        - type: "email"
+          recipients: ["security@aclue.app", "oncall@aclue.app"]
+
+      escalation:
+        - after_hours: 2
+          notify: ["tech_lead"]
+        - after_hours: 4
+          notify: ["engineering_manager"]
+
+      sla:
+        acknowledge: 30       # 30 minutes
+        respond: 2           # 2 hours
+        resolve: 8           # 8 hours
+
+    p2_medium:
+      channels:
+        - type: "slack"
+          channels: ["#security-notifications"]
+        - type: "email"
+          recipients: ["team@aclue.app"]
+        - type: "ticket"
+          system: "jira"
+
+      sla:
+        acknowledge: 4        # 4 hours
+        respond: 24          # 24 hours
+        resolve: 72          # 72 hours
+
+    p3_low:
+      channels:
+        - type: "email"
+          digest: "daily"
+        - type: "dashboard"
+          update: "realtime"
+
+      sla:
+        acknowledge: 24      # 24 hours
+        respond: 72         # 72 hours
+        resolve: 168        # 1 week
+
+  # Environment-based routing
+  by_environment:
+    production:
+      all_alerts: true
+      channels: ["pagerduty", "slack", "email"]
+      always_escalate: ["critical", "high"]
+
+    staging:
+      filter: ["critical", "high", "medium"]
+      channels: ["slack", "email"]
+      business_hours_only: true
+
+    development:
+      filter: ["critical"]
+      channels: ["email", "dashboard"]
+      digest_mode: true
+
+# =============================================================================
+# NOTIFICATION TEMPLATES
+# =============================================================================
+
+notification_templates:
+  # Alert templates
+  security_alert:
+    subject: "[{priority}] Security Alert: {event_type}"
+    body: |
+      Environment: {environment}
+      Event Type: {event_type}
+      Severity: {severity}
+      Time: {timestamp}
+      Details: {details}
+      Affected Resources: {resources}
+      Recommended Action: {action}
+      Runbook: {runbook_link}
+
+  vulnerability_alert:
+    subject: "[{severity}] New Vulnerability: {cve_id}"
+    body: |
+      CVE ID: {cve_id}
+      CVSS Score: {cvss_score}
+      Affected Package: {package}
+      Version: {version}
+      Published: {published_date}
+      Description: {description}
+      Remediation: {remediation}
+      Environments Affected: {environments}
+
+  compliance_alert:
+    subject: "Compliance Violation: {policy_name}"
+    body: |
+      Policy: {policy_name}
+      Violation Type: {violation_type}
+      Resource: {resource}
+      Environment: {environment}
+      Impact: {impact}
+      Required Action: {action}
+      Deadline: {deadline}
+
+# =============================================================================
+# ALERT AGGREGATION
+# =============================================================================
+
+alert_aggregation:
+  # Deduplication rules
+  deduplication:
+    window_minutes: 5
+    key_fields:
+      - "event_type"
+      - "source"
+      - "resource"
+    max_duplicates: 1
+
+  # Correlation rules
+  correlation:
+    related_events:
+      - group: "brute_force_attack"
+        events:
+          - "multiple_auth_failures"
+          - "account_lockout"
+          - "password_reset_requested"
+        window_minutes: 30
+
+      - group: "data_breach_attempt"
+        events:
+          - "privilege_escalation"
+          - "large_data_query"
+          - "data_export"
+        window_minutes: 60
+
+      - group: "service_compromise"
+        events:
+          - "unexpected_process"
+          - "file_modification"
+          - "network_anomaly"
+        window_minutes: 15
+
+  # Batching rules
+  batching:
+    low_priority:
+      interval: "hourly"
+      max_alerts: 50
+      format: "summary"
+
+    medium_priority:
+      interval: "every_4_hours"
+      max_alerts: 20
+      format: "detailed"
+
+    reports:
+      daily_summary:
+        time: "09:00"
+        timezone: "UTC"
+        recipients: ["team@aclue.app"]
+
+      weekly_report:
+        day: "monday"
+        time: "09:00"
+        recipients: ["management@aclue.app"]
+
+# =============================================================================
+# ALERTING CHANNELS
+# =============================================================================
+
+alerting_channels:
+  # PagerDuty configuration
+  pagerduty:
+    enabled: true
+    api_key: "${PAGERDUTY_API_KEY}"
+    routing_keys:
+      critical: "${PAGERDUTY_CRITICAL_KEY}"
+      high: "${PAGERDUTY_HIGH_KEY}"
+    auto_resolve: true
+    incident_urgency: "high"
+
+  # Slack configuration
+  slack:
+    enabled: true
+    workspace: "aclue"
+    bot_token: "${SLACK_BOT_TOKEN}"
+    channels:
+      security_critical: "#security-critical"
+      security_alerts: "#security-alerts"
+      security_notifications: "#security-notifications"
+      incidents: "#incidents"
+    message_format: "blocks"
+    thread_replies: true
+
+  # Email configuration
+  email:
+    enabled: true
+    smtp_host: "smtp.sendgrid.net"
+    smtp_port: 587
+    from_address: "security-alerts@aclue.app"
+    reply_to: "security@aclue.app"
+    templates:
+      critical: "security-critical-alert"
+      high: "security-high-alert"
+      medium: "security-medium-alert"
+      low: "security-info"
+
+  # Webhook configuration
+  webhooks:
+    enabled: true
+    endpoints:
+      - url: "${SECURITY_WEBHOOK_URL}"
+        events: ["critical", "high"]
+        retry_count: 3
+        timeout_seconds: 10
+
+  # SMS configuration (critical only)
+  sms:
+    enabled: false
+    provider: "twilio"
+    account_sid: "${TWILIO_ACCOUNT_SID}"
+    auth_token: "${TWILIO_AUTH_TOKEN}"
+    from_number: "${TWILIO_PHONE_NUMBER}"
+    critical_only: true
+
+# =============================================================================
+# MONITORING DASHBOARDS
+# =============================================================================
+
+dashboards:
+  # Security dashboard
+  security_dashboard:
+    url: "https://monitoring.aclue.app/security"
+    panels:
+      - "authentication_metrics"
+      - "vulnerability_trends"
+      - "threat_detection"
+      - "compliance_status"
+      - "incident_timeline"
+      - "security_score"
+
+    refresh_rate: "30_seconds"
+    retention: "90_days"
+
+  # Executive dashboard
+  executive_dashboard:
+    url: "https://monitoring.aclue.app/executive"
+    panels:
+      - "security_posture_score"
+      - "critical_vulnerabilities"
+      - "compliance_summary"
+      - "incident_metrics"
+      - "trend_analysis"
+
+    refresh_rate: "5_minutes"
+    retention: "365_days"
+
+  # Operations dashboard
+  ops_dashboard:
+    url: "https://monitoring.aclue.app/ops"
+    panels:
+      - "real_time_threats"
+      - "system_health"
+      - "deployment_security"
+      - "api_security"
+      - "container_security"
+
+    refresh_rate: "10_seconds"
+    retention: "30_days"
+
+# =============================================================================
+# METRICS AND INDICATORS
+# =============================================================================
+
+metrics_indicators:
+  # Security metrics
+  security_metrics:
+    - metric: "failed_auth_rate"
+      calculation: "failures/total_attempts"
+      threshold: 0.1
+      window: "5_minutes"
+
+    - metric: "vulnerability_density"
+      calculation: "vulnerabilities/lines_of_code"
+      threshold: 0.001
+      window: "daily"
+
+    - metric: "mean_time_to_detect"
+      calculation: "detection_time - event_time"
+      target: "<5_minutes"
+      window: "hourly"
+
+    - metric: "mean_time_to_respond"
+      calculation: "response_time - detection_time"
+      target: "<30_minutes"
+      window: "hourly"
+
+    - metric: "security_score"
+      calculation: "weighted_average"
+      components:
+        - "vulnerability_score: 30%"
+        - "compliance_score: 25%"
+        - "configuration_score: 25%"
+        - "incident_score: 20%"
+
+  # Key risk indicators
+  risk_indicators:
+    - indicator: "unpatched_critical_vulnerabilities"
+      threshold: 0
+      action: "immediate_remediation"
+
+    - indicator: "expired_certificates"
+      threshold: 0
+      action: "auto_renewal"
+
+    - indicator: "inactive_security_controls"
+      threshold: 0
+      action: "investigate"
+
+    - indicator: "anomalous_admin_activity"
+      baseline: "statistical"
+      action: "alert_review"
+
+# =============================================================================
+# AUTOMATION RULES
+# =============================================================================
+
+automation_rules:
+  # Auto-response rules
+  auto_response:
+    - trigger: "brute_force_detected"
+      actions:
+        - "block_ip_address"
+        - "notify_security_team"
+        - "increase_monitoring"
+
+    - trigger: "malware_detected"
+      actions:
+        - "quarantine_file"
+        - "isolate_system"
+        - "initiate_ir"
+
+    - trigger: "data_exfiltration_attempt"
+      actions:
+        - "block_transfer"
+        - "revoke_access"
+        - "capture_evidence"
+
+  # Auto-remediation rules
+  auto_remediation:
+    - trigger: "missing_security_headers"
+      action: "apply_headers"
+      requires_approval: false
+
+    - trigger: "weak_tls_version"
+      action: "enforce_tls_1_3"
+      requires_approval: true
+
+    - trigger: "excessive_permissions"
+      action: "apply_least_privilege"
+      requires_approval: true
+
+# =============================================================================
+# REPORTING CONFIGURATION
+# =============================================================================
+
+reporting:
+  # Scheduled reports
+  scheduled_reports:
+    daily_security_summary:
+      schedule: "daily_09:00_utc"
+      recipients: ["security@aclue.app"]
+      content:
+        - "24_hour_incident_summary"
+        - "new_vulnerabilities"
+        - "failed_auth_summary"
+        - "security_score"
+
+    weekly_executive_report:
+      schedule: "weekly_monday_09:00_utc"
+      recipients: ["executives@aclue.app"]
+      content:
+        - "weekly_security_posture"
+        - "incident_trends"
+        - "compliance_status"
+        - "upcoming_risks"
+
+    monthly_compliance_report:
+      schedule: "monthly_first_monday"
+      recipients: ["compliance@aclue.app"]
+      content:
+        - "compliance_metrics"
+        - "audit_findings"
+        - "policy_violations"
+        - "remediation_status"
+
+  # Ad-hoc reports
+  on_demand_reports:
+    - "incident_report"
+    - "vulnerability_assessment"
+    - "penetration_test_results"
+    - "security_audit_findings"
+
+# =============================================================================
+# INTEGRATION CONFIGURATION
+# =============================================================================
+
+integrations:
+  # SIEM integration
+  siem:
+    platform: "splunk"
+    endpoint: "${SPLUNK_HEC_ENDPOINT}"
+    token: "${SPLUNK_HEC_TOKEN}"
+    index: "security"
+    source_type: "aclue_security"
+
+  # Ticketing system
+  ticketing:
+    platform: "jira"
+    endpoint: "${JIRA_API_ENDPOINT}"
+    project: "SEC"
+    issue_types:
+      critical: "Security Incident"
+      high: "Security Issue"
+      medium: "Security Task"
+      low: "Security Improvement"
+
+  # Threat intelligence
+  threat_intel:
+    feeds:
+      - name: "abuse_ch"
+        url: "https://sslbl.abuse.ch/blacklist/"
+        update: "hourly"
+
+      - name: "emerging_threats"
+        url: "${ET_FEED_URL}"
+        update: "daily"
+
+# =============================================================================
+# NOTES
+# =============================================================================
+
+notes:
+  - "All critical alerts require acknowledgment within SLA"
+  - "Production alerts always take priority"
+  - "Escalation is automatic if SLA breached"
+  - "All security events are logged for audit"
+  - "Dashboard access requires MFA"
+  - "Alert fatigue is monitored and adjusted monthly"

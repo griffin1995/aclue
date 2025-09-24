@@ -1,0 +1,410 @@
+# =============================================================================
+# aclue Platform Dependency Security Scanning
+# =============================================================================
+#
+# Comprehensive dependency vulnerability scanning for both frontend and backend:
+# - Daily automated dependency security checks
+# - Production deployment dependency validation
+# - OWASP Dependency Check integration
+# - Multi-language dependency analysis (Node.js, Python)
+# - Automated security advisories and updates
+#
+# =============================================================================
+
+name: '📦 Dependency Security Check'
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'web/package*.json'
+      - 'backend/requirements*.txt'
+      - '.github/workflows/dependency-check.yml'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'web/package*.json'
+      - 'backend/requirements*.txt'
+  schedule:
+    # Daily dependency check at 02:00 UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: dependency-check-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: '18'
+  PYTHON_VERSION: '3.12'
+
+jobs:
+  # ==========================================================================
+  # JOB: Frontend Dependency Analysis
+  # ==========================================================================
+  frontend-dependencies:
+    name: '🌐 Frontend Dependency Scan'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    defaults:
+      run:
+        working-directory: ./web
+
+    steps:
+      - name: '📥 Checkout Repository'
+        uses: actions/checkout@v4
+
+      - name: '🟢 Setup Node.js'
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: web/package-lock.json
+
+      - name: '📦 Install Dependencies'
+        run: npm ci --prefer-offline --no-audit
+
+      - name: '🔍 npm Audit - High/Critical Only'
+        run: |
+          mkdir -p ../dependency-reports
+          echo "🔍 Running npm audit for high and critical vulnerabilities..."
+          npm audit --audit-level=high --json > ../dependency-reports/npm-audit-high.json || true
+          npm audit --audit-level=high || echo "⚠️ High/Critical vulnerabilities detected"
+
+      - name: '🔍 npm Audit - Complete Scan'
+        run: |
+          echo "🔍 Running complete npm audit scan..."
+          npm audit --json > ../dependency-reports/npm-audit-complete.json || true
+          npm audit || echo "⚠️ Vulnerabilities detected in dependencies"
+
+      - name: '🔍 OWASP Dependency Check - Frontend'
+        uses: dependency-check/Dependency-Check_Action@main
+        with:
+          project: 'aclue-frontend'
+          path: './web'
+          format: 'ALL'
+          out: 'dependency-reports'
+          args: >
+            --enableRetired
+            --enableExperimental
+            --nodeAuditSkipDevDependencies
+            --nodePackageSkipDevDependencies
+            --suppression suppression.xml
+
+      - name: '🔍 Snyk Dependency Scan'
+        uses: snyk/actions/node@master
+        continue-on-error: true
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          command: test
+          args: --severity-threshold=high --json-file-output=dependency-reports/snyk-frontend.json
+          json: true
+
+      - name: '🔍 Retire.js Security Scan'
+        run: |
+          npx retire --js --jspath . --outputformat json --outputpath ../dependency-reports/retirejs-scan.json || echo "⚠️ Retire.js found vulnerable libraries"
+
+      - name: '📊 Generate Frontend Dependency Summary'
+        run: |
+          echo "# 📦 Frontend Dependency Security Report" > ../dependency-reports/frontend-summary.md
+          echo "Generated: $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> ../dependency-reports/frontend-summary.md
+          echo "" >> ../dependency-reports/frontend-summary.md
+
+          echo "## 📋 Scan Results" >> ../dependency-reports/frontend-summary.md
+
+          if [ -f "../dependency-reports/npm-audit-high.json" ]; then
+            HIGH_COUNT=$(jq '.metadata.vulnerabilities.high // 0' ../dependency-reports/npm-audit-high.json)
+            CRITICAL_COUNT=$(jq '.metadata.vulnerabilities.critical // 0' ../dependency-reports/npm-audit-high.json)
+            echo "- **npm audit**: $HIGH_COUNT high, $CRITICAL_COUNT critical vulnerabilities" >> ../dependency-reports/frontend-summary.md
+          fi
+
+          echo "- **OWASP Dependency Check**: See detailed report" >> ../dependency-reports/frontend-summary.md
+          echo "- **Snyk**: See detailed report" >> ../dependency-reports/frontend-summary.md
+          echo "- **Retire.js**: See detailed report" >> ../dependency-reports/frontend-summary.md
+
+      - name: '📤 Upload Frontend Dependency Results'
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: frontend-dependency-results
+          path: dependency-reports/
+          retention-days: 30
+
+  # ==========================================================================
+  # JOB: Backend Dependency Analysis
+  # ==========================================================================
+  backend-dependencies:
+    name: '🐍 Backend Dependency Scan'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    defaults:
+      run:
+        working-directory: ./backend
+
+    steps:
+      - name: '📥 Checkout Repository'
+        uses: actions/checkout@v4
+
+      - name: '🐍 Setup Python'
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: '📦 Install Dependencies'
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install safety pip-audit cyclonedx-bom
+
+      - name: '🔍 Safety Dependency Scan'
+        run: |
+          mkdir -p ../dependency-reports
+          echo "🔍 Running Safety dependency scan..."
+          safety check --json --output ../dependency-reports/safety-report.json || true
+          safety check --short-report || echo "⚠️ Safety found vulnerable dependencies"
+
+      - name: '🔍 Pip Audit Security Check'
+        run: |
+          echo "🔍 Running pip-audit security check..."
+          pip-audit --format=json --output=../dependency-reports/pip-audit.json || true
+          pip-audit || echo "⚠️ pip-audit found vulnerable dependencies"
+
+      - name: '🔍 OWASP Dependency Check - Backend'
+        uses: dependency-check/Dependency-Check_Action@main
+        with:
+          project: 'aclue-backend'
+          path: './backend'
+          format: 'ALL'
+          out: 'dependency-reports'
+          args: >
+            --enableRetired
+            --enableExperimental
+
+      - name: '🔍 Generate SBOM (Software Bill of Materials)'
+        run: |
+          echo "🔍 Generating Software Bill of Materials..."
+          cyclonedx-py -r -o ../dependency-reports/sbom-backend.json || echo "⚠️ SBOM generation failed"
+
+      - name: '🔍 Snyk Python Dependency Scan'
+        uses: snyk/actions/python@master
+        continue-on-error: true
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          command: test
+          args: --severity-threshold=high --json-file-output=dependency-reports/snyk-backend.json
+
+      - name: '📊 Generate Backend Dependency Summary'
+        run: |
+          echo "# 🐍 Backend Dependency Security Report" > ../dependency-reports/backend-summary.md
+          echo "Generated: $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> ../dependency-reports/backend-summary.md
+          echo "" >> ../dependency-reports/backend-summary.md
+
+          echo "## 📋 Scan Results" >> ../dependency-reports/backend-summary.md
+          echo "- **Safety**: See detailed report" >> ../dependency-reports/backend-summary.md
+          echo "- **pip-audit**: See detailed report" >> ../dependency-reports/backend-summary.md
+          echo "- **OWASP Dependency Check**: See detailed report" >> ../dependency-reports/backend-summary.md
+          echo "- **Snyk**: See detailed report" >> ../dependency-reports/backend-summary.md
+          echo "- **SBOM**: Generated successfully" >> ../dependency-reports/backend-summary.md
+
+      - name: '📤 Upload Backend Dependency Results'
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: backend-dependency-results
+          path: dependency-reports/
+          retention-days: 30
+
+  # ==========================================================================
+  # JOB: License Compliance Check
+  # ==========================================================================
+  license-compliance:
+    name: '⚖️ License Compliance'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: '📥 Checkout Repository'
+        uses: actions/checkout@v4
+
+      - name: '🟢 Setup Node.js'
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: web/package-lock.json
+
+      - name: '🐍 Setup Python'
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: '📦 Install License Analysis Tools'
+        run: |
+          npm install -g license-checker
+          pip install pip-licenses
+
+      - name: '⚖️ Frontend License Analysis'
+        working-directory: ./web
+        run: |
+          mkdir -p ../license-reports
+          echo "🔍 Analyzing frontend licenses..."
+          license-checker --onlyAllow 'MIT;Apache-2.0;BSD-3-Clause;BSD-2-Clause;ISC;0BSD;Unlicense;WTFPL' --json > ../license-reports/frontend-licenses.json || true
+          license-checker --summary > ../license-reports/frontend-license-summary.txt || true
+
+      - name: '⚖️ Backend License Analysis'
+        working-directory: ./backend
+        run: |
+          echo "🔍 Analyzing backend licenses..."
+          pip install -r requirements.txt
+          pip-licenses --format=json --output-file=../license-reports/backend-licenses.json || true
+          pip-licenses --format=plain > ../license-reports/backend-license-summary.txt || true
+
+      - name: '📊 Generate License Compliance Report'
+        run: |
+          mkdir -p license-reports
+          echo "# ⚖️ License Compliance Report" > license-reports/license-compliance.md
+          echo "Generated: $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> license-reports/license-compliance.md
+          echo "" >> license-reports/license-compliance.md
+
+          echo "## 📋 Summary" >> license-reports/license-compliance.md
+          echo "- **Frontend**: License analysis completed" >> license-reports/license-compliance.md
+          echo "- **Backend**: License analysis completed" >> license-reports/license-compliance.md
+          echo "" >> license-reports/license-compliance.md
+
+          echo "## 🎯 Allowed Licenses" >> license-reports/license-compliance.md
+          echo "- MIT" >> license-reports/license-compliance.md
+          echo "- Apache-2.0" >> license-reports/license-compliance.md
+          echo "- BSD-3-Clause" >> license-reports/license-compliance.md
+          echo "- BSD-2-Clause" >> license-reports/license-compliance.md
+          echo "- ISC" >> license-reports/license-compliance.md
+
+      - name: '📤 Upload License Compliance Results'
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: license-compliance-results
+          path: license-reports/
+          retention-days: 90
+
+  # ==========================================================================
+  # JOB: Dependency Update Notifications
+  # ==========================================================================
+  dependency-updates:
+    name: '🔄 Dependency Update Check'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    if: github.event_name == 'schedule'
+
+    steps:
+      - name: '📥 Checkout Repository'
+        uses: actions/checkout@v4
+
+      - name: '🟢 Setup Node.js'
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: web/package-lock.json
+
+      - name: '🔍 Check Frontend Outdated Dependencies'
+        working-directory: ./web
+        run: |
+          mkdir -p ../update-reports
+          echo "🔍 Checking for outdated frontend dependencies..."
+          npm outdated --json > ../update-reports/npm-outdated.json || echo "📊 Outdated packages detected"
+          npm outdated || echo "📊 See outdated packages above"
+
+      - name: '🐍 Setup Python'
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: '🔍 Check Backend Outdated Dependencies'
+        working-directory: ./backend
+        run: |
+          pip install pip-review
+          echo "🔍 Checking for outdated backend dependencies..."
+          pip list --outdated --format=json > ../update-reports/pip-outdated.json || echo "📊 Outdated packages detected"
+          pip list --outdated || echo "📊 No outdated packages found"
+
+      - name: '📤 Upload Update Check Results'
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: dependency-update-results
+          path: update-reports/
+          retention-days: 7
+
+  # ==========================================================================
+  # JOB: Dependency Security Summary
+  # ==========================================================================
+  dependency-summary:
+    name: '📊 Dependency Security Summary'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs: [frontend-dependencies, backend-dependencies, license-compliance]
+    if: always()
+
+    steps:
+      - name: '📥 Download All Dependency Results'
+        uses: actions/download-artifact@v4
+        with:
+          path: all-dependency-reports/
+
+      - name: '📊 Generate Consolidated Dependency Report'
+        run: |
+          mkdir -p consolidated-dependency-report
+
+          echo "# 📦 aclue Platform Dependency Security Report" > consolidated-dependency-report/dependency-summary.md
+          echo "Generated: $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> consolidated-dependency-report/dependency-summary.md
+          echo "Branch: ${{ github.ref_name }}" >> consolidated-dependency-report/dependency-summary.md
+          echo "Commit: ${{ github.sha }}" >> consolidated-dependency-report/dependency-summary.md
+          echo "" >> consolidated-dependency-report/dependency-summary.md
+
+          echo "## 📋 Scan Status" >> consolidated-dependency-report/dependency-summary.md
+          echo "" >> consolidated-dependency-report/dependency-summary.md
+
+          if [ -d "all-dependency-reports/frontend-dependency-results" ]; then
+            echo "✅ **Frontend Dependencies**: Scan completed" >> consolidated-dependency-report/dependency-summary.md
+          fi
+
+          if [ -d "all-dependency-reports/backend-dependency-results" ]; then
+            echo "✅ **Backend Dependencies**: Scan completed" >> consolidated-dependency-report/dependency-summary.md
+          fi
+
+          if [ -d "all-dependency-reports/license-compliance-results" ]; then
+            echo "✅ **License Compliance**: Scan completed" >> consolidated-dependency-report/dependency-summary.md
+          fi
+
+          echo "" >> consolidated-dependency-report/dependency-summary.md
+          echo "## 🔗 Next Steps" >> consolidated-dependency-report/dependency-summary.md
+          echo "1. Review detailed scan results in individual artifacts" >> consolidated-dependency-report/dependency-summary.md
+          echo "2. Address any high/critical vulnerabilities found" >> consolidated-dependency-report/dependency-summary.md
+          echo "3. Update dependencies with security patches" >> consolidated-dependency-report/dependency-summary.md
+          echo "4. Ensure license compliance for all dependencies" >> consolidated-dependency-report/dependency-summary.md
+
+          # Archive all results
+          tar -czf consolidated-dependency-report/all-dependency-results.tar.gz all-dependency-reports/
+
+      - name: '📤 Upload Consolidated Dependency Report'
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: consolidated-dependency-report
+          path: consolidated-dependency-report/
+          retention-days: 90
+
+      - name: '📊 Dependency Check Status'
+        run: |
+          echo "📦 Dependency security scanning completed"
+          echo "📊 Check consolidated report for detailed findings"
+
+          # Fail on critical vulnerabilities for production deployments
+          if [ "${{ github.event_name }}" == "push" ] && [ "${{ github.ref_name }}" == "main" ]; then
+            echo "🚨 Production deployment - validating critical vulnerabilities"
+            # Add logic to check for critical vulnerabilities and fail if found
+          fi

@@ -1,0 +1,213 @@
+# Artillery Load Testing Configuration for aclue Platform
+# Configured for WAF allowlist compatibility (Tier 2: Performance Testing)
+
+config:
+  target: 'https://aclue.app'
+  plugins:
+    metrics-by-endpoint: {}
+
+  # WAF-compliant load testing phases
+  phases:
+    # Warm-up phase - very gentle to establish allowlist trust
+    - duration: 120  # 2 minutes
+      arrivalRate: 2
+      name: "Warm-up phase"
+
+    # Ramp-up phase - gradual increase within rate limits
+    - duration: 300  # 5 minutes
+      arrivalRate: 5
+      rampTo: 10
+      name: "Ramp-up phase"
+
+    # Sustained load - stay within WAF rate limits
+    - duration: 600  # 10 minutes
+      arrivalRate: 10
+      name: "Sustained load phase"
+
+    # Peak load - maximum rate within WAF allowlist
+    - duration: 180  # 3 minutes
+      arrivalRate: 15
+      name: "Peak load phase"
+
+    # Cool-down phase - graceful reduction
+    - duration: 120  # 2 minutes
+      arrivalRate: 15
+      rampTo: 5
+      name: "Cool-down phase"
+
+  # WAF identification and compliance headers
+  defaults:
+    headers:
+      User-Agent: "Artillery/2.0.0 (aclue-performance-testing; +https://aclue.app/monitoring)"
+      Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
+      Accept-Language: "en-GB,en;q=0.5"
+      Accept-Encoding: "gzip, deflate, br"
+      DNT: "1"
+      Connection: "keep-alive"
+      Upgrade-Insecure-Requests: "1"
+      Cache-Control: "max-age=0"
+      X-Test-Purpose: "performance-load-testing"
+      X-Monitoring-Tool: "artillery"
+      X-Request-Source: "aclue-performance-team"
+
+  # Rate limiting compliance
+  http:
+    timeout: 30
+    pool: 25  # Connection pool size
+    maxSockets: 25  # Maximum concurrent connections
+
+  # Environment-specific variables
+  variables:
+    domain: "aclue.app"
+    protocol: "https"
+    environment: "production"
+    waf_tier: "tier2-performance"
+
+  # Performance thresholds for production
+  ensure:
+    # Response time requirements
+    p95: 2000  # 95th percentile under 2 seconds
+    p99: 5000  # 99th percentile under 5 seconds
+
+    # Error rate requirements
+    maxErrorRate: 5  # Maximum 5% error rate
+
+    # Throughput requirements
+    minRequestRate: 8  # Minimum 8 requests per second
+
+  # Processor for custom metrics and validation
+  processor: "./artillery-processor.js"
+
+# Test scenarios
+scenarios:
+  # Main page load testing (public endpoint)
+  - name: "Homepage Load Test"
+    weight: 30
+    flow:
+      - get:
+          url: "/"
+          headers:
+            X-Test-Scenario: "homepage-load"
+          capture:
+            - json: "$.title"
+              as: "pageTitle"
+          expect:
+            - statusCode: 200
+            - hasHeader: "content-type"
+            - headerEquals:
+                content-type: "text/html"
+
+  # Newsletter endpoint testing (allowlisted endpoint)
+  - name: "Newsletter Subscription Flow"
+    weight: 25
+    flow:
+      - get:
+          url: "/newsletter"
+          headers:
+            X-Test-Scenario: "newsletter-page"
+          expect:
+            - statusCode: 200
+            - contentType: "text/html"
+
+      # Test newsletter form submission
+      - post:
+          url: "/newsletter"
+          headers:
+            Content-Type: "application/x-www-form-urlencoded"
+            X-Test-Scenario: "newsletter-submit"
+          form:
+            email: "artillery-test-{{ $randomString() }}@example.com"
+          expect:
+            - statusCode: [200, 302, 409]  # Allow redirect and duplicate email responses
+
+  # API health check testing
+  - name: "API Health Monitoring"
+    weight: 20
+    flow:
+      - get:
+          url: "{{ $environment }}/api/health"
+          headers:
+            X-Test-Scenario: "api-health"
+          expect:
+            - statusCode: 200
+            - hasHeader: "content-type"
+            - contentType: "application/json"
+
+  # Static assets performance testing
+  - name: "Static Assets Load Test"
+    weight: 15
+    flow:
+      - get:
+          url: "/aclue_text_clean.png"
+          headers:
+            X-Test-Scenario: "static-assets"
+          expect:
+            - statusCode: 200
+            - contentType: "image/png"
+
+      - get:
+          url: "/favicon.ico"
+          headers:
+            X-Test-Scenario: "favicon-load"
+          expect:
+            - statusCode: [200, 404]  # Allow missing favicon
+
+  # Landing page testing (if accessible)
+  - name: "Landing Page Performance"
+    weight: 10
+    flow:
+      - get:
+          url: "/landingpage"
+          headers:
+            X-Test-Scenario: "landing-page"
+          expect:
+            - statusCode: [200, 403, 404]  # May be restricted or not exist
+
+# Custom functions for dynamic testing
+functions:
+  # Generate unique test identifiers
+  randomTestId: "artillery-{{ $randomString() }}-{{ $timestamp }}"
+
+  # Generate realistic user data
+  randomEmail: "test-{{ $randomString() }}@example.com"
+
+  # Environment-aware URL construction
+  environment: |
+    function(context, events, done) {
+      const environments = {
+        production: "https://aclue-backend-production.up.railway.app",
+        staging: "https://aclue-backend-staging.up.railway.app"
+      };
+      context.vars.environment = environments.production;
+      return done();
+    }
+
+# Before/After hooks for test lifecycle
+before:
+  flow:
+    - log: "Starting Artillery load test for aclue platform"
+    - log: "WAF Allowlist: Tier 2 Performance Testing"
+    - log: "Target: {{ target }}"
+
+after:
+  flow:
+    - log: "Artillery load test completed"
+    - log: "Check reports for performance metrics and potential WAF blocks"
+
+# Reporting configuration
+output:
+  # Built-in console reporter
+  - type: console
+    config:
+      # Show progress during test execution
+      printStats: true
+
+  # JSON output for CI/CD integration
+  - type: json
+    config:
+      output: "./artillery-reports/artillery-results-{{ $timestamp }}.json"
+
+  # HTML report generation
+  - type: html
+    config:
+      output: "./artillery-reports/artillery-report-{{ $timestamp }}.html"

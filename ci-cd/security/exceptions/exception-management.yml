@@ -1,0 +1,526 @@
+# =============================================================================
+# aclue Platform Security Exception Management System
+# =============================================================================
+#
+# Manages security exceptions with time-bounds, approval workflows,
+# audit trails, and automated expiry handling
+#
+# =============================================================================
+
+metadata:
+  version: "1.0.0"
+  platform: "aclue"
+  description: "Security exception management and allowlist system"
+  created: "2025-09-24"
+  owner: "security-team"
+
+# =============================================================================
+# EXCEPTION CATEGORIES
+# =============================================================================
+
+exception_categories:
+  # Vulnerability exceptions
+  vulnerability_exceptions:
+    types:
+      - "false_positive"
+      - "accepted_risk"
+      - "compensating_controls"
+      - "no_upgrade_path"
+      - "vendor_dependency"
+      - "legacy_system"
+
+    approval_matrix:
+      critical:
+        approvers: ["cto", "security_lead", "product_owner"]
+        min_approvals: 2
+        max_duration_days: 30
+        review_frequency: "weekly"
+
+      high:
+        approvers: ["security_lead", "tech_lead"]
+        min_approvals: 2
+        max_duration_days: 90
+        review_frequency: "biweekly"
+
+      medium:
+        approvers: ["tech_lead", "senior_developer"]
+        min_approvals: 1
+        max_duration_days: 180
+        review_frequency: "monthly"
+
+      low:
+        approvers: ["senior_developer"]
+        min_approvals: 1
+        max_duration_days: 365
+        review_frequency: "quarterly"
+
+  # Policy exceptions
+  policy_exceptions:
+    types:
+      - "business_requirement"
+      - "technical_limitation"
+      - "temporary_workaround"
+      - "poc_testing"
+      - "migration_period"
+
+    approval_requirements:
+      security_policy:
+        approvers: ["security_team"]
+        documentation: "required"
+
+      compliance_policy:
+        approvers: ["compliance_team", "legal"]
+        documentation: "mandatory"
+
+      operational_policy:
+        approvers: ["ops_team"]
+        documentation: "recommended"
+
+  # Tool exceptions
+  tool_exceptions:
+    types:
+      - "false_positive"
+      - "test_code"
+      - "third_party_library"
+      - "generated_code"
+      - "documentation"
+
+    auto_approve:
+      - "test_files"
+      - "mock_data"
+      - "documentation"
+
+# =============================================================================
+# EXCEPTION WORKFLOW
+# =============================================================================
+
+exception_workflow:
+  # Request phase
+  request:
+    required_fields:
+      - field: "exception_type"
+        type: "enum"
+        values: ["vulnerability", "policy", "tool", "temporary"]
+
+      - field: "severity"
+        type: "enum"
+        values: ["critical", "high", "medium", "low"]
+
+      - field: "justification"
+        type: "string"
+        min_length: 100
+        must_include: ["business_impact", "risk_assessment"]
+
+      - field: "compensating_controls"
+        type: "array"
+        min_items: 1
+        required_for: ["critical", "high"]
+
+      - field: "expiry_date"
+        type: "date"
+        max_future_days: 365
+
+      - field: "affected_resources"
+        type: "array"
+        must_specify: ["environment", "service", "component"]
+
+    validation:
+      - check: "no_duplicate_exception"
+      - check: "requestor_authorised"
+      - check: "expiry_within_limits"
+      - check: "compensating_controls_adequate"
+
+  # Approval phase
+  approval:
+    routing:
+      auto_route_based_on:
+        - "severity"
+        - "exception_type"
+        - "affected_environment"
+
+    sla:
+      critical: "4_hours"
+      high: "24_hours"
+      medium: "72_hours"
+      low: "1_week"
+
+    approval_criteria:
+      must_evaluate:
+        - "risk_vs_benefit"
+        - "compensating_controls"
+        - "business_justification"
+        - "alternative_solutions"
+        - "timeline_reasonable"
+
+    conditional_approval:
+      with_conditions:
+        - "additional_monitoring"
+        - "reduced_scope"
+        - "shorter_duration"
+        - "enhanced_controls"
+
+  # Implementation phase
+  implementation:
+    actions:
+      - "update_allowlist"
+      - "configure_tool_suppressions"
+      - "update_monitoring_rules"
+      - "notify_stakeholders"
+      - "schedule_reviews"
+
+    verification:
+      - "exception_properly_scoped"
+      - "controls_in_place"
+      - "monitoring_active"
+      - "documentation_complete"
+
+  # Monitoring phase
+  monitoring:
+    continuous_checks:
+      - "exception_still_needed"
+      - "controls_effective"
+      - "no_abuse_detected"
+      - "risk_unchanged"
+
+    alerts:
+      - trigger: "exception_expires_soon"
+        before_days: 7
+        notify: ["owner", "approver"]
+
+      - trigger: "control_failure"
+        immediate: true
+        notify: ["security_team"]
+
+      - trigger: "risk_increase"
+        immediate: true
+        notify: ["approver", "security_team"]
+
+  # Review phase
+  review:
+    scheduled_reviews:
+      critical: "weekly"
+      high: "biweekly"
+      medium: "monthly"
+      low: "quarterly"
+
+    review_criteria:
+      - "still_required"
+      - "controls_adequate"
+      - "risk_acceptable"
+      - "alternatives_available"
+
+    outcomes:
+      - "extend"
+      - "modify"
+      - "revoke"
+      - "convert_to_permanent"
+
+# =============================================================================
+# ALLOWLIST CONFIGURATION
+# =============================================================================
+
+allowlists:
+  # Vulnerability allowlist
+  vulnerability_allowlist:
+    - id: "CVE-2024-XXX"
+      package: "webpack@5.x"
+      severity: "medium"
+      reason: "No exploit path in our usage"
+      compensating_controls:
+        - "Input validation"
+        - "Sandboxed environment"
+      expires: "2025-12-31"
+      approved_by: "tech_lead"
+      environments: ["development"]
+
+    - id: "GHSA-XXX"
+      package: "node-sass"
+      severity: "low"
+      reason: "Build-time only dependency"
+      compensating_controls:
+        - "Not exposed to user input"
+      expires: "2025-06-30"
+      approved_by: "security_team"
+      environments: ["all"]
+
+  # Secret pattern allowlist
+  secret_allowlist:
+    - pattern: "example_[a-z0-9]{32}"
+      reason: "Example keys in documentation"
+      locations:
+        - "docs/**"
+        - "examples/**"
+      expires: "never"
+
+    - pattern: "test_[a-z0-9]{20}"
+      reason: "Test fixtures"
+      locations:
+        - "**/*.test.js"
+        - "**/*.spec.ts"
+        - "test/**"
+      expires: "never"
+
+  # File/Path allowlist
+  path_allowlist:
+    - path: "docs/examples/"
+      reason: "Documentation examples"
+      skip_checks:
+        - "secrets"
+        - "vulnerabilities"
+
+    - path: "test/fixtures/"
+      reason: "Test data"
+      skip_checks:
+        - "secrets"
+
+    - path: ".github/workflows/"
+      reason: "CI/CD configuration"
+      skip_checks:
+        - "hardcoded_versions"
+
+# =============================================================================
+# EXCEPTION TEMPLATES
+# =============================================================================
+
+exception_templates:
+  # Common exception scenarios
+  templates:
+    legacy_dependency:
+      name: "Legacy Dependency Exception"
+      prefilled:
+        exception_type: "vulnerability"
+        justification_template: "Legacy system requiring {package} version {version}. Migration planned for {date}."
+        compensating_controls:
+          - "Network isolation"
+          - "Input validation"
+          - "Enhanced monitoring"
+      max_duration_days: 180
+
+    poc_testing:
+      name: "Proof of Concept Testing"
+      prefilled:
+        exception_type: "policy"
+        justification_template: "POC testing for {feature}. Limited to {environment} environment."
+        compensating_controls:
+          - "Isolated environment"
+          - "No production data"
+          - "Time-limited access"
+      max_duration_days: 30
+
+    third_party_integration:
+      name: "Third-party Integration Requirement"
+      prefilled:
+        exception_type: "policy"
+        justification_template: "Required by {vendor} integration. No alternative available."
+        compensating_controls:
+          - "API gateway filtering"
+          - "Rate limiting"
+          - "Audit logging"
+      max_duration_days: 365
+
+    false_positive:
+      name: "Confirmed False Positive"
+      prefilled:
+        exception_type: "tool"
+        justification_template: "Confirmed false positive in {tool}. {explanation}"
+        compensating_controls:
+          - "Manual review completed"
+      max_duration_days: 90
+
+# =============================================================================
+# AUTOMATED EXCEPTION HANDLING
+# =============================================================================
+
+automation:
+  # Auto-approval rules
+  auto_approval:
+    conditions:
+      - type: "test_environment"
+        severity: ["low"]
+        auto_approve: true
+        max_duration_days: 30
+
+      - type: "documented_false_positive"
+        severity: ["low", "medium"]
+        auto_approve: true
+        max_duration_days: 90
+
+      - type: "build_dependency"
+        severity: ["low"]
+        environments: ["development"]
+        auto_approve: true
+
+  # Auto-expiry handling
+  auto_expiry:
+    warning_notifications:
+      - before_days: 30
+        notify: ["owner"]
+        message: "Exception expiring in 30 days"
+
+      - before_days: 7
+        notify: ["owner", "approver"]
+        message: "Exception expiring in 7 days - action required"
+
+      - before_days: 1
+        notify: ["owner", "approver", "security_team"]
+        message: "Exception expires tomorrow"
+
+    on_expiry:
+      actions:
+        - "revoke_exception"
+        - "remove_from_allowlist"
+        - "notify_stakeholders"
+        - "create_audit_entry"
+        - "trigger_compliance_scan"
+
+    grace_period:
+      critical: 0           # No grace period
+      high: 1              # 1 day grace
+      medium: 3            # 3 days grace
+      low: 7               # 7 days grace
+
+  # Auto-review triggers
+  auto_review:
+    triggers:
+      - event: "new_vulnerability_published"
+        affecting: "excepted_package"
+        action: "immediate_review"
+
+      - event: "risk_score_increase"
+        threshold: 2
+        action: "schedule_review"
+
+      - event: "compensating_control_failure"
+        action: "immediate_review"
+
+      - event: "environment_change"
+        from: "development"
+        to: "production"
+        action: "revoke_exception"
+
+# =============================================================================
+# AUDIT AND COMPLIANCE
+# =============================================================================
+
+audit_compliance:
+  # Audit trail requirements
+  audit_trail:
+    capture_events:
+      - "exception_requested"
+      - "exception_approved"
+      - "exception_denied"
+      - "exception_modified"
+      - "exception_reviewed"
+      - "exception_expired"
+      - "exception_revoked"
+
+    required_fields:
+      - "timestamp"
+      - "actor"
+      - "action"
+      - "justification"
+      - "approvers"
+      - "affected_resources"
+      - "risk_score"
+
+    retention:
+      period_years: 7
+      storage: "immutable"
+      encryption: "required"
+
+  # Compliance reporting
+  reporting:
+    scheduled_reports:
+      - name: "Active Exceptions Report"
+        frequency: "weekly"
+        recipients: ["security_team", "compliance_team"]
+
+      - name: "Exception Metrics Report"
+        frequency: "monthly"
+        recipients: ["management"]
+
+      - name: "Exception Audit Report"
+        frequency: "quarterly"
+        recipients: ["audit_committee"]
+
+    metrics:
+      - "total_active_exceptions"
+      - "exceptions_by_severity"
+      - "exceptions_by_age"
+      - "expired_exceptions"
+      - "exception_trend"
+      - "mean_time_to_approval"
+      - "exception_review_rate"
+
+  # Compliance validation
+  validation:
+    checks:
+      - "all_exceptions_have_expiry"
+      - "all_exceptions_have_owner"
+      - "high_severity_reviewed_weekly"
+      - "no_expired_exceptions_active"
+      - "audit_trail_complete"
+
+    enforcement:
+      - "block_deployments_with_expired_exceptions"
+      - "require_review_for_extension"
+      - "escalate_overdue_reviews"
+
+# =============================================================================
+# EXCEPTION METRICS AND KPIs
+# =============================================================================
+
+metrics_kpis:
+  # Key metrics
+  metrics:
+    operational:
+      - metric: "active_exception_count"
+        target: "<20"
+        measure: "monthly"
+
+      - metric: "average_exception_age"
+        target: "<60_days"
+        measure: "weekly"
+
+      - metric: "exception_review_compliance"
+        target: ">95%"
+        measure: "weekly"
+
+    risk:
+      - metric: "high_severity_exceptions"
+        target: "<5"
+        measure: "daily"
+
+      - metric: "exceptions_without_controls"
+        target: "0"
+        measure: "daily"
+
+      - metric: "overdue_reviews"
+        target: "0"
+        measure: "daily"
+
+  # KPIs
+  kpis:
+    - kpi: "exception_reduction_rate"
+      target: "10%_monthly"
+      calculation: "month_over_month"
+
+    - kpi: "mean_time_to_resolution"
+      target: "<30_days"
+      calculation: "average_age_at_closure"
+
+    - kpi: "false_positive_rate"
+      target: "<5%"
+      calculation: "false_positives/total_findings"
+
+# =============================================================================
+# NOTES
+# =============================================================================
+
+notes:
+  - "All exceptions must have an expiry date"
+  - "Critical exceptions require executive approval"
+  - "Automated expiry prevents exception drift"
+  - "Regular reviews ensure continued validity"
+  - "Compensating controls are mandatory for high-risk exceptions"
+  - "Audit trail is immutable and retained for 7 years"

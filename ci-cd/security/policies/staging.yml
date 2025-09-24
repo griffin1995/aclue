@@ -1,0 +1,347 @@
+# =============================================================================
+# aclue Platform Staging Security Policy
+# =============================================================================
+#
+# Balanced security policy for staging environment
+# Allows limited tolerance for testing while maintaining security
+#
+# =============================================================================
+
+policy:
+  name: "Staging Security Policy"
+  environment: "staging"
+  enforcement: "moderate"
+  created: "2025-09-24"
+  owner: "security-team"
+
+# =============================================================================
+# STAGING SECURITY REQUIREMENTS
+# =============================================================================
+
+enforcement_mode:
+  level: "balanced"
+  fail_fast: false
+  auto_rollback: false
+  require_security_review: true
+  require_change_ticket: false
+
+# =============================================================================
+# VULNERABILITY POLICY
+# =============================================================================
+
+vulnerabilities:
+  # Limited tolerance for testing scenarios
+  critical:
+    max_allowed: 0
+    action: "block"
+    notification: "immediate"
+    escalation: "security_lead"
+    exception_window_hours: 24
+
+  high:
+    max_allowed: 1
+    action: "review"
+    notification: "1_hour"
+    require_justification: true
+    monitoring: "continuous"
+
+  medium:
+    max_allowed: 5
+    action: "warn"
+    notification: "4_hours"
+    review_cycle: "daily"
+    tracking: true
+
+  low:
+    max_allowed: 20
+    action: "log"
+    notification: "daily"
+    review_cycle: "weekly"
+    batch_review: true
+
+  # Testing allowances
+  testing_exceptions:
+    security_testing_tools: true
+    penetration_testing: true
+    vulnerability_validation: true
+    max_duration_days: 7
+
+# =============================================================================
+# SECRET DETECTION POLICY
+# =============================================================================
+
+secrets:
+  # Stricter than development, looser than production
+  detection:
+    confirmed:
+      max_allowed: 0
+      action: "block"
+      rotation_required: true
+      notification: "immediate"
+
+    high_confidence:
+      max_allowed: 0
+      action: "manual_review"
+      sla: "1_hour"
+
+    medium_confidence:
+      max_allowed: 1
+      action: "automated_review"
+      sla: "4_hours"
+
+    low_confidence:
+      max_allowed: 5
+      action: "log"
+      batch_review: "daily"
+
+  # Test secret allowances
+  test_secrets:
+    allow_mock_credentials: true
+    allow_test_api_keys: true
+    require_prefix: "test_"
+    auto_expire_days: 30
+
+# =============================================================================
+# DEPENDENCY SECURITY POLICY
+# =============================================================================
+
+dependencies:
+  # Direct dependencies
+  direct:
+    critical_vulnerabilities: 0
+    high_vulnerabilities: 1
+    outdated_threshold_days: 60
+    auto_update_patches: true
+    notify_major_updates: true
+
+  # Transitive dependencies
+  transitive:
+    critical_vulnerabilities: 2
+    high_vulnerabilities: 5
+    track_upstream_fixes: true
+    weekly_review: true
+
+  # Experimental packages
+  experimental:
+    allow_beta_versions: true
+    allow_rc_versions: true
+    require_approval: false
+    monitoring: "enhanced"
+
+# =============================================================================
+# CONTAINER SECURITY POLICY
+# =============================================================================
+
+containers:
+  # Image requirements
+  images:
+    require_signature: false
+    require_sbom: true
+    max_age_days: 30
+    allow_latest_tag: true
+
+  # Runtime security (relaxed for testing)
+  runtime:
+    read_only_root_filesystem: false
+    no_new_privileges: true
+    user: "non-root"
+    allow_privileged: false
+
+  # Scanning requirements
+  scanning:
+    on_build: true
+    on_push: true
+    periodic: "daily"
+    block_on_critical: true
+    warn_on_high: true
+
+# =============================================================================
+# API SECURITY POLICY
+# =============================================================================
+
+api_security:
+  # Authentication (testing flexibility)
+  authentication:
+    require_mfa: false
+    session_timeout_minutes: 120
+    token_rotation: "24_hours"
+    allow_http: true          # For local testing
+
+  # Rate limiting (relaxed for testing)
+  rate_limits:
+    public_endpoints: 500
+    authenticated_endpoints: 5000
+    admin_endpoints: 10000
+    login_attempts: 10
+
+  # Security headers (recommended but not enforced)
+  recommended_headers:
+    - name: "X-Content-Type-Options"
+      value: "nosniff"
+    - name: "X-Frame-Options"
+      value: "SAMEORIGIN"
+    - name: "X-XSS-Protection"
+      value: "1; mode=block"
+
+# =============================================================================
+# DATA PROTECTION POLICY
+# =============================================================================
+
+data_protection:
+  # Encryption (recommended)
+  encryption:
+    at_rest:
+      required: true
+      algorithm: "AES-256-GCM"
+
+    in_transit:
+      required: true
+      min_tls_version: "1.2"
+
+  # Test data management
+  test_data:
+    allow_synthetic_pii: true
+    allow_anonymised_production: true
+    require_data_masking: true
+    auto_cleanup_days: 30
+
+# =============================================================================
+# MONITORING & ALERTING POLICY
+# =============================================================================
+
+monitoring:
+  # Security monitoring (learning mode)
+  security_events:
+    failed_authentication:
+      threshold: 20
+      window_minutes: 10
+      action: "alert"
+
+    privilege_escalation:
+      threshold: 5
+      action: "log_and_alert"
+
+    anomaly_detection:
+      enabled: true
+      learning_mode: true
+      baseline_period_days: 7
+
+  # Alerting (non-pager)
+  alerting:
+    critical:
+      - "security_team_slack"
+      - "email"
+    high:
+      - "email"
+      - "dashboard"
+    medium:
+      - "dashboard"
+    low:
+      - "log"
+
+# =============================================================================
+# TESTING ALLOWANCES
+# =============================================================================
+
+testing:
+  # Security testing
+  security_testing:
+    allow_vulnerability_scanning: true
+    allow_penetration_testing: true
+    allow_load_testing: true
+    allow_chaos_engineering: true
+    require_notification: true
+
+  # Development features
+  development_features:
+    allow_debug_mode: true
+    allow_verbose_logging: true
+    allow_test_endpoints: true
+    allow_mock_services: true
+
+  # Testing accounts
+  test_accounts:
+    allow_test_users: true
+    allow_admin_bypass: false
+    require_test_prefix: true
+    auto_disable_days: 7
+
+# =============================================================================
+# DEPLOYMENT REQUIREMENTS
+# =============================================================================
+
+deployment:
+  # Pre-deployment checks
+  pre_deployment:
+    security_scan: "required"
+    vulnerability_scan: "recommended"
+    secret_scan: "required"
+    smoke_tests: "required"
+
+  # Deployment approval
+  approval:
+    auto_approve_patches: true
+    require_approval_major: true
+    approvers: ["tech_lead"]
+
+  # Rollback triggers (relaxed)
+  rollback_triggers:
+    error_rate_increase_percent: 20
+    response_time_increase_percent: 100
+    manual_trigger: true
+
+# =============================================================================
+# EXCEPTION HANDLING
+# =============================================================================
+
+exceptions:
+  # More flexible exception handling
+  approval_required: ["tech_lead"]
+  max_duration_days: 7
+  self_service_exceptions: true
+  require_justification: true
+
+  # Common exceptions
+  allowed_exceptions:
+    - "testing_new_features"
+    - "security_validation"
+    - "performance_testing"
+    - "integration_testing"
+
+# =============================================================================
+# COMPLIANCE REQUIREMENTS
+# =============================================================================
+
+compliance:
+  # Relaxed compliance for staging
+  regulations:
+    gdpr:
+      enabled: true
+      test_mode: true
+      synthetic_data: true
+
+    pci_dss:
+      enabled: false
+      test_cards_only: true
+
+  # Audit (reduced frequency)
+  audit:
+    logging:
+      api_calls: true
+      errors: true
+      security_events: true
+
+    retention:
+      logs_days: 30
+      metrics_days: 90
+
+# =============================================================================
+# NOTES
+# =============================================================================
+
+notes:
+  - "Staging is for testing and validation"
+  - "Limited security exceptions allowed"
+  - "Test data only - no real PII"
+  - "Weekly security review required"
+  - "Automatic cleanup of test resources"

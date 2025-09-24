@@ -1,0 +1,485 @@
+# =============================================================================
+# aclue Platform Production Security Policy
+# =============================================================================
+#
+# Zero-tolerance security policy for production environment
+# All violations result in deployment blocking
+#
+# =============================================================================
+
+policy:
+  name: "Production Security Policy"
+  environment: "production"
+  enforcement: "strict"
+  created: "2025-09-24"
+  owner: "security-team"
+
+# =============================================================================
+# PRODUCTION SECURITY REQUIREMENTS
+# =============================================================================
+
+enforcement_mode:
+  level: "zero_tolerance"
+  fail_fast: true
+  auto_rollback: true
+  require_security_approval: true
+  require_change_ticket: true
+
+# =============================================================================
+# VULNERABILITY POLICY
+# =============================================================================
+
+vulnerabilities:
+  # Absolute limits - ANY violation blocks deployment
+  critical:
+    max_allowed: 0
+    action: "block"
+    notification: "immediate"
+    escalation: "cto"
+    auto_rollback: true
+
+  high:
+    max_allowed: 0
+    action: "block"
+    notification: "immediate"
+    escalation: "security_lead"
+    require_exception: true
+
+  medium:
+    max_allowed: 2
+    action: "review"
+    notification: "30_minutes"
+    require_justification: true
+    monitoring: "continuous"
+
+  low:
+    max_allowed: 10
+    action: "warn"
+    notification: "daily"
+    review_cycle: "weekly"
+    tracking: true
+
+  # Special handling for zero-day vulnerabilities
+  zero_day:
+    action: "emergency_block"
+    notification: "immediate"
+    incident_response: true
+    war_room: true
+
+# =============================================================================
+# SECRET DETECTION POLICY
+# =============================================================================
+
+secrets:
+  # Zero tolerance for any confirmed secrets
+  detection:
+    confirmed:
+      max_allowed: 0
+      action: "block"
+      auto_rotate: true
+      incident: true
+
+    high_confidence:
+      max_allowed: 0
+      action: "block"
+      manual_review: true
+      sla: "15_minutes"
+
+    medium_confidence:
+      max_allowed: 0
+      action: "manual_review"
+      sla: "30_minutes"
+
+    low_confidence:
+      max_allowed: 0
+      action: "automated_review"
+      sla: "1_hour"
+
+  # Automated secret rotation
+  rotation:
+    api_keys: "30_days"
+    database_passwords: "60_days"
+    jwt_secrets: "90_days"
+    certificates: "30_days_before_expiry"
+
+# =============================================================================
+# DEPENDENCY SECURITY POLICY
+# =============================================================================
+
+dependencies:
+  # Direct dependencies - strictest control
+  direct:
+    critical_vulnerabilities: 0
+    high_vulnerabilities: 0
+    outdated_threshold_days: 30
+    auto_update_patches: true
+    review_major_updates: true
+
+  # Transitive dependencies - managed risk
+  transitive:
+    critical_vulnerabilities: 0
+    high_vulnerabilities: 1      # Allow 1 with documented exception
+    require_sbom: true
+    vulnerability_scan: "continuous"
+
+  # Supply chain security
+  supply_chain:
+    require_signatures: true
+    allowed_registries:
+      - "registry.npmjs.org"
+      - "pypi.org"
+      - "docker.io"
+    blocked_packages: []
+    integrity_verification: true
+
+# =============================================================================
+# CONTAINER SECURITY POLICY
+# =============================================================================
+
+containers:
+  # Image requirements
+  images:
+    require_signature: true
+    require_sbom: true
+    max_age_days: 7
+    base_image_allowlist:
+      - "node:18-alpine"
+      - "python:3.12-slim"
+      - "nginx:stable-alpine"
+
+  # Runtime security
+  runtime:
+    read_only_root_filesystem: true
+    no_new_privileges: true
+    drop_capabilities: ["ALL"]
+    seccomp_profile: "runtime/default"
+    user: "non-root"
+
+  # Vulnerability scanning
+  scanning:
+    on_build: true
+    on_push: true
+    on_deploy: true
+    periodic: "hourly"
+    block_on_critical: true
+
+# =============================================================================
+# API SECURITY POLICY
+# =============================================================================
+
+api_security:
+  # Authentication requirements
+  authentication:
+    require_mfa: true
+    session_timeout_minutes: 60
+    token_rotation: "1_hour"
+    require_https: true
+
+  # Rate limiting (per minute)
+  rate_limits:
+    public_endpoints: 100
+    authenticated_endpoints: 1000
+    admin_endpoints: 5000
+    login_attempts: 5
+
+  # Input validation
+  input_validation:
+    sql_injection_protection: true
+    xss_protection: true
+    xxe_protection: true
+    command_injection_protection: true
+    path_traversal_protection: true
+
+  # Security headers (all required)
+  required_headers:
+    - name: "Strict-Transport-Security"
+      value: "max-age=63072000; includeSubDomains; preload"
+    - name: "Content-Security-Policy"
+      value: "default-src 'self'; script-src 'self' 'unsafe-inline' https://posthog.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://aclue-backend-production.up.railway.app https://posthog.com"
+    - name: "X-Content-Type-Options"
+      value: "nosniff"
+    - name: "X-Frame-Options"
+      value: "DENY"
+    - name: "X-XSS-Protection"
+      value: "1; mode=block"
+    - name: "Referrer-Policy"
+      value: "strict-origin-when-cross-origin"
+    - name: "Permissions-Policy"
+      value: "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()"
+
+# =============================================================================
+# DATA PROTECTION POLICY
+# =============================================================================
+
+data_protection:
+  # Encryption requirements
+  encryption:
+    at_rest:
+      required: true
+      algorithm: "AES-256-GCM"
+      key_rotation: "90_days"
+
+    in_transit:
+      required: true
+      min_tls_version: "1.3"
+      cipher_suites:
+        - "TLS_AES_128_GCM_SHA256"
+        - "TLS_AES_256_GCM_SHA384"
+        - "TLS_CHACHA20_POLY1305_SHA256"
+
+  # Data classification
+  classification:
+    pii:
+      encryption: "required"
+      access_control: "strict"
+      audit_logging: true
+      retention_days: 365
+
+    sensitive:
+      encryption: "required"
+      access_control: "moderate"
+      audit_logging: true
+      retention_days: 730
+
+    public:
+      encryption: "optional"
+      access_control: "basic"
+      audit_logging: false
+      retention_days: 1095
+
+# =============================================================================
+# MONITORING & ALERTING POLICY
+# =============================================================================
+
+monitoring:
+  # Security monitoring
+  security_events:
+    failed_authentication:
+      threshold: 5
+      window_minutes: 5
+      action: "block_and_alert"
+
+    privilege_escalation:
+      threshold: 1
+      action: "immediate_alert"
+      incident_response: true
+
+    anomalous_data_access:
+      threshold: "statistical"
+      action: "investigate"
+      ml_detection: true
+
+  # Performance monitoring
+  performance:
+    response_time_p95_ms: 1000
+    error_rate_percent: 0.1
+    uptime_percent: 99.99
+
+  # Alerting channels
+  alerting:
+    critical:
+      - "pagerduty"
+      - "security_team_slack"
+      - "email_escalation"
+    high:
+      - "security_team_slack"
+      - "email"
+    medium:
+      - "email"
+      - "dashboard"
+    low:
+      - "dashboard"
+
+# =============================================================================
+# INCIDENT RESPONSE POLICY
+# =============================================================================
+
+incident_response:
+  # Response times (minutes)
+  sla:
+    critical: 15
+    high: 60
+    medium: 240      # 4 hours
+    low: 1440        # 24 hours
+
+  # Escalation path
+  escalation:
+    level_1: ["on_call_engineer"]
+    level_2: ["security_team", "tech_lead"]
+    level_3: ["security_lead", "engineering_manager"]
+    level_4: ["cto", "ciso"]
+
+  # Required actions
+  actions:
+    immediate:
+      - "isolate_affected_systems"
+      - "preserve_evidence"
+      - "notify_security_team"
+      - "start_incident_log"
+
+    investigation:
+      - "root_cause_analysis"
+      - "impact_assessment"
+      - "containment_strategy"
+      - "communication_plan"
+
+    resolution:
+      - "remediation"
+      - "validation"
+      - "monitoring"
+      - "documentation"
+
+    post_incident:
+      - "post_mortem"
+      - "lessons_learned"
+      - "process_improvement"
+      - "training_updates"
+
+# =============================================================================
+# COMPLIANCE REQUIREMENTS
+# =============================================================================
+
+compliance:
+  # Regulatory requirements
+  regulations:
+    gdpr:
+      enabled: true
+      data_processing_agreement: true
+      privacy_policy: true
+      cookie_consent: true
+      data_portability: true
+      right_to_deletion: true
+
+    pci_dss:
+      enabled: true
+      network_segmentation: true
+      cardholder_data_encryption: true
+      access_control: true
+      vulnerability_management: true
+      monitoring: true
+
+    iso_27001:
+      enabled: true
+      risk_assessment: "quarterly"
+      security_review: "monthly"
+      audit: "annual"
+      training: "quarterly"
+
+  # Audit requirements
+  audit:
+    logging:
+      all_api_calls: true
+      all_database_queries: true
+      all_authentication_events: true
+      all_authorization_decisions: true
+      all_configuration_changes: true
+
+    retention:
+      security_logs_years: 7
+      audit_logs_years: 7
+      application_logs_days: 90
+      performance_logs_days: 30
+
+    integrity:
+      tamper_proof: true
+      cryptographic_signing: true
+      centralised_storage: true
+      real_time_streaming: true
+
+# =============================================================================
+# DEPLOYMENT REQUIREMENTS
+# =============================================================================
+
+deployment:
+  # Pre-deployment checks
+  pre_deployment:
+    security_scan: "required"
+    vulnerability_scan: "required"
+    secret_scan: "required"
+    license_check: "required"
+    dependency_check: "required"
+    configuration_review: "required"
+
+  # Deployment approval
+  approval:
+    required_approvers:
+      - "tech_lead"
+      - "security_team"
+    automated_checks:
+      - "all_tests_pass"
+      - "security_score_above_90"
+      - "no_critical_vulnerabilities"
+      - "no_secrets_detected"
+
+  # Rollback triggers
+  rollback_triggers:
+    error_rate_increase_percent: 5
+    response_time_increase_percent: 50
+    security_events_per_minute: 10
+    availability_decrease_percent: 0.1
+
+  # Post-deployment monitoring
+  post_deployment:
+    enhanced_monitoring_minutes: 60
+    canary_deployment: true
+    progressive_rollout: true
+    automatic_rollback: true
+
+# =============================================================================
+# EXCEPTION HANDLING
+# =============================================================================
+
+exceptions:
+  # No exceptions allowed in production without executive approval
+  approval_required:
+    - "cto"
+    - "security_lead"
+    - "product_owner"
+
+  max_duration_hours: 24
+  require_incident_ticket: true
+  require_remediation_plan: true
+  require_compensating_controls: true
+
+  # Exception audit
+  audit:
+    log_all_exceptions: true
+    review_frequency: "daily"
+    report_to_board: "monthly"
+
+# =============================================================================
+# EMERGENCY PROCEDURES
+# =============================================================================
+
+emergency:
+  # Break-glass procedures
+  break_glass:
+    require_dual_approval: true
+    max_duration_hours: 4
+    automatic_revoke: true
+    full_audit: true
+    post_incident_review: "mandatory"
+
+  # War room activation
+  war_room:
+    triggers:
+      - "data_breach"
+      - "active_exploitation"
+      - "ransomware"
+      - "complete_outage"
+    participants:
+      - "security_team"
+      - "engineering_leadership"
+      - "legal"
+      - "communications"
+
+# =============================================================================
+# NOTES
+# =============================================================================
+
+notes:
+  - "This policy is reviewed monthly"
+  - "All exceptions require executive approval"
+  - "Violations trigger automatic incident response"
+  - "Compliance is monitored continuously"
+  - "Security training is mandatory quarterly"

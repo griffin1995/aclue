@@ -1,0 +1,292 @@
+{
+  "dashboard": {
+    "id": null,
+    "uid": "aclue-apm",
+    "title": "aclue Application Performance Monitoring",
+    "tags": ["aclue", "apm", "performance"],
+    "timezone": "browser",
+    "schemaVersion": 16,
+    "version": 0,
+    "refresh": "5s",
+    "panels": [
+      {
+        "id": 1,
+        "gridPos": {"h": 4, "w": 6, "x": 0, "y": 0},
+        "type": "stat",
+        "title": "Avg Response Time",
+        "targets": [
+          {
+            "expr": "avg(rate(http_request_duration_seconds_sum{service=\"aclue-backend\"}[5m]) / rate(http_request_duration_seconds_count{service=\"aclue-backend\"}[5m])) * 1000",
+            "legendFormat": "Avg Response Time"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {"mode": "thresholds"},
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"value": 0, "color": "green"},
+                {"value": 100, "color": "yellow"},
+                {"value": 200, "color": "red"}
+              ]
+            },
+            "unit": "ms",
+            "decimals": 2
+          }
+        }
+      },
+      {
+        "id": 2,
+        "gridPos": {"h": 4, "w": 6, "x": 6, "y": 0},
+        "type": "stat",
+        "title": "P95 Response Time",
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket{service=\"aclue-backend\"}[5m])) by (le)) * 1000",
+            "legendFormat": "P95"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {"mode": "thresholds"},
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"value": 0, "color": "green"},
+                {"value": 200, "color": "yellow"},
+                {"value": 500, "color": "red"}
+              ]
+            },
+            "unit": "ms",
+            "decimals": 2
+          }
+        }
+      },
+      {
+        "id": 3,
+        "gridPos": {"h": 4, "w": 6, "x": 12, "y": 0},
+        "type": "stat",
+        "title": "P99 Response Time",
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.99, sum(rate(http_request_duration_seconds_bucket{service=\"aclue-backend\"}[5m])) by (le)) * 1000",
+            "legendFormat": "P99"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {"mode": "thresholds"},
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"value": 0, "color": "green"},
+                {"value": 500, "color": "yellow"},
+                {"value": 1000, "color": "red"}
+              ]
+            },
+            "unit": "ms",
+            "decimals": 2
+          }
+        }
+      },
+      {
+        "id": 4,
+        "gridPos": {"h": 4, "w": 6, "x": 18, "y": 0},
+        "type": "stat",
+        "title": "Requests/sec",
+        "targets": [
+          {
+            "expr": "sum(rate(http_requests_total{service=\"aclue-backend\"}[5m]))",
+            "legendFormat": "RPS"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "reqps",
+            "decimals": 2
+          }
+        }
+      },
+      {
+        "id": 5,
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 4},
+        "type": "graph",
+        "title": "Response Time by Endpoint",
+        "targets": [
+          {
+            "expr": "avg by (endpoint) (rate(http_request_duration_seconds_sum{service=\"aclue-backend\"}[5m]) / rate(http_request_duration_seconds_count{service=\"aclue-backend\"}[5m])) * 1000",
+            "legendFormat": "{{ endpoint }}"
+          }
+        ],
+        "yaxes": [
+          {"format": "ms", "min": 0},
+          {"format": "short"}
+        ],
+        "options": {
+          "legend": {
+            "calcs": ["mean", "max"],
+            "displayMode": "table",
+            "placement": "right"
+          }
+        }
+      },
+      {
+        "id": 6,
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 4},
+        "type": "graph",
+        "title": "Request Rate by Endpoint",
+        "targets": [
+          {
+            "expr": "sum by (endpoint) (rate(http_requests_total{service=\"aclue-backend\"}[5m]))",
+            "legendFormat": "{{ endpoint }}"
+          }
+        ],
+        "yaxes": [
+          {"format": "reqps"},
+          {"format": "short"}
+        ]
+      },
+      {
+        "id": 7,
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 12},
+        "type": "graph",
+        "title": "Error Rate by Endpoint",
+        "targets": [
+          {
+            "expr": "sum by (endpoint, status) (rate(http_requests_total{service=\"aclue-backend\",status=~\"4..|5..\"}[5m]))",
+            "legendFormat": "{{ endpoint }} - {{ status }}"
+          }
+        ],
+        "yaxes": [
+          {"format": "reqps"},
+          {"format": "short"}
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            }
+          }
+        }
+      },
+      {
+        "id": 8,
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 12},
+        "type": "graph",
+        "title": "Database Query Performance",
+        "targets": [
+          {
+            "expr": "avg by (query_type) (rate(db_query_duration_seconds_sum[5m]) / rate(db_query_duration_seconds_count[5m])) * 1000",
+            "legendFormat": "{{ query_type }}"
+          }
+        ],
+        "yaxes": [
+          {"format": "ms"},
+          {"format": "short"}
+        ]
+      },
+      {
+        "id": 9,
+        "gridPos": {"h": 6, "w": 8, "x": 0, "y": 20},
+        "type": "table",
+        "title": "Slowest Endpoints",
+        "targets": [
+          {
+            "expr": "topk(10, avg by (endpoint) (rate(http_request_duration_seconds_sum{service=\"aclue-backend\"}[5m]) / rate(http_request_duration_seconds_count{service=\"aclue-backend\"}[5m])) * 1000)",
+            "format": "table",
+            "instant": true
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "gridPos": {"h": 6, "w": 8, "x": 8, "y": 20},
+        "type": "piechart",
+        "title": "Time Spent by Endpoint",
+        "targets": [
+          {
+            "expr": "sum by (endpoint) (rate(http_request_duration_seconds_sum{service=\"aclue-backend\"}[1h]))",
+            "legendFormat": "{{ endpoint }}"
+          }
+        ]
+      },
+      {
+        "id": 11,
+        "gridPos": {"h": 6, "w": 8, "x": 16, "y": 20},
+        "type": "bargauge",
+        "title": "Cache Hit Ratio",
+        "targets": [
+          {
+            "expr": "(sum(rate(cache_hits_total[5m])) / (sum(rate(cache_hits_total[5m])) + sum(rate(cache_misses_total[5m])))) * 100",
+            "legendFormat": "Cache Hit %"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {"mode": "thresholds"},
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"value": 0, "color": "red"},
+                {"value": 50, "color": "yellow"},
+                {"value": 80, "color": "green"}
+              ]
+            },
+            "unit": "percent",
+            "min": 0,
+            "max": 100
+          }
+        }
+      },
+      {
+        "id": 12,
+        "gridPos": {"h": 6, "w": 24, "x": 0, "y": 26},
+        "type": "graph",
+        "title": "Core Web Vitals",
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.75, sum(rate(web_vitals_lcp_seconds_bucket[5m])) by (le)) * 1000",
+            "legendFormat": "LCP (Largest Contentful Paint)"
+          },
+          {
+            "expr": "histogram_quantile(0.75, sum(rate(web_vitals_fid_seconds_bucket[5m])) by (le)) * 1000",
+            "legendFormat": "FID (First Input Delay)"
+          },
+          {
+            "expr": "avg(web_vitals_cls)",
+            "legendFormat": "CLS (Cumulative Layout Shift)"
+          }
+        ],
+        "yaxes": [
+          {"format": "ms"},
+          {"format": "short"}
+        ]
+      }
+    ],
+    "templating": {
+      "list": [
+        {
+          "name": "endpoint",
+          "type": "query",
+          "query": "label_values(http_requests_total{service=\"aclue-backend\"}, endpoint)",
+          "multi": true,
+          "includeAll": true,
+          "refresh": 1
+        },
+        {
+          "name": "status_code",
+          "type": "query",
+          "query": "label_values(http_requests_total, status)",
+          "multi": true,
+          "includeAll": true,
+          "refresh": 1
+        }
+      ]
+    },
+    "time": {
+      "from": "now-3h",
+      "to": "now"
+    }
+  }
+}

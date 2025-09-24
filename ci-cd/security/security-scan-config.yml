@@ -1,0 +1,261 @@
+# =============================================================================
+# aclue Platform Security Scanning Configuration
+# =============================================================================
+#
+# Central configuration file for all security scanning tools and thresholds
+# used across the aclue platform CI/CD pipeline.
+#
+# =============================================================================
+
+# Security Scanning Thresholds
+thresholds:
+  # Vulnerability severity levels that will fail the CI/CD pipeline
+  fail_on_severity:
+    production: ["critical", "high"]
+    staging: ["critical"]
+    development: ["critical"]
+
+  # Maximum number of vulnerabilities allowed per severity level
+  max_vulnerabilities:
+    critical: 0
+    high: 2
+    medium: 10
+    low: 50
+
+  # License compliance settings
+  license_compliance:
+    fail_on_unknown: true
+    fail_on_copyleft: false
+    allowed_licenses:
+      - "MIT"
+      - "Apache-2.0"
+      - "BSD-3-Clause"
+      - "BSD-2-Clause"
+      - "ISC"
+      - "0BSD"
+      - "Unlicense"
+    prohibited_licenses:
+      - "GPL-3.0"
+      - "AGPL-3.0"
+      - "LGPL-3.0"
+
+# Tool-specific configurations
+tools:
+  # ESLint Security Plugin Configuration
+  eslint:
+    enabled: true
+    config_file: ".eslintrc.security.json"
+    fail_on_error: true
+    extensions: [".js", ".jsx", ".ts", ".tsx"]
+
+  # npm Audit Configuration
+  npm_audit:
+    enabled: true
+    audit_level: "moderate"
+    production_only: false
+    skip_dev_dependencies: false
+
+  # Snyk Configuration
+  snyk:
+    enabled: true
+    severity_threshold: "medium"
+    fail_on_issues: true
+    monitor: true
+
+  # GitLeaks Configuration
+  gitleaks:
+    enabled: true
+    config_file: ".gitleaks.toml"
+    verbose: true
+
+  # TruffleHog Configuration
+  trufflehog:
+    enabled: true
+    only_verified: false
+    include_detectors: ["all"]
+
+  # detect-secrets Configuration
+  detect_secrets:
+    enabled: true
+    baseline_file: ".secrets.baseline"
+    plugins:
+      - "AWSKeyDetector"
+      - "ArtifactoryDetector"
+      - "Base64HighEntropyString"
+      - "BasicAuthDetector"
+      - "CloudantDetector"
+      - "HexHighEntropyString"
+      - "IbmCloudIamDetector"
+      - "JwtTokenDetector"
+      - "KeywordDetector"
+      - "MailchimpDetector"
+      - "PrivateKeyDetector"
+      - "SlackDetector"
+      - "StripeDetector"
+      - "TwilioKeyDetector"
+
+  # Bandit Python Security Configuration
+  bandit:
+    enabled: true
+    confidence: "low"
+    severity: "low"
+    exclude_paths: ["tests/", "test_*.py", "*_test.py"]
+
+  # Safety Python Dependencies
+  safety:
+    enabled: true
+    json_output: true
+    ignore_vulnerabilities: []
+
+  # Docker Security Configuration
+  docker:
+    enabled: true
+    tools:
+      - "hadolint"
+      - "trivy"
+      - "docker-scout"
+    scan_levels: ["os", "library"]
+
+  # OWASP Dependency Check
+  owasp_dependency_check:
+    enabled: true
+    formats: ["HTML", "JSON", "XML"]
+    fail_build_on_cvss: 7.0
+
+  # Semgrep Configuration
+  semgrep:
+    enabled: true
+    rules:
+      - "p/security-audit"
+      - "p/secrets"
+      - "p/owasp-top-ten"
+      - "p/javascript"
+      - "p/typescript"
+      - "p/react"
+      - "p/python"
+
+# File and Path Exclusions
+exclusions:
+  # Files to exclude from all security scans
+  files:
+    - "*.md"
+    - "*.log"
+    - "*.lock"
+    - "package-lock.json"
+    - "yarn.lock"
+    - "pnpm-lock.yaml"
+    - "*.min.js"
+    - "*.min.css"
+    - "*.map"
+
+  # Directories to exclude from all security scans
+  directories:
+    - ".git/"
+    - "node_modules/"
+    - "backend_env/"
+    - "venv/"
+    - ".next/"
+    - "dist/"
+    - "build/"
+    - "coverage/"
+    - ".nyc_output/"
+    - "temp/"
+    - "tmp/"
+    - ".vercel/"
+
+  # Patterns to exclude from secret detection
+  secret_patterns:
+    - "test_*"
+    - "*_test.py"
+    - "*.test.js"
+    - "*.test.ts"
+    - "*.spec.js"
+    - "*.spec.ts"
+    - "*.example"
+    - "*.sample"
+    - "docs/"
+    - "examples/"
+
+# Custom Security Rules for aclue Platform
+custom_rules:
+  # aclue-specific secret patterns
+  secret_patterns:
+    - name: "aclue API Key"
+      pattern: "aclue[_-]?(api[_-]?key|token|secret)[_-]?[=:]\\s*['\"]?[a-zA-Z0-9_-]{20,}['\"]?"
+      severity: "critical"
+
+    - name: "Supabase Service Role Key"
+      pattern: "supabase[_-]?service[_-]?role[_-]?key[_-]?[=:]\\s*['\"]?[a-zA-Z0-9._-]{100,}['\"]?"
+      severity: "critical"
+
+    - name: "Resend API Key"
+      pattern: "resend[_-]?api[_-]?key[_-]?[=:]\\s*['\"]?re_[a-zA-Z0-9_-]{20,}['\"]?"
+      severity: "critical"
+
+    - name: "PostHog API Key"
+      pattern: "posthog[_-]?api[_-]?key[_-]?[=:]\\s*['\"]?phc_[a-zA-Z0-9_-]{40,}['\"]?"
+      severity: "high"
+
+    - name: "Railway Token"
+      pattern: "railway[_-]?token[_-]?[=:]\\s*['\"]?[a-fA-F0-9-]{36}['\"]?"
+      severity: "critical"
+
+    - name: "Vercel Token"
+      pattern: "vercel[_-]?token[_-]?[=:]\\s*['\"]?[a-zA-Z0-9_-]{24,}['\"]?"
+      severity: "high"
+
+# Notification Settings
+notifications:
+  # Slack webhook for critical security alerts (if configured)
+  slack:
+    enabled: false
+    webhook_url: ""
+    channels:
+      critical: "#security-alerts"
+      high: "#development"
+
+  # Email notifications
+  email:
+    enabled: false
+    recipients: []
+
+  # GitHub Issues for tracking security findings
+  github_issues:
+    enabled: true
+    labels: ["security", "vulnerability"]
+    assign_to: []
+
+# Reporting Configuration
+reporting:
+  # Generate security reports in multiple formats
+  formats: ["json", "html", "pdf"]
+
+  # Report storage settings
+  storage:
+    retention_days: 90
+    archive_location: "security-reports/"
+
+  # Metrics to track
+  metrics:
+    - "vulnerability_count_by_severity"
+    - "time_to_resolution"
+    - "false_positive_rate"
+    - "scan_duration"
+    - "coverage_percentage"
+
+# Environment-specific settings
+environments:
+  production:
+    strict_mode: true
+    fail_fast: true
+    require_approval: true
+
+  staging:
+    strict_mode: false
+    fail_fast: false
+    require_approval: false
+
+  development:
+    strict_mode: false
+    fail_fast: false
+    require_approval: false
