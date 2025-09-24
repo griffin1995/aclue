@@ -110,7 +110,7 @@ sudo -u postgres psql -c "ALTER USER aclue PASSWORD 'aclue_dev_password';"
 
 Update `.env`:
 ```bash
-DATABASE_URL=postgresql://aclue:aclue_dev_password@localhost:5432/aclue_dev
+DATABASE_URL=postgresql://aclue:[DEV_PASSWORD]@localhost:5432/aclue_dev
 ```
 
 #### Option B: Supabase (Recommended)

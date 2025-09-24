@@ -493,7 +493,7 @@ We take security seriously and apologise for any inconvenience.
 # ❌ NEVER DO THIS
 API_KEY = "sk-abc123def456ghi789"
 password = "admin123"
-DATABASE_URL = "postgresql://user:pass@prod-server/db"
+DATABASE_URL = "postgresql://[USER]:[PASS]@prod-server/db"
 
 # ✅ ALWAYS DO THIS
 API_KEY = os.getenv('API_KEY')
@@ -545,7 +545,7 @@ from unittest.mock import patch
 def mock_env_vars():
     with patch.dict('os.environ', {
         'SECRET_KEY': 'test-secret-key-minimum-64-chars' + 'x' * 40,
-        'DATABASE_URL': 'postgresql://test:test@localhost/test',
+        'DATABASE_URL': 'postgresql://[USER]:[PASS]@localhost/test',
         'RESEND_API_KEY': 're_test_key',
     }):
         yield
@@ -948,8 +948,8 @@ gitleaks version
 | API Key | `[api_key_prefix]_[key_data]` | Regex + Entropy |
 | JWT | `eyJhbGciOiJIUzI1NiIs...` | JWT structure |
 | AWS Key | `AKIA[A-Z0-9]{16}` | AWS pattern |
-| Private Key | `-----BEGIN RSA PRIVATE KEY-----` | PEM format |
-| Database URL | `postgresql://user:pass@host/db` | URL structure |
+| Private Key | `-----BEGIN [ALGORITHM] PRIVATE KEY-----` | PEM format |
+| Database URL | `postgresql://[USER]:[PASS]@host/db` | URL structure |
 
 ### Appendix B: Compliance Timelines
 
