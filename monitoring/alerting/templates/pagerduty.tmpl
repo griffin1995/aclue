@@ -1,0 +1,354 @@
+{{/* PagerDuty Notification Templates for aclue Platform AlertManager */}}
+{{/* Updated: September 2024 */}}
+
+{{/* Default PagerDuty description template */}}
+{{ define "pagerduty.default.description" }}
+{{- range .Alerts -}}
+{{ .Annotations.summary }}
+
+Service: {{ .Labels.service }}
+Severity: {{ .Labels.severity }}
+Team: {{ .Labels.team }}
+Category: {{ .Labels.category }}
+
+{{- if .Annotations.description }}
+
+Description:
+{{ .Annotations.description }}
+{{- end }}
+
+{{- if .Annotations.impact }}
+Impact: {{ .Annotations.impact }}
+{{- end }}
+
+{{- if .Annotations.business_impact }}
+Business Impact: {{ .Annotations.business_impact }}
+{{- end }}
+
+{{- if .Annotations.revenue_impact }}
+Revenue Impact: {{ .Annotations.revenue_impact }}
+{{- end }}
+
+Alert Time: {{ .StartsAt.Format "2006-01-02 15:04:05 MST" }}
+
+{{- if .Annotations.runbook_url }}
+Runbook: {{ .Annotations.runbook_url }}
+{{- end }}
+
+{{- if .Annotations.dashboard_url }}
+Dashboard: {{ .Annotations.dashboard_url }}
+{{- end }}
+
+Platform: aclue.app
+Environment: Production
+Alert Source: {{ .Labels.job }}
+
+{{- end }}
+{{ end }}
+
+{{/* Security-specific PagerDuty description */}}
+{{ define "pagerduty.security.description" }}
+🔒 SECURITY INCIDENT DETECTED 🔒
+
+{{- range .Alerts -}}
+{{ .Annotations.summary }}
+
+SECURITY DETAILS:
+- Attack Type: {{ .Labels.attack_type | default "Unknown" }}
+- Service: {{ .Labels.service }}
+- Source: {{ .Labels.source_ip | default "Multiple Sources" }}
+- Category: {{ .Labels.category }}
+
+{{- if .Annotations.security_impact }}
+Security Impact: {{ .Annotations.security_impact }}
+{{- end }}
+
+{{- if .Annotations.compliance_impact }}
+Compliance Impact: {{ .Annotations.compliance_impact }}
+{{- end }}
+
+{{- if .Annotations.description }}
+
+Incident Details:
+{{ .Annotations.description }}
+{{- end }}
+
+{{- if .Annotations.actions }}
+
+Required Security Actions:
+{{ .Annotations.actions }}
+{{- end }}
+
+Detection Time: {{ .StartsAt.Format "2006-01-02 15:04:05 MST" }}
+
+{{- if .Annotations.runbook_url }}
+Security Runbook: {{ .Annotations.runbook_url }}
+{{- end }}
+
+Security Dashboard: https://grafana.aclue.app/d/security-overview
+
+⚠️ IMMEDIATE SECURITY RESPONSE REQUIRED ⚠️
+Platform: aclue.app
+Environment: Production
+
+{{- end }}
+{{ end }}
+
+{{/* Critical business impact PagerDuty description */}}
+{{ define "pagerduty.business_critical.description" }}
+💰 BUSINESS-CRITICAL ALERT 💰
+
+{{- range .Alerts -}}
+{{ .Annotations.summary }}
+
+BUSINESS IMPACT DETAILS:
+- Service: {{ .Labels.service }}
+- Team: {{ .Labels.team }}
+- Category: {{ .Labels.category }}
+- Severity: {{ .Labels.severity }}
+
+{{- if .Annotations.business_impact }}
+Business Impact: {{ .Annotations.business_impact }}
+{{- end }}
+
+{{- if .Annotations.revenue_impact }}
+Revenue Impact: {{ .Annotations.revenue_impact }}
+{{- end }}
+
+{{- if .Annotations.description }}
+
+Issue Description:
+{{ .Annotations.description }}
+{{- end }}
+
+{{- if .Annotations.actions }}
+
+Critical Actions Required:
+{{ .Annotations.actions }}
+{{- end }}
+
+Alert Time: {{ .StartsAt.Format "2006-01-02 15:04:05 MST" }}
+
+{{- if .Annotations.runbook_url }}
+Emergency Runbook: {{ .Annotations.runbook_url }}
+{{- end }}
+
+{{- if .Annotations.dashboard_url }}
+Live Dashboard: {{ .Annotations.dashboard_url }}
+{{- end }}
+
+🚨 IMMEDIATE BUSINESS IMPACT - URGENT RESPONSE REQUIRED 🚨
+Platform: aclue.app
+Environment: Production
+
+{{- end }}
+{{ end }}
+
+{{/* Performance degradation PagerDuty description */}}
+{{ define "pagerduty.performance.description" }}
+⚡ PERFORMANCE DEGRADATION ALERT ⚡
+
+{{- range .Alerts -}}
+{{ .Annotations.summary }}
+
+PERFORMANCE DETAILS:
+- Service: {{ .Labels.service }}
+- Metric: {{ .Labels.metric | default "Multiple Metrics" }}
+- Threshold: {{ .Labels.threshold | default "N/A" }}
+- Current Value: {{ .Value | default "N/A" }}
+
+{{- if .Annotations.impact }}
+Performance Impact: {{ .Annotations.impact }}
+{{- end }}
+
+{{- if .Annotations.description }}
+
+Issue Details:
+{{ .Annotations.description }}
+{{- end }}
+
+{{- if .Annotations.actions }}
+
+Performance Recovery Actions:
+{{ .Annotations.actions }}
+{{- end }}
+
+Alert Time: {{ .StartsAt.Format "2006-01-02 15:04:05 MST" }}
+
+{{- if .Annotations.runbook_url }}
+Performance Runbook: {{ .Annotations.runbook_url }}
+{{- end }}
+
+Performance Dashboard: https://grafana.aclue.app/d/performance-overview
+
+Platform: aclue.app
+Environment: Production
+Service Status: https://status.aclue.app
+
+{{- end }}
+{{ end }}
+
+{{/* Database-related PagerDuty description */}}
+{{ define "pagerduty.database.description" }}
+🗄️ DATABASE ALERT 🗄️
+
+{{- range .Alerts -}}
+{{ .Annotations.summary }}
+
+DATABASE DETAILS:
+- Service: {{ .Labels.service }}
+- Database: {{ .Labels.database | default "Supabase PostgreSQL" }}
+- Instance: {{ .Labels.instance | default "Primary" }}
+- Category: {{ .Labels.category }}
+
+{{- if .Annotations.description }}
+
+Database Issue Details:
+{{ .Annotations.description }}
+{{- end }}
+
+{{- if .Annotations.impact }}
+Database Impact: {{ .Annotations.impact }}
+{{- end }}
+
+{{- if .Annotations.actions }}
+
+Database Recovery Actions:
+{{ .Annotations.actions }}
+{{- end }}
+
+Alert Time: {{ .StartsAt.Format "2006-01-02 15:04:05 MST" }}
+
+{{- if .Annotations.runbook_url }}
+Database Runbook: {{ .Annotations.runbook_url }}
+{{- end }}
+
+Database Dashboard: https://grafana.aclue.app/d/database-overview
+Supabase Dashboard: https://app.supabase.com/projects
+
+Platform: aclue.app
+Environment: Production
+
+{{- end }}
+{{ end }}
+
+{{/* Infrastructure PagerDuty description */}}
+{{ define "pagerduty.infrastructure.description" }}
+🏗️ INFRASTRUCTURE ALERT 🏗️
+
+{{- range .Alerts -}}
+{{ .Annotations.summary }}
+
+INFRASTRUCTURE DETAILS:
+- Component: {{ .Labels.service }}
+- Type: {{ .Labels.category }}
+- Instance: {{ .Labels.instance | default "N/A" }}
+- Provider: {{ .Labels.provider | default "Multiple" }}
+
+{{- if .Annotations.description }}
+
+Infrastructure Issue:
+{{ .Annotations.description }}
+{{- end }}
+
+{{- if .Annotations.impact }}
+Infrastructure Impact: {{ .Annotations.impact }}
+{{- end }}
+
+{{- if .Annotations.actions }}
+
+Infrastructure Actions Required:
+{{ .Annotations.actions }}
+{{- end }}
+
+Alert Time: {{ .StartsAt.Format "2006-01-02 15:04:05 MST" }}
+
+{{- if .Annotations.runbook_url }}
+Infrastructure Runbook: {{ .Annotations.runbook_url }}
+{{- end }}
+
+Infrastructure Dashboard: https://grafana.aclue.app/d/infrastructure-overview
+
+Platform Services:
+- Frontend: https://vercel.com/dashboard
+- Backend: https://railway.app/dashboard
+- Database: https://app.supabase.com/projects
+
+Platform: aclue.app
+Environment: Production
+
+{{- end }}
+{{ end }}
+
+{{/* Webhook payload template for custom integrations */}}
+{{ define "pagerduty.webhook.payload" }}
+{
+  "routing_key": "{{ .CommonLabels.routing_key | default "default" }}",
+  "event_action": "trigger",
+  "dedup_key": "{{ .GroupLabels.alertname }}-{{ .GroupLabels.service }}",
+  "payload": {
+    "summary": "{{ range .Alerts }}{{ .Annotations.summary }}{{ end }}",
+    "source": "aclue-alertmanager",
+    "severity": "{{ .CommonLabels.severity | default "warning" }}",
+    "timestamp": "{{ (index .Alerts 0).StartsAt.Format "2006-01-02T15:04:05Z07:00" }}",
+    "component": "{{ .CommonLabels.service }}",
+    "group": "{{ .CommonLabels.team }}",
+    "class": "{{ .CommonLabels.category }}",
+    "custom_details": {
+      "alert_count": {{ len .Alerts }},
+      "platform": "aclue.app",
+      "environment": "production",
+      "team": "{{ .CommonLabels.team }}",
+      "service": "{{ .CommonLabels.service }}",
+      "category": "{{ .CommonLabels.category }}",
+      {{- if .CommonLabels.business_impact }}
+      "business_impact": "{{ .CommonLabels.business_impact }}",
+      {{- end }}
+      {{- if .CommonLabels.revenue_impact }}
+      "revenue_impact": "{{ .CommonLabels.revenue_impact }}",
+      {{- end }}
+      "runbook_url": "{{ (index .Alerts 0).Annotations.runbook_url | default "N/A" }}",
+      "dashboard_url": "{{ (index .Alerts 0).Annotations.dashboard_url | default "https://grafana.aclue.app" }}",
+      "grafana_url": "https://grafana.aclue.app",
+      "status_page": "https://status.aclue.app",
+      "alert_details": [
+        {{- range $i, $alert := .Alerts }}
+        {{- if $i }},{{ end }}
+        {
+          "summary": "{{ $alert.Annotations.summary }}",
+          "description": "{{ $alert.Annotations.description | default "N/A" }}",
+          "status": "{{ $alert.Status }}",
+          "starts_at": "{{ $alert.StartsAt.Format "2006-01-02T15:04:05Z07:00" }}",
+          {{- if ne $alert.Status "firing" }}
+          "ends_at": "{{ $alert.EndsAt.Format "2006-01-02T15:04:05Z07:00" }}",
+          {{- end }}
+          "labels": {
+            {{- range $key, $value := $alert.Labels.SortedPairs }}
+            "{{ $key }}": "{{ $value }}"{{- if not (last $alert.Labels.SortedPairs) }},{{ end }}
+            {{- end }}
+          }
+        }
+        {{- end }}
+      ]
+    }
+  },
+  "links": [
+    {
+      "href": "{{ (index .Alerts 0).Annotations.runbook_url | default "https://runbooks.aclue.app" }}",
+      "text": "Runbook"
+    },
+    {
+      "href": "{{ (index .Alerts 0).Annotations.dashboard_url | default "https://grafana.aclue.app" }}",
+      "text": "Dashboard"
+    },
+    {
+      "href": "https://grafana.aclue.app",
+      "text": "Grafana"
+    },
+    {
+      "href": "https://status.aclue.app",
+      "text": "Status Page"
+    }
+  ]
+}
+{{ end }}

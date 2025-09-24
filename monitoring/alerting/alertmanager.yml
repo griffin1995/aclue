@@ -1,0 +1,286 @@
+# AlertManager Configuration for aclue Platform
+# Production-ready alert routing with intelligent correlation and escalation
+# Last updated: September 2024
+
+global:
+  # SMTP configuration for email notifications
+  smtp_smarthost: 'smtp.gmail.com:587'
+  smtp_from: 'alerts@aclue.app'
+  smtp_auth_username: 'alerts@aclue.app'
+  smtp_auth_password: '{{ env "SMTP_PASSWORD" }}'
+  smtp_require_tls: true
+
+  # Default notification URLs
+  slack_api_url: '{{ env "SLACK_WEBHOOK_URL" }}'
+  pagerduty_url: 'https://events.pagerduty.com/v2/enqueue'
+
+# Templates for rich notifications
+templates:
+  - '/etc/alertmanager/templates/*.tmpl'
+
+# Alert routing tree with intelligent escalation
+route:
+  # Default grouping and timing
+  group_by: ['alertname', 'cluster', 'service']
+  group_wait: 10s        # Wait time before sending initial notification
+  group_interval: 5m     # Wait time before sending batch of new alerts
+  repeat_interval: 12h   # Resend notification interval
+  receiver: 'default-notifications'
+
+  # Routing tree for different severity levels
+  routes:
+    # P0 - Critical alerts (immediate PagerDuty + SMS)
+    - match:
+        severity: 'P0'
+      group_wait: 0s
+      group_interval: 1m
+      repeat_interval: 5m
+      receiver: 'pagerduty-critical'
+      routes:
+        # Business hours escalation
+        - match_re:
+            time: '^(09|10|11|12|13|14|15|16|17):.*'
+            day: '^(monday|tuesday|wednesday|thursday|friday)$'
+          receiver: 'pagerduty-critical-business-hours'
+        # After hours escalation
+        - receiver: 'pagerduty-critical-after-hours'
+
+    # P1 - High priority alerts (PagerDuty + Slack)
+    - match:
+        severity: 'P1'
+      group_wait: 2m
+      group_interval: 3m
+      repeat_interval: 30m
+      receiver: 'pagerduty-high'
+      routes:
+        # Security alerts get special handling
+        - match:
+            category: 'security'
+          receiver: 'security-team-escalation'
+
+    # P2 - Medium priority alerts (Slack + Email)
+    - match:
+        severity: 'P2'
+      group_wait: 5m
+      group_interval: 10m
+      repeat_interval: 2h
+      receiver: 'slack-medium-priority'
+
+    # P3 - Low priority alerts (Email only)
+    - match:
+        severity: 'P3'
+      group_wait: 30m
+      group_interval: 1h
+      repeat_interval: 24h
+      receiver: 'email-low-priority'
+
+    # Special routing for maintenance windows
+    - match:
+        maintenance: 'true'
+      receiver: 'maintenance-notifications'
+
+    # Service-specific routing
+    - match:
+        service: 'frontend'
+      receiver: 'frontend-team-alerts'
+    - match:
+        service: 'backend'
+      receiver: 'backend-team-alerts'
+    - match:
+        service: 'database'
+      receiver: 'database-team-alerts'
+
+# Alert inhibition rules to prevent alert storms
+inhibit_rules:
+  # If service is down, suppress all other alerts for that service
+  - source_match:
+      alertname: 'ServiceDown'
+    target_match_re:
+      service: '.*'
+    equal: ['service']
+
+  # If database is down, suppress connection errors
+  - source_match:
+      alertname: 'DatabaseDown'
+    target_match:
+      alertname: 'DatabaseConnectionError'
+    equal: ['instance']
+
+  # If node is down, suppress all node-specific alerts
+  - source_match:
+      alertname: 'NodeDown'
+    target_match_re:
+      alertname: '(HighCPU|HighMemory|DiskSpaceWarning).*'
+    equal: ['instance']
+
+# Notification receivers configuration
+receivers:
+  # Default catch-all receiver
+  - name: 'default-notifications'
+    slack_configs:
+      - api_url: '{{ global.slack_api_url }}'
+        channel: '#alerts-general'
+        template: 'slack.default.tmpl'
+        title: 'aclue Platform Alert'
+        text: '{{ template "slack.default.text" . }}'
+
+  # P0 Critical - PagerDuty with immediate escalation
+  - name: 'pagerduty-critical'
+    pagerduty_configs:
+      - service_key: '{{ env "PAGERDUTY_SERVICE_KEY" }}'
+        description: '{{ template "pagerduty.default.description" . }}'
+        severity: 'critical'
+        client: 'AlertManager'
+        client_url: 'https://grafana.aclue.app'
+    slack_configs:
+      - api_url: '{{ global.slack_api_url }}'
+        channel: '#alerts-critical'
+        template: 'slack.critical.tmpl'
+        title: '🚨 CRITICAL: {{ .GroupLabels.alertname }}'
+        color: 'danger'
+        text: '{{ template "slack.critical.text" . }}'
+    email_configs:
+      - to: 'oncall@aclue.app'
+        subject: '🚨 CRITICAL Alert - {{ .GroupLabels.alertname }}'
+        html: '{{ template "email.critical.html" . }}'
+
+  # P0 Critical - Business hours escalation
+  - name: 'pagerduty-critical-business-hours'
+    pagerduty_configs:
+      - service_key: '{{ env "PAGERDUTY_SERVICE_KEY" }}'
+        description: '{{ template "pagerduty.default.description" . }}'
+        severity: 'critical'
+    slack_configs:
+      - api_url: '{{ global.slack_api_url }}'
+        channel: '#alerts-critical'
+        template: 'slack.critical.tmpl'
+        title: '🚨 CRITICAL (Business Hours): {{ .GroupLabels.alertname }}'
+      - api_url: '{{ global.slack_api_url }}'
+        channel: '#engineering'
+        template: 'slack.critical.tmpl'
+        title: '🚨 All hands - Critical issue'
+
+  # P0 Critical - After hours escalation
+  - name: 'pagerduty-critical-after-hours'
+    pagerduty_configs:
+      - service_key: '{{ env "PAGERDUTY_AFTER_HOURS_KEY" }}'
+        description: '{{ template "pagerduty.default.description" . }}'
+        severity: 'critical'
+    slack_configs:
+      - api_url: '{{ global.slack_api_url }}'
+        channel: '#alerts-critical'
+        template: 'slack.critical.tmpl'
+        title: '🚨 CRITICAL (After Hours): {{ .GroupLabels.alertname }}'
+
+  # P1 High priority - PagerDuty + Slack
+  - name: 'pagerduty-high'
+    pagerduty_configs:
+      - service_key: '{{ env "PAGERDUTY_SERVICE_KEY" }}'
+        description: '{{ template "pagerduty.default.description" . }}'
+        severity: 'error'
+    slack_configs:
+      - api_url: '{{ global.slack_api_url }}'
+        channel: '#alerts-high'
+        template: 'slack.high.tmpl'
+        title: '⚠️ HIGH: {{ .GroupLabels.alertname }}'
+        color: 'warning'
+        text: '{{ template "slack.high.text" . }}'
+
+  # Security team escalation
+  - name: 'security-team-escalation'
+    pagerduty_configs:
+      - service_key: '{{ env "PAGERDUTY_SECURITY_KEY" }}'
+        description: '{{ template "pagerduty.security.description" . }}'
+        severity: 'critical'
+    slack_configs:
+      - api_url: '{{ global.slack_api_url }}'
+        channel: '#security-alerts'
+        template: 'slack.security.tmpl'
+        title: '🔒 SECURITY ALERT: {{ .GroupLabels.alertname }}'
+        color: 'danger'
+    email_configs:
+      - to: 'security@aclue.app'
+        subject: '🔒 SECURITY ALERT - {{ .GroupLabels.alertname }}'
+        html: '{{ template "email.security.html" . }}'
+
+  # P2 Medium priority - Slack + Email
+  - name: 'slack-medium-priority'
+    slack_configs:
+      - api_url: '{{ global.slack_api_url }}'
+        channel: '#alerts-medium'
+        template: 'slack.medium.tmpl'
+        title: '⚡ MEDIUM: {{ .GroupLabels.alertname }}'
+        color: 'warning'
+        text: '{{ template "slack.medium.text" . }}'
+    email_configs:
+      - to: 'team@aclue.app'
+        subject: '⚡ Medium Priority Alert - {{ .GroupLabels.alertname }}'
+        html: '{{ template "email.medium.html" . }}'
+
+  # P3 Low priority - Email only
+  - name: 'email-low-priority'
+    email_configs:
+      - to: 'monitoring@aclue.app'
+        subject: 'ℹ️ Info: {{ .GroupLabels.alertname }}'
+        html: '{{ template "email.low.html" . }}'
+
+  # Service-specific team routing
+  - name: 'frontend-team-alerts'
+    slack_configs:
+      - api_url: '{{ global.slack_api_url }}'
+        channel: '#frontend-alerts'
+        template: 'slack.service.tmpl'
+        title: '🌐 Frontend Alert: {{ .GroupLabels.alertname }}'
+
+  - name: 'backend-team-alerts'
+    slack_configs:
+      - api_url: '{{ global.slack_api_url }}'
+        channel: '#backend-alerts'
+        template: 'slack.service.tmpl'
+        title: '⚙️ Backend Alert: {{ .GroupLabels.alertname }}'
+
+  - name: 'database-team-alerts'
+    slack_configs:
+      - api_url: '{{ global.slack_api_url }}'
+        channel: '#database-alerts'
+        template: 'slack.service.tmpl'
+        title: '🗄️ Database Alert: {{ .GroupLabels.alertname }}'
+
+  # Maintenance window notifications
+  - name: 'maintenance-notifications'
+    slack_configs:
+      - api_url: '{{ global.slack_api_url }}'
+        channel: '#maintenance'
+        template: 'slack.maintenance.tmpl'
+        title: '🔧 Maintenance Alert: {{ .GroupLabels.alertname }}'
+        color: 'good'
+
+# Time-based routing configuration
+time_intervals:
+  - name: business_hours
+    time_intervals:
+      - times:
+          - start_time: '09:00'
+            end_time: '18:00'
+        weekdays: ['monday:friday']
+        location: 'Europe/London'
+
+  - name: after_hours
+    time_intervals:
+      - times:
+          - start_time: '18:00'
+            end_time: '09:00'
+        weekdays: ['monday:friday']
+        location: 'Europe/London'
+      - weekdays: ['saturday', 'sunday']
+        location: 'Europe/London'
+
+# Mute specific alerts during maintenance
+mute_time_intervals:
+  - name: maintenance_window
+    time_intervals:
+      - times:
+          - start_time: '02:00'
+            end_time: '04:00'
+        weekdays: ['sunday']
+        location: 'Europe/London'

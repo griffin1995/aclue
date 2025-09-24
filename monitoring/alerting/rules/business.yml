@@ -1,0 +1,406 @@
+# Business Metric Alert Rules for aclue Platform
+# Monitors critical business KPIs and user journey success rates
+# Updated: September 2024
+
+groups:
+  - name: user_registration_metrics
+    rules:
+      # ==========================================
+      # USER REGISTRATION AND ONBOARDING
+      # ==========================================
+
+      # User registration failure rate spike
+      - alert: UserRegistrationFailureSpike
+        expr: rate(user_registration_attempts_total{status="failed"}[10m]) / rate(user_registration_attempts_total[10m]) > 0.15
+        for: 5m
+        labels:
+          severity: P1
+          category: business
+          team: backend
+          service: authentication
+        annotations:
+          summary: "User registration failure rate spike detected"
+          description: |
+            User registration failure rate is {{ $value | humanizePercentage }}, exceeding 15% threshold.
+            This directly impacts user acquisition and platform growth.
+            Current failure rate: {{ $value | humanizePercentage }}
+            Failed registrations in last 10min: {{ $labels.failed_count }}
+          runbook_url: "https://runbooks.aclue.app/registration-failures"
+          dashboard_url: "https://grafana.aclue.app/d/user-registration"
+          business_impact: "HIGH - Blocking new user acquisition"
+          revenue_impact: "Direct impact on growth metrics and potential revenue"
+          actions: |
+            1. IMMEDIATE: Check Supabase auth service status
+            2. Verify registration form functionality
+            3. Review email verification system
+            4. Check for spam/bot registration attempts
+            5. Monitor social media for user complaints
+
+      # User registration volume drop
+      - alert: UserRegistrationVolumeDrop
+        expr: rate(user_registration_attempts_total[1h]) < rate(user_registration_attempts_total[1h] offset 1d) * 0.5
+        for: 30m
+        labels:
+          severity: P2
+          category: business
+          team: marketing
+          service: acquisition
+        annotations:
+          summary: "Significant drop in user registration volume"
+          description: |
+            User registrations have dropped by more than 50% compared to same time yesterday.
+            Current hourly rate: {{ $value }}, Yesterday: {{ $labels.yesterday_rate }}
+            This may indicate marketing campaign issues or technical problems.
+          runbook_url: "https://runbooks.aclue.app/registration-volume-drop"
+          business_impact: "MEDIUM - Reduced user acquisition rate"
+          actions: |
+            1. Check marketing campaign performance
+            2. Verify referral traffic sources
+            3. Review social media and PR mentions
+            4. Check for seasonal patterns
+            5. Analyze user feedback and support tickets
+
+      # New user activation rate low
+      - alert: NewUserActivationRateLow
+        expr: rate(user_first_action_completed_total[24h]) / rate(user_registration_successful_total[24h]) < 0.6
+        for: 1h
+        labels:
+          severity: P2
+          category: business
+          team: product
+          service: onboarding
+        annotations:
+          summary: "New user activation rate below target"
+          description: |
+            Only {{ $value | humanizePercentage }} of new users are completing their first action within 24 hours.
+            Target activation rate: 60%, Current: {{ $value | humanizePercentage }}
+            This indicates potential onboarding flow issues.
+          runbook_url: "https://runbooks.aclue.app/user-activation"
+          business_impact: "MEDIUM - Poor user onboarding experience"
+          actions: |
+            1. Review onboarding flow analytics
+            2. Check for UI/UX issues in first-time user experience
+            3. Analyze user feedback and session recordings
+            4. Review welcome email delivery and engagement
+            5. A/B test onboarding improvements
+
+  - name: newsletter_subscription_metrics
+    rules:
+      # ==========================================
+      # NEWSLETTER SUBSCRIPTION SYSTEM
+      # ==========================================
+
+      # Newsletter subscription failure rate
+      - alert: NewsletterSubscriptionFailures
+        expr: rate(newsletter_subscription_attempts_total{status="failed"}[10m]) / rate(newsletter_subscription_attempts_total[10m]) > 0.05
+        for: 3m
+        labels:
+          severity: P1
+          category: business
+          team: marketing
+          service: newsletter
+        annotations:
+          summary: "Newsletter subscription failure rate elevated"
+          description: |
+            Newsletter subscription failures at {{ $value | humanizePercentage }}, above 5% threshold.
+            This is critical as newsletter is a primary growth driver for aclue.
+            Failed subscriptions impact: Direct loss of potential customers
+          runbook_url: "https://runbooks.aclue.app/newsletter-failures"
+          dashboard_url: "https://grafana.aclue.app/d/newsletter-metrics"
+          business_impact: "HIGH - Primary growth channel compromised"
+          revenue_impact: "Direct impact on lead generation and customer acquisition"
+          actions: |
+            1. IMMEDIATE: Test newsletter subscription form manually
+            2. Check Resend service status and API responses
+            3. Verify Server Action execution in Vercel logs
+            4. Check Supabase newsletter_subscribers table writes
+            5. Review email deliverability and domain reputation
+
+      # Newsletter subscription volume drop
+      - alert: NewsletterSubscriptionVolumeDrop
+        expr: rate(newsletter_subscription_attempts_total[2h]) < rate(newsletter_subscription_attempts_total[2h] offset 1w) * 0.3
+        for: 1h
+        labels:
+          severity: P2
+          category: business
+          team: marketing
+          service: newsletter
+        annotations:
+          summary: "Newsletter subscription volume significantly decreased"
+          description: |
+            Newsletter subscriptions have dropped by more than 70% compared to same time last week.
+            Current rate: {{ $value }}/hour, Last week: {{ $labels.last_week_rate }}/hour
+            This may indicate traffic issues or form problems.
+          runbook_url: "https://runbooks.aclue.app/newsletter-volume-drop"
+          business_impact: "MEDIUM - Reduced lead generation"
+          actions: |
+            1. Check website traffic analytics
+            2. Verify newsletter form visibility and positioning
+            3. Review referral traffic and marketing campaigns
+            4. Check for seasonal patterns or external factors
+            5. Test form functionality across different devices/browsers
+
+      # Welcome email delivery failures
+      - alert: WelcomeEmailDeliveryFailures
+        expr: rate(welcome_email_delivery_total{status="failed"}[15m]) / rate(welcome_email_delivery_total[15m]) > 0.02
+        for: 5m
+        labels:
+          severity: P1
+          category: business
+          team: marketing
+          service: email
+        annotations:
+          summary: "Welcome email delivery failure rate elevated"
+          description: |
+            Welcome email delivery failures at {{ $value | humanizePercentage }}, above 2% threshold.
+            Failed welcome emails damage first impression and reduce engagement.
+            This affects new subscriber onboarding experience.
+          runbook_url: "https://runbooks.aclue.app/welcome-email-failures"
+          business_impact: "HIGH - Poor first impression for new subscribers"
+          actions: |
+            1. Check Resend dashboard for bounce/reject rates
+            2. Verify email template rendering
+            3. Review sender domain reputation
+            4. Check for ESP blacklisting
+            5. Test welcome email delivery to various providers
+
+  - name: revenue_critical_metrics
+    rules:
+      # ==========================================
+      # REVENUE-IMPACTING ALERTS
+      # ==========================================
+
+      # Critical API endpoints affecting revenue
+      - alert: RevenueImpactingAPIFailures
+        expr: rate(http_requests_total{endpoint=~"/(api/v1/products|api/v1/recommendations|api/v1/auth).*",status=~"5.."}[5m]) / rate(http_requests_total{endpoint=~"/(api/v1/products|api/v1/recommendations|api/v1/auth).*"}[5m]) > 0.02
+        for: 2m
+        labels:
+          severity: P1
+          category: business
+          team: backend
+          service: "{{ $labels.endpoint }}"
+        annotations:
+          summary: "Revenue-critical API endpoint {{ $labels.endpoint }} failing"
+          description: |
+            Revenue-critical endpoint {{ $labels.endpoint }} has {{ $value | humanizePercentage }} error rate.
+            This directly impacts user's ability to discover products and complete key actions.
+            Error threshold: 2%, Current: {{ $value | humanizePercentage }}
+          runbook_url: "https://runbooks.aclue.app/revenue-api-failures"
+          business_impact: "CRITICAL - Direct revenue impact"
+          revenue_impact: "Immediate - Users cannot complete revenue-generating actions"
+          actions: |
+            1. IMMEDIATE: Check endpoint-specific logs
+            2. Verify database connectivity for endpoint
+            3. Check for deployment issues
+            4. Review endpoint-specific resource usage
+            5. Implement emergency fallbacks if available
+
+      # Product recommendation system failures
+      - alert: ProductRecommendationSystemFailure
+        expr: rate(product_recommendations_generated_total{status="failed"}[10m]) / rate(product_recommendations_generated_total[10m]) > 0.1
+        for: 3m
+        labels:
+          severity: P1
+          category: business
+          team: ml
+          service: recommendations
+        annotations:
+          summary: "Product recommendation system failing"
+          description: |
+            AI product recommendation system failure rate: {{ $value | humanizePercentage }}
+            This is critical as recommendations drive the core value proposition of aclue.
+            Failed recommendations reduce user engagement and conversion potential.
+          runbook_url: "https://runbooks.aclue.app/recommendation-failures"
+          business_impact: "CRITICAL - Core platform value compromised"
+          actions: |
+            1. Check ML model service health
+            2. Verify product database connectivity
+            3. Review recommendation algorithm logs
+            4. Check for data pipeline issues
+            5. Implement fallback recommendation logic
+
+      # User journey completion drops
+      - alert: UserJourneyCompletionDrop
+        expr: rate(user_journey_completed_total{journey="product_discovery"}[1h]) / rate(user_journey_started_total{journey="product_discovery"}[1h]) < 0.4
+        for: 30m
+        labels:
+          severity: P2
+          category: business
+          team: product
+          service: user-experience
+        annotations:
+          summary: "Product discovery journey completion rate below target"
+          description: |
+            Only {{ $value | humanizePercentage }} of users complete the product discovery journey.
+            Target completion rate: 40%, Current: {{ $value | humanizePercentage }}
+            This indicates potential UX issues or technical problems in core user flow.
+          runbook_url: "https://runbooks.aclue.app/journey-completion"
+          business_impact: "MEDIUM - Reduced user engagement and conversion potential"
+          actions: |
+            1. Review user journey analytics and funnel analysis
+            2. Check for technical errors in journey steps
+            3. Analyze user session recordings
+            4. Review page load times for journey pages
+            5. Check for mobile vs desktop experience differences
+
+  - name: authentication_business_impact
+    rules:
+      # ==========================================
+      # AUTHENTICATION BUSINESS IMPACT
+      # ==========================================
+
+      # Authentication service affecting user access
+      - alert: AuthenticationServiceBusinessImpact
+        expr: rate(authentication_attempts_total{status="failed"}[5m]) / rate(authentication_attempts_total[5m]) > 0.1
+        for: 3m
+        labels:
+          severity: P1
+          category: business
+          team: backend
+          service: authentication
+        annotations:
+          summary: "Authentication failures impacting user access"
+          description: |
+            Authentication failure rate: {{ $value | humanizePercentage }}, above 10% threshold.
+            This prevents users from accessing platform features and completing actions.
+            Failed logins directly impact user retention and engagement.
+          runbook_url: "https://runbooks.aclue.app/auth-business-impact"
+          business_impact: "HIGH - Users cannot access platform services"
+          actions: |
+            1. Check Supabase Auth service status immediately
+            2. Verify JWT token validation
+            3. Review authentication flow logs
+            4. Check for brute force attacks
+            5. Test authentication manually with test accounts
+
+      # Session management affecting user experience
+      - alert: SessionManagementIssues
+        expr: rate(user_session_expired_total[15m]) / rate(user_session_created_total[15m]) > 0.3
+        for: 5m
+        labels:
+          severity: P2
+          category: business
+          team: backend
+          service: session
+        annotations:
+          summary: "High rate of premature session expiration"
+          description: |
+            {{ $value | humanizePercentage }} of user sessions are expiring prematurely.
+            This forces users to re-authenticate frequently, degrading user experience.
+            May indicate session management or token refresh issues.
+          runbook_url: "https://runbooks.aclue.app/session-management"
+          business_impact: "MEDIUM - Poor user experience due to frequent re-authentication"
+          actions: |
+            1. Review session timeout configurations
+            2. Check token refresh mechanism
+            3. Verify session storage and management
+            4. Review user activity patterns
+            5. Check for security policy changes
+
+  - name: conversion_funnel_metrics
+    rules:
+      # ==========================================
+      # CONVERSION FUNNEL MONITORING
+      # ==========================================
+
+      # Landing page conversion rate drop
+      - alert: LandingPageConversionDrop
+        expr: rate(newsletter_subscription_successful_total{source="landing"}[2h]) / rate(landing_page_visits_total[2h]) < 0.08
+        for: 1h
+        labels:
+          severity: P2
+          category: business
+          team: marketing
+          service: conversion
+        annotations:
+          summary: "Landing page conversion rate below target"
+          description: |
+            Landing page to newsletter conversion rate: {{ $value | humanizePercentage }}
+            Target conversion rate: 8%, Current: {{ $value | humanizePercentage }}
+            This affects primary acquisition funnel performance.
+          runbook_url: "https://runbooks.aclue.app/landing-conversion"
+          business_impact: "MEDIUM - Reduced lead generation from primary channel"
+          actions: |
+            1. Review landing page performance and load times
+            2. A/B test newsletter signup form placement
+            3. Check for mobile responsiveness issues
+            4. Review traffic source quality
+            5. Analyze user behaviour with heat maps
+
+      # Feature adoption rate monitoring
+      - alert: FeatureAdoptionRateLow
+        expr: rate(feature_usage_total{feature="product_discovery"}[24h]) / rate(user_sessions_total[24h]) < 0.3
+        for: 2h
+        labels:
+          severity: P3
+          category: business
+          team: product
+          service: features
+        annotations:
+          summary: "Core feature adoption rate below expectations"
+          description: |
+            Product discovery feature adoption: {{ $value | humanizePercentage }}
+            Target adoption rate: 30%, Current: {{ $value | humanizePercentage }}
+            Low adoption may indicate UX issues or lack of feature awareness.
+          runbook_url: "https://runbooks.aclue.app/feature-adoption"
+          business_impact: "LOW - Reduced platform value realization"
+          actions: |
+            1. Review feature visibility and placement
+            2. Analyze user onboarding effectiveness
+            3. Check feature performance and reliability
+            4. Review user feedback and support tickets
+            5. Consider feature education improvements
+
+  - name: customer_satisfaction_metrics
+    rules:
+      # ==========================================
+      # CUSTOMER SATISFACTION INDICATORS
+      # ==========================================
+
+      # Support ticket volume spike
+      - alert: SupportTicketVolumeSpike
+        expr: rate(support_tickets_created_total[2h]) > rate(support_tickets_created_total[2h] offset 1w) * 2
+        for: 30m
+        labels:
+          severity: P2
+          category: business
+          team: support
+          service: customer-service
+        annotations:
+          summary: "Support ticket volume spike detected"
+          description: |
+            Support ticket creation rate has doubled compared to same time last week.
+            Current rate: {{ $value }}/hour, Last week: {{ $labels.last_week_rate }}/hour
+            This may indicate a widespread issue affecting users.
+          runbook_url: "https://runbooks.aclue.app/support-volume-spike"
+          business_impact: "MEDIUM - Potential widespread user issues"
+          actions: |
+            1. Review recent support ticket categories and themes
+            2. Check for system-wide technical issues
+            3. Review recent deployments for potential impact
+            4. Monitor social media for user complaints
+            5. Escalate to engineering if technical pattern detected
+
+      # User retention rate warning
+      - alert: UserRetentionRateWarning
+        expr: rate(user_sessions_total{user_type="returning"}[7d]) / rate(user_sessions_total[7d] offset 7d) < 0.7
+        for: 6h
+        labels:
+          severity: P3
+          category: business
+          team: product
+          service: retention
+        annotations:
+          summary: "User retention rate declining"
+          description: |
+            7-day user retention rate: {{ $value | humanizePercentage }}
+            Previous week: {{ $labels.previous_week_rate | humanizePercentage }}
+            Declining retention may indicate product-market fit or experience issues.
+          runbook_url: "https://runbooks.aclue.app/user-retention"
+          business_impact: "LOW-MEDIUM - Long-term user engagement declining"
+          actions: |
+            1. Analyze user behaviour patterns and drop-off points
+            2. Review recent product changes impact
+            3. Survey users about their experience
+            4. Check competitive landscape changes
+            5. Review user engagement metrics and content quality

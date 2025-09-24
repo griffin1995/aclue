@@ -1,0 +1,296 @@
+{
+  "test_configuration": {
+    "name": "aclue Platform Alert Testing Configuration",
+    "version": "1.0",
+    "last_updated": "2024-09-24",
+    "environment": "test"
+  },
+
+  "prometheus_config": {
+    "prometheus_url": "http://localhost:9090",
+    "query_timeout": 30,
+    "test_metrics": [
+      "up",
+      "http_requests_total",
+      "http_request_duration_seconds",
+      "node_memory_MemAvailable_bytes",
+      "pg_up"
+    ]
+  },
+
+  "alertmanager_config": {
+    "alertmanager_url": "http://localhost:9093",
+    "api_timeout": 30,
+    "webhook_timeout": 120
+  },
+
+  "notification_channels": {
+    "slack": {
+      "test_webhook": "https://hooks.slack.com/services/TEST/WEBHOOK/URL",
+      "test_channels": ["#alerts-test", "#monitoring-test"],
+      "expected_delivery_time": 10
+    },
+    "pagerduty": {
+      "test_service_key": "test-service-key",
+      "test_routing_key": "test-routing-key",
+      "expected_delivery_time": 30
+    },
+    "email": {
+      "smtp_server": "smtp.test.com",
+      "test_recipients": ["test@aclue.app", "monitoring-test@aclue.app"],
+      "expected_delivery_time": 60
+    }
+  },
+
+  "severity_levels": {
+    "P0": {
+      "name": "Critical",
+      "response_time_seconds": 300,
+      "escalation_channels": ["pagerduty", "slack", "email"],
+      "max_group_wait": "10s",
+      "max_repeat_interval": "5m"
+    },
+    "P1": {
+      "name": "High",
+      "response_time_seconds": 900,
+      "escalation_channels": ["pagerduty", "slack"],
+      "max_group_wait": "2m",
+      "max_repeat_interval": "30m"
+    },
+    "P2": {
+      "name": "Medium",
+      "response_time_seconds": 1800,
+      "escalation_channels": ["slack", "email"],
+      "max_group_wait": "5m",
+      "max_repeat_interval": "2h"
+    },
+    "P3": {
+      "name": "Low",
+      "response_time_seconds": 7200,
+      "escalation_channels": ["email"],
+      "max_group_wait": "30m",
+      "max_repeat_interval": "24h"
+    }
+  },
+
+  "critical_alerts": [
+    {
+      "alert_name": "ServiceDown",
+      "severity": "P0",
+      "required_labels": ["service", "team", "category"],
+      "required_annotations": ["summary", "description", "runbook_url", "actions"],
+      "max_for_duration": "1m",
+      "business_impact": "complete_outage"
+    },
+    {
+      "alert_name": "DatabaseDown",
+      "severity": "P0",
+      "required_labels": ["service", "team", "category"],
+      "required_annotations": ["summary", "description", "runbook_url", "actions"],
+      "max_for_duration": "30s",
+      "business_impact": "complete_outage"
+    },
+    {
+      "alert_name": "MemoryExhaustionCritical",
+      "severity": "P0",
+      "required_labels": ["instance", "service"],
+      "required_annotations": ["summary", "description", "runbook_url", "actions"],
+      "max_for_duration": "1m",
+      "business_impact": "service_degradation"
+    },
+    {
+      "alert_name": "NewsletterSubscriptionFailures",
+      "severity": "P1",
+      "required_labels": ["service", "team"],
+      "required_annotations": ["summary", "description", "business_impact", "revenue_impact"],
+      "max_for_duration": "3m",
+      "business_impact": "growth_channel_impact"
+    }
+  ],
+
+  "test_scenarios": {
+    "syntax_validation": {
+      "enabled": true,
+      "rule_files": [
+        "../rules/critical.yml",
+        "../rules/performance.yml",
+        "../rules/business.yml",
+        "../rules/security.yml"
+      ],
+      "required_fields": ["alert", "expr", "labels", "annotations"],
+      "required_labels": ["severity", "category", "team", "service"],
+      "required_annotations": ["summary", "description", "runbook_url"]
+    },
+
+    "logic_validation": {
+      "enabled": true,
+      "test_queries": [
+        "up == 0",
+        "rate(http_requests_total[5m]) > 100",
+        "histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m])) > 0.5"
+      ],
+      "false_positive_checks": true,
+      "duration_validation": true
+    },
+
+    "template_validation": {
+      "enabled": true,
+      "template_files": [
+        "../templates/slack.tmpl",
+        "../templates/email.tmpl",
+        "../templates/pagerduty.tmpl"
+      ],
+      "required_slack_templates": [
+        "slack.default.text",
+        "slack.critical.text",
+        "slack.high.text",
+        "slack.security.text"
+      ],
+      "required_email_templates": [
+        "email.critical.html",
+        "email.security.html",
+        "email.medium.html"
+      ]
+    },
+
+    "notification_delivery": {
+      "enabled": false,
+      "test_alert_count": 3,
+      "delivery_timeout": 120,
+      "retry_attempts": 2,
+      "test_severities": ["P0", "P1", "P2"]
+    },
+
+    "runbook_validation": {
+      "enabled": true,
+      "runbook_directory": "../runbooks/",
+      "required_sections": [
+        "Alert:",
+        "Severity:",
+        "Response Time:",
+        "Immediate Response",
+        "Diagnostic Procedures",
+        "Recovery Actions",
+        "Communication"
+      ],
+      "check_runbook_urls": true
+    },
+
+    "escalation_testing": {
+      "enabled": true,
+      "timing_validation": true,
+      "channel_validation": true,
+      "inhibition_testing": true
+    },
+
+    "correlation_testing": {
+      "enabled": true,
+      "inhibition_scenarios": [
+        {
+          "primary_alert": "ServiceDown",
+          "inhibited_alerts": ["HighErrorRate", "APIResponseTimeHigh"],
+          "description": "Service down should inhibit error and performance alerts"
+        },
+        {
+          "primary_alert": "DatabaseDown",
+          "inhibited_alerts": ["DatabaseConnectionError", "DatabaseQueryPerformanceSlow"],
+          "description": "Database down should inhibit DB-related alerts"
+        }
+      ]
+    }
+  },
+
+  "thresholds": {
+    "alert_rule_validation": {
+      "max_syntax_errors": 0,
+      "max_logic_errors": 0,
+      "min_required_annotations": 3
+    },
+
+    "performance_benchmarks": {
+      "max_query_execution_time": 5.0,
+      "max_template_render_time": 1.0,
+      "max_notification_delivery_time": 120
+    },
+
+    "reliability_targets": {
+      "notification_delivery_success_rate": 0.99,
+      "alert_correlation_accuracy": 0.95,
+      "false_positive_rate": 0.02
+    }
+  },
+
+  "test_data": {
+    "sample_metrics": {
+      "service_up": {
+        "metric": "up{job=\"aclue-backend\"}",
+        "values": [0, 1],
+        "description": "Service availability metric"
+      },
+      "error_rate": {
+        "metric": "rate(http_requests_total{status=~\"5..\"}[5m])",
+        "threshold": 0.05,
+        "description": "HTTP error rate metric"
+      },
+      "response_time": {
+        "metric": "histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m]))",
+        "threshold": 0.5,
+        "description": "API response time P95"
+      }
+    },
+
+    "test_alerts": [
+      {
+        "alertname": "TestServiceDown",
+        "severity": "P0",
+        "service": "test-service",
+        "team": "test-team",
+        "summary": "Test service is down",
+        "description": "This is a test alert for validation purposes"
+      },
+      {
+        "alertname": "TestHighErrorRate",
+        "severity": "P1",
+        "service": "test-api",
+        "team": "test-team",
+        "summary": "High error rate detected",
+        "description": "Test alert for error rate validation"
+      }
+    ]
+  },
+
+  "reporting": {
+    "output_formats": ["json", "html", "junit"],
+    "include_metrics": true,
+    "include_screenshots": false,
+    "report_retention_days": 30
+  },
+
+  "integration": {
+    "grafana_url": "https://grafana.aclue.app",
+    "status_page_url": "https://status.aclue.app",
+    "runbook_base_url": "https://runbooks.aclue.app",
+    "dashboard_urls": {
+      "platform_overview": "https://grafana.aclue.app/d/platform-overview",
+      "service_health": "https://grafana.aclue.app/d/service-health",
+      "security_overview": "https://grafana.aclue.app/d/security-overview",
+      "business_metrics": "https://grafana.aclue.app/d/business-metrics"
+    }
+  },
+
+  "schedule": {
+    "automated_testing": {
+      "enabled": true,
+      "cron_schedule": "0 2 * * *",
+      "test_types": ["syntax", "templates", "runbooks"],
+      "notification_on_failure": true
+    },
+
+    "comprehensive_testing": {
+      "enabled": true,
+      "cron_schedule": "0 2 * * 0",
+      "test_types": ["all"],
+      "generate_report": true
+    }
+  }
+}

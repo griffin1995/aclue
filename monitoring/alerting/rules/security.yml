@@ -1,0 +1,497 @@
+# Security-Related Alert Rules for aclue Platform
+# Monitors security threats, suspicious activities, and compliance violations
+# Updated: September 2024
+
+groups:
+  - name: attack_detection
+    rules:
+      # ==========================================
+      # DDOS AND TRAFFIC ANOMALIES
+      # ==========================================
+
+      # Potential DDoS attack detection
+      - alert: PotentialDDoSAttack
+        expr: rate(http_requests_total[1m]) > rate(http_requests_total[1m] offset 5m) * 5
+        for: 2m
+        labels:
+          severity: P0
+          category: security
+          team: security
+          service: traffic
+          attack_type: ddos
+        annotations:
+          summary: "Potential DDoS attack detected - Traffic spike"
+          description: |
+            HTTP request rate has increased by 5x compared to 5 minutes ago.
+            Current rate: {{ $value }} requests/min
+            This may indicate a DDoS attack or traffic anomaly.
+            IMMEDIATE SECURITY RESPONSE REQUIRED.
+          runbook_url: "https://runbooks.aclue.app/ddos-response"
+          dashboard_url: "https://grafana.aclue.app/d/security-traffic"
+          security_impact: "CRITICAL - Service availability under threat"
+          compliance_impact: "Service continuity at risk"
+          actions: |
+            1. IMMEDIATE: Enable DDoS protection in Cloudflare
+            2. Check traffic sources and patterns
+            3. Implement rate limiting if not active
+            4. Monitor CPU and memory impact
+            5. Consider emergency traffic blocking
+            6. Notify security team and on-call engineer
+
+      # Suspicious traffic patterns
+      - alert: SuspiciousTrafficPatterns
+        expr: |
+          (
+            rate(http_requests_total{status=~"4.."}[5m]) >
+            rate(http_requests_total{status=~"4.."}[5m] offset 1h) * 3
+          ) and (
+            rate(http_requests_total[5m]) > 100
+          )
+        for: 5m
+        labels:
+          severity: P1
+          category: security
+          team: security
+          service: traffic
+          attack_type: reconnaissance
+        annotations:
+          summary: "Suspicious traffic patterns detected"
+          description: |
+            Significant increase in 4xx errors with elevated traffic volume.
+            Current 4xx rate: {{ $value }} errors/min
+            This may indicate reconnaissance or scanning activity.
+          runbook_url: "https://runbooks.aclue.app/suspicious-traffic"
+          security_impact: "HIGH - Potential attack preparation"
+          actions: |
+            1. Analyze traffic sources and user agents
+            2. Check for common attack patterns
+            3. Review blocked requests in WAF
+            4. Consider IP-based rate limiting
+            5. Monitor for escalation to more serious attacks
+
+      # Unusual geographic traffic distribution
+      - alert: UnusualGeographicTrafficDistribution
+        expr: |
+          (
+            rate(http_requests_total{country!~"GB|US|CA|AU|DE|FR|NL"}[10m]) /
+            rate(http_requests_total[10m])
+          ) > 0.8
+        for: 10m
+        labels:
+          severity: P2
+          category: security
+          team: security
+          service: traffic
+          attack_type: geographic_anomaly
+        annotations:
+          summary: "Unusual geographic traffic distribution detected"
+          description: |
+            {{ $value | humanizePercentage }} of traffic is coming from unexpected geographic locations.
+            This may indicate botnet activity or coordinated attacks.
+            Normal geographic distribution appears disrupted.
+          runbook_url: "https://runbooks.aclue.app/geographic-anomaly"
+          security_impact: "MEDIUM - Potential coordinated attack"
+          actions: |
+            1. Analyze traffic by country and region
+            2. Check for known bad IP ranges
+            3. Review user agent patterns from unusual locations
+            4. Consider geographic rate limiting
+            5. Monitor for other attack indicators
+
+  - name: authentication_security
+    rules:
+      # ==========================================
+      # AUTHENTICATION ATTACKS
+      # ==========================================
+
+      # Brute force login attempts
+      - alert: BruteForceLoginAttempts
+        expr: rate(authentication_attempts_total{status="failed"}[5m]) > 50
+        for: 3m
+        labels:
+          severity: P1
+          category: security
+          team: security
+          service: authentication
+          attack_type: brute_force
+        annotations:
+          summary: "Brute force login attempts detected"
+          description: |
+            High rate of failed authentication attempts: {{ $value }} failures/min.
+            This indicates a brute force attack against user accounts.
+            Immediate action required to protect user accounts.
+          runbook_url: "https://runbooks.aclue.app/brute-force-response"
+          security_impact: "HIGH - User account security at risk"
+          compliance_impact: "Data protection and user privacy at risk"
+          actions: |
+            1. IMMEDIATE: Enable account lockout mechanisms
+            2. Implement CAPTCHA for failed attempts
+            3. Analyze attack sources (IP addresses, patterns)
+            4. Block malicious IP ranges
+            5. Alert affected users if accounts compromised
+            6. Review authentication security measures
+
+      # Multiple failed logins from single IP
+      - alert: MultipleFailedLoginsFromSingleIP
+        expr: rate(authentication_attempts_total{status="failed"}[10m]) by (source_ip) > 20
+        for: 2m
+        labels:
+          severity: P1
+          category: security
+          team: security
+          service: authentication
+          attack_type: credential_stuffing
+        annotations:
+          summary: "Multiple failed logins from IP {{ $labels.source_ip }}"
+          description: |
+            IP address {{ $labels.source_ip }} has {{ $value }} failed login attempts in 10 minutes.
+            This indicates credential stuffing or targeted brute force attack.
+            Single IP threshold exceeded significantly.
+          runbook_url: "https://runbooks.aclue.app/ip-based-attack"
+          security_impact: "HIGH - Targeted account takeover attempts"
+          actions: |
+            1. IMMEDIATE: Block IP address {{ $labels.source_ip }}
+            2. Check if any successful logins occurred from this IP
+            3. Review targeted usernames for patterns
+            4. Implement IP-based rate limiting
+            5. Monitor for IP address changes (distributed attack)
+
+      # Successful login after multiple failures (potential compromise)
+      - alert: SuccessfulLoginAfterMultipleFailures
+        expr: |
+          (rate(authentication_attempts_total{status="success"}[5m]) by (user_id)) and on(user_id)
+          (rate(authentication_attempts_total{status="failed"}[15m] offset 5m) by (user_id) > 10)
+        for: 0s
+        labels:
+          severity: P0
+          category: security
+          team: security
+          service: authentication
+          attack_type: account_compromise
+        annotations:
+          summary: "CRITICAL: Successful login after multiple failures for user {{ $labels.user_id }}"
+          description: |
+            User {{ $labels.user_id }} successfully logged in after {{ $labels.failed_attempts }} recent failures.
+            This strongly indicates a successful account compromise.
+            IMMEDIATE SECURITY INCIDENT RESPONSE REQUIRED.
+          runbook_url: "https://runbooks.aclue.app/account-compromise"
+          security_impact: "CRITICAL - Confirmed account compromise"
+          compliance_impact: "Data breach potential - immediate containment required"
+          actions: |
+            1. IMMEDIATE: Lock user account {{ $labels.user_id }}
+            2. Invalidate all sessions for this user
+            3. Alert user via verified contact methods
+            4. Review account activity for data access
+            5. Initiate incident response procedures
+            6. Consider password reset requirement
+
+      # Privilege escalation attempts
+      - alert: PrivilegeEscalationAttempts
+        expr: rate(authorization_failures_total{reason="insufficient_privileges"}[5m]) > 10
+        for: 2m
+        labels:
+          severity: P1
+          category: security
+          team: security
+          service: authorization
+          attack_type: privilege_escalation
+        annotations:
+          summary: "Privilege escalation attempts detected"
+          description: |
+            {{ $value }} authorization failures due to insufficient privileges per minute.
+            This may indicate attempts to access unauthorized resources or escalate privileges.
+            Monitoring for potential insider threats or compromised accounts.
+          runbook_url: "https://runbooks.aclue.app/privilege-escalation"
+          security_impact: "HIGH - Unauthorized access attempts"
+          actions: |
+            1. Review attempted resource access patterns
+            2. Identify users attempting privilege escalation
+            3. Check for recent permission changes
+            4. Analyze access request patterns
+            5. Consider temporary additional monitoring for flagged users
+
+  - name: application_security
+    rules:
+      # ==========================================
+      # APPLICATION-LEVEL SECURITY
+      # ==========================================
+
+      # SQL injection attempt detection
+      - alert: SQLInjectionAttempts
+        expr: rate(http_requests_total{method="POST", attack_type="sqli"}[5m]) > 5
+        for: 1m
+        labels:
+          severity: P1
+          category: security
+          team: security
+          service: application
+          attack_type: sql_injection
+        annotations:
+          summary: "SQL injection attempts detected"
+          description: |
+            {{ $value }} SQL injection attempts detected in the last 5 minutes.
+            This indicates active attempts to compromise the database.
+            Input validation and WAF protection should be verified.
+          runbook_url: "https://runbooks.aclue.app/sql-injection"
+          security_impact: "HIGH - Database security at risk"
+          compliance_impact: "Data confidentiality and integrity at risk"
+          actions: |
+            1. Check WAF rules for SQL injection protection
+            2. Review and strengthen input validation
+            3. Monitor database for unusual queries
+            4. Block attacking IP addresses
+            5. Review application logs for injection patterns
+
+      # Cross-site scripting (XSS) attempts
+      - alert: XSSAttempts
+        expr: rate(http_requests_total{attack_type="xss"}[5m]) > 10
+        for: 2m
+        labels:
+          severity: P2
+          category: security
+          team: security
+          service: application
+          attack_type: xss
+        annotations:
+          summary: "Cross-site scripting (XSS) attempts detected"
+          description: |
+            {{ $value }} XSS attempts detected in the last 5 minutes.
+            This indicates attempts to inject malicious scripts.
+            Content Security Policy and input sanitization should be reviewed.
+          runbook_url: "https://runbooks.aclue.app/xss-attempts"
+          security_impact: "MEDIUM - Client-side security and user data at risk"
+          actions: |
+            1. Review Content Security Policy configuration
+            2. Strengthen input sanitization
+            3. Check for stored XSS vulnerabilities
+            4. Monitor for successful XSS exploitation
+            5. Consider additional client-side protections
+
+      # Unusual API usage patterns
+      - alert: UnusualAPIUsagePatterns
+        expr: |
+          (
+            rate(http_requests_total{endpoint=~"/api/v1/.*"}[10m]) by (source_ip) >
+            rate(http_requests_total{endpoint=~"/api/v1/.*"}[10m] offset 1h) by (source_ip) * 10
+          ) and (
+            rate(http_requests_total{endpoint=~"/api/v1/.*"}[10m]) by (source_ip) > 100
+          )
+        for: 5m
+        labels:
+          severity: P2
+          category: security
+          team: security
+          service: api
+          attack_type: api_abuse
+        annotations:
+          summary: "Unusual API usage pattern from {{ $labels.source_ip }}"
+          description: |
+            IP {{ $labels.source_ip }} showing {{ $value }}x increase in API usage.
+            This may indicate API scraping, abuse, or automated attacks.
+            Current rate significantly exceeds normal usage patterns.
+          runbook_url: "https://runbooks.aclue.app/api-abuse"
+          security_impact: "MEDIUM - API abuse and potential data harvesting"
+          actions: |
+            1. Analyze API endpoint access patterns
+            2. Check for automated vs human-like behavior
+            3. Implement API rate limiting if not present
+            4. Review API authentication and authorization
+            5. Consider blocking or throttling suspicious IPs
+
+  - name: infrastructure_security
+    rules:
+      # ==========================================
+      # INFRASTRUCTURE SECURITY
+      # ==========================================
+
+      # WAF block rate changes
+      - alert: WAFBlockRateIncrease
+        expr: rate(cloudflare_waf_blocks_total[5m]) > rate(cloudflare_waf_blocks_total[5m] offset 1h) * 3
+        for: 5m
+        labels:
+          severity: P1
+          category: security
+          team: security
+          service: waf
+          attack_type: multiple
+        annotations:
+          summary: "WAF block rate significantly increased"
+          description: |
+            Web Application Firewall block rate has increased {{ $value }}x compared to an hour ago.
+            Current block rate: {{ $value }} blocks/min
+            This indicates increased attack activity against the platform.
+          runbook_url: "https://runbooks.aclue.app/waf-activity"
+          security_impact: "HIGH - Increased attack activity detected"
+          actions: |
+            1. Review WAF logs for attack types and patterns
+            2. Check blocked request categories
+            3. Verify WAF rules are functioning correctly
+            4. Consider additional security measures
+            5. Monitor for attacks bypassing WAF
+
+      # Security certificate issues
+      - alert: SecurityCertificateIssues
+        expr: probe_ssl_earliest_cert_expiry - time() < 86400 * 30
+        for: 0s
+        labels:
+          severity: P2
+          category: security
+          team: security
+          service: certificates
+        annotations:
+          summary: "SSL certificate expiring within 30 days for {{ $labels.instance }}"
+          description: |
+            SSL certificate for {{ $labels.instance }} expires in {{ $value | humanizeDuration }}.
+            Certificate renewal should be planned to avoid security warnings and service disruption.
+          runbook_url: "https://runbooks.aclue.app/certificate-renewal"
+          security_impact: "MEDIUM - Potential security warning and service disruption"
+          compliance_impact: "Security compliance may be affected"
+          actions: |
+            1. Plan certificate renewal process
+            2. Verify automatic renewal if configured
+            3. Test certificate chain validation
+            4. Schedule renewal well before expiration
+            5. Monitor certificate status regularly
+
+      # Suspicious user agent patterns
+      - alert: SuspiciousUserAgentPatterns
+        expr: rate(http_requests_total{user_agent=~".*(bot|crawler|scanner|hack|exploit).*"}[10m]) > 50
+        for: 5m
+        labels:
+          severity: P2
+          category: security
+          team: security
+          service: traffic
+          attack_type: reconnaissance
+        annotations:
+          summary: "High rate of requests from suspicious user agents"
+          description: |
+            {{ $value }} requests/min from user agents indicating bots, crawlers, or scanning tools.
+            This may indicate reconnaissance activity or automated attacks.
+            User agent patterns suggest potential malicious intent.
+          runbook_url: "https://runbooks.aclue.app/suspicious-user-agents"
+          security_impact: "MEDIUM - Potential reconnaissance or attack preparation"
+          actions: |
+            1. Analyze specific user agent strings and patterns
+            2. Block known malicious user agents
+            3. Implement user agent validation
+            4. Monitor for legitimate vs malicious crawling
+            5. Consider CAPTCHA for suspicious patterns
+
+  - name: data_security
+    rules:
+      # ==========================================
+      # DATA PROTECTION AND PRIVACY
+      # ==========================================
+
+      # Unusual data access patterns
+      - alert: UnusualDataAccessPatterns
+        expr: rate(database_queries_total{table=~"users|newsletter_subscribers"}[10m]) > rate(database_queries_total{table=~"users|newsletter_subscribers"}[10m] offset 1d) * 5
+        for: 10m
+        labels:
+          severity: P1
+          category: security
+          team: security
+          service: database
+          attack_type: data_exfiltration
+        annotations:
+          summary: "Unusual access pattern to sensitive data tables"
+          description: |
+            Access to sensitive data tables (users, newsletter_subscribers) has increased {{ $value }}x.
+            This may indicate data exfiltration attempts or compromised applications.
+            Sensitive data access requires immediate investigation.
+          runbook_url: "https://runbooks.aclue.app/data-access-anomaly"
+          security_impact: "HIGH - Potential data breach or exfiltration"
+          compliance_impact: "GDPR and data protection compliance at risk"
+          actions: |
+            1. IMMEDIATE: Review database access logs
+            2. Identify applications and users accessing data
+            3. Check for unauthorized bulk data retrieval
+            4. Verify application behavior and queries
+            5. Consider temporary access restrictions
+            6. Initiate data breach assessment if needed
+
+      # Personal data query volume spike
+      - alert: PersonalDataQueryVolumeSpike
+        expr: rate(database_queries_total{query_type="personal_data"}[5m]) > 100
+        for: 3m
+        labels:
+          severity: P1
+          category: security
+          team: security
+          service: privacy
+          attack_type: data_mining
+        annotations:
+          summary: "High volume of personal data queries detected"
+          description: |
+            {{ $value }} personal data queries per minute detected.
+            This may indicate unauthorized personal data mining or privacy violation.
+            GDPR compliance requires immediate investigation.
+          runbook_url: "https://runbooks.aclue.app/personal-data-access"
+          security_impact: "HIGH - Personal data privacy at risk"
+          compliance_impact: "CRITICAL - Potential GDPR violation"
+          actions: |
+            1. IMMEDIATE: Audit personal data access
+            2. Identify legitimate vs suspicious access patterns
+            3. Review data minimization practices
+            4. Check for proper consent and lawful basis
+            5. Consider temporary access restrictions
+            6. Document incident for compliance reporting
+
+      # Failed data export attempts
+      - alert: FailedDataExportAttempts
+        expr: rate(data_export_attempts_total{status="failed"}[15m]) > 5
+        for: 5m
+        labels:
+          severity: P2
+          category: security
+          team: security
+          service: data_export
+          attack_type: data_exfiltration
+        annotations:
+          summary: "Multiple failed data export attempts detected"
+          description: |
+            {{ $value }} failed data export attempts in the last 15 minutes.
+            This may indicate unauthorized attempts to extract platform data.
+            Export mechanisms should be reviewed for security.
+          runbook_url: "https://runbooks.aclue.app/data-export-failures"
+          security_impact: "MEDIUM - Potential data exfiltration attempts"
+          actions: |
+            1. Review data export request patterns
+            2. Verify export authorization mechanisms
+            3. Check for brute force export attempts
+            4. Monitor successful exports for anomalies
+            5. Strengthen export access controls
+
+  - name: compliance_monitoring
+    rules:
+      # ==========================================
+      # COMPLIANCE AND AUDIT ALERTS
+      # ==========================================
+
+      # Audit log anomalies
+      - alert: AuditLogAnomalies
+        expr: rate(audit_log_entries_total[1h]) < rate(audit_log_entries_total[1h] offset 24h) * 0.1
+        for: 30m
+        labels:
+          severity: P1
+          category: security
+          team: security
+          service: audit
+          compliance_risk: high
+        annotations:
+          summary: "Significant drop in audit log entries detected"
+          description: |
+            Audit logging has dropped to {{ $value | humanizePercentage }} of normal volume.
+            This may indicate audit system failure or tampering.
+            Compliance monitoring is compromised.
+          runbook_url: "https://runbooks.aclue.app/audit-log-issues"
+          security_impact: "HIGH - Audit trail compromised"
+          compliance_impact: "CRITICAL - Compliance monitoring failure"
+          actions: |
+            1. IMMEDIATE: Check audit system health
+            2. Verify audit log storage and integrity
+            3. Review audit system configuration
+            4. Check for system tampering or failures
+            5. Restore audit logging immediately
+            6. Report compliance impact to relevant stakeholders

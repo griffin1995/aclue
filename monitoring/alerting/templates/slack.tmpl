@@ -1,0 +1,304 @@
+{{/* Slack Notification Templates for aclue Platform AlertManager */}}
+{{/* Updated: September 2024 */}}
+
+{{/* Default Slack template */}}
+{{ define "slack.default.text" }}
+{{- range .Alerts -}}
+*Alert:* {{ .Annotations.summary }}
+*Severity:* {{ .Labels.severity }}
+*Service:* {{ .Labels.service }}
+*Status:* {{ .Status }}
+{{- if .Annotations.description }}
+
+*Description:* {{ .Annotations.description }}
+{{- end }}
+{{- if .Annotations.runbook_url }}
+
+*Runbook:* <{{ .Annotations.runbook_url }}|View Runbook>
+{{- end }}
+{{- if .Annotations.dashboard_url }}
+*Dashboard:* <{{ .Annotations.dashboard_url }}|View Dashboard>
+{{- end }}
+
+*Labels:*
+{{- range .Labels.SortedPairs }}
+  • {{ .Name }}: `{{ .Value }}`
+{{- end }}
+
+---
+{{- end }}
+{{ end }}
+
+{{/* Critical alerts template - P0 */}}
+{{ define "slack.critical.text" }}
+🚨 *CRITICAL ALERT* 🚨
+
+{{- range .Alerts }}
+*{{ .Annotations.summary }}*
+
+*🔥 IMMEDIATE ACTION REQUIRED 🔥*
+
+*Service:* `{{ .Labels.service }}`
+*Category:* `{{ .Labels.category }}`
+*Team:* `{{ .Labels.team }}`
+*Status:* `{{ .Status }}`
+
+{{- if .Annotations.description }}
+*Description:*
+{{ .Annotations.description }}
+{{- end }}
+
+{{- if .Annotations.business_impact }}
+*Business Impact:* {{ .Annotations.business_impact }}
+{{- end }}
+
+{{- if .Annotations.revenue_impact }}
+*Revenue Impact:* {{ .Annotations.revenue_impact }}
+{{- end }}
+
+{{- if .Annotations.actions }}
+*Immediate Actions Required:*
+```
+{{ .Annotations.actions }}
+```
+{{- end }}
+
+*🔗 Quick Links:*
+{{- if .Annotations.runbook_url }}
+• <{{ .Annotations.runbook_url }}|Emergency Runbook>
+{{- end }}
+{{- if .Annotations.dashboard_url }}
+• <{{ .Annotations.dashboard_url }}|Live Dashboard>
+{{- end }}
+• <https://grafana.aclue.app|Grafana Overview>
+• <https://status.aclue.app|Status Page>
+
+*Started:* {{ .StartsAt.Format "15:04:05 MST" }}
+{{- if ne .Status "firing" }}
+*Resolved:* {{ .EndsAt.Format "15:04:05 MST" }}
+*Duration:* {{ .EndsAt.Sub .StartsAt }}
+{{- end }}
+
+---
+{{- end }}
+
+*Alert Context:*
+• Environment: Production
+• Platform: aclue.app
+• Alert Source: {{ .CommonLabels.job }}
+• Alert Count: {{ len .Alerts }}
+{{ end }}
+
+{{/* High priority alerts template - P1 */}}
+{{ define "slack.high.text" }}
+⚠️ *HIGH PRIORITY ALERT*
+
+{{- range .Alerts }}
+*{{ .Annotations.summary }}*
+
+*Service:* `{{ .Labels.service }}`
+*Team:* `{{ .Labels.team }}`
+*Status:* `{{ .Status }}`
+
+{{- if .Annotations.description }}
+*Description:* {{ .Annotations.description }}
+{{- end }}
+
+{{- if .Annotations.impact }}
+*Impact:* {{ .Annotations.impact }}
+{{- end }}
+
+{{- if .Annotations.actions }}
+*Recommended Actions:*
+```
+{{ .Annotations.actions }}
+```
+{{- end }}
+
+*Links:*
+{{- if .Annotations.runbook_url }}
+• <{{ .Annotations.runbook_url }}|Runbook>
+{{- end }}
+{{- if .Annotations.dashboard_url }}
+• <{{ .Annotations.dashboard_url }}|Dashboard>
+{{- end }}
+
+*Time:* {{ .StartsAt.Format "15:04:05 MST" }}
+{{- if ne .Status "firing" }}
+*Resolved:* {{ .EndsAt.Format "15:04:05 MST" }}
+{{- end }}
+
+---
+{{- end }}
+{{ end }}
+
+{{/* Security alerts template */}}
+{{ define "slack.security.text" }}
+🔒 *SECURITY ALERT* 🔒
+
+{{- range .Alerts }}
+*{{ .Annotations.summary }}*
+
+*Security Impact:* `{{ .Annotations.security_impact }}`
+*Attack Type:* `{{ .Labels.attack_type }}`
+{{- if .Annotations.compliance_impact }}
+*Compliance Impact:* `{{ .Annotations.compliance_impact }}`
+{{- end }}
+
+{{- if .Annotations.description }}
+*Details:*
+{{ .Annotations.description }}
+{{- end }}
+
+{{- if .Annotations.actions }}
+*Security Response Actions:*
+```
+{{ .Annotations.actions }}
+```
+{{- end }}
+
+*Security Context:*
+• Source: {{ .Labels.source_ip | default "Multiple" }}
+• Service: {{ .Labels.service }}
+• Category: {{ .Labels.category }}
+
+*Links:*
+{{- if .Annotations.runbook_url }}
+• <{{ .Annotations.runbook_url }}|Security Runbook>
+{{- end }}
+• <https://grafana.aclue.app/d/security-overview|Security Dashboard>
+
+*Detection Time:* {{ .StartsAt.Format "15:04:05 MST" }}
+{{- if ne .Status "firing" }}
+*Resolution Time:* {{ .EndsAt.Format "15:04:05 MST" }}
+{{- end }}
+
+---
+{{- end }}
+
+*🛡️ Security Team Alert - Immediate Review Required*
+{{ end }}
+
+{{/* Medium priority alerts template - P2 */}}
+{{ define "slack.medium.text" }}
+⚡ *Medium Priority Alert*
+
+{{- range .Alerts }}
+*{{ .Annotations.summary }}*
+
+*Service:* {{ .Labels.service }} | *Team:* {{ .Labels.team }}
+
+{{- if .Annotations.description }}
+*Description:* {{ .Annotations.description }}
+{{- end }}
+
+{{- if .Annotations.actions }}
+*Actions:*
+{{ .Annotations.actions }}
+{{- end }}
+
+{{- if .Annotations.runbook_url }}
+*Runbook:* <{{ .Annotations.runbook_url }}|View>
+{{- end }}
+
+*Time:* {{ .StartsAt.Format "15:04 MST" }}
+{{- end }}
+{{ end }}
+
+{{/* Service-specific alerts template */}}
+{{ define "slack.service.text" }}
+{{- if eq .CommonLabels.service "frontend" }}🌐{{ else if eq .CommonLabels.service "backend" }}⚙️{{ else if eq .CommonLabels.service "database" }}🗄️{{ else }}🔧{{ end }} *{{ .CommonLabels.service | title }} Service Alert*
+
+{{- range .Alerts }}
+*{{ .Annotations.summary }}*
+
+{{- if .Annotations.description }}
+{{ .Annotations.description }}
+{{- end }}
+
+*Severity:* {{ .Labels.severity }}
+{{- if .Annotations.impact }}
+*Impact:* {{ .Annotations.impact }}
+{{- end }}
+
+{{- if .Annotations.runbook_url }}
+*Runbook:* <{{ .Annotations.runbook_url }}|View>
+{{- end }}
+
+*Time:* {{ .StartsAt.Format "15:04 MST" }}
+---
+{{- end }}
+{{ end }}
+
+{{/* Maintenance alerts template */}}
+{{ define "slack.maintenance.text" }}
+🔧 *Maintenance Alert*
+
+{{- range .Alerts }}
+*{{ .Annotations.summary }}*
+
+{{- if .Annotations.description }}
+*Details:* {{ .Annotations.description }}
+{{- end }}
+
+*Service:* {{ .Labels.service }}
+*Type:* {{ .Labels.maintenance_type | default "Scheduled" }}
+
+{{- if .Annotations.duration }}
+*Expected Duration:* {{ .Annotations.duration }}
+{{- end }}
+
+{{- if .Annotations.impact }}
+*Expected Impact:* {{ .Annotations.impact }}
+{{- end }}
+
+*Time:* {{ .StartsAt.Format "15:04:05 MST" }}
+---
+{{- end }}
+{{ end }}
+
+{{/* Resolution notification template */}}
+{{ define "slack.resolved.text" }}
+✅ *Alert Resolved*
+
+{{- range .Alerts }}
+*{{ .Annotations.summary }}* - RESOLVED
+
+*Service:* {{ .Labels.service }}
+*Duration:* {{ .EndsAt.Sub .StartsAt }}
+*Resolution Time:* {{ .EndsAt.Format "15:04:05 MST" }}
+
+{{- if .Annotations.resolution_notes }}
+*Resolution Notes:* {{ .Annotations.resolution_notes }}
+{{- end }}
+
+---
+{{- end }}
+{{ end }}
+
+{{/* Alert summary for multiple alerts */}}
+{{ define "slack.summary" }}
+*Alert Summary - {{ len .Alerts }} alerts*
+
+{{- if .CommonLabels.service }}
+*Service:* {{ .CommonLabels.service }}
+{{- end }}
+{{- if .CommonLabels.team }}
+*Team:* {{ .CommonLabels.team }}
+{{- end }}
+
+*Breakdown:*
+{{- $severityCount := dict }}
+{{- range .Alerts }}
+  {{- $sev := .Labels.severity }}
+  {{- $count := index $severityCount $sev | default 0 }}
+  {{- $_ := set $severityCount $sev (add $count 1) }}
+{{- end }}
+{{- range $sev, $count := $severityCount }}
+• {{ $sev }}: {{ $count }} alerts
+{{- end }}
+
+*Time Range:* {{ (index .Alerts 0).StartsAt.Format "15:04" }} - {{ (index .Alerts 0).EndsAt.Format "15:04 MST" }}
+
+<https://grafana.aclue.app|View All Alerts in Grafana>
+{{ end }}

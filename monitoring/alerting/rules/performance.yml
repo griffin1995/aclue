@@ -1,0 +1,425 @@
+# Performance Degradation Alert Rules for aclue Platform
+# Monitors response times, throughput, and performance metrics
+# Updated: September 2024
+
+groups:
+  - name: api_performance_degradation
+    rules:
+      # ==========================================
+      # API RESPONSE TIME DEGRADATION
+      # ==========================================
+
+      # API P95 response time above 500ms (P1)
+      - alert: APIResponseTimeHigh
+        expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket{job="aclue-backend"}[5m])) > 0.5
+        for: 3m
+        labels:
+          severity: P1
+          category: performance
+          team: backend
+          service: api
+        annotations:
+          summary: "API P95 response time exceeding 500ms threshold"
+          description: |
+            API P95 response time is {{ $value }}s, exceeding the 500ms SLA.
+            This indicates backend performance degradation affecting user experience.
+            Target: <500ms, Current: {{ $value }}s
+          runbook_url: "https://runbooks.aclue.app/api-response-time"
+          dashboard_url: "https://grafana.aclue.app/d/api-performance"
+          impact: "Slow API responses degrading user experience"
+          actions: |
+            1. Check database query performance
+            2. Review recent code deployments
+            3. Monitor CPU and memory usage
+            4. Check for slow database queries
+            5. Review API endpoint performance breakdown
+
+      # API P95 response time critically slow above 2s (P0)
+      - alert: APIResponseTimeCritical
+        expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket{job="aclue-backend"}[5m])) > 2.0
+        for: 2m
+        labels:
+          severity: P0
+          category: performance
+          team: backend
+          service: api
+        annotations:
+          summary: "CRITICAL: API P95 response time above 2 seconds"
+          description: |
+            API P95 response time is critically slow at {{ $value }}s.
+            This severely impacts user experience and may indicate system failure.
+            IMMEDIATE ATTENTION REQUIRED.
+          runbook_url: "https://runbooks.aclue.app/api-response-time-critical"
+          impact: "Severe user experience degradation - potential service failure"
+          actions: |
+            1. IMMEDIATE: Check for system-wide issues
+            2. Review database performance and locks
+            3. Check for resource exhaustion
+            4. Consider emergency scaling
+            5. Review recent deployments for rollback
+
+      # Database query performance degradation
+      - alert: DatabaseQueryPerformanceSlow
+        expr: rate(pg_stat_user_tables_seq_scan[5m]) / rate(pg_stat_user_tables_tup_returned[5m]) > 0.1
+        for: 5m
+        labels:
+          severity: P2
+          category: performance
+          team: backend
+          service: database
+        annotations:
+          summary: "Database queries showing high sequential scan ratio"
+          description: |
+            Database is performing {{ $value | humanizePercentage }} sequential scans vs indexed lookups.
+            This indicates potential missing indexes or inefficient queries.
+          runbook_url: "https://runbooks.aclue.app/database-query-performance"
+          impact: "Slower database queries affecting API performance"
+          actions: |
+            1. Identify slow queries using pg_stat_statements
+            2. Review query execution plans
+            3. Check for missing indexes
+            4. Optimize frequently used queries
+            5. Monitor query cache hit rates
+
+      # Database connection time degradation
+      - alert: DatabaseConnectionTimeSlow
+        expr: histogram_quantile(0.95, rate(pg_stat_database_blks_read[5m])) > 100
+        for: 5m
+        labels:
+          severity: P2
+          category: performance
+          team: backend
+          service: database
+        annotations:
+          summary: "Database connection establishment time degraded"
+          description: |
+            Database connection time is slower than expected.
+            P95 connection time: {{ $value }}ms
+          runbook_url: "https://runbooks.aclue.app/database-connection-performance"
+          impact: "Slower API response times due to database connection delays"
+          actions: |
+            1. Check database connection pool settings
+            2. Monitor database resource utilisation
+            3. Review connection pool efficiency
+            4. Check network latency to database
+
+  - name: frontend_performance_degradation
+    rules:
+      # ==========================================
+      # FRONTEND PERFORMANCE METRICS
+      # ==========================================
+
+      # Core Web Vitals - Largest Contentful Paint (LCP) degradation
+      - alert: CoreWebVitalsLCPDegradation
+        expr: web_vitals_lcp_p75 > 2.5
+        for: 10m
+        labels:
+          severity: P2
+          category: performance
+          team: frontend
+          service: web
+        annotations:
+          summary: "Core Web Vitals LCP degraded - P75 above 2.5s"
+          description: |
+            Largest Contentful Paint (LCP) P75 is {{ $value }}s, exceeding the 2.5s threshold.
+            This indicates slower page loading affecting user experience and SEO.
+            Good: <2.5s, Needs Improvement: 2.5-4s, Poor: >4s
+          runbook_url: "https://runbooks.aclue.app/core-web-vitals-lcp"
+          dashboard_url: "https://grafana.aclue.app/d/core-web-vitals"
+          impact: "Slower page loading affecting user experience and search rankings"
+          actions: |
+            1. Review image optimisation and lazy loading
+            2. Check render-blocking resources
+            3. Optimise server response times
+            4. Review CDN performance
+            5. Check font loading strategies
+
+      # Core Web Vitals - First Input Delay (FID) degradation
+      - alert: CoreWebVitalsFIDDegradation
+        expr: web_vitals_fid_p75 > 100
+        for: 10m
+        labels:
+          severity: P2
+          category: performance
+          team: frontend
+          service: web
+        annotations:
+          summary: "Core Web Vitals FID degraded - P75 above 100ms"
+          description: |
+            First Input Delay (FID) P75 is {{ $value }}ms, exceeding the 100ms threshold.
+            This indicates JavaScript blocking main thread, affecting interactivity.
+            Good: <100ms, Needs Improvement: 100-300ms, Poor: >300ms
+          runbook_url: "https://runbooks.aclue.app/core-web-vitals-fid"
+          impact: "Poor page interactivity affecting user engagement"
+          actions: |
+            1. Review JavaScript bundle sizes
+            2. Implement code splitting
+            3. Defer non-critical JavaScript
+            4. Optimise third-party scripts
+            5. Review web worker usage
+
+      # Core Web Vitals - Cumulative Layout Shift (CLS) degradation
+      - alert: CoreWebVitalsCLSDegradation
+        expr: web_vitals_cls_p75 > 0.1
+        for: 10m
+        labels:
+          severity: P2
+          category: performance
+          team: frontend
+          service: web
+        annotations:
+          summary: "Core Web Vitals CLS degraded - P75 above 0.1"
+          description: |
+            Cumulative Layout Shift (CLS) P75 is {{ $value }}, exceeding the 0.1 threshold.
+            This indicates visual instability during page loading.
+            Good: <0.1, Needs Improvement: 0.1-0.25, Poor: >0.25
+          runbook_url: "https://runbooks.aclue.app/core-web-vitals-cls"
+          impact: "Visual layout shifts causing poor user experience"
+          actions: |
+            1. Add size attributes to images and videos
+            2. Reserve space for dynamic content
+            3. Avoid inserting content above existing content
+            4. Use CSS containment for dynamic elements
+            5. Preload web fonts to prevent font swaps
+
+      # Page load time degradation
+      - alert: PageLoadTimeDegradation
+        expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket{handler=~"page_.*"}[5m])) > 3.0
+        for: 5m
+        labels:
+          severity: P2
+          category: performance
+          team: frontend
+          service: web
+        annotations:
+          summary: "Page load time P95 exceeding 3 seconds"
+          description: |
+            Page load time P95 is {{ $value }}s, exceeding the 3-second threshold.
+            This affects user experience and conversion rates.
+          runbook_url: "https://runbooks.aclue.app/page-load-time"
+          impact: "Slow page loads affecting user experience and conversions"
+          actions: |
+            1. Review page weight and resource optimisation
+            2. Check CDN cache hit rates
+            3. Optimise critical rendering path
+            4. Review server-side rendering performance
+            5. Check for render-blocking resources
+
+      # Static asset performance degradation
+      - alert: StaticAssetPerformanceDegradation
+        expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket{handler="static"}[5m])) > 1.0
+        for: 5m
+        labels:
+          severity: P2
+          category: performance
+          team: frontend
+          service: cdn
+        annotations:
+          summary: "Static asset loading P95 above 1 second"
+          description: |
+            Static asset loading time P95 is {{ $value }}s.
+            This may indicate CDN performance issues or asset size problems.
+          runbook_url: "https://runbooks.aclue.app/static-asset-performance"
+          impact: "Slower page loading due to static asset delivery issues"
+          actions: |
+            1. Check CDN performance and cache hit rates
+            2. Review asset optimisation (compression, minification)
+            3. Check geographic distribution of CDN
+            4. Monitor CDN provider status
+            5. Consider asset preloading strategies
+
+  - name: infrastructure_performance_degradation
+    rules:
+      # ==========================================
+      # INFRASTRUCTURE PERFORMANCE
+      # ==========================================
+
+      # Network latency degradation
+      - alert: NetworkLatencyDegradation
+        expr: histogram_quantile(0.95, rate(net_dev_receive_bytes_total[5m])) / histogram_quantile(0.95, rate(net_dev_transmit_bytes_total[5m])) > 2.0
+        for: 5m
+        labels:
+          severity: P2
+          category: performance
+          team: platform
+          service: network
+        annotations:
+          summary: "Network latency degradation detected"
+          description: |
+            Network latency indicators show degraded performance.
+            Receive/transmit ratio: {{ $value }}
+          runbook_url: "https://runbooks.aclue.app/network-latency"
+          impact: "Increased latency affecting all service communications"
+          actions: |
+            1. Check network provider status
+            2. Review routing and DNS performance
+            3. Monitor bandwidth utilisation
+            4. Check for network congestion
+            5. Review firewall and security rules
+
+      # Container performance degradation
+      - alert: ContainerPerformanceDegradation
+        expr: rate(container_cpu_usage_seconds_total[5m]) > 0.8
+        for: 10m
+        labels:
+          severity: P2
+          category: performance
+          team: platform
+          service: "{{ $labels.name }}"
+        annotations:
+          summary: "Container {{ $labels.name }} high CPU usage"
+          description: |
+            Container {{ $labels.name }} has been using {{ $value | humanizePercentage }} CPU for 10 minutes.
+            This may indicate performance issues or resource constraints.
+          runbook_url: "https://runbooks.aclue.app/container-performance"
+          impact: "Container performance degradation affecting service response"
+          actions: |
+            1. Review container resource limits
+            2. Check application performance within container
+            3. Monitor memory usage alongside CPU
+            4. Consider horizontal scaling
+            5. Review container optimisation
+
+      # Disk I/O performance degradation
+      - alert: DiskIOPerformanceDegradation
+        expr: rate(node_disk_io_time_seconds_total[5m]) > 0.8
+        for: 10m
+        labels:
+          severity: P2
+          category: performance
+          team: platform
+          service: storage
+        annotations:
+          summary: "High disk I/O utilisation on {{ $labels.instance }}"
+          description: |
+            Disk I/O utilisation on {{ $labels.instance }} is {{ $value | humanizePercentage }}.
+            This may cause application performance degradation.
+          runbook_url: "https://runbooks.aclue.app/disk-io-performance"
+          impact: "Slower disk operations affecting application performance"
+          actions: |
+            1. Identify I/O intensive processes
+            2. Check for large file operations
+            3. Review database I/O patterns
+            4. Consider storage optimisation
+            5. Monitor for I/O wait times
+
+      # Memory pressure affecting performance
+      - alert: MemoryPressurePerformanceImpact
+        expr: node_memory_SwapUsed_bytes > 0
+        for: 5m
+        labels:
+          severity: P2
+          category: performance
+          team: platform
+          service: memory
+        annotations:
+          summary: "System using swap memory on {{ $labels.instance }}"
+          description: |
+            System on {{ $labels.instance }} is using {{ $value | humanizeBytes }} swap memory.
+            This indicates memory pressure that will significantly impact performance.
+          runbook_url: "https://runbooks.aclue.app/memory-pressure"
+          impact: "Significant performance degradation due to swap usage"
+          actions: |
+            1. Identify memory-intensive processes
+            2. Review memory usage patterns
+            3. Consider memory optimisation
+            4. Plan for memory capacity increase
+            5. Monitor swap usage trends
+
+  - name: third_party_performance_degradation
+    rules:
+      # ==========================================
+      # THIRD-PARTY SERVICE PERFORMANCE
+      # ==========================================
+
+      # Vercel Edge Network performance
+      - alert: VercelEdgePerformanceDegradation
+        expr: histogram_quantile(0.95, rate(vercel_edge_request_duration_seconds_bucket[5m])) > 0.5
+        for: 5m
+        labels:
+          severity: P2
+          category: performance
+          team: frontend
+          service: vercel
+        annotations:
+          summary: "Vercel Edge Network performance degradation"
+          description: |
+            Vercel Edge Network P95 response time is {{ $value }}s, exceeding 500ms.
+            This affects frontend delivery performance.
+          runbook_url: "https://runbooks.aclue.app/vercel-performance"
+          impact: "Slower frontend delivery affecting user experience"
+          actions: |
+            1. Check Vercel status page
+            2. Review edge cache configuration
+            3. Monitor geographic performance distribution
+            4. Check for edge function performance issues
+            5. Consider cache optimisation
+
+      # Railway backend performance
+      - alert: RailwayBackendPerformanceDegradation
+        expr: histogram_quantile(0.95, rate(railway_request_duration_seconds_bucket[5m])) > 1.0
+        for: 5m
+        labels:
+          severity: P2
+          category: performance
+          team: backend
+          service: railway
+        annotations:
+          summary: "Railway backend performance degradation"
+          description: |
+            Railway backend P95 response time is {{ $value }}s, exceeding 1 second.
+            This affects API performance and user experience.
+          runbook_url: "https://runbooks.aclue.app/railway-performance"
+          impact: "Slower backend API responses"
+          actions: |
+            1. Check Railway dashboard and status
+            2. Review container resource utilisation
+            3. Monitor database connection performance
+            4. Check for container scaling needs
+            5. Review deployment performance impact
+
+      # Supabase database performance
+      - alert: SupabasePerformanceDegradation
+        expr: histogram_quantile(0.95, rate(supabase_query_duration_seconds_bucket[5m])) > 0.2
+        for: 5m
+        labels:
+          severity: P2
+          category: performance
+          team: backend
+          service: supabase
+        annotations:
+          summary: "Supabase database performance degradation"
+          description: |
+            Supabase query P95 response time is {{ $value }}s, exceeding 200ms.
+            This affects all database-dependent operations.
+          runbook_url: "https://runbooks.aclue.app/supabase-performance"
+          impact: "Slower database queries affecting API performance"
+          actions: |
+            1. Check Supabase dashboard for performance metrics
+            2. Review slow query logs
+            3. Check database connection pool utilisation
+            4. Monitor for resource constraints
+            5. Consider query optimisation
+
+      # External API performance degradation
+      - alert: ExternalAPIPerformanceDegradation
+        expr: histogram_quantile(0.95, rate(external_api_request_duration_seconds_bucket[5m])) > 2.0
+        for: 5m
+        labels:
+          severity: P3
+          category: performance
+          team: backend
+          service: external-api
+        annotations:
+          summary: "External API performance degradation detected"
+          description: |
+            External API {{ $labels.api }} P95 response time is {{ $value }}s.
+            This may affect dependent features and user experience.
+          runbook_url: "https://runbooks.aclue.app/external-api-performance"
+          impact: "Slower external API responses affecting dependent features"
+          actions: |
+            1. Check external service status pages
+            2. Review API rate limiting
+            3. Consider implementing caching
+            4. Monitor error rates alongside performance
+            5. Implement circuit breakers if needed

@@ -1,0 +1,333 @@
+# Critical System Health Alert Rules for aclue Platform
+# These are P0/P1 alerts that require immediate attention
+# Updated: September 2024
+
+groups:
+  - name: critical_system_health
+    rules:
+      # ==========================================
+      # P0 CRITICAL ALERTS - IMMEDIATE RESPONSE
+      # ==========================================
+
+      # Service completely down detection
+      - alert: ServiceDown
+        expr: up == 0
+        for: 30s
+        labels:
+          severity: P0
+          category: availability
+          team: platform
+          service: "{{ $labels.job }}"
+        annotations:
+          summary: "{{ $labels.job }} service is completely down"
+          description: |
+            Service {{ $labels.job }} on instance {{ $labels.instance }} has been down for more than 30 seconds.
+            This is a critical failure affecting user availability.
+            IMMEDIATE ACTION REQUIRED.
+          runbook_url: "https://runbooks.aclue.app/service-down"
+          dashboard_url: "https://grafana.aclue.app/d/service-overview"
+          impact: "Complete service outage - users cannot access platform"
+          actions: |
+            1. Check service health endpoints
+            2. Review deployment status
+            3. Check infrastructure status (Vercel/Railway)
+            4. Escalate to on-call engineer if not resolved in 5 minutes
+
+      # Database completely inaccessible
+      - alert: DatabaseDown
+        expr: pg_up == 0
+        for: 15s
+        labels:
+          severity: P0
+          category: database
+          team: platform
+          service: database
+        annotations:
+          summary: "PostgreSQL database is completely inaccessible"
+          description: |
+            Supabase PostgreSQL database connection has failed for {{ $labels.instance }}.
+            This affects all platform functionality including authentication and data access.
+            CRITICAL - ALL SERVICES AFFECTED.
+          runbook_url: "https://runbooks.aclue.app/database-down"
+          impact: "Complete platform failure - no database access"
+          actions: |
+            1. Check Supabase dashboard for outages
+            2. Verify connection strings and credentials
+            3. Test database connectivity from backend services
+            4. Contact Supabase support if infrastructure issue
+
+      # Memory exhaustion - critical threshold
+      - alert: MemoryExhaustionCritical
+        expr: (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes * 100) < 5
+        for: 1m
+        labels:
+          severity: P0
+          category: resources
+          team: platform
+          service: infrastructure
+        annotations:
+          summary: "Critical memory exhaustion on {{ $labels.instance }}"
+          description: |
+            Available memory on {{ $labels.instance }} is below 5% ({{ $value }}%).
+            System is at risk of OOM kills and service failures.
+            IMMEDIATE INTERVENTION REQUIRED.
+          runbook_url: "https://runbooks.aclue.app/memory-exhaustion"
+          impact: "Service instability and potential crashes"
+          actions: |
+            1. Identify memory-consuming processes
+            2. Restart non-critical services
+            3. Scale up infrastructure if possible
+            4. Implement emergency memory cleanup
+
+      # CPU exhaustion - critical threshold
+      - alert: CPUExhaustionCritical
+        expr: 100 - (avg by (instance) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 95
+        for: 2m
+        labels:
+          severity: P0
+          category: resources
+          team: platform
+          service: infrastructure
+        annotations:
+          summary: "Critical CPU exhaustion on {{ $labels.instance }}"
+          description: |
+            CPU usage on {{ $labels.instance }} has been above 95% for 2 minutes.
+            System responsiveness severely degraded.
+            Current usage: {{ $value }}%
+          runbook_url: "https://runbooks.aclue.app/cpu-exhaustion"
+          impact: "Severe performance degradation affecting all users"
+          actions: |
+            1. Identify CPU-intensive processes
+            2. Scale infrastructure immediately
+            3. Kill non-essential processes
+            4. Check for runaway processes or infinite loops
+
+      # Disk space critical - less than 5% free
+      - alert: DiskSpaceCritical
+        expr: (node_filesystem_avail_bytes / node_filesystem_size_bytes * 100) < 5
+        for: 30s
+        labels:
+          severity: P0
+          category: storage
+          team: platform
+          service: infrastructure
+        annotations:
+          summary: "Critical disk space on {{ $labels.instance }}"
+          description: |
+            Disk space on {{ $labels.instance }} is critically low: {{ $value }}% free.
+            Services may fail to write logs, cache, or temporary files.
+            IMMEDIATE CLEANUP REQUIRED.
+          runbook_url: "https://runbooks.aclue.app/disk-space-critical"
+          impact: "Service failures due to inability to write files"
+          actions: |
+            1. Clean temporary files and logs
+            2. Clear application caches
+            3. Identify large files for removal
+            4. Expand storage if possible
+
+      # SSL certificate expiration - within 7 days
+      - alert: SSLCertificateExpiringSoon
+        expr: probe_ssl_earliest_cert_expiry - time() < 86400 * 7
+        for: 0s
+        labels:
+          severity: P0
+          category: security
+          team: platform
+          service: infrastructure
+        annotations:
+          summary: "SSL certificate expiring within 7 days for {{ $labels.instance }}"
+          description: |
+            SSL certificate for {{ $labels.instance }} expires in {{ $value | humanizeDuration }}.
+            Certificate expiration will cause complete service unavailability.
+            URGENT RENEWAL REQUIRED.
+          runbook_url: "https://runbooks.aclue.app/ssl-renewal"
+          impact: "Complete service outage when certificate expires"
+          actions: |
+            1. Renew SSL certificate immediately
+            2. Update certificate in load balancer/CDN
+            3. Verify certificate chain
+            4. Test HTTPS connectivity
+
+      # ==========================================
+      # P1 HIGH PRIORITY ALERTS - URGENT RESPONSE
+      # ==========================================
+
+      # High error rate detection
+      - alert: HighErrorRate
+        expr: rate(http_requests_total{status=~"5.."}[5m]) / rate(http_requests_total[5m]) > 0.05
+        for: 2m
+        labels:
+          severity: P1
+          category: errors
+          team: backend
+          service: "{{ $labels.service }}"
+        annotations:
+          summary: "High 5xx error rate detected for {{ $labels.service }}"
+          description: |
+            Service {{ $labels.service }} is experiencing {{ $value | humanizePercentage }} error rate.
+            This indicates serious backend issues affecting user experience.
+            Error rate threshold: 5%, Current: {{ $value | humanizePercentage }}
+          runbook_url: "https://runbooks.aclue.app/high-error-rate"
+          dashboard_url: "https://grafana.aclue.app/d/error-analysis"
+          impact: "Degraded user experience with frequent errors"
+          actions: |
+            1. Check application logs for error patterns
+            2. Review recent deployments
+            3. Verify database connectivity and performance
+            4. Monitor error rate trending
+
+      # Memory usage warning - above 80%
+      - alert: MemoryUsageHigh
+        expr: (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes * 100) < 20
+        for: 5m
+        labels:
+          severity: P1
+          category: resources
+          team: platform
+          service: infrastructure
+        annotations:
+          summary: "High memory usage on {{ $labels.instance }}"
+          description: |
+            Memory usage on {{ $labels.instance }} is high: {{ $value }}% available.
+            System approaching memory pressure that could affect performance.
+          runbook_url: "https://runbooks.aclue.app/memory-high"
+          impact: "Potential service degradation and instability"
+          actions: |
+            1. Monitor memory usage trending
+            2. Identify memory-intensive processes
+            3. Consider scaling up if sustained
+            4. Review application memory leaks
+
+      # Disk space warning - less than 15% free
+      - alert: DiskSpaceWarning
+        expr: (node_filesystem_avail_bytes / node_filesystem_size_bytes * 100) < 15
+        for: 5m
+        labels:
+          severity: P1
+          category: storage
+          team: platform
+          service: infrastructure
+        annotations:
+          summary: "Low disk space warning on {{ $labels.instance }}"
+          description: |
+            Disk space on {{ $labels.instance }} is running low: {{ $value }}% free.
+            Approaching critical threshold that could cause service issues.
+          runbook_url: "https://runbooks.aclue.app/disk-space-warning"
+          impact: "Risk of service degradation due to storage constraints"
+          actions: |
+            1. Monitor disk usage trending
+            2. Clean up old logs and temporary files
+            3. Plan for storage expansion
+            4. Set up automated cleanup if applicable
+
+      # Database connection pool exhaustion
+      - alert: DatabaseConnectionPoolExhaustion
+        expr: pg_stat_activity_count / pg_settings_max_connections * 100 > 80
+        for: 2m
+        labels:
+          severity: P1
+          category: database
+          team: backend
+          service: database
+        annotations:
+          summary: "Database connection pool nearing exhaustion"
+          description: |
+            PostgreSQL connection pool is {{ $value }}% utilized.
+            High risk of connection failures for new requests.
+            Max connections: {{ $labels.max_connections }}, Current: {{ $labels.current_connections }}
+          runbook_url: "https://runbooks.aclue.app/db-connection-pool"
+          impact: "Potential connection failures for new database requests"
+          actions: |
+            1. Review connection pool configuration
+            2. Identify long-running connections
+            3. Kill idle connections if necessary
+            4. Consider scaling database connections
+
+      # Load balancer health check failures
+      - alert: LoadBalancerHealthCheckFailing
+        expr: probe_success == 0
+        for: 1m
+        labels:
+          severity: P1
+          category: availability
+          team: platform
+          service: loadbalancer
+        annotations:
+          summary: "Load balancer health check failing for {{ $labels.instance }}"
+          description: |
+            Health check probe for {{ $labels.instance }} has been failing for 1 minute.
+            This may indicate service degradation or routing issues.
+          runbook_url: "https://runbooks.aclue.app/health-check-failure"
+          impact: "Potential traffic routing issues and service unavailability"
+          actions: |
+            1. Check target service health
+            2. Verify load balancer configuration
+            3. Review networking and firewall rules
+            4. Test connectivity manually
+
+      # Authentication service degradation
+      - alert: AuthenticationServiceDegradation
+        expr: rate(supabase_auth_requests_total{status="error"}[5m]) / rate(supabase_auth_requests_total[5m]) > 0.02
+        for: 3m
+        labels:
+          severity: P1
+          category: authentication
+          team: backend
+          service: auth
+        annotations:
+          summary: "Authentication service experiencing high error rate"
+          description: |
+            Supabase authentication is failing at {{ $value | humanizePercentage }} rate.
+            This prevents users from logging in and accessing the platform.
+            Error threshold: 2%, Current: {{ $value | humanizePercentage }}
+          runbook_url: "https://runbooks.aclue.app/auth-degradation"
+          impact: "Users unable to authenticate and access platform features"
+          actions: |
+            1. Check Supabase auth service status
+            2. Verify API keys and configuration
+            3. Review authentication flow logs
+            4. Test login functionality manually
+
+      # CDN performance degradation
+      - alert: CDNPerformanceDegradation
+        expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket{handler="static"}[5m])) > 2
+        for: 5m
+        labels:
+          severity: P1
+          category: performance
+          team: frontend
+          service: cdn
+        annotations:
+          summary: "CDN performance degradation detected"
+          description: |
+            CDN response time (P95) is {{ $value }}s, exceeding 2s threshold.
+            This affects page load times and user experience.
+          runbook_url: "https://runbooks.aclue.app/cdn-performance"
+          impact: "Slow page loading affecting user experience"
+          actions: |
+            1. Check CDN provider status (Vercel/Cloudflare)
+            2. Review cache hit rates
+            3. Verify geographic distribution
+            4. Consider cache warming or purging
+
+      # Container restart loop detection
+      - alert: ContainerRestartLoop
+        expr: increase(kube_pod_container_status_restarts_total[10m]) > 3
+        for: 0s
+        labels:
+          severity: P1
+          category: containers
+          team: platform
+          service: "{{ $labels.container }}"
+        annotations:
+          summary: "Container {{ $labels.container }} in restart loop"
+          description: |
+            Container {{ $labels.container }} in pod {{ $labels.pod }} has restarted {{ $value }} times in 10 minutes.
+            This indicates a serious application or infrastructure issue.
+          runbook_url: "https://runbooks.aclue.app/container-restart-loop"
+          impact: "Service instability and potential data loss"
+          actions: |
+            1. Check container logs for crash reasons
+            2. Review resource limits and requests
+            3. Verify health check configurations
+            4. Check for application bugs or configuration errors

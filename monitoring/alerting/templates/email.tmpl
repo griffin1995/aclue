@@ -1,0 +1,393 @@
+{{/* Email Notification Templates for aclue Platform AlertManager */}}
+{{/* Updated: September 2024 */}}
+
+{{/* Critical alerts email template */}}
+{{ define "email.critical.html" }}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚨 CRITICAL Alert - aclue Platform</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 20px; background-color: #f5f5f5; }
+        .container { max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .header { background: linear-gradient(135deg, #dc3545, #b02a37); color: white; padding: 20px; text-align: center; }
+        .header h1 { margin: 0; font-size: 24px; font-weight: bold; }
+        .alert-badge { display: inline-block; background: rgba(255,255,255,0.2); padding: 5px 10px; border-radius: 12px; font-size: 12px; margin-top: 5px; }
+        .content { padding: 20px; }
+        .alert-item { border-left: 4px solid #dc3545; margin: 20px 0; padding: 15px; background-color: #fff5f5; border-radius: 4px; }
+        .alert-title { font-size: 18px; font-weight: bold; color: #dc3545; margin: 0 0 10px 0; }
+        .alert-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 15px 0; }
+        .meta-item { background: #f8f9fa; padding: 8px; border-radius: 4px; font-size: 14px; }
+        .meta-label { font-weight: bold; color: #495057; }
+        .description { background: #e9ecef; padding: 15px; border-radius: 4px; margin: 15px 0; line-height: 1.5; }
+        .actions { background: #fff3cd; border: 1px solid #ffeaa7; padding: 15px; border-radius: 4px; margin: 15px 0; }
+        .actions h4 { margin: 0 0 10px 0; color: #856404; }
+        .actions pre { background: white; padding: 10px; border-radius: 4px; font-size: 12px; overflow-x: auto; white-space: pre-wrap; }
+        .links { margin: 20px 0; }
+        .link-button { display: inline-block; background: #007bff; color: white; padding: 10px 15px; text-decoration: none; border-radius: 4px; margin: 5px; font-size: 14px; }
+        .link-button:hover { background: #0056b3; }
+        .critical-button { background: #dc3545; }
+        .critical-button:hover { background: #b02a37; }
+        .footer { background: #f8f9fa; padding: 15px; text-align: center; font-size: 12px; color: #6c757d; }
+        .timestamp { font-size: 12px; color: #6c757d; margin-top: 10px; }
+        .impact-box { background: #f8d7da; border: 1px solid #f1aeb5; padding: 10px; border-radius: 4px; margin: 10px 0; }
+        .impact-label { font-weight: bold; color: #721c24; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚨 CRITICAL ALERT</h1>
+            <div class="alert-badge">aclue Platform - Immediate Action Required</div>
+        </div>
+
+        <div class="content">
+            {{- range .Alerts }}
+            <div class="alert-item">
+                <div class="alert-title">{{ .Annotations.summary }}</div>
+
+                <div class="alert-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">Service:</span> {{ .Labels.service }}
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Team:</span> {{ .Labels.team }}
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Category:</span> {{ .Labels.category }}
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Severity:</span> {{ .Labels.severity }}
+                    </div>
+                </div>
+
+                {{- if .Annotations.description }}
+                <div class="description">
+                    <strong>Description:</strong><br>
+                    {{ .Annotations.description | reReplaceAll "\n" "<br>" }}
+                </div>
+                {{- end }}
+
+                {{- if or .Annotations.business_impact .Annotations.revenue_impact }}
+                <div class="impact-box">
+                    {{- if .Annotations.business_impact }}
+                    <div class="impact-label">Business Impact:</div>
+                    <div>{{ .Annotations.business_impact }}</div>
+                    {{- end }}
+                    {{- if .Annotations.revenue_impact }}
+                    <div class="impact-label">Revenue Impact:</div>
+                    <div>{{ .Annotations.revenue_impact }}</div>
+                    {{- end }}
+                </div>
+                {{- end }}
+
+                {{- if .Annotations.actions }}
+                <div class="actions">
+                    <h4>🚀 Immediate Actions Required:</h4>
+                    <pre>{{ .Annotations.actions }}</pre>
+                </div>
+                {{- end }}
+
+                <div class="links">
+                    {{- if .Annotations.runbook_url }}
+                    <a href="{{ .Annotations.runbook_url }}" class="link-button critical-button">📋 Emergency Runbook</a>
+                    {{- end }}
+                    {{- if .Annotations.dashboard_url }}
+                    <a href="{{ .Annotations.dashboard_url }}" class="link-button critical-button">📊 Live Dashboard</a>
+                    {{- end }}
+                    <a href="https://grafana.aclue.app" class="link-button">📈 Grafana Overview</a>
+                </div>
+
+                <div class="timestamp">
+                    <strong>Alert Started:</strong> {{ .StartsAt.Format "2006-01-02 15:04:05 MST" }}
+                    {{- if ne .Status "firing" }}
+                    <br><strong>Resolved:</strong> {{ .EndsAt.Format "2006-01-02 15:04:05 MST" }}
+                    <br><strong>Duration:</strong> {{ .EndsAt.Sub .StartsAt }}
+                    {{- end }}
+                </div>
+            </div>
+            {{- end }}
+        </div>
+
+        <div class="footer">
+            <strong>aclue Platform Monitoring</strong><br>
+            This is an automated alert from the aclue monitoring system.<br>
+            Environment: Production | Alert Count: {{ len .Alerts }}
+        </div>
+    </div>
+</body>
+</html>
+{{ end }}
+
+{{/* Security alerts email template */}}
+{{ define "email.security.html" }}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔒 Security Alert - aclue Platform</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 20px; background-color: #f5f5f5; }
+        .container { max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .header { background: linear-gradient(135deg, #6f42c1, #563d7c); color: white; padding: 20px; text-align: center; }
+        .header h1 { margin: 0; font-size: 24px; font-weight: bold; }
+        .security-badge { display: inline-block; background: rgba(255,255,255,0.2); padding: 5px 10px; border-radius: 12px; font-size: 12px; margin-top: 5px; }
+        .content { padding: 20px; }
+        .alert-item { border-left: 4px solid #6f42c1; margin: 20px 0; padding: 15px; background-color: #f8f7ff; border-radius: 4px; }
+        .alert-title { font-size: 18px; font-weight: bold; color: #6f42c1; margin: 0 0 10px 0; }
+        .security-context { background: #e7e3ff; padding: 15px; border-radius: 4px; margin: 15px 0; }
+        .context-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+        .context-item { background: white; padding: 8px; border-radius: 4px; font-size: 14px; }
+        .context-label { font-weight: bold; color: #495057; }
+        .impact-section { background: #fff3cd; border: 1px solid #ffeaa7; padding: 15px; border-radius: 4px; margin: 15px 0; }
+        .description { background: #e9ecef; padding: 15px; border-radius: 4px; margin: 15px 0; line-height: 1.5; }
+        .actions { background: #d1ecf1; border: 1px solid #bee5eb; padding: 15px; border-radius: 4px; margin: 15px 0; }
+        .actions h4 { margin: 0 0 10px 0; color: #0c5460; }
+        .actions pre { background: white; padding: 10px; border-radius: 4px; font-size: 12px; overflow-x: auto; white-space: pre-wrap; }
+        .links { margin: 20px 0; }
+        .link-button { display: inline-block; background: #6f42c1; color: white; padding: 10px 15px; text-decoration: none; border-radius: 4px; margin: 5px; font-size: 14px; }
+        .link-button:hover { background: #563d7c; }
+        .footer { background: #f8f9fa; padding: 15px; text-align: center; font-size: 12px; color: #6c757d; }
+        .timestamp { font-size: 12px; color: #6c757d; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔒 SECURITY ALERT</h1>
+            <div class="security-badge">aclue Platform - Security Incident Detected</div>
+        </div>
+
+        <div class="content">
+            {{- range .Alerts }}
+            <div class="alert-item">
+                <div class="alert-title">{{ .Annotations.summary }}</div>
+
+                <div class="security-context">
+                    <strong>Security Context:</strong>
+                    <div class="context-grid">
+                        <div class="context-item">
+                            <span class="context-label">Attack Type:</span> {{ .Labels.attack_type | default "Unknown" }}
+                        </div>
+                        <div class="context-item">
+                            <span class="context-label">Service:</span> {{ .Labels.service }}
+                        </div>
+                        <div class="context-item">
+                            <span class="context-label">Source:</span> {{ .Labels.source_ip | default "Multiple Sources" }}
+                        </div>
+                        <div class="context-item">
+                            <span class="context-label">Category:</span> {{ .Labels.category }}
+                        </div>
+                    </div>
+                </div>
+
+                {{- if or .Annotations.security_impact .Annotations.compliance_impact }}
+                <div class="impact-section">
+                    {{- if .Annotations.security_impact }}
+                    <strong>Security Impact:</strong> {{ .Annotations.security_impact }}<br>
+                    {{- end }}
+                    {{- if .Annotations.compliance_impact }}
+                    <strong>Compliance Impact:</strong> {{ .Annotations.compliance_impact }}
+                    {{- end }}
+                </div>
+                {{- end }}
+
+                {{- if .Annotations.description }}
+                <div class="description">
+                    <strong>Incident Details:</strong><br>
+                    {{ .Annotations.description | reReplaceAll "\n" "<br>" }}
+                </div>
+                {{- end }}
+
+                {{- if .Annotations.actions }}
+                <div class="actions">
+                    <h4>🛡️ Security Response Actions:</h4>
+                    <pre>{{ .Annotations.actions }}</pre>
+                </div>
+                {{- end }}
+
+                <div class="links">
+                    {{- if .Annotations.runbook_url }}
+                    <a href="{{ .Annotations.runbook_url }}" class="link-button">📋 Security Runbook</a>
+                    {{- end }}
+                    <a href="https://grafana.aclue.app/d/security-overview" class="link-button">🔍 Security Dashboard</a>
+                    <a href="https://grafana.aclue.app" class="link-button">📈 Grafana Overview</a>
+                </div>
+
+                <div class="timestamp">
+                    <strong>Detection Time:</strong> {{ .StartsAt.Format "2006-01-02 15:04:05 MST" }}
+                    {{- if ne .Status "firing" }}
+                    <br><strong>Resolution Time:</strong> {{ .EndsAt.Format "2006-01-02 15:04:05 MST" }}
+                    <br><strong>Duration:</strong> {{ .EndsAt.Sub .StartsAt }}
+                    {{- end }}
+                </div>
+            </div>
+            {{- end }}
+        </div>
+
+        <div class="footer">
+            <strong>aclue Security Monitoring</strong><br>
+            This is an automated security alert from the aclue monitoring system.<br>
+            Environment: Production | Security Alert Count: {{ len .Alerts }}
+        </div>
+    </div>
+</body>
+</html>
+{{ end }}
+
+{{/* Medium priority alerts email template */}}
+{{ define "email.medium.html" }}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚡ Medium Priority Alert - aclue Platform</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 20px; background-color: #f5f5f5; }
+        .container { max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .header { background: linear-gradient(135deg, #fd7e14, #e8590c); color: white; padding: 20px; text-align: center; }
+        .header h1 { margin: 0; font-size: 22px; font-weight: bold; }
+        .content { padding: 20px; }
+        .alert-item { border-left: 4px solid #fd7e14; margin: 20px 0; padding: 15px; background-color: #fff8f0; border-radius: 4px; }
+        .alert-title { font-size: 16px; font-weight: bold; color: #fd7e14; margin: 0 0 10px 0; }
+        .alert-meta { background: #f8f9fa; padding: 10px; border-radius: 4px; margin: 10px 0; font-size: 14px; }
+        .description { margin: 15px 0; line-height: 1.5; }
+        .actions { background: #e2e3e5; padding: 10px; border-radius: 4px; margin: 15px 0; }
+        .link-button { display: inline-block; background: #fd7e14; color: white; padding: 8px 12px; text-decoration: none; border-radius: 4px; margin: 5px; font-size: 14px; }
+        .footer { background: #f8f9fa; padding: 15px; text-align: center; font-size: 12px; color: #6c757d; }
+        .timestamp { font-size: 12px; color: #6c757d; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚡ Medium Priority Alert</h1>
+        </div>
+
+        <div class="content">
+            {{- range .Alerts }}
+            <div class="alert-item">
+                <div class="alert-title">{{ .Annotations.summary }}</div>
+
+                <div class="alert-meta">
+                    <strong>Service:</strong> {{ .Labels.service }} |
+                    <strong>Team:</strong> {{ .Labels.team }} |
+                    <strong>Category:</strong> {{ .Labels.category }}
+                </div>
+
+                {{- if .Annotations.description }}
+                <div class="description">{{ .Annotations.description | reReplaceAll "\n" "<br>" }}</div>
+                {{- end }}
+
+                {{- if .Annotations.impact }}
+                <div><strong>Impact:</strong> {{ .Annotations.impact }}</div>
+                {{- end }}
+
+                {{- if .Annotations.actions }}
+                <div class="actions">
+                    <strong>Recommended Actions:</strong><br>
+                    {{ .Annotations.actions | reReplaceAll "\n" "<br>" }}
+                </div>
+                {{- end }}
+
+                {{- if .Annotations.runbook_url }}
+                <a href="{{ .Annotations.runbook_url }}" class="link-button">View Runbook</a>
+                {{- end }}
+
+                <div class="timestamp">
+                    <strong>Alert Time:</strong> {{ .StartsAt.Format "2006-01-02 15:04:05 MST" }}
+                </div>
+            </div>
+            {{- end }}
+        </div>
+
+        <div class="footer">
+            aclue Platform Monitoring - Medium Priority Alert
+        </div>
+    </div>
+</body>
+</html>
+{{ end }}
+
+{{/* Low priority alerts email template */}}
+{{ define "email.low.html" }}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ℹ️ Info Alert - aclue Platform</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 20px; background-color: #f5f5f5; }
+        .container { max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .header { background: linear-gradient(135deg, #6c757d, #5a6268); color: white; padding: 15px; text-align: center; }
+        .header h1 { margin: 0; font-size: 20px; }
+        .content { padding: 20px; }
+        .alert-item { border-left: 3px solid #6c757d; padding: 10px; background-color: #f8f9fa; border-radius: 4px; margin: 15px 0; }
+        .alert-title { font-weight: bold; color: #6c757d; margin-bottom: 8px; }
+        .description { margin: 10px 0; color: #495057; }
+        .link-button { display: inline-block; background: #6c757d; color: white; padding: 6px 10px; text-decoration: none; border-radius: 4px; margin: 5px 0; font-size: 13px; }
+        .footer { background: #f8f9fa; padding: 10px; text-align: center; font-size: 11px; color: #6c757d; }
+        .timestamp { font-size: 11px; color: #6c757d; margin-top: 8px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>ℹ️ Information Alert</h1>
+        </div>
+
+        <div class="content">
+            {{- range .Alerts }}
+            <div class="alert-item">
+                <div class="alert-title">{{ .Annotations.summary }}</div>
+
+                {{- if .Annotations.description }}
+                <div class="description">{{ .Annotations.description }}</div>
+                {{- end }}
+
+                <div><strong>Service:</strong> {{ .Labels.service }}</div>
+
+                {{- if .Annotations.runbook_url }}
+                <a href="{{ .Annotations.runbook_url }}" class="link-button">View Details</a>
+                {{- end }}
+
+                <div class="timestamp">{{ .StartsAt.Format "2006-01-02 15:04 MST" }}</div>
+            </div>
+            {{- end }}
+        </div>
+
+        <div class="footer">
+            aclue Platform Monitoring - Information Alert
+        </div>
+    </div>
+</body>
+</html>
+{{ end }}
+
+{{/* Default email template */}}
+{{ define "email.default.html" }}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Alert - aclue Platform</title>
+</head>
+<body>
+    <h2>Alert Notification</h2>
+    {{- range .Alerts }}
+    <h3>{{ .Annotations.summary }}</h3>
+    <p><strong>Service:</strong> {{ .Labels.service }}</p>
+    <p><strong>Status:</strong> {{ .Status }}</p>
+    {{- if .Annotations.description }}
+    <p><strong>Description:</strong> {{ .Annotations.description }}</p>
+    {{- end }}
+    <p><strong>Time:</strong> {{ .StartsAt.Format "2006-01-02 15:04:05 MST" }}</p>
+    {{- end }}
+</body>
+</html>
+{{ end }}
