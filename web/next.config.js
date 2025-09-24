@@ -37,9 +37,8 @@ const nextConfig = {
   // ===========================================================================
   // CORE REACT CONFIGURATION
   // ===========================================================================
-  
+
   reactStrictMode: true,        // Enable React strict mode for development warnings
-  swcMinify: true,              // Use SWC for faster minification instead of Terser
   
   // ===========================================================================
   // ENVIRONMENT VARIABLES
@@ -279,6 +278,31 @@ const nextConfig = {
   
   // Build output mode for different deployment targets
   output: process.env.BUILD_STANDALONE === 'true' ? 'standalone' : undefined,
+
+  // ===========================================================================
+  // TURBOPACK CONFIGURATION (Next.js 15+)
+  // ===========================================================================
+
+  turbopack: {
+    rules: {
+      '*.svg': {
+        loaders: ['@svgr/webpack'],
+        as: '*.js',
+      },
+    },
+  },
+
+  // ===========================================================================
+  // SERVER EXTERNAL PACKAGES (Next.js 15+)
+  // ===========================================================================
+
+  serverExternalPackages: ['sharp'], // Optimize server components
+
+  // ===========================================================================
+  // TYPED ROUTES (Next.js 15+)
+  // ===========================================================================
+
+  typedRoutes: true,              // Enable typed routes for better DX
   
   // ===========================================================================
   // EXPERIMENTAL FEATURES
@@ -290,24 +314,12 @@ const nextConfig = {
     // optimizeCss: true,           // Temporarily disabled - causing critters dependency issues
     webVitalsAttribution: ['CLS', 'FCP', 'FID', 'LCP', 'TTFB'], // Enhanced Web Vitals tracking
     optimizePackageImports: ['lucide-react', '@headlessui/react', 'framer-motion'], // Optimize package imports
-    turbo: {                       // Enable Turbo for faster builds
-      rules: {
-        '*.svg': {
-          loaders: ['@svgr/webpack'],
-          as: '*.js',
-        },
-      },
-    },
-    serverComponentsExternalPackages: ['sharp'], // Optimize server components
 
     // ===========================================================================
     // APP ROUTER MIGRATION SUPPORT
     // ===========================================================================
     // App Router is now enabled by default in Next.js 14+
     // Server Actions are enabled by default in Next.js 14+
-
-    // App Router optimization features
-    typedRoutes: true,              // Enable typed routes for better DX
     mdxRs: true,                    // Enable MDX with Rust-based parser
     optimisticClientCache: true,    // Enable optimistic client cache
 
