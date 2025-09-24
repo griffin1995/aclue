@@ -4,7 +4,13 @@ repos:
     rev: v1.5.0
     hooks:
       - id: detect-secrets
-        args: ['--baseline', '.secrets.baseline']
+        args: [
+          '--baseline', '.secrets.baseline',
+          '--exclude-lines', '(EXAMPLE|PLACEHOLDER|XXX|DO_NOT_USE|FAKE)',
+          '--exclude-secrets', '(sk|pk)_(test|live)_[X]{3,}.*',
+          '--exclude-secrets', 'sk_(test|live)_EXAMPLE.*',
+          '--exclude-secrets', 'pk_(test|live)_EXAMPLE.*'
+        ]
         exclude: |
           (?x)^(
             package-lock\.json|
@@ -15,8 +21,7 @@ repos:
             node_modules/|
             \.secrets\.baseline|
             tests/.*\.json|
-            test_.*\.py|
-            .*\.md
+            test_.*\.py
           )$
         additional_dependencies: ['gibberish-detector']
 

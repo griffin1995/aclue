@@ -282,7 +282,7 @@ jobs:
           echo "| Coverage | ${{ steps.coverage.outputs.coverage_status }} | ${{ steps.coverage.outputs.coverage_percentage }}% | ≥ $(echo '${{ needs.gate-setup.outputs.quality_thresholds }}' | jq -r '.min_coverage')% | ${{ steps.coverage.outputs.coverage_gate_status == 'PASS' && '✅' || '❌' }} |" >> $GITHUB_STEP_SUMMARY
 
       - name: 📋 Upload Quality Results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: code-quality-gate-results
@@ -445,7 +445,7 @@ jobs:
           echo "| Secrets | ${{ steps.secrets.outputs.secrets_found }} | - | - | 0 | ${{ steps.secrets.outputs.secrets_gate_status == 'PASS' && '✅' || '❌' }} |" >> $GITHUB_STEP_SUMMARY
 
       - name: 📋 Upload Security Gate Results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: security-gate-results
@@ -569,7 +569,7 @@ jobs:
           echo "| API Response Time | ${{ steps.api_performance.outputs.api_response_time }}ms | ≤$(echo '${{ needs.gate-setup.outputs.performance_thresholds }}' | jq -r '.max_api_response')ms | ${{ steps.api_performance.outputs.api_gate_status == 'PASS' && '✅' || '❌' }} |" >> $GITHUB_STEP_SUMMARY
 
       - name: 📋 Upload Performance Gate Results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: performance-gate-results

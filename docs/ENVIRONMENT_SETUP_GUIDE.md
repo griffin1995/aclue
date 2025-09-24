@@ -287,8 +287,9 @@ NEXT_PUBLIC_SENTRY_ENVIRONMENT=development
 
 ```bash
 # In web/.env.local
-NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_your_publishable_key
-STRIPE_SECRET_KEY=sk_test_your_secret_key
+# EXAMPLE ONLY - Replace with your actual Stripe keys
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_EXAMPLE_KEY_DO_NOT_USE
+STRIPE_SECRET_KEY=sk_test_EXAMPLE_KEY_DO_NOT_USE
 ```
 
 ### Step 6: Complete Frontend Configuration

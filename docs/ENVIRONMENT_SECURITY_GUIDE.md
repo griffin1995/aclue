@@ -33,7 +33,7 @@ This guide provides comprehensive security best practices for managing environme
 RESEND_API_KEY=re_abc123456789  # This will be exposed!
 
 # DON'T: Use NEXT_PUBLIC_ prefix for sensitive data
-NEXT_PUBLIC_STRIPE_SECRET_KEY=sk_live_abc123  # Exposed to browser!
+NEXT_PUBLIC_STRIPE_SECRET_KEY=sk_live_XXXXXXXXXXXX  # EXAMPLE - Exposed to browser!
 
 # DON'T: Use weak or predictable secrets
 SECRET_KEY=password123  # Easily guessable
@@ -166,7 +166,7 @@ RESEND_API_KEY=re_<production-key>
 # Server-side only (no NEXT_PUBLIC_ prefix)
 RESEND_API_KEY=re_abc123...
 SUPABASE_SERVICE_ROLE_KEY=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...
-STRIPE_SECRET_KEY=sk_live_abc123...
+STRIPE_SECRET_KEY=sk_live_XXXXXXXXXXXX  # Example pattern only
 
 # Client-side safe (NEXT_PUBLIC_ prefix)
 NEXT_PUBLIC_SUPABASE_URL=https://abc123.supabase.co
@@ -430,7 +430,7 @@ class EnvironmentMonitor:
 2. **Contain Threat**
    ```bash
    # Immediately revoke compromised keys
-   stripe keys revoke sk_live_abc123
+   stripe keys revoke sk_live_EXAMPLE_KEY_ID  # Replace with actual key ID
 
    # Disable compromised service accounts
    railway auth:revoke --token abc123

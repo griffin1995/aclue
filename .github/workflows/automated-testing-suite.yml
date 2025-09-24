@@ -338,7 +338,7 @@ jobs:
           fi
 
       - name: 📋 Upload Test Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: test-results-${{ matrix.category }}
@@ -352,7 +352,7 @@ jobs:
           echo "${{ steps.test_execution.outputs.result }}" > "test-status/${{ matrix.category }}.status"
 
       - name: 📋 Upload Test Status
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: test-status-${{ matrix.category }}
@@ -422,7 +422,7 @@ jobs:
           fi
 
       - name: 📋 Upload Orchestration Results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: orchestration-results
@@ -445,7 +445,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: 📥 Download All Test Artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           path: artifacts/
 
@@ -544,7 +544,7 @@ jobs:
           echo "success_rate=$success_rate" >> $GITHUB_ENV
 
       - name: 📋 Upload Unified Report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: unified-test-report
           path: unified-results/

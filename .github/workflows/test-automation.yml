@@ -29,7 +29,7 @@ on:
       - 'web/**'
       - 'tests/**'
       - '.github/workflows/**'
-  
+
   # Trigger on pushes to main branch
   push:
     branches: [ main, dev ]
@@ -38,7 +38,7 @@ on:
       - 'web/**'
       - 'tests/**'
       - '.github/workflows/**'
-  
+
   # Allow manual triggering
   workflow_dispatch:
     inputs:
@@ -74,7 +74,7 @@ jobs:
   # ===========================================================================
   # SETUP AND PREPARATION
   # ===========================================================================
-  
+
   setup:
     name: Setup and Validation
     runs-on: ubuntu-latest
@@ -82,13 +82,13 @@ jobs:
       backend-changed: ${{ steps.changes.outputs.backend }}
       frontend-changed: ${{ steps.changes.outputs.frontend }}
       test-matrix: ${{ steps.matrix.outputs.test-matrix }}
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0  # Full history for better change detection
-      
+
       - name: Detect changes
         uses: dorny/paths-filter@v2
         id: changes
@@ -107,7 +107,7 @@ jobs:
               - 'backend/tests/**'
               - 'web/src/**/__tests__/**'
               - 'web/e2e/**'
-      
+
       - name: Generate test matrix
         id: matrix
         run: |
@@ -116,7 +116,7 @@ jobs:
           else
             echo "test-matrix=[\"${{ github.event.inputs.test_suite }}\"]" >> $GITHUB_OUTPUT
           fi
-      
+
       - name: Validate test configuration
         run: |
           echo "🔍 Change Detection Results:"
@@ -128,7 +128,7 @@ jobs:
   # ===========================================================================
   # BACKEND TESTING
   # ===========================================================================
-  
+
   backend-tests:
     name: Backend Tests (Essential)
     runs-on: ubuntu-latest
@@ -209,7 +209,7 @@ jobs:
   # ===========================================================================
   # FRONTEND TESTING
   # ===========================================================================
-  
+
   frontend-tests:
     name: Frontend Tests (Essential)
     runs-on: ubuntu-latest
@@ -271,7 +271,7 @@ jobs:
   # ===========================================================================
   # END-TO-END TESTING
   # ===========================================================================
-  
+
   e2e-tests:
     name: E2E Tests (Minimal)
     runs-on: ubuntu-latest
@@ -284,7 +284,7 @@ jobs:
       matrix:
         browser: [chromium]  # Single browser for speed
         device: [desktop]    # Single device for speed
-    
+
     services:
       postgres:
         image: postgres:15
@@ -299,51 +299,51 @@ jobs:
           --health-retries 5
         ports:
           - 5432:5432
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
           cache-dependency-path: web/package-lock.json
-      
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: ${{ env.PYTHON_VERSION }}
-      
+
       - name: Install backend dependencies
         working-directory: ./backend
         run: |
           pip install -r requirements.txt
-      
+
       - name: Install frontend dependencies
         working-directory: ./web
         run: |
           npm ci
-      
+
       - name: Install Playwright browsers
         working-directory: ./web
         run: |
           npx playwright install --with-deps ${{ matrix.browser }}
-      
+
       - name: Set up test environment
         run: |
           # Backend test environment
           cd backend
           cp .env.test.example .env.test
           echo "DATABASE_URL=postgresql://testuser:testpassword@localhost:5432/aclue_e2e_test" >> .env.test
-          
+
           # Frontend test environment
           cd ../web
           cp .env.test.example .env.test
           echo "NEXT_PUBLIC_API_URL=http://localhost:8000" >> .env.test
           echo "NEXT_PUBLIC_WEB_URL=http://localhost:3000" >> .env.test
-      
+
       - name: Start backend server
         working-directory: ./backend
         run: |
@@ -352,7 +352,7 @@ jobs:
           sleep 10  # Wait for server to start
         env:
           ENVIRONMENT: test
-      
+
       - name: Start frontend server
         working-directory: ./web
         run: |
@@ -362,14 +362,14 @@ jobs:
           sleep 15  # Wait for Next.js to start
         env:
           NODE_ENV: test
-      
+
       - name: Wait for services
         run: |
           # Wait for backend health check
           timeout 60 bash -c 'until curl -f http://localhost:8000/health; do sleep 2; done'
           # Wait for frontend
           timeout 60 bash -c 'until curl -f http://localhost:3000; do sleep 2; done'
-      
+
       - name: Run E2E tests (${{ matrix.browser }} - ${{ matrix.device }})
         working-directory: ./web
         run: |
@@ -380,9 +380,9 @@ jobs:
           fi
         env:
           PLAYWRIGHT_TEST_BASE_URL: http://localhost:3000
-      
+
       - name: Upload E2E test results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: e2e-results-${{ matrix.browser }}-${{ matrix.device }}
@@ -394,13 +394,13 @@ jobs:
   # ===========================================================================
   # PERFORMANCE TESTING
   # ===========================================================================
-  
+
   performance-tests:
     name: Performance Tests (Disabled)
     runs-on: ubuntu-latest
     needs: [setup, backend-tests]
     if: false  # Disabled for emergency pipeline restoration
-    
+
     services:
       postgres:
         image: postgres:15
@@ -415,35 +415,35 @@ jobs:
           --health-retries 5
         ports:
           - 5432:5432
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: ${{ env.PYTHON_VERSION }}
-      
+
       - name: Install dependencies
         working-directory: ./backend
         run: |
           pip install -r requirements.txt
           pip install pytest-benchmark locust
-      
+
       - name: Set up performance test environment
         working-directory: ./backend
         run: |
           cp .env.test.example .env.test
           echo "DATABASE_URL=postgresql://testuser:testpassword@localhost:5432/aclue_perf_test" >> .env.test
-      
+
       - name: Run database performance tests
         working-directory: ./backend
         run: |
           pytest tests/test_performance.py -m "performance and database" \
             --benchmark-json=benchmark-results.json \
             -v
-      
+
       - name: Start backend for API performance tests
         working-directory: ./backend
         run: |
@@ -451,44 +451,44 @@ jobs:
           sleep 10
         env:
           ENVIRONMENT: test
-      
+
       - name: Run API performance tests
         working-directory: ./backend
         run: |
           pytest tests/test_performance.py -m "performance and api" \
             --benchmark-json=api-benchmark-results.json \
             -v
-      
+
       - name: Run load testing
         working-directory: ./backend
         run: |
           # Create basic locust configuration
           cat > locustfile.py << EOF
           from locust import HttpUser, task, between
-          
+
           class aclueUser(HttpUser):
               wait_time = between(1, 3)
-              
+
               @task(3)
               def browse_products(self):
                   self.client.get("/api/v1/products/")
-              
+
               @task(1)
               def get_recommendations(self):
                   # Would need authentication for real test
                   response = self.client.get("/api/v1/products/")
-                  
+
               def on_start(self):
                   # Would implement login here for authenticated tests
                   pass
           EOF
-          
+
           # Run load test
           locust --headless --users 10 --spawn-rate 2 --run-time 30s \
             --host http://localhost:8000 --html performance-report.html
-      
+
       - name: Archive performance results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: performance-test-results
@@ -501,66 +501,66 @@ jobs:
   # ===========================================================================
   # SECURITY TESTING
   # ===========================================================================
-  
+
   security-tests:
     name: Security Tests (Disabled)
     runs-on: ubuntu-latest
     needs: [setup, backend-tests]
     if: false  # Disabled for emergency pipeline restoration
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: ${{ env.PYTHON_VERSION }}
-      
+
       - name: Install security testing tools
         run: |
           pip install bandit safety pytest
-      
+
       - name: Install backend dependencies
         working-directory: ./backend
         run: |
           pip install -r requirements.txt
-      
+
       - name: Run security linting (Bandit)
         working-directory: ./backend
         run: |
           bandit -r app/ -f json -o bandit-report.json || true
           bandit -r app/ -f txt
-      
+
       - name: Check for known vulnerabilities
         working-directory: ./backend
         run: |
           safety check --json --output safety-report.json || true
           safety check
-      
+
       - name: Run security tests
         working-directory: ./backend
         run: |
           pytest tests/test_security.py -m "security" -v \
             --html=security-test-report.html --self-contained-html
-      
+
       - name: Set up Node.js for frontend security
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-      
+
       - name: Install frontend dependencies
         working-directory: ./web
         run: npm ci
-      
+
       - name: Run npm audit
         working-directory: ./web
         run: |
           npm audit --audit-level moderate --json > npm-audit-report.json || true
           npm audit --audit-level moderate
-      
+
       - name: Upload security test results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: security-test-results
@@ -574,42 +574,42 @@ jobs:
   # ===========================================================================
   # TEST REPORTING AND QUALITY GATES
   # ===========================================================================
-  
+
   test-reporting:
     name: Test Reporting (Emergency Mode)
     runs-on: ubuntu-latest
     needs: [backend-tests, frontend-tests]  # Only essential tests
     if: always()
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      
+
       - name: Download all test artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           path: test-results
-      
+
       - name: Generate combined test report
         run: |
           # Create comprehensive test report
           mkdir -p combined-report
-          
+
           echo "# aclue Test Automation Report" > combined-report/README.md
           echo "Generated: $(date)" >> combined-report/README.md
           echo "" >> combined-report/README.md
-          
+
           echo "## Test Results Summary" >> combined-report/README.md
           echo "- Backend Tests: ${{ needs.backend-tests.result }}" >> combined-report/README.md
           echo "- Frontend Tests: ${{ needs.frontend-tests.result }}" >> combined-report/README.md
           echo "- E2E Tests: ${{ needs.e2e-tests.result }}" >> combined-report/README.md
           echo "- Performance Tests: ${{ needs.performance-tests.result }}" >> combined-report/README.md
           echo "- Security Tests: ${{ needs.security-tests.result }}" >> combined-report/README.md
-          
+
           # Copy all test artifacts to combined report
           find test-results -type f \( -name "*.html" -o -name "*.json" -o -name "*.xml" \) \
             -exec cp {} combined-report/ \;
-      
+
       - name: Check quality gates (Emergency Mode)
         run: |
           # Emergency mode quality gates - report but don't block
@@ -634,14 +634,14 @@ jobs:
           fi
 
           echo "🚀 Emergency mode: All quality gates passed (with allowances)"
-      
+
       - name: Upload combined test report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: combined-test-report
           path: combined-report/
           retention-days: 30
-      
+
       - name: Comment on PR with results
         if: github.event_name == 'pull_request'
         uses: actions/github-script@v6
@@ -652,15 +652,15 @@ jobs:
             const e2eResult = '${{ needs.e2e-tests.result }}';
             const performanceResult = '${{ needs.performance-tests.result }}';
             const securityResult = '${{ needs.security-tests.result }}';
-            
+
             const getEmoji = (result) => {
               if (result === 'success') return '✅';
               if (result === 'skipped') return '⏭️';
               return '❌';
             };
-            
+
             const comment = `## 🧪 Test Results Summary
-            
+
             | Test Suite | Result |
             |------------|--------|
             | Backend Tests | ${getEmoji(backendResult)} ${backendResult} |
@@ -668,13 +668,13 @@ jobs:
             | E2E Tests | ${getEmoji(e2eResult)} ${e2eResult} |
             | Performance Tests | ${getEmoji(performanceResult)} ${performanceResult} |
             | Security Tests | ${getEmoji(securityResult)} ${securityResult} |
-            
+
             📊 Detailed test reports and coverage information are available in the workflow artifacts.
-            
-            ${backendResult === 'success' && frontendResult === 'success' && securityResult === 'success' ? 
-              '🎉 All critical tests passed! This PR is ready for review.' : 
+
+            ${backendResult === 'success' && frontendResult === 'success' && securityResult === 'success' ?
+              '🎉 All critical tests passed! This PR is ready for review.' :
               '⚠️ Some tests failed. Please review and fix issues before merging.'}`;
-            
+
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
@@ -685,23 +685,23 @@ jobs:
   # ===========================================================================
   # DEPLOYMENT READINESS CHECK
   # ===========================================================================
-  
+
   deployment-readiness:
     name: Deployment Readiness Check
     runs-on: ubuntu-latest
     needs: [test-reporting]
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      
+
       - name: Check deployment readiness
         run: |
           echo "🚀 Checking deployment readiness..."
           echo "All tests passed - System ready for deployment"
           echo "DEPLOYMENT_READY=true" >> $GITHUB_ENV
-      
+
       - name: Trigger deployment workflow
         if: env.DEPLOYMENT_READY == 'true'
         run: |

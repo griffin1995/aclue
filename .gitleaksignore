@@ -1,0 +1,20 @@
+# Gitleaks ignore file for documentation and reference files
+# These files contain example patterns for educational purposes only
+
+# Documentation with example patterns
+docs/tailwind.txt:*
+docs/jwt-auth.txt:*
+docs/pyjwt.txt:*
+docs/jwt-framework.txt:*
+docs/jwt-sessions.txt:*
+docs/supabase.txt:*
+docs/API_DOCUMENTATION.md:*
+docs/ENVIRONMENT_SETUP_GUIDE.md:*
+docs/SECRET-MANAGEMENT-PROCEDURES.md:*
+
+# Specific patterns in security documentation
+docs/ENVIRONMENT_SECURITY_GUIDE.md:sk_live_XXXXXXXXXXXX
+docs/ENVIRONMENT_SECURITY_GUIDE.md:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+docs/DOCUMENTATION_SECURITY_STANDARDS.md:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+docs/SECURITY_AUDIT_GITHUB_PUSH_PROTECTION.md:eyJ0eXAiOiJKV1Q
+docs/SECURITY_AUDIT_GITHUB_PUSH_PROTECTION.md:sk_live_abc123

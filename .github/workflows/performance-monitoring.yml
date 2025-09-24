@@ -229,7 +229,7 @@ jobs:
           fi
 
       - name: 📋 Upload Lighthouse Results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: lighthouse-performance-results
@@ -390,7 +390,7 @@ jobs:
           fi
 
       - name: 📋 Upload API Performance Results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: api-performance-results
@@ -461,7 +461,7 @@ jobs:
           done
 
       - name: 📋 Upload Resource Monitoring Results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: resource-monitoring-results
@@ -481,7 +481,7 @@ jobs:
 
     steps:
       - name: 📥 Download Performance Results
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           path: all-performance-results/
 
@@ -551,7 +551,7 @@ jobs:
           echo "STATUS_EMOJI=$status_emoji" >> $GITHUB_ENV
 
       - name: 📋 Upload Performance Summary
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: performance-summary-report
           path: performance-summary/
