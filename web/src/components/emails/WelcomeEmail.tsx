@@ -53,34 +53,41 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
       .glassmorphism-card { background: #f0f9ff !important; border: 1px solid #bae6fd !important; color: #18181b !important; }
       .section-divider { border-top: 1px solid #bae6fd !important; }
       .early-access-badge { background: #f0f9ff !important; border: 1px solid #0ea5e9 !important; color: #18181b !important; }
+      .footer { color: #18181b !important; }
+      .footer a { color: #0284c7 !important; }
+      .footer div[style*="background: #27272a"] { background: #f8fafc !important; border-color: #bae6fd !important; }
+      .footer div[style*="border-top: 1px solid #52525b"] { border-color: #bae6fd !important; }
+      .footer a[style*="background: #3f3f46"] { background: #fef2f2 !important; border-color: #ef4444 !important; }
       .heading-text { color: #18181b !important; }
       .lead-text { color: #27272a !important; }
       .body-text { color: #3f3f46 !important; }
       .section-heading { color: #18181b !important; }
       .card-heading { color: #18181b !important; }
       .card-text { color: #18181b !important; }
+      .badge-text { color: #18181b !important; }
+      .badge-secondary { color: #27272a !important; }
     }
 
     @media (prefers-color-scheme: dark) {
-      .container { background: #18181b !important; color: #e4e4e7 !important; }
-      .header { background: #27272a !important; color: #e4e4e7 !important; }
-      .content { background: #27272a !important; color: #e4e4e7 !important; }
-      .glassmorphism-card { background: #3f3f46 !important; border: 1px solid #52525b !important; color: #e4e4e7 !important; }
-      .section-divider { border-top: 1px solid #52525b !important; }
-      .early-access-badge { background: #3f3f46 !important; border: 1px solid #0ea5e9 !important; color: #e4e4e7 !important; }
-      .footer { color: #e4e4e7 !important; }
-      .footer a { color: #0ea5e9 !important; }
-      .footer div[style*="background: #f8fafc"] { background: #27272a !important; border-color: #52525b !important; }
-      .footer div[style*="border-top: 1px solid #e2e8f0"] { border-color: #52525b !important; }
-      .footer a[style*="background: #fef2f2"] { background: #3f3f46 !important; border-color: #ef4444 !important; }
-      .heading-text { color: #e4e4e7 !important; }
-      .lead-text { color: #e4e4e7 !important; }
-      .body-text { color: #e4e4e7 !important; }
-      .section-heading { color: #e4e4e7 !important; }
-      .card-heading { color: #e4e4e7 !important; }
-      .card-text { color: #e4e4e7 !important; }
-      .badge-text { color: #e4e4e7 !important; }
-      .badge-secondary { color: #e4e4e7 !important; }
+      .container { background: #0f172a !important; color: #e2e8f0 !important; }
+      .header { background: #1e293b !important; color: #e2e8f0 !important; }
+      .content { background: #1e293b !important; color: #e2e8f0 !important; }
+      .glassmorphism-card { background: #334155 !important; border: 1px solid #475569 !important; color: #e2e8f0 !important; }
+      .section-divider { border-top: 1px solid #475569 !important; }
+      .early-access-badge { background: #334155 !important; border: 1px solid #3b82f6 !important; color: #e2e8f0 !important; }
+      .footer { color: #e2e8f0 !important; }
+      .footer a { color: #60a5fa !important; }
+      .footer div[style*="background: #f8fafc"] { background: #1e293b !important; border-color: #475569 !important; }
+      .footer div[style*="border-top: 1px solid #e2e8f0"] { border-color: #475569 !important; }
+      .footer a[style*="background: #fef2f2"] { background: #334155 !important; border-color: #ef4444 !important; }
+      .heading-text { color: #f1f5f9 !important; }
+      .lead-text { color: #e2e8f0 !important; }
+      .body-text { color: #cbd5e1 !important; }
+      .section-heading { color: #f1f5f9 !important; }
+      .card-heading { color: #f1f5f9 !important; }
+      .card-text { color: #e2e8f0 !important; }
+      .badge-text { color: #f1f5f9 !important; }
+      .badge-secondary { color: #cbd5e1 !important; }
     }
 
     @media only screen and (max-width: 600px) {
@@ -94,14 +101,14 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
 
     .section-divider {
       border: 0;
-      border-top: 1px solid #52525b;
+      border-top: 1px solid #475569;
       margin: 32px 0;
       height: 0;
     }
 
     .early-access-badge {
-      background: #3f3f46;
-      border: 1px solid #0ea5e9;
+      background: #334155;
+      border: 1px solid #3b82f6;
       border-radius: 12px;
       padding: 20px;
       margin: 24px 0;
@@ -126,8 +133,8 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
 
   // Header styles with WCAG-compliant solid background
   const header = {
-    background: '#27272a',
-    color: '#e4e4e7',
+    background: '#1e293b',
+    color: '#e2e8f0',
     padding: '40px 30px 32px 30px',
     textAlign: 'center' as const,
     borderRadius: '12px 12px 0 0',
@@ -135,10 +142,10 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
 
   // Content section styles with WCAG-compliant background
   const content = {
-    background: '#27272a',
+    background: '#1e293b',
     padding: '32px 30px',
     borderRadius: '0 0 12px 12px',
-    color: '#e4e4e7',
+    color: '#e2e8f0',
     lineHeight: '1.6',
   }
 
@@ -148,7 +155,7 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
     fontWeight: 'bold',
     marginBottom: '0',
     marginTop: '0',
-    color: '#e4e4e7',
+    color: '#f1f5f9',
     textAlign: 'center' as const,
     lineHeight: '1.2',
   }
@@ -158,7 +165,7 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
     fontWeight: '600',
     marginBottom: '12px',
     marginTop: '0',
-    color: '#e4e4e7',
+    color: '#f1f5f9',
     textAlign: 'left' as const,
   }
 
@@ -167,7 +174,7 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
     fontWeight: 'bold',
     marginBottom: '16px',
     marginTop: '0',
-    color: '#e4e4e7',
+    color: '#f1f5f9',
     textAlign: 'center' as const,
   }
 
@@ -177,7 +184,7 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
     lineHeight: '1.6',
     marginBottom: '16px',
     marginTop: '0',
-    color: '#e4e4e7',
+    color: '#cbd5e1',
   }
 
   const leadText = {
@@ -185,22 +192,22 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
     lineHeight: '1.6',
     marginBottom: '20px',
     marginTop: '0',
-    color: '#e4e4e7',
+    color: '#e2e8f0',
     fontWeight: '500',
   }
 
   const cardText = {
     fontSize: '16px',
     lineHeight: '1.7',
-    color: '#e4e4e7',
+    color: '#e2e8f0',
     textAlign: 'left' as const,
     marginBottom: '0',
   }
 
   // WCAG-compliant card styles with solid backgrounds
   const glassmorphismCard = {
-    background: '#3f3f46',
-    border: '1px solid #52525b',
+    background: '#334155',
+    border: '1px solid #475569',
     borderRadius: '16px',
     padding: '28px',
     margin: '28px 0',
@@ -209,8 +216,8 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
 
   // WCAG-compliant early access badge styles
   const earlyAccessBadge = {
-    background: '#3f3f46',
-    border: '1px solid #0ea5e9',
+    background: '#334155',
+    border: '1px solid #3b82f6',
     borderRadius: '12px',
     padding: '20px',
     margin: '24px 0',
@@ -220,13 +227,13 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
   // WCAG-compliant section divider styles
   const sectionDivider = {
     border: '0',
-    borderTop: '1px solid #52525b',
+    borderTop: '1px solid #475569',
     margin: '32px 0',
     height: '0',
   }
 
   return (
-    <div style={{ fontFamily: 'Arial, sans-serif', lineHeight: 1.6, color: '#e4e4e7', margin: 0, padding: 0 }}>
+    <div style={{ fontFamily: 'Arial, sans-serif', lineHeight: 1.6, color: '#e2e8f0', margin: 0, padding: 0 }}>
       <style>{emailStyles}</style>
       <div style={container} className="container">
         <div style={emailWrapper} className="email-wrapper">
@@ -290,7 +297,7 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
               fontWeight: '600',
               marginBottom: '8px',
               marginTop: '0',
-              color: '#e4e4e7'
+              color: '#e2e8f0'
             }}>
               Thank you for being part of this journey!
             </p>
@@ -299,7 +306,7 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
               fontWeight: '600',
               marginBottom: '4px',
               marginTop: '0',
-              color: '#e4e4e7'
+              color: '#e2e8f0'
             }}>
               The aclue Team
             </p>
@@ -308,7 +315,7 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
               <a
                 href="https://aclue.app"
                 style={{
-                  color: '#0284c7',
+                  color: '#60a5fa',
                   textDecoration: 'none',
                   fontSize: '16px',
                   fontWeight: '500'
@@ -328,7 +335,7 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
             textAlign: 'center' as const,
             fontSize: '16px',
             lineHeight: '1.6',
-            color: '#e4e4e7'
+            color: '#e2e8f0'
           }} className="footer">
 
             {/* Privacy Rights and Legal Section */}
@@ -345,7 +352,7 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
                 fontWeight: '600',
                 marginBottom: '16px',
                 marginTop: '0',
-                color: '#e4e4e7',
+                color: '#f1f5f9',
                 textAlign: 'center' as const
               }}>
                 Your Privacy & Rights
@@ -356,7 +363,7 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
                 lineHeight: '1.6',
                 marginBottom: '20px',
                 marginTop: '0',
-                color: '#e4e4e7',
+                color: '#cbd5e1',
                 textAlign: 'center' as const
               }}>
                 We respect your privacy and data rights under GDPR. You have the right to access, update, or delete your personal data at any time.
@@ -398,7 +405,7 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
                 }}>
                   <a href="https://aclue.app/privacy"
                     style={{
-                      color: '#0284c7',
+                      color: '#60a5fa',
                       textDecoration: 'none',
                       fontWeight: '500'
                     }}>
@@ -407,7 +414,7 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
                   <span style={{ color: '#94a3b8', margin: '0 8px' }}>•</span>
                   <a href="https://aclue.app/terms"
                     style={{
-                      color: '#0284c7',
+                      color: '#60a5fa',
                       textDecoration: 'none',
                       fontWeight: '500'
                     }}>
@@ -416,7 +423,7 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
                   <span style={{ color: '#94a3b8', margin: '0 8px' }}>•</span>
                   <a href="https://aclue.app/data-rights"
                     style={{
-                      color: '#0284c7',
+                      color: '#60a5fa',
                       textDecoration: 'none',
                       fontWeight: '500'
                     }}>
@@ -436,7 +443,7 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
                   fontWeight: '600',
                   marginBottom: '4px',
                   marginTop: '0',
-                  color: '#e4e4e7'
+                  color: '#f1f5f9'
                 }}>
                   aclue Limited
                 </p>
@@ -444,7 +451,7 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
                   fontSize: '13px',
                   marginBottom: '0',
                   marginTop: '0',
-                  color: '#e4e4e7',
+                  color: '#cbd5e1',
                   lineHeight: '1.5'
                 }}>
                   71-75 Shelton Street, Covent Garden<br />
