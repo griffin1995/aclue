@@ -46,13 +46,28 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
 
   // WCAG AA Compliant email styles with accessibility-focused design
   const emailStyles = `
+    @media (prefers-color-scheme: light) {
+      .container { background: #ffffff !important; color: #18181b !important; }
+      .header { background: #f8fafc !important; color: #18181b !important; }
+      .content { background: #ffffff !important; color: #18181b !important; }
+      .glassmorphism-card { background: #f0f9ff !important; border: 1px solid #bae6fd !important; color: #18181b !important; }
+      .section-divider { border-top: 1px solid #bae6fd !important; }
+      .early-access-badge { background: #f0f9ff !important; border: 1px solid #0ea5e9 !important; color: #18181b !important; }
+      .heading-text { color: #18181b !important; }
+      .lead-text { color: #27272a !important; }
+      .body-text { color: #3f3f46 !important; }
+      .section-heading { color: #18181b !important; }
+      .card-heading { color: #18181b !important; }
+      .card-text { color: #18181b !important; }
+    }
+
     @media (prefers-color-scheme: dark) {
       .container { background: #18181b !important; color: #e4e4e7 !important; }
-      .header { background: #27272a !important; }
-      .content { background: #27272a !important; }
-      .glassmorphism-card { background: #3f3f46 !important; border: 1px solid #52525b !important; }
+      .header { background: #27272a !important; color: #e4e4e7 !important; }
+      .content { background: #27272a !important; color: #e4e4e7 !important; }
+      .glassmorphism-card { background: #3f3f46 !important; border: 1px solid #52525b !important; color: #e4e4e7 !important; }
       .section-divider { border-top: 1px solid #52525b !important; }
-      .early-access-badge { background: #3f3f46 !important; border: 1px solid #0ea5e9 !important; }
+      .early-access-badge { background: #3f3f46 !important; border: 1px solid #0ea5e9 !important; color: #e4e4e7 !important; }
       .footer { color: #e4e4e7 !important; }
       .footer a { color: #0ea5e9 !important; }
       .footer div[style*="background: #f8fafc"] { background: #27272a !important; border-color: #52525b !important; }
@@ -79,13 +94,13 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
 
     .section-divider {
       border: 0;
-      border-top: 1px solid #bae6fd;
+      border-top: 1px solid #52525b;
       margin: 32px 0;
       height: 0;
     }
 
     .early-access-badge {
-      background: #f0f9ff;
+      background: #3f3f46;
       border: 1px solid #0ea5e9;
       border-radius: 12px;
       padding: 20px;
@@ -118,12 +133,12 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
     borderRadius: '12px 12px 0 0',
   }
 
-  // Content section styles with WCAG-compliant white background
+  // Content section styles with WCAG-compliant background
   const content = {
-    background: '#ffffff',
+    background: '#27272a',
     padding: '32px 30px',
     borderRadius: '0 0 12px 12px',
-    color: '#18181b',
+    color: '#e4e4e7',
     lineHeight: '1.6',
   }
 
@@ -143,7 +158,7 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
     fontWeight: '600',
     marginBottom: '12px',
     marginTop: '0',
-    color: '#18181b',
+    color: '#e4e4e7',
     textAlign: 'left' as const,
   }
 
@@ -152,7 +167,7 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
     fontWeight: 'bold',
     marginBottom: '16px',
     marginTop: '0',
-    color: '#18181b',
+    color: '#e4e4e7',
     textAlign: 'center' as const,
   }
 
@@ -162,7 +177,7 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
     lineHeight: '1.6',
     marginBottom: '16px',
     marginTop: '0',
-    color: '#3f3f46',
+    color: '#e4e4e7',
   }
 
   const leadText = {
@@ -170,22 +185,22 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
     lineHeight: '1.6',
     marginBottom: '20px',
     marginTop: '0',
-    color: '#27272a',
+    color: '#e4e4e7',
     fontWeight: '500',
   }
 
   const cardText = {
     fontSize: '16px',
     lineHeight: '1.7',
-    color: '#18181b',
+    color: '#e4e4e7',
     textAlign: 'left' as const,
     marginBottom: '0',
   }
 
   // WCAG-compliant card styles with solid backgrounds
   const glassmorphismCard = {
-    background: '#f0f9ff',
-    border: '1px solid #bae6fd',
+    background: '#3f3f46',
+    border: '1px solid #52525b',
     borderRadius: '16px',
     padding: '28px',
     margin: '28px 0',
@@ -194,7 +209,7 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
 
   // WCAG-compliant early access badge styles
   const earlyAccessBadge = {
-    background: '#f0f9ff',
+    background: '#3f3f46',
     border: '1px solid #0ea5e9',
     borderRadius: '12px',
     padding: '20px',
@@ -205,13 +220,13 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
   // WCAG-compliant section divider styles
   const sectionDivider = {
     border: '0',
-    borderTop: '1px solid #bae6fd',
+    borderTop: '1px solid #52525b',
     margin: '32px 0',
     height: '0',
   }
 
   return (
-    <div style={{ fontFamily: 'Arial, sans-serif', lineHeight: 1.6, color: '#333', margin: 0, padding: 0 }}>
+    <div style={{ fontFamily: 'Arial, sans-serif', lineHeight: 1.6, color: '#e4e4e7', margin: 0, padding: 0 }}>
       <style>{emailStyles}</style>
       <div style={container} className="container">
         <div style={emailWrapper} className="email-wrapper">
@@ -222,16 +237,6 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
         </div>
 
         <div style={content} className="content">
-          {/* Personal Introduction Section */}
-          <section>
-            <p style={leadText} className="lead-text">
-              Hello there! We're delighted you've joined our community of thoughtful gift-givers.
-            </p>
-            <p style={text} className="body-text">
-              aclue is where AI-powered intelligence meets personalised discovery, making gift-giving intuitive and meaningful.
-            </p>
-          </section>
-
           <hr style={sectionDivider} className="section-divider" />
 
           {/* Subscription Confirmation */}
@@ -251,13 +256,11 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
 
             <div className="glassmorphism-card" style={glassmorphismCard}>
               <p style={cardText} className="card-text">
-                <strong>🧠 Intelligent Personalisation:</strong> Our AI learns your preferences and suggests gifts that truly resonate with your recipients.
+                <strong>🧠 Smart Profile:</strong> Personalised for gifts that resonate.
                 <br /><br />
-                <strong>🎯 Smart Matching:</strong> Connect with the perfect gifts through advanced recommendation algorithms.
+                <strong>⭐ Curated Quality:</strong> Only the best products make it.
                 <br /><br />
-                <strong>⭐ Curated Quality:</strong> Only the best products make it to your recommendations.
-                <br /><br />
-                <strong>👥 Social Integration:</strong> Connect with friends and family for better gift ideas.
+                <strong>👥 Social Integration:</strong> Share with friends and family.
               </p>
             </div>
           </section>
@@ -287,7 +290,7 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
               fontWeight: '600',
               marginBottom: '8px',
               marginTop: '0',
-              color: '#18181b'
+              color: '#e4e4e7'
             }}>
               Thank you for being part of this journey!
             </p>
@@ -296,7 +299,7 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
               fontWeight: '600',
               marginBottom: '4px',
               marginTop: '0',
-              color: '#18181b'
+              color: '#e4e4e7'
             }}>
               The aclue Team
             </p>
@@ -325,7 +328,7 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
             textAlign: 'center' as const,
             fontSize: '16px',
             lineHeight: '1.6',
-            color: '#52525b'
+            color: '#e4e4e7'
           }} className="footer">
 
             {/* Privacy Rights and Legal Section */}
@@ -342,7 +345,7 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
                 fontWeight: '600',
                 marginBottom: '16px',
                 marginTop: '0',
-                color: '#18181b',
+                color: '#e4e4e7',
                 textAlign: 'center' as const
               }}>
                 Your Privacy & Rights
@@ -353,7 +356,7 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
                 lineHeight: '1.6',
                 marginBottom: '20px',
                 marginTop: '0',
-                color: '#3f3f46',
+                color: '#e4e4e7',
                 textAlign: 'center' as const
               }}>
                 We respect your privacy and data rights under GDPR. You have the right to access, update, or delete your personal data at any time.
@@ -433,7 +436,7 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
                   fontWeight: '600',
                   marginBottom: '4px',
                   marginTop: '0',
-                  color: '#18181b'
+                  color: '#e4e4e7'
                 }}>
                   aclue Limited
                 </p>
@@ -441,7 +444,7 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
                   fontSize: '13px',
                   marginBottom: '0',
                   marginTop: '0',
-                  color: '#3f3f46',
+                  color: '#e4e4e7',
                   lineHeight: '1.5'
                 }}>
                   71-75 Shelton Street, Covent Garden<br />
