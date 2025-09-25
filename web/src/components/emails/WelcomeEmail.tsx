@@ -52,9 +52,9 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
       .content { background: #ffffff !important; color: #18181b !important; }
       .glassmorphism-card { background: #f0f9ff !important; border: 1px solid #bae6fd !important; color: #18181b !important; }
       .section-divider { border-top: 1px solid #bae6fd !important; }
-      .early-access-badge { background: #f0f9ff !important; border: 1px solid #0ea5e9 !important; color: #18181b !important; }
+      .early-access-badge { background: #f0f9ff !important; border: 1px solid #00d4ff !important; color: #18181b !important; }
       .footer { color: #18181b !important; }
-      .footer a { color: #0284c7 !important; }
+      .footer a { color: #007cf0 !important; }
       .footer div[style*="background: #27272a"] { background: #f8fafc !important; border-color: #bae6fd !important; }
       .footer div[style*="border-top: 1px solid #52525b"] { border-color: #bae6fd !important; }
       .footer a[style*="background: #3f3f46"] { background: #fef2f2 !important; border-color: #ef4444 !important; }
@@ -74,9 +74,9 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
       .content { background: #1e293b !important; color: #e2e8f0 !important; }
       .glassmorphism-card { background: #334155 !important; border: 1px solid #475569 !important; color: #e2e8f0 !important; }
       .section-divider { border-top: 1px solid #475569 !important; }
-      .early-access-badge { background: #334155 !important; border: 1px solid #3b82f6 !important; color: #e2e8f0 !important; }
+      .early-access-badge { background: #334155 !important; border: 1px solid #00d4ff !important; color: #e2e8f0 !important; }
       .footer { color: #e2e8f0 !important; }
-      .footer a { color: #60a5fa !important; }
+      .footer a { color: #00d4ff !important; }
       .footer div[style*="background: #f8fafc"] { background: #1e293b !important; border-color: #475569 !important; }
       .footer div[style*="border-top: 1px solid #e2e8f0"] { border-color: #475569 !important; }
       .footer a[style*="background: #fef2f2"] { background: #334155 !important; border-color: #ef4444 !important; }
@@ -108,7 +108,7 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
 
     .early-access-badge {
       background: #334155;
-      border: 1px solid #3b82f6;
+      border: 1px solid #00d4ff;
       border-radius: 12px;
       padding: 20px;
       margin: 24px 0;
@@ -128,7 +128,7 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
   const emailWrapper = {
     borderRadius: '12px',
     overflow: 'hidden',
-    boxShadow: '0 8px 32px rgba(14, 165, 233, 0.25)',
+    boxShadow: '0 8px 32px rgba(0, 212, 255, 0.35)',
   }
 
   // Header styles with WCAG-compliant solid background
@@ -211,13 +211,13 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
     borderRadius: '16px',
     padding: '28px',
     margin: '28px 0',
-    boxShadow: '0 4px 16px rgba(14, 165, 233, 0.1)',
+    boxShadow: '0 4px 16px rgba(0, 212, 255, 0.15)',
   }
 
   // WCAG-compliant early access badge styles
   const earlyAccessBadge = {
     background: '#334155',
-    border: '1px solid #3b82f6',
+    border: '1px solid #00d4ff',
     borderRadius: '12px',
     padding: '20px',
     margin: '24px 0',
@@ -248,7 +248,7 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
 
           {/* Subscription Confirmation */}
           <section>
-            <h2 style={sectionHeading} className="section-heading">📧 You're Successfully Subscribed</h2>
+            <h2 style={sectionHeading} className="section-heading">📧 Thanks for subscribing</h2>
             <p style={text} className="body-text">
               You'll receive curated updates about new features,
               intelligent recommendations, and exclusive insights into the future of gifting.
@@ -315,7 +315,7 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
               <a
                 href="https://aclue.app"
                 style={{
-                  color: '#60a5fa',
+                  color: '#00d4ff',
                   textDecoration: 'none',
                   fontSize: '16px',
                   fontWeight: '500'
@@ -405,7 +405,7 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
                 }}>
                   <a href="https://aclue.app/privacy"
                     style={{
-                      color: '#60a5fa',
+                      color: '#00d4ff',
                       textDecoration: 'none',
                       fontWeight: '500'
                     }}>
@@ -414,7 +414,7 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
                   <span style={{ color: '#94a3b8', margin: '0 8px' }}>•</span>
                   <a href="https://aclue.app/terms"
                     style={{
-                      color: '#60a5fa',
+                      color: '#00d4ff',
                       textDecoration: 'none',
                       fontWeight: '500'
                     }}>
@@ -423,7 +423,7 @@ export default function WelcomeEmail({ email, source = 'newsletter' }: WelcomeEm
                   <span style={{ color: '#94a3b8', margin: '0 8px' }}>•</span>
                   <a href="https://aclue.app/data-rights"
                     style={{
-                      color: '#60a5fa',
+                      color: '#00d4ff',
                       textDecoration: 'none',
                       fontWeight: '500'
                     }}>
