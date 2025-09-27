@@ -304,14 +304,18 @@ export const metadata: Metadata = {
     images: ['/aclue_text_clean.png'],
     creator: '@aclue',
   },
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 1,
-  },
-  themeColor: '#6366f1',
   manifest: '/manifest.json',
   alternates: {
     canonical: 'https://aclue.app',
   },
+}
+
+/**
+ * Viewport configuration for marketing pages
+ */
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  themeColor: '#6366f1',
 }

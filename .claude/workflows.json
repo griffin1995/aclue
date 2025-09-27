@@ -1,0 +1,189 @@
+{
+  "workflows": {
+    "start": {
+      "name": "aclue Development Environment Startup",
+      "description": "Comprehensive development environment setup and launch for the aclue platform",
+      "version": "1.0.0",
+      "script": "scripts/start.js",
+      "category": "development",
+      "tags": ["startup", "development", "environment", "servers"],
+      "parameters": {
+        "mode": {
+          "type": "string",
+          "description": "Startup mode",
+          "enum": ["full", "quick", "backend-only", "frontend-only"],
+          "default": "full"
+        },
+        "verbose": {
+          "type": "boolean",
+          "description": "Enable verbose logging",
+          "default": false
+        },
+        "skipChecks": {
+          "type": "boolean",
+          "description": "Skip environment validation checks",
+          "default": false
+        },
+        "browser": {
+          "type": "boolean",
+          "description": "Launch browser after startup",
+          "default": true
+        }
+      },
+      "examples": [
+        {
+          "command": "/start",
+          "description": "Full startup with default options"
+        },
+        {
+          "command": "/start --quick --verbose",
+          "description": "Quick startup with verbose logging"
+        },
+        {
+          "command": "/start --backend-only --no-browser",
+          "description": "Start only backend service without browser"
+        },
+        {
+          "command": "/start --frontend-only --skip-checks",
+          "description": "Start only frontend service, skip validation"
+        }
+      ],
+      "integrations": {
+        "mcp": {
+          "railway": {
+            "description": "Backend deployment management and monitoring",
+            "tools": [
+              "get-logs",
+              "list-services",
+              "check-railway-status"
+            ]
+          },
+          "vercel": {
+            "description": "Frontend deployment management",
+            "tools": [
+              "getDeployments",
+              "getDeployment"
+            ]
+          },
+          "filesystem": {
+            "description": "Project file operations",
+            "tools": [
+              "read_text_file",
+              "write_file",
+              "list_directory"
+            ]
+          },
+          "playwright": {
+            "description": "Browser automation for testing",
+            "tools": [
+              "browser_navigate",
+              "browser_snapshot"
+            ]
+          }
+        },
+        "scripts": {
+          "backend_start": "backend/start.sh",
+          "quick_start_guide": "QUICK_START_GUIDE.md"
+        }
+      },
+      "phases": [
+        {
+          "name": "Environment Validation",
+          "description": "Validate system requirements and project structure",
+          "duration_estimate": "10-15s",
+          "checks": [
+            "Project directory existence",
+            "Required binaries (node, python3, git)",
+            "Version compatibility",
+            "Working directory validation"
+          ]
+        },
+        {
+          "name": "Project Setup",
+          "description": "Setup dependencies and configuration files",
+          "duration_estimate": "30-120s",
+          "tasks": [
+            "Backend virtual environment creation",
+            "Python dependencies installation",
+            "Frontend node_modules installation",
+            "Environment file generation"
+          ]
+        },
+        {
+          "name": "Service Health Checks",
+          "description": "Verify system readiness and port availability",
+          "duration_estimate": "5-10s",
+          "checks": [
+            "Port availability (3000, 8000)",
+            "Database connectivity",
+            "Deployment services status"
+          ]
+        },
+        {
+          "name": "Server Startup",
+          "description": "Launch development servers",
+          "duration_estimate": "10-20s",
+          "services": [
+            "Backend FastAPI server (port 8000)",
+            "Frontend Next.js dev server (port 3000)"
+          ]
+        },
+        {
+          "name": "Service Verification",
+          "description": "Verify servers are healthy and responsive",
+          "duration_estimate": "5-10s",
+          "checks": [
+            "Backend health endpoint",
+            "Frontend page load",
+            "API documentation access"
+          ]
+        },
+        {
+          "name": "Browser Launch",
+          "description": "Open development URLs in browser",
+          "duration_estimate": "2-5s",
+          "urls": [
+            "http://localhost:3000 (Frontend)",
+            "http://localhost:8000/docs (API Docs)"
+          ]
+        },
+        {
+          "name": "Status Report",
+          "description": "Generate comprehensive status dashboard",
+          "duration_estimate": "1-2s",
+          "output": [
+            "Service status summary",
+            "Quick access links",
+            "Useful commands",
+            "Next steps guidance"
+          ]
+        }
+      ],
+      "total_duration_estimate": "60-180s",
+      "success_criteria": [
+        "Backend server running on port 8000",
+        "Frontend server running on port 3000",
+        "Health checks passing",
+        "Development URLs accessible"
+      ],
+      "failure_recovery": [
+        "Port conflict resolution",
+        "Dependency installation retry",
+        "Environment file regeneration",
+        "Process cleanup and restart"
+      ]
+    }
+  },
+  "aliases": {
+    "dev": "start",
+    "up": "start",
+    "launch": "start",
+    "boot": "start"
+  },
+  "metadata": {
+    "created": "2025-01-24T00:00:00Z",
+    "author": "aclue Development Team",
+    "project": "aclue-preprod",
+    "version": "1.0.0"
+  }
+}

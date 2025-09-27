@@ -1,0 +1,55 @@
+{
+  "performance": {
+    "contextOptimization": true,
+    "lazyLoadTools": true,
+    "cacheResults": true,
+    "maxContextTokens": 25000
+  },
+  "mcpServers": {
+    "loadOrder": ["vercel", "railway", "filesystem", "playwright", "memory"],
+    "prioritization": "dynamic",
+    "contextFiltering": true
+  },
+  "tools": {
+    "preload": [
+      "mcp__filesystem__read_text_file",
+      "mcp__filesystem__edit_file",
+      "mcp__filesystem__list_directory",
+      "mcp__vercel__getDeployment",
+      "mcp__railway__get-logs",
+      "Bash",
+      "Edit",
+      "Read"
+    ],
+    "onDemand": [
+      "mcp__playwright__*",
+      "mcp__memory__*",
+      "WebSearch",
+      "WebFetch"
+    ]
+  },
+  "permissions": {
+    "allow": [
+      "Bash(git:*)",
+      "Bash(npm:*)",
+      "Bash(npx:*)",
+      "Bash(vercel:*)",
+      "Bash(railway:*)",
+      "Bash(python:*)",
+      "Bash(node:*)",
+      "mcp__filesystem__*",
+      "mcp__railway__*",
+      "mcp__vercel__*",
+      "Read(/home/jack/Documents/aclue-preprod/**)",
+      "WebFetch(domain:aclue.app)",
+      "WebFetch(domain:aclue-backend-production.up.railway.app)"
+    ],
+    "deny": []
+  },
+  "development": {
+    "autoCommit": false,
+    "linting": true,
+    "typeChecking": true,
+    "testingFramework": "jest"
+  }
+}

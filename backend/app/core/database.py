@@ -9,14 +9,14 @@ logger = structlog.get_logger(__name__)
 
 # Create async engine
 engine = create_async_engine(
-    settings.DATABASE_URL.replace("postgresql://", "postgresql+asyncpg://"),
+    str(settings.DATABASE_URL).replace("postgresql://", "postgresql+asyncpg://"),
     echo=settings.DEBUG,
     pool_size=settings.DATABASE_POOL_SIZE,
     max_overflow=settings.DATABASE_MAX_OVERFLOW,
     pool_pre_ping=True,
     # For SQLite compatibility in tests
-    poolclass=StaticPool if "sqlite" in settings.DATABASE_URL else None,
-    connect_args={"check_same_thread": False} if "sqlite" in settings.DATABASE_URL else {},
+    poolclass=StaticPool if "sqlite" in str(settings.DATABASE_URL) else None,
+    connect_args={"check_same_thread": False} if "sqlite" in str(settings.DATABASE_URL) else {},
 )
 
 # Create async session factory

@@ -1,0 +1,42 @@
+{
+  "agentOptimization": {
+    "coreAgents": [
+      "context-manager",
+      "backend-architect",
+      "frontend-developer",
+      "code-reviewer",
+      "devops-troubleshooter",
+      "security-auditor"
+    ],
+    "projectSpecificAgents": [
+      "dx-optimizer",
+      "deployment-engineer",
+      "api-documenter",
+      "test-automator"
+    ],
+    "onDemandAgents": [
+      "performance-engineer",
+      "database-optimizer",
+      "incident-responder",
+      "ui-ux-designer"
+    ],
+    "disabledAgents": [
+      "quant-analyst",
+      "risk-manager",
+      "unity-developer",
+      "ios-developer",
+      "c-pro",
+      "cpp-pro"
+    ]
+  },
+  "modelAssignment": {
+    "haiku": ["api-documenter", "content-marketer", "customer-support"],
+    "sonnet": ["frontend-developer", "backend-architect", "code-reviewer", "dx-optimizer"],
+    "opus": ["context-manager", "security-auditor", "incident-responder", "performance-engineer"]
+  },
+  "contextLimits": {
+    "perAgent": 5000,
+    "total": 20000,
+    "spillover": "disk-cache"
+  }
+}

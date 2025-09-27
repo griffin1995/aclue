@@ -1,10 +1,10 @@
 /**
  * aclue Next.js Configuration
- * 
+ *
  * Production-ready Next.js configuration for the aclue gift recommendation platform.
  * Optimised for performance, security, and deployment flexibility across development,
  * staging, and production environments.
- * 
+ *
  * Key Features:
  *   - Advanced image optimization with Amazon CDN support
  *   - Security headers and CORS configuration
@@ -12,25 +12,25 @@
  *   - Environment-specific settings
  *   - API proxy for development
  *   - Static export support for S3 deployment
- * 
+ *
  * Deployment Targets:
  *   - Vercel (serverless)
  *   - AWS S3 + CloudFront (static)
  *   - Docker containers (standalone)
  *   - Traditional hosting (server)
- * 
+ *
  * Performance Optimizations:
  *   - SWC compiler for faster builds
  *   - Image optimization with WebP/AVIF
  *   - Console removal in production
  *   - ETag and compression configuration
- * 
+ *
  * Security Features:
  *   - Security headers (XSS, clickjacking protection)
  *   - CORS policy enforcement
  *   - Referrer policy configuration
  *   - Permissions policy restrictions
- * 
+ *
  * @type {import('next').NextConfig}
  */
 const nextConfig = {
@@ -39,17 +39,17 @@ const nextConfig = {
   // ===========================================================================
 
   reactStrictMode: true,        // Enable React strict mode for development warnings
-  
+
   // ===========================================================================
   // ENVIRONMENT VARIABLES
   // ===========================================================================
   // Client-side environment variables with fallback defaults
-  
+
   env: {
     // Core service URLs
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000',     // Backend API endpoint
     NEXT_PUBLIC_WEB_URL: process.env.NEXT_PUBLIC_WEB_URL || 'http://localhost:3000',     // Frontend application URL
-    
+
     // Analytics and monitoring
     NEXT_PUBLIC_MIXPANEL_TOKEN: process.env.NEXT_PUBLIC_MIXPANEL_TOKEN,                 // Mixpanel analytics token
     NEXT_PUBLIC_SENTRY_DSN: process.env.NEXT_PUBLIC_SENTRY_DSN,                         // Sentry error tracking DSN
@@ -60,7 +60,7 @@ const nextConfig = {
   // IMAGE OPTIMIZATION
   // ===========================================================================
   // Next.js image optimization with CDN and external domain support
-  
+
   images: {
     // Enable image optimization for better performance
     unoptimized: false,
@@ -80,7 +80,7 @@ const nextConfig = {
         protocol: 'http',
         hostname: 'localhost',                                 // Local development images
       },
-      
+
       // Stock photo services
       {
         protocol: 'https',
@@ -90,7 +90,7 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'images.pexels.com',                         // Pexels stock photos
       },
-      
+
       // AWS S3 storage
       {
         protocol: 'https',
@@ -104,7 +104,7 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'aclue-dev-assets.s3.amazonaws.com',      // Development asset bucket
       },
-      
+
       // Amazon product images (for affiliate links)
       {
         protocol: 'https',
@@ -114,7 +114,7 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'images-na.ssl-images-amazon.com',           // Amazon SSL CDN
       },
-      
+
       // Development and testing
       {
         protocol: 'https',
@@ -127,7 +127,7 @@ const nextConfig = {
   // WEBPACK CONFIGURATION
   // ===========================================================================
   // Custom webpack configuration for enhanced functionality
-  
+
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     // Add support for SVG imports as React components
     config.module.rules.push({
@@ -177,7 +177,7 @@ const nextConfig = {
   // SECURITY HEADERS
   // ===========================================================================
   // HTTP security headers for protection against common attacks
-  
+
   async headers() {
     return [
       // Global security headers for all routes
@@ -202,14 +202,14 @@ const nextConfig = {
           }
         ]
       },
-      
+
       // API-specific CORS headers
       {
         source: '/api/(.*)',           // Apply to API routes
         headers: [
           {
             key: 'Access-Control-Allow-Origin',
-            value: process.env.NODE_ENV === 'production' 
+            value: process.env.NODE_ENV === 'production'
               ? 'https://aclue.app'     // Production domain only
               : 'http://localhost:3000'        // Development localhost
           },
@@ -230,7 +230,7 @@ const nextConfig = {
   // URL REDIRECTS
   // ===========================================================================
   // Permanent redirects for SEO and user experience
-  
+
   async redirects() {
     return [
       // Legacy route redirects
@@ -256,7 +256,7 @@ const nextConfig = {
   // URL REWRITES
   // ===========================================================================
   // Development API proxy and URL rewriting
-  
+
   async rewrites() {
     // Only enable API proxy in development for CORS and testing
     if (process.env.NODE_ENV === 'development') {
@@ -275,7 +275,7 @@ const nextConfig = {
   // ===========================================================================
   // BUILD CONFIGURATION
   // ===========================================================================
-  
+
   // Build output mode for different deployment targets
   output: process.env.BUILD_STANDALONE === 'true' ? 'standalone' : undefined,
 
@@ -303,7 +303,7 @@ const nextConfig = {
   // ===========================================================================
 
   typedRoutes: true,              // Enable typed routes for better DX
-  
+
   // ===========================================================================
   // EXPERIMENTAL FEATURES
   // ===========================================================================
@@ -332,7 +332,7 @@ const nextConfig = {
   // COMPILER OPTIMIZATIONS
   // ===========================================================================
   // SWC compiler optimizations for production
-  
+
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production' ? {
       exclude: ['error']            // Remove console.log but keep console.error
@@ -342,7 +342,7 @@ const nextConfig = {
   // ===========================================================================
   // TYPESCRIPT CONFIGURATION
   // ===========================================================================
-  
+
   typescript: {
     ignoreBuildErrors: true,  // Temporarily ignore for deployment
   },
@@ -350,7 +350,7 @@ const nextConfig = {
   // ===========================================================================
   // ESLINT CONFIGURATION
   // ===========================================================================
-  
+
   eslint: {
     ignoreDuringBuilds: false,      // Run ESLint during builds to catch issues early
   },
@@ -375,13 +375,13 @@ const nextConfig = {
   // Configuration for static deployment (S3, CDN)
 
   trailingSlash: false,           // Disable trailing slashes for App Router compatibility
-  
-  
+
+
   // ===========================================================================
   // PAGE EXTENSIONS
   // ===========================================================================
   // Supported file extensions for pages and API routes
-  
+
   pageExtensions: ['ts', 'tsx', 'js', 'jsx'],  // TypeScript and JavaScript support
 };
 

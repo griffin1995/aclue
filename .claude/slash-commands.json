@@ -1,0 +1,350 @@
+{
+  "slashCommands": {
+    "start": {
+      "name": "start",
+      "description": "Launch the aclue development environment with context-manager-first architecture for intelligent error recovery",
+      "category": "development",
+      "priority": "high",
+      "handler": {
+        "type": "node",
+        "path": ".claude/scripts/start.js",
+        "timeout": 300000,
+        "requiresConfirmation": false,
+        "architecture": "context-manager-first"
+      },
+      "parameters": [
+        {
+          "name": "mode",
+          "type": "flag",
+          "description": "Startup mode",
+          "options": [
+            {
+              "flag": "--quick",
+              "alias": "-q",
+              "description": "Quick startup - skip dependency installation checks"
+            },
+            {
+              "flag": "--backend-only",
+              "description": "Start only the FastAPI backend server"
+            },
+            {
+              "flag": "--frontend-only",
+              "description": "Start only the Next.js frontend development server"
+            }
+          ]
+        },
+        {
+          "name": "options",
+          "type": "flag",
+          "description": "Additional options",
+          "options": [
+            {
+              "flag": "--verbose",
+              "alias": "-v",
+              "description": "Enable verbose logging and detailed output"
+            },
+            {
+              "flag": "--skip-checks",
+              "description": "Skip environment validation and port conflict checks"
+            },
+            {
+              "flag": "--no-browser",
+              "description": "Don't automatically launch browser after startup"
+            },
+            {
+              "flag": "--help",
+              "alias": "-h",
+              "description": "Show detailed help information"
+            }
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "command": "/start",
+          "description": "Full startup - both backend and frontend with all checks"
+        },
+        {
+          "command": "/start --quick",
+          "description": "Quick startup - skip dependency installation checks"
+        },
+        {
+          "command": "/start --verbose --backend-only",
+          "description": "Start only backend with detailed logging"
+        },
+        {
+          "command": "/start --frontend-only --no-browser",
+          "description": "Start only frontend without opening browser"
+        },
+        {
+          "command": "/start --skip-checks --quick",
+          "description": "Fastest startup - skip all validation and dependency checks"
+        }
+      ],
+      "output": {
+        "format": "structured",
+        "includes": [
+          "Service status dashboard",
+          "Quick access URLs",
+          "Process IDs and ports",
+          "Health check results",
+          "Next steps guidance"
+        ]
+      },
+      "integration": {
+        "contextManager": {
+          "enabled": true,
+          "loadFirst": true,
+          "agentDelegation": {
+            "python-pro": "Python dependency issues",
+            "typescript-pro": "Node.js dependency issues",
+            "deployment-engineer": "Railway/Vercel deployment issues",
+            "database-admin": "Supabase connectivity issues",
+            "devops-troubleshooter": "Port conflicts and system issues",
+            "error-detective": "Complex debugging scenarios"
+          }
+        },
+        "mcp": {
+          "required": ["filesystem"],
+          "optional": ["railway", "vercel", "playwright", "memory"]
+        },
+        "services": {
+          "backend": {
+            "port": 8000,
+            "healthEndpoint": "/health",
+            "docsEndpoint": "/docs"
+          },
+          "frontend": {
+            "port": 3000,
+            "healthEndpoint": "/",
+            "devMode": true
+          }
+        },
+        "dependencies": {
+          "node": ">=18.0.0",
+          "python": ">=3.8.0",
+          "npm": "*",
+          "git": "*"
+        }
+      },
+      "estimatedDuration": {
+        "quick": "30-60s",
+        "full": "60-180s",
+        "firstRun": "120-300s"
+      },
+      "troubleshooting": {
+        "commonIssues": [
+          {
+            "issue": "Port 8000/3000 already in use",
+            "solution": "Command will detect and offer to terminate conflicting processes"
+          },
+          {
+            "issue": "Dependencies not installed",
+            "solution": "Run without --quick flag to install missing dependencies"
+          },
+          {
+            "issue": "Environment files missing",
+            "solution": "Command automatically creates .env files from templates"
+          },
+          {
+            "issue": "Python virtual environment missing",
+            "solution": "Command automatically creates venv in backend directory"
+          }
+        ]
+      }
+    },
+    "save": {
+      "name": "save",
+      "description": "Graceful development environment shutdown with comprehensive state preservation",
+      "category": "development",
+      "priority": "high",
+      "handler": {
+        "type": "script",
+        "path": ".claude/scripts/save-command.sh",
+        "timeout": 180000,
+        "requiresConfirmation": false
+      },
+      "parameters": [
+        {
+          "name": "mode",
+          "type": "flag",
+          "description": "Shutdown mode",
+          "options": [
+            {
+              "flag": "--quick",
+              "alias": "-q",
+              "description": "Quick shutdown - skip comprehensive checks"
+            },
+            {
+              "flag": "--force",
+              "alias": "-f",
+              "description": "Force shutdown - kill all processes immediately"
+            },
+            {
+              "flag": "--status-only",
+              "description": "Save session state without shutting down processes"
+            },
+            {
+              "flag": "--dry-run",
+              "description": "Preview what would be done without executing"
+            }
+          ]
+        },
+        {
+          "name": "git",
+          "type": "flag",
+          "description": "Git operations",
+          "options": [
+            {
+              "flag": "--commit",
+              "description": "Auto-commit uncommitted changes before shutdown"
+            },
+            {
+              "flag": "--stash",
+              "description": "Stash uncommitted changes for later recovery"
+            }
+          ]
+        },
+        {
+          "name": "options",
+          "type": "flag",
+          "description": "Additional options",
+          "options": [
+            {
+              "flag": "--verbose",
+              "alias": "-v",
+              "description": "Enable verbose logging and detailed output"
+            },
+            {
+              "flag": "--clean",
+              "description": "Perform resource cleanup (temp files, caches, logs)"
+            },
+            {
+              "flag": "--help",
+              "alias": "-h",
+              "description": "Show detailed help information"
+            }
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "command": "/save",
+          "description": "Standard graceful shutdown with state preservation"
+        },
+        {
+          "command": "/save --commit --clean",
+          "description": "Commit changes and perform cleanup before shutdown"
+        },
+        {
+          "command": "/save --quick --verbose",
+          "description": "Quick shutdown with detailed logging"
+        },
+        {
+          "command": "/save --force",
+          "description": "Emergency force shutdown (last resort)"
+        },
+        {
+          "command": "/save --stash --status-only",
+          "description": "Stash changes and save state without shutdown"
+        },
+        {
+          "command": "/save --dry-run",
+          "description": "Preview shutdown operations without executing"
+        }
+      ],
+      "output": {
+        "format": "structured",
+        "includes": [
+          "Process termination summary",
+          "Git operations status",
+          "Session state preservation",
+          "Cleanup operation results",
+          "Recovery instructions"
+        ]
+      },
+      "integration": {
+        "mcp": {
+          "required": ["filesystem"],
+          "optional": ["railway", "vercel", "memory"]
+        },
+        "services": {
+          "processManager": {
+            "gracefulTimeout": 10000,
+            "forceTimeout": 5000,
+            "maxAttempts": 3
+          },
+          "stateManager": {
+            "contextDirectory": ".claude/context",
+            "preserveHistory": true,
+            "mcpIntegration": true
+          },
+          "gitManager": {
+            "autoCommit": "optional",
+            "stashSupport": true,
+            "backupCreation": true
+          },
+          "cleanupManager": {
+            "tempFiles": true,
+            "cacheCleanup": true,
+            "logArchival": true
+          }
+        },
+        "dependencies": {
+          "node": ">=18.0.0",
+          "git": "*"
+        }
+      },
+      "estimatedDuration": {
+        "standard": "15-30s",
+        "quick": "5-15s",
+        "force": "<5s",
+        "statusOnly": "5-10s",
+        "withCleanup": "30-60s"
+      },
+      "troubleshooting": {
+        "commonIssues": [
+          {
+            "issue": "Process won't terminate gracefully",
+            "solution": "Use --force flag for emergency shutdown"
+          },
+          {
+            "issue": "Git operations fail",
+            "solution": "Check git repository status and permissions"
+          },
+          {
+            "issue": "State preservation fails",
+            "solution": "Ensure .claude/context directory has write permissions"
+          },
+          {
+            "issue": "Cleanup operations timeout",
+            "solution": "Run with --quick to skip cleanup or check filesystem permissions"
+          }
+        ]
+      }
+    }
+  },
+  "aliases": {
+    "dev": "start",
+    "up": "start",
+    "launch": "start",
+    "boot": "start",
+    "run": "start",
+    "stop": "save",
+    "shutdown": "save",
+    "halt": "save",
+    "down": "save",
+    "exit": "save"
+  },
+  "metadata": {
+    "version": "2.0.0",
+    "created": "2025-01-24T00:00:00Z",
+    "project": "aclue-preprod",
+    "author": "Backend System Architect",
+    "lastUpdated": "2025-01-24T12:00:00Z",
+    "features": {
+      "startCommand": "v1.0.0 - Comprehensive development environment startup",
+      "saveCommand": "v1.0.0 - Graceful shutdown with state preservation"
+    }
+  }
+}

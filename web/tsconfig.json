@@ -2,31 +2,31 @@
   "_description": "aclue TypeScript Configuration - Strict type checking for production-ready React/Next.js development",
   "_features": [
     "Strict type checking with comprehensive error detection",
-    "Path mapping for clean imports and better developer experience", 
+    "Path mapping for clean imports and better developer experience",
     "Next.js optimization with incremental compilation",
     "Production-ready compiler options for performance and safety",
     "Testing framework integration with Jest and React Testing Library"
   ],
-  
+
   "compilerOptions": {
     // ==========================================================================
     // COMPILATION TARGET AND LIBRARIES
     // ==========================================================================
     "target": "ES2020",                       // Target ES2020 for modern browsers (better performance)
     "lib": ["DOM", "DOM.Iterable", "ES2020"],  // Include DOM APIs and ES2020 features
-    
+
     // ==========================================================================
     // JAVASCRIPT INTEGRATION
     // ==========================================================================
     "allowJs": true,                           // Allow importing JavaScript files
     "skipLibCheck": true,                      // Skip type checking of declaration files for faster builds
-    
+
     // ==========================================================================
     // TYPE CHECKING STRICTNESS
     // ==========================================================================
     "strict": true,                            // Enable all strict type checking options
     "forceConsistentCasingInFileNames": true,  // Ensure consistent file name casing
-    
+
     // ==========================================================================
     // OUTPUT AND MODULE SYSTEM
     // ==========================================================================
@@ -36,12 +36,12 @@
     "moduleResolution": "bundler",             // Use bundler resolution for better performance
     "resolveJsonModule": true,                 // Allow importing JSON files
     "isolatedModules": true,                   // Ensure each file can be safely transpiled
-    
+
     // ==========================================================================
     // JSX AND REACT CONFIGURATION
     // ==========================================================================
     "jsx": "preserve",                         // Preserve JSX for Next.js to handle
-    
+
     // ==========================================================================
     // BUILD PERFORMANCE
     // ==========================================================================
@@ -51,7 +51,7 @@
         "name": "next"                         // Next.js TypeScript plugin for enhanced IDE support
       }
     ],
-    
+
     // ==========================================================================
     // PATH MAPPING FOR CLEAN IMPORTS
     // ==========================================================================
@@ -70,13 +70,13 @@
       "@/context/*": ["./src/context/*"],      // React context providers
       "@/config/*": ["./src/config/*"]         // Application configuration
     },
-    
+
     // ==========================================================================
     // TYPE DEFINITIONS
     // ==========================================================================
     "types": ["jest", "node"], // Include type definitions
     "typeRoots": ["./node_modules/@types", "./src/types"], // Type definition roots
-    
+
     // ==========================================================================
     // OUTPUT CONFIGURATION
     // ==========================================================================
@@ -84,7 +84,7 @@
     "declarationMap": false,                   // Don't generate declaration source maps
     "sourceMap": true,                         // Generate source maps for debugging
     "removeComments": true,                    // Remove comments from output
-    
+
     // ==========================================================================
     // ADVANCED TYPE CHECKING
     // ==========================================================================
@@ -106,7 +106,7 @@
     "useUnknownInCatchVariables": true,        // Use 'unknown' type for catch clause variables
     "verbatimModuleSyntax": false               // Temporarily disabled for build fixes
   },
-  
+
   // ============================================================================
   // FILE INCLUSION
   // ============================================================================
@@ -116,7 +116,7 @@
     "**/*.tsx",                                // All TypeScript React files
     ".next/types/**/*.ts"                      // Next.js generated types
   ],
-  
+
   // ============================================================================
   // FILE EXCLUSION
   // ============================================================================

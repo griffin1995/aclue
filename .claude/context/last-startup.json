@@ -1,0 +1,59 @@
+{
+  "timestamp": "2025-09-26T15:59:38.008Z",
+  "services": {
+    "environment": "unknown",
+    "backend": {
+      "status": "unhealthy",
+      "port": 8000,
+      "pid": 320459
+    },
+    "frontend": {
+      "status": "unhealthy",
+      "port": 3000,
+      "pid": 320507
+    },
+    "database": {
+      "status": "unreachable",
+      "connected": false
+    },
+    "services": {
+      "vercel": "operational",
+      "railway": "operational"
+    },
+    "contextManager": {
+      "activated": true,
+      "activatedAt": "2025-09-26T15:59:11.858Z",
+      "mode": "startup-coordinator",
+      "delegationEnabled": true,
+      "availableAgents": [
+        "python-pro",
+        "typescript-pro",
+        "deployment-engineer",
+        "database-admin",
+        "devops-troubleshooter",
+        "error-detective"
+      ]
+    },
+    "agentDelegation": {
+      "delegated": true,
+      "agent": "python-pro",
+      "task": "fix Python dependency issues preventing /start command",
+      "timestamp": "2025-09-26T15:59:25.967Z",
+      "errorContext": {
+        "phase": "project-setup",
+        "error": "Backend setup failed: Command failed: venv/bin/pip install -r requirements.txt\nERROR: Could not install packages due to an OSError: [Errno 28] No space left on device\n\n",
+        "stack": "Error: Backend setup failed: Command failed: venv/bin/pip install -r requirements.txt\nERROR: Could not install packages due to an OSError: [Errno 28] No space left on device\n\n\n    at AclueStartCommand.setupBackend (/home/jack/Documents/aclue-preprod/.claude/scripts/start.js:576:19)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async AclueStartCommand.setupProject (/home/jack/Documents/aclue-preprod/.claude/scripts/start.js:509:13)\n    at async AclueStartCommand.setupProjectWithRecovery (/home/jack/Documents/aclue-preprod/.claude/scripts/start.js:380:13)\n    at async AclueStartCommand.execute (/home/jack/Documents/aclue-preprod/.claude/scripts/start.js:82:17)",
+        "timestamp": "2025-09-26T15:59:25.967Z"
+      }
+    }
+  },
+  "performance": {
+    "startupTime": 26.173,
+    "errors": []
+  },
+  "environment": {
+    "nodeVersion": "v20.18.2",
+    "platform": "linux",
+    "projectRoot": "/home/jack/Documents/aclue-preprod"
+  }
+}

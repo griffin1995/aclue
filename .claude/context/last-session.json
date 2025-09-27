@@ -1,0 +1,167 @@
+{
+  "timestamp": "2025-09-24T15:48:06.355Z",
+  "processes": {
+    "1608173": {
+      "pid": 1608173,
+      "command": "npm exec @modelcontextprotocol/server-filesystem /home/jack/Documents/aclue-preprod",
+      "user": "jack",
+      "cpu": 0,
+      "memory": 0,
+      "port": null,
+      "serviceType": "unknown",
+      "priority": 1,
+      "isAclue": true,
+      "discovered": "2025-09-24T15:48:06.355Z"
+    },
+    "1608234": {
+      "pid": 1608234,
+      "command": "sh -c \"mcp-server-filesystem\" /home/jack/Documents/aclue-preprod",
+      "user": "jack",
+      "cpu": 0,
+      "memory": 0,
+      "port": null,
+      "serviceType": "tools",
+      "priority": 1,
+      "isAclue": true,
+      "discovered": "2025-09-24T15:48:06.355Z"
+    },
+    "1608240": {
+      "pid": 1608240,
+      "command": "node /home/jack/.nvm/versions/node/v20.18.2/bin/mcp-server-filesystem /home/jack/Documents/aclue-preprod",
+      "user": "jack",
+      "cpu": 0,
+      "memory": 0,
+      "port": null,
+      "serviceType": "tools",
+      "priority": 1,
+      "isAclue": true,
+      "discovered": "2025-09-24T15:48:06.355Z"
+    },
+    "1630097": {
+      "pid": 1630097,
+      "command": "/bin/bash -c -l source /home/jack/.claude/shell-snapshots/snapshot-bash-1758636742427-mmnpye.sh && eval 'cd /home/jack/Documents/aclue-preprod/web && npm run dev &' \\< /dev/null && pwd -P >| /tmp/claude-ad26-cwd",
+      "user": "jack",
+      "cpu": 0,
+      "memory": 0,
+      "port": null,
+      "serviceType": "frontend",
+      "priority": 2,
+      "isAclue": true,
+      "discovered": "2025-09-24T15:48:06.354Z"
+    },
+    "1630099": {
+      "pid": 1630099,
+      "command": "npm run dev",
+      "user": "jack",
+      "cpu": 0,
+      "memory": 0,
+      "port": null,
+      "serviceType": "frontend",
+      "priority": 2,
+      "isAclue": true,
+      "discovered": "2025-09-24T15:48:06.355Z"
+    },
+    "1630121": {
+      "pid": 1630121,
+      "command": "sh -c next dev",
+      "user": "jack",
+      "cpu": 0,
+      "memory": 0,
+      "port": null,
+      "serviceType": "frontend",
+      "priority": 2,
+      "isAclue": true,
+      "discovered": "2025-09-24T15:48:06.355Z"
+    },
+    "1630122": {
+      "pid": 1630122,
+      "command": "node /home/jack/Documents/aclue-preprod/web/node_modules/.bin/next dev",
+      "user": "jack",
+      "cpu": 0,
+      "memory": 0,
+      "port": null,
+      "serviceType": "frontend",
+      "priority": 2,
+      "isAclue": true,
+      "discovered": "2025-09-24T15:48:06.355Z"
+    },
+    "1861300": {
+      "pid": 1861300,
+      "command": "npm exec @modelcontextprotocol/server-filesystem /home/jack/Documents/aclue-preprod",
+      "user": "jack",
+      "cpu": 0,
+      "memory": 0.5,
+      "port": null,
+      "serviceType": "unknown",
+      "priority": 1,
+      "isAclue": true,
+      "discovered": "2025-09-24T15:48:06.355Z"
+    },
+    "1861356": {
+      "pid": 1861356,
+      "command": "sh -c \"mcp-server-filesystem\" /home/jack/Documents/aclue-preprod",
+      "user": "jack",
+      "cpu": 0,
+      "memory": 0,
+      "port": null,
+      "serviceType": "tools",
+      "priority": 1,
+      "isAclue": true,
+      "discovered": "2025-09-24T15:48:06.355Z"
+    },
+    "1861357": {
+      "pid": 1861357,
+      "command": "node /home/jack/.nvm/versions/node/v20.18.2/bin/mcp-server-filesystem /home/jack/Documents/aclue-preprod",
+      "user": "jack",
+      "cpu": 0.3,
+      "memory": 0.2,
+      "port": null,
+      "serviceType": "tools",
+      "priority": 1,
+      "isAclue": true,
+      "discovered": "2025-09-24T15:48:06.355Z"
+    },
+    "1968084": {
+      "pid": 1968084,
+      "command": "/bin/bash -c -l source /home/jack/.claude/shell-snapshots/snapshot-bash-1758715152985-q4u5b4.sh && eval 'cd /home/jack/Documents/aclue-preprod && timeout 30 node .claude/scripts/save.js --status-only --verbose' \\< /dev/null && pwd -P >| /tmp/claude-c5cc-cwd",
+      "user": "jack",
+      "cpu": 11.1,
+      "memory": 0,
+      "port": null,
+      "serviceType": "tools",
+      "priority": 1,
+      "isAclue": true,
+      "discovered": "2025-09-24T15:48:06.355Z"
+    }
+  },
+  "services": {
+    "backend": "stopped",
+    "frontend": "running"
+  },
+  "git": {
+    "hasChanges": false,
+    "branch": "unknown"
+  },
+  "environment": {
+    "cwd": "/home/jack/Documents/aclue-preprod",
+    "nodeVersion": "v20.18.2",
+    "platform": "linux"
+  },
+  "options": {
+    "quick": false,
+    "force": false,
+    "commit": false,
+    "stash": false,
+    "clean": false,
+    "statusOnly": true,
+    "dryRun": false,
+    "verbose": true
+  },
+  "enrichmentError": "object is not iterable (cannot read property Symbol(Symbol.iterator))",
+  "metadata": {
+    "version": "1.0.0",
+    "saveCommand": "aclue-save",
+    "preservedAt": "2025-09-24T15:48:06.360Z",
+    "enrichmentFailed": true
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "workflows": {
+    "development": {
+      "agents": ["frontend-developer", "backend-architect", "code-reviewer"],
+      "tools": ["filesystem", "git", "npm"],
+      "contextLimit": 15000
+    },
+    "deployment": {
+      "agents": ["deployment-engineer", "devops-troubleshooter"],
+      "tools": ["vercel", "railway", "monitoring"],
+      "contextLimit": 10000
+    },
+    "testing": {
+      "agents": ["test-automator", "debugger", "performance-engineer"],
+      "tools": ["playwright", "jest", "lighthouse"],
+      "contextLimit": 12000
+    },
+    "production": {
+      "agents": ["incident-responder", "security-auditor", "performance-engineer"],
+      "tools": ["monitoring", "logs", "analytics"],
+      "contextLimit": 8000
+    }
+  },
+  "contextManagement": {
+    "autoCleanup": true,
+    "cacheStrategy": "lru",
+    "spilloverToFile": true
+  },
+  "aclueSpecific": {
+    "frontendPath": "/home/jack/Documents/aclue-preprod/web",
+    "backendPath": "/home/jack/Documents/aclue-preprod/backend",
+    "docsPath": "/home/jack/Documents/aclue-preprod/docs",
+    "deploymentUrls": {
+      "frontend": "https://aclue.app",
+      "backend": "https://aclue-backend-production.up.railway.app"
+    },
+    "testCredentials": {
+      "email": "john.doe@example.com",
+      "password": "password123"
+    }
+  }
+}
