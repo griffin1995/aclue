@@ -7,7 +7,7 @@ All email templates, sender addresses, and domain references have been updated t
 reflect the new aclue brand identity and aclue.app domain.
 
 This service handles sending emails for:
-- Welcome emails to newsletter subscribers  
+- Welcome emails to newsletter subscribers
 - Admin notifications to contact@aclue.app
 - Other email notifications
 
@@ -41,103 +41,103 @@ class EmailTemplate:
 class EmailService:
     """
     Email service for handling all email communications.
-    
+
     Features:
     - Newsletter welcome emails
     - Admin notifications
     - Email template management
     - Resend API integration
     """
-    
+
     def __init__(self):
         self.resend_api_key = settings.RESEND_API_KEY
         # Rebranded email addresses (August 2025) - updated from aclue/aclue domains
         self.from_email = "aclue <noreply@aclue.app>"        # Primary sender for all notifications
         self.admin_email = "jtgriffin95@gmail.com"               # Admin notifications recipient
         self.base_url = "https://api.resend.com"
-        
+
     async def send_welcome_email(self, email: str, source: str) -> bool:
         """
         Send welcome email to newsletter subscriber.
-        
+
         Args:
             email: Subscriber email address
             source: Source of the signup (e.g., 'maintenance_page')
-            
+
         Returns:
             bool: True if email sent successfully, False otherwise
         """
         try:
             template = self._get_welcome_email_template(source)
-            
+
             success = await self._send_email(
                 to_email=email,
                 subject=template.subject,
                 html_content=template.html_content,
                 text_content=template.text_content
             )
-            
+
             if success:
                 logger.info(f"Welcome email sent successfully to {email}")
             else:
                 logger.error(f"Failed to send welcome email to {email}")
-                
+
             return success
-            
+
         except Exception as e:
             logger.error(f"Error sending welcome email to {email}: {str(e)}")
             return False
-    
+
     async def send_admin_notification(self, subscriber_email: str, source: str, signup_id: str) -> bool:
         """
         Send admin notification about new newsletter signup.
-        
+
         Args:
             subscriber_email: Email address of the subscriber
             source: Source of the signup
             signup_id: Newsletter signup ID
-            
+
         Returns:
             bool: True if email sent successfully, False otherwise
         """
         try:
             template = self._get_admin_notification_template(subscriber_email, source, signup_id)
-            
+
             success = await self._send_email(
                 to_email=self.admin_email,
                 subject=template.subject,
                 html_content=template.html_content,
                 text_content=template.text_content
             )
-            
+
             if success:
                 logger.info(f"Admin notification sent for signup: {subscriber_email}")
             else:
                 logger.error(f"Failed to send admin notification for signup: {subscriber_email}")
-                
+
             return success
-            
+
         except Exception as e:
             logger.error(f"Error sending admin notification for {subscriber_email}: {str(e)}")
             return False
-    
+
     async def _send_email(self, to_email: str, subject: str, html_content: str, text_content: str) -> bool:
         """
         Send email using Resend API.
-        
+
         Args:
             to_email: Recipient email address
             subject: Email subject
             html_content: HTML email content
             text_content: Plain text email content
-            
+
         Returns:
             bool: True if email sent successfully, False otherwise
         """
         if not self.resend_api_key:
             logger.warning("RESEND_API_KEY not configured, skipping email send")
             return False
-        
+
         try:
             async with httpx.AsyncClient() as client:
                 response = await client.post(
@@ -154,18 +154,18 @@ class EmailService:
                         "text": text_content
                     }
                 )
-                
+
                 if response.status_code == 200:
                     logger.info(f"Email sent successfully to {to_email}")
                     return True
                 else:
                     logger.error(f"Failed to send email to {to_email}: {response.status_code} - {response.text}")
                     return False
-                    
+
         except Exception as e:
             logger.error(f"Error sending email to {to_email}: {str(e)}")
             return False
-    
+
     def _get_welcome_email_template(self, source: str) -> EmailTemplate:
         """
         Get welcome email template for newsletter subscriber.
@@ -435,7 +435,7 @@ class EmailService:
         </body>
         </html>
         """
-        
+
         text_content = f"""
         Welcome to aclue - AI-Powered Gift Discovery!
 
@@ -458,9 +458,9 @@ class EmailService:
         You're receiving this email because you signed up for aclue updates.
         If you no longer wish to receive these emails, you can unsubscribe by emailing contact@aclue.app
         """
-        
+
         return EmailTemplate(subject, html_content, text_content)
-    
+
     def _get_admin_notification_template(self, subscriber_email: str, source: str, signup_id: str) -> EmailTemplate:
         """
         Get admin notification template for new newsletter signup.
@@ -658,7 +658,7 @@ class EmailService:
         </body>
         </html>
         """
-        
+
         text_content = f"""
         New Newsletter Signup - aclue
 
@@ -674,5 +674,5 @@ class EmailService:
 
         You can view all newsletter subscribers in the admin dashboard.
         """
-        
+
         return EmailTemplate(subject, html_content, text_content)

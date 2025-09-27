@@ -181,7 +181,7 @@ ${CYAN}State Preservation:${NC}
 
 ${CYAN}Typical Shutdown Time:${NC}
     • Standard mode:    15-30 seconds
-    • Quick mode:       5-15 seconds  
+    • Quick mode:       5-15 seconds
     • Force mode:       < 5 seconds
     • Status only:      5-10 seconds
 
@@ -313,7 +313,7 @@ check_running_processes() {
 # Function to confirm shutdown if processes are running
 confirm_shutdown() {
     local process_count=$1
-    
+
     if [[ $process_count -eq 0 ]]; then
         return 0
     fi
@@ -427,7 +427,7 @@ main() {
     else
         exit_code=$?
         log "ERROR" "Save operation failed with exit code: $exit_code"
-        
+
         if [[ $exit_code -ne 0 ]] && [[ ! "${node_args[*]}" =~ "--force" ]]; then
             log "WARNING" "Consider using '/save --force' for emergency shutdown"
         fi

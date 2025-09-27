@@ -60,7 +60,7 @@ class SaveCleanupManager {
             await this.discoverCacheDirectories();
             await this.discoverLogFiles();
             await this.discoverBuildArtifacts();
-            
+
             if (this.options.aggressive) {
                 await this.discoverNodeModules();
                 await this.discoverPythonCache();
@@ -89,7 +89,7 @@ class SaveCleanupManager {
 
             // First analyze what we're going to clean
             const analysis = await this.analyzeCleanupItems();
-            
+
             if (analysis.totalFiles === 0) {
                 return {
                     success: true,
@@ -114,7 +114,7 @@ class SaveCleanupManager {
             await this.cleanCacheDirectories();
             await this.cleanLogFiles();
             await this.cleanBuildArtifacts();
-            
+
             if (this.options.aggressive) {
                 await this.cleanNodeModules();
                 await this.cleanPythonCache();
@@ -140,25 +140,25 @@ class SaveCleanupManager {
                 '**/tmp/*',
                 '**/*.tmp',
                 '**/*.temp',
-                
+
                 // OS temp files
                 '**/.DS_Store',
                 '**/Thumbs.db',
                 '**/*.swp',
                 '**/*.swo',
                 '**/*~',
-                
+
                 // Editor temp files
                 '**/.vscode/settings.json.bak*',
                 '**/*.bak',
                 '**/*.backup',
-                
+
                 // Development temp files
                 '**/coverage/*',
                 '**/.nyc_output/*',
                 '**/*.pid',
                 '**/*.lock',
-                
+
                 // Claude Code temp files
                 '**/.tmp-*',
                 '**/temp-*'
@@ -184,27 +184,27 @@ class SaveCleanupManager {
                 'web/.next/cache',
                 'web/.next/server',
                 'web/node_modules/.cache',
-                
+
                 // Python caches
                 'backend/__pycache__',
                 'backend/**/__pycache__',
                 'backend/.pytest_cache',
-                
+
                 // Build caches
                 'web/.nuxt',
                 'web/.output',
                 'web/dist/cache',
-                
+
                 // Package manager caches
                 'web/.yarn/cache',
                 'web/.pnp/cache',
                 'backend/.pip/cache',
-                
+
                 // Development tool caches
                 'web/.eslintcache',
                 'backend/.mypy_cache',
                 'backend/.coverage',
-                
+
                 // Claude Code caches
                 '.claude/cache',
                 '.claude/temp'
@@ -239,18 +239,18 @@ class SaveCleanupManager {
                 '**/*.log',
                 '**/logs/*',
                 '**/log/*',
-                
+
                 // Development logs
                 'web/npm-debug.log*',
                 'web/yarn-debug.log*',
                 'web/yarn-error.log*',
                 'backend/debug.log',
                 'backend/error.log',
-                
+
                 // System logs
                 '**/.pm2/logs/*',
                 '**/nohup.out',
-                
+
                 // Claude Code logs
                 '.claude/logs/*',
                 '.claude/**/*.log'
@@ -262,7 +262,7 @@ class SaveCleanupManager {
                     try {
                         const stats = await fs.stat(match);
                         const age = (Date.now() - stats.mtime.getTime()) / (1000 * 60 * 60 * 24); // days
-                        
+
                         if (!this.options.preserveLogs || age > this.options.maxLogAge) {
                             this.cleanupTargets.logFiles.push({
                                 path: match,
@@ -289,12 +289,12 @@ class SaveCleanupManager {
                 'web/.next/standalone',
                 'web/.next/static',
                 'web/out',
-                
+
                 // Python build artifacts
                 'backend/build',
                 'backend/dist',
                 'backend/*.egg-info',
-                
+
                 // General build artifacts
                 '**/build/*',
                 '**/dist/*',
@@ -451,7 +451,7 @@ class SaveCleanupManager {
                 try {
                     await fs.unlink(file);
                     this.stats.tempFiles++;
-                    
+
                     if (this.options.verbose) {
                         this.log(`   Removed: ${path.relative(this.projectRoot, file)}`, 'info');
                     }
@@ -477,7 +477,7 @@ class SaveCleanupManager {
                 try {
                     await this.removeDirectory(cache.path);
                     this.stats.cacheSize += cache.size;
-                    
+
                     if (this.options.verbose) {
                         this.log(`   Cleared: ${cache.relativePath} (${this.formatBytes(cache.size)})`, 'info');
                     }
@@ -511,7 +511,7 @@ class SaveCleanupManager {
                         // Delete very old logs
                         await fs.unlink(log.path);
                         this.stats.logFiles++;
-                        
+
                         if (this.options.verbose) {
                             this.log(`   Removed: ${path.relative(this.projectRoot, log.path)}`, 'info');
                         }
@@ -543,9 +543,9 @@ class SaveCleanupManager {
                     } else {
                         await fs.unlink(artifact.path);
                     }
-                    
+
                     this.stats.freedSpace += artifact.size;
-                    
+
                     if (this.options.verbose) {
                         this.log(`   Removed: ${path.relative(this.projectRoot, artifact.path)}`, 'info');
                     }
@@ -596,7 +596,7 @@ class SaveCleanupManager {
                 try {
                     await this.removeDirectory(cache.path);
                     this.stats.freedSpace += cache.size;
-                    
+
                     if (this.options.verbose) {
                         this.log(`   Cleared: ${path.relative(this.projectRoot, cache.path)}`, 'info');
                     }
@@ -620,7 +620,7 @@ class SaveCleanupManager {
         try {
             // Use glob-like pattern matching
             const fullPattern = path.join(this.projectRoot, pattern);
-            
+
             if (process.platform === 'win32') {
                 // Windows: Use dir command for simple patterns
                 const { stdout } = await execAsync(`dir /s /b "${fullPattern}"`, { timeout: 10000 });
@@ -676,11 +676,11 @@ class SaveCleanupManager {
         try {
             const archiveDir = path.join(this.projectRoot, '.claude', 'logs', 'archived');
             await fs.mkdir(archiveDir, { recursive: true });
-            
+
             const fileName = path.basename(logPath);
             const archiveName = `${fileName}.${Date.now()}.archived`;
             const archivePath = path.join(archiveDir, archiveName);
-            
+
             await fs.rename(logPath, archivePath);
         } catch (error) {
             // If archiving fails, just delete the file

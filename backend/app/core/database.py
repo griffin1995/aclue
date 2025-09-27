@@ -16,7 +16,9 @@ engine = create_async_engine(
     pool_pre_ping=True,
     # For SQLite compatibility in tests
     poolclass=StaticPool if "sqlite" in str(settings.DATABASE_URL) else None,
-    connect_args={"check_same_thread": False} if "sqlite" in str(settings.DATABASE_URL) else {},
+    connect_args={"check_same_thread": False}
+    if "sqlite" in str(settings.DATABASE_URL)
+    else {},
 )
 
 # Create async session factory
@@ -51,8 +53,7 @@ async def create_tables():
     try:
         async with engine.begin() as conn:
             # Import all models to ensure they're registered
-            from app.models_sqlalchemy import user, product, recommendation, swipe, gift_link, affiliate  # noqa
-            
+
             await conn.run_sync(Base.metadata.create_all)
             logger.info("Database tables created successfully")
     except Exception as e:
@@ -73,11 +74,11 @@ async def drop_tables():
 
 class DatabaseManager:
     """Database manager for handling connections and transactions."""
-    
+
     def __init__(self):
         self.engine = engine
         self.session_factory = AsyncSessionLocal
-    
+
     async def health_check(self) -> bool:
         """Check database connectivity."""
         try:
@@ -87,11 +88,11 @@ class DatabaseManager:
         except Exception as e:
             logger.error("Database health check failed", error=str(e))
             return False
-    
+
     async def get_session(self) -> AsyncSession:
         """Get a new database session."""
         return self.session_factory()
-    
+
     async def close(self):
         """Close the database engine."""
         await self.engine.dispose()

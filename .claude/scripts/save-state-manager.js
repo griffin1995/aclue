@@ -49,7 +49,7 @@ class SaveStateManager {
 
             // Store session state
             const sessionResult = await this.storeSessionState(enrichedData);
-            
+
             // Store MCP-compatible context
             const mcpResult = await this.storeMCPContext(enrichedData);
 
@@ -298,7 +298,7 @@ class SaveStateManager {
                 const packageJsonPath = path.join(this.projectRoot, 'web', 'package.json');
                 const packageContent = await fs.readFile(packageJsonPath, 'utf8');
                 const packageData = JSON.parse(packageContent);
-                
+
                 metadata.frontend = {
                     name: packageData.name,
                     version: packageData.version,
@@ -408,7 +408,7 @@ class SaveStateManager {
     async storeMCPContext(sessionData) {
         try {
             const mcpContextPath = path.join(this.stateDirectory, 'mcp-context.json');
-            
+
             const mcpContext = {
                 timestamp: new Date().toISOString(),
                 sessionData: {
@@ -435,7 +435,7 @@ class SaveStateManager {
     async createRecoveryMetadata(sessionData) {
         try {
             const recoveryMetadataPath = path.join(this.stateDirectory, 'recovery-metadata.json');
-            
+
             const recoveryData = {
                 timestamp: new Date().toISOString(),
                 canRecover: true,
@@ -492,11 +492,11 @@ class SaveStateManager {
 
         for (const [key, value] of Object.entries(env)) {
             const isSensitive = sensitivePatterns.some(pattern => pattern.test(key));
-            
+
             if (isSensitive) {
                 safeEnvVars[key] = '[REDACTED]';
-            } else if (key.startsWith('NEXT_PUBLIC_') || 
-                      key.startsWith('npm_') || 
+            } else if (key.startsWith('NEXT_PUBLIC_') ||
+                      key.startsWith('npm_') ||
                       ['NODE_VERSION', 'PATH', 'HOME', 'USER', 'TERM'].includes(key)) {
                 safeEnvVars[key] = value;
             }
@@ -524,7 +524,7 @@ class SaveStateManager {
             const command = process.platform === 'win32' ?
                 `netstat -an | findstr :${port}` :
                 `lsof -i :${port}`;
-            
+
             const { stdout } = await execAsync(command);
             return stdout.trim().length > 0;
         } catch {

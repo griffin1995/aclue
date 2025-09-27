@@ -38,7 +38,7 @@ class SaveProcessManager {
 
             const allProcesses = await this.getAllProcesses();
             const aclueProcesses = this.filterAclueProcesses(allProcesses);
-            
+
             // Create process map for tracking
             const processMap = new Map();
             aclueProcesses.forEach(proc => {
@@ -95,7 +95,7 @@ class SaveProcessManager {
             if (parts.length >= 11) {
                 const pid = parseInt(parts[1]);
                 const command = parts.slice(10).join(' ');
-                
+
                 if (!isNaN(pid) && command) {
                     processes.push({
                         pid,
@@ -119,11 +119,11 @@ class SaveProcessManager {
         for (let i = 1; i < lines.length; i++) {
             const line = lines[i].trim();
             const match = line.match(/^\s*(\d+)\s+(.+)$/);
-            
+
             if (match) {
                 const pid = parseInt(match[1]);
                 const command = match[2].trim();
-                
+
                 if (!isNaN(pid) && command) {
                     processes.push({
                         pid,
@@ -149,7 +149,7 @@ class SaveProcessManager {
             if (parts.length >= 4) {
                 const pid = parseInt(parts[3]);
                 const command = (parts[1] || '').replace(/"/g, '');
-                
+
                 if (!isNaN(pid) && command) {
                     processes.push({
                         pid,
@@ -170,42 +170,42 @@ class SaveProcessManager {
 
         for (const proc of processes) {
             const command = proc.command.toLowerCase();
-            
+
             // Check for aclue-related indicators
-            const isAclueRelated = 
+            const isAclueRelated =
                 // Node.js processes running in aclue directory
                 (command.includes('node') && command.includes('aclue')) ||
-                
+
                 // npm dev server
                 (command.includes('npm') && command.includes('dev')) ||
-                
+
                 // Next.js development server
                 command.includes('next-dev') ||
                 command.includes('next dev') ||
-                
+
                 // Python/uvicorn processes
                 (command.includes('python') && (
-                    command.includes('uvicorn') || 
+                    command.includes('uvicorn') ||
                     command.includes('aclue') ||
                     command.includes('main:app')
                 )) ||
-                
+
                 // Direct uvicorn processes
                 command.includes('uvicorn') ||
-                
+
                 // Processes with aclue-specific ports
                 command.includes(':3000') ||
                 command.includes(':8000') ||
-                
+
                 // Development servers
                 command.includes('vite') ||
                 command.includes('webpack') ||
-                
+
                 // Process running from aclue directories
                 command.includes('aclue-preprod') ||
                 command.includes('/web/') ||
                 command.includes('/backend/') ||
-                
+
                 // Claude Code processes related to aclue
                 (command.includes('claude') && command.includes('aclue'));
 
@@ -213,7 +213,7 @@ class SaveProcessManager {
                 // Try to determine port and service type
                 const port = this.extractPort(command);
                 const serviceType = this.determineServiceType(command, port);
-                
+
                 aclueProcesses.push({
                     ...proc,
                     port,
@@ -313,7 +313,7 @@ class SaveProcessManager {
 
             // Phase 1: Graceful termination (SIGTERM)
             this.log(`📤 Phase 1: Sending SIGTERM to ${aclueProcesses.length} process(es)`, 'info');
-            
+
             for (const proc of aclueProcesses) {
                 try {
                     const result = await this.terminateProcessGracefully(proc);
@@ -337,7 +337,7 @@ class SaveProcessManager {
 
             if (remainingProcesses.length > 0) {
                 this.log(`⚡ Phase 2: Force terminating ${remainingProcesses.length} remaining process(es)`, 'warning');
-                
+
                 for (const proc of remainingProcesses) {
                     try {
                         const result = await this.forceTerminateProcess(proc);

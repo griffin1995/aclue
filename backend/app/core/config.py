@@ -233,9 +233,7 @@ class Settings(BaseSettings):
     # EXTERNAL API INTEGRATIONS
     # =========================================================================
 
-    OPENAI_API_KEY: Optional[str] = Field(
-        default=None, description="OpenAI API key"
-    )
+    OPENAI_API_KEY: Optional[str] = Field(default=None, description="OpenAI API key")
 
     OPENAI_MODEL: str = Field(
         default="gpt-3.5-turbo", description="OpenAI model to use"
@@ -245,9 +243,7 @@ class Settings(BaseSettings):
         default=1000, ge=1, le=4000, description="Maximum tokens for OpenAI requests"
     )
 
-    POSTHOG_API_KEY: Optional[str] = Field(
-        default=None, description="PostHog API key"
-    )
+    POSTHOG_API_KEY: Optional[str] = Field(default=None, description="PostHog API key")
 
     POSTHOG_HOST: HttpUrl = Field(
         default="https://app.posthog.com", description="PostHog host URL"
@@ -492,7 +488,7 @@ class Settings(BaseSettings):
     # VALIDATORS
     # =========================================================================
 
-    @field_validator("CORS_ORIGINS", mode='before')
+    @field_validator("CORS_ORIGINS", mode="before")
     def parse_cors_origins(cls, v) -> List[str]:
         """Parse CORS origins from environment variable."""
         if isinstance(v, str):
@@ -503,7 +499,7 @@ class Settings(BaseSettings):
                 return [origin.strip() for origin in v.split(",")]
         return v
 
-    @field_validator("ALLOWED_HOSTS", mode='before')
+    @field_validator("ALLOWED_HOSTS", mode="before")
     def parse_allowed_hosts(cls, v) -> List[str]:
         """Parse allowed hosts from environment variable."""
         if isinstance(v, str):
@@ -514,7 +510,7 @@ class Settings(BaseSettings):
                 return [host.strip() for host in v.split(",")]
         return v
 
-    @field_validator("ALLOWED_FILE_TYPES", mode='before')
+    @field_validator("ALLOWED_FILE_TYPES", mode="before")
     def parse_allowed_file_types(cls, v) -> List[str]:
         """Parse allowed file types from environment variable."""
         if isinstance(v, str):

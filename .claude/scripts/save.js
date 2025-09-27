@@ -123,7 +123,7 @@ class AclueSaveCommand {
 
             if (recoveryResult.success) {
                 this.log(`🔧 Recovery successful: ${recoveryResult.message}`, 'success');
-                
+
                 if (this.options.force) {
                     this.log('🚨 Force mode enabled - attempting emergency shutdown', 'warning');
                     return await this.performEmergencyShutdown();
@@ -204,7 +204,7 @@ class AclueSaveCommand {
 
             if (discoveredProcesses.aclueProcesses.length > 0) {
                 this.log(`✅ Found ${discoveredProcesses.aclueProcesses.length} aclue-related process(es)`, 'success');
-                
+
                 if (this.options.verbose) {
                     discoveredProcesses.aclueProcesses.forEach(proc => {
                         this.log(`   • PID ${proc.pid}: ${proc.command} (Port: ${proc.port || 'N/A'})`, 'process');
@@ -284,7 +284,7 @@ class AclueSaveCommand {
             };
 
             const preservationResult = await this.stateManager.preserveSession(sessionData);
-            
+
             if (preservationResult.success) {
                 this.status.session.preserved = true;
                 this.log(`✅ Session state preserved: ${preservationResult.location}`, 'success');
@@ -325,7 +325,7 @@ class AclueSaveCommand {
             };
 
             const captureResult = await this.stateManager.captureServiceStatus(serviceCapture);
-            
+
             if (captureResult.success) {
                 this.log('✅ Service status captured', 'success');
             } else {
@@ -363,10 +363,10 @@ class AclueSaveCommand {
             } else {
                 // Graceful termination with escalation
                 const gracefulResult = await this.processManager.gracefulTermination();
-                
+
                 if (gracefulResult.success) {
                     this.log(`✅ Graceful termination completed: ${gracefulResult.terminated} process(es)`, 'success');
-                    
+
                     if (gracefulResult.forcedKills > 0) {
                         this.log(`⚠️  ${gracefulResult.forcedKills} process(es) required force termination`, 'warning');
                     }
@@ -387,13 +387,13 @@ class AclueSaveCommand {
 
         try {
             const cleanupResult = await this.cleanupManager.performCleanup();
-            
+
             if (cleanupResult.success) {
                 this.status.cleanup = cleanupResult.stats;
                 this.log(`✅ Cleanup completed:`, 'success');
                 this.log(`   • Removed ${cleanupResult.stats.tempFiles} temporary files`, 'cleanup');
                 this.log(`   • Cleared ${this.formatBytes(cleanupResult.stats.cacheSize)} of cache`, 'cleanup');
-                
+
                 if (cleanupResult.stats.logFiles > 0) {
                     this.log(`   • Archived ${cleanupResult.stats.logFiles} log files`, 'cleanup');
                 }
@@ -413,7 +413,7 @@ class AclueSaveCommand {
         try {
             // Re-discover processes to ensure they're terminated
             const verificationResult = await this.processManager.verifyTermination();
-            
+
             if (verificationResult.success) {
                 this.log(`✅ Shutdown verification passed`, 'success');
                 if (verificationResult.remainingProcesses === 0) {
@@ -422,7 +422,7 @@ class AclueSaveCommand {
             } else {
                 this.log(`⚠️  Shutdown verification issues:`, 'warning');
                 this.log(`   ${verificationResult.remainingProcesses} process(es) still running`, 'warning');
-                
+
                 if (this.options.verbose && verificationResult.processes) {
                     verificationResult.processes.forEach(proc => {
                         this.log(`   • PID ${proc.pid}: ${proc.command}`, 'process');
@@ -450,7 +450,7 @@ class AclueSaveCommand {
         try {
             // Force kill all aclue processes immediately
             const emergencyResult = await this.processManager.emergencyShutdown();
-            
+
             // Basic state preservation
             const basicState = {
                 timestamp: new Date().toISOString(),
@@ -552,7 +552,7 @@ class AclueSaveCommand {
     updateServiceStatus(discoveredProcesses) {
         const backendProcess = discoveredProcesses.aclueProcesses
             .find(p => p.port === 8000 || p.command.includes('uvicorn'));
-        
+
         const frontendProcess = discoveredProcesses.aclueProcesses
             .find(p => p.port === 3000 || p.command.includes('npm'));
 

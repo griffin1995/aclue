@@ -63,8 +63,8 @@ class SaveGitManager {
             this.gitStatus = { ...this.gitStatus, ...statusResult };
 
             // Determine if there are changes
-            this.gitStatus.hasChanges = 
-                this.gitStatus.changes.length > 0 || 
+            this.gitStatus.hasChanges =
+                this.gitStatus.changes.length > 0 ||
                 this.gitStatus.staged.length > 0 ||
                 (this.options.includeUntracked && this.gitStatus.untracked.length > 0);
 
@@ -298,32 +298,32 @@ class SaveGitManager {
 
         const totalFiles = this.gitStatus.changes.length + this.gitStatus.staged.length;
         const hasUntracked = this.gitStatus.untracked.length > 0;
-        
+
         // Analyze changes to determine commit type
         const commitType = this.determineCommitType();
-        
+
         // Generate descriptive message
         let message = `${commitType}: save development session`;
-        
+
         if (totalFiles > 0) {
             message += ` (${totalFiles} file${totalFiles > 1 ? 's' : ''})`;
         }
-        
+
         if (hasUntracked && this.options.includeUntracked) {
             message += ` with ${this.gitStatus.untracked.length} new file${this.gitStatus.untracked.length > 1 ? 's' : ''}`;
         }
 
         // Add file details in commit body
         const details = [];
-        
+
         if (this.gitStatus.staged.length > 0) {
             details.push(`Staged changes: ${this.gitStatus.staged.length} file(s)`);
         }
-        
+
         if (this.gitStatus.changes.length > 0) {
             details.push(`Modified files: ${this.gitStatus.changes.length} file(s)`);
         }
-        
+
         if (hasUntracked && this.options.includeUntracked) {
             details.push(`New files: ${this.gitStatus.untracked.length} file(s)`);
         }
@@ -334,7 +334,7 @@ class SaveGitManager {
 
         // Add timestamp
         message += `\n\nSaved at: ${new Date().toISOString()}`;
-        
+
         return message;
     }
 
@@ -383,9 +383,9 @@ class SaveGitManager {
 
         const totalFiles = this.gitStatus.changes.length + this.gitStatus.staged.length;
         const timestamp = new Date().toISOString().slice(0, 19).replace('T', ' ');
-        
+
         let message = `Development session save - ${timestamp}`;
-        
+
         if (totalFiles > 0) {
             message += ` (${totalFiles} file${totalFiles > 1 ? 's' : ''})`;
         }
@@ -416,7 +416,7 @@ class SaveGitManager {
     async performStash(message) {
         try {
             let stashCommand = 'git stash push';
-            
+
             if (message) {
                 stashCommand += ` -m "${this.escapeShellArg(message)}"`;
             }
@@ -584,7 +584,7 @@ if (require.main === module) {
                     console.log(`  Modified: ${result.changes?.length || 0}`);
                     console.log(`  Staged: ${result.staged?.length || 0}`);
                     console.log(`  Untracked: ${result.untracked?.length || 0}`);
-                    
+
                     if (result.error) {
                         console.log(`  Error: ${result.error}`);
                     }
