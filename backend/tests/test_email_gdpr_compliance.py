@@ -10,23 +10,22 @@ Test Coverage:
 - Legal compliance statements
 """
 
-import os
 import re
 import sys
 from pathlib import Path
-from typing import List, Dict, Any
 
 # Add parent directories to path to import modules
 sys.path.insert(0, str(Path(__file__).parent.parent))
 sys.path.insert(0, str(Path(__file__).parent.parent.parent / "web"))
 
 # Color codes for output
-RED = '\033[91m'
-GREEN = '\033[92m'
-YELLOW = '\033[93m'
-BLUE = '\033[94m'
-RESET = '\033[0m'
-BOLD = '\033[1m'
+RED = "\033[91m"
+GREEN = "\033[92m"
+YELLOW = "\033[93m"
+BLUE = "\033[94m"
+RESET = "\033[0m"
+BOLD = "\033[1m"
+
 
 class GDPRComplianceChecker:
     """
@@ -44,7 +43,7 @@ class GDPRComplianceChecker:
     def load_template(self) -> bool:
         """Load the email template file"""
         try:
-            with open(self.template_path, 'r', encoding='utf-8') as f:
+            with open(self.template_path, "r", encoding="utf-8") as f:
                 self.template_content = f.read()
             return True
         except Exception as e:
@@ -58,13 +57,13 @@ class GDPRComplianceChecker:
         CAN-SPAM Act requirement
         """
         unsubscribe_patterns = [
-            r'unsubscribe',
-            r'opt[-\s]?out',
-            r'manage[-\s]?preferences',
-            r'email[-\s]?preferences',
-            r'stop[-\s]?receiving',
-            r'remove[-\s]?from[-\s]?list',
-            r'update[-\s]?subscription'
+            r"unsubscribe",
+            r"opt[-\s]?out",
+            r"manage[-\s]?preferences",
+            r"email[-\s]?preferences",
+            r"stop[-\s]?receiving",
+            r"remove[-\s]?from[-\s]?list",
+            r"update[-\s]?subscription",
         ]
 
         found = False
@@ -74,15 +73,17 @@ class GDPRComplianceChecker:
                 break
 
         if not found:
-            self.violations.append({
-                'severity': 'CRITICAL',
-                'violation': 'Missing unsubscribe link',
-                'regulation': 'GDPR Article 21 & CAN-SPAM Act',
-                'requirement': 'All marketing emails MUST include a clear unsubscribe mechanism',
-                'penalty': 'Up to €20 million or 4% of annual global turnover'
-            })
+            self.violations.append(
+                {
+                    "severity": "CRITICAL",
+                    "violation": "Missing unsubscribe link",
+                    "regulation": "GDPR Article 21 & CAN-SPAM Act",
+                    "requirement": "All marketing emails MUST include a clear unsubscribe mechanism",
+                    "penalty": "Up to €20 million or 4% of annual global turnover",
+                }
+            )
         else:
-            self.passed_checks.append('Unsubscribe link present')
+            self.passed_checks.append("Unsubscribe link present")
 
     def check_privacy_policy_link(self) -> None:
         """
@@ -90,10 +91,10 @@ class GDPRComplianceChecker:
         GDPR Article 13: Information to be provided
         """
         privacy_patterns = [
-            r'privacy[-\s]?policy',
-            r'data[-\s]?protection',
-            r'privacy[-\s]?notice',
-            r'privacy[-\s]?statement'
+            r"privacy[-\s]?policy",
+            r"data[-\s]?protection",
+            r"privacy[-\s]?notice",
+            r"privacy[-\s]?statement",
         ]
 
         found = False
@@ -103,15 +104,17 @@ class GDPRComplianceChecker:
                 break
 
         if not found:
-            self.violations.append({
-                'severity': 'HIGH',
-                'violation': 'Missing privacy policy link',
-                'regulation': 'GDPR Article 13',
-                'requirement': 'Must provide clear information about data processing',
-                'penalty': 'Regulatory fines and loss of user trust'
-            })
+            self.violations.append(
+                {
+                    "severity": "HIGH",
+                    "violation": "Missing privacy policy link",
+                    "regulation": "GDPR Article 13",
+                    "requirement": "Must provide clear information about data processing",
+                    "penalty": "Regulatory fines and loss of user trust",
+                }
+            )
         else:
-            self.passed_checks.append('Privacy policy link present')
+            self.passed_checks.append("Privacy policy link present")
 
     def check_sender_identification(self) -> None:
         """
@@ -119,10 +122,10 @@ class GDPRComplianceChecker:
         CAN-SPAM requirement for sender information
         """
         sender_patterns = [
-            r'aclue[-\s]?team',
-            r'from[-\s]?aclue',
-            r'aclue\.app',
-            r'aclue\.co\.uk'
+            r"aclue[-\s]?team",
+            r"from[-\s]?aclue",
+            r"aclue\.app",
+            r"aclue\.co\.uk",
         ]
 
         found = False
@@ -132,13 +135,15 @@ class GDPRComplianceChecker:
                 break
 
         if found:
-            self.passed_checks.append('Clear sender identification present')
+            self.passed_checks.append("Clear sender identification present")
         else:
-            self.warnings.append({
-                'severity': 'MEDIUM',
-                'warning': 'Sender identification could be clearer',
-                'recommendation': 'Include clear company name and contact information'
-            })
+            self.warnings.append(
+                {
+                    "severity": "MEDIUM",
+                    "warning": "Sender identification could be clearer",
+                    "recommendation": "Include clear company name and contact information",
+                }
+            )
 
     def check_physical_address(self) -> None:
         """
@@ -147,11 +152,11 @@ class GDPRComplianceChecker:
         """
         # Check for address patterns
         address_patterns = [
-            r'\d+\s+\w+\s+(street|st|avenue|ave|road|rd|boulevard|blvd)',
-            r'(po|p\.o\.)\s+box',
-            r'\w+,\s+\w+\s+\d{5}',  # City, State ZIP
-            r'registered\s+office',
-            r'company\s+address'
+            r"\d+\s+\w+\s+(street|st|avenue|ave|road|rd|boulevard|blvd)",
+            r"(po|p\.o\.)\s+box",
+            r"\w+,\s+\w+\s+\d{5}",  # City, State ZIP
+            r"registered\s+office",
+            r"company\s+address",
         ]
 
         found = False
@@ -161,15 +166,17 @@ class GDPRComplianceChecker:
                 break
 
         if not found:
-            self.violations.append({
-                'severity': 'HIGH',
-                'violation': 'Missing physical mailing address',
-                'regulation': 'CAN-SPAM Act',
-                'requirement': 'Must include valid physical postal address',
-                'penalty': 'Up to $51,744 per email violation'
-            })
+            self.violations.append(
+                {
+                    "severity": "HIGH",
+                    "violation": "Missing physical mailing address",
+                    "regulation": "CAN-SPAM Act",
+                    "requirement": "Must include valid physical postal address",
+                    "penalty": "Up to $51,744 per email violation",
+                }
+            )
         else:
-            self.passed_checks.append('Physical address present')
+            self.passed_checks.append("Physical address present")
 
     def check_consent_reference(self) -> None:
         """
@@ -177,12 +184,12 @@ class GDPRComplianceChecker:
         GDPR Article 7: Conditions for consent
         """
         consent_patterns = [
-            r'subscribed',
-            r'signed[-\s]?up',
-            r'opted[-\s]?in',
-            r'requested',
-            r'joined',
-            r'registered'
+            r"subscribed",
+            r"signed[-\s]?up",
+            r"opted[-\s]?in",
+            r"requested",
+            r"joined",
+            r"registered",
         ]
 
         found = False
@@ -192,13 +199,15 @@ class GDPRComplianceChecker:
                 break
 
         if found:
-            self.passed_checks.append('Consent reference present')
+            self.passed_checks.append("Consent reference present")
         else:
-            self.warnings.append({
-                'severity': 'MEDIUM',
-                'warning': 'No clear reference to how consent was obtained',
-                'recommendation': 'Include reminder of how/when user subscribed'
-            })
+            self.warnings.append(
+                {
+                    "severity": "MEDIUM",
+                    "warning": "No clear reference to how consent was obtained",
+                    "recommendation": "Include reminder of how/when user subscribed",
+                }
+            )
 
     def check_data_retention_info(self) -> None:
         """
@@ -206,10 +215,10 @@ class GDPRComplianceChecker:
         GDPR Article 13(2)(a): Storage period
         """
         retention_patterns = [
-            r'data[-\s]?retention',
-            r'how[-\s]?long',
-            r'storage[-\s]?period',
-            r'keep[-\s]?your[-\s]?data'
+            r"data[-\s]?retention",
+            r"how[-\s]?long",
+            r"storage[-\s]?period",
+            r"keep[-\s]?your[-\s]?data",
         ]
 
         found = False
@@ -219,11 +228,13 @@ class GDPRComplianceChecker:
                 break
 
         if not found:
-            self.warnings.append({
-                'severity': 'LOW',
-                'warning': 'No data retention information',
-                'recommendation': 'Consider adding information about data storage period'
-            })
+            self.warnings.append(
+                {
+                    "severity": "LOW",
+                    "warning": "No data retention information",
+                    "recommendation": "Consider adding information about data storage period",
+                }
+            )
 
     def check_third_party_sharing(self) -> None:
         """
@@ -231,10 +242,10 @@ class GDPRComplianceChecker:
         GDPR Article 13(1)(e): Recipients of personal data
         """
         sharing_patterns = [
-            r'third[-\s]?part',
-            r'share[-\s]?your[-\s]?data',
-            r'partners',
-            r'data[-\s]?sharing'
+            r"third[-\s]?part",
+            r"share[-\s]?your[-\s]?data",
+            r"partners",
+            r"data[-\s]?sharing",
         ]
 
         found = False
@@ -244,11 +255,13 @@ class GDPRComplianceChecker:
                 break
 
         if not found:
-            self.warnings.append({
-                'severity': 'LOW',
-                'warning': 'No third-party sharing disclosure',
-                'recommendation': 'If data is shared with third parties, this must be disclosed'
-            })
+            self.warnings.append(
+                {
+                    "severity": "LOW",
+                    "warning": "No third-party sharing disclosure",
+                    "recommendation": "If data is shared with third parties, this must be disclosed",
+                }
+            )
 
     def check_data_rights_info(self) -> None:
         """
@@ -256,12 +269,12 @@ class GDPRComplianceChecker:
         GDPR Articles 15-22: Data subject rights
         """
         rights_patterns = [
-            r'your[-\s]?rights',
-            r'data[-\s]?rights',
-            r'right[-\s]?to[-\s]?access',
-            r'right[-\s]?to[-\s]?delete',
-            r'right[-\s]?to[-\s]?rectif',
-            r'right[-\s]?to[-\s]?portability'
+            r"your[-\s]?rights",
+            r"data[-\s]?rights",
+            r"right[-\s]?to[-\s]?access",
+            r"right[-\s]?to[-\s]?delete",
+            r"right[-\s]?to[-\s]?rectif",
+            r"right[-\s]?to[-\s]?portability",
         ]
 
         found = False
@@ -271,11 +284,13 @@ class GDPRComplianceChecker:
                 break
 
         if not found:
-            self.warnings.append({
-                'severity': 'MEDIUM',
-                'warning': 'No information about data subject rights',
-                'recommendation': 'Include information about user rights under GDPR'
-            })
+            self.warnings.append(
+                {
+                    "severity": "MEDIUM",
+                    "warning": "No information about data subject rights",
+                    "recommendation": "Include information about user rights under GDPR",
+                }
+            )
 
     def run_all_checks(self) -> None:
         """Run all GDPR compliance checks"""
@@ -332,28 +347,42 @@ class GDPRComplianceChecker:
 
         # Summary
         print(f"\n{BOLD}📊 COMPLIANCE SUMMARY{RESET}")
-        print(f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+        print("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
 
-        total_checks = len(self.violations) + len(self.warnings) + len(self.passed_checks)
-        compliance_score = (len(self.passed_checks) / total_checks * 100) if total_checks > 0 else 0
+        total_checks = (
+            len(self.violations) + len(self.warnings) + len(self.passed_checks)
+        )
+        compliance_score = (
+            (len(self.passed_checks) / total_checks * 100) if total_checks > 0 else 0
+        )
 
         print(f"Critical Violations: {RED}{len(self.violations)}{RESET}")
         print(f"Warnings: {YELLOW}{len(self.warnings)}{RESET}")
         print(f"Passed: {GREEN}{len(self.passed_checks)}{RESET}")
-        print(f"Compliance Score: {self._get_score_color(compliance_score)}{compliance_score:.1f}%{RESET}")
+        print(
+            f"Compliance Score: {self._get_score_color(compliance_score)}{compliance_score:.1f}%{RESET}"
+        )
 
         # Overall Status
         print(f"\n{BOLD}🎯 OVERALL STATUS:{RESET} ", end="")
         if self.violations:
             print(f"{RED}FAIL - IMMEDIATE ACTION REQUIRED{RESET}")
-            print(f"\n{RED}The email template has critical GDPR violations that must be fixed{RESET}")
-            print(f"{RED}before sending any marketing emails to avoid legal penalties.{RESET}")
+            print(
+                f"\n{RED}The email template has critical GDPR violations that must be fixed{RESET}"
+            )
+            print(
+                f"{RED}before sending any marketing emails to avoid legal penalties.{RESET}"
+            )
         elif self.warnings:
             print(f"{YELLOW}PASS WITH WARNINGS{RESET}")
-            print(f"\n{YELLOW}The email template meets minimum requirements but could be improved.{RESET}")
+            print(
+                f"\n{YELLOW}The email template meets minimum requirements but could be improved.{RESET}"
+            )
         else:
             print(f"{GREEN}FULLY COMPLIANT{RESET}")
-            print(f"\n{GREEN}The email template meets all GDPR and email marketing requirements.{RESET}")
+            print(
+                f"\n{GREEN}The email template meets all GDPR and email marketing requirements.{RESET}"
+            )
 
         # Recommendations
         if self.violations or self.warnings:
@@ -378,11 +407,13 @@ def main():
     """Main function to run GDPR compliance tests"""
 
     # Check if we should test secure template
-    if len(sys.argv) > 1 and sys.argv[1] == '--secure':
+    if len(sys.argv) > 1 and sys.argv[1] == "--secure":
         template_path = "/home/jack/Documents/aclue-preprod/web/src/app/email-preview/secure-email-template.tsx"
         print(f"{GREEN}Testing SECURE email template...{RESET}\n")
     else:
-        template_path = "/home/jack/Documents/aclue-preprod/web/src/app/email-preview/page.tsx"
+        template_path = (
+            "/home/jack/Documents/aclue-preprod/web/src/app/email-preview/page.tsx"
+        )
         print(f"{YELLOW}Testing ORIGINAL email template...{RESET}\n")
 
     # Create and run compliance checker
